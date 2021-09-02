@@ -1,0 +1,25 @@
+image: python:3.9
+
+stages:
+  - lint
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - api/.venv/
+
+lint:
+  stage: lint
+  before_script:
+    - cd api
+    - python -V  # Print out python version for debugging
+    - pip install virtualenv
+    - virtualenv .venv
+    - source .venv/bin/activate
+    - pip install pre-commit
+
+  script:
+    - pre-commit run -a
