@@ -3,3 +3,6 @@ api/gccsite/*/migrations/
 api/.venv/
 api/gccsite/db.sqlite3
 front/node_modules*
+test/db-data
+**/.*.*.sw*
+**/.*.sw*
