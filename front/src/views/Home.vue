@@ -1,18 +1,17 @@
 <template>
   <Menu isConnected="false" />
-  <HomeBanner />
+  <!-- <HomeBanner /> -->
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import Vue from 'vue'
 import Menu from '@/components/Menu.vue'
 import HomeBanner from '@/components/HomeBanner.vue'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'Home',
   components: {
-    Menu,
-    HomeBanner
+    Menu
   }
 })
 </script>

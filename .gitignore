@@ -1,5 +1,6 @@
 api/gccsite/*/migrations/
 !api/gccsite/*/migrations/__init__.py
+node_modules
 api/.venv/
 api/gccsite/db.sqlite3
 front/node_modules*
