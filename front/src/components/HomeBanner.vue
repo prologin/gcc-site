@@ -3,7 +3,7 @@
   <div class="home-banner">
     <div class="banner-text">
       <h1 class="banner-title"> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
-      <b-button block class="primary-button banner-button"> toto </b-button>
+      <b-button block size="lg" class="primary-button banner-button"> S'inscrire à un stage </b-button>
     </div>
   </div>
 </div>
@@ -30,7 +30,7 @@ export default Vue.extend({
   .banner-title {
     font-weight: 600;
     font-size: 3em;
-    max-width: 15em;
+    max-width: 13em;
   }
   .banner-text {
     position: absolute;
@@ -40,5 +40,6 @@ export default Vue.extend({
   }
   .banner-button {
     margin-top: 2em;
+    font-weight: 600;
   }
 </style>
