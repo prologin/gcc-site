@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+
+body {
+    font-family: 'Inter',sans-serif;
+}
+
+.primary-button {
+    background-color: #222A35;
+    border-color: #222A35;
+    color: white;
+}
+
+.secondary-button {
+    color: #222A35;
+    background-color: white;
+    border-color: white;
+}
