@@ -1,6 +1,8 @@
 <template>
-  <Menu isConnected="false" />
-  <!-- <HomeBanner /> -->
+  <div class="home">
+    <Menu isConnected="false" />
+    <HomeBanner />
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,7 +13,8 @@ import HomeBanner from '@/components/HomeBanner.vue'
 export default Vue.extend({
   name: 'Home',
   components: {
-    Menu
+    Menu,
+    HomeBanner
   }
 })
 </script>

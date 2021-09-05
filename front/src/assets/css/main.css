@@ -22,10 +22,12 @@ html {
 
 .primary-button {
     background-color: #222A35;
+    border-color: #222A35;
     color: white;
 }
 
 .secondary-button {
     color: black;
     background-color: white;
+    border-color: white;
 }

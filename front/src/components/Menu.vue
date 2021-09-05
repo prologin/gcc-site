@@ -2,8 +2,8 @@
   <div class="menu">
     <img class="menu-logo" src="../assets/GCC_3.svg" />
     <div class="nav-buttons" v-if="isConnected">
-       <a class="button secondary-button" id="inscription" > S'inscrire </a> <!-- TODO: add link to ProloginAuth -->
-       <a class="button primary-button" id="connect" > Se connecter </a>
+       <b-button class="button primary-button"> S'inscrire </b-button>
+       <b-button class="button secondary-button"> Se connecter </b-button>
     </div>
     <div v-else>
       Bonjour {{ name }} {{ surname }} !
@@ -25,9 +25,10 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style>
 .menu-logo {
-  width: 5em;
+  width: 10em;
+  height: 3em;
   padding-left: 5%;
 }
 
