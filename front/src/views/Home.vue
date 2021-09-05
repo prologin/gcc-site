@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
-    <Menu isConnected="false" />
+  <b-container fluid>
+    <Menu  />
     <HomeBanner />
-  </div>
+  </b-container>
 </template>
 
 <script lang="ts">

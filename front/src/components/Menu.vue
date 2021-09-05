@@ -1,15 +1,22 @@
 <template>
-  <div class="menu">
-    <img class="menu-logo" src="../assets/GCC_3.svg" />
-    <div class="nav-buttons" v-if="isConnected">
-       <b-button class="button primary-button"> S'inscrire </b-button>
-       <b-button class="button secondary-button"> Se connecter </b-button>
-    </div>
-    <div v-else>
-      Bonjour {{ name }} {{ surname }} !
-    </div>
+<b-navbar toggleable="md">
+  <div class="col-1"> </div>
+  <b-navbar-brand to="/">
+    <img class="menu-logo" src="../assets/GCC_3.svg" alt="Logo des stages Girls Can Code" />
+  </b-navbar-brand>
+  <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-  </div>
+  <b-collapse id="nav-collapse" is-nav>
+    <b-navbar-nav class="ml-auto" align="left">
+      <b-nav-item href="#">
+        <b-button class="secondary-button"> S'inscrire </b-button>
+      </b-nav-item>
+      <b-nav-item href="#">
+        <b-button class="primary-button"> Se connecter </b-button>
+      </b-nav-item>
+    </b-navbar-nav>
+  </b-collapse>
+</b-navbar>
 </template>
 
 <script lang="ts">
@@ -26,26 +33,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.menu-logo {
-  width: 10em;
-  height: 3em;
-  padding-left: 5%;
-}
-
-.menu {
-  padding-top: 0.7em;
-  flex-wrap: wrap;
-  display: flex; /* flexbox */
-  justify-content: space-between; /* space between direct children */
-  align-items: center;
-}
-
-#connect {
-}
-
-.nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
+  .menu-logo {
+    width: 5em;
+  }
 </style>
