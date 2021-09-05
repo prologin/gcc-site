@@ -8,10 +8,10 @@
 
   <b-collapse id="nav-collapse" is-nav>
     <b-navbar-nav class="ml-auto" align="left">
-      <b-nav-item href="#">
+      <b-nav-item v-bind:href="'/api/sso/login/prologin?next=' + currentLocation()">
         <b-button class="secondary-button"> S'inscrire </b-button>
       </b-nav-item>
-      <b-nav-item href="#">
+      <b-nav-item v-bind:href="'/api/sso/login/prologin?next=' + currentLocation()">
         <b-button class="primary-button"> Se connecter </b-button>
       </b-nav-item>
     </b-navbar-nav>
@@ -24,6 +24,14 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'Menu',
+  methods: {
+    currentLocation: function () {
+      if (window.location !== undefined) {
+        return window.location.href
+      }
+      return 'filler'
+    }
+  },
   props: {
     isConnected: Boolean,
     name: String,
