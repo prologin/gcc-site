@@ -30,7 +30,7 @@ export default Vue.extend({
   .banner-title {
     font-weight: 600;
     font-size: 3em;
-    max-width: 13em;
+    max-width: 14em;
   }
   .banner-text {
     position: absolute;
