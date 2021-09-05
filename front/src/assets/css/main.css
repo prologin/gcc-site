@@ -2,22 +2,46 @@
 
 body {
     font-family: 'Inter',sans-serif;
+    color: var(--main-dark-color);
+    font-size: 16px;
+
+    --gcc-pink-color: #FF0079;
+    --gcc-green-color: #A6C613;
+    --gcc-blue-color: #00AED3;
+    --main-dark-color: #222A35;
 }
 
 .primary-button {
-    background-color: #222A35;
-    border-color: #222A35;
+    background-color: var(--main-dark-color);
+    border-color: var(--main-dark-color);
     color: white;
 }
 
 .secondary-button {
-    color: #222A35;
+    color: var(--main-dark-color);
     background-color: white;
     border-color: white;
 }
 
 .secondary-button:hover {
-    color: #222A35;
+    color: var(--main-dark-color);
     background-color: white;
-    border-color: #222A35;
+    border-color: var(--main-dark-color);
+}
+
+h1 {
+    font-size: 200%;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 150%;
+}
+
+h3 {
+    font-size: 100%;
+}
+
+h4 {
+    font-size: 80%;
 }

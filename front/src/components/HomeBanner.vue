@@ -1,11 +1,13 @@
 <template>
 <div>
-  <div class="home-banner">
-    <div class="banner-text">
-      <h1 class="banner-title"> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
-      <b-button block size="lg" class="primary-button banner-button"> S'inscrire à un stage </b-button>
-    </div>
-  </div>
+  <b-container fluid class="home-banner hidden-phone">
+    <b-row>
+      <b-col class="banner-headline" offset="1" sm="12" md="5">
+        <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
+        <b-button class="primary-button headline-button" block size="lg">S'inscrire à un stage</b-button>
+      </b-col>
+    </b-row>
+  </b-container>
 </div>
 </template>
 
@@ -27,19 +29,18 @@ export default Vue.extend({
     background-repeat: no-repeat;
     background-position: bottom 0 right 0;
   }
-  .banner-title {
-    font-weight: 600;
+
+  .banner-headline {
+    margin-top: 5em;
+  }
+
+  .banner-headline h1 {
+    font-weight: 700;
     font-size: 3em;
-    max-width: 14em;
   }
-  .banner-text {
-    position: absolute;
-    top: 15%;
-    left: 10%;
-    display: block;
-  }
-  .banner-button {
-    margin-top: 2em;
+
+  .headline-button {
+    margin-top: 3em;
     font-weight: 600;
   }
 </style>
