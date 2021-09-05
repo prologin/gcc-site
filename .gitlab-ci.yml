@@ -12,6 +12,10 @@ cache:
     - api/.venv/
 
 lint:
+  only:
+    changes:
+      - api
+      - test
   stage: lint
   before_script:
     - cd api
