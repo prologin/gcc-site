@@ -4,7 +4,8 @@
     <b-row>
       <b-col class="banner-headline" offset="1" sm="12" md="5">
         <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
-        <b-button class="primary-button headline-button" block size="lg">S'inscrire à un stage</b-button>
+        <!-- TODO: use vue-router link -->
+        <b-button to="/inscription" class="primary-button headline-button" block size="lg"> S'inscrire à un stage </b-button>
       </b-col>
     </b-row>
   </b-container>

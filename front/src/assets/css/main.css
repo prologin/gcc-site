@@ -9,18 +9,21 @@ body {
     --gcc-green-color: #A6C613;
     --gcc-blue-color: #00AED3;
     --main-dark-color: #222A35;
+    --global-border-radius: 12px;
 }
 
 .primary-button {
     background-color: var(--main-dark-color);
     border-color: var(--main-dark-color);
     color: white;
+    border-radius: var(--global-border-radius);
 }
 
 .secondary-button {
     color: var(--main-dark-color);
     background-color: white;
     border-color: white;
+    border-radius: var(--global-border-radius);
 }
 
 .secondary-button:hover {
@@ -56,4 +59,8 @@ h4 {
 
 .gcc-blue {
   color: var(--gcc-blue-color);
+}
+
+.jumbotron {
+    border-radius: var(--global-border-radius);
 }
