@@ -45,3 +45,15 @@ h3 {
 h4 {
     font-size: 80%;
 }
+
+.gcc-pink {
+  color: var(--gcc-pink-color);
+}
+
+.gcc-green {
+  color: var(--gcc-green-color);
+}
+
+.gcc-blue {
+  color: var(--gcc-blue-color);
+}

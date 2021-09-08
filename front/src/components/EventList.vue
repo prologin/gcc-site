@@ -1,18 +1,19 @@
 <template>
     <div class="background-style pb-4">
         <section class="w-75 mx-auto pt-5">
-            <EventCard v-for="post in posts"
-                       v-bind:key="post.id"
-                       v-bind:title="post.title"
-                       v-bind:date="post.date"
-                       v-bind:adress="post.adress"/>
+            <EventCard v-for="(event, index) in events"
+                       v-bind:index="index"
+                       v-bind:key="event.id"
+                       v-bind:title="event.title"
+                       v-bind:date="event.date"
+                       v-bind:address="event.address"/>
         </section>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import EventCard from './EventCard.vue'
+import EventCard from '@/components/EventCard.vue'
 
 export default Vue.extend({
   name: 'EventList',
@@ -22,8 +23,8 @@ export default Vue.extend({
   },
   data () {
     return {
-      posts: [
-        { id: 1, title: 'Stage long à EPITA Paris', date: '12 janvier au 15 décembre 1245', adress: 'EPITA Paris, 14-16 rue Voltaire, 94270 Le Kremlin-Bicêtre' },
+      events: [
+        { id: 1, title: 'Stage long à EPITA Paris', date: '12 janvier au 15 décembre 1245', address: 'EPITA Paris, 14-16 rue Voltaire, 94270 Le Kremlin-Bicêtre' },
         { id: 2, title: 'Stage court à EPITA Paris' },
         { id: 3, title: 'Stage long à EPITA Lyon' }
       ]
@@ -45,7 +46,7 @@ export default Vue.extend({
     border-radius: 12px;
 }
 
-.btn-group-vertical > button{
+.btn-group-vertical > button {
     margin-bottom:5px;
     border-radius:12px !important;
 }
