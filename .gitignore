@@ -1,4 +1,7 @@
 api/gccsite/*/migrations/
+api/.venv/
+api/gccsite/gccsite/settings/dev.py
+*.pyc
 !api/gccsite/*/migrations/__init__.py
 node_modules
 api/.venv/

@@ -1,2 +1,4 @@
 django==3.2.7
 djangorestframework==3.12.4
+prologin-eventsd==0.1.2
+social-auth-backend-prologin==0.1.3

@@ -17,7 +17,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'adminsortable2',
+    'eventsd.users',
+    'social_django',
     'rest_framework',
+    'eventsd.events',
 ]
 
 MIDDLEWARE = [
@@ -89,3 +93,31 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SOCIAL_AUTH_PROLOGIN_SCOPE = [
+    "email",
+    "profile",
+    "contest",
+    "security_clearance",
+]
+
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
+    "social_core.pipeline.user.get_username",
+    "social_auth_backend_prologin.pipeline.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_auth_backend_prologin.pipeline.save_all_claims_as_extra_data",
+    "social_core.pipeline.user.user_details",
+    "social_auth_backend_prologin.pipeline.apply_upstream_security_clearances",
+)
+
+AUTHENTICATION_BACKENDS = (
+    "social_auth_backend_prologin.backend.ProloginOpenIdConnect",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+AUTH_USER_MODEL = "eventsd_users.User"
