@@ -3,6 +3,7 @@
     <Menu  />
     <HomeBanner />
     <EventList />
+    <Newsletter />
   </div>
 </template>
 
@@ -11,13 +12,15 @@ import Vue from 'vue'
 import Menu from '@/components/Menu.vue'
 import HomeBanner from '@/components/HomeBanner.vue'
 import EventList from '@/components/EventList.vue'
+import Newsletter from '@/components/Newsletter.vue'
 
 export default Vue.extend({
   name: 'Home',
   components: {
     Menu,
     HomeBanner,
-    EventList
+    EventList,
+    Newsletter
   }
 })
 </script>
