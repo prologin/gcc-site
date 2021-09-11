@@ -1,13 +1,11 @@
 <template>
 <div>
-  <b-container fluid class="home-banner hidden-phone">
-    <b-row>
-      <b-col class="banner-headline" offset="1" sm="12" md="5">
+  <b-container fluid class="home-banner">
+      <b-col class="ml-5 mt-5 pt-5 w-50">
         <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
         <!-- TODO: use vue-router link -->
-        <b-button to="/inscription" class="primary-button headline-button" block size="lg"> S'inscrire à un stage </b-button>
+        <b-button to="/inscription" class="primary-button subtitleSize" block size="lg"> S'inscrire à un stage </b-button>
       </b-col>
-    </b-row>
   </b-container>
 </div>
 </template>
@@ -24,24 +22,10 @@ export default Vue.extend({
 
 <style scoped>
   .home-banner {
-    height: 90vh;
+    height: 70vh;
     background-size: cover;
     background-image: url('../assets/girls_class.svg');
     background-repeat: no-repeat;
     background-position: bottom 0 right 0;
-  }
-
-  .banner-headline {
-    margin-top: 5em;
-  }
-
-  .banner-headline h1 {
-    font-weight: 700;
-    font-size: 3em;
-  }
-
-  .headline-button {
-    margin-top: 3em;
-    font-weight: 600;
   }
 </style>

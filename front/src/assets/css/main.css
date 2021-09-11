@@ -10,6 +10,7 @@ body {
     --gcc-blue-color: #00AED3;
     --main-dark-color: #222A35;
     --global-border-radius: 12px;
+    --main-hover-color: #46566D;
 }
 
 .primary-button {
@@ -17,6 +18,10 @@ body {
     border-color: var(--main-dark-color);
     color: white;
     border-radius: var(--global-border-radius);
+}
+
+.primary-button:hover {
+    background-color: var(--main-hover-color);
 }
 
 .secondary-button {
@@ -27,25 +32,25 @@ body {
 }
 
 .secondary-button:hover {
-    color: var(--main-dark-color);
+    color: var(--main-hover-color);
     background-color: white;
-    border-color: var(--main-dark-color);
+    border-color: white;
 }
 
-h1 {
+h1, .titleSize {
     font-size: 200%;
     font-weight: bold;
 }
 
-h2 {
+h2, .subtitleSize {
     font-size: 150%;
 }
 
-h3 {
+h3, .subsubtitleSize {
     font-size: 100%;
 }
 
-h4 {
+h4, .contentTextSize {
     font-size: 80%;
 }
 
