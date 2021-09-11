@@ -4,18 +4,21 @@
       <b-col class="ml-5 mt-5 pt-5 w-50">
         <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
         <!-- TODO: use vue-router link -->
-        <b-button to="/inscription" class="primary-button subtitleSize" block size="lg"> S'inscrire à un stage </b-button>
+        <b-button @click="scrollTo('event-list')" class="primary-button subtitleSize" block size="lg"> Voir les stages </b-button>
       </b-col>
   </b-container>
 </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
   name: 'HomeBanner',
-  props: {
+  methods: {
+    scrollTo (index) {
+      document.getElementById(index).scrollIntoView({ behavior: 'smooth' })
+    }
   }
 })
 </script>

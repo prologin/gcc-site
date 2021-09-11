@@ -1,5 +1,5 @@
 <template>
-    <div class="background-style pb-4">
+    <div id="event-list" class="background-style pb-4">
         <section class="w-75 mx-auto pt-5">
             <EventCard v-for="(event, index) in events"
                        v-bind:index="index"
