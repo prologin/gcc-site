@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Inscription from '@/views/Inscription.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
+import LegalNotices from '@/views/LegalNotices.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes: Array<RouteConfig> = [
     path: '/inscription',
     name: 'inscription',
     component: Inscription
+  },
+  {
+    path: '/legal',
+    name: 'legal',
+    component: LegalNotices
   },
   {
     path: '*',

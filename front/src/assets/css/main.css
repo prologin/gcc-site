@@ -54,6 +54,12 @@ h4, .contentTextSize {
     font-size: 80%;
 }
 
+.light-text {
+  color: #37474F;
+  font-weight: 400;
+  font-size: 80%;
+}
+
 .gcc-pink {
   color: var(--gcc-pink-color);
 }
