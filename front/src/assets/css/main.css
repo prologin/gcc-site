@@ -69,3 +69,9 @@ h4, .contentTextSize {
 .jumbotron {
     border-radius: var(--global-border-radius);
 }
+
+.content-background {
+  background-color: white;
+  border-radius: var(--global-border-radius);
+}
+

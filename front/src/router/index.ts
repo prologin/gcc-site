@@ -3,24 +3,29 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Inscription from '@/views/Inscription.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: About
   },
   {
     path: '/inscription',
-    name: 'Inscription',
+    name: 'inscription',
     component: Inscription
+  },
+  {
+    path: '*',
+    component: PageNotFound
   }
 ]
 
