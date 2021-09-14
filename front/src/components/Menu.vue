@@ -1,7 +1,7 @@
 <template>
 <b-navbar toggleable="md">
   <b-navbar-brand to="/">
-    <img class="menu-logo ml-5 pl-3" src="../assets/GCC_3.svg" alt="Logo des stages Girls Can Code" />
+    <img class="menu-logo ml-5 pl-3" :src="require('@/assets/logo_gcc_text_right.svg')" alt="Logo des stages Girls Can Code" />
   </b-navbar-brand>
   <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

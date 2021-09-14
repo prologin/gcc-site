@@ -4,7 +4,7 @@
     <div class="form-page-below-background" />
     <b-container>
       <b-jumbotron class="form-page-form">
-        <img src="../assets/GCC_3.svg" alt="Logo des stages Girls Can Code" class="logo" />
+        <img :src="require('@/assets/logo_gcc.svg')" alt="Logo des stages Girls Can Code" class="logo" />
         <!-- TODO: [1]-[2]-[3] -->
         <div v-if="state == 0">
           <b-form @submit="submitPersonalInformation" inline>
