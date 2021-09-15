@@ -1,15 +1,18 @@
 <template>
-    <b-row align-v="center" class="m-2 mx-5">
+    <b-container fluid class="footer-bg py-2">
+    <b-row align-v="center" class="mx-5">
         <b-col md="auto">
+            <b-link :to='{ name:"home" }'>
             <img class="picture-size"
                  :src="require('@/assets/logo_gcc.svg')"
                  alt="Logo des stages Girls Can Code!" />
+            </b-link>
         </b-col>
         <b-col md="auto">
             <h4 class="my-auto">Politique de confidentialité</h4>
         </b-col>
         <b-col md="auto">
-            <h4 class="my-auto">Mentions légales</h4>
+            <b-link :to="{ name: 'legal'}" class="secondary-button footer-link-style  my-auto">Mentions légales</b-link>
         </b-col>
         <b-row class="ml-auto">
             <h3 class="light-text my-auto mr-4">info@prologin.org</h3>
@@ -22,6 +25,7 @@
             </b-row>
         </b-row>
     </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -68,12 +72,15 @@ export default Vue.extend({
 </script>
 
 <style>
+.footer-bg {
+  background-color: white;
+}
+
 .picture-size {
   max-height: 30px;
 }
 
-.light-text {
-  color: #37474F;
-  font-weight: 400;
+.footer-link-style {
+  font-size: 80%;
 }
 </style>

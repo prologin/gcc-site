@@ -32,17 +32,20 @@
                     </b-col>
                 </b-row>
             </b-jumbotron>
+      <Footer />
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import Menu from '@/components/Menu.vue'
+import Footer from '@/components/Footer.vue'
 
 export default Vue.extend({
   name: 'LegalNotices',
   components: {
-    Menu
+    Menu,
+    Footer
   }
 })
 </script>

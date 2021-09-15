@@ -1,7 +1,7 @@
 <template>
     <b-container fluid>
       <Menu />
-      <b-row class="background-image">
+      <b-row class="page-not-found-background">
         <b-col class="my-auto content-background" md="auto" offset-md="6">
           <p class="text-center">
           <span class="error-code">404</span><br>
@@ -27,7 +27,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.background-image {
+.page-not-found-background {
   min-height: 90vh;
   background-color: white;
   background-image: url('~@/assets/page_not_found_bg.svg');
