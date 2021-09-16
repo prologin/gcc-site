@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Menu  />
+    <Header />
     <HomeBanner />
     <EventList />
     <Newsletter />
@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Menu from '@/components/Menu.vue'
+import Header from '@/components/Header.vue'
 import HomeBanner from '@/components/HomeBanner.vue'
 import EventList from '@/components/EventList.vue'
 import Newsletter from '@/components/Newsletter.vue'
@@ -19,7 +19,7 @@ import Footer from '@/components/Footer.vue'
 export default Vue.extend({
   name: 'Home',
   components: {
-    Menu,
+    Header,
     HomeBanner,
     EventList,
     Newsletter,

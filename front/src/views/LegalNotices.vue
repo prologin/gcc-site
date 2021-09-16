@@ -1,6 +1,6 @@
 <template>
     <div class="basic-background">
-        <Menu />
+        <Header />
             <b-jumbotron class="mx-5 px-5">
                 <template #header>Mentions Légales</template>
 
@@ -38,13 +38,13 @@
 
 <script>
 import Vue from 'vue'
-import Menu from '@/components/Menu.vue'
+import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 
 export default Vue.extend({
   name: 'LegalNotices',
   components: {
-    Menu,
+    Header,
     Footer
   }
 })

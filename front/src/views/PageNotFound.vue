@@ -1,6 +1,6 @@
 <template>
     <b-container fluid>
-      <Menu />
+      <Header />
       <b-row class="page-not-found-background">
         <b-col class="my-auto content-background" md="auto" offset-md="6">
           <p class="text-center">
@@ -16,12 +16,12 @@
 
 <script>
 import Vue from 'vue'
-import Menu from '@/components/Menu.vue'
+import Header from '@/components/Header.vue'
 
 export default Vue.extend({
   name: 'PageNotFound',
   components: {
-    Menu
+    Header
   }
 })
 </script>
