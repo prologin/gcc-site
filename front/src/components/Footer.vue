@@ -1,22 +1,22 @@
 <template>
     <b-container fluid class="footer-bg py-2">
     <b-row align-v="center" class="mx-5">
-        <b-col md="auto">
+        <b-col md="auto" class="col-sm-auto mb-3 mb-sm-0 text-center text-sm-left">
             <b-link :to='{ name:"home" }'>
             <img class="picture-size"
                  :src="require('@/assets/logo_gcc.svg')"
                  alt="Logo des stages Girls Can Code!" />
             </b-link>
         </b-col>
-        <b-col md="auto">
+        <b-col md="auto" class="col-sm-auto text-center text-sm-left">
             <h4 class="my-auto">Politique de confidentialité</h4>
         </b-col>
-        <b-col md="auto">
+        <b-col md="auto" class="col-sm-auto text-center text-sm-left">
             <b-link :to="{ name: 'legal'}" class="secondary-button footer-link-style  my-auto">Mentions légales</b-link>
         </b-col>
-        <b-row class="ml-auto">
-            <h3 class="light-text my-auto mr-4">info@prologin.org</h3>
-            <b-row cols="5">
+        <b-row class="ml-auto col-sm-auto">
+            <h3 class="light-text my-auto mr-4 col-sm-auto order-12 order-sm-1">info@prologin.org</h3>
+            <b-row cols="5" class="col-sm-auto order-1 order-sm-12 my-3 my-sm-0">
                 <SocialNetwork v-for="(sn, index) in socialNetworks"
                                v-bind:link="sn.link"
                                v-bind:imgName="sn.imgName"
