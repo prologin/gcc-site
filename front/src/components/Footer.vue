@@ -9,10 +9,10 @@
             </b-link>
         </b-col>
         <b-col md="auto" class="col-sm-auto text-center text-sm-left">
-            <h4 class="my-auto">Politique de confidentialité</h4>
+            <b-link :to="{ name: 'privacy'}" class="secondary-button footer-link-style my-auto">Politique de confidentialité</b-link>
         </b-col>
         <b-col md="auto" class="col-sm-auto text-center text-sm-left">
-            <b-link :to="{ name: 'legal'}" class="secondary-button footer-link-style  my-auto">Mentions légales</b-link>
+            <b-link :to="{ name: 'legal'}" class="secondary-button footer-link-style my-auto">Mentions légales</b-link>
         </b-col>
         <b-row class="ml-auto col-sm-auto">
             <h3 class="light-text my-auto mr-4 col-sm-auto order-12 order-sm-1">info@prologin.org</h3>

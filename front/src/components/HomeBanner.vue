@@ -3,7 +3,6 @@
   <b-container fluid class="home-banner">
       <b-col class="ml-5 mt-5 pt-5 w-50">
         <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
-        <!-- TODO: use vue-router link -->
         <b-button @click="scrollTo('event-list')" class="primary-button subtitleSize" block size="lg"> Voir les stages </b-button>
       </b-col>
   </b-container>
@@ -27,7 +26,7 @@ export default Vue.extend({
   .home-banner {
     height: 70vh;
     background-size: cover;
-    background-image: url('../assets/girls_class.svg');
+    background-image: url('~@/assets/girls_class.svg');
     background-repeat: no-repeat;
     background-position: bottom 0 right 0;
   }

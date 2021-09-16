@@ -1,5 +1,5 @@
 <template>
-    <div class="background-image">
+    <div class="basic-background">
         <Menu />
             <b-jumbotron class="mx-5 px-5">
                 <template #header>Mentions Légales</template>
@@ -51,12 +51,5 @@ export default Vue.extend({
 </script>
 
 <style>
-.background-image {
-  background-color: white;
-  background-image: url('~@/assets/basic_background.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
 
 </style>
