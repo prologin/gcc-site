@@ -1,6 +1,6 @@
 <template>
     <b-container fluid class="footer-bg py-2">
-    <b-row align-v="center" class="mx-5">
+    <b-row class="mx-5">
         <b-col md="auto" class="col-sm-auto mb-3 mb-sm-0 text-center text-sm-left">
             <b-link :to='{ name:"home" }'>
             <img class="picture-size"
@@ -14,9 +14,9 @@
         <b-col md="auto" class="col-sm-auto text-center text-sm-left">
             <b-link :to="{ name: 'legal'}" class="secondary-button footer-link-style my-auto">Mentions légales</b-link>
         </b-col>
-        <b-row class="ml-auto col-sm-auto">
-            <h3 class="light-text my-auto mr-4 col-sm-auto order-12 order-sm-1">info@prologin.org</h3>
-            <b-row cols="5" class="col-sm-auto order-1 order-sm-12 my-3 my-sm-0">
+        <b-row class="mx-auto ml-sm-auto mr-sm-0 col-sm-auto">
+            <h3 class="light-text my-auto col-sm-auto order-12 order-sm-1 text-center">info@prologin.org</h3>
+            <b-row cols="5" class="col-sm-auto order-1 order-sm-12 my-3 my-sm-0 mx-auto mr-sm-0">
                 <SocialNetwork v-for="(sn, index) in socialNetworks"
                                v-bind:link="sn.link"
                                v-bind:imgName="sn.imgName"
