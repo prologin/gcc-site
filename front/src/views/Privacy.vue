@@ -1,6 +1,6 @@
 <template>
   <div class="basic-background">
-    <Menu />
+    <Header />
     <b-container>
     <h1 class="text-center m-5">Girls Can Code! (GCC!) et vos données personnelles</h1>
     <b-container class="accordion" role="tablist">
@@ -18,7 +18,7 @@
 <script>
 import Vue from 'vue'
 import AccordionCard from '@/components/AccordionCard.vue'
-import Menu from '@/components/Menu.vue'
+import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 
 export default Vue.extend({
@@ -26,7 +26,7 @@ export default Vue.extend({
   components: {
     AccordionCard,
     Footer,
-    Menu
+    Header
   },
   data () {
     return {

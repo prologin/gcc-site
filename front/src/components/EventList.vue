@@ -1,5 +1,5 @@
 <template>
-    <div id="event-list" class="background-style pb-4">
+    <div id="event-list" class="event-list-background pb-4">
         <section class="w-75 mx-auto pt-5">
             <EventCard v-for="(event, index) in events"
                        v-bind:index="index"
@@ -34,11 +34,12 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.background-style {
+.event-list-background {
     background-color: #efefef;
-    background-image: url('../assets/event_list_bg.svg');
+    background-image: url('~@/assets/event_list_bg.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: top 0 right 0;
 }
 
 .event-card {
