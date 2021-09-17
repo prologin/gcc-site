@@ -1,9 +1,11 @@
 <template>
     <div class="background-style text-center py-5">
-        <h1>S'inscrire à la newsletter</h1>
-        <h3>Pour être tenu au courant de nos prochains évènements.</h3>
-        <h4>Nous n'aimons pas le spam et nous ne partagerons jamais votre adresse email.</h4>
-        <b-form class="w-50 mx-auto m-5" @submit="onSubmit">
+        <div class="mx-2 mx-sm-auto">
+          <h1>S'inscrire à la newsletter</h1>
+          <h3>Pour être tenu au courant de nos prochains évènements.</h3>
+          <h4>Nous n'aimons pas le spam et nous ne partagerons jamais votre adresse email.</h4>
+        </div>
+        <b-form class="col-sm-7 mx-auto my-4" @submit="onSubmit">
             <b-input-group
                 id="input-group-1"
                 label-for="input-1"
@@ -18,7 +20,8 @@
                     >
                 </b-form-input>
                 <b-input-group-append>
-                    <b-button type="submit" class="primary-button">S'inscrire maintenant</b-button>
+                    <b-button type="submit" class="primary-button d-none d-sm-block">S'inscrire maintenant</b-button>
+                    <b-button type="submit" class="primary-button d-block d-sm-none">S'inscrire</b-button>
                 </b-input-group-append>
             </b-input-group>
         </b-form>
@@ -49,7 +52,7 @@ export default Vue.extend({
 <style>
 .background-style {
   background-color: #efefef;
-  background-image: url('../assets/newsletter_bg.svg');
+  background-image: url('~@/assets/newsletter_bg.svg');
   background-repeat:no-repeat;
   background-size:cover;
 }
@@ -57,5 +60,10 @@ export default Vue.extend({
 .rounded-input {
   border-top-left-radius: var(--global-border-radius) !important;
   border-bottom-left-radius: var(--global-border-radius) !important;
+}
+
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: var(--global-border-radius) !important;
+  border-bottom-right-radius: var(--global-border-radius) !important;
 }
 </style>
