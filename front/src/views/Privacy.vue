@@ -2,8 +2,8 @@
   <div class="basic-background">
     <Header />
     <b-container>
-    <h1 class="text-center m-5">Girls Can Code! (GCC!) et vos données personnelles</h1>
-    <b-container class="accordion" role="tablist">
+    <h1 class="text-center m-3">Girls Can Code! (GCC!) et vos données personnelles</h1>
+    <b-container class="accordion mb-1" role="tablist">
       <AccordionCard v-for="(privacy_element, index) in privacy_list"
       v-bind:key="index"
       v-bind:index="index"

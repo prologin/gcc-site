@@ -1,16 +1,16 @@
 <template>
   <b-card no-body>
-    <b-card-header class="p-1" header-tag="header" role="tab">
-      <b-button class="primary-button" block v-b-toggle="'accordion-' + index">
+    <b-card-header header-tag="header" role="tab">
+      <b-row class="secondary-button px-4" v-b-toggle="'accordion-' + index">
         {{ title }}
 
-        <span class="when-closed">
+        <span class="when-closed ml-auto">
           <b-icon icon="caret-down-fill"/>
         </span>
-        <span class="when-open">
+        <span class="when-open ml-auto">
           <b-icon icon="caret-up-fill"/>
         </span>
-      </b-button>
+      </b-row>
     </b-card-header>
     <b-collapse :id="'accordion-' + index" role="tabpanel">
       <b-card-body>
@@ -32,7 +32,6 @@ export default Vue.extend({
 
 <style>
 .card, .card-header {
-  border: none !important;
   background-color: white !important;
 }
 
