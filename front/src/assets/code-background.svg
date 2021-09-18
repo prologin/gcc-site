@@ -1,0 +1,150 @@
+<svg width="960" height="540" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect x="839" y="952" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="231px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1088" y="952" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0.5s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1538" y="952" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="159px"
+            begin="0.2s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1715" y="952" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0.6s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1352" y="1007" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="168px"
+            begin="0.2s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1538" y="1007" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="297px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1851" y="1007" width="0" height="37" rx="12" fill="#FF0079">
+     <animate attributeName="width"  from="0px"  to="135px"
+            begin="0.0.4s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="839" y="1062" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="231px"
+            begin="0.9s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1554" y="1062" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0.7s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1088" y="1062" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="159px"
+            begin="0.3s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1265" y="1062" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="-349" y="786" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0.2s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="101" y="786" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="159px"
+            begin="0.7s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="-85" y="841" width="0" height="37" rx="12" fill="#FF0079">
+     <animate attributeName="width"  from="0px"  to="168px"
+            begin="0.5s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="101" y="841" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="297px"
+            begin="0.3s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="117" y="896" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0.9s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="-172" y="896" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0.8s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="414" y="951" width="0" height="37" rx="12" fill="#FF0079">
+     <animate attributeName="width"  from="0px"  to="135px"
+            begin="0.3s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="-349" y="1006" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="101" y="1006" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="159px"
+            begin="0.2s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="-85" y="1061" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="483px"
+            begin="0.9s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1607" y="567" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="159px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1784" y="567" width="0" height="37" rx="12" fill="#FF0079">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1421" y="622" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="168px"
+            begin="0.3s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1623" y="677" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0.6s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1334" y="677" width="0" height="37" rx="12" fill="#00AED3">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0.5s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1421" y="732" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="483px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="908" y="842" width="0" height="37" rx="12" fill="#00AED3">
+     <animate attributeName="width"  from="0px"  to="95px"
+            begin="0.2s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1157" y="787" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="432px"
+            begin="0.5s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1607" y="787" width="0" height="37" rx="12" fill="#FF0079">
+     <animate attributeName="width"  from="0px"  to="159px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1784" y="787" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0.8s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1024" y="842" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="376px"
+            begin="0.7s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1421" y="842" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="483px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1334" y="897" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="271px"
+            begin="0s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+<rect x="1421" y="952" width="0" height="37" rx="12" fill="#EFEFEF">
+     <animate attributeName="width"  from="0px"  to="483px"
+            begin="0.5s" dur="0.4s" fill="freeze" restart="whenNotActive" />
+</rect>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="1920" height="1080" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+

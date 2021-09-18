@@ -26,7 +26,7 @@ export default Vue.extend({
   .home-banner {
     height: 70vh;
     background-size: cover;
-    background-image: url('~@/assets/girls_class.svg');
+    background-image: url('~@/assets/girls_class.svg'), url('~@/assets/code-background.svg');
     background-repeat: no-repeat;
     background-position: bottom 0 right 0;
   }
