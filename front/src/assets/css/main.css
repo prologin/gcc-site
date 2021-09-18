@@ -1,9 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
 
+/* If the screen size is 601px wide or more */
+@media screen and (min-width: 601px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* If the screen size is 600px wide or less */
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 4vw;;
+  }
+}
+
+
 body {
     font-family: 'Inter',sans-serif;
     color: var(--main-dark-color);
-    font-size: 16px;
 
     --gcc-pink-color: #FF0079;
     --gcc-green-color: #A6C613;

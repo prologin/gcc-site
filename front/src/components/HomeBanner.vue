@@ -1,9 +1,9 @@
 <template>
 <div>
   <b-container fluid class="home-banner">
-      <b-col class="ml-5 mt-5 pt-5 w-50">
+      <b-col class="ml-0 ml-sm-5 pl-3 mt-5 pt-2 pt-sm-5 text-center text-sm-left col-sm-5">
         <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
-        <b-button @click="scrollTo('event-list')" class="primary-button subtitleSize" block size="lg"> Voir les stages </b-button>
+        <b-button @click="scrollTo('event-list')" class="primary-button subtitleSize mt-4" block> Voir les stages </b-button>
       </b-col>
   </b-container>
 </div>
