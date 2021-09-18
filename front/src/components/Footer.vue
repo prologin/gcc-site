@@ -1,22 +1,22 @@
 <template>
     <b-container fluid class="footer-bg py-2">
     <b-row class="mx-5">
-        <b-col md="auto" class="col-sm-auto mb-3 mb-sm-0 text-center text-sm-left">
+        <b-col class="col-12 col-lg-auto mb-3 mb-lg-0 text-center text-lg-left">
             <b-link :to='{ name:"home" }'>
             <img class="picture-size"
                  :src="require('@/assets/logo_gcc.svg')"
                  alt="Logo des stages Girls Can Code!" />
             </b-link>
         </b-col>
-        <b-col md="auto" class="col-sm-auto text-center text-sm-left">
+        <b-col class="col-12 col-lg-auto text-center text-lg-left">
             <b-link :to="{ name: 'privacy'}" class="secondary-button footer-link-style my-auto">Politique de confidentialité</b-link>
         </b-col>
-        <b-col md="auto" class="col-sm-auto text-center text-sm-left">
+        <b-col class="col-12 col-lg-auto text-center text-lg-left">
             <b-link :to="{ name: 'legal'}" class="secondary-button footer-link-style my-auto">Mentions légales</b-link>
         </b-col>
-        <b-row class="mx-auto ml-sm-auto mr-sm-0 col-sm-auto">
-            <h3 class="light-text my-auto col-sm-auto order-12 order-sm-1 text-center">info@prologin.org</h3>
-            <b-row cols="5" class="col-sm-auto order-1 order-sm-12 my-3 my-sm-0 mx-auto mr-sm-0">
+        <b-row class="col-12 col-lg-auto mx-auto ml-lg-auto mr-lg-0 p-0">
+            <h3 class="light-text my-auto col-lg-auto order-12 order-lg-1 text-center">info@prologin.org</h3>
+            <b-row class="col-12 col-lg-auto order-1 order-lg-12 my-3 my-lg-0 mx-auto mr-lg-0" align-h="center">
                 <SocialNetwork v-for="(sn, index) in socialNetworks"
                                v-bind:link="sn.link"
                                v-bind:imgName="sn.imgName"

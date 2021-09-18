@@ -4,14 +4,14 @@
             <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true"/>
         </b-col>
         <!-- Event infos verticaly centered -->
-        <b-col class="col-sm-auto">
+        <b-col class="col-lg-auto">
             <h1>{{ title }}</h1>
             <h2>{{ date }}</h2>
             <h3>{{ address }}</h3>
         </b-col>
-        <b-button-group vertical class="col-sm-auto ml-auto mt-4 mb-1 my-sm-auto" cols="auto">
-            <b-button class="mx-auto ml-sm-auto mr-sm-5 primary-button">S'inscrire à ce stage</b-button>
-            <b-button class="mx-auto ml-sm-auto mr-sm-5 secondary-button">Plus d'informations</b-button>
+        <b-button-group vertical class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto">
+            <b-button class="mx-auto ml-lg-auto mr-lg-4  primary-button">S'inscrire à ce stage</b-button>
+            <b-button class="mx-auto ml-lg-auto mr-lg-4 secondary-button">Plus d'informations</b-button>
         </b-button-group>
     </b-row>
 </template>
