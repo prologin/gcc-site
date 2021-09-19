@@ -15,13 +15,13 @@
                     v-model="form.email"
                     type="email"
                     placeholder="Votre.email@example.com"
-                    class="rounded-input"
+                    class="rounded-input-left"
                     required
                     >
                 </b-form-input>
                 <b-input-group-append>
-                    <b-button type="submit" class="primary-button d-none d-sm-block">S'inscrire maintenant</b-button>
-                    <b-button type="submit" class="primary-button d-block d-sm-none">S'inscrire</b-button>
+                    <b-button type="submit" class="primary-button rounded-input-right d-none d-sm-block">S'inscrire maintenant</b-button>
+                    <b-button type="submit" class="primary-button rounded-input-right d-block d-sm-none">S'inscrire</b-button>
                 </b-input-group-append>
             </b-input-group>
         </b-form>
@@ -49,7 +49,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 .background-style {
   background-color: #efefef;
   background-image: url('~@/assets/newsletter_bg.svg');
@@ -57,12 +57,12 @@ export default Vue.extend({
   background-size:cover;
 }
 
-.rounded-input {
+.rounded-input-left {
   border-top-left-radius: var(--global-border-radius) !important;
   border-bottom-left-radius: var(--global-border-radius) !important;
 }
 
-.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+.rounded-input-right {
   border-top-right-radius: var(--global-border-radius) !important;
   border-bottom-right-radius: var(--global-border-radius) !important;
 }
