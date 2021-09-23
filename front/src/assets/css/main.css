@@ -96,7 +96,6 @@ h4, .contentTextSize {
 }
 
 .basic-background {
-  height: 100vh;
   background-color: white;
   background-image: url('~@/assets/basic_background.svg');
   background-repeat: no-repeat;

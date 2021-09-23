@@ -6,6 +6,7 @@ import Inscription from '@/views/Inscription.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 import LegalNotices from '@/views/LegalNotices.vue'
 import Privacy from '@/views/Privacy.vue'
+import PartnersPage from '@/views/PartnersPage.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes: Array<RouteConfig> = [
     path: '/privacy',
     name: 'privacy',
     component: Privacy
+  },
+  {
+    path: '/partenaires',
+    name: 'partners',
+    component: PartnersPage
   },
   {
     path: '*',
