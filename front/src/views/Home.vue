@@ -3,6 +3,7 @@
     <Header />
     <HomeBanner />
     <EventList />
+    <FAQ />
     <Partners v-bind:isFrontPage="true"/>
     <Newsletter />
     <Footer />
@@ -15,6 +16,7 @@ import Header from '@/components/Header.vue'
 import HomeBanner from '@/components/HomeBanner.vue'
 import EventList from '@/components/EventList.vue'
 import Partners from '@/components/Partners.vue'
+import FAQ from '@/components/FAQ.vue'
 import Newsletter from '@/components/Newsletter.vue'
 import Footer from '@/components/Footer.vue'
 
@@ -25,6 +27,7 @@ export default Vue.extend({
     HomeBanner,
     EventList,
     Partners,
+    FAQ,
     Newsletter,
     Footer
   }
