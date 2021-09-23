@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'eventsd.events',
+    'eventsd.sponsors',
     'corsheaders',
 ]
 
@@ -124,3 +125,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = "eventsd_users.User"
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+MEDIA_URL = '/api/media/'
