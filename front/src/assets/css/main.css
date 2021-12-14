@@ -16,56 +16,63 @@
 
 
 body {
-    font-family: 'Inter',sans-serif;
-    color: var(--main-dark-color);
+  font-family: 'Inter',sans-serif;
+  color: var(--main-dark-color);
 
-    --gcc-pink-color: #FF0079;
-    --gcc-green-color: #A6C613;
-    --gcc-blue-color: #00AED3;
-    --main-dark-color: #222A35;
-    --global-border-radius: 12px;
-    --main-hover-color: #46566D;
+  --gcc-pink-color: #FF0079;
+  --gcc-green-color: #A6C613;
+  --gcc-blue-color: #00AED3;
+  --main-dark-color: #222A35;
+  --global-border-radius: 12px;
+  --main-hover-color: #46566D;
+
+  /* 
+   * The fixed navbar overlay other contents, unless you add padding
+   * to the top of the <body>.
+   */
+  padding-top: 70px; 
 }
 
 .primary-button {
-    background-color: var(--main-dark-color);
-    border-color: var(--main-dark-color);
-    color: white;
-    border-radius: var(--global-border-radius);
+  background-color: var(--main-dark-color);
+  border-color: var(--main-dark-color);
+  color: white;
+  border-radius: var(--global-border-radius);
 }
 
 .primary-button:hover {
-    background-color: var(--main-hover-color);
+  background-color: var(--main-hover-color);
 }
 
 .secondary-button {
-    color: var(--main-dark-color);
-    background-color: white;
-    border-color: white;
-    border-radius: var(--global-border-radius);
+  color: var(--main-dark-color);
+  background-color: white;
+  border-color: white;
+  border-radius: var(--global-border-radius);
 }
 
-.secondary-button:hover {
-    color: var(--main-hover-color);
-    background-color: white;
-    border-color: white;
+.secondary-button:hover, .secondary-button:focus {
+  color: var(--main-hover-color);
+  background-color: white;
+  border-color: var(--main-hover-color);
+  text-decoration: underline;
 }
 
 h1, .titleSize {
-    font-size: 200%;
-    font-weight: bold;
+  font-size: 200%;
+  font-weight: bold;
 }
 
 h2, .subtitleSize {
-    font-size: 150%;
+  font-size: 150%;
 }
 
 h3, .subsubtitleSize {
-    font-size: 100%;
+  font-size: 100%;
 }
 
 h4, .contentTextSize {
-    font-size: 80%;
+  font-size: 80%;
 }
 
 .light-text {
@@ -87,12 +94,13 @@ h4, .contentTextSize {
 }
 
 .jumbotron {
-    border-radius: var(--global-border-radius);
+  border-radius: var(--global-border-radius);
 }
 
 .content-background {
   background-color: white;
   border-radius: var(--global-border-radius);
+  padding: 15px;
 }
 
 .basic-background {

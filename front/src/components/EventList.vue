@@ -1,14 +1,14 @@
 <template>
-    <div id="event-list" class="event-list-background pb-4">
-        <section class="w-75 mx-auto pt-5">
-            <EventCard v-for="(event, index) in events"
-                       v-bind:index="index"
-                       v-bind:key="event.id"
-                       v-bind:title="event.title"
-                       v-bind:date="event.date"
-                       v-bind:address="event.address"/>
-        </section>
-    </div>
+  <div class="event-list-background pb-4">
+    <section class="w-75 mx-auto pt-5">
+      <EventCard v-for="(event, index) in events"
+                 v-bind:index="index"
+                 v-bind:key="event.id"
+                 v-bind:title="event.title"
+                 v-bind:date="event.date"
+                 v-bind:address="event.address"/>
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -35,20 +35,20 @@ export default Vue.extend({
 
 <style scoped>
 .event-list-background {
-    background-color: #efefef;
-    background-image: url('~@/assets/event_list_bg.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top 0 right 0;
+  background-color: #efefef;
+  background-image: url('~@/assets/event_list_bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top 0 right 0;
 }
 
 .event-card {
-    background-color: #FFFFFF;
-    border-radius: 12px;
+  background-color: #FFFFFF;
+  border-radius: 12px;
 }
 
 .btn-group-vertical > button {
-    margin-bottom:5px;
-    border-radius:12px !important;
+  margin-bottom:5px;
+  border-radius:12px !important;
 }
 </style>
