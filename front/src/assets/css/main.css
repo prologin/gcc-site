@@ -23,8 +23,10 @@ body {
   --gcc-green-color: #A6C613;
   --gcc-blue-color: #00AED3;
   --main-dark-color: #222A35;
+  --main-light-color: #eff2f5;
   --global-border-radius: 12px;
   --main-hover-color: #46566D;
+  --light-text-color: #92a2b9;
 
   /* 
    * The fixed navbar overlay other contents, unless you add padding

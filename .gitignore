@@ -10,3 +10,4 @@ front/node_modules*
 test/db-data
 **/.*.*.sw*
 **/.*.sw*
+*.orig
