@@ -73,6 +73,7 @@ export default Vue.extend({
 
 <style>
 .footer-bg {
+  flex-shrink: 0;
   background-color: white;
 }
 

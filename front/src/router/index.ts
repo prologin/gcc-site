@@ -1,12 +1,14 @@
-import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '@/views/Home.vue'
+import Vue from 'vue'
+
 import About from '@/views/About.vue'
+import Applications from '@/views/ApplicationsView.vue'
+import Home from '@/views/Home.vue'
 import Inscription from '@/views/Inscription.vue'
-import PageNotFound from '@/views/PageNotFound.vue'
 import LegalNotices from '@/views/LegalNotices.vue'
-import Privacy from '@/views/Privacy.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 import PartnersPage from '@/views/PartnersPage.vue'
+import Privacy from '@/views/Privacy.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +42,11 @@ const routes: Array<RouteConfig> = [
     path: '/partenaires',
     name: 'partners',
     component: PartnersPage
+  },
+  {
+    path: '/applications',
+    name: 'applications',
+    component: Applications
   },
   {
     path: '*',
