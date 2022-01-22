@@ -3,10 +3,10 @@
     <Header />
       <b-container fluid class="home-banner">
       <b-row class="h-100" align-v="center" align-h="center">
-        <b-col class="text-center text-md-left col-md-5 col-lg-4 content-background">
-          <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1>
-          <b-button @click="scrollTo('event-list')" class="primary-button subtitleSize mt-4" block> Voir les stages </b-button>
-          <b-button @click="scrollTo('faq')" class="secondary-button subtitleSize" block>Plus d'informations</b-button>
+        <b-col class="text-center text-md-left col-md-5 col-lg-4 content-background home-title">
+          <span> <h1> Stage d'initiation à l'informatique pour collégiennes et lycéennes. </h1></span>
+          <span> <b-button @click="scrollTo('event-list')" class="primary-button subtitleSize mt-4" block> Voir les stages </b-button></span>
+          <span> <b-button @click="scrollTo('faq')" class="secondary-button subtitleSize" block>Plus d'informations</b-button></span>
         </b-col>
       </b-row>
     </b-container>
@@ -53,5 +53,62 @@ export default Vue.extend({
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+/* title animation */
+.home-title span {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    border-radius: var(--global-border-radius);
+}
+
+.home-title span::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--main-dark-color);
+    animation: a-ltr-after 0.7s cubic-bezier(.5, .5, .5, .5) forwards;
+    transform: translateX(-101%);
+}
+
+.home-title span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation: a-ltr-before 1s cubic-bezier(.5, .5, .5, .5) forwards;
+    transform: translateX(0);
+}
+
+.home-title span:nth-of-type(1)::before,
+.home-title span:nth-of-type(1)::after {
+    animation-delay: 1s;
+}
+
+.home-title span:nth-of-type(2)::before,
+.home-title span:nth-of-type(2)::after {
+    animation-delay: 1.5s;
+}
+
+.home-title span:nth-of-type(3)::before,
+.home-title span:nth-of-type(3)::after {
+    animation-delay: 2s;
+}
+
+@keyframes a-ltr-after {
+    0% {transform: translateX(-100%)}
+    100% {transform: translateX(101%)}
+}
+
+@keyframes a-ltr-before {
+    0% {transform: translateX(0)}
+    100% {transform: translateX(200%)}
 }
 </style>
