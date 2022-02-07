@@ -5,12 +5,53 @@
     </b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-auto text-right">
-        <b-nav-item v-bind:href="'/api/sso/login/prologin?next=' + currentLocation()">
+      <b-navbar-nav v-if="isAuthenticated" class="ml-auto">
+        <b-nav-item>
+          <b-dropdown no-caret toggle-class='secondary-button' variant='none'>
+            <!-- Using 'button-content' slot -->
+            <template #button-content>
+              <b-row>
+                <b-col>
+                  <b-icon-person-circle aria-hidden="true" class="mr-2"/>
+                    {{ getFirstName }} {{ getLastName }}
+                </b-col>
+                <b-col>
+                  <b-icon icon='chevron-compact-down' />
+                </b-col>
+              </b-row>
+            </template>
+
+            <b-dropdown-header id="dropdown-header-label">
+              <h2>{{ getFirstName }} {{ getLastName }}</h2>
+              <h3>{{ getEmail }}</h3>
+            </b-dropdown-header>
+            <b-dropdown-divider/>
+              <b-dropdown-item-button href="#">
+                <b-icon icon="person-fill" aria-hidden="true"/>
+                  Mon compte
+              </b-dropdown-item-button>
+              <b-dropdown-item :to="{ name: 'applications' }">
+                <b-icon icon="inbox-fill"/>
+                  Mes candidatures
+              </b-dropdown-item>
+              <b-dropdown-divider/>
+                <b-dropdown-item-button @click="logout">
+                  <b-icon icon="power" aria-hidden="true"/>
+                    Se déconnecter
+                </b-dropdown-item-button>
+              </b-dropdown>
+        </b-nav-item>
+        <b-nav-item>
+          <hr class="my-1">
+        </b-nav-item>
+      </b-navbar-nav>
+
+      <b-navbar-nav v-else class="ml-auto">
+        <b-nav-item>
           <b-button class="secondary-button"> S'inscrire </b-button>
         </b-nav-item>
-        <b-nav-item v-bind:href="'/api/sso/login/prologin?next=' + currentLocation()">
-          <b-button class="primary-button"> Se connecter </b-button>
+        <b-nav-item>
+          <b-button @click="login" class="primary-button"> Se connecter </b-button>
         </b-nav-item>
         <b-nav-item>
           <hr class="my-1">
@@ -22,6 +63,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default Vue.extend({
   name: 'Header',
@@ -64,12 +106,27 @@ export default Vue.extend({
       this.showNavbar = currentScrollPosition < this.lastScrollPosition
       // Set the current scroll position as the last scroll position
       this.lastScrollPosition = currentScrollPosition
+    },
+    async logout () {
+      await this.$store.dispatch('LogOut')
+    },
+    ...mapActions(['LogIn']),
+    async login () {
+      const user = {
+        firstName: 'Alice',
+        lastName: 'Doe',
+        email: 'alice.doe@example.com'
+      }
+      await this.LogIn(user)
     }
   },
-  props: {
-    isConnected: Boolean,
-    name: String,
-    surname: String
+  computed: {
+    ...mapGetters([
+      'isAuthenticated',
+      'getFirstName',
+      'getLastName',
+      'getEmail'
+    ])
   }
 })
 </script>
