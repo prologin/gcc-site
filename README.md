@@ -130,7 +130,7 @@ You can now access the front at `http://localhost:8080`.
 
 To stop the containers, you can launch `docker-compose down` in the test directory.
 
-To interact with the Django Backend you can run `sudo docker exec -it test_api_1 bash`.
+To interact with the Django Backend you can run `sudo docker exec -it dev-setup_api_1 bash`.
 You can use the same commands as the Backend first setup above.
 
 Note that the state is inside the container as a sqlite DB. Thus if you remove the container,
