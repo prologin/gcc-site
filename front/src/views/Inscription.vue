@@ -1,20 +1,15 @@
 <template>
-  <b-container class="p-0" fluid>
-    <FormPage />
-  </b-container>
+  <ContactInformationComponent />
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import FormPage from '@/components/FormPage.vue'
+import ContactInformationComponent from '@/components/ContactInformationComponent.vue'
 
 export default Vue.extend({
   name: 'Inscription',
   components: {
-    FormPage
+    ContactInformationComponent
   }
 })
 </script>
-
-<style scoped>
-</style>
