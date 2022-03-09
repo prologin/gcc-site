@@ -26,7 +26,12 @@ body {
   --global-border-radius: 12px;
   --main-hover-color: #46566D;
   --light-text-color: #92a2b9;
+}
 
+/*
+ * To use in each view that use header and footer.
+ * */
+.main-body-style {
   /* 
    * The fixed navbar overlay other contents, unless you add padding
    * to the top of the <body>.
@@ -122,6 +127,8 @@ h4, .contentTextSize {
 }
 
 .basic-background {
+  height: 100%;
+  background-attachment: fixed;
   background-color: white;
   background-image: url('~@/assets/basic_background.svg');
   background-repeat: no-repeat;

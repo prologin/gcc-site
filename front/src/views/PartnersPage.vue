@@ -1,14 +1,16 @@
 <template>
-  <div>
+  <div class="main-body-style">
     <Header/>
-      <b-container fluid class="basic-background">
-        <b-container class="content-background m-0 m-sm-5 p-3">
-          <h1>Nos partenaires</h1>
-          <p>Merci à tous nos partenaires qui nous permettent d'organiser les stages.</p>
-          <hr>
-          <Partners v-bind:isFrontPage="false"/>
-          <hr>
-          <h4>Si vous souhaitez nous soutenir, vous pouvez nous envoyer un mail à info@prologin.org</h4>
+      <b-container fluid class="basic-background content">
+        <b-container fluid class="content-background">
+          <div class="m-5">
+            <h1>Nos partenaires</h1>
+            <p>Merci à tous nos partenaires qui nous permettent d'organiser les stages.</p>
+            <hr>
+            <Partners v-bind:isFrontPage="false"/>
+            <hr>
+            <h4>Si vous souhaitez nous soutenir, vous pouvez nous envoyer un mail à info@prologin.org</h4>
+          </div>
         </b-container>
       </b-container>
       <Footer/>
@@ -31,6 +33,3 @@ export default Vue.extend({
 })
 
 </script>
-
-<style>
-</style>

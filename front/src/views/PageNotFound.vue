@@ -1,17 +1,19 @@
 <template>
-    <b-container fluid>
+  <div class="main-body-style">
+    <b-container class="content" fluid>
       <Header />
-      <b-row class="page-not-found-background">
-        <b-col class="my-auto content-background" md="auto" offset-md="6">
-          <p class="text-center">
-          <span class="error-code">404</span><br>
-          <span class="error-message">Page introuvable</span><br>
-          </p>
-          <b-button :to="{ name: 'home' }" class="primary-button" block>Retour a l'accueil</b-button>
-          <span class="light-text">Si vous pensez que ceci est une erreur, envoyez un mail à info@prologin.org</span>
-        </b-col>
-      </b-row>
+        <b-row class="page-not-found-background">
+          <b-col class="my-auto content-background" md="auto" offset-md="6">
+            <p class="text-center">
+            <span class="error-code">404</span><br>
+            <span class="error-message">Page introuvable</span><br>
+            </p>
+            <b-button :to="{ name: 'home' }" class="primary-button" block>Retour a l'accueil</b-button>
+            <span class="light-text">Si vous pensez que ceci est une erreur, envoyez un mail à info@prologin.org</span>
+          </b-col>
+        </b-row>
     </b-container>
+  </div>
 </template>
 
 <script>
@@ -26,7 +28,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 .page-not-found-background {
   min-height: 90vh;
   background-color: white;

@@ -1,4 +1,5 @@
 <template>
+  <div class="main-body-style">
   <b-container fluid class="p-0">
     <!-- Header -->
     <Header />
@@ -39,6 +40,7 @@
       <!-- Footer -->
       <Footer />
   </b-container>
+  </div>
 </template>
 
 <script>
@@ -69,7 +71,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 .home-banner {
   height: 70vh;
   background-image: url('~@/assets/girl-class-v2.svg'), url('~@/assets/code-background-v2.svg');
