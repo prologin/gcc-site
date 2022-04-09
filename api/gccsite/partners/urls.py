@@ -1,0 +1,12 @@
+from django.urls import path, include
+from rest_framework import routers
+from . import views
+
+app_name = "partners"
+
+router = routers.SimpleRouter()
+router.register("", views.PartnerViewset, basename="partners")
+
+urlpatterns = [
+    path("", include(router.urls)),
+]
