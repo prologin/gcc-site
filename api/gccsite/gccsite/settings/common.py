@@ -19,12 +19,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'adminsortable2',
+    'users',
     'social_django',
     'rest_framework',
-    'corsheaders',
-    'users',
     'events',
     'partners',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
