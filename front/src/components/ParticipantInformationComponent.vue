@@ -76,7 +76,7 @@ export default Vue.extend({
         phone: ''
       }
     }
-  },
+  }
 })
 </script>
 
