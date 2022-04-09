@@ -56,7 +56,7 @@
   </b-container>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import QuestionsTypeEnum from '@/enums/QuestionsTypeEnum.js'
 
