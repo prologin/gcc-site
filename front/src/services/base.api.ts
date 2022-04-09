@@ -11,7 +11,7 @@ export default class BaseAPIService {
   constructor (resource: string) {
     this.axiosInstance = axios.create({
       // TODO: Clean when we will have a good API (:
-      baseURL: '/api/eventsd/' + resource
+      baseURL: '/api/v1/' + resource
     })
   }
 
