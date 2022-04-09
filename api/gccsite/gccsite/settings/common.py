@@ -19,12 +19,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'adminsortable2',
-    'eventsd.users',
     'social_django',
     'rest_framework',
-    'eventsd.events',
-    'eventsd.sponsors',
     'corsheaders',
+    'users',
+    'events',
+    'partners',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +124,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 )
 
-AUTH_USER_MODEL = "eventsd_users.User"
+AUTH_USER_MODEL = "users.User"
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 

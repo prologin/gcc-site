@@ -13,7 +13,7 @@ AWS_S3_ENDPOINT_URL = (
 )
 
 AWS_STORAGE_BUCKET_NAME = (
-    "eventsd-dev"
+    "gcc-site-dev"
 )
 
 AWS_ACCESS_KEY_ID = (
