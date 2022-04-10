@@ -23,6 +23,5 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
             "username",
-            "email",
             "is_staff",
         )
