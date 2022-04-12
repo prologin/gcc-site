@@ -1,0 +1,23 @@
+stages:
+  - testyarn
+
+testyarn:
+  before_script:
+    - cd front
+  stage: testyarn
+  script:
+  - "yarn install"
+  - "export NODE_OPTIONS=--openssl-legacy-provider"
+  - "yarn build"
+  cache:
+    key: gcc-yarn
+    paths:
+      - front/node_modules/
+  image:
+    name: j4m3s/gcc-build:17.9-alpine3.14
+    entrypoint: [""]
+  rules:
+    - changes:
+      - front/yarn.lock
+    - exists:
+      - front/node_modules
