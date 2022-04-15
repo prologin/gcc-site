@@ -53,6 +53,18 @@
          </b-col>
        </b-row>
        <!-- TODO: Add slider (or range) for class level + conditionnal text field if other selected in slider -->
+       <b-row>
+         <h3> Acceptez-vous le partage de ces informations dans le cadre de l'organisation d'un covoiturage ? </h3>
+       </b-row>
+       <b-row>
+         <b-form-group v-slot="{ ariaDescribedby }">
+          <b-form-radio-group v-model="carpool_use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
+            <b-form-radio value="yes"> Oui </b-form-radio>
+            <b-form-radio value="no"> Non </b-form-radio>
+          </b-form-radio-group>
+         </b-form-group>
+       </b-row>
+
      </b-form>
   </b-container>
 </template>
@@ -65,6 +77,7 @@ export default Vue.extend({
   data: () => {
     return {
       use_contact_info: '',
+      carpool_use_contact_info: '',
       personal: {
         familyname: '',
         name: '',
