@@ -9,7 +9,7 @@ import LegalNotices from '@/views/LegalNotices.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 import PartnersPage from '@/views/PartnersPage.vue'
 import Privacy from '@/views/Privacy.vue'
-import LoginView from '@/views/Login.vue'
+import LoginRegisterView from '@/views/LoginRegisterView.vue'
 
 Vue.use(VueRouter)
 
@@ -51,8 +51,8 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/connexion',
-    name: 'login',
-    component: LoginView
+    name: 'login-register',
+    component: LoginRegisterView
   },
   {
     path: '*',

@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <b-row align-h="center" class="content-background py-5">
+    <b-row align-h="center" class="py-5">
       <b-col cols="10">
         <b-form-group
           id="input-group-1"
