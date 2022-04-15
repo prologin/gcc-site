@@ -22,7 +22,7 @@
       :items="applications"
       thead-class="d-none"
       selectable
-      @row-clicked="item=>$set(item, '_showDetails', !item._showDetails)"
+      @row-clicked="item=>$set(item, '_showDetails', !item._showDetails && item.status != ApplicationStatusEnum.REJECTED)"
       >
 
       <template #cell(displayName)="data">
@@ -45,17 +45,17 @@
         <ApplicationStatusComponent v-bind:status="data.item.status" />
       </template>
 
-      <template #cell(selected)="{ rowSelected }">
-        <template v-if="rowSelected">
+      <template #cell(selected)="data">
+        <div v-if="data.rowSelected && data.item.status != ApplicationStatusEnum.REJECTED">
           <span aria-hidden="true">
             <b-icon font-scale="2" variant="secondary" icon="chevron-compact-up"/>
           </span>
-        </template>
-        <template v-else>
+        </div>
+        <div v-else-if="data.item.status != ApplicationStatusEnum.REJECTED">
           <span aria-hidden="true">
             <b-icon font-scale="2" variant="secondary" icon="chevron-compact-down"/>
           </span>
-        </template>
+        </div>
       </template>
 
       <template #row-details="data">
@@ -70,9 +70,11 @@
 <script>
 import Vue from 'vue'
 import ApplicationStatusComponent from '@/components/ApplicationStatusComponent.vue'
+import ApplicationStatusEnum from '@/enums/ApplicationStatusEnum.js'
 
 export default Vue.extend({
   name: 'ApplicationsList',
+  mixins: [ApplicationStatusEnum.Mixin],
   components: {
     ApplicationStatusComponent
   },
