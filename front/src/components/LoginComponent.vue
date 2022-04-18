@@ -2,6 +2,9 @@
   <b-container fluid>
     <b-row align-h="center" class="py-5">
       <b-col cols="10">
+        <b-alert v-model="showError" variant="danger">
+          <b-icon-exclamation-circle class="mx-2" /> La connexion a échouée, merci de réessayer.
+        </b-alert>
         <b-form-group
           id="input-group-1"
           label="Email :"
@@ -27,7 +30,7 @@
               />
           </b-form-group>
 
-            <b-button class="primary-button mt-4" block>Se connecter</b-button>
+            <b-button @click="login" class="primary-button mt-4" block>Se connecter</b-button>
 
             <hr class="hr-text mt-5" data-content="Ou se connecter avec :">
 
@@ -66,17 +69,18 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions(['LogIn']),
-    async submit () {
-      const User = new FormData()
-      User.append('email', this.loginForm.email)
-      User.append('password', this.loginForm.password)
-      try {
-        await this.LogIn(User)
-        this.$router.push({ name: 'home' })
-        this.showError = false
-      } catch (error) {
-        this.showError = true
+    // TODO: Create user from form.
+    async login () {
+      const user = {
+        firstName: 'Alice',
+        lastName: 'Doe',
+        email: 'alice.doe@example.com'
       }
+      await this.LogIn(user).then(() => {
+        this.$router.push(this.$route.query.redirect || { name: 'home' })
+      }).catch(() => {
+        this.showError = true
+      })
     }
   }
 })
@@ -126,8 +130,8 @@ label, legend {
 
 .prologin-login-button {
   background:
-    linear-gradient(white, white) padding-box,
-    linear-gradient(to right, yellow, red, blue) border-box;
+  linear-gradient(white, white) padding-box,
+  linear-gradient(to right, yellow, red, blue) border-box;
   border: 2px solid transparent !important;
   color: var(--main-dark-color) !important;
 }

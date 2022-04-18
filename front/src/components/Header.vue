@@ -48,10 +48,7 @@
 
       <b-navbar-nav v-else class="ml-auto">
         <b-nav-item>
-          <b-button class="secondary-button"> S'inscrire </b-button>
-        </b-nav-item>
-        <b-nav-item>
-          <b-button @click="login" class="primary-button"> Se connecter </b-button>
+          <b-button :to="{ name: 'login-register' }" class="primary-button px-4">Connexion</b-button>
         </b-nav-item>
         <b-nav-item>
           <hr class="my-1">
@@ -108,16 +105,9 @@ export default Vue.extend({
       this.lastScrollPosition = currentScrollPosition
     },
     async logout () {
-      await this.$store.dispatch('LogOut')
-    },
-    ...mapActions(['LogIn']),
-    async login () {
-      const user = {
-        firstName: 'Alice',
-        lastName: 'Doe',
-        email: 'alice.doe@example.com'
-      }
-      await this.LogIn(user)
+      await this.$store.dispatch('LogOut').then(() => {
+        this.$router.push({ name: 'home' })
+      })
     }
   },
   computed: {
