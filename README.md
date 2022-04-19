@@ -4,7 +4,7 @@ Since this site is primarily a front that handles all the workflow and
 an API backend, most of the logic is the front. The API exposes data
 and verifies permissions and soundness of the data pushed into it.
 
-There's 2 ways of developing :
+There's 2 ways of developing:
 - Developing on the front (visual / workflow for instance)
   without modifying the backend.
   See # Working on the frontend
@@ -13,12 +13,13 @@ There's 2 ways of developing :
   See # Working on the backend and # Working on the frontend
 
 # Installing dependencies
+
 Dependencies needed
 - yarn
 - pip
 - python3
 
-## on Debian/Ubuntu based OS
+## On Debian/Ubuntu based OS
 ```
 apt-get update && apt-get install -y yarn python3-venv python3-pip
 ```
@@ -26,18 +27,18 @@ apt-get update && apt-get install -y yarn python3-venv python3-pip
 # Working on the Backend
 ## First setup
 
-In the api directory, run the following commands :
+In the api directory, run the following commands:
 ```
 # Create an "isolated environment" where you can install python packages
 python3 -m venv venv
-# Acticate this environment
+# Activate this environment
 . ./venv/bin/activate
 # Install python packages
 pip3 install -r requirements.txt
 ```
 
 Create the file gccsite/gccsite/settings/dev.py (it's a gitignored file)
-containing the following :
+containing the following:
 
 ```
 from .common import * # noqa
@@ -66,7 +67,7 @@ To create a super user :
 ./gccsite/manage.py createsuperuser
 ```
 A fake password and email are completely okay since it's a local dev setup.
-Just renember them to be able to log in the interface.
+Just remember them to be able to log in the interface.
 This allows you to access Django Admin (which is useful to add/modify/view data from the DB
 easily).
 
@@ -77,7 +78,7 @@ To apply migrations (need to be run the first time and every time you do a Model
 ```
 
 ## Run
-Go into `api/gccsite` and launch the following command :
+Go into `api/gccsite` and launch the following command:
 ```
 ./manage.py runserver
 ```
@@ -93,7 +94,7 @@ This might take a while.
 
 ## Run
 
-To launch the site (with hot reloading) :
+To launch the site (with hot reloading):
 ```
 yarn serve
 ```
