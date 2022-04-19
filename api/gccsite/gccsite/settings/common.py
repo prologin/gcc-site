@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = "CHANGE_ME"
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
