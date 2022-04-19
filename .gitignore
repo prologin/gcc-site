@@ -1,13 +1,10 @@
-api/gccsite/*/migrations/
-api/.venv/
-api/gccsite/gccsite/settings/dev.py
+# Python
+__pycache__/
 *.pyc
-!api/gccsite/*/migrations/__init__.py
-node_modules
-api/.venv/
-api/gccsite/db.sqlite3
-front/node_modules*
-test/db-data
+
+# Node
+node_modules/
+
 **/.*.*.sw*
 **/.*.sw*
 *.orig
