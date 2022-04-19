@@ -97,7 +97,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+PROJECT_ROOT_DIR = BASE_DIR.parent
 
+STATIC_ROOT = PROJECT_ROOT_DIR / "public" / "static"
 STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
