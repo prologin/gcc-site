@@ -70,7 +70,10 @@ class Form(models.Model):
         return self.name
 
     def get_form_fields(self):
-        return {f[0]: f[1] for f in [q.get_field_tuple() for q in self.questions.all()]}
+        return {
+            f[0]: f[1]
+            for f in [q.get_field_tuple() for q in self.questions.all()]
+        }
 
 
 class QuestionType(models.TextChoices):
@@ -88,7 +91,9 @@ class Question(models.Model):
         on_delete=models.CASCADE,
         verbose_name=_("Formulaire"),
     )
-    text = models.CharField(verbose_name=_("Texte de la question"), max_length=1000)
+    text = models.CharField(
+        verbose_name=_("Texte de la question"), max_length=1000
+    )
     type = models.CharField(
         verbose_name=_("Type"),
         choices=QuestionType.choices,
@@ -155,7 +160,9 @@ class Question(models.Model):
                 **self.get_form_field_kwargs(),
             )
 
-        raise NotImplementedError("No form field implemented for this question type.")
+        raise NotImplementedError(
+            "No form field implemented for this question type."
+        )
 
     def get_field_tuple(self):
         return (str(self.id), self.get_form_field())
