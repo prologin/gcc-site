@@ -10,11 +10,17 @@ api-lint:
 
   allow_failure: true
 
+  variables:
+    DEBIAN_FRONTEND: noninteractive
+
   before_script:
-    - pip install black
+    - apt update
+    - apt install -y git
+    - pip install pre-commit
+    - cd api
 
   script:
-    - "black --check api"
+    - pre-commit run -a
 
 # Tests that yarn install and yarn build are successful
 test-yarn:
@@ -34,8 +40,8 @@ test-yarn:
     - cd front
 
   script:
-    - "yarn install"
-    - "yarn build"
+    - yarn install
+    - yarn build
 
   cache:
     key: gcc-yarn
