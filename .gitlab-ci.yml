@@ -2,7 +2,7 @@ stages:
   - lint
   - build
 
-# Lints the API with black
+# Lints the API with multiple tools, according to pre-commit config
 api-lint:
   stage: lint
 
@@ -15,8 +15,7 @@ api-lint:
 
   before_script:
     - python -V # Print out python version for debugging
-    - pip install virtualenv
-    - virtualenv venv
+    - python -m venv venv
     - source venv/bin/activate
     - pip install pre-commit
     - cd api
