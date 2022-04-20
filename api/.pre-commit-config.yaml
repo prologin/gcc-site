@@ -7,6 +7,8 @@ repos:
     hooks:
       - id: black
         args: ["-l", "79"]
+  - repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
     hooks:
       - id: flake8
         args: ["--count", "--ignore=E731,W503", "--show-source", "--statistics"]
