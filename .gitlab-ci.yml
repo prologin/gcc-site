@@ -8,14 +8,26 @@ api-lint:
 
   image: "python:3.10-bullseye"
 
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
   allow_failure: true
 
   before_script:
+    - python -V # Print out python version for debugging
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
     - pip install pre-commit
     - cd api
 
   script:
     - pre-commit run -a
+
+  cache:
+    paths:
+      - .cache/pip
+      - venv/
 
 # Tests that yarn install and yarn build are successful
 test-yarn:
