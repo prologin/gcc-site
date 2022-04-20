@@ -10,6 +10,7 @@ api-lint:
 
   variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+    PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
 
   allow_failure: true
 
@@ -25,7 +26,8 @@ api-lint:
 
   cache:
     paths:
-      - .cache/pip
+      - ${PIP_CACHE_DIR}
+      - ${PRE_COMMIT_HOME}
       - venv/
 
 # Tests that yarn install and yarn build are successful
