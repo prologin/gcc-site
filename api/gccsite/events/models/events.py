@@ -65,9 +65,7 @@ class Event(models.Model):
     signup_start_date = models.DateTimeField(
         verbose_name=_("Date de début d'inscription")
     )
-    signup_end_date = models.DateTimeField(
-        verbose_name=_("Date de fin d'inscription")
-    )
+    signup_end_date = models.DateTimeField(verbose_name=_("Date de fin d'inscription"))
 
     start_date = models.DateTimeField(verbose_name=_("Date de début"))
     end_date = models.DateTimeField(verbose_name=_("Date de fin"))
@@ -101,8 +99,7 @@ class Event(models.Model):
     description = models.TextField(
         verbose_name=_("Description de l'évènement"),
         help_text=_(
-            "Si ce champ n'est pas spécifié, "
-            "la description du projet sera utilisée."
+            "Si ce champ n'est pas spécifié, " "la description du projet sera utilisée."
         ),
     )
 
@@ -179,9 +176,7 @@ class EventDocument(models.Model):
     display_name = models.CharField(
         max_length=260,
         verbose_name=_("Nom public du document"),
-        help_text=_(
-            "Le nom public du document qui sera affiché aux participants"
-        ),
+        help_text=_("Le nom public du document qui sera affiché aux participants"),
     )
 
     visibility = models.IntegerField(

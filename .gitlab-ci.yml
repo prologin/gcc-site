@@ -1,23 +1,49 @@
 stages:
-  - testyarn
+  - lint
+  - build
 
-testyarn:
+# Lints the API with black
+api-lint:
+  stage: lint
+
+  image: "python:3.10-slim-bullseye"
+
+  allow_failure: true
+
+  before_script:
+    - pip install black
+
+  script:
+    - "black --check api"
+
+# Tests that yarn install and yarn build are successful
+test-yarn:
+  stage: build
+
+  image:
+    name: j4m3s/gcc-build:17.9-alpine3.14
+    entrypoint: [""]
+
+  variables:
+    # Without this it will not work
+    # Note that this is not a problem for production since SSL is not handled by
+    # the front and we're only building static assets
+    NODE_OPTIONS: "--openssl-legacy-provider"
+
   before_script:
     - cd front
-  stage: testyarn
+
   script:
-  - "yarn install"
-  - "export NODE_OPTIONS=--openssl-legacy-provider"
-  - "yarn build"
+    - "yarn install"
+    - "yarn build"
+
   cache:
     key: gcc-yarn
     paths:
       - front/node_modules/
-  image:
-    name: j4m3s/gcc-build:17.9-alpine3.14
-    entrypoint: [""]
+
   rules:
     - changes:
-      - front/yarn.lock
+        - front/yarn.lock
     - exists:
-      - front/node_modules
+        - front/node_modules
