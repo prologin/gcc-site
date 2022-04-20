@@ -1,12 +1,6 @@
-from rest_framework import (
-    viewsets,
-    permissions,
-)
+from rest_framework import permissions, viewsets
 
-from .. import (
-    models,
-    serializers,
-)
+from .. import models, serializers
 
 
 class FormViewset(viewsets.ReadOnlyModelViewSet):

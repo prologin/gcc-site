@@ -1,15 +1,7 @@
-from rest_framework import (
-    viewsets,
-    permissions,
-    response,
-)
-
+from rest_framework import permissions, response, viewsets
 from rest_framework.decorators import action
 
-from .. import (
-    serializers,
-    models,
-)
+from .. import models, serializers
 
 
 class EventViewset(viewsets.ReadOnlyModelViewSet):

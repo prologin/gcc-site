@@ -1,10 +1,12 @@
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.core.validators import ValidationError
+from pathlib import Path
+
 from django.conf import settings
 from django.core.files.storage import default_storage
-from pathlib import Path
+from django.core.validators import ValidationError
+from django.db import models
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
 from .signup import SelectionStatus
 
 

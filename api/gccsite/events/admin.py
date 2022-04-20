@@ -1,6 +1,7 @@
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-from adminsortable2.admin import SortableInlineAdminMixin
+
 from . import models
 
 

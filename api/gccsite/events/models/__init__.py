@@ -1,20 +1,6 @@
-from .events import (
-    Center,
-    Event,
-    DocumentType,
-    EventDocument,
-    Document,
-)
-
-from .signup import (
-    SelectionStatus,
-    Attendee,
-    Form,
-    QuestionType,
-    Question,
-    FormAnswer,
-    AttendeeLabel,
-)
+from .events import Center, Document, DocumentType, Event, EventDocument
+from .signup import (Attendee, AttendeeLabel, Form, FormAnswer, Question,
+                     QuestionType, SelectionStatus)
 
 __all__ = (
     "Project",

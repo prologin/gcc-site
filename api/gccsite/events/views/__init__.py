@@ -1,11 +1,5 @@
-from .events import (
-    EventViewset,
-)
-
-from .signup import (
-    FormViewset,
-    AttendeeViewset,
-)
+from .events import EventViewset
+from .signup import AttendeeViewset, FormViewset
 
 __all__ = (
     "EventViewset",

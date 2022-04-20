@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as UpstreamUserAdmin
 from django.utils.translation import ugettext_lazy as _
+
 from . import models
 
 
