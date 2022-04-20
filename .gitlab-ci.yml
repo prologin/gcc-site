@@ -6,16 +6,11 @@ stages:
 api-lint:
   stage: lint
 
-  image: "python:3.10-slim-bullseye"
+  image: "python:3.10-bullseye"
 
   allow_failure: true
 
-  variables:
-    DEBIAN_FRONTEND: noninteractive
-
   before_script:
-    - apt update
-    - apt install -y git
     - pip install pre-commit
     - cd api
 
