@@ -59,8 +59,8 @@
       </template>
 
       <template #row-details="data">
-          <b-row class="mb-2">
-            <b-col>{{ data.item.buttons }}</b-col>
+          <b-row class="mb-2" v-if="data.item.status != ApplicationStatusEnum.REJECTED">
+            <b-col><ApplicationDetailsComponent v-bind:status="data.item.status" /></b-col>
           </b-row>
       </template>
     </b-table>
@@ -68,7 +68,9 @@
 </template>
 
 <script>
+
 import Vue from 'vue'
+import ApplicationDetailsComponent from '@/components/ApplicationDetailsComponent.vue'
 import ApplicationStatusComponent from '@/components/ApplicationStatusComponent.vue'
 import ApplicationStatusEnum from '@/enums/ApplicationStatusEnum.js'
 
@@ -76,6 +78,7 @@ export default Vue.extend({
   name: 'ApplicationsList',
   mixins: [ApplicationStatusEnum.Mixin],
   components: {
+    ApplicationDetailsComponent,
     ApplicationStatusComponent
   },
   data () {
