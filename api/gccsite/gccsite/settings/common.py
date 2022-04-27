@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "social_django",
     "rest_framework",
     "corsheaders",
+    "drf_yasg",
     # GCC apps
     "gccsite",
     "users",
