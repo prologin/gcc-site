@@ -32,7 +32,8 @@ class Partner(models.Model):
     )
 
     enabled = models.BooleanField(
-        verbose_name=_("Activé"),
+        verbose_name=_("Actif"),
+        default=True,
     )
 
     order = models.PositiveIntegerField(
