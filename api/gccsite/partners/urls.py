@@ -9,5 +9,5 @@ router = routers.SimpleRouter()
 router.register("", views.PartnerViewset, basename="partners")
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("partners/", include(router.urls)),
 ]
