@@ -17,9 +17,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/sso/", include("social_django.urls", namespace="social")),
-    path("api/v1/events/", include("events.urls", namespace="events")),
-    path("api/v1/partners/", include("partners.urls", namespace="partners")),
-    path("api/v1/users/", include("users.urls", namespace="users")),
+    path("api/v1/", include("events.urls", namespace="events")),
+    path("api/v1/", include("partners.urls", namespace="partners")),
+    path("api/v1/", include("users.urls", namespace="users")),
     # Swagger UI and Redoc URLs
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
