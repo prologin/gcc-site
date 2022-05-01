@@ -34,6 +34,10 @@ api-lint:
 test-yarn:
   stage: build
 
+  rules:
+    - changes:
+      - front/**
+
   image:
     name: j4m3s/gcc-build:17.9-alpine3.14
     entrypoint: [""]
@@ -55,9 +59,3 @@ test-yarn:
     key: gcc-yarn
     paths:
       - front/node_modules/
-
-  rules:
-    - changes:
-        - front/yarn.lock
-    - exists:
-        - front/node_modules
