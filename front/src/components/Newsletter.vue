@@ -54,6 +54,8 @@ export default Vue.extend({
 }
 
 .rounded-input-left {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
   border-top-left-radius: var(--global-border-radius) !important;
   border-bottom-left-radius: var(--global-border-radius) !important;
 }
@@ -61,5 +63,7 @@ export default Vue.extend({
 .rounded-input-right {
   border-top-right-radius: var(--global-border-radius) !important;
   border-bottom-right-radius: var(--global-border-radius) !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 </style>
