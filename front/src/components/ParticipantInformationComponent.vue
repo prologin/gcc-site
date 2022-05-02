@@ -52,7 +52,6 @@
              />
          </b-col>
        </b-row>
-       <!-- TODO: Add slider (or range) for class level + conditionnal text field if other selected in slider -->
        <b-row>
          <h3> Acceptez-vous le partage de ces informations dans le cadre de l'organisation d'un covoiturage ? </h3>
        </b-row>
@@ -65,6 +64,24 @@
          </b-form-group>
        </b-row>
 
+         <h3>Sélectionner votre classe</h3>
+         <b-form-input class="slider" type="range" min="0" max="7" step="1" v-model="class_level" />
+         <div class="sliderticks">
+           <p>6<sup class="sup-vertical-correction">e</sup></p>
+           <p>5<sup class="sup-vertical-correction">e</sup></p>
+           <p>4<sup class="sup-vertical-correction">e</sup></p>
+           <p>3<sup class="sup-vertical-correction">e</sup></p>
+           <p>2<sup class="sup-vertical-correction">e</sup></p>
+           <p>1<sup class="sup-vertical-correction">e</sup></p>
+           <p>Terminale</p>
+           <p>Autre</p>
+         </div>
+         <!-- TODO: Use an enum, add an animation -->
+         <div v-if="class_level === '7'">
+           Insérer votre classe
+           <b-form-input v-model="other_class" placeholder="Insérer votre classe ici" />
+         </div>
+
      </b-form>
   </b-container>
 </template>
@@ -76,6 +93,7 @@ export default Vue.extend({
   name: 'ContactInformationComponent',
   data: () => {
     return {
+      class_level: '',
       use_contact_info: '',
       carpool_use_contact_info: '',
       personal: {
@@ -100,4 +118,24 @@ export default Vue.extend({
 
 }
 
+.sliderticks p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 0px;
+  margin: 0 0 20px 0;
+}
+
+.sliderticks {
+  -webkit-appearance: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+/* Used to fix vertical alignment of text */
+.sup-vertical-correction {
+  margin-top: 8px;
+}
 </style>
