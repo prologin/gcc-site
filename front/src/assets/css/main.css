@@ -32,11 +32,11 @@ body {
  * To use in each view that use header and footer.
  * */
 .main-body-style {
-  /* 
+  /*
    * The fixed navbar overlay other contents, unless you add padding
    * to the top of the <body>.
    */
-  padding-top: 70px; 
+  padding-top: 70px;
 
   /*
    * Needed to fix the footer to the bottom of the screen or to the bottom of

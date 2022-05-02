@@ -49,4 +49,5 @@ export default Vue.extend({
   background-size: 70%;
   background-position: left bottom;
 }
+
 </style>
