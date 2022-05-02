@@ -40,6 +40,8 @@ urlpatterns = [
     ),
 ]
 
+# Serve uploaded media when DEBUG is activated
+# This is mainly to make the dev environment easier
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
