@@ -216,4 +216,8 @@ export default Vue.extend({
 .wizard-h .wizard-h__step span, .wizard-h .wizard-h__step--previous span, .wizard-h .wizard-h__step--current span {
   display: inline-block;
 }
+
+.form-control {
+  border-radius: var(--global-border-radius) !important;
+}
 </style>

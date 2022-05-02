@@ -43,6 +43,11 @@ export default Vue.extend({
 })
 </script>
 <style scoped>
+
+label {
+  margin-left: 0.6rem !important;
+}
+
 .main-body-style {
   height: 100vh !important;
   background-color: var(--main-light-color) !important;

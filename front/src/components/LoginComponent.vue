@@ -86,7 +86,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
 .hr-text {
   line-height: 1em;
   position: relative;
@@ -122,10 +122,6 @@ export default Vue.extend({
 
 .form-control, .prologin-login-button {
   border-radius: var(--global-border-radius) !important;
-}
-
-label, legend {
-  margin-left: 0.6rem;
 }
 
 .prologin-login-button {
