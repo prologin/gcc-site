@@ -10,6 +10,19 @@ from django.utils.translation import gettext_lazy as _
 from .signup import Attendee, SelectionStatus
 
 
+class Address(models.Model):
+    street_number = models.IntegerField(verbose_name=_("Numéro de voie"), blank=True, null=True)
+    line1 = models.CharField(verbose_name=_("Adresse ligne 1"), max_length=200)
+    line2 = models.CharField(verbose_name=_("Adresse ligne 2"), max_length=200, blank=True, null=True)
+    city = models.CharField(verbose_name=_("Ville"), max_length=50)
+    zip_code = models.IntegerField(verbose_name=_("Code postal"))
+    country = models.CharField(verbose_name=_("Pays"), max_length=30, default="France")
+
+    class Meta:
+        verbose_name = _("Adresse")
+        verbose_name_plural = _("Adresses")
+
+
 class Center(models.Model):
     name = models.CharField(verbose_name=_("Nom"), max_length=120)
     address = models.TextField(verbose_name=_("Adresse"), max_length=1000)
