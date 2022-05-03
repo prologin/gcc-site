@@ -26,9 +26,9 @@
       <EventCard v-for="(event, index) in events"
                  v-bind:index="index"
                  v-bind:key="event.id"
-                 v-bind:title="event.title"
-                 v-bind:date="event.date"
-                 v-bind:address="event.address"
+                 v-bind:title="event.name"
+                 v-bind:date="event.start_date"
+                 v-bind:address="event.center.name"
                  scheduleType="WEEKEND"/>
     </section>
   </b-container>
