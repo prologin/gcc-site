@@ -11,12 +11,21 @@ from .signup import Attendee, SelectionStatus
 
 
 class Address(models.Model):
-    street_number = models.IntegerField(verbose_name=_("Numéro de voie"), blank=True, null=True)
+    street_number = models.IntegerField(
+        verbose_name=_("Numéro de voie"), blank=True, null=True
+    )
     line1 = models.CharField(verbose_name=_("Adresse ligne 1"), max_length=200)
-    line2 = models.CharField(verbose_name=_("Adresse ligne 2"), max_length=200, blank=True, null=True)
+    line2 = models.CharField(
+        verbose_name=_("Adresse ligne 2"),
+        max_length=200,
+        blank=True,
+        null=True,
+    )
     city = models.CharField(verbose_name=_("Ville"), max_length=50)
     zip_code = models.IntegerField(verbose_name=_("Code postal"))
-    country = models.CharField(verbose_name=_("Pays"), max_length=30, default="France")
+    country = models.CharField(
+        verbose_name=_("Pays"), max_length=30, default="France"
+    )
 
     class Meta:
         verbose_name = _("Adresse")
