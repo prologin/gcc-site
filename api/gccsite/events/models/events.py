@@ -5,7 +5,7 @@ from django.core.files.storage import default_storage
 from django.core.validators import ValidationError
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .signup import SelectionStatus
 
@@ -15,20 +15,20 @@ class Center(models.Model):
     address = models.TextField(verbose_name=_("Adresse"), max_length=1000)
     lng = models.DecimalField(
         verbose_name=_("Longitude"),
-        max_digits=9,
-        decimal_places=6,
+        max_digits=14,
+        decimal_places=10,
         null=True,
         blank=True,
     )
     lat = models.DecimalField(
         verbose_name=_("Latitude"),
-        max_digits=9,
-        decimal_places=6,
+        max_digits=14,
+        decimal_places=10,
         null=True,
         blank=True,
     )
     private_notes = models.TextField(
-        verbose_name=("Notes privées"), max_length=2000, blank=True, null=True
+        verbose_name=_("Notes privées"), max_length=2000, blank=True, null=True
     )
 
     class Meta:
@@ -92,9 +92,8 @@ class Event(models.Model):
     notes = models.TextField(
         verbose_name=_("Notes"),
         help_text=_(
-            "Ce texte, si défini est affiché "
-            "lors de l'inscription à l'évènement "
-            "(il peut éventuellement contenir des liens)"
+            "Ce texte, si défini, est affiché lors de l'inscription à"
+            " l'évènement (il peut éventuellement contenir des liens)"
         ),
         blank=True,
         null=True,
@@ -103,8 +102,8 @@ class Event(models.Model):
     description = models.TextField(
         verbose_name=_("Description de l'évènement"),
         help_text=_(
-            "Si ce champ n'est pas spécifié, "
-            "la description du projet sera utilisée."
+            "Si ce champ n'est pas spécifié, la description du projet sera"
+            " utilisée."
         ),
     )
 
@@ -113,6 +112,9 @@ class Event(models.Model):
     class Meta:
         verbose_name = _("évènement")
         verbose_name_plural = _("évènements")
+
+    def __str__(self):
+        return self.name
 
     def clean(self):
         errors = {}
@@ -140,10 +142,7 @@ class Event(models.Model):
 
         return self.form.questions.all()
 
-    def __str__(self):
-        return self.name
-
-    def get_my_documents(self, attendee):
+    def get_attendee_documents(self, attendee):
         if attendee.status == SelectionStatus.CONFIRMED.value:
             return self.documents.all()
         if attendee.status == SelectionStatus.ACCEPTED.value:
@@ -193,7 +192,7 @@ class EventDocument(models.Model):
 
     class Meta:
         verbose_name = _("document lié à l'évènement")
-        verbose_name_plural = _("documents lié à l'évènement")
+        verbose_name_plural = _("documents liés à l'évènement")
 
     def __str__(self):
         return self.display_name

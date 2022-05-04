@@ -2,15 +2,16 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.validators import ValidationError
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class SelectionStatus(models.IntegerChoices):
     ABANDONED = -1, _("Abandonné")
     ENROLLED = 0, _("Inscrit")
     NOT_SELECTED = 1, _("Non sélectionné")
-    ACCEPTED = 2, _("Accepté")
-    CONFIRMED = 3, _("Confirmé")
+    SELECTED = 2, _("Sélectionné")
+    ACCEPTED = 3, _("Accepté")
+    CONFIRMED = 4, _("Confirmé")
 
 
 class Attendee(models.Model):
@@ -18,6 +19,7 @@ class Attendee(models.Model):
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
         on_delete=models.CASCADE,
+        related_name="attendees",
     )
 
     first_name = models.CharField(
@@ -38,6 +40,7 @@ class Attendee(models.Model):
         to="events.Event",
         verbose_name=_("Évènement"),
         on_delete=models.CASCADE,
+        related_name="attendees",
     )
 
     status = models.SmallIntegerField(
@@ -49,6 +52,11 @@ class Attendee(models.Model):
         to="events.AttendeeLabel",
         blank=True,
         verbose_name=_("Labels"),
+    )
+
+    created_at = models.DateTimeField(
+        verbose_name=_("Date d'inscription"),
+        auto_now_add=True,
     )
 
     class Meta:
@@ -91,15 +99,19 @@ class Question(models.Model):
         on_delete=models.CASCADE,
         verbose_name=_("Formulaire"),
     )
+
     text = models.CharField(
         verbose_name=_("Texte de la question"), max_length=1000
     )
+
     type = models.CharField(
         verbose_name=_("Type"),
         choices=QuestionType.choices,
         max_length=32,
     )
+
     mandatory = models.BooleanField(verbose_name=_("Obligatoire"))
+
     answers = models.TextField(
         verbose_name=_("Réponses possibles"),
         blank=True,
@@ -107,6 +119,7 @@ class Question(models.Model):
         max_length=500,
         help_text=_("Une réponse par ligne"),
     )
+
     order = models.PositiveSmallIntegerField(verbose_name=_("Ordre"))
 
     class Meta:
