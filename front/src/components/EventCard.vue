@@ -38,11 +38,12 @@
 import Vue from 'vue'
 import EventInfo from '@/components/EventInfo.vue'
 import ScheduleTypeEnum from '@/enums/ScheduleTypeEnum.js'
+import { formatDate } from '@/services/date'
 
 export default Vue.extend({
   name: 'EventCard',
   mixins: [ScheduleTypeEnum.Mixin],
-  props: ['title', 'date', 'address', 'index', 'scheduleType'],
+  props: ['title', 'start_date', 'end_date', 'signup_start_date', 'signup_end_date', 'address', 'index', 'scheduleType'],
   components: {
     EventInfo
   },
@@ -50,6 +51,9 @@ export default Vue.extend({
     colorClass: function () {
       var colors = ['gcc-pink', 'gcc-green', 'gcc-blue']
       return colors[this.index % colors.length]
+    },
+    date: function () {
+      return 'Du ' + formatDate(this.start_date) + ' au ' + formatDate(this.end_date)
     }
   }
 })
