@@ -27,7 +27,10 @@
                  v-bind:index="index"
                  v-bind:key="event.id"
                  v-bind:title="event.name"
-                 v-bind:date="event.start_date"
+                 v-bind:start_date="event.start_date"
+                 v-bind:end_date="event.end_date"
+                 v-bind:signup_start_date="event.singup_start_date"
+                 v-bind:signup_end_date="event.singup_end_date"
                  v-bind:address="event.center.name"
                  scheduleType="WEEKEND"/>
     </section>
