@@ -19,7 +19,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Vendor
-    "adminsortable2",
     "social_django",
     "rest_framework",
     "corsheaders",

@@ -1,4 +1,3 @@
-from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -52,7 +51,7 @@ class EventAdmin(admin.ModelAdmin):
     )
 
 
-class QuestionInlineAdmin(SortableInlineAdminMixin, admin.TabularInline):
+class QuestionInlineAdmin(admin.TabularInline):
     model = models.Question
     fields = ("order", "text", "type", "mandatory", "answers")
     extra = 0
