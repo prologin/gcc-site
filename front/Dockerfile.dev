@@ -1,0 +1,28 @@
+FROM node:17
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Without this line it won't work, should not affect production anyway We're
+# building static assets and should have nothing to do with OpenSSL
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# Install dependencies
+RUN apt update && apt install python3 make gcc g++ openssl
+
+COPY package.json yarn.lock /tmp/
+WORKDIR /tmp
+
+# Install the node modules when building the image
+# It cannot be in the app directory since it will be bind mounted (and therefore
+# node_modules will be overwritten)
+RUN mkdir /node_modules && \
+    yarn install --non-interactive --no-progress --modules-folder=/node_modules && \
+    yarn cache clean
+
+# Need to add Node binaries to the path (`yarn run` does not seems to detect
+# binaries specified by `--modules-folder` option)
+ENV PATH $PATH:/node_modules/.bin
+
+WORKDIR /app
+
+CMD [ "yarn", "serve", "--modules-folder=/node_modules" ]

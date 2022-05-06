@@ -119,34 +119,56 @@ This is almost certain to break your system.
 
 ### Docker compose usage
 
-Go into ./test and launch `sudo docker-compose up -d` [1].
+In the root of the project, simply run `sudo docker-compose -f docker-compose.dev.yaml up -d`[^1].
 It might take a while the first time to build images.
 
-You can now access the API at `http://localhost:8000`.
+Once it is done, you can access the frontend at `http://localhost:8080`.
 
-Go into `front` and launch `yarn serve` to launch the server for VueJS and
-code hot reloading. (This makes developing much easier).
-
-You can now access the front at `http://localhost:8080`.
-
-To stop the containers, you can launch `docker-compose down` in the test directory.
-
-To interact with the Django Backend you can run `sudo docker exec -it dev-setup_api_1 bash`.
-You can use the same commands as the Backend first setup above.
-
-Note that the state is inside the container as a sqlite DB. Thus if you remove the container,
-the state will disappear and you will have to do the first setup again.
-
-[1] : If you don't use sudo while working with docker / docker-compose you have
+[^1]: If you don't use sudo while working with docker / docker-compose you have
 now opened yourself to a local privilege escalation. :)
 
-### Troubleshooting
+#### Initial setup
+
+Before you can start using the backend, you will need to run the following commands in the container.
+
+To run commands inside the container, you need to `sudo docker-compose -f docker-compose.dev.yaml exec api bash`.
+
+Then run the following:
+```sh
+python ./manage.py makemigrations  # Create migrations for the DB
+python ./manage.py migrate         # Apply the migrations
+python ./manage.py createsuperuser # Create a super user (to access Django admin)
+```
+
+You can now access the backend at `http://localhost:8000`.
+
+#### Inspect the logs
+
+To inspect the container logs (in case you encounter Django errors or something), run `sudo docker-compose -f docker-compose.dev.yaml logs`.
+
+It is strongly advised to use the `--follow` option to inspect the logs continuously.
+
+#### Stop the containers
+
+To stop the containers, you can launch `sudo docker-compose -f docker-compose.dev.yaml stop` in the root directory.
+
+#### Data persistence
+
+The Postgres (database) files are stored on the root of the project in the `./pg-data` directory. This directory is mounted into the DB container, therefore the data is preserved even if the container is destroyed.
+
+#### Allow port access
+
+Note that this setup will only redirect ports to localhost. Therefore if you need to test on another device on your network, you will need to open ports on your network interface.
+
+The easiest way to do it is to let Docker handle this for you. Edit the file `docker-compose.dev.yaml` and change ports redirections from `127.0.0.1:XXXX:XXXX` to `XXXX:XXXX`, this will redirect the container port on all interfaces of your host machine. If you want to restrict it to a single interface, simply edit the IP address from `127.0.0.1` to the IP associated with your interface (e.g. `192.168.42.42`).
+
+You will need to recreate the containers to apply these changes: `sudo docker-compose -f docker-compose.dev.yaml up --force-recreate -d`.
+
+#### Troubleshooting
 
 If you can some problem with the API (data inconsistencies, etc),
 removing the container and its state might help.
 
-To do so run `docker-compose destroy` in the test directory.
-Note that all backend data will be deleted.
+To do so run `sudo docker-compose -f docker-compose.dev.yaml down` in the root directory.
 
-If you want to save some data for tests, you should add fixtures to the backend.
-
+If you need to delete the database, remove the `./pg-data` directory.

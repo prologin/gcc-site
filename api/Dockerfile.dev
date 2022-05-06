@@ -1,0 +1,11 @@
+FROM python:3.10-bullseye
+
+RUN mkdir -p /var/prologin/api/gccsite
+WORKDIR /var/prologin/api/gccsite
+
+COPY requirements.txt /var/prologin/api/requirements.txt
+RUN pip3 install -r /var/prologin/api/requirements.txt
+
+COPY docker-entrypoint.dev.sh /docker-entrypoint.dev.sh
+ENTRYPOINT [ "/docker-entrypoint.dev.sh" ]
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]

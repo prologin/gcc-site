@@ -4,14 +4,17 @@
 // https://cli.vuejs.org/config/#devserver-proxy
 // https://stackoverflow.com/questions/40315451/proxy-requests-to-a-separate-backend-server-with-vue-cli?answertab=active#tab-top
 
-module.exports = { 
+module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: 'http://localhost:8000',
+        target: process.env.BACKEND_URL == undefined ? 'http://localhost:8000' : process.env.BACKEND_URL,
         changeOrigin: true,
         secure: false
       }
-    }
+    },
+    watchOptions: {
+      poll: true,
+    },
   }
 }

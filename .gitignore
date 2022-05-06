@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 
+# Postgres DB data
+./pg-data
+
 # Node
 node_modules/
 

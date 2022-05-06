@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    container_name: gccsite-api
+
+    depends_on:
+      - db
+
+    restart: on-failure
+
+    environment:
+      DJANGO_SETTINGS_MODULE: gccsite.settings.docker-dev
+
+    volumes:
+      - ./api/gccsite:/var/prologin/api/gccsite
+
+    ports:
+      - 127.0.0.1:8000:8000
+
+  db:
+    # Freeze the version to avoid problems
+    # Use alpine to reduce size
+    image: postgres:14-alpine
+    container_name: gccsite-db
+
+    restart: on-failure
+
+    environment:
+      POSTGRES_USER: prologin
+      # This file if for dev **only**
+      # Make sure you use a robust password in production
+      POSTGRES_PASSWORD: CHANGE_ME
+
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.dev
+    container_name: gccsite-front
+
+    restart: on-failure
+
+    environment:
+      BACKEND_URL: 'http://gccsite-api:8000'
+
+    volumes:
+      - ./front:/app
+
+    ports:
+      - 127.0.0.1:8080:8080
