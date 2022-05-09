@@ -14,9 +14,11 @@ class Address(models.Model):
     street_number = models.IntegerField(
         verbose_name=_("Numéro de voie"), blank=True, null=True
     )
-    line1 = models.CharField(verbose_name=_("Adresse ligne 1"), max_length=200)
-    line2 = models.CharField(
-        verbose_name=_("Adresse ligne 2"),
+    street_name = models.CharField(
+        verbose_name=_("Nom de la voie"), max_length=200
+    )
+    complement = models.CharField(
+        verbose_name=_("Complément d'adresse"),
         max_length=200,
         blank=True,
         null=True,
