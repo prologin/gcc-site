@@ -1,4 +1,11 @@
-from .events import Center, Document, DocumentType, Event, EventDocument
+from .events import (
+    Address,
+    Center,
+    Document,
+    DocumentType,
+    Event,
+    EventDocument,
+)
 from .signup import (
     Attendee,
     AttendeeLabel,
@@ -11,6 +18,7 @@ from .signup import (
 
 __all__ = (
     "Project",
+    "Address",
     "Center",
     "Event",
     "Document",
