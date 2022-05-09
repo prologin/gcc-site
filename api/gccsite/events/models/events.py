@@ -36,20 +36,10 @@ class Address(models.Model):
 
 class Center(models.Model):
     name = models.CharField(verbose_name=_("Nom"), max_length=120)
-    address = models.TextField(verbose_name=_("Adresse"), max_length=1000)
-    lng = models.DecimalField(
-        verbose_name=_("Longitude"),
-        max_digits=14,
-        decimal_places=10,
-        null=True,
-        blank=True,
-    )
-    lat = models.DecimalField(
-        verbose_name=_("Latitude"),
-        max_digits=14,
-        decimal_places=10,
-        null=True,
-        blank=True,
+    address = models.ForeignKey(
+        to="events.Address",
+        on_delete=models.CASCADE,
+        verbose_name=_("Adresse"),
     )
     private_notes = models.TextField(
         verbose_name=_("Notes privées"), max_length=2000, blank=True, null=True
