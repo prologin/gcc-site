@@ -22,7 +22,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "default": {
-            "format": "[{levelname}] {asctime} {module} - {message}",
+            "format": "[{asctime}] ({levelname}) {module} - {message}",
             "style": "{",
         },
     },
