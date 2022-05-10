@@ -29,6 +29,9 @@ class Address(models.Model):
         verbose_name=_("Pays"), max_length=30, default="France"
     )
 
+    def __str__(self) -> str:
+        return f"{self.city}, {self.street_number} {self.street_name}"
+
     class Meta:
         verbose_name = _("Adresse")
         verbose_name_plural = _("Adresses")
