@@ -16,5 +16,5 @@ class ApplicationViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return models.Application.objects.filter(
-            owner=self.request.user,
+            user=self.request.user,
         )

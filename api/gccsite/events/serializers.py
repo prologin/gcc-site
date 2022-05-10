@@ -126,7 +126,7 @@ class FormAnswerPushSerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    owner = serializers.PrimaryKeyRelatedField(
+    user = serializers.PrimaryKeyRelatedField(
         allow_null=True,
         queryset=get_user_model().objects.all(),
     )
@@ -141,7 +141,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         request = self.context["request"]
         user = request.user
-        validated_data["owner"] = user
+        validated_data["user"] = user
         validated_data["status"] = models.SelectionStatus.ENROLLED.value
         form_answers = validated_data.pop("form_answers")
         ret = super().create(validated_data)
@@ -154,7 +154,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         model = models.Application
         fields = (
             "id",
-            "owner",
+            "user",
             "event",
             "first_name",
             "last_name",

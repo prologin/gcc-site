@@ -15,7 +15,7 @@ class SelectionStatus(models.IntegerChoices):
 
 
 class Application(models.Model):
-    owner = models.ForeignKey(
+    user = models.ForeignKey(
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
         on_delete=models.CASCADE,

@@ -89,23 +89,23 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_display = (
         "first_name",
         "last_name",
-        "owner",
+        "user",
         "status",
         "event",
     )
 
     raw_id_fields = (
-        "owner",
+        "user",
         "event",
     )
 
     search_fields = (
         "first_name",
         "last_name",
-        "owner__username",
-        "owner__first_name",
-        "owner__last_name",
-        "owner__email",
+        "user__username",
+        "user__first_name",
+        "user__last_name",
+        "user__email",
     )
 
     list_filter = (
@@ -117,7 +117,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     filter_horizontal = ("labels",)
 
     fieldsets = (
-        (None, {"fields": ("owner", "event")}),
+        (None, {"fields": ("user", "event")}),
         (
             _("Informations participant"),
             {
