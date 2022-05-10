@@ -2,7 +2,7 @@ import BaseAPIService from '@/services/base.api'
 
 export default class EventsAPIService extends BaseAPIService {
   constructor () {
-    super('events')
+    super('')
   }
 
   async getEventList () {
