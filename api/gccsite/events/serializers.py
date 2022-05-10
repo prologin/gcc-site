@@ -7,7 +7,15 @@ from . import models
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Address
-        fields = "__all__"
+        fields = (
+            "id",
+            "street_number",
+            "street_name",
+            "complement",
+            "city",
+            "zip_code",
+            "country",
+        )
 
 
 class CenterSerializer(serializers.ModelSerializer):
