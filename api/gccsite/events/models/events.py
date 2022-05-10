@@ -28,6 +28,12 @@ class Address(models.Model):
     country = models.CharField(
         verbose_name=_("Pays"), max_length=30, default="France"
     )
+    center = models.OneToOneField(
+        to="events.Center",
+        on_delete=models.CASCADE,
+        verbose_name=_("Centre"),
+        null=True,
+    )
 
     def __str__(self) -> str:
         return f"{self.city}, {self.street_number} {self.street_name}"
@@ -39,11 +45,6 @@ class Address(models.Model):
 
 class Center(models.Model):
     name = models.CharField(verbose_name=_("Nom"), max_length=120)
-    address = models.ForeignKey(
-        to="events.Address",
-        on_delete=models.CASCADE,
-        verbose_name=_("Adresse"),
-    )
     private_notes = models.TextField(
         verbose_name=_("Notes privées"), max_length=2000, blank=True, null=True
     )
