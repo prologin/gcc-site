@@ -25,7 +25,7 @@ class CenterAdmin(admin.ModelAdmin):
         (None, {"fields": ("name",)}),
         (_("Notes"), {"fields": ("private_notes",)}),
     )
-    # inlines = (AddressAdmin,)
+    inlines = (AddressAdmin,)
 
 
 class EventDocumentInlineAdmin(admin.TabularInline):
