@@ -4,15 +4,28 @@ from django.utils.translation import ugettext_lazy as _
 from . import models
 
 
+class AddressAdmin(admin.StackedInline):
+    model = models.Address
+    fields = (
+        "street_number",
+        "street_name",
+        "complement",
+        "city",
+        "zip_code",
+        "country",
+    )
+    extra = 0
+
+
 @admin.register(models.Center)
 class CenterAdmin(admin.ModelAdmin):
-    list_display = ("name",)
-    search_fields = ("name", "address")
+    list_display = ("name", "address")
+    search_fields = ("name", "address__city")
     fieldsets = (
-        (None, {"fields": ("name", "address")}),
-        (_("Coordonnées GPS"), {"fields": ("lat", "lng")}),
+        (None, {"fields": ("name",)}),
         (_("Notes"), {"fields": ("private_notes",)}),
     )
+    # inlines = (AddressAdmin,)
 
 
 class EventDocumentInlineAdmin(admin.TabularInline):
