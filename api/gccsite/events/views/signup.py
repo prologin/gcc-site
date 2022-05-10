@@ -15,6 +15,9 @@ class ApplicationViewset(viewsets.ModelViewSet):
     http_method_names = ["get", "post", "delete"]
 
     def get_queryset(self):
-        return models.Application.objects.filter(
-            user=self.request.user,
-        )
+        if self.request.user.is_staff:
+            return models.Application.objects
+        else:
+            return models.Application.objects.filter(
+                user=self.request.user,
+            )
