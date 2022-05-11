@@ -1,5 +1,5 @@
 <template>
-  <Schedules />
+  <Schedules v-bind:scheduleType="scheduleType"/>
 </template>
 
 <script>
@@ -8,6 +8,7 @@ import Schedules from '@/components/Schedules.vue'
 
 export default Vue.extend({
   name: 'EventInfo',
+  props: ['scheduleType'],
   components: {
     Schedules
   }

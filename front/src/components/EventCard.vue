@@ -28,7 +28,7 @@
                 hide-header
                 ok-title="Fermer"
                 ok-variant="secondary-button">
-        <EventInfo />
+        <EventInfo v-bind:scheduleType="scheduleType"/>
       </b-modal>
     </b-button-group>
   </b-row>
@@ -37,10 +37,12 @@
 <script>
 import Vue from 'vue'
 import EventInfo from '@/components/EventInfo.vue'
+import ScheduleTypeEnum from '@/enums/ScheduleTypeEnum.js'
 
 export default Vue.extend({
   name: 'EventCard',
-  props: ['title', 'date', 'address', 'index'],
+  mixins: [ScheduleTypeEnum.Mixin],
+  props: ['title', 'date', 'address', 'index', 'scheduleType'],
   components: {
     EventInfo
   },
