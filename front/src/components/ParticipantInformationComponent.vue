@@ -76,21 +76,23 @@
            <p>Autre</p>
          </div>
          <!-- TODO: Use an enum, add an animation -->
-         <div v-if="class_level === '7'">
+         <div v-if="class_level === ClassTypeEnum.AUTRE">
            Insérer votre classe
-           <b-form-input required v-model="other_class" :disabled="class_level !== '7'" placeholder="Insérer votre classe ici" />
+           <b-form-input required v-model="other_class" :disabled="class_level !== ClassTypeEnum.AUTRE" placeholder="Insérer votre classe ici" />
          </div>
   </b-container>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import ClassTypeEnum from '@/enums/ClassTypeEnum.js'
 
 export default Vue.extend({
   name: 'ContactInformationComponent',
+  mixins: [ClassTypeEnum.Mixin],
   data: () => {
     return {
-      class_level: '7',
+      class_level: ClassTypeEnum.AUTRE,
       other_class: '',
       use_contact_info: '',
       carpool_use_contact_info: '',
