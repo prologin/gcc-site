@@ -1,6 +1,5 @@
 <template>
   <b-container fluid>
-     <b-form>
        <b-row> <h2> Information de la participante </h2> </b-row>
        <!-- Autofill fields if |yes| -->
        <b-row>
@@ -81,8 +80,6 @@
            Insérer votre classe
            <b-form-input v-model="other_class" placeholder="Insérer votre classe ici" />
          </div>
-
-     </b-form>
   </b-container>
 </template>
 

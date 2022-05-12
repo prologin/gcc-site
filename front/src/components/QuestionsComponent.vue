@@ -1,6 +1,5 @@
 <template>
   <b-container fluid>
-    <b-form>
       <b-col>
         <div v-for="(question, i) in questions" v-bind:key="i">
 
@@ -52,7 +51,6 @@
 
         </div>
       </b-col>
-    </b-form>
   </b-container>
 </template>
 

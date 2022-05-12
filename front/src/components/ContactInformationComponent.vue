@@ -1,6 +1,5 @@
 <template>
   <b-container fluid>
-        <b-form @submit="submitAnswers">
           <b-row> <h2> Vos informations de contact </h2> </b-row>
           <b-row>
             <b-col md="6">
@@ -94,7 +93,6 @@
                  />
             </b-col>
           </b-row>
-        </b-form>
   </b-container>
 </template>
 
@@ -115,13 +113,6 @@ export default Vue.extend({
         town: '',
         phone: ''
       }
-    }
-  },
-  methods: {
-    /* eslint-disable-next-line */
-    submitAnswers (event: any) {
-      event.preventDefault()
-      console.log('Submit')
     }
   }
 })
