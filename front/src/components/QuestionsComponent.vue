@@ -42,6 +42,7 @@
               <b-form-checkbox-group
                 :id="'input-question' + i"
                 :options="question.possible_answers"
+                :required="question.mandatory"
                 :aria-describedby="ariaDescribedBy"
                 v-model="answers[i]"
                 :name="question.text"

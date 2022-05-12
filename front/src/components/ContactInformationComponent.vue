@@ -36,6 +36,7 @@
                 placeholder="email@example.com"
                 required
                 v-model="personal.email"
+                type="email"
                 />
             </b-col>
           </b-row>
@@ -89,6 +90,7 @@
                  id="input-7"
                  placeholder="Numéro de téléphone (+33 6 60 60 60 60)"
                  required
+                 type="tel"
                  v-model="personal.phone"
                  />
             </b-col>

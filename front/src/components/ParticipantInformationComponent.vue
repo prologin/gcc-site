@@ -56,7 +56,7 @@
        </b-row>
        <b-row>
          <b-form-group v-slot="{ ariaDescribedby }">
-          <b-form-radio-group v-model="carpool_use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
+          <b-form-radio-group required v-model="carpool_use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
             <b-form-radio value="yes"> Oui </b-form-radio>
             <b-form-radio value="no"> Non </b-form-radio>
           </b-form-radio-group>
@@ -64,7 +64,7 @@
        </b-row>
 
          <h3>Sélectionner votre classe</h3>
-         <b-form-input class="slider" type="range" min="0" max="7" step="1" v-model="class_level" />
+         <b-form-input required class="slider" type="range" min="0" max="7" step="1" v-model="class_level" />
          <div class="sliderticks">
            <p>6<sup class="sup-vertical-correction">e</sup></p>
            <p>5<sup class="sup-vertical-correction">e</sup></p>
@@ -78,7 +78,7 @@
          <!-- TODO: Use an enum, add an animation -->
          <div v-if="class_level === '7'">
            Insérer votre classe
-           <b-form-input v-model="other_class" placeholder="Insérer votre classe ici" />
+           <b-form-input required v-model="other_class" :disabled="class_level !== '7'" placeholder="Insérer votre classe ici" />
          </div>
   </b-container>
 </template>
@@ -90,7 +90,8 @@ export default Vue.extend({
   name: 'ContactInformationComponent',
   data: () => {
     return {
-      class_level: '',
+      class_level: '7',
+      other_class: '',
       use_contact_info: '',
       carpool_use_contact_info: '',
       personal: {
