@@ -67,7 +67,7 @@ class EventViewset(viewsets.ReadOnlyModelViewSet):
     filterset_class = EventFilter
 
     @action(methods=["get"], detail=True)
-    @swagger_auto_schema(responses={200: serializers.QuestionSerializer})
+    @swagger_auto_schema(responses={200: serializers.QuestionSerializer(many=True)})
     def questions(self, request: request.Request, pk):
         event: models.Event = self.get_object()
         serializer = serializers.QuestionSerializer(
