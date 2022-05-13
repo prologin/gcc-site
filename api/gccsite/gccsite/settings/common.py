@@ -135,5 +135,5 @@ MEDIA_ROOT = PROJECT_ROOT_DIR / "public" / "media"
 MEDIA_URL = "/api/media/"
 
 REST_FRAMEWORK = {
-    "DEFAULT_FILTER_BACKENDS": [],
+    "DEFAULT_FILTER_BACKENDS": ["gccsite.backends.FilterBackend"],
 }
