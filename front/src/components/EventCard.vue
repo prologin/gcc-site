@@ -42,7 +42,8 @@ import { formatDate } from '@/services/date'
 
 export default Vue.extend({
   name: 'EventCard',
-  props: ['title', 'start_date', 'end_date', 'address', 'index'],
+  mixins: [ScheduleTypeEnum.Mixin],
+  props: ['title', 'start_date', 'end_date', 'address', 'index', 'scheduleType'],
   components: {
     EventInfo
   },
