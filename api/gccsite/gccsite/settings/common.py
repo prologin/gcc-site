@@ -133,3 +133,7 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 MEDIA_ROOT = PROJECT_ROOT_DIR / "public" / "media"
 MEDIA_URL = "/api/media/"
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": [],
+}
