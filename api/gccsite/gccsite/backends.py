@@ -4,6 +4,13 @@ from rest_framework.compat import coreschema
 
 
 class FilterBackend(filters.DjangoFilterBackend):
+    """
+    The default filter backend does not properly set the field types,
+    making all query parameters string type.
+
+    This is a simple override that supports boolean and date filters.
+    """
+
     def get_coreschema_field(self, field):
         format = None
         field_cls = coreschema.String
