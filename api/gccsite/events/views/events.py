@@ -82,7 +82,6 @@ class EventViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.EventSerializer
     queryset = models.Event.objects
-    filter_backends = (FilterBackend,)
     filterset_class = EventFilter
 
     @action(methods=["get"], detail=True)
