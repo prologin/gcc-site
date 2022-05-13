@@ -24,7 +24,9 @@ Examples
 
 from django.utils import timezone
 from django_filters import rest_framework as filters
-from rest_framework import permissions, viewsets
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import permissions, request, response, viewsets
+from rest_framework.decorators import action
 
 from .. import models, serializers
 
@@ -63,3 +65,13 @@ class EventViewset(viewsets.ReadOnlyModelViewSet):
     queryset = models.Event.objects
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = EventFilter
+
+    @action(methods=["get"], detail=True)
+    @swagger_auto_schema(responses={200: serializers.QuestionSerializer})
+    def questions(self, request: request.Request, pk):
+        event: models.Event = self.get_object()
+        serializer = serializers.QuestionSerializer(
+            models.Form.objects.get(id=event.form.id).questions,
+            many=True,
+        )
+        return response.Response(serializer.data)
