@@ -183,6 +183,12 @@ class Event(models.Model):
                 ),
             )
 
+    def get_application_questions(self, mandatory_only=False):
+        if mandatory_only:
+            return self.form.questions.filter(mandatory=True)
+        else:
+            return self.form.questions.all()
+
 
 class DocumentType(models.IntegerChoices):
     PUBLIC = 1, _("Public")
