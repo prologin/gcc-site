@@ -3,15 +3,19 @@
        <b-row> <h2> Information de la participante </h2> </b-row>
        <!-- Autofill fields if |yes| -->
        <b-row>
-         <h3> Utiliser les informations de contact ci-dessus </h3>
+         <b-col>
+           <h3> Utiliser les informations de contact ci-dessus </h3>
+         </b-col>
        </b-row>
        <b-row>
-         <b-form-group v-slot="{ ariaDescribedby }">
-          <b-form-radio-group v-model="use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
-            <b-form-radio value="yes"> Oui </b-form-radio>
-            <b-form-radio value="no"> Non </b-form-radio>
-          </b-form-radio-group>
-         </b-form-group>
+         <b-col>
+           <b-form-group v-slot="{ ariaDescribedby }">
+            <b-form-radio-group v-model="use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
+              <b-form-radio value="yes"> Oui </b-form-radio>
+              <b-form-radio value="no"> Non </b-form-radio>
+            </b-form-radio-group>
+           </b-form-group>
+         </b-col>
        </b-row>
 
        <b-row>
@@ -52,15 +56,19 @@
          </b-col>
        </b-row>
        <b-row>
-         <h3> Acceptez-vous le partage de ces informations dans le cadre de l'organisation d'un covoiturage ? </h3>
+         <b-col>
+           <h3> Acceptez-vous le partage de ces informations dans le cadre de l'organisation d'un covoiturage ? </h3>
+         </b-col>
        </b-row>
        <b-row>
-         <b-form-group v-slot="{ ariaDescribedby }">
-          <b-form-radio-group required v-model="carpool_use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
-            <b-form-radio value="yes"> Oui </b-form-radio>
-            <b-form-radio value="no"> Non </b-form-radio>
-          </b-form-radio-group>
-         </b-form-group>
+         <b-col>
+           <b-form-group v-slot="{ ariaDescribedby }">
+            <b-form-radio-group v-model="carpool_use_contact_info" :aria-describedby="ariaDescribedby" name="some-radios">
+              <b-form-radio value="yes"> Oui </b-form-radio>
+              <b-form-radio value="no"> Non </b-form-radio>
+            </b-form-radio-group>
+           </b-form-group>
+         </b-col>
        </b-row>
 
          <h3>Sélectionner votre classe</h3>
