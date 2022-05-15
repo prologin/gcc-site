@@ -1,4 +1,5 @@
 from django_filters import rest_framework as filters
+from gccsite.serializers import MultipleSerializerViewSetMixin
 from rest_framework import permissions, viewsets
 
 from .. import models, serializers
@@ -19,9 +20,16 @@ class ApplicationFilter(filters.FilterSet):
         fields = ["user_id", "event_id", "status"]
 
 
-class ApplicationViewset(viewsets.ModelViewSet):
+class ApplicationViewset(
+    MultipleSerializerViewSetMixin, viewsets.ModelViewSet
+):
     permission_classes = [permissions.IsAuthenticated]
+
     serializer_class = serializers.ApplicationSerializer
+    actions_serializer_classes = {
+        "list": serializers.ApplicationShortSerializer
+    }
+
     http_method_names = ["get", "post", "delete"]
 
     filter_backends = (filters.DjangoFilterBackend,)
@@ -31,6 +39,4 @@ class ApplicationViewset(viewsets.ModelViewSet):
         if self.request.user.is_staff:
             return models.Application.objects
         else:
-            return models.Application.objects.filter(
-                user=self.request.user,
-            )
+            return models.Application.objects.filter(user=self.request.user)

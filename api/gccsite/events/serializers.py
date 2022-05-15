@@ -71,6 +71,21 @@ class PartialEventSerializer(serializers.ModelSerializer):
         )
 
 
+class EventShortSerializer(serializers.ModelSerializer):
+    center_name = serializers.CharField(source="center.name")
+
+    class Meta:
+        model = models.Event
+        depth = 0
+
+        fields = (
+            "id",
+            "center_name",
+            "start_date",
+            "end_date",
+        )
+
+
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Question
@@ -161,17 +176,20 @@ class ApplicationSerializer(serializers.ModelSerializer):
             FormAnswerPushSerializer().create(answer)
         return ret
 
+
+class ApplicationShortSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        queryset=get_user_model().objects.all()
+    )
+    event = EventShortSerializer()
+
     class Meta:
         model = models.Application
         fields = (
             "id",
             "user",
-            "event",
             "first_name",
             "last_name",
-            "dob",
+            "event",
             "status",
-            "form_answers",
         )
-
-        read_only_fields = ("id",)
