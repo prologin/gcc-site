@@ -18,6 +18,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("accounts/", include("rest_framework.urls")),
     path("api/sso/", include("social_django.urls", namespace="social")),
     path("api/v1/", include("events.urls", namespace="events")),
     path("api/v1/", include("partners.urls", namespace="partners")),
