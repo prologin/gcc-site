@@ -25,7 +25,7 @@ Examples
 from django.utils import timezone
 from django_filters import rest_framework as filters
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import permissions, response, viewsets
+from rest_framework import permissions, request, response, viewsets
 from rest_framework.decorators import action
 
 from .. import models, serializers
@@ -110,4 +110,25 @@ class EventViewset(viewsets.ReadOnlyModelViewSet):
             models.Form.objects.get(id=event.form.id).questions,
             many=True,
         )
+        return response.Response(serializer.data)
+
+    @action(
+        methods=["get"],
+        detail=True,
+        permission_classes=[permissions.IsAuthenticated],
+    )
+    @swagger_auto_schema(
+        responses={200: serializers.EventDocumentSerializer(many=True)}
+    )
+    def docs(self, request: request.Request, pk):
+        event: models.Event = self.get_object()
+        try:
+            attendee: models.Attendee = models.Attendee.objects.get(
+                owner=request.user
+            )
+        except models.Attendee.DoesNotExist:
+            docs = event.get_attendee_documents(None)
+        else:
+            docs = event.get_attendee_documents(attendee)
+        serializer = serializers.EventDocumentSerializer(docs, many=True)
         return response.Response(serializer.data)
