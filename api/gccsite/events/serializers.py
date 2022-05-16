@@ -34,7 +34,6 @@ class EventSerializer(serializers.ModelSerializer):
             "form_id",
             "description",
             "notes",
-            "documents",
         )
 
 
@@ -64,6 +63,17 @@ class QuestionSerializer(serializers.ModelSerializer):
             "type",
             "mandatory",
             "possible_answers",
+        )
+
+
+class EventDocumentSerializer(serializers.ModelSerializer):
+    file = serializers.ReadOnlyField(source="document.file.url")
+
+    class Meta:
+        model = models.EventDocument
+        fields = (
+            "file",
+            "display_name",
         )
 
 
