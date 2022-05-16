@@ -72,6 +72,7 @@ class EventDocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.EventDocument
         fields = (
+            "id",
             "file",
             "display_name",
         )
