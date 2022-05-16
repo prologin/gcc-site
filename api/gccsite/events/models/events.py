@@ -35,7 +35,7 @@ class Address(models.Model):
         null=True,
     )
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.city}, {self.street_number} {self.street_name}"
 
     class Meta:
