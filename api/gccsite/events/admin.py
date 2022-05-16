@@ -10,8 +10,8 @@ class AddressAdmin(admin.StackedInline):
         "street_number",
         "street_name",
         "complement",
-        "city",
         "zip_code",
+        "city",
         "country",
     )
     extra = 0

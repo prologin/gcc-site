@@ -12,8 +12,8 @@ class AddressSerializer(serializers.ModelSerializer):
             "street_number",
             "street_name",
             "complement",
-            "city",
             "zip_code",
+            "city",
             "country",
         )
 
