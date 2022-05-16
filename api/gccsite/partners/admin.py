@@ -9,8 +9,13 @@ class PartnersAdmin(admin.ModelAdmin):
         "name",
         "enabled",
         "featured",
+        "is_on_front_page",
         "order",
         "website_url",
     )
 
-    list_filter = ("enabled",)
+    list_filter = (
+        "enabled",
+        "featured",
+        "is_on_front_page",
+    )

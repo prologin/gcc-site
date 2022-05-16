@@ -21,6 +21,14 @@ class Partner(models.Model):
         null=True,
     )
 
+    is_on_front_page = models.BooleanField(
+        verbose_name=_("Affiché sur la page d'accueil"),
+        default=False,
+        editable=True,
+    )
+
+    # Indicates if the partner is featured
+    # e.g. featured partners are displayed higher on the front page, etc.
     featured = models.BooleanField(
         verbose_name=_("Mis en avant"),
         default=False,
@@ -36,13 +44,24 @@ class Partner(models.Model):
         default=True,
     )
 
+    # Order in which partners are supposed to be "ranked", can be use to force
+    # partners before or after others.
+    # Lower values are more important.
     order = models.PositiveIntegerField(
         verbose_name=_("Ordre"),
-        default=1,
+        default=0,
     )
 
     class Meta:
-        ordering = ("order",)
+        verbose_name = _("partenaire")
+        verbose_name_plural = _("partenaires")
+
+        ordering = (
+            "-enabled",
+            "-featured",
+            "-is_on_front_page",
+            "order",
+        )
 
     def __str__(self):
         return self.name
