@@ -74,13 +74,19 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa
+        "NAME": (
+            "django.contrib.auth.password_validation.MinimumLengthValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa
+        "NAME": (
+            "django.contrib.auth.password_validation.CommonPasswordValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa
+        "NAME": (
+            "django.contrib.auth.password_validation.NumericPasswordValidator"
+        ),
     },
 ]
 
@@ -134,6 +140,13 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 MEDIA_ROOT = PROJECT_ROOT_DIR / "public" / "media"
 MEDIA_URL = "/api/media/"
 
+"""
+The default filter backend does not properly set the field types,
+making all query parameters string type.
+
+Having proper types in the generated OpenAPI file is **extremely** important
+since it will greatly help to use the API.
+"""
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["gccsite.backends.FilterBackend"],
 }
