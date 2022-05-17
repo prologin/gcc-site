@@ -15,6 +15,7 @@ class AddressAdmin(admin.StackedInline):
         "country",
     )
     extra = 0
+    min_num = 1
 
 
 @admin.register(models.Center)
