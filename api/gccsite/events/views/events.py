@@ -88,9 +88,14 @@ class EventFilter(filters.FilterSet):
 
 class EventViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.AllowAny]
-    serializer_class = serializers.EventSerializer
     queryset = models.Event.objects
     filterset_class = EventFilter
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.PartialEventSerializer
+        if self.action == "retrieve":
+            return serializers.EventSerializer
 
     @action(methods=["get"], detail=True)
     @swagger_auto_schema(
