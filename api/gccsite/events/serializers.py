@@ -38,6 +38,22 @@ class EventSerializer(serializers.ModelSerializer):
         )
 
 
+class PartialEventSerializer(serializers.ModelSerializer):
+
+    center = serializers.CharField(source="center__name")
+
+    class Meta:
+        depth = 1
+        model = models.Event
+        fields = (
+            "id",
+            "name",
+            "center",
+            "start_date",
+            "end_date",
+        )
+
+
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Question
