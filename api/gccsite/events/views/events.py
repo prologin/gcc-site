@@ -70,6 +70,9 @@ class EventViewset(viewsets.ReadOnlyModelViewSet):
         responses={200: serializers.QuestionSerializer(many=True)}
     )
     def questions(self, request, pk):
+        """
+        Return a list of questions attached to this event.
+        """
         event = self.get_object()
         serializer = serializers.QuestionSerializer(
             models.Form.objects.get(id=event.form.id).questions,
