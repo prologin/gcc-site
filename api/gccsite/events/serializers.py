@@ -15,6 +15,8 @@ class AddressSerializer(serializers.ModelSerializer):
             "zip_code",
             "city",
             "country",
+            "lat",
+            "lng",
         )
 
 

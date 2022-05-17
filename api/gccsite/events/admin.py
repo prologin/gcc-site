@@ -13,6 +13,8 @@ class AddressAdmin(admin.StackedInline):
         "zip_code",
         "city",
         "country",
+        "lat",
+        "lng",
     )
     extra = 0
     min_num = 1

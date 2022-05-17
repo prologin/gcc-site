@@ -34,6 +34,21 @@ class Address(models.Model):
         verbose_name=_("Centre"),
     )
 
+    lat = models.DecimalField(
+        verbose_name=_("Latitude"),
+        max_digits=14,
+        decimal_places=10,
+        null=True,
+        blank=True,
+    )
+    lng = models.DecimalField(
+        verbose_name=_("Longitude"),
+        max_digits=14,
+        decimal_places=10,
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return f"{self.city}, {self.street_number} {self.street_name}"
 
