@@ -3,12 +3,6 @@ from rest_framework import permissions, viewsets
 from .. import models, serializers
 
 
-class FormViewset(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = models.Form.objects.all()
-    serializer_class = serializers.FormSerializer
-
-
 class AttendeeViewset(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.AttendeeSerializer
