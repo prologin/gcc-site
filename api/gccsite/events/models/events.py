@@ -32,7 +32,6 @@ class Address(models.Model):
         to="events.Center",
         on_delete=models.CASCADE,
         verbose_name=_("Centre"),
-        null=True,
     )
 
     def __str__(self):
