@@ -51,18 +51,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
 
 
-class FormSerializer(serializers.ModelSerializer):
-
-    questions = QuestionSerializer(many=True)
-
-    class Meta:
-        model = models.Form
-        fields = (
-            "id",
-            "questions",
-        )
-
-
 class FormAnswerSerializer(serializers.ModelSerializer):
     question = QuestionSerializer()
 
