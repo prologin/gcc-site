@@ -41,17 +41,44 @@ def filter_open(queryset, name, value):
 
 
 class EventFilter(filters.FilterSet):
-    only_open = filters.BooleanFilter(method=filter_open)
-    center = filters.CharFilter(field_name="center__name")
-    starts_after = filters.DateFilter(
-        field_name="start_date", lookup_expr="gte"
+    only_open = filters.BooleanFilter(
+        method=filter_open,
+        help_text=(
+            "If `true`, only return events for which registrations is open."
+        ),
     )
-    ends_before = filters.DateFilter(field_name="end_date", lookup_expr="lte")
+    center = filters.CharFilter(
+        field_name="center__name",
+        help_text=(
+            "Filter by centers. "
+            "The argument must exactly match the center name."
+        ),
+    )
+    starts_after = filters.DateFilter(
+        field_name="start_date",
+        lookup_expr="gte",
+        help_text="Return events that start after the given date.",
+    )
+    ends_before = filters.DateFilter(
+        field_name="end_date",
+        lookup_expr="lte",
+        help_text="Return events that end before the given date.",
+    )
     signup_starts_after = filters.DateFilter(
-        field_name="signup_start_date", lookup_expr="gte"
+        field_name="signup_start_date",
+        lookup_expr="gte",
+        help_text=(
+            "Return events for which registrations "
+            "starts after the given date."
+        ),
     )
     signup_ends_before = filters.DateFilter(
-        field_name="signup_end_date", lookup_expr="lte"
+        field_name="signup_end_date",
+        lookup_expr="lte",
+        help_text=(
+            "Return events for which registrations "
+            "ends before the given date."
+        ),
     )
 
     class Meta:
