@@ -40,7 +40,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 class PartialEventSerializer(serializers.ModelSerializer):
 
-    center = serializers.CharField(source="center__name")
+    center = serializers.CharField(source="center.name")
 
     class Meta:
         depth = 1
