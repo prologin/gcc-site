@@ -143,20 +143,20 @@ class Event(models.Model):
         return self.form.questions.all()
 
     def get_attendee_documents(self, attendee: Attendee):
-        if attendee:
-            if attendee.status == SelectionStatus.CONFIRMED.value:
-                return EventDocument.objects.filter(event=self)
-            if attendee.status == SelectionStatus.ACCEPTED.value:
-                return EventDocument.objects.filter(
-                    event=self,
-                    visibility__in=(
-                        DocumentType.ACCEPTED_OR_CONFIRMED.value,
-                        DocumentType.PUBLIC,
-                    ),
-                )
-        return EventDocument.objects.filter(
-            event=self, visibility=DocumentType.PUBLIC.value
-        )
+        if not attendee:
+            return EventDocument.objects.filter(
+                event=self, visibility=DocumentType.PUBLIC.value
+            )
+        if attendee.status == SelectionStatus.CONFIRMED.value:
+            return EventDocument.objects.filter(event=self)
+        if attendee.status == SelectionStatus.ACCEPTED.value:
+            return EventDocument.objects.filter(
+                event=self,
+                visibility__in=(
+                    DocumentType.ACCEPTED_OR_CONFIRMED.value,
+                    DocumentType.PUBLIC,
+                ),
+            )
 
 
 class DocumentType(models.IntegerChoices):
