@@ -11,11 +11,9 @@ from .signup import Attendee, SelectionStatus
 
 
 class Address(models.Model):
-    street_number = models.IntegerField(
-        verbose_name=_("Numéro de voie"), blank=True, null=True
-    )
-    street_name = models.CharField(
-        verbose_name=_("Nom de la voie"), max_length=200
+    street = models.CharField(
+        verbose_name=_("Numéro et nom de voie"),
+        max_length=250,
     )
     complement = models.CharField(
         verbose_name=_("Complément d'adresse"),
@@ -50,7 +48,7 @@ class Address(models.Model):
     )
 
     def __str__(self):
-        return f"{self.city}, {self.street_number} {self.street_name}"
+        return f"{self.city}, {self.street}"
 
     class Meta:
         verbose_name = _("Adresse")
