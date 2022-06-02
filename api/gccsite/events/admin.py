@@ -7,8 +7,7 @@ from . import models
 class AddressAdmin(admin.StackedInline):
     model = models.Address
     fields = (
-        "street_number",
-        "street_name",
+        "street",
         "complement",
         "zip_code",
         "city",
