@@ -154,6 +154,7 @@
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import { mapGetters } from 'vuex'
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -182,12 +183,19 @@ export default Vue.extend({
         city: 'Le KB',
         country: 'France'
       },
-      email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
+      email: this.$store.getters.getEmail,
+      firstName: this.$store.getters.getFirstName,
+      lastName: this.$store.getters.getLastName,
       newsletter: 'NO',
       phone: '06 00 00 00 00'
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getFirstName',
+      'getLastName',
+      'getEmail'
+    ])
   }
 })
 </script>
