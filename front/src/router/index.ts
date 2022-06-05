@@ -1,7 +1,7 @@
 import VueRouter, { RouteConfig } from 'vue-router'
 import Vue from 'vue'
 
-import About from '@/views/About.vue'
+import AccountPage from '@/views/AccountInformationsView.vue'
 import Applications from '@/views/ApplicationsView.vue'
 import Home from '@/views/Home.vue'
 import Inscription from '@/views/Inscription.vue'
@@ -19,11 +19,6 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'home',
     component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: About
   },
   {
     path: '/inscription',
@@ -60,6 +55,13 @@ const routes: Array<RouteConfig> = [
     component: LoginRegisterView
   },
   {
+    path: '/mon-compte',
+    name: 'account-informations',
+    component: AccountPage,
+    // Only logged-in users can see their account informations.
+    meta: { requiresAuth: true }
+  },
+  {
     path: '*',
     component: PageNotFound
   }
@@ -84,8 +86,6 @@ router.beforeEach((to, from, next) => {
       name: 'login-register',
       query: { redirect: to.fullPath }
     })
-  } else if (requiresAuth && isAuthenticated) {
-    next()
   } else {
     next()
   }

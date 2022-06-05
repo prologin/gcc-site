@@ -61,13 +61,7 @@ export default Vue.extend({
     FAQ,
     Newsletter,
     Footer
-  },
-  methods: {
-    scrollTo (index) {
-      document.getElementById(index).scrollIntoView({ behavior: 'smooth' })
-    }
   }
-
 })
 </script>
 

@@ -26,10 +26,10 @@
               <h3>{{ getEmail }}</h3>
             </b-dropdown-header>
             <b-dropdown-divider/>
-              <b-dropdown-item-button href="#">
+              <b-dropdown-item :to="{ name: 'account-informations' }">
                 <b-icon icon="person-fill" aria-hidden="true"/>
                   Mon compte
-              </b-dropdown-item-button>
+              </b-dropdown-item>
               <b-dropdown-item :to="{ name: 'applications' }">
                 <b-icon icon="inbox-fill"/>
                   Mes candidatures

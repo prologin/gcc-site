@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid class="footer-bg py-2">
+    <b-container fluid class="footer-bg py-2 w-100">
     <b-row class="mx-5">
         <b-col class="col-12 col-lg-auto mb-3 mb-lg-0 text-center text-lg-left">
             <b-link :to='{ name:"home" }'>

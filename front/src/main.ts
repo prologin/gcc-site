@@ -10,6 +10,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import './assets/css/main.css'
 
+Vue.mixin({
+  methods: {
+    scrollTo (index) {
+      const selectedElement = window.document.getElementById(index)
+      if (selectedElement !== null) {
+        selectedElement.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
+})
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
