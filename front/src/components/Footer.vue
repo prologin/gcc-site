@@ -24,6 +24,9 @@
                                v-bind:key="index" />
             </b-row>
         </b-row>
+        <b-col class="col-12 col-lg-auto text-center text-lg-left">
+            Illustrations made with <b-link to="https://storyset.com" class="secondary-button footer-link-style my-auto">Storyset</b-link>
+        </b-col>
     </b-row>
     </b-container>
 </template>
