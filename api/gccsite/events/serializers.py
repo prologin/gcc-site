@@ -26,6 +26,7 @@ class CenterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Center
+
         fields = (
             "id",
             "name",
@@ -34,12 +35,12 @@ class CenterSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
-
     center = CenterSerializer()
 
     class Meta:
-        depth = 1
         model = models.Event
+        depth = 1
+
         fields = (
             "id",
             "name",
@@ -73,6 +74,7 @@ class PartialEventSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Question
+
         fields = (
             "id",
             "order",
@@ -88,6 +90,14 @@ class EventDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.EventDocument
+
+
+class FormSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True)
+
+    class Meta:
+        model = models.Form
+
         fields = (
             "id",
             "file",
@@ -100,6 +110,7 @@ class FormAnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.FormAnswer
+
         fields = (
             "id",
             "question",
