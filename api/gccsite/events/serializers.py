@@ -10,8 +10,7 @@ class AddressSerializer(serializers.ModelSerializer):
         model = models.Address
         fields = (
             "id",
-            "street_number",
-            "street_name",
+            "street",
             "complement",
             "zip_code",
             "city",
@@ -107,6 +106,11 @@ class EventDocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.EventDocument
 
+        fields = (
+            "file",
+            "display_name",
+        )
+
 
 class FormSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True)
@@ -116,8 +120,7 @@ class FormSerializer(serializers.ModelSerializer):
 
         fields = (
             "id",
-            "file",
-            "display_name",
+            "questions",
         )
 
 
