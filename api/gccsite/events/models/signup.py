@@ -14,12 +14,12 @@ class SelectionStatus(models.IntegerChoices):
     CONFIRMED = 4, _("Confirmé")
 
 
-class Attendee(models.Model):
+class Application(models.Model):
     owner = models.ForeignKey(
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
         on_delete=models.CASCADE,
-        related_name="attendees",
+        related_name="applications",
     )
 
     first_name = models.CharField(
@@ -40,7 +40,7 @@ class Attendee(models.Model):
         to="events.Event",
         verbose_name=_("Évènement"),
         on_delete=models.CASCADE,
-        related_name="attendees",
+        related_name="applications",
     )
 
     status = models.SmallIntegerField(
@@ -49,7 +49,7 @@ class Attendee(models.Model):
     )
 
     labels = models.ManyToManyField(
-        to="events.AttendeeLabel",
+        to="events.ApplicationLabel",
         blank=True,
         verbose_name=_("Labels"),
     )
@@ -60,8 +60,8 @@ class Attendee(models.Model):
     )
 
     class Meta:
-        verbose_name = _("participant")
-        verbose_name_plural = _("participants")
+        verbose_name = _("candidatures")
+        verbose_name_plural = _("candidatures")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
@@ -194,8 +194,8 @@ class Question(models.Model):
 
 
 class FormAnswer(models.Model):
-    attendee = models.ForeignKey(
-        to="events.Attendee",
+    application = models.ForeignKey(
+        to="events.Application",
         related_name="form_answers",
         verbose_name=_("Participant"),
         on_delete=models.CASCADE,
@@ -216,14 +216,14 @@ class FormAnswer(models.Model):
     class Meta:
         verbose_name = _("réponse formulaire")
         verbose_name_plural = _("réponses formulaire")
-        unique_together = (("attendee", "question"),)
+        unique_together = (("application", "question"),)
         ordering = ("question__order",)
 
     def __str__(self):
         return self.answer
 
 
-class AttendeeLabel(models.Model):
+class ApplicationLabel(models.Model):
     title = models.CharField(max_length=120, verbose_name=_("Titre"))
 
     class Meta:

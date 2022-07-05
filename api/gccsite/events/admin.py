@@ -84,8 +84,8 @@ class FormAnswerInline(admin.TabularInline):
     extra = 0
 
 
-@admin.register(models.Attendee)
-class AttendeeAdmin(admin.ModelAdmin):
+@admin.register(models.Application)
+class ApplicationAdmin(admin.ModelAdmin):
     list_display = (
         "first_name",
         "last_name",
@@ -139,8 +139,8 @@ class AttendeeAdmin(admin.ModelAdmin):
     inlines = (FormAnswerInline,)
 
 
-@admin.register(models.AttendeeLabel)
-class AttendeeLabelAdmin(admin.ModelAdmin):
+@admin.register(models.ApplicationLabel)
+class ApplicationLabelAdmin(admin.ModelAdmin):
     search_fields = ("title",)
 
 

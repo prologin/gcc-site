@@ -121,11 +121,11 @@ class FormAnswerPushSerializer(serializers.ModelSerializer):
             "question",
             "answer",
         )
-        write_only_fields = ("attendee_id",)
+        write_only_fields = ("application_id",)
         read_only_fields = ("id",)
 
 
-class AttendeeSerializer(serializers.ModelSerializer):
+class ApplicationSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(
         allow_null=True,
         queryset=get_user_model().objects.all(),
@@ -146,12 +146,12 @@ class AttendeeSerializer(serializers.ModelSerializer):
         form_answers = validated_data.pop("form_answers")
         ret = super().create(validated_data)
         for answer in form_answers:
-            answer["attendee_id"] = ret.id
+            answer["application_id"] = ret.id
             FormAnswerPushSerializer().create(answer)
         return ret
 
     class Meta:
-        model = models.Attendee
+        model = models.Application
         fields = (
             "id",
             "owner",

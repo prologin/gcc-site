@@ -6,7 +6,10 @@ from . import views
 router = routers.SimpleRouter()
 
 router.register("events", views.EventViewset, basename="events")
-router.register("attendees", views.AttendeeViewset, basename="attendees")
+router.register("forms", views.FormViewset, basename="forms")
+router.register(
+    "applications", views.ApplicationViewset, basename="applications"
+)
 
 app_name = "events"
 

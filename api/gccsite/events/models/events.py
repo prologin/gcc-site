@@ -7,7 +7,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .signup import Attendee, SelectionStatus
+from .signup import SelectionStatus
 
 
 class Address(models.Model):
@@ -172,17 +172,12 @@ class Event(models.Model):
 
         return self.form.questions.all()
 
-    def get_attendee_documents(self, attendee: Attendee):
-        if not attendee:
-            return EventDocument.objects.filter(
-                event=self, visibility=DocumentType.PUBLIC.value
-            )
-        if attendee.status == SelectionStatus.CONFIRMED.value:
-            return EventDocument.objects.filter(event=self)
-        if attendee.status == SelectionStatus.ACCEPTED.value:
-            return EventDocument.objects.filter(
-                event=self,
-                visibility__in=(
+    def get_application_documents(self, application):
+        if application.status == SelectionStatus.CONFIRMED.value:
+            return self.documents.all()
+        if application.status == SelectionStatus.ACCEPTED.value:
+            return self.documents.filter(
+                eventdocument__visibility__in=(
                     DocumentType.ACCEPTED_OR_CONFIRMED.value,
                     DocumentType.PUBLIC,
                 ),

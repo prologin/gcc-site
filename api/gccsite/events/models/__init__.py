@@ -7,8 +7,8 @@ from .events import (
     EventDocument,
 )
 from .signup import (
-    Attendee,
-    AttendeeLabel,
+    Application,
+    ApplicationLabel,
     Form,
     FormAnswer,
     Question,
@@ -25,10 +25,10 @@ __all__ = (
     "DocumentType",
     "EventDocument",
     "SelectionStatus",
-    "Attendee",
+    "Application",
     "Form",
     "QuestionType",
     "Question",
     "FormAnswer",
-    "AttendeeLabel",
+    "ApplicationLabel",
 )

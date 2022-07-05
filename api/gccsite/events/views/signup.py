@@ -3,12 +3,18 @@ from rest_framework import permissions, viewsets
 from .. import models, serializers
 
 
-class AttendeeViewset(viewsets.ModelViewSet):
+class FormViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = serializers.AttendeeSerializer
+    queryset = models.Form.objects.all()
+    serializer_class = serializers.FormSerializer
+
+
+class ApplicationViewset(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.ApplicationSerializer
     http_method_names = ["get", "post", "delete"]
 
     def get_queryset(self):
-        return models.Attendee.objects.filter(
+        return models.Application.objects.filter(
             owner=self.request.user,
         )
