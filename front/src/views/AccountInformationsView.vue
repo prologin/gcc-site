@@ -128,21 +128,21 @@
           <b-col md="12" class="my-5 p-5 account-group" id="rgpd">
             <h1>Exporter vos données personnelles</h1>
             <h3>Vous pouvez télécharger une archive contenant toutes vos données personnelles, comme prévu par le Droit à la portabilité (Art. 20 du RGPD).</h3>
-            <div class="mt-4">
+            <b-col offset-md="8" class="mt-5 p-0 col-12 col-md-4">
               <!-- TODO: Add getGDPRArchive API call -->
               <b-button class="primary-button" block>Télécharger</b-button>
-            </div>
+            </b-col>
           </b-col>
 
           <b-col md="12" class="my-5 p-5 account-group" id="delete">
             <h1>Supprimer votre compte</h1>
             <h3>Vous pouvez supprimer votre compte et toutes les données personnelles associées, comme prévu par votre Droit à la suppression (Art. 17 du RGPD).</h3>
-            <div class="mt-4">
+            <b-col offset-md="8" class="mt-5 p-0 col-12 col-md-4">
               <!-- TODO: Add API call to delete account -->
               <!-- TODO: Add modal to ensure that the user will lose all informations and confirm -->
               <!-- MAYBE: Add text field or some radio button to know why the user delete the account -->
               <b-button class="primary-button red-button" block>Supprimer</b-button>
-            </div>
+            </b-col>
           </b-col>
         </b-col>
       </b-row>
