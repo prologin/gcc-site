@@ -32,7 +32,7 @@
               </b-button>
                 <b-button class="secondary-button" block @click="scrollTo('notifications')">
                   <b-icon-envelope aria-hidden="true" class="mr-3" />
-                    Gestions des notifications
+                    Gestion des notifications
                 </b-button>
                 <b-button class="secondary-button" block @click="scrollTo('rgpd')">
                   <b-icon-gear aria-hidden="true" class="mr-3" />
