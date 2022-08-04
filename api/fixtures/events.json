@@ -1,0 +1,201 @@
+[
+{
+  "model": "events.form",
+  "pk": 1,
+  "fields": {
+    "name": "Formulaire classique"
+  }
+},
+{
+  "model": "events.question",
+  "pk": 1,
+  "fields": {
+    "form": 1,
+    "text": "Taille de T-Shirt ?",
+    "type": "CHOICE",
+    "mandatory": true,
+    "answers": "XS\r\nS\r\nM\r\nL\r\nXL\r\n2XL",
+    "order": 1
+  }
+},
+{
+  "model": "events.question",
+  "pk": 2,
+  "fields": {
+    "form": 1,
+    "text": "Informations",
+    "type": "TITLE",
+    "mandatory": false,
+    "answers": "",
+    "order": 0
+  }
+},
+{
+  "model": "events.question",
+  "pk": 3,
+  "fields": {
+    "form": 1,
+    "text": "Contacts",
+    "type": "TITLE",
+    "mandatory": false,
+    "answers": "",
+    "order": 2
+  }
+},
+{
+  "model": "events.question",
+  "pk": 4,
+  "fields": {
+    "form": 1,
+    "text": "Nom du représentant légal",
+    "type": "TEXT",
+    "mandatory": true,
+    "answers": "",
+    "order": 3
+  }
+},
+{
+  "model": "events.question",
+  "pk": 5,
+  "fields": {
+    "form": 1,
+    "text": "Prénom du représentant légal",
+    "type": "TEXT",
+    "mandatory": true,
+    "answers": "",
+    "order": 4
+  }
+},
+{
+  "model": "events.question",
+  "pk": 6,
+  "fields": {
+    "form": 1,
+    "text": "Questions",
+    "type": "TITLE",
+    "mandatory": false,
+    "answers": "",
+    "order": 5
+  }
+},
+{
+  "model": "events.question",
+  "pk": 7,
+  "fields": {
+    "form": 1,
+    "text": "Comment as-tu découvert le stage ?",
+    "type": "LONG_TEXT",
+    "mandatory": true,
+    "answers": "",
+    "order": 6
+  }
+},
+{
+  "model": "events.question",
+  "pk": 8,
+  "fields": {
+    "form": 1,
+    "text": "Remarques supplémentaires",
+    "type": "LONG_TEXT",
+    "mandatory": false,
+    "answers": "",
+    "order": 7
+  }
+},
+{
+  "model": "events.address",
+  "pk": 1,
+  "fields": {
+    "street": "14 rue Coltaire",
+    "complement": null,
+    "city": "Le Kremlin-Bicêtre",
+    "zip_code": 94270,
+    "country": "France",
+    "center": 1,
+    "lat": null,
+    "lng": null
+  }
+},
+{
+  "model": "events.address",
+  "pk": 2,
+  "fields": {
+    "street": "24 rue Pasteur",
+    "complement": null,
+    "city": "Le Kremlin-Bicêtre",
+    "zip_code": 94270,
+    "country": "France",
+    "center": 2,
+    "lat": null,
+    "lng": null
+  }
+},
+{
+  "model": "events.address",
+  "pk": 3,
+  "fields": {
+    "street": "88, Boulevard Lahitolle",
+    "complement": null,
+    "city": "Bourges",
+    "zip_code": 18000,
+    "country": "France",
+    "center": 3,
+    "lat": null,
+    "lng": null
+  }
+},
+{
+  "model": "events.center",
+  "pk": 1,
+  "fields": {
+    "name": "EPITA Paris",
+    "private_notes": ""
+  }
+},
+{
+  "model": "events.center",
+  "pk": 2,
+  "fields": {
+    "name": "EPITECH Paris",
+    "private_notes": ""
+  }
+},
+{
+  "model": "events.center",
+  "pk": 3,
+  "fields": {
+    "name": "INSA Bourges",
+    "private_notes": ""
+  }
+},
+{
+  "model": "events.event",
+  "pk": 1,
+  "fields": {
+    "name": "GCC! Paris été 2022",
+    "center": 1,
+    "signup_start_date": "2022-05-31T22:00:00Z",
+    "signup_end_date": "2022-07-30T22:00:00Z",
+    "start_date": "2022-08-22T07:00:00Z",
+    "end_date": "2022-08-27T10:00:00Z",
+    "form": 1,
+    "notes": "",
+    "description": "Stage Girls Can Code! à Paris"
+  }
+},
+{
+  "model": "events.event",
+  "pk": 2,
+  "fields": {
+    "name": "GCC! Bourges 2023",
+    "center": 3,
+    "signup_start_date": "2022-12-31T23:00:00Z",
+    "signup_end_date": "2023-01-13T22:59:00Z",
+    "start_date": "2023-01-14T08:00:00Z",
+    "end_date": "2023-01-15T17:00:00Z",
+    "form": 1,
+    "notes": "",
+    "description": "GCC! Bourges"
+  }
+}
+]

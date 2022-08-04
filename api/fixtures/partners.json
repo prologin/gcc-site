@@ -1,0 +1,44 @@
+[
+{
+  "model": "partners.partner",
+  "pk": 1,
+  "fields": {
+    "name": "EPITA",
+    "description": "",
+    "website_url": "https://epita.fr",
+    "is_on_front_page": true,
+    "featured": true,
+    "logo": "epita.jpg",
+    "enabled": true,
+    "order": 0
+  }
+},
+{
+  "model": "partners.partner",
+  "pk": 2,
+  "fields": {
+    "name": "EPITECH",
+    "description": "",
+    "website_url": null,
+    "is_on_front_page": true,
+    "featured": false,
+    "logo": "epitech.png",
+    "enabled": true,
+    "order": 0
+  }
+},
+{
+  "model": "partners.partner",
+  "pk": 3,
+  "fields": {
+    "name": "Ville du Kremlin-Bicêtre",
+    "description": "",
+    "website_url": null,
+    "is_on_front_page": false,
+    "featured": false,
+    "logo": "kb.png",
+    "enabled": true,
+    "order": 0
+  }
+}
+]

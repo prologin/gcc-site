@@ -17,6 +17,7 @@ services:
 
     volumes:
       - ./api/gccsite:/var/prologin/api/gccsite
+      - ./api/fixtures/:/var/prologin/api/fixtures
 
     ports:
       - 127.0.0.1:8000:8000

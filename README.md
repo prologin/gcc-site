@@ -71,7 +71,7 @@ Just remember them to be able to log in the interface.
 This allows you to access Django Admin (which is useful to add/modify/view data from the DB
 easily).
 
-To apply migrations (need to be run the first time and every time you do a Model change) :
+To apply migrations (need to be run the first time and every time you do a Model change):
 ```
 . ./venv/bin/activate
 ./gccsite/manage.py migrate
@@ -83,8 +83,12 @@ Go into `api/gccsite` and launch the following command:
 ./manage.py runserver
 ```
 
-You might have the create the migrations / apply them.
-See the Django documentation : https://docs.djangoproject.com/en/4.0/topics/migrations/
+## Load data
+Some dev data is provided in the `api/fixtures/` directory. You can load this data in your DB by running:
+```
+./manage.py <fixture>.json
+```
+User passwords are the same as their username.
 
 # Working on the Frontend
 ## First setup
