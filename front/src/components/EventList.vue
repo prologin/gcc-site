@@ -51,7 +51,7 @@ export default Vue.extend({
     }
   },
   async created () {
-    const [error, events] = await eventsAPI.getEventList()
+    const [error, events] = await eventsAPI.eventsList(true)
 
     if (error) {
       this.showError = true

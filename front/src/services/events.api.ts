@@ -2,23 +2,34 @@ import BaseAPIService from '@/services/base.api'
 
 export default class EventsAPIService extends BaseAPIService {
   constructor () {
-    super('')
+    super('events')
   }
 
-  async getEventList () {
-    return this.axiosCall({ method: 'get', url: '/events' })
+  async eventsList (onlyOpen?: boolean, center?: string, startsAfter?: string, endsBefore?: string, signupStartsAfter?: string, signupEndsBefore?: string) {
+    return this.axiosCall({
+      method: 'get',
+      url: '/',
+      params: {
+        only_open: onlyOpen,
+        center,
+        starts_after: startsAfter,
+        ends_before: endsBefore,
+        signup_starts_after: signupStartsAfter,
+        signup_ends_before: signupEndsBefore
+      }
+    })
   }
 
-  async getEventBasicInfo (eventId: number) {
-    return this.axiosCall({ method: 'get', url: `/event/${eventId}` })
+  async eventsRead (id: number) {
+    return this.axiosCall({ method: 'get', url: `/${id}` })
   }
 
-  async getEventDetailedInfo (eventId: number) {
-    return this.axiosCall({ method: 'get', url: `/event/${eventId}/details` })
+  async eventsDocs (id: number) {
+    return this.axiosCall({ method: 'get', url: `/${id}/docs` })
   }
 
-  async getEventQuestions (eventId: number) {
-    return this.axiosCall({ method: 'get', url: `/event/${eventId}/questions` })
+  async eventsQuestions (id: number) {
+    return this.axiosCall({ method: 'get', url: `/${id}/questions` })
   }
 }
 
