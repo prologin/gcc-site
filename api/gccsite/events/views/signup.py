@@ -7,10 +7,17 @@ from rest_framework.decorators import action
 from .. import models, serializers
 
 
-class FormViewset(viewsets.ReadOnlyModelViewSet):
+class FormViewset(
+    MultipleSerializerViewSetMixin, viewsets.ReadOnlyModelViewSet
+):
     permission_classes = [permissions.IsAuthenticated]
     queryset = models.Form.objects.all()
     serializer_class = serializers.FormSerializer
+
+    actions_serializer_classes = {
+        "list": serializers.FormShortSerializer,
+        "read": serializers.FormSerializer,
+    }
 
 
 class ApplicationFilter(filters.FilterSet):

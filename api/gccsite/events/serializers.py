@@ -99,12 +99,20 @@ class EventDocumentSerializer(serializers.ModelSerializer):
         )
 
 
+class FormShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Form
+
+        fields = ("id", "name")
+
+
 class FormSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Form
 
         fields = (
             "id",
+            "name",
             "json_schema",
             "ui_schema",
         )
