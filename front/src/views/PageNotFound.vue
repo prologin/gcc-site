@@ -2,16 +2,17 @@
   <div class="main-body-style">
     <b-container class="content" fluid>
       <Header />
-        <b-row class="page-not-found-background">
-          <b-col class="my-auto content-background" md="auto" offset-md="6">
-            <p class="text-center">
+      <b-row class="page-not-found-background">
+        <b-col class="my-auto content-background" md="auto" offset-md="6">
+          <p class="text-center">
             <span class="error-code">404</span><br>
             <span class="error-message">Page introuvable</span><br>
-            </p>
-            <b-button :to="{ name: 'home' }" class="primary-button" block>Retour a l'accueil</b-button>
-            <span class="light-text">Si vous pensez que ceci est une erreur, envoyez un mail à info@prologin.org</span>
-          </b-col>
-        </b-row>
+          </p>
+          <b-button :to="{ name: 'home' }" class="primary-button" block>Retour a l'accueil</b-button>
+          <span class="light-text">Si vous pensez que ceci est une erreur, envoyez un mail à
+            {{ Constants.CONTACT_EMAIL }}</span>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -20,10 +21,15 @@
 import Vue from 'vue'
 import Header from '@/components/Header.vue'
 
+import * as Constants from '@/constants'
+
 export default Vue.extend({
   name: 'PageNotFound',
   components: {
     Header
+  },
+  created () {
+    this.Constants = Constants
   }
 })
 </script>
