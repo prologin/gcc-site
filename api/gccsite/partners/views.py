@@ -6,8 +6,15 @@ from . import models, serializers
 
 
 class PartnerFilter(filters.FilterSet):
-    is_on_front_page = filters.BooleanFilter()
-    featured = filters.BooleanFilter()
+    is_on_front_page = filters.BooleanFilter(
+        help_text=(
+            "If `true`, only returns partners that should be displayed on the"
+            " front page."
+        )
+    )
+    featured = filters.BooleanFilter(
+        help_text="If `true`, only returns partners that should be featured."
+    )
 
     class Meta:
         model = models.Partner
@@ -18,7 +25,6 @@ class PartnerViewset(
     MultipleSerializerViewSetMixin, viewsets.ReadOnlyModelViewSet
 ):
     permission_classes = [permissions.AllowAny]
-    filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = PartnerFilter
 
     serializer_class = serializers.PartnerSerializer

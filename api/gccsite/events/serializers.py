@@ -1,3 +1,6 @@
+from collections import defaultdict, deque
+
+import jsonschema
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
@@ -21,7 +24,6 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class CenterSerializer(serializers.ModelSerializer):
-
     address = AddressSerializer()
 
     class Meta:
@@ -56,7 +58,6 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class PartialEventSerializer(serializers.ModelSerializer):
-
     center = serializers.CharField(source="center.name")
 
     class Meta:
@@ -86,20 +87,6 @@ class EventShortSerializer(serializers.ModelSerializer):
         )
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Question
-
-        fields = (
-            "id",
-            "order",
-            "text",
-            "type",
-            "mandatory",
-            "possible_answers",
-        )
-
-
 class EventDocumentSerializer(serializers.ModelSerializer):
     file = serializers.ReadOnlyField(source="document.file.url")
 
@@ -113,103 +100,89 @@ class EventDocumentSerializer(serializers.ModelSerializer):
 
 
 class FormSerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True)
-
     class Meta:
         model = models.Form
 
         fields = (
             "id",
-            "questions",
+            "json_schema",
+            "ui_schema",
         )
-
-
-class FormAnswerValidator:
-    def __call__(self, value):
-        question, answers = value["question"], value["answer"].splitlines()
-
-        if question.type in (
-            models.QuestionType.CHOICE.value,
-            models.QuestionType.MULTIPLE_CHOICES.value,
-        ):
-            possible_answers = question.answers.splitlines()
-            for answer in answers:
-                if answer not in possible_answers:
-                    raise serializers.ValidationError(
-                        {
-                            "answer": _(
-                                f'"{answer}" n\'est pas un choix possible'
-                                " (choisir parmi :"
-                                f' {", ".join(possible_answers)})'
-                            )
-                        }
-                    )
-
-
-class FormAnswerSerializer(serializers.ModelSerializer):
-    question = serializers.PrimaryKeyRelatedField(
-        queryset=models.Question.objects.all()
-    )
-
-    class Meta:
-        model = models.FormAnswer
-
-        fields = (
-            "id",
-            "question",
-            "answer",
-        )
-
-        write_only_fields = ("application_id",)
-        read_only_fields = ("id",)
-
-        validators = [FormAnswerValidator()]
 
 
 class ApplicationValidator:
-    def __call__(self, value):
-        answers = value.get("form_answers", [])
-        answers_ids_set = {answer["question"].id for answer in answers}
+    requires_context = True
 
-        event = models.Event.objects.get(pk=value["event"].id)
-        questions = event.get_application_questions()
+    @staticmethod
+    def rec_defaultdict():
+        """Recursive defaultdict"""
+        return defaultdict(ApplicationValidator.rec_defaultdict)
 
-        questions_ids_set = set(questions.values_list("id", flat=True))
-        mandatory_questions_ids_set = set(
-            questions.filter(mandatory=True).values_list("id", flat=True)
+    @staticmethod
+    def add_error(errors, keys_dq, err):
+        """Adds an error to the error dict
+
+        Args:
+            errors (dict): errors dictionary
+            keys_dq (deque): keys deque
+            err (str): error to add
+
+        Returns:
+            dict: errors dictionary updated
+        """
+        k = keys_dq.popleft()
+
+        if len(keys_dq) == 0:
+            if errors[k]:
+                if isinstance(errors[k], list):
+                    errors[k].append(err)
+                else:
+                    errors[k] = [errors[k], err]
+            else:
+                errors[k] = err
+        else:
+            errors[k] = ApplicationValidator.add_error(errors[k], keys_dq, err)
+
+        return errors
+
+    def __call__(self, value, serializer):
+        event = models.Event.objects.get(
+            pk=value["event"].id
+            if value.get("event")
+            else serializer.instance.event_id
         )
 
-        if len(answers) != len(answers_ids_set):
+        # Event validation
+        if not event.is_open:
             raise serializers.ValidationError(
-                {
-                    "form_answers": _(
-                        "Vous avez répondu plusieurs fois à la même question"
-                    )
-                }
+                {"event": _("Cet évènement n'accepte pas les inscriptions.")}
             )
 
-        if answers_ids_set < mandatory_questions_ids_set:
-            raise serializers.ValidationError(
-                {
-                    "form_answers": _(
-                        "Certaines questions obligatoires n'ont pas de réponse"
-                    )
-                }
-            )
+        answer = value.get("form_answer")
+        # # Validate answer if it has been changed
+        # # OR if the Application is created (POST) or updated (PUT)
+        # # meaning that partial is False
+        if answer or not serializer._kwargs.get("partial", False):
+            validator = jsonschema.Draft202012Validator(event.form.json_schema)
 
-        if answers_ids_set - questions_ids_set:
-            raise serializers.ValidationError(
-                {
-                    "form_answers": _(
-                        "Vous avez répondu à des questions non demandées"
-                    )
-                }
-            )
+            errors = ApplicationValidator.rec_defaultdict()
+            for err in validator.iter_errors(answer):
+                ApplicationValidator.add_error(
+                    errors,
+                    # If there is no relative_path, the error is that the
+                    # argument is required
+                    err.relative_path or deque(["required"]),
+                    err.message,
+                )
+
+            if errors:
+                raise serializers.ValidationError({"form_answer": errors})
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
-    form_answers = FormAnswerSerializer(many=True, required=False)
+
+    form_answer = serializers.JSONField(required=True)
 
     class Meta:
         model = models.Application
@@ -221,7 +194,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             "last_name",
             "dob",
             "status",
-            "form_answers",
+            "form_answer",
         )
 
         read_only_fields = ("id", "user", "status")
@@ -234,18 +207,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         validated_data["user"] = request.user
         validated_data["status"] = models.SelectionStatus.ENROLLED.value
 
-        try:
-            form_answers = validated_data.pop("form_answers")
-        except KeyError:
-            form_answers = []
-
-        ret = super().create(validated_data)
-
-        for answer in form_answers:
-            answer["application_id"] = ret.id
-            FormAnswerSerializer().create(answer)
-
-        return ret
+        return super().create(validated_data)
 
 
 class ApplicationShortSerializer(serializers.ModelSerializer):
@@ -264,3 +226,13 @@ class ApplicationShortSerializer(serializers.ModelSerializer):
             "event",
             "status",
         )
+
+        read_only_fields = ("id", "user", "status")
+
+
+class ApplicationStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Application
+        fields = ("id", "status")
+
+        read_only_fields = ("id",)

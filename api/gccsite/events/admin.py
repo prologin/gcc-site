@@ -60,28 +60,15 @@ class EventAdmin(admin.ModelAdmin):
             {"fields": ("form",)},
         ),
         (
-            _("Informations aux participants"),
+            _("Informations aux participantes"),
             {"fields": ("description", "notes")},
         ),
     )
 
 
-class QuestionInlineAdmin(admin.TabularInline):
-    model = models.Question
-    fields = ("order", "text", "type", "mandatory", "answers")
-    extra = 0
-
-
 @admin.register(models.Form)
 class FormAdmin(admin.ModelAdmin):
     search_fields = ("name",)
-    inlines = (QuestionInlineAdmin,)
-
-
-class FormAnswerInline(admin.TabularInline):
-    model = models.FormAnswer
-    fields = ("question", "answer")
-    extra = 0
 
 
 @admin.register(models.Application)
@@ -119,14 +106,8 @@ class ApplicationAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("user", "event")}),
         (
-            _("Informations participant"),
-            {
-                "fields": (
-                    "first_name",
-                    "last_name",
-                    "dob",
-                )
-            },
+            _("Informations participante"),
+            {"fields": ("first_name", "last_name", "dob", "form_answer")},
         ),
         (
             _("Sélection"),
@@ -135,8 +116,6 @@ class ApplicationAdmin(admin.ModelAdmin):
             },
         ),
     )
-
-    inlines = (FormAnswerInline,)
 
 
 @admin.register(models.ApplicationLabel)

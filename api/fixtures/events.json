@@ -1,201 +1,319 @@
 [
-{
-  "model": "events.form",
-  "pk": 1,
-  "fields": {
-    "name": "Formulaire classique"
+  {
+    "model": "events.application",
+    "pk": 9,
+    "fields": {
+      "user": 1,
+      "first_name": "Kenji",
+      "last_name": "Gaillac",
+      "dob": "1999-08-11",
+      "event": 2,
+      "status": 1,
+      "created_at": "2022-08-29T20:57:16.943Z",
+      "form_answer": {
+        "infos": {
+          "allergies": false,
+          "tailleTShirt": "M"
+        },
+        "questions": {
+          "q1": false,
+          "q2": "Sur l'Internet"
+        },
+        "resplegal": {
+          "nom": "Gaillac",
+          "tel": "0123456789",
+          "prenom": "Isa"
+        }
+      },
+      "labels": []
+    }
+  },
+  {
+    "model": "events.application",
+    "pk": 10,
+    "fields": {
+      "user": 2,
+      "first_name": "Toto",
+      "last_name": "Tutu",
+      "dob": "2011-09-03",
+      "event": 3,
+      "status": 0,
+      "created_at": "2022-09-03T10:39:01.411Z",
+      "form_answer": {
+        "infos": {
+          "allergies": false,
+          "tailleTShirt": "XL"
+        },
+        "questions": {
+          "q1": true,
+          "q2": ""
+        },
+        "resplegal": {
+          "nom": "Tata",
+          "tel": "0123456789",
+          "prenom": "Titi"
+        }
+      },
+      "labels": []
+    }
+  },
+  {
+    "model": "events.form",
+    "pk": 1,
+    "fields": {
+      "name": "Formulaire de démo",
+      "json_schema": {
+        "type": "object",
+        "required": [
+          "resplegal",
+          "infos",
+          "questions"
+        ],
+        "properties": {
+          "infos": {
+            "type": "object",
+            "required": [
+              "tailleTShirt",
+              "allergies"
+            ],
+            "properties": {
+              "allergies": {
+                "type": "boolean",
+                "description": "Coche si tu as des allergies (alimentaires ou autres)."
+              },
+              "tailleTShirt": {
+                "enum": [
+                  "XS",
+                  "S",
+                  "M",
+                  "L",
+                  "XL",
+                  "2XL"
+                ],
+                "type": "string"
+              },
+              "listeAllergies": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "allergie": {
+                      "type": "string",
+                      "title": "Allergie"
+                    },
+                    "precisions": {
+                      "type": "string",
+                      "title": "Précisions"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "questions": {
+            "type": "object",
+            "required": [
+              "q1",
+              "q2"
+            ],
+            "properties": {
+              "q1": {
+                "type": "boolean",
+                "title": "J'ai déjà codé"
+              },
+              "q2": {
+                "type": "string",
+                "title": "Comment as-tu découvert le stage ?"
+              },
+              "q3": {
+                "type": "string",
+                "title": "As-tu des remarques supplémentaires ?"
+              }
+            }
+          },
+          "resplegal": {
+            "type": "object",
+            "required": [
+              "nom",
+              "prenom",
+              "tel"
+            ],
+            "properties": {
+              "nom": {
+                "type": "string"
+              },
+              "tel": {
+                "type": "string",
+                "pattern": "^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$"
+              },
+              "prenom": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ui_schema": {
+        "type": "Categorization",
+        "elements": [
+          {
+            "type": "Category",
+            "label": "Reponsable légal",
+            "elements": [
+              {
+                "type": "HorizontalLayout",
+                "elements": [
+                  {
+                    "type": "Control",
+                    "label": "Nom",
+                    "scope": "#/properties/resplegal/properties/nom"
+                  },
+                  {
+                    "type": "Control",
+                    "label": "Prénom",
+                    "scope": "#/properties/resplegal/properties/prenom"
+                  }
+                ]
+              },
+              {
+                "type": "Control",
+                "label": "Téléphone",
+                "scope": "#/properties/resplegal/properties/tel"
+              }
+            ]
+          },
+          {
+            "type": "Category",
+            "label": "Informations",
+            "elements": [
+              {
+                "type": "Control",
+                "label": "Taille de T-Shirt",
+                "scope": "#/properties/infos/properties/tailleTShirt"
+              },
+              {
+                "type": "Control",
+                "label": "Signaler des allergies",
+                "scope": "#/properties/infos/properties/allergies"
+              },
+              {
+                "rule": {
+                  "effect": "SHOW",
+                  "condition": {
+                    "scope": "#/properties/infos/properties/allergies",
+                    "schema": {
+                      "const": true
+                    }
+                  }
+                },
+                "type": "Control",
+                "label": "Liste des allergies",
+                "scope": "#/properties/infos/properties/listeAllergies"
+              }
+            ]
+          },
+          {
+            "type": "Category",
+            "label": "Questions",
+            "elements": [
+              {
+                "type": "Control",
+                "label": "",
+                "scope": "#/properties/questions"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "model": "events.address",
+    "pk": 1,
+    "fields": {
+      "street": "14-16 rue Voltaire",
+      "complement": null,
+      "city": "Le Kremlin-Bicêtre",
+      "zip_code": 94270,
+      "country": "France",
+      "center": 1,
+      "lat": "48.8157348632",
+      "lng": "2.3623597621"
+    }
+  },
+  {
+    "model": "events.address",
+    "pk": 2,
+    "fields": {
+      "street": "4 Rue du Dôme",
+      "complement": null,
+      "city": "Strasbourg",
+      "zip_code": 67000,
+      "country": "France",
+      "center": 2,
+      "lat": "48.5836830139",
+      "lng": "7.7499365806"
+    }
+  },
+  {
+    "model": "events.center",
+    "pk": 1,
+    "fields": {
+      "name": "EPITA Paris",
+      "private_notes": ""
+    }
+  },
+  {
+    "model": "events.center",
+    "pk": 2,
+    "fields": {
+      "name": "EPITECH Strasbourg",
+      "private_notes": ""
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+      "name": "GCC! Strasbourg été 2022",
+      "center": 2,
+      "signup_start_date": "2022-05-31T22:00:00Z",
+      "signup_end_date": "2022-07-16T21:59:00Z",
+      "start_date": "2022-07-18T07:00:00Z",
+      "end_date": "2022-07-23T16:00:00Z",
+      "form": 1,
+      "notes": "",
+      "description": "Stage Girls Can Code! à l'EPITECH Strasbourg"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+      "name": "GCC! Paris été 2022",
+      "center": 1,
+      "signup_start_date": "2022-05-31T22:00:00Z",
+      "signup_end_date": "2022-08-15T21:59:00Z",
+      "start_date": "2022-08-22T07:00:00Z",
+      "end_date": "2022-08-27T10:00:00Z",
+      "form": 1,
+      "notes": "",
+      "description": "Stage Girls Can Code! à l'EPITA Paris"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+      "name": "GCC! Test. (Always open)",
+      "center": 1,
+      "signup_start_date": "1899-12-31T23:51:00Z",
+      "signup_end_date": "2099-12-31T23:00:00Z",
+      "start_date": "2100-01-04T08:00:00Z",
+      "end_date": "2100-01-09T11:00:00Z",
+      "form": 1,
+      "notes": "",
+      "description": "Cet événement est toujours ouvert aux inscriptions"
+    }
   }
-},
-{
-  "model": "events.question",
-  "pk": 1,
-  "fields": {
-    "form": 1,
-    "text": "Taille de T-Shirt ?",
-    "type": "CHOICE",
-    "mandatory": true,
-    "answers": "XS\r\nS\r\nM\r\nL\r\nXL\r\n2XL",
-    "order": 1
-  }
-},
-{
-  "model": "events.question",
-  "pk": 2,
-  "fields": {
-    "form": 1,
-    "text": "Informations",
-    "type": "TITLE",
-    "mandatory": false,
-    "answers": "",
-    "order": 0
-  }
-},
-{
-  "model": "events.question",
-  "pk": 3,
-  "fields": {
-    "form": 1,
-    "text": "Contacts",
-    "type": "TITLE",
-    "mandatory": false,
-    "answers": "",
-    "order": 2
-  }
-},
-{
-  "model": "events.question",
-  "pk": 4,
-  "fields": {
-    "form": 1,
-    "text": "Nom du représentant légal",
-    "type": "TEXT",
-    "mandatory": true,
-    "answers": "",
-    "order": 3
-  }
-},
-{
-  "model": "events.question",
-  "pk": 5,
-  "fields": {
-    "form": 1,
-    "text": "Prénom du représentant légal",
-    "type": "TEXT",
-    "mandatory": true,
-    "answers": "",
-    "order": 4
-  }
-},
-{
-  "model": "events.question",
-  "pk": 6,
-  "fields": {
-    "form": 1,
-    "text": "Questions",
-    "type": "TITLE",
-    "mandatory": false,
-    "answers": "",
-    "order": 5
-  }
-},
-{
-  "model": "events.question",
-  "pk": 7,
-  "fields": {
-    "form": 1,
-    "text": "Comment as-tu découvert le stage ?",
-    "type": "LONG_TEXT",
-    "mandatory": true,
-    "answers": "",
-    "order": 6
-  }
-},
-{
-  "model": "events.question",
-  "pk": 8,
-  "fields": {
-    "form": 1,
-    "text": "Remarques supplémentaires",
-    "type": "LONG_TEXT",
-    "mandatory": false,
-    "answers": "",
-    "order": 7
-  }
-},
-{
-  "model": "events.address",
-  "pk": 1,
-  "fields": {
-    "street": "14 rue Coltaire",
-    "complement": null,
-    "city": "Le Kremlin-Bicêtre",
-    "zip_code": 94270,
-    "country": "France",
-    "center": 1,
-    "lat": null,
-    "lng": null
-  }
-},
-{
-  "model": "events.address",
-  "pk": 2,
-  "fields": {
-    "street": "24 rue Pasteur",
-    "complement": null,
-    "city": "Le Kremlin-Bicêtre",
-    "zip_code": 94270,
-    "country": "France",
-    "center": 2,
-    "lat": null,
-    "lng": null
-  }
-},
-{
-  "model": "events.address",
-  "pk": 3,
-  "fields": {
-    "street": "88, Boulevard Lahitolle",
-    "complement": null,
-    "city": "Bourges",
-    "zip_code": 18000,
-    "country": "France",
-    "center": 3,
-    "lat": null,
-    "lng": null
-  }
-},
-{
-  "model": "events.center",
-  "pk": 1,
-  "fields": {
-    "name": "EPITA Paris",
-    "private_notes": ""
-  }
-},
-{
-  "model": "events.center",
-  "pk": 2,
-  "fields": {
-    "name": "EPITECH Paris",
-    "private_notes": ""
-  }
-},
-{
-  "model": "events.center",
-  "pk": 3,
-  "fields": {
-    "name": "INSA Bourges",
-    "private_notes": ""
-  }
-},
-{
-  "model": "events.event",
-  "pk": 1,
-  "fields": {
-    "name": "GCC! Paris été 2022",
-    "center": 1,
-    "signup_start_date": "2022-05-31T22:00:00Z",
-    "signup_end_date": "2022-07-30T22:00:00Z",
-    "start_date": "2022-08-22T07:00:00Z",
-    "end_date": "2022-08-27T10:00:00Z",
-    "form": 1,
-    "notes": "",
-    "description": "Stage Girls Can Code! à Paris"
-  }
-},
-{
-  "model": "events.event",
-  "pk": 2,
-  "fields": {
-    "name": "GCC! Bourges 2023",
-    "center": 3,
-    "signup_start_date": "2022-12-31T23:00:00Z",
-    "signup_end_date": "2023-01-13T22:59:00Z",
-    "start_date": "2023-01-14T08:00:00Z",
-    "end_date": "2023-01-15T17:00:00Z",
-    "form": 1,
-    "notes": "",
-    "description": "GCC! Bourges"
-  }
-}
 ]

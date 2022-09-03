@@ -131,13 +131,16 @@ class Event(models.Model):
 
     description = models.TextField(
         verbose_name=_("Description de l'évènement"),
-        help_text=_(
-            "Si ce champ n'est pas spécifié, la description du projet sera"
-            " utilisée."
-        ),
     )
 
     objects = EventManager()
+
+    @property
+    def is_open(self):
+        return (
+            self.signup_start_date <= timezone.now()
+            and self.signup_end_date > timezone.now()
+        )
 
     class Meta:
         verbose_name = _("évènement")
@@ -169,8 +172,6 @@ class Event(models.Model):
 
         if errors:
             raise ValidationError(errors)
-
-        return self.form.questions.all()
 
     def get_application_documents(self, application):
         if application.status == SelectionStatus.CONFIRMED.value:

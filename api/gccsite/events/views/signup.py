@@ -1,6 +1,8 @@
 from django_filters import rest_framework as filters
+from drf_yasg.utils import swagger_auto_schema
 from gccsite.serializers import MultipleSerializerViewSetMixin
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, response, status, viewsets
+from rest_framework.decorators import action
 
 from .. import models, serializers
 
@@ -12,8 +14,15 @@ class FormViewset(viewsets.ReadOnlyModelViewSet):
 
 
 class ApplicationFilter(filters.FilterSet):
-    user_id = filters.NumberFilter(field_name="user__id")
-    event_id = filters.NumberFilter(field_name="event__id")
+    user_id = filters.NumberFilter(
+        field_name="user__id", help_text="Filter by user."
+    )
+    event_id = filters.NumberFilter(
+        field_name="event__id", help_text="Filter by event."
+    )
+    status = filters.ChoiceFilter(
+        help_text="Filter by status.", choices=models.SelectionStatus.choices
+    )
 
     class Meta:
         model = models.Application
@@ -27,12 +36,12 @@ class ApplicationViewset(
 
     serializer_class = serializers.ApplicationSerializer
     actions_serializer_classes = {
-        "list": serializers.ApplicationShortSerializer
+        "list": serializers.ApplicationShortSerializer,
+        "update_status": serializers.ApplicationStatusSerializer,
     }
 
-    http_method_names = ["get", "post", "delete"]
+    http_method_names = ["get", "post", "delete", "put", "patch"]
 
-    filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ApplicationFilter
 
     def get_queryset(self):
@@ -40,3 +49,25 @@ class ApplicationViewset(
             return models.Application.objects
         else:
             return models.Application.objects.filter(user=self.request.user)
+
+    @action(
+        methods=["patch"],
+        detail=True,
+        permission_classes=[permissions.IsAdminUser],
+    )
+    @swagger_auto_schema(responses={200: serializers.ApplicationSerializer})
+    def update_status(self, request, pk):
+        application = self.get_object()
+
+        serializer = self.get_serializer(
+            application, data=request.data, partial=True
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return response.Response(serializer.data)
+        else:
+            return response.Response(
+                serializer.errors, status.HTTP_400_BAD_REQUEST
+            )

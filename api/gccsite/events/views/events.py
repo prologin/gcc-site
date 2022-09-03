@@ -22,27 +22,18 @@ Examples
 - `/api/events?starts_after=2022-04-04&ends_before=2022-04-15`
 """
 
-from django.utils import timezone
 from django_filters import rest_framework as filters
 from drf_yasg.utils import swagger_auto_schema
+from gccsite.serializers import MultipleSerializerViewSetMixin
 from rest_framework import permissions, response, viewsets
 from rest_framework.decorators import action
 
 from .. import models, serializers
 
 
-def filter_open(queryset, name, value):
-    if value:
-        return queryset.filter(
-            signup_start_date__lte=timezone.now(),
-            signup_end_date__gt=timezone.now(),
-        )
-    return queryset
-
-
 class EventFilter(filters.FilterSet):
     only_open = filters.BooleanFilter(
-        method=filter_open,
+        method="filter_open",
         help_text=(
             "If `true`, only return events for which registrations is open."
         ),
@@ -50,7 +41,7 @@ class EventFilter(filters.FilterSet):
     center = filters.CharFilter(
         field_name="center__name",
         help_text=(
-            "Filter by centers. "
+            "Filter by center. "
             "The argument must exactly match the center name."
         ),
     )
@@ -76,8 +67,7 @@ class EventFilter(filters.FilterSet):
         field_name="signup_end_date",
         lookup_expr="lte",
         help_text=(
-            "Return events for which registrations "
-            "ends before the given date."
+            "Return events for which registrations ends before the given date."
         ),
     )
 
@@ -85,31 +75,36 @@ class EventFilter(filters.FilterSet):
         model = models.Event
         fields = []
 
+    def filter_open(self, queryset, name, value):
+        if value:
+            return models.Event.objects.get_open_events()
 
-class EventViewset(viewsets.ReadOnlyModelViewSet):
+        return queryset
+
+
+class EventViewset(
+    MultipleSerializerViewSetMixin, viewsets.ReadOnlyModelViewSet
+):
     permission_classes = [permissions.AllowAny]
     queryset = models.Event.objects
     filterset_class = EventFilter
 
-    def get_serializer_class(self):
-        if self.action == "list":
-            return serializers.PartialEventSerializer
-        if self.action == "retrieve":
-            return serializers.EventSerializer
+    actions_serializer_classes = {
+        "list": serializers.PartialEventSerializer,
+        "retrieve": serializers.EventSerializer,
+    }
 
     @action(methods=["get"], detail=True)
-    @swagger_auto_schema(
-        responses={200: serializers.QuestionSerializer(many=True)}
-    )
-    def questions(self, request, pk):
+    @swagger_auto_schema(responses={200: serializers.FormSerializer()})
+    def form(self, request, pk):
         """
-        Return a list of questions attached to this event.
+        Return the form attached to this event.
         """
         event = self.get_object()
-        serializer = serializers.QuestionSerializer(
-            models.Form.objects.get(id=event.form.id).questions,
-            many=True,
+        serializer = serializers.FormSerializer(
+            models.Form.objects.get(id=event.form.id),
         )
+
         return response.Response(serializer.data)
 
     @action(

@@ -1,6 +1,4 @@
-from django import forms
 from django.contrib.auth import get_user_model
-from django.core.validators import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -59,6 +57,10 @@ class Application(models.Model):
         auto_now_add=True,
     )
 
+    form_answer = models.JSONField(
+        verbose_name=_("Réponse de formulaire"), default=dict
+    )
+
     class Meta:
         verbose_name = _("candidatures")
         verbose_name_plural = _("candidatures")
@@ -70,157 +72,31 @@ class Application(models.Model):
 class Form(models.Model):
     name = models.CharField(verbose_name=_("Nom"), max_length=120)
 
+    json_schema = models.JSONField(
+        verbose_name=_("JSON Schema"),
+        help_text=_(
+            "The JSON schema of the Form.\n"
+            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
+            " website</a> to generate your form"
+        ),
+        default=dict,
+    )
+    ui_schema = models.JSONField(
+        verbose_name=_("UI Schema"),
+        help_text=_(
+            "The UI schema of the Form.\n"
+            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
+            " website</a> to generate your form"
+        ),
+        default=dict,
+    )
+
     class Meta:
         verbose_name = _("formulaire")
         verbose_name_plural = _("formulaires")
 
     def __str__(self):
         return self.name
-
-    def get_form_fields(self):
-        return {
-            f[0]: f[1]
-            for f in [q.get_field_tuple() for q in self.questions.all()]
-        }
-
-
-class QuestionType(models.TextChoices):
-    TITLE = "TITLE", _("Titre")
-    TEXT = "TEXT", _("Texte")
-    LONG_TEXT = "LONG_TEXT", _("Texte long")
-    CHOICE = "CHOICE", _("Choix")
-    MULTIPLE_CHOICES = "MULTIPLE_CHOICES", _("Choix multiple")
-
-
-class Question(models.Model):
-    form = models.ForeignKey(
-        to="events.Form",
-        related_name="questions",
-        on_delete=models.CASCADE,
-        verbose_name=_("Formulaire"),
-    )
-
-    text = models.CharField(
-        verbose_name=_("Texte de la question"), max_length=1000
-    )
-
-    type = models.CharField(
-        verbose_name=_("Type"),
-        choices=QuestionType.choices,
-        max_length=32,
-    )
-
-    mandatory = models.BooleanField(verbose_name=_("Obligatoire"))
-
-    answers = models.TextField(
-        verbose_name=_("Réponses possibles"),
-        blank=True,
-        null=True,
-        max_length=500,
-        help_text=_("Une réponse par ligne"),
-    )
-
-    order = models.PositiveSmallIntegerField(verbose_name=_("Ordre"))
-
-    class Meta:
-        verbose_name = _("question")
-        verbose_name_plural = _("questions")
-        ordering = ("order",)
-
-    def clean(self):
-        if self.type in (
-            QuestionType.CHOICE.value,
-            QuestionType.MULTIPLE_CHOICES.value,
-        ) and (self.answers is None or self.answers == ""):
-            raise ValidationError(
-                _(
-                    "Pour une question de ce type, "
-                    "vous devez préciser les choix possibles"
-                )
-            )
-
-    def get_form_field_kwargs(self):
-        return {
-            "label": str(self),
-            "label_suffix": None,
-            "required": self.mandatory,
-        }
-
-    def get_form_field(self):
-        if self.type == QuestionType.TEXT.value:
-            return forms.fields.CharField(
-                max_length=400, **self.get_form_field_kwargs()
-            )
-
-        if self.type == QuestionType.LONG_TEXT.value:
-            return forms.fields.CharField(
-                max_length=1_000,
-                widget=forms.widgets.Textarea(),
-                **self.get_form_field_kwargs(),
-            )
-
-        if self.type == QuestionType.CHOICE.value:
-            return forms.fields.ChoiceField(
-                choices=self.get_field_choices(),
-                widget=forms.widgets.RadioSelect(),
-                **self.get_form_field_kwargs(),
-            )
-
-        if self.type == QuestionType.MULTIPLE_CHOICES.value:
-            return forms.fields.MultipleChoiceField(
-                choices=self.get_field_choices(),
-                widget=forms.widgets.CheckboxSelectMultiple(),
-                **self.get_form_field_kwargs(),
-            )
-
-        raise NotImplementedError(
-            "No form field implemented for this question type."
-        )
-
-    def get_field_tuple(self):
-        return (str(self.id), self.get_form_field())
-
-    def __str__(self):
-        if self.mandatory:
-            return self.text + " (*)"
-        return self.text
-
-    @property
-    def possible_answers(self):
-        return self.answers.splitlines()
-
-    def get_field_choices(self):
-        return [(answer, answer) for answer in self.possible_answers]
-
-
-class FormAnswer(models.Model):
-    application = models.ForeignKey(
-        to="events.Application",
-        related_name="form_answers",
-        verbose_name=_("Participant"),
-        on_delete=models.CASCADE,
-    )
-
-    question = models.ForeignKey(
-        to="events.Question",
-        related_name="form_answers",
-        verbose_name=_("Question"),
-        on_delete=models.CASCADE,
-    )
-
-    answer = models.TextField(
-        verbose_name=_("Réponse"),
-        max_length=10_000,
-    )
-
-    class Meta:
-        verbose_name = _("réponse formulaire")
-        verbose_name_plural = _("réponses formulaire")
-        unique_together = (("application", "question"),)
-        ordering = ("question__order",)
-
-    def __str__(self):
-        return self.answer
 
 
 class ApplicationLabel(models.Model):
