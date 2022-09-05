@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     # Vendor
     "social_django",
     "rest_framework",
+    "rest_framework_simplejwt",
     "corsheaders",
     "drf_yasg",
     "django_filters",
@@ -140,13 +141,20 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 MEDIA_ROOT = PROJECT_ROOT_DIR / "public" / "media"
 MEDIA_URL = "/api/media/"
 
-"""
-The default filter backend does not properly set the field types,
-making all query parameters string type.
-
-Having proper types in the generated OpenAPI file is **extremely** important
-since it will greatly help to use the API.
-"""
 REST_FRAMEWORK = {
+    # The default filter backend does not properly set the field types,
+    # making all query parameters string type.
+    # Having proper types in the generated OpenAPI file is **extremely** important  # noqa: E501
+    # since it will greatly help to use the API.
     "DEFAULT_FILTER_BACKENDS": ["gccsite.backends.FilterBackend"],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False,
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    },
 }

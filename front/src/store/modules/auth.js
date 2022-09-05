@@ -1,44 +1,83 @@
 // Based on https://www.smashingmagazine.com/2020/10/authentication-in-vue-js/
 
-const state = {
-  user: {
-    firstName: '',
-    lastName: '',
-    email: ''
-  }
-}
+import { authAPI } from '@/services/auth.api'
+import { usersAPI } from '@/services/users.api'
+
+const user = JSON.parse(localStorage.getItem('user'))
+const initialSate = user ? { user: user } : { user: null }
 
 const getters = {
-  isAuthenticated: (state) => !!state.user.firstName && !!state.user.lastName,
-  getFirstName: (state) => state.user.firstName,
-  getLastName: (state) => state.user.lastName,
-  getEmail: (state) => state.user.email
+  isAuthenticated: (state) => !!state.user,
+  getFirstName: (state) => state.user ? state.user.first_name : null,
+  getLastName: (state) => state.user ? state.user.last_name : null,
+  getEmail: (state) => state.user ? state.user.email : null,
+  getUsername: (state) => state.user ? state.user.username : null
 }
 
 const actions = {
-  async LogIn ({ commit }, user) {
-    // TODO: Add the real login method
-    await commit('SET_USER', user)
+  async login ({ commit }, user) {
+    return authAPI.login(user.email, user.password).then(
+      (data) => {
+        localStorage.setItem('access', data.access)
+        localStorage.setItem('refresh', data.refresh)
+
+        usersAPI.usersMeRead().then(user => {
+          localStorage.setItem('user', JSON.stringify(user))
+          commit('loginSuccess', user)
+          return Promise.resolve(user)
+        })
+      }
+    ).catch(
+      (error) => {
+        commit('loginFailure')
+        return Promise.reject(error)
+      }
+    )
   },
 
-  async LogOut ({ commit }) {
-    const user = {
-      firstName: '',
-      lastName: '',
-      email: ''
-    }
-    commit('SET_USER', user)
+  async logout ({ commit }) {
+    localStorage.removeItem('user')
+    localStorage.removeItem('access')
+    localStorage.removeItem('refresh')
+
+    commit('logout')
+  },
+
+  async register ({ dispatch }, user) {
+    // TODO
+    console.log('register method is not implemented')
+  },
+
+  async refreshToken ({ commit }) {
+    authAPI.refreshToken(localStorage.getItem('refresh')).then(
+      (access) => {
+        localStorage.setItem('access', access)
+      },
+      () => {
+        localStorage.removeItem('user')
+        localStorage.removeItem('access')
+        localStorage.removeItem('refresh')
+      }
+    )
   }
 }
 
 const mutations = {
-  SET_USER (state, user) {
+  loginSuccess (state, user) {
     state.user = user
+  },
+
+  loginFailure (state) {
+    state.user = null
+  },
+
+  logout (state) {
+    state.user = null
   }
 }
 
 export default {
-  state,
+  state: initialSate,
   getters,
   actions,
   mutations

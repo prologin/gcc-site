@@ -40,3 +40,10 @@ LOGGING = {
         },
     },
 }
+
+SWAGGER_SETTINGS.update(  # noqa: F405
+    {
+        "REFETCH_SCHEMA_WITH_AUTH": True,
+        "REFETCH_SCHEMA_ON_LOGOUT": True,
+    }
+)

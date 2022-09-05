@@ -1,7 +1,8 @@
 <template>
   <b-navbar toggleable="md" class="navbar fixed-top" :class="{ 'navbar-hidden': !showNavbar }">
     <b-navbar-brand :to="{ name: 'home' }">
-      <img class="menu-logo ml-0 ml-sm-5 pl-3" :src="require('@/assets/logo_gcc_text_right.svg')" alt="Logo des stages Girls Can Code" />
+      <img class="menu-logo ml-0 ml-sm-5 pl-3" :src="require('@/assets/logo_gcc_text_right.svg')"
+        alt="Logo des stages Girls Can Code" />
     </b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
@@ -12,8 +13,8 @@
             <template #button-content>
               <b-row>
                 <b-col>
-                  <b-icon-person-circle aria-hidden="true" class="mr-2"/>
-                    {{ getFirstName }} {{ getLastName }}
+                  <b-icon-person-circle aria-hidden="true" class="mr-2" />
+                  {{ getFirstName }} {{ getLastName }}
                 </b-col>
                 <b-col>
                   <b-icon icon='chevron-compact-down' />
@@ -25,21 +26,21 @@
               <h2>{{ getFirstName }} {{ getLastName }}</h2>
               <h3>{{ getEmail }}</h3>
             </b-dropdown-header>
-            <b-dropdown-divider/>
-              <b-dropdown-item :to="{ name: 'account-informations' }">
-                <b-icon icon="person-fill" aria-hidden="true"/>
-                  Mon compte
-              </b-dropdown-item>
-              <b-dropdown-item :to="{ name: 'applications' }">
-                <b-icon icon="inbox-fill"/>
-                  Mes candidatures
-              </b-dropdown-item>
-              <b-dropdown-divider/>
-                <b-dropdown-item-button @click="logout">
-                  <b-icon icon="power" aria-hidden="true"/>
-                    Se déconnecter
-                </b-dropdown-item-button>
-              </b-dropdown>
+            <b-dropdown-divider />
+            <b-dropdown-item :to="{ name: 'account-informations' }">
+              <b-icon icon="person-fill" aria-hidden="true" />
+              Mon compte
+            </b-dropdown-item>
+            <b-dropdown-item :to="{ name: 'applications' }">
+              <b-icon icon="inbox-fill" />
+              Mes candidatures
+            </b-dropdown-item>
+            <b-dropdown-divider />
+            <b-dropdown-item-button @click="logout">
+              <b-icon icon="power" aria-hidden="true" />
+              Se déconnecter
+            </b-dropdown-item-button>
+          </b-dropdown>
         </b-nav-item>
         <b-nav-item>
           <hr class="my-1">
@@ -105,7 +106,7 @@ export default Vue.extend({
       this.lastScrollPosition = currentScrollPosition
     },
     async logout () {
-      await this.$store.dispatch('LogOut').then(() => {
+      await this.$store.dispatch('logout').then(() => {
         this.$router.push({ name: 'home' })
       })
     }

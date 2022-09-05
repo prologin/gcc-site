@@ -7,7 +7,7 @@
           <b-img :src="require('@/assets/no-event.svg')" />
         </b-col>
         <b-col md="4" align="center" v-if="showError">
-          <h1>Nous ne pouvons afficher les stages pour le moment.</h1>
+          <h1>Nous ne pouvons pas afficher les stages pour le moment.</h1>
           <h3>Une erreur technique est survenue. Veuillez nous excuser pour la gêne occasionnée. Nous vous invitons à
             réessayer ultérieurement et restons à votre disposition par mail à {{ Constants.CONTACT_EMAIL }}</h3>
         </b-col>
@@ -51,14 +51,15 @@ export default Vue.extend({
     }
   },
   async created () {
-    const [error, events] = await eventsAPI.eventsList(true)
-
-    if (error) {
-      this.showError = true
-    } else {
-      this.showError = false
-      this.events = events
-    }
+    await eventsAPI.eventsList(true).then(
+      (response) => {
+        this.showError = false
+        this.events = response
+      },
+      () => {
+        this.showError = true
+      }
+    )
   }
 })
 </script>

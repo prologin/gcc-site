@@ -6,6 +6,11 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
+from .simplejwt_yasg import (
+    DecoratedTokenObtainPairView,
+    DecoratedTokenRefreshView,
+)
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Girls Can Code! API",
@@ -18,8 +23,17 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", include("rest_framework.urls")),
     path("api/sso/", include("social_django.urls", namespace="social")),
+    path(
+        "api/v1/token/",
+        DecoratedTokenObtainPairView.as_view(),
+        name="token_obtain_pair",
+    ),
+    path(
+        "api/v1/token/refresh/",
+        DecoratedTokenRefreshView.as_view(),
+        name="token_refresh",
+    ),
     path("api/v1/", include("events.urls", namespace="events")),
     path("api/v1/", include("partners.urls", namespace="partners")),
     path("api/v1/", include("users.urls", namespace="users")),

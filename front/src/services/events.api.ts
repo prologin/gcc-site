@@ -21,15 +21,15 @@ export default class EventsAPIService extends BaseAPIService {
   }
 
   async eventsRead (id: number) {
-    return this.axiosCall({ method: 'get', url: `/${id}` })
+    return this.axiosCall({ method: 'get', url: `/${id}/` })
   }
 
   async eventsDocs (id: number) {
-    return this.axiosCall({ method: 'get', url: `/${id}/docs` })
+    return this.axiosCall({ method: 'get', url: `/${id}/docs/` })
   }
 
   async eventsQuestions (id: number) {
-    return this.axiosCall({ method: 'get', url: `/${id}/questions` })
+    return this.axiosCall({ method: 'get', url: `/${id}/questions/` })
   }
 }
 
