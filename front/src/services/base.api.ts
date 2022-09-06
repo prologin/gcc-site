@@ -22,12 +22,11 @@ export default class BaseAPIService {
 
         if (access) {
           config.headers = {
-            ...config.header,
+            ...config.headers,
             authorization: `Bearer ${access}`
           }
         }
 
-        console.log(config)
         return config
       }
     )
@@ -41,12 +40,9 @@ export default class BaseAPIService {
           error.response.status === 401 &&
           !config._retry) {
           config._retry = true
-          console.log('refreshing token')
-          await authAPI.refreshToken(localStorage.getItem('refresh')).then(
+          await authAPI.refreshToken(localStorage.getItem('refresh') || '').then(
             (data) => {
               localStorage.setItem('access', data.access)
-              console.log('token refreshed, retrying request')
-              console.log(config)
               return this.axiosCall(config)
             },
             (error) => Promise.reject(error)

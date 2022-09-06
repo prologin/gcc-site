@@ -8,10 +8,14 @@ const initialSate = user ? { user: user } : { user: null }
 
 const getters = {
   isAuthenticated: (state) => !!state.user,
+
   getFirstName: (state) => state.user ? state.user.first_name : null,
   getLastName: (state) => state.user ? state.user.last_name : null,
   getEmail: (state) => state.user ? state.user.email : null,
-  getUsername: (state) => state.user ? state.user.username : null
+  getAddress: (state) => state.user ? state.user.address : null,
+  getCity: (state) => state.user ? state.user.city : null,
+  getZipCode: (state) => state.user ? state.user.zip_code : null,
+  getCountry: (state) => state.user ? state.user.country : null
 }
 
 const actions = {

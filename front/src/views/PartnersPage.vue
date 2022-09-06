@@ -7,9 +7,12 @@
           <h1>Nos partenaires</h1>
           <p>Merci à tous nos partenaires qui nous permettent d'organiser les stages.</p>
           <hr>
-          <Partners v-bind:isFrontPage="false" />
+          <Partners />
           <hr>
-          <h4>Si vous souhaitez nous soutenir, vous pouvez nous envoyer un mail à {{ Constants.CONTACT_EMAIL }}</h4>
+          <h4>Si vous souhaitez nous soutenir, vous pouvez nous envoyer un mail à <a
+              :href="`mailto:${Constants.PARTNERS_EMAIL}`">
+              {{ Constants.PARTNERS_EMAIL }}
+            </a></h4>
         </div>
       </b-container>
     </b-container>

@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from .common import *  # noqa
 
 # Django secret key
@@ -45,5 +47,12 @@ SWAGGER_SETTINGS.update(  # noqa: F405
     {
         "REFETCH_SCHEMA_WITH_AUTH": True,
         "REFETCH_SCHEMA_ON_LOGOUT": True,
+        # So you can refresh without authenticating again
+        "PERSIST_AUTH": True,
     }
 )
+
+SIMPLE_JWT = {
+    # Use a reasonable lifetime for prod
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+}

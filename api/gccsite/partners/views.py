@@ -1,5 +1,4 @@
 from django_filters import rest_framework as filters
-from gccsite.serializers import MultipleSerializerViewSetMixin
 from rest_framework import permissions, viewsets
 
 from . import models, serializers
@@ -21,18 +20,11 @@ class PartnerFilter(filters.FilterSet):
         fields = []
 
 
-class PartnerViewset(
-    MultipleSerializerViewSetMixin, viewsets.ReadOnlyModelViewSet
-):
+class PartnerViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.AllowAny]
     filterset_class = PartnerFilter
 
     serializer_class = serializers.PartnerSerializer
-
-    actions_serializer_classes = {
-        "list": serializers.PartnerShortSerializer,
-        "retrieve": serializers.PartnerDetailsSerializer,
-    }
 
     def get_queryset(self):
         return models.Partner.objects.filter(enabled=True)

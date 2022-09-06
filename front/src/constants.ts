@@ -5,7 +5,9 @@ export const ADDRESS_LINE_3 = '94270 Le Kremlin-Bicêtre'
 export const CONTACT_EMAIL = 'info@girlscancode.fr'
 export const CONTACT_PHONE = '+33 (0)1 44 08 01 90'
 
-export const SCOLARSHIP_EMAIL = 'bourse@girlscancode.fr'
+export const SCHOLARSHIP_EMAIL = 'bourse@girlscancode.fr'
+
+export const PARTNERS_EMAIL = 'partenaires@girlscancode.fr'
 
 export const CNIL_DECL_NUM = '830039'
 
@@ -70,39 +72,39 @@ export const PRIVACY_LIST = [
 
 export const FAQ_ENTRIES = [
   {
-    question: 'Qu\'es ce qu\'un stage GCC! ?',
-    answer: '<p>C\'est un stage où vous apprenez et pratiquez la programmation, accompagnées par des étudiants et étudiantes en informatique. Nous proposons deux type de stages :<ul><li> les stages longs qui durent du lundi matin au samedi midi</li><li> Les stages courts qui durent le temps d\'un week-end</li></ul>Le tout dans une atmosphère détendue, nous ne forçons personne, ce stage est là pour vous faire découvrir un domaine afin de vous aider dans votre orientation. Nous ne vous en voudrons pas si vous n\'aimez pas la programmation.<br><br>Nous organisons aussi des conférences animées par des femmes du numérique pour qu\'elles partagent leur vécu dans le monde du travail.</p>'
+    question: "Qu'est-ce qu'un stage GCC! ?",
+    answer: "<p>C'est un stage où vous apprenez et pratiquez la programmation, accompagnées par des étudiants et étudiantes en informatique.</br>Nous proposons deux type de stages :<ul><li> les stages longs qui durent du lundi matin au samedi midi</li><li>les stages courts qui durent le temps d'un week-end</li></ul>Le tout dans une atmosphère détendue, nous ne forçons personne, ce stage est là pour vous faire découvrir un domaine afin de vous aider dans votre orientation. Nous ne vous en voudrons pas si vous n'aimez pas la programmation.<br><br>Nous organisons aussi des conférences animées par des femmes du numérique pour qu'elles partagent leur vécu dans le monde du travail.</p>"
   },
   {
     question: 'Qui peux s\'inscrire aux stages ?',
-    answer: 'Toutes personnes s\'identifiant comme une femme et étant actuellement ou à la rentrée prochaine dans l\'enseignement secondaire (collège et lycée) ou équivalent. Il faut aussi être en capacité d\'être presente sur le lieu du stage quand ceux-ci sont en présentiel.'
+    answer: 'Toute personne s\'identifiant comme une femme et étant actuellement ou à la rentrée prochaine dans l\'enseignement secondaire (collège et lycée) ou équivalent.'
   },
   {
     question: 'Combien coûte un stage ?',
-    answer: `Nous prennons en charge l'ensemble des repas ainsi que tous les frais relatifs aux activités pendant le stage. Si vous avez besoin d'une aide financière pour le logement et/ou le transport vous pouvez faire une demande de bourse à <a href="mailto:${SCOLARSHIP_EMAIL}">${SCOLARSHIP_EMAIL}</a>. Nous pouvons aussi vous mettre en relation avec les autres familles volontaires pour l'hébergement ou pour du covoiturage, pour cela envoyez un mail à <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+    answer: `Nous prenons en charge l'ensemble des repas ainsi que tous les frais relatifs aux activités pendant le stage. Si vous avez besoin d'une aide financière pour le logement et/ou le transport vous pouvez faire une demande de bourse à <a href="mailto:${SCHOLARSHIP_EMAIL}">${SCHOLARSHIP_EMAIL}</a>. Nous pouvons aussi vous mettre en relation avec les autres familles volontaires pour l'hébergement ou pour du covoiturage, pour cela envoyez un mail à <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
   },
   {
     question: 'Quels sont les critères de sélection ?',
-    answer: 'Nous nous basons principalement sur la motivation et réponses lors de la candidature. Le niveau est absolument pas un critère car nous adaptons les exercices en fonction de celui-ci. Les filles n\'aillant jamais participées au stage sont prioritaires par rapport à celles qui l\'ont déjà fait.'
+    answer: "Nous nous basons principalement sur la motivation et réponses lors de la candidature. Le niveau n'est absolument pas un critère car nous adaptons les exercices en fonction de celui-ci. Les filles n'ayant jamais participé à nos stages sont prioritaires par rapport à celles qui en ont déjà fait."
   },
   {
     question: 'Quel est le niveau requis pour participer ?',
-    answer: 'Il n\'y a pas de niveau minimal. Nous nous adaptons à tous les niveaux, il ne faut pas hésiter à nous communiquer s\'il y a des sujets spécifiques que vous souhaitez découvrir ou approfondir. Nous nous adaptons à tous les profils.'
+    answer: "Il n'y a pas de niveau minimal. Nous nous adaptons à tous les niveaux, il ne faut pas hésiter à nous informer d'éventuels sujets spécifiques que vous souhaitez découvrir ou approfondir. Nous nous adaptons à tous les profils."
   },
   {
     question: 'Qui organise le stage ?',
-    answer: 'Nous somme l\'association Prologin et en plus des stages "Girls Can Code!", nous organisons le concours <a href="https://prologin.org">Prologin</a>. Notre but est de promouvoir l\'informatique auprès des jeunes. Les encadrants sont principalement des étudiants et étudiantes en informatique. Ils sont là pour vous aider dans les exercices et répondre à toutes vos questions que ce soit d\'informatique ou d\'orientation.'
+    answer: 'Nous sommes l\'association Prologin et en plus des stages "Girls Can Code!", nous organisons le concours <a href="https://prologin.org">Prologin</a>. Notre but est de promouvoir l\'informatique auprès des jeunes. Les encadrants sont principalement des étudiants et étudiantes en informatique. Ils sont là pour vous aider dans les exercices et répondre à toutes vos questions que ce soit d\'informatique ou d\'orientation.'
   },
   {
     question: 'Comment bénéficier de la bourse ?',
-    answer: 'Il suffit d\'envoyer un mail à bourse@prologin.org et l\'ensemble de la procedure vous sera transmise par un responsable de l\'association.'
+    answer: `Il suffit d'envoyer un mail à <a href="mailto:${SCHOLARSHIP_EMAIL}">${SCHOLARSHIP_EMAIL}</a>. et l'ensemble de la procedure vous sera transmise par un responsable de l'association.`
   },
   {
     question: 'Peut-on faire le stage plusieurs fois ?',
-    answer: 'Oui, c\'est possible cependant vous ne serez pas prioritaire lors de la sélection. De plus, la grande majorité des sujets reste sensiblement les mêmes.'
+    answer: 'Oui, c\'est possible. Cependant, gardez à l\'esprit que vous ne serez pas prioritaire lors de la sélection. De plus, il est possible que vous ayez déjà exploré toutes les notions que nous proposons.'
   },
   {
-    question: 'Je ne suis pas éligible aux stages GCC!, que me suggerez vous ?',
-    answer: '<h4>Si tu as déjà codé</h4><p>Nous te proposons de participer au concours <a href="https://prologin.org">Prologin</a>.<h4>Si tu souhaites débuter</h4> Tu peux te laisser guider par les exercices de <a href="http://www.france-ioi.org/">France-IOI</a> et si tu te debrouille en anglais, il y a <a href="https://www.codecademy.com/">Codecademy</a>.</p>'
+    question: 'Je ne suis pas éligible aux stages GCC!, que me suggérez-vous ?',
+    answer: '<h4>Si tu as déjà codé</h4><p>Nous te proposons de participer au concours <a href="https://prologin.org">Prologin</a>.<h4>Si tu souhaites débuter</h4> Tu peux te laisser guider par les exercices de <a href="http://www.france-ioi.org/">France-IOI</a> et si tu te débrouilles en anglais, il y a <a href="https://www.codecademy.com/">Codecademy</a>.</p>'
   }
 ]

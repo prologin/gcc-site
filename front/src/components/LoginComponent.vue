@@ -63,9 +63,11 @@ export default Vue.extend({
         }).catch((err) => {
           this.showError = true
           if (err.response) {
-            this.error = err.response.data.detail
-          } else if (err.request) {
-            this.error = 'Impossible de se connecter au serveur. Réessayez plus tard.'
+            if (err.response.status === 500) {
+              this.error = 'Une erreur inattendue est survenue du côté de notre serveur. Réessayez plus tard.'
+            } else {
+              this.error = err.response.data.detail
+            }
           } else {
             this.error = 'Une erreur inconnue est survenue. Si le problème persiste, nous vous invitons à réessayer plus tard.'
           }
