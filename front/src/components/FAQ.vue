@@ -1,6 +1,6 @@
 <template>
   <b-container fluid class="faq-background p-2 p-sm-0">
-    <b-row>
+    <b-row class="w-100">
       <b-col class="col-12 col-sm-8">
         <b-img :src="require('@/assets/photo_1.png')" alt="Photo des stages Girls Can Code!" fluid />
         <b-col class="content-background ml-1 ml-sm-5 mr-1 p-3">
@@ -15,7 +15,7 @@
         <b-img :src="require('@/assets/photo_2.png')" alt="Photo des stages Girls Can Code!" fluid />
       </b-col>
     </b-row>
-    <b-row>
+    <b-row class="w-100">
       <b-col class="d-none d-sm-block">
         <b-img :src="require('@/assets/photo_3.png')" alt="Photo des stages Girls Can Code!" fluid />
       </b-col>
