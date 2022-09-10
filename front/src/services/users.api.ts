@@ -1,18 +1,20 @@
 import BaseAPIService from '@/services/base.api'
 
+import { UserType } from '@/models/user.interface'
+
 export default class UsersAPIService extends BaseAPIService {
   constructor () {
     super('users')
   }
 
-  async usersMeRead () {
+  async usersMeRead (): Promise<UserType> {
     return this.axiosCall({
       method: 'get',
       url: '/me/'
     })
   }
 
-  async usersMeUpdate (user) {
+  async usersMeUpdate (user: UserType): Promise<UserType> {
     return this.axiosCall({
       method: 'get',
       url: '/me/',
@@ -20,7 +22,7 @@ export default class UsersAPIService extends BaseAPIService {
     })
   }
 
-  async usersMePartialUpdate (user) {
+  async usersMePartialUpdate (user: UserType): Promise<UserType> {
     return this.axiosCall({
       method: 'get',
       url: '/me/',

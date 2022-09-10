@@ -12,7 +12,7 @@ import './assets/css/main.css'
 
 Vue.mixin({
   methods: {
-    scrollTo (index, pos?: string) {
+    scrollTo (index: string, pos?: ScrollLogicalPosition) {
       const selectedElement = window.document.getElementById(index)
       if (selectedElement !== null) {
         selectedElement.scrollIntoView({ block: pos || 'start', behavior: 'smooth' })
