@@ -8,7 +8,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="isAuthenticated" class="ml-auto">
         <b-nav-item>
-          <b-dropdown no-caret toggle-class='secondary-button' variant='none'>
+          <b-dropdown right no-caret toggle-class='secondary-button' variant='none'>
             <!-- Using 'button-content' slot -->
             <template #button-content>
               <b-row>
