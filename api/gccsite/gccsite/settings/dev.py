@@ -35,10 +35,15 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {
+        "root": {
             "handlers": ["console"],
             "level": "INFO",
             "propagate": True,
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
         },
     },
 }
