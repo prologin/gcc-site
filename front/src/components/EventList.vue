@@ -21,14 +21,14 @@
     </section>
     <section v-else class="w-75 mx-auto pt-5">
       <EventCard v-for="(event, index) in events" v-bind:index="index" v-bind:key="event.id" v-bind:title="event.name"
-        v-bind:start_date="event.start_date" v-bind:end_date="event.end_date"
+        v-bind:id="event.id" v-bind:start_date="event.start_date" v-bind:end_date="event.end_date"
         v-bind:signup_start_date="event.singup_start_date" v-bind:signup_end_date="event.singup_end_date"
         v-bind:address="event.center.name" scheduleType="WEEKEND" />
     </section>
   </b-container>
 </template>
 
-<script lang="ts">
+<script>
 import EventCard from '@/components/EventCard.vue'
 import Newsletter from '@/components/Newsletter.vue'
 import { eventsAPI } from '@/services/events.api'
