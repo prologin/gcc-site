@@ -24,11 +24,10 @@
       <b-modal :id="'modal-' + index"
                 size="xl"
                 centered
-                ok-only
-                hide-header
-                ok-title="Fermer"
+                hide-footer
+                headerClass='p-2 border-bottom-0'
                 ok-variant="secondary-button">
-        <EventInfo v-bind:scheduleType="scheduleType"/>
+        <EventInfo v-bind:id="id" v-bind:colorClass="colorClass" v-bind:scheduleType="scheduleType"/>
       </b-modal>
     </b-button-group>
   </b-row>
@@ -43,7 +42,7 @@ import { formatDate } from '@/services/date'
 export default Vue.extend({
   name: 'EventCard',
   mixins: [ScheduleTypeEnum.Mixin],
-  props: ['title', 'start_date', 'end_date', 'address', 'index', 'scheduleType'],
+  props: ['title', 'id', 'start_date', 'end_date', 'address', 'index', 'scheduleType'],
   components: {
     EventInfo
   },
