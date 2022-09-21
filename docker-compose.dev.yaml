@@ -41,7 +41,7 @@ services:
 
   front:
     build:
-      context: ./front
+      context: ./frontend
       dockerfile: Dockerfile.dev
     container_name: gccsite-front
 
@@ -51,7 +51,7 @@ services:
       BACKEND_URL: 'http://gccsite-api:8000'
 
     volumes:
-      - ./front:/app
+      - ./frontend:/app
 
     ports:
       - 127.0.0.1:8080:8080

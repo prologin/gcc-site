@@ -36,7 +36,7 @@ test-yarn:
 
   rules:
     - changes:
-      - front/**
+      - frontend/**
 
   image:
     name: j4m3s/gcc-build:17.9-alpine3.14
@@ -49,7 +49,7 @@ test-yarn:
     NODE_OPTIONS: "--openssl-legacy-provider"
 
   before_script:
-    - cd front
+    - cd frontend
 
   script:
     - yarn install
@@ -58,4 +58,4 @@ test-yarn:
   cache:
     key: gcc-yarn
     paths:
-      - front/node_modules/
+      - frontend/node_modules/
