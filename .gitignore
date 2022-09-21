@@ -5,6 +5,8 @@ __pycache__/
 # Postgres DB data
 ./pg-data
 
+.nuxt/
+
 # Node
 node_modules/
 
