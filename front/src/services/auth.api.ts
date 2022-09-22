@@ -3,8 +3,8 @@ import axios from 'axios'
 const AUTH_API_URL = '/api/v1/token'
 
 export default class AuthAPIService {
-  async login (username?: string, password?: string) {
-    return axios.post(AUTH_API_URL + '/', { username, password }).then(
+  async login (email?: string, password?: string) {
+    return axios.post(AUTH_API_URL + '/', { email, password }).then(
       ({ data }) => Promise.resolve(data),
       (error) => Promise.reject(error)
     )
