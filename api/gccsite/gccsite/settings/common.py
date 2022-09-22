@@ -155,6 +155,14 @@ REST_FRAMEWORK = {
 SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False,
     "SECURITY_DEFINITIONS": {
-        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": (
+                "To authenticate, get a token below or from your cookies and "
+                r'put "Bearer \<your token\>" in the text box.'
+            ),
+        }
     },
 }
