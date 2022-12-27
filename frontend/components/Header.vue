@@ -2,8 +2,7 @@
   <b-navbar
     toggleable="md"
     class="navbar fixed-top"
-    :class="{ 'navbar-hidden': !showNavbar }"
-  >
+    :class="{ 'navbar-hidden': !showNavbar }">
     <NuxtLink to="/">
       <img
         class="menu-logo ml-0 ml-sm-5 pl-3"
