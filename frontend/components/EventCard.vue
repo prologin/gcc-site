@@ -55,6 +55,9 @@
       </b-col>
       <!-- type -->
       <b-col>
+        {{ camps_type }}
+      </b-col>
+      <b-col>
         {{ date }}
       </b-col>
       <b-col>
@@ -84,6 +87,7 @@ export default Vue.extend({
   props: [
     "isFrontPage",
     "title",
+    "camps_type",
     "id",
     "start_date",
     "end_date",

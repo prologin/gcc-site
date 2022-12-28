@@ -10,11 +10,11 @@
         v-bind:index="index"
         v-bind:key="event.id"
         v-bind:title="event.name"
+        v-bind:camps_type="event.camps_type"
         v-bind:id="event.id"
         v-bind:start_date="event.start_date"
         v-bind:end_date="event.end_date"
-        v-bind:address="event.center.name"
-      />
+        v-bind:address="event.center.name"/>
 
       <!-- Footer -->
       <Footer />
