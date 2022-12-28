@@ -81,11 +81,19 @@ class EventManager(models.Manager):
             signup_start_date__lte=timezone.now(),
         )
 
+class CampsType(models.IntegerChoices):
+    LONG = 1, _("Stage Long")
+    SHORT = 2, _("Stage Court")
 
 class Event(models.Model):
     name = models.CharField(
         max_length=256,
         verbose_name=_("Nom de l'évènement"),
+    )
+
+    camps_type = models.SmallIntegerField(
+        choices = CampsType.choices,
+        verbose_name=_("Durée du stage"),
     )
 
     center = models.ForeignKey(

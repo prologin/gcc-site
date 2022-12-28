@@ -37,13 +37,13 @@ class EventDocumentInlineAdmin(admin.TabularInline):
 
 @admin.register(models.Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("name", "center", "start_date", "end_date")
+    list_display = ("name", "camps_type" ,"center", "start_date", "end_date")
     list_filter = ("center",)
     ordering = ("-start_date",)
     inlines = (EventDocumentInlineAdmin,)
 
     fieldsets = (
-        (None, {"fields": ("name", "center")}),
+        (None, {"fields": ("name", "camps_type", "center")}),
         (
             "Dates de l'évènement",
             {
