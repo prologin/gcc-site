@@ -45,6 +45,7 @@ class EventSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
+            "camps_type",
             "center",
             "signup_start_date",
             "signup_end_date",
