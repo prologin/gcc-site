@@ -38,7 +38,7 @@
             </b-dropdown-header>
             <b-dropdown-divider />
             <b-dropdown-item>
-              <NuxtLink style="color: black" to="/">
+              <NuxtLink style="color: black" to="/admin">
                 Administration Django
               </NuxtLink>
             </b-dropdown-item>
