@@ -1,46 +1,72 @@
 <template>
-  <b-row class="event-card mb-4 p-3">
-    <b-col class="my-auto d-none d-sm-block" md="auto">
-      <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
-    </b-col>
-    <!-- Event infos verticaly centered -->
-    <b-col class="col-lg-auto">
-      <h1>{{ title }}</h1>
-      <h2>{{ date }}</h2>
-      <h3>{{ address }}</h3>
-    </b-col>
+  <div v-if="isFrontPage">
+    <b-row class="event-card mb-4 p-3">
+      <b-col class="my-auto d-none d-sm-block" md="auto">
+        <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
+      </b-col>
+      <!-- Event infos verticaly centered -->
+      <b-col class="col-lg-auto">
+        <h1>{{ title }}</h1>
+        <h2>{{ date }}</h2>
+        <h3>{{ address }}</h3>
+      </b-col>
 
-    <b-button-group vertical class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto">
-      <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button">
-        S'inscrire à ce stage
-      </b-button>
-      <b-button
-        v-b-modal="'modal-' + index"
-        class="mx-auto ml-lg-auto mr-lg-4 secondary-button"
-      >
-        Plus d'informations
-      </b-button>
+      <b-button-group vertical class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto">
+        <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button"
+          >S'inscrire à ce stage</b-button
+        >
+        <b-button
+          v-b-modal="'modal-' + index"
+          class="mx-auto ml-lg-auto mr-lg-4 secondary-button"
+        >
+          Plus d'informations
+        </b-button>
 
-      <!--
-        TODO: Add "S'inscrire à ce stage" button in the following modal
-        component.
-      -->
-      <b-modal
-        :id="'modal-' + index"
-        size="xl"
-        centered
-        hide-footer
-        header-class="p-2 border-bottom-0"
-        ok-variant="secondary-button"
-      >
-        <EventInfo
-          :id="id"
-          :color-class="colorClass"
-          :schedule-type="scheduleType"
-        />
-      </b-modal>
-    </b-button-group>
-  </b-row>
+        <!--
+          TODO: Add "S'inscrire à ce stage" button in the following modal
+          component.
+        -->
+        <b-modal
+          :id="'modal-' + index"
+          size="xl"
+          centered
+          hide-footer
+          headerClass="p-2 border-bottom-0"
+          ok-variant="secondary-button"
+        >
+          <EventInfo
+            v-bind:id="id"
+            v-bind:colorClass="colorClass"
+            v-bind:scheduleType="scheduleType"
+          />
+        </b-modal>
+      </b-button-group>
+    </b-row>
+  </div>
+
+  <div v-else>
+    <b-row class="event-card mb-4 p-3">
+      <b-col class="my-auto d-none d-sm-block" md="auto">
+        <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
+      </b-col>
+      <!-- Event infos verticaly centered -->
+      <b-col class="d-none d-sm-block" md="2">
+        {{ title }}
+      </b-col>
+      <!-- type -->
+      <b-col>
+        {{ date }}
+      </b-col>
+      <b-col>
+        {{ address }}
+      </b-col>
+      <b-col>
+        <NuxtLink to="/review">
+          Review
+        </NuxtLink>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>
@@ -56,13 +82,14 @@ export default Vue.extend({
   },
   mixins: [ScheduleTypeEnum.Mixin],
   props: [
-    'title',
-    'id',
-    'start_date',
-    'end_date',
-    'address',
-    'index',
-    'scheduleType',
+    "isFrontPage",
+    "title",
+    "id",
+    "start_date",
+    "end_date",
+    "address",
+    "index",
+    "scheduleType",
   ],
   computed: {
     colorClass: function () {
