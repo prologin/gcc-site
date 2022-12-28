@@ -1,5 +1,5 @@
 <template>
-  <div class="main-body-style">
+  <div class="main-body-style" >
     <b-container fluid class="p-0">
       <Header />
       <b-container fluid class="basic-background content">

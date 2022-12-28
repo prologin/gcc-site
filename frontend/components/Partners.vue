@@ -4,11 +4,11 @@
         <h1>Ils nous soutiennent</h1>
       </b-row>
 
-      <vue-horizontal responsive ref="horizontal" @scroll-debounce="onScrollDebounce" :displacement="displacement"> <!--  v-if="isFrontPage" -->
+      <vue-horizontal ref="horizontal" @scroll-debounce="onScrollDebounce" :displacement="displacement"> <!--  v-if="isFrontPage" -->
           <b-link
             v-b-modal="'modal-' + partner.name"
             v-for="(partner, index) in partnersSortedByOrder"
-            :key="index" class="my-5 mx-3">
+            :key="index" class="m-5">
             <b-img
               class="partners-logo-style"
               :src="partner.logo"
