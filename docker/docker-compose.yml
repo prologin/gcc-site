@@ -1,0 +1,178 @@
+---
+version: "3.8"
+
+services:
+  s3_dev:
+    image: scality/s3server
+    hostname: s3_dev
+    restart: unless-stopped
+    environment:
+      MINIO_ACCESS_KEY_FILE: s3-access
+      MINIO_SECRET_KEY_FILE: s3-secret
+      S3DATAPATH: /data
+      S3METADATAPATH: /metadata
+      ENDPOINT: s3-dev
+    secrets:
+      - s3-access
+      - s3-secret
+    ports:
+      - $S3_PORT:8000
+    volumes:
+      - s3_dev_data:/data
+      - s3_dev_metadata:/metadata
+
+  db_dev:
+    image: postgres:13
+    hostname: db_dev
+    restart: unless-stopped
+    shm_size: 256M
+    environment:
+      POSTGRES_USER: gccsite_dev
+      POSTGRES_DB: gccsite_dev
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres-passwd
+    secrets:
+      - postgres-passwd
+    volumes:
+      - db_dev_data:/var/lib/postgresql/data
+
+  db_dev_adminer:
+    image: adminer
+    hostname: db_adminer_dev
+    restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: db_dev
+    ports:
+      - $ADMINER_PORT:8080
+    depends_on:
+      - db_dev
+
+  redis_dev:
+    image: redis:7
+    hostname: redis_dev
+    restart: unless-stopped
+    volumes:
+      - redis_dev_data:/data
+
+  backend_dev: &backend_dev
+    image: backend_dev
+    build:
+      context: ../backend
+      args:
+        DJANGO_UID: 1000
+        DJANGO_GID: 1000
+        BUILDKIT_INLINE_CACHE: 1
+    restart: unless-stopped
+    environment:
+      DEV: 1
+      DJANGO_DEBUG: 1
+      DJANGO_SETTINGS_MODULE: gccsite.settings
+      DJANGO_ALLOWED_HOSTS: "*"
+      DJANGO_SECRET_KEY_FILE: /run/secrets/django-secret-key
+      DB_NAME: gccsite_dev
+      DB_USER: gccsite_dev
+      DB_HOST: db_dev
+      DB_PASSWORD_FILE: /run/secrets/postgres-passwd
+      DJANGO_CACHE_URL: redis://redis_dev:6379/0
+      S3_ACCESS_KEY_FILE: /run/secrets/s3-access
+      S3_SECRET_KEY_FILE: /run/secrets/s3-secret
+      S3_ENDPOINT: http://s3-dev:8000/
+      S3_BUCKET: gccsite
+      S3_CUSTOM_DOMAIN: localhost:$S3_PORT/gccsite
+      S3_SECURE_URLS: 0
+      CELERY_BROKER_URL: redis://redis_dev:6379/1
+      CELERY_RESULT_EXPIRES: 60
+      PROLOGIN_OIDC_URL: https://auth.prologin.org/application/o/prologin-public-test-client
+      PROLOGIN_OIDC_CLIENT_ID_FILE: /run/secrets/prologin-oidc-client-id
+      PROLOGIN_OIDC_CLIENT_SECRET_FILE: /run/secrets/prologin-oidc-client-secret
+    depends_on:
+      - s3_dev
+      - db_dev
+      - redis_dev
+    links:
+      - s3_dev:s3-dev
+    volumes:
+      - type: bind
+        source: ../backend
+        target: /app/gccsite/
+      - type: bind
+        source: ./volumes/ipython
+        target: /app/.ipython
+      - type: bind
+        source: ./config/cors.json
+        target: /app/cors.json
+    secrets:
+      - django-secret-key
+      - postgres-passwd
+      - s3-access
+      - s3-secret
+      - prologin-oidc-client-id
+      - prologin-oidc-client-secret
+
+  celery_dev:
+    <<: *backend_dev
+    command: celery -A gccsite worker -l DEBUG --concurrency=2
+
+  celery_dev_flower:
+    image: mher/flower:latest
+    restart: unless-stopped
+    environment:
+      CELERY_BROKER_URL: redis://redis_dev:6379/1
+    ports:
+      - $FLOWER_PORT:5555
+    depends_on:
+      - redis_dev
+      - celery_dev
+
+  frontend_dev:
+    image: frontend_dev
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile.dev
+      args:
+        NODE_UID: 1000
+        NODE_GID: 1000
+        BUILDKIT_INLINE_CACHE: 1
+    restart: unless-stopped
+    environment:
+      DEV: 1
+    volumes:
+      - type: bind
+        source: ../frontend/src
+        target: /app/src
+      - type: bind
+        source: ../frontend/pages
+        target: /app/pages
+      - type: bind
+        source: ../frontend/styles
+        target: /app/styles
+
+  reverse_dev:
+    image: nginx
+    ports:
+      - $REVERSE_PORT:80
+    restart: unless-stopped
+    depends_on:
+      - frontend_dev
+    volumes:
+      - type: bind
+        source: ./config/nginx.conf
+        target: /etc/nginx/nginx.conf
+volumes:
+  s3_dev_data: {}
+  s3_dev_metadata: {}
+  db_dev_data: {}
+  redis_dev_data: {}
+
+secrets:
+  django-secret-key:
+    file: ./secrets/django-secret-key
+  postgres-passwd:
+    file: ./secrets/postgres-passwd
+  s3-access:
+    file: ./secrets/s3-access
+  s3-secret:
+    file: ./secrets/s3-secret
+  prologin-oidc-client-id:
+    file: ./secrets/prologin-oidc-client-id
+  prologin-oidc-client-secret:
+    file: ./secrets/prologin-oidc-client-secret

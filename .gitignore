@@ -1,8 +1,17 @@
-# Python
-__pycache__/
-*.pyc
+.DS_Store
+.idea
+*.log
+tmp/
 
+*.py[cod]
+*.egg
+build
+htmlcov
+.coverage
+
+node_modules/
 .nuxt/
 
-# Node
-node_modules/
+docker/volumes/
+docker/secrets/
+docker/.env
