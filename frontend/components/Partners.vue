@@ -4,44 +4,44 @@
         <h1>Ils nous soutiennent</h1>
       </b-row>
 
-      <vue-horizontal v-if="isFrontPage">
-        <b-link
-          v-b-modal="'modal-' + partner.name"
-          v-for="(partner, index) in partnersSortedByOrder"
-          :key="index" class="m-5">
-          <b-img
-            class="partners-logo-style"
-            :src="partner.logo"
-            width="200"
-            height="100"/>
-          <b-modal
-            :id="'modal-' + partner.name"
-            size="lg"
-            centered
-            ok-only
-            hide-header
-            ok-title="Fermer"
-            ok-variant="secondary-button">
-            <b-card
-              :img-src="partner.logo"
-              :img-alt="`Logo de notre partenaire ${partner.name}`"
-              img-width="250"
-              img-left
-              class="px-3"
-              :title="partner.name"
-              title-tag="h1">
-              <b-card-text>
-                <p>{{ partner.description }}</p>
-              </b-card-text>
-              <b-card-text>
-                <a :href="partner.website_url">Voir leur site</a>
-              </b-card-text>
-            </b-card>
-          </b-modal>
-        </b-link>
+      <vue-horizontal responsive ref="horizontal" @scroll-debounce="onScrollDebounce" :displacement="displacement"> <!--  v-if="isFrontPage" -->
+          <b-link
+            v-b-modal="'modal-' + partner.name"
+            v-for="(partner, index) in partnersSortedByOrder"
+            :key="index" class="my-5 mx-3">
+            <b-img
+              class="partners-logo-style"
+              :src="partner.logo"
+              width="200"
+              height="100"/>
+            <b-modal
+              :id="'modal-' + partner.name"
+              size="lg"
+              centered
+              ok-only
+              hide-header
+              ok-title="Fermer"
+              ok-variant="secondary-button">
+              <b-card
+                :img-src="partner.logo"
+                :img-alt="`Logo de notre partenaire ${partner.name}`"
+                img-width="250"
+                img-left
+                class="px-3"
+                :title="partner.name"
+                title-tag="h1">
+                <b-card-text>
+                  <p>{{ partner.description }}</p>
+                </b-card-text>
+                <b-card-text>
+                  <a :href="partner.website_url">Voir leur site</a>
+                </b-card-text>
+              </b-card>
+            </b-modal>
+          </b-link>
       </vue-horizontal>
 
-      <b-link
+      <!-- <b-link
         v-else
         v-b-modal="'modal-' + partner.name"
         v-for="(partner, index) in partnersSortedByOrder"
@@ -75,7 +75,7 @@
             </b-card-text>
           </b-card>
         </b-modal>
-      </b-link>
+      </b-link> -->
 
     <b-row v-if="isFrontPage && !isFeaturedSpace" align-h="center" class="mb-3">
       <NuxtLink
@@ -101,6 +101,11 @@ export default Vue.extend({
   data() {
     return {
       partners: [],
+      hasPrev: false,
+      hasNext: false,
+      interval: null,
+      // relative width to move when next/prev is clicked.
+      displacement: 1.0,
     };
   },
   beforeMount() {
@@ -110,12 +115,61 @@ export default Vue.extend({
         this.partners = res
     })
   },
+  mounted() {
+    // Custom observe visibility is below
+    // Much easier way: https://www.npmjs.com/package/vue-observe-visibility
+    observeVisibility(this.$refs.horizontal.$el, (visible) => {
+      if (visible) {
+        this.interval = setInterval(this.play, 4000)
+      } else {
+        clearInterval(this.interval)
+      }
+    })
+  },
+  destroyed() {
+    clearInterval(this.interval)
+  },
+  methods: {
+    onScrollDebounce({hasNext, hasPrev}) {
+      this.hasPrev = hasPrev
+      this.hasNext = hasNext
+    },
+    play() {
+      if (!this.hasNext && this.hasPrev) {
+        this.$refs.horizontal.scrollToIndex(0)
+        this.displacement = 1.0
+        return
+      }
+
+      if (this.hasNext) {
+        this.$refs.horizontal.next()
+
+        // After first nav, change displacement window to just 60%
+        this.displacement = 0.6
+      }
+    }
+  },
   computed: {
     partnersSortedByOrder() {
       return this.partners.slice().sort((a, b) => a.order - b.order);
     },
   },
 });
+
+
+/**
+ * Custom function, much easier way: https://www.npmjs.com/package/vue-observe-visibility
+ *
+ * @param element to track visibility
+ * @param callback: function(boolean) when visibility change
+ */
+function observeVisibility(element, callback) {
+  const observer = new IntersectionObserver((records) => {
+    callback(records.find(record => record.isIntersecting))
+  }, {rootMargin: '10% 0% 10% 0%', threshold: 1.0});
+  observer.observe(element);
+}
+
 </script>
 
 <style>
