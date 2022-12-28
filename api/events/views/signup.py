@@ -1,5 +1,4 @@
 from django_filters import rest_framework as filters
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, response, status, viewsets
 from rest_framework.decorators import action
 
@@ -63,7 +62,6 @@ class ApplicationViewset(
         detail=True,
         permission_classes=[permissions.IsAdminUser],
     )
-    @swagger_auto_schema(responses={200: serializers.ApplicationSerializer})
     def update_status(self, request, pk):
         application = self.get_object()
 

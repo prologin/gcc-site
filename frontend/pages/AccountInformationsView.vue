@@ -135,7 +135,6 @@
                 id="input-6"
                 v-model="accountInfo.address.postalCode"
                 type="text"
-                type="text"
                 placeholder="Code postal"
               />
               <b-form-input

@@ -23,7 +23,6 @@ Examples
 """
 
 from django_filters import rest_framework as filters
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, response, viewsets
 from rest_framework.decorators import action
 
@@ -93,10 +92,11 @@ class EventViewset(
     actions_serializer_classes = {
         "list": serializers.PartialEventSerializer,
         "retrieve": serializers.EventSerializer,
+        "form": serializers.FormSerializer,
+        "docs": serializers.EventDocumentSerializer,
     }
 
     @action(methods=["get"], detail=True)
-    @swagger_auto_schema(responses={200: serializers.FormSerializer()})
     def form(self, request, pk):
         """
         Return the form attached to this event.
@@ -112,9 +112,6 @@ class EventViewset(
         methods=["get"],
         detail=True,
         permission_classes=[permissions.IsAuthenticated],
-    )
-    @swagger_auto_schema(
-        responses={200: serializers.EventDocumentSerializer(many=True)}
     )
     def docs(self, request, pk):
         event = self.get_object()

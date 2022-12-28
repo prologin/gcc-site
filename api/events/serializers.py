@@ -2,7 +2,6 @@ from collections import defaultdict, deque
 
 import jsonschema
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
 from . import models
@@ -163,7 +162,7 @@ class ApplicationValidator:
         # Event validation
         if not event.is_open:
             raise serializers.ValidationError(
-                {"event": _("Cet évènement n'accepte pas les inscriptions.")}
+                {"event": "Cet évènement n'accepte pas les inscriptions."}
             )
 
         answer = value.get("form_answer")

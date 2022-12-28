@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
@@ -9,27 +8,27 @@ class User(AbstractUser):
 
     address = models.TextField(
         max_length=1000,
-        verbose_name=_("Adresse"),
+        verbose_name="Adresse",
         null=True,
         blank=True,
     )
 
     city = models.CharField(
-        verbose_name=_("Ville"),
+        verbose_name="Ville",
         max_length=150,
         null=True,
         blank=True,
     )
 
     zip_code = models.CharField(
-        verbose_name=_("Code Postal"),
+        verbose_name="Code Postal",
         max_length=20,
         null=True,
         blank=True,
     )
 
     country = models.CharField(
-        verbose_name=_("Pays"),
+        verbose_name="Pays",
         max_length=64,
         null=True,
         blank=True,
@@ -38,7 +37,7 @@ class User(AbstractUser):
     email = models.EmailField(
         null=False,
         blank=False,
-        verbose_name=_("Adresse email"),
+        verbose_name="Adresse email",
         unique=True,
     )
 

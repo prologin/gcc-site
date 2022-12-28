@@ -1,5 +1,4 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 
 
 class EventSignupForm(forms.Form):
@@ -7,21 +6,21 @@ class EventSignupForm(forms.Form):
         self.form_object = kwargs.pop("form_object")  # noqa
         super().__init__(*args, **kwargs)
         first_name = forms.fields.CharField(
-            label=_("Prénom (*)"),
+            label="Prénom (*)",
             max_length=256,
             label_suffix="",
             required=True,
         )
 
         last_name = forms.fields.CharField(
-            label=_("Nom (*)"),
+            label="Nom (*)",
             max_length=256,
             label_suffix="",
             required=True,
         )
 
         dob = forms.fields.DateField(
-            label=_("Date de naisssance (*)"),
+            label="Date de naisssance (*)",
             required=True,
         )
 

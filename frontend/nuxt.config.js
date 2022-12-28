@@ -1,7 +1,7 @@
 export default {
   server: {
-    port: 8080,
     host: "0.0.0.0",
+    port: 3000,
   },
 
   /*
@@ -50,7 +50,7 @@ export default {
   },
 
   proxy: {
-    "/api/": {
+    "/rest/": {
       target:
         process.env.BACKEND_URL == undefined
           ? "http://localhost:8000"

@@ -12,7 +12,7 @@ export default class BaseAPIService {
 
   constructor(resource: string) {
     this.axiosInstance = axios.create({
-      baseURL: '/api/v1/' + resource
+      baseURL: '/rest/v1/' + resource
     });
 
     // Add authorization header if there is one

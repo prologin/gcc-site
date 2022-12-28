@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
 
 from . import models
 
@@ -25,7 +24,7 @@ class CenterAdmin(admin.ModelAdmin):
     search_fields = ("name", "address__city")
     fieldsets = (
         (None, {"fields": ("name",)}),
-        (_("Notes"), {"fields": ("private_notes",)}),
+        ("Notes", {"fields": ("private_notes",)}),
     )
     inlines = (AddressAdmin,)
 
@@ -46,21 +45,21 @@ class EventAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("name", "center")}),
         (
-            _("Dates de l'évènement"),
+            "Dates de l'évènement",
             {
                 "fields": ("start_date", "end_date"),
             },
         ),
         (
-            _("Dates d'inscription"),
+            "Dates d'inscription",
             {"fields": ("signup_start_date", "signup_end_date")},
         ),
         (
-            _("Formulaires d'inscription"),
+            "Formulaires d'inscription",
             {"fields": ("form",)},
         ),
         (
-            _("Informations aux participantes"),
+            "Informations aux participantes",
             {"fields": ("description", "notes")},
         ),
     )
@@ -106,11 +105,11 @@ class ApplicationAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("user", "event")}),
         (
-            _("Informations participante"),
+            "Informations participante",
             {"fields": ("first_name", "last_name", "dob", "form_answer")},
         ),
         (
-            _("Sélection"),
+            "Sélection",
             {
                 "fields": ("status", "labels"),
             },

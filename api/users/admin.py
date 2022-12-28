@@ -1,24 +1,25 @@
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.admin import UserAdmin as UpstreamUserAdmin
-from django.utils.translation import ugettext_lazy as _
 
 from . import models
 
+admin.site.login = login_required(admin.site.login)
 
 @admin.register(models.User)
 class UserAdmin(UpstreamUserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (
-            _("Informations personnelles"),
+            "Informations personnelles",
             {"fields": ("first_name", "last_name", "email")},
         ),
         (
-            _("Adresse postale"),
+            "Adresse postale",
             {"fields": ("address", "city", "zip_code", "country")},
         ),
         (
-            _("Permissions"),
+            "Permissions",
             {
                 "fields": (
                     "is_active",
@@ -29,7 +30,7 @@ class UserAdmin(UpstreamUserAdmin):
                 ),
             },
         ),
-        (_("Dates importantes"), {"fields": ("last_login", "date_joined")}),
+        ("Dates importantes", {"fields": ("last_login", "date_joined")}),
     )
 
     add_fieldsets = (
