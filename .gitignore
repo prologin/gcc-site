@@ -2,14 +2,7 @@
 __pycache__/
 *.pyc
 
-# Postgres DB data
-pg-data/
-
 .nuxt/
 
 # Node
 node_modules/
-
-**/.*.*.sw*
-**/.*.sw*
-*.orig
