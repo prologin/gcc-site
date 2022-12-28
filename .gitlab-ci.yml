@@ -12,8 +12,6 @@ api-lint:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
 
-  allow_failure: true
-
   before_script:
     - python -V # Print out python version for debugging
     - python -m venv venv

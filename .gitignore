@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 
 # Postgres DB data
-./pg-data
+pg-data/
 
 .nuxt/
 

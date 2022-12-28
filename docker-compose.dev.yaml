@@ -4,7 +4,10 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
+      args:
+        INCLUDE_DEV_DEPS: true
+        INSTALL_PROJECT: false
     container_name: gccsite-api
 
     depends_on:

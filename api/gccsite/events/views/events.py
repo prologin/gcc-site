@@ -24,9 +24,10 @@ Examples
 
 from django_filters import rest_framework as filters
 from drf_yasg.utils import swagger_auto_schema
-from gccsite.serializers import MultipleSerializerViewSetMixin
 from rest_framework import permissions, response, viewsets
 from rest_framework.decorators import action
+
+from gccsite.serializers import MultipleSerializerViewSetMixin
 
 from .. import models, serializers
 

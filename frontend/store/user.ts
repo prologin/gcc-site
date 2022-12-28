@@ -83,4 +83,3 @@ export const mutations = {
     state.user = null
   }
 }
-

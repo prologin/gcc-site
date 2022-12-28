@@ -7,21 +7,24 @@ and verifies permissions and soundness of the data pushed into it.
 There's 2 ways of developing:
 - Developing on the front (visual / workflow for instance)
   without modifying the backend.
-  See # Working on the frontend
+  See [Working on the frontend](#working-on-the-frontend).
   If you need the backend API, see below.
 - Developing on the backend and the frontend (add/fix/remove something on the API)
-  See # Working on the backend and # Working on the frontend
+  See [Working on the backend](#working-on-the-backend) and [Working on the frontend](#working-on-the-frontend).
+  **The recommanded method to work on the backend and the frontend is by using
+  `docker-compose`. See [Advanced](#advanced).**
 
 # Installing dependencies
 
 Dependencies needed
 - yarn
-- pip
 - python3
+- pip
+- poetry
 
 ## On Debian/Ubuntu based OS
 ```
-apt-get update && apt-get install -y yarn python3-venv python3-pip
+apt-get update && apt-get install -y yarn python3-venv python3-pip && pip3 install poetry
 ```
 
 # Working on the Backend
@@ -29,43 +32,22 @@ apt-get update && apt-get install -y yarn python3-venv python3-pip
 
 In the api directory, run the following commands:
 ```
-# Create an "isolated environment" where you can install python packages
-python3 -m venv venv
-# Activate this environment
-. ./venv/bin/activate
-# Install python packages
-pip3 install -r requirements.txt
+# Install Python dependencies (but not the current project)
+poetry install --no-root
 ```
 
-Create the file gccsite/gccsite/settings/dev.py (it's a gitignored file)
-containing the following:
-
+Then you can spawn a poetry shell (to access the created virtualenv);
 ```
-from .common import * # noqa
-
-SOCIAL_AUTH_PROLOGIN_KEY = (
-    "FIXME" # Replace with a random string
-)
-
-SOCIAL_AUTH_PROLOGIN_SECRET = (
-    "FIXME" # Replace with a random string
-)
-```
-
-If you want the real values (to be able to use Prologin OIDC), ask a root :).
-
-```
-# to enter the Virtualenv
-. ./venv/bin/activate
-# Now you can interact with the Django cli
+poetry shell
+# Now you can interact with the Django CLI
 ./gccsite/manage.py [...]
 ```
 
 To create a super user :
 ```
-. ./venv/bin/activate
 ./gccsite/manage.py createsuperuser
 ```
+
 A fake password and email are completely okay since it's a local dev setup.
 Just remember them to be able to log in the interface.
 This allows you to access Django Admin (which is useful to add/modify/view data from the DB
