@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('events', '0001_initial'),
+        ("events", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='description',
+            model_name="event",
+            name="description",
             field=models.TextField(verbose_name="Description de l'évènement"),
         ),
     ]

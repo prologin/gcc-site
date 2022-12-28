@@ -27,25 +27,31 @@
             required
           />
         </b-form-group>
-        <b-button @click="login" class="primary-button mt-4" block
-          >Se connecter</b-button
-        >
-        <hr class="hr-text mt-5" data-content="Ou se connecter avec :" />
+        <b-button class="primary-button mt-4" block @click="login">
+          Se connecter
+        </b-button>
+        <hr class="hr-text mt-5" data-content="Ou se connecter avec :" >
 
         <b-button block class="login-button">
-            <b-row align-v="center">
-                <b-col cols="2">
-                  <b-img :src="require(`@/assets/logo-prologin.svg`)" style="max-width: 30px" :alt="`Logo de Prologin`" />
-                </b-col>
-                <b-col cols="10">
-                    Prologin
-                </b-col>
-            </b-row>
+          <b-row align-v="center">
+            <b-col cols="2">
+              <b-img
+                :src="require(`@/assets/logo-prologin.svg`)"
+                style="max-width: 30px"
+                :alt="`Logo de Prologin`"
+              />
+            </b-col>
+            <b-col cols="10"> Prologin </b-col>
+          </b-row>
         </b-button>
 
         <!-- Logo from fontawesome -->
-        <ConnectButton v-for="(sn, index) in Constants.BUTTON_SNS"
-          :logo="sn.logo" v-bind:name="sn.name" v-bind:key="index" />
+        <ConnectButton
+          v-for="(sn, index) in Constants.BUTTON_SNS"
+          :key="index"
+          :logo="sn.logo"
+          :name="sn.name"
+        />
       </b-col>
     </b-row>
   </b-container>
@@ -53,28 +59,28 @@
 
 <script>
 import Vue from "vue";
-import ConnectButton from '@/components/ConnectButton.vue'
+import ConnectButton from '@/components/ConnectButton.vue';
 
-import * as Constants from '@/constants'
+import * as Constants from '@/constants';
 
 export default Vue.extend({
   name: "LoginComponent",
   components: {
     ConnectButton
   },
-  created () {
-    this.Constants = Constants
-  },
-  data() {
+  data () {
     return {
       loginForm: {
-        email: "",
-        password: "",
+        email: '',
+        password: '',
       },
-      error: "",
+      error: '',
       showError: false,
-      emptyFields: false,
+      emptyFields: false
     };
+  },
+  created() {
+    this.Constants = Constants;
   },
   methods: {
     async login() {
@@ -85,7 +91,7 @@ export default Vue.extend({
         await this.$store
           .dispatch("user/login", this.loginForm)
           .then(() => {
-            window.$nuxt.$router.push("/")
+            window.$nuxt.$router.push("/");
           })
           .catch((err) => {
             this.showError = true;
@@ -103,7 +109,7 @@ export default Vue.extend({
           });
       }
     },
-  },
+  }
 });
 </script>
 
@@ -147,9 +153,8 @@ export default Vue.extend({
 }
 
 .login-button {
-  background:
-    linear-gradient(white, white) padding-box,
-    linear-gradient(to right, #00AED3, #E4006D, #A6C613) border-box;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to right, #00aed3, #e4006d, #a6c613) border-box;
   border: 2px solid transparent !important;
   color: var(--main-dark-color) !important;
 }

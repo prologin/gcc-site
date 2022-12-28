@@ -2,29 +2,31 @@
   <b-container class="background-login main-body-style" fluid>
     <b-row class="offset-0 col-xl-4 offset-xl-4 p-0" no-gutters>
       <b-col cols="12" align="center">
-          <NuxtLink to="/">
-            <b-img class="mb-4" :src="require('@/assets/logo_gcc.svg')" />
-          </NuxtLink>
-        <h2 class="mb-4" v-if="showLogin"> Se connecter sur <b>Girls can code!</b> </h2>
-        <h2 class="mb-4" v-else>S'inscrire sur <b>Girls can code!</b></h2>
+        <NuxtLink to="/">
+          <b-img class="mb-4" :src="require('@/assets/logo_gcc.svg')" />
+        </NuxtLink>
+        <h2 v-if="showLogin" class="mb-4">
+          Se connecter sur <b>Girls can code!</b>
+        </h2>
+        <h2 v-else class="mb-4">S'inscrire sur <b>Girls can code!</b></h2>
       </b-col>
       <b-container fluid class="content-background">
-        <b-col cols="12" v-if="showLogin">
+        <b-col v-if="showLogin" cols="12">
           <LoginComponent />
         </b-col>
-        <b-col cols="12" v-else>
+        <b-col v-else cols="12">
           <RegisterComponent />
         </b-col>
-        <b-col cols="12" v-if="showLogin" align="center">
+        <b-col v-if="showLogin" cols="12" align="center">
           <h4 class="mt-3">
             Je n'ai pas de compte,
-            <b-link v-on:click="showLogin = !showLogin">s'inscrire</b-link>
+            <b-link @click="showLogin = !showLogin"> s'inscrire </b-link>
           </h4>
         </b-col>
-        <b-col cols="12" v-else align="center">
+        <b-col v-else cols="12" align="center">
           <h4 class="mt-3">
             J'ai déjà un compte,
-            <b-link v-on:click="showLogin = !showLogin">se connecter</b-link>
+            <b-link @click="showLogin = !showLogin"> se connecter </b-link>
           </h4>
         </b-col>
       </b-container>
@@ -46,9 +48,9 @@ export default Vue.extend({
   data() {
     return {
       showLogin: true,
-    };
-  },
-});
+    }
+  }
+})
 </script>
 <style scoped>
 label {

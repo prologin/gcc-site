@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const AUTH_API_URL = '/api/v1/token'
+const AUTH_API_URL = '/api/v1/token';
 
 export default class AuthAPIService {
   async login (email?: string, password?: string) {

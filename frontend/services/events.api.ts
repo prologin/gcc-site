@@ -1,11 +1,18 @@
-import BaseAPIService from '@/services/base.api'
+import BaseAPIService from '@/services/base.api';
 
 export default class EventsAPIService extends BaseAPIService {
   constructor () {
-    super('events')
+    super('events');
   }
 
-  async eventsList (onlyOpen?: boolean, center?: string, startsAfter?: string, endsBefore?: string, signupStartsAfter?: string, signupEndsBefore?: string) {
+  async eventsList (
+    onlyOpen?: boolean,
+    center?: string,
+    startsAfter?: string,
+    endsBefore?: string,
+    signupStartsAfter?: string,
+    signupEndsBefore?: string
+  ) {
     return this.axiosCall({
       method: 'get',
       url: '/',
@@ -16,7 +23,7 @@ export default class EventsAPIService extends BaseAPIService {
         ends_before: endsBefore,
         signup_starts_after: signupStartsAfter,
         signup_ends_before: signupEndsBefore
-      }
+      },
     })
   }
 

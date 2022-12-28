@@ -1,13 +1,13 @@
 const ScheduleTypeEnum = {
   WEEK: 'WEEK',
   WEEKEND: 'WEEKEND',
-  OTHER: 'OTHER'
+  OTHER: 'OTHER',
 }
 
 ScheduleTypeEnum.Mixin = {
   created () {
     this.ScheduleTypeEnum = ScheduleTypeEnum
-  }
+  },
 }
 
 export default ScheduleTypeEnum

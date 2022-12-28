@@ -11,12 +11,16 @@
       />
     </div>
     <b-row class="p-3 d-flex" style="flex-direction: column">
-      <hr class="eventInfo-line" :class="colorClass + '-back'" md="auto" />
+      <hr class="eventInfo-line" :class="colorClass + '-back'" md="auto" >
       <b-tbody class="mb-4">
-        <h1>Stage : {{ this.info.name }}</h1>
+        <h1>Stage : {{ info.name }}</h1>
         <b-row align-h="around" class="m-3">
           <b-row class="m-3">
-            <font-awesome-icon icon="fa-regular fa-calendar" class="eventInfo-icon" size="3x"/>
+            <font-awesome-icon
+              icon="fa-regular fa-calendar"
+              class="eventInfo-icon"
+              size="3x"
+            />
             <!-- <b-img
               :src="require('@/assets/logo-calendar.svg')"
               class="eventInfo-icon"
@@ -31,7 +35,11 @@
             </ul>
           </b-row>
           <b-row class="m-3">
-            <font-awesome-icon icon="fa-solid fa-location-dot" class="eventInfo-icon" size="3x"/>
+            <font-awesome-icon
+              icon="fa-solid fa-location-dot"
+              class="eventInfo-icon"
+              size="3x"
+            />
             <!--<b-img
               :src="require('@/assets/logo-localisation.svg')"
               class="eventInfo-icon"
@@ -39,26 +47,26 @@
             <ul style="list-style: none; margin: 0; padding: 0px">
               <li>
                 <h2>
-                  {{ this.info.center.address.street }}
-                  {{ this.info.center.address.complement }}
+                  {{ info.center.address.street }}
+                  {{ info.center.address.complement }}
                 </h2>
               </li>
               <li>
                 <h2>
-                  {{ this.info.center.address.city }} ({{
-                    this.info.center.address.zip_code
+                  {{ info.center.address.city }} ({{
+                    info.center.address.zip_code
                   }})
                 </h2>
               </li>
             </ul>
           </b-row>
         </b-row>
-        <h2>{{ this.info.description }}</h2>
+        <h2>{{ info.description }}</h2>
       </b-tbody>
       <b-button-group class="mx-auto m-5 mb-1 my-lg-auto">
-        <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button"
-          >S'inscrire à ce stage</b-button
-        >
+        <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button">
+          S'inscrire à ce stage
+        </b-button>
         <b-button
           v-b-modal="'modal'"
           class="mx-auto ml-lg-auto mr-lg-4 secondary-button"
@@ -71,10 +79,10 @@
         size="xl"
         centered
         hide-footer
-        headerClass="p-2 border-bottom-0"
+        header-class="p-2 border-bottom-0"
         ok-variant="secondary-button"
       >
-        <Schedules v-bind:scheduleType="scheduleType" />
+        <Schedules :schedule-type="scheduleType" />
       </b-modal>
     </b-row>
   </b-container>
@@ -88,58 +96,58 @@ import { formatDate } from "@/services/date";
 
 export default Vue.extend({
   name: "EventInfo",
-  props: ["id", "colorClass", "scheduleType"],
-  data() {
+  components: {
+    Schedules
+  },
+  props: ['id', 'colorClass', 'scheduleType'],
+  data () {
     return {
       info: {
         center: {
           address: {
-            city: "",
-            complement: "",
-            country: "",
-            id: "",
-            lat: "",
-            lng: "",
-            street: "",
-            zip_code: "",
+            city: '',
+            complement: '',
+            country: '',
+            id: '',
+            lat: '',
+            lng: '',
+            street: '',
+            zip_code: '',
           },
-          id: "",
-          name: "",
+          id: '',
+          name: '',
         },
-        description: "",
-        end_date: "",
-        form_id: "",
-        id: "",
-        name: "",
-        notes: "",
-        signup_end_date: "",
-        signup_start_date: "",
-        start_date: "",
-      },
+        description: '',
+        end_date: '',
+        form_id: '',
+        id: '',
+        name: '',
+        notes: '',
+        signup_end_date: '',
+        signup_start_date: '',
+        start_date: '',
+      }
     };
   },
   computed: {
     startdate: function () {
-      return "Début : " + formatDate(this.info.start_date);
+      return 'Début : ' + formatDate(this.info.start_date)
     },
     enddate: function () {
-      return "Fin : " + formatDate(this.info.end_date);
+      return 'Fin : ' + formatDate(this.info.end_date)
     },
   },
-  async created() {
+  async created () {
     await eventsAPI.eventsRead(this.id).then(
       (response) => {
-        this.info = response;
+        this.info = response
       },
       () => {
-        this.showError = true;
+        this.showError = true
       }
-    );
+    )
   },
-  components: {
-    Schedules,
-  },
-});
+})
 </script>
 
 <style>

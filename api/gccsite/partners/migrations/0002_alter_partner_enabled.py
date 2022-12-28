@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('partners', '0001_initial'),
+        ("partners", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='partner',
-            name='enabled',
-            field=models.BooleanField(default=True, verbose_name='Actif'),
+            model_name="partner",
+            name="enabled",
+            field=models.BooleanField(default=True, verbose_name="Actif"),
         ),
     ]

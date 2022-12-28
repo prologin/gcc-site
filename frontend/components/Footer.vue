@@ -6,7 +6,8 @@
           <img
             class="picture-size"
             :src="require('../assets/logo_gcc.svg')"
-            alt="Logo des stages Girls Can Code!"/>
+            alt="Logo des stages Girls Can Code!"
+          >
         </NuxtLink>
       </b-col>
       <b-col class="col-12 col-lg-auto text-center text-lg-left">
@@ -33,13 +34,14 @@
         </h3>
         <b-row
           class="col-12 col-lg-auto order-1 order-lg-12 my-3 my-lg-0 mx-auto mr-lg-0"
-          align-h="center">
+          align-h="center"
+        >
           <SocialNetwork
             v-for="(sn, index) in Constants.SOCIAL_NETWORKS"
-            v-bind:link="sn.link"
-            v-bind:logo="sn.logo"
-            v-bind:alt="sn.alt"
-            v-bind:key="index"
+            :key="index"
+            :link="sn.link"
+            :logo="sn.logo"
+            :alt="sn.alt"
           />
         </b-row>
       </b-row>
@@ -69,7 +71,7 @@ export default Vue.extend({
   },
   created() {
     this.Constants = Constants;
-  },
+  }
 });
 </script>
 

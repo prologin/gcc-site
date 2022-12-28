@@ -11,9 +11,9 @@
     </b-col>
 
     <b-button-group vertical class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto">
-      <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button"
-        >S'inscrire à ce stage</b-button
-      >
+      <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button">
+        S'inscrire à ce stage
+      </b-button>
       <b-button
         v-b-modal="'modal-' + index"
         class="mx-auto ml-lg-auto mr-lg-4 secondary-button"
@@ -30,13 +30,13 @@
         size="xl"
         centered
         hide-footer
-        headerClass="p-2 border-bottom-0"
+        header-class="p-2 border-bottom-0"
         ok-variant="secondary-button"
       >
         <EventInfo
-          v-bind:id="id"
-          v-bind:colorClass="colorClass"
-          v-bind:scheduleType="scheduleType"
+          :id="id"
+          :color-class="colorClass"
+          :schedule-type="scheduleType"
         />
       </b-modal>
     </b-button-group>
@@ -51,31 +51,31 @@ import { formatDate } from "@/services/date";
 
 export default Vue.extend({
   name: "EventCard",
+  components: {
+    EventInfo
+  },
   mixins: [ScheduleTypeEnum.Mixin],
   props: [
-    "title",
-    "id",
-    "start_date",
-    "end_date",
-    "address",
-    "index",
-    "scheduleType",
+    'title',
+    'id',
+    'start_date',
+    'end_date',
+    'address',
+    'index',
+    'scheduleType',
   ],
-  components: {
-    EventInfo,
-  },
   computed: {
     colorClass: function () {
-      var colors = ["gcc-pink", "gcc-green", "gcc-blue"];
+      const colors = ['gcc-pink', 'gcc-green', 'gcc-blue'];
       return colors[this.index % colors.length];
     },
     date: function () {
       return (
         "Du " + formatDate(this.start_date) + " au " + formatDate(this.end_date)
       );
-    },
-  },
-});
+    }
+  }
+})
 </script>
 
 <style>

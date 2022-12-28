@@ -5,9 +5,9 @@
     </b-row>
     <b-row align-h="center">
       <b-link
-        v-b-modal="'modal-' + partner.name"
         v-for="(partner, index) in partnersSortedByOrder"
         :key="index"
+        v-b-modal="'modal-' + partner.name"
       >
         <b-img
           class="partners-logo-style m-5"
@@ -48,7 +48,8 @@
         v-if="isFrontPage && !isFeaturedSpace"
         to="/PartnersPage"
         class="secondary-button"
-        >Voir tous nos partenaires
+      >
+        Voir tous nos partenaires
       </NuxtLink>
     </b-row>
   </b-container>
@@ -65,21 +66,21 @@ export default Vue.extend({
   data() {
     return {
       partners: [],
-    };
-  },
-  beforeMount() {
-    partnersAPI
-    .partnersList(this.isFrontPage || undefined, this.isFeaturedSpace)
-    .then((res) => {
-        this.partners = res
-    })
+    }
   },
   computed: {
-    partnersSortedByOrder() {
-      return this.partners.slice().sort((a, b) => a.order - b.order);
+    partnersSortedByOrder () {
+      return this.partners.slice().sort((a, b) => a.order - b.order)
     },
   },
-});
+  beforeMount () {
+    partnersAPI
+      .partnersList(this.isFrontPage || undefined, this.isFeaturedSpace)
+      .then((res) => {
+        this.partners = res;
+      })
+  }
+})
 </script>
 
 <style>

@@ -11,19 +11,23 @@
 
     Source: https://www.freecodecamp.org/news/how-to-use-html-to-open-link-in-new-tab/
   -->
-  <a :href="`${link}`" target="_blank" rel="noopener noreferrer" >
-    <font-awesome-icon :icon=logo style="color:#222A35;" class="social-network-icon" :title=alt />
+  <a :href="`${link}`" target="_blank" rel="noopener noreferrer">
+    <font-awesome-icon
+      :icon="logo"
+      style="color: #222a35"
+      class="social-network-icon"
+      :title="alt"
+    />
   </a>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default Vue.extend({
   name: 'SocialNetwork',
-  props: ['link', 'logo', 'alt']
+  props: ['link', 'logo', 'alt'],
 })
-
 </script>
 <style>
 .social-network-icon:hover {

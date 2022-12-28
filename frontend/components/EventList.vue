@@ -6,7 +6,7 @@
         <b-col md="4">
           <b-img :src="require('@/assets/no-event.svg')" />
         </b-col>
-        <b-col md="4" align="center" v-if="showError">
+        <b-col v-if="showError" md="4" align="center">
           <h1>Nous ne pouvons pas afficher les stages pour le moment.</h1>
           <h3>
             Une erreur technique est survenue. Veuillez nous excuser pour la
@@ -14,7 +14,7 @@
             restons à votre disposition par mail à {{ Constants.CONTACT_EMAIL }}
           </h3>
         </b-col>
-        <b-col md="4" align="center" v-else>
+        <b-col v-else md="4" align="center">
           <h1>Malheureusement, il n'y a pas de stages pour le moment...</h1>
           <h3>
             Vous pouvez vous inscrire à notre newsletter afin de recevoir un
@@ -27,42 +27,41 @@
     <section v-else class="w-75 mx-auto pt-5">
       <EventCard
         v-for="(event, index) in events"
-        v-bind:index="index"
-        v-bind:key="event.id"
-        v-bind:title="event.name"
-        v-bind:id="event.id"
-        v-bind:start_date="event.start_date"
-        v-bind:end_date="event.end_date"
-        v-bind:signup_start_date="event.singup_start_date"
-        v-bind:signup_end_date="event.singup_end_date"
-        v-bind:address="event.center.name"
-        scheduleType="WEEKEND"
+        :id="event.id"
+        :key="event.id"
+        :index="index"
+        :title="event.name"
+        :start_date="event.start_date"
+        :end_date="event.end_date"
+        :signup_start_date="event.singup_start_date"
+        :signup_end_date="event.singup_end_date"
+        :address="event.center.name"
+        schedule-type="WEEKEND"
       />
     </section>
   </b-container>
 </template>
 
 <script>
-import EventCard from "./EventCard.vue";
-import Newsletter from "./Newsletter.vue";
+import Vue from 'vue';
 import { eventsAPI } from "../services/events.api";
-import Vue from "vue";
-
-import * as Constants from "../constants";
+import * as Constants from '../constants';
+import EventCard from './EventCard.vue';
+import Newsletter from './Newsletter.vue';
 
 export default Vue.extend({
   name: "EventList",
-  props: {},
   components: {
     EventCard,
-    Newsletter,
+    Newsletter
   },
+  props: {},
   data() {
     return {
       events: null,
       showError: false,
-      Constants: Constants,
-    };
+      Constants
+    }
   },
   async created() {
     await eventsAPI.eventsList(true).then(
@@ -74,7 +73,7 @@ export default Vue.extend({
         this.showError = true;
       }
     );
-  },
+  }
 });
 </script>
 

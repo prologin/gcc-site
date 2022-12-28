@@ -10,12 +10,12 @@ const ClassTypeEnum = {
   _1_ERE: 5,
   TERMINALE: 6,
   AUTRE: 7
-}
+};
 
 ClassTypeEnum.Mixin = {
   created () {
     this.ClassTypeEnum = ClassTypeEnum
-  }
+  },
 }
 
 export default ClassTypeEnum

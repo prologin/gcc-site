@@ -11,7 +11,7 @@
         alt="Logo des stages Girls Can Code"
       />
     </NuxtLink>
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="isAuthenticated" class="ml-auto">
         <b-nav-item>
@@ -43,7 +43,7 @@
               <font-awesome-icon icon="fa-solid fa-user" />
               <NuxtLink style="color: black" to="/AccountInformationsView">
                 Mon compte
-                </NuxtLink>
+              </NuxtLink>
             </b-dropdown-item>
             <b-dropdown-item>
               <font-awesome-icon icon="fa-solid fa-inbox" />
@@ -59,18 +59,22 @@
           </b-dropdown>
         </b-nav-item>
         <b-nav-item>
-          <hr class="my-1" />
+          <hr class="my-1" >
         </b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav v-else class="ml-auto">
         <b-nav-item>
-          <NuxtLink to="/LoginRegisterView" class="primary-button py-2 px-4" style="color: white">
+          <NuxtLink
+            to="/LoginRegisterView"
+            class="primary-button py-2 px-4"
+            style="color: white"
+          >
             Connexion
           </NuxtLink>
         </b-nav-item>
         <b-nav-item>
-          <hr class="my-1" />
+          <hr class="my-1" >
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -87,7 +91,7 @@ export default Vue.extend({
     return {
       showNavbar: true,
       lastScrollPosition: 0,
-    };
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
@@ -129,7 +133,7 @@ export default Vue.extend({
       await this.$store.dispatch("user/logout").then(() => {
         (this as any).$router.push("/");
       });
-    },
+    }
   },
   computed: {
     ...mapGetters("user", [
@@ -138,7 +142,7 @@ export default Vue.extend({
       "getLastName",
       "getEmail",
     ]),
-  },
+  }
 });
 </script>
 
@@ -157,6 +161,6 @@ export default Vue.extend({
 }
 
 button.dropdown-item {
-    z-index: 10;
+  z-index: 10;
 }
 </style>

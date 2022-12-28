@@ -2,7 +2,10 @@
   <b-container fluid class="p-0">
     <b-list-group horizontal>
       <b-list-group-item>
-        <b-img :src="require(`@/assets/indicator-` + iconImageName + `.svg`)" alt="Status"/>
+        <b-img
+          :src="require(`@/assets/indicator-` + iconImageName + `.svg`)"
+          alt="Status"
+        />
       </b-list-group-item>
       <b-list-group-item class="d-flex align-items-center light-color-text">
         {{ statusText }}
@@ -12,8 +15,8 @@
 </template>
 
 <script>
-import ApplicationStatusEnum from '@/enums/ApplicationStatusEnum.js'
-import Vue from 'vue'
+import Vue from "vue";
+import ApplicationStatusEnum from "@/enums/ApplicationStatusEnum.js";
 
 export default Vue.extend({
   name: 'ApplicationStatusComponent',
@@ -23,36 +26,35 @@ export default Vue.extend({
     iconImageName: function () {
       switch (this.status) {
         case ApplicationStatusEnum.ONGOING:
-          return 'loading'
+          return 'loading';
         case ApplicationStatusEnum.REJECTED:
-          return 'rejected'
+          return 'rejected';
         case ApplicationStatusEnum.ACCEPTED_WAITING_VALIDATION:
-          return 'waiting'
+          return 'waiting';
         case ApplicationStatusEnum.ACCEPTED_AND_VALIDATED:
-          return 'validated'
+          return 'validated';
         case ApplicationStatusEnum.COMPLETE:
-          return 'finished'
+          return 'finished';
         default:
-          return ''
+          return '';
       }
     },
     statusText: function () {
       switch (this.status) {
         case ApplicationStatusEnum.ONGOING:
-          return 'Votre candidature est en cours d\'examen.'
+          return "Votre candidature est en cours d'examen."
         case ApplicationStatusEnum.REJECTED:
-          return 'Votre candidature n\'a pas été retenue.'
+          return "Votre candidature n'a pas été retenue."
         case ApplicationStatusEnum.ACCEPTED_WAITING_VALIDATION:
-          return 'Votre canditature a été acceptée, veuillez confirmer votre présence.'
+          return 'Votre canditature a été acceptée, veuillez confirmer votre présence.';
         case ApplicationStatusEnum.ACCEPTED_AND_VALIDATED:
-          return 'Votre candidature est complète !'
+          return 'Votre candidature est complète !';
         case ApplicationStatusEnum.COMPLETE:
-          return 'Stage terminé.'
+          return 'Stage terminé.';
         default:
-          return ''
+          return '';
       }
     }
-  }
+  },
 })
-
 </script>

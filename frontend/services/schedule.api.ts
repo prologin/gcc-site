@@ -28,7 +28,7 @@ export default class ScheduleAPIService {
             title: 'Gouter et jeux du soir',
             start: 17,
             duration: 1
-          }
+          },
         ]
       },
       {
@@ -68,10 +68,10 @@ export default class ScheduleAPIService {
             title: 'Gouter et jeux du soir',
             start: 17,
             duration: 1
-          }
+          },
         ]
       }
-    ]
+    ];
   }
 
   getWeekSchedule () {
@@ -103,7 +103,7 @@ export default class ScheduleAPIService {
             title: 'Initiation au Python',
             start: 14,
             duration: 4
-          }
+          },
         ]
       },
       {
@@ -128,7 +128,7 @@ export default class ScheduleAPIService {
             title: 'Python',
             start: 14,
             duration: 4
-          }
+          },
         ]
       },
       {
@@ -153,7 +153,7 @@ export default class ScheduleAPIService {
             title: 'Activité surprise',
             start: 13,
             duration: 5
-          }
+          },
         ]
       },
       {
@@ -178,7 +178,7 @@ export default class ScheduleAPIService {
             title: 'Projets',
             start: 14,
             duration: 4
-          }
+          },
         ]
       },
       {
@@ -208,7 +208,7 @@ export default class ScheduleAPIService {
             title: 'Projets',
             start: 14,
             duration: 4
-          }
+          },
         ]
       },
       {
@@ -233,10 +233,10 @@ export default class ScheduleAPIService {
             title: 'Repas',
             start: 13,
             duration: 2
-          }
+          },
         ]
       }
-    ]
+    ];
   }
 }
 

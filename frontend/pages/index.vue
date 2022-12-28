@@ -18,18 +18,18 @@
             </span>
             <span>
               <b-button
-                @click="scrollTo('event-list')"
                 class="primary-button subtitleSize mt-4"
                 block
+                @click="scrollTo('event-list')"
               >
                 Voir les stages
               </b-button>
             </span>
             <span>
               <b-button
-                @click="scrollTo('faq')"
                 class="secondary-button subtitleSize"
                 block
+                @click="scrollTo('faq')"
                 >Plus d'informations
               </b-button>
             </span>
@@ -38,7 +38,7 @@
       </b-container>
       <!-- Featured partners -->
       <!-- TODO change style -->
-      <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="true" />
+      <Partners :is-front-page="true" :is-featured-space="true" />
 
       <!-- Event list -->
       <EventList id="event-list" />
@@ -47,7 +47,7 @@
       <FAQ id="faq" />
 
       <!-- Partners -->
-      <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="false" />
+      <Partners :is-front-page="true" :is-featured-space="false" />
 
       <!-- Newsletter -->
       <b-container fluid class="newsletter-background text-center">
@@ -84,7 +84,7 @@ export default Vue.extend({
     FAQ,
     Newsletter,
     Footer,
-  },
+  }
 });
 </script>
 

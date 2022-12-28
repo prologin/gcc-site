@@ -1,8 +1,8 @@
-import BaseAPIService from './base.api'
+import BaseAPIService from './base.api';
 
 export default class PartnersAPIService extends BaseAPIService {
   constructor () {
-    super('partners')
+    super('partners');
   }
 
   async partnersList (isOnFrontPage?: string, isFeatured?: string) {
@@ -12,7 +12,7 @@ export default class PartnersAPIService extends BaseAPIService {
       params: {
         is_on_front_page: isOnFrontPage,
         featured: isFeatured
-      }
+      },
     })
   }
 

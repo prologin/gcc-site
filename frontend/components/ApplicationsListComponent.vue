@@ -22,53 +22,79 @@
       :items="applications"
       thead-class="d-none"
       selectable
-      @row-clicked="item=>$set(item, '_showDetails', !item._showDetails && item.status != ApplicationStatusEnum.REJECTED)"
-      >
-
-      <template #cell(displayName)="data">
-        <b-list-group horizontal>
-          <b-list-group-item>
-            <b-icon-person-circle aria-hidden="true" font-scale="2" variant="secondary"/>
-          </b-list-group-item>
-          <b-list-group-item class="d-flex align-items-center light-color-text">
-            <h2>{{ data.item.displayName }}</h2>
-          </b-list-group-item>
-        </b-list-group>
-      </template>
+      data"@row-clicked="
+        (item) =>
+          $set(
+            item,
+            '_showDetails',
+            !item._showDetails && item.status != ApplicationStatusEnum.REJECTED
+          )
+    >
+<template #cell(displayName)="
+    >
+      <b-list-group horizontal>
+        <b-list-group-item>
+          <b-icon-person-circle
+            aria-hidden="true"
+            font-scale="2"
+            variant="secondary"
+          />
+        </b-list-group-item>
+        <b-list-group-item class="d-flex align-items-center light-color-text">
+          <h2>{{ data.item.displayName }}</h2>
+        </b-list-group-item>
+      </b-list-group>
+    </b-table>
+  </b-container>
+</template>
 
       <template #cell(event)="data">
-        <h2><b>{{ data.item.eventName }}</b></h2>
+        <h2>
+          <b>{{ data.item.eventName }}</b>
+        </h2>
         <h3>{{ data.item.eventDate }}</h3>
       </template>
 
       <template #cell(status)="data">
-        <ApplicationStatusComponent v-bind:status="data.item.status" />
+        <ApplicationStatusComponent :status="data.item.status" />
       </template>
 
       <template #cell(selected)="data">
-        <div v-if="data.rowSelected && data.item.status != ApplicationStatusEnum.REJECTED">
+        <div
+          v-if="
+            data.rowSelected &&
+            data.item.status != ApplicationStatusEnum.REJECTED
+          "
+        >
           <span aria-hidden="true">
-            <b-icon font-scale="2" variant="secondary" icon="chevron-compact-up"/>
+            <b-icon
+              font-scale="2"
+              variant="secondary"
+              icon="chevron-compact-up"
+            />
           </span>
         </div>
         <div v-else-if="data.item.status != ApplicationStatusEnum.REJECTED">
           <span aria-hidden="true">
-            <b-icon font-scale="2" variant="secondary" icon="chevron-compact-down"/>
+            <b-icon
+              font-scale="2"
+              variant="secondary"
+              icon="chevron-compact-down"
+            />
           </span>
         </div>
       </template>
 
       <template #row-details="data">
-          <b-row class="mb-2" v-if="data.item.status != ApplicationStatusEnum.REJECTED">
-            <b-col><ApplicationDetailsComponent v-bind:status="data.item.status" /></b-col>
-          </b-row>
+        <b-row v-if="data.item.status != ApplicationStatusEnum.REJECTED" class="mb-2">
+          <b-col><ApplicationDetailsComponent :status="data.item.status" /></b-col>
+        </b-row>
       </template>
     </b-table>
   </b-container>
 </template>
 
 <script>
-
 import Vue from 'vue'
 import ApplicationDetailsComponent from '@/components/ApplicationDetailsComponent.vue'
 import ApplicationStatusComponent from '@/components/ApplicationStatusComponent.vue'
@@ -76,11 +102,11 @@ import ApplicationStatusEnum from '@/enums/ApplicationStatusEnum.js'
 
 export default Vue.extend({
   name: 'ApplicationsList',
-  mixins: [ApplicationStatusEnum.Mixin],
   components: {
     ApplicationDetailsComponent,
     ApplicationStatusComponent
   },
+  mixins: [ApplicationStatusEnum.Mixin],
   data () {
     return {
       fields: [
@@ -91,11 +117,92 @@ export default Vue.extend({
         'selected'
       ],
       applications: [
-        { id: 1, displayName: '1 Poupette TOTO', eventName: 'Stage long à EPITA Paris', eventDate: '12 janvier au 15 décembre 1245', status: 'ONGOING', buttons: [{ type: 0, title: 'Supprimer la candidature', action: function () { console.log('yea') } }] },
-        { id: 2, displayName: '2 Poupette TOTO', eventName: 'Stage court à EPITA Paris', eventDate: '12 janvier au 15 décembre 1245', status: 'REJECTED', buttons: [{ type: 0, title: 'Supprimer la candidature', action: function () { console.log('yea') } }] },
-        { id: 3, displayName: '3 Valentin SEUX', eventName: 'Stage long à l’ENS Lyon', eventDate: '12 janvier au 15 décembre 1245', status: 'ACCEPTED_WAITING_VALIDATION', buttons: [] },
-        { id: 4, displayName: '4 Poupette TOTO', eventName: 'Stage long à l’ENS Lyon', eventDate: '12 janvier au 15 décembre 1245', status: 'ACCEPTED_AND_VALIDATED', buttons: [{ type: 0, title: 'Confirmer sa venue', action: function () { console.log('yea') } }, { type: 1, title: 'Annuler sa candiature', action: function () { console.log('yea') } }] },
-        { id: 5, displayName: '5 Poupette TOTO', eventName: 'Stage long à l’ENS Lyon', eventDate: '12 janvier au 15 décembre 1245', status: 'COMPLETE', buttons: [{ type: 0, title: 'Télécharger ses fichiers', action: function () { console.log('yea') } }, { type: 0, title: 'Voir les photos', action: function () { console.log('yea') } }] }
+        {
+          id: 1,
+          displayName: '1 Poupette TOTO',
+          eventName: 'Stage long à EPITA Paris',
+          eventDate: '12 janvier au 15 décembre 1245',
+          status: 'ONGOING',
+          buttons: [
+            {
+              type: 0,
+              title: 'Supprimer la candidature',
+              action: function () {
+                console.log('yea')
+              }
+            }
+          ]
+        },
+        {
+          id: 2,
+          displayName: '2 Poupette TOTO',
+          eventName: 'Stage court à EPITA Paris',
+          eventDate: '12 janvier au 15 décembre 1245',
+          status: 'REJECTED',
+          buttons: [
+            {
+              type: 0,
+              title: 'Supprimer la candidature',
+              action: function () {
+                console.log('yea')
+              }
+            }
+          ]
+        },
+        {
+          id: 3,
+          displayName: '3 Valentin SEUX',
+          eventName: 'Stage long à l’ENS Lyon',
+          eventDate: '12 janvier au 15 décembre 1245',
+          status: 'ACCEPTED_WAITING_VALIDATION',
+          buttons: []
+        },
+        {
+          id: 4,
+          displayName: '4 Poupette TOTO',
+          eventName: 'Stage long à l’ENS Lyon',
+          eventDate: '12 janvier au 15 décembre 1245',
+          status: 'ACCEPTED_AND_VALIDATED',
+          buttons: [
+            {
+              type: 0,
+              title: 'Confirmer sa venue',
+              action: function () {
+                console.log('yea')
+              }
+            },
+            {
+              type: 1,
+              title: 'Annuler sa candiature',
+              action: function () {
+                console.log('yea')
+              }
+            }
+          ]
+        },
+        {
+          id: 5,
+          displayName: '5 Poupette TOTO',
+          eventName: 'Stage long à l’ENS Lyon',
+          eventDate: '12 janvier au 15 décembre 1245',
+          status: 'COMPLETE',
+          buttons: [
+            {
+              type: 0,
+              title: 'Télécharger ses fichiers',
+              action: function () {
+                console.log('yea')
+              }
+            },
+            {
+              type: 0,
+              title: 'Voir les photos',
+              action: function () {
+                console.log('yea')
+              }
+            }
+          ]
+        }
       ]
     }
   }

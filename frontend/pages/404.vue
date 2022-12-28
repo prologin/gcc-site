@@ -5,12 +5,12 @@
       <b-row class="page-not-found-background">
         <b-col class="my-auto content-background" md="auto" offset-md="6">
           <p class="text-center">
-            <span class="error-code">404</span><br />
-            <span class="error-message">Page introuvable</span><br />
+            <span class="error-code">404</span><br >
+            <span class="error-message">Page introuvable</span><br >
           </p>
-          <NuxtLink to="/" class="primary-button" block
-            >Retour a l'accueil</NuxtLink
-          >
+          <NuxtLink to="/" class="primary-button" block>
+            Retour a l'accueil
+          </NuxtLink>
           <span class="light-text"
             >Si vous pensez que ceci est une erreur, envoyez un mail à
             {{ Constants.CONTACT_EMAIL }}</span
@@ -28,14 +28,14 @@ import Header from "@/components/Header.vue";
 import * as Constants from "@/constants";
 
 export default Vue.extend({
-  props: ["error"],
-  name: "error",
+  name: 'error',
   components: {
-    Header,
+    Header
   },
+  props: ["error"],
   created() {
     this.Constants = Constants;
-  },
+  }
 });
 </script>
 
