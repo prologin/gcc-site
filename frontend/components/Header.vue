@@ -65,11 +65,9 @@
 
       <b-navbar-nav v-else class="ml-auto">
         <b-nav-item>
-          <b-button class="primary-button px-4">
-            <NuxtLink to="/LoginRegisterView" style="color: white">
-              Connexion
-            </NuxtLink>
-          </b-button>
+          <NuxtLink to="/LoginRegisterView" class="primary-button py-2 px-4" style="color: white">
+            Connexion
+          </NuxtLink>
         </b-nav-item>
         <b-nav-item>
           <hr class="my-1" />
