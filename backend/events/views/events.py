@@ -38,8 +38,14 @@ class EventFilter(filters.FilterSet):
             "If `true`, only return events for which registrations is open."
         ),
     )
+    camps_type = filters.CharFilter(
+        field_name="camps_type",
+        help_text=(
+            "Filter by camps type. "
+        )
+    )
     center = filters.CharFilter(
-        field_name="center__name",
+        field_name="center_name",
         help_text=(
             "Filter by center. "
             "The argument must exactly match the center name."

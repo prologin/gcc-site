@@ -66,6 +66,7 @@ class PartialEventSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
+            "camps_type",
             "center",
             "start_date",
             "end_date",

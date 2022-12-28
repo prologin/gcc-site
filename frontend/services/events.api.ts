@@ -8,6 +8,7 @@ export default class EventsAPIService extends BaseAPIService {
   async eventsList (
     onlyOpen?: boolean,
     center?: string,
+    campsType?: string,
     startsAfter?: string,
     endsBefore?: string,
     signupStartsAfter?: string,
@@ -18,6 +19,7 @@ export default class EventsAPIService extends BaseAPIService {
       url: '/',
       params: {
         only_open: onlyOpen,
+        campsType,
         center,
         starts_after: startsAfter,
         ends_before: endsBefore,
