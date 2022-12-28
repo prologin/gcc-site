@@ -93,14 +93,14 @@ User passwords are the same as their username.
 # Working on the Frontend
 ## First setup
 
-Go into `front` and launch `yarn install` to install dependencies locally.
+Go into `frontend` and launch `yarn install` to install dependencies locally.
 This might take a while.
 
 ## Run
 
 To launch the site (with hot reloading):
 ```
-yarn serve
+yarn dev
 ```
 
 You can now access the front at `http://localhost:8080`.
