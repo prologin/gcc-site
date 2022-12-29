@@ -38,13 +38,9 @@
       </b-container>
       <!-- Featured partners -->
       <!-- TODO change style -->
-      <b-container fluid class="content">
-        <b-container fluid class="content-background">
-          <div class="m-5">
-            <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="true" />
-          </div>
-        </b-container>
-      </b-container>
+      <div fluid class="m-4">
+          <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="true" />
+      </div>
       <!-- Event list -->
       <EventList id="event-list" />
 
@@ -52,7 +48,9 @@
       <FAQ id="faq" />
 
       <!-- Partners -->
-      <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="false" />
+      <div fluid class="m-4">
+          <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="false" />
+      </div>
 
       <!-- Newsletter -->
       <b-container fluid class="newsletter-background text-center">
