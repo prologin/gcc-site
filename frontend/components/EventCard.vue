@@ -55,7 +55,7 @@
       </b-col>
       <!-- type -->
       <b-col>
-        {{ camps_type }}
+        {{ CampsType[camps_type] }}
       </b-col>
       <b-col>
         {{ date }}
@@ -77,6 +77,11 @@ import Vue from "vue";
 import EventInfo from "@/components/EventInfo.vue";
 import ScheduleTypeEnum from "@/enums/ScheduleTypeEnum.js";
 import { formatDate } from "@/services/date";
+
+const CampsType = {
+  short: "Stage Court",
+  long: "Stage Long"
+};
 
 export default Vue.extend({
   name: "EventCard",
@@ -104,8 +109,13 @@ export default Vue.extend({
       return (
         "Du " + formatDate(this.start_date) + " au " + formatDate(this.end_date)
       );
-    }
+    },
   },
+  data() {
+    return {
+      CampsType
+    }
+  }
 });
 </script>
 
