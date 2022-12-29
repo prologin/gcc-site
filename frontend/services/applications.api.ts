@@ -5,11 +5,12 @@ export default class ApplicationsAPIService extends BaseAPIService {
     super('applications')
   }
 
-  async applicationsList (event_id?:number) {
+  async applicationsList (user_id?:number, event_id?:number) {
     return this.axiosCall({
       method: 'get',
       url: '/',
       params: {
+        user_id: user_id,
         event_id:event_id
       }
     })
