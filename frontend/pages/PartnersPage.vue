@@ -8,7 +8,7 @@
             <h1>Nos partenaires</h1>
             <p>Merci à tous nos partenaires qui nous permettent d'organiser les stages.</p>
             <hr>
-            <PartnersStatic />
+            <Partners />
             <hr>
             <h4>Si vous souhaitez nous soutenir, vous pouvez nous envoyer un mail à <a
                 :href="`mailto:${Constants.PARTNERS_EMAIL}`">
@@ -24,7 +24,7 @@
 
 <script>
 import Vue from 'vue'
-import Partners from '@/components/PartnersStatic.vue'
+import Partners from '@/components/PartnersDynamic.vue'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 

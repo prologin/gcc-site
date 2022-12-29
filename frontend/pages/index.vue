@@ -38,8 +38,13 @@
       </b-container>
       <!-- Featured partners -->
       <!-- TODO change style -->
-      <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="true" />
-
+      <b-container fluid class="content">
+        <b-container fluid class="content-background">
+          <div class="m-5">
+            <Partners v-bind:isFrontPage="true" v-bind:isFeaturedSpace="true" />
+          </div>
+        </b-container>
+      </b-container>
       <!-- Event list -->
       <EventList id="event-list" />
 
