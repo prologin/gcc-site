@@ -56,7 +56,7 @@ services:
   backend_dev: &backend_dev
     image: backend_dev
     build:
-      context: ../api
+      context: ../backend
       args:
         DJANGO_UID: 1000
         DJANGO_GID: 1000
@@ -92,7 +92,7 @@ services:
       - s3_dev:s3-dev
     volumes:
       - type: bind
-        source: ../api
+        source: ../backend
         target: /app/gccsite/
       - type: bind
         source: ./volumes/ipython
