@@ -113,6 +113,7 @@ lint:backend:
   artifacts:
     reports:
       junit: backend/prospector-output.xml
+  allow_failure: true
 
 lint:frontend:
   stage: qa
