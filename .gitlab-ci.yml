@@ -126,6 +126,7 @@ lint:frontend:
     - cd backend
   script:
     - yarn lint
+  allow_failure: true
 
 lint:shellcheck:
   stage: qa
