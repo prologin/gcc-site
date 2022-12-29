@@ -17,7 +17,7 @@
         ce formulaire nous permettent de préparer le stage: sélections,
         documents, nourritures, etc. Pour en apprendre plus à propos de notre
         gestion des données et de vos droits, consultez
-        <NuxtLink to="privacy"> page dédiée </NuxtLink>
+        <NuxtLink to="/Privacy"> page dédiée </NuxtLink>
       </p>
     </div>
     <b-row class="mx-0 mx-md-5">
@@ -295,6 +295,7 @@ import Footer from "@/components/Footer.vue";
 
 export default Vue.extend({
   name: 'AccountPage',
+  middleware: 'auth',
   components: {
     Header,
     Footer

@@ -20,6 +20,12 @@ export default {
       },
     ]
   },
+
+  build: {
+    transpile: [
+      'defu'
+    ]
+  },
   buildModules: ["@nuxt/typescript-build"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -29,7 +35,7 @@ export default {
    ** Nuxt.js modules
    ** Doc: https://modules.nuxtjs.org
    */
-  modules: ["bootstrap-vue/nuxt", "@nuxtjs/axios"],
+  modules: ["bootstrap-vue/nuxt", "@nuxtjs/axios", "@nuxtjs/auth-next"],
 
   bootstrapVue: {
     icons: true,
@@ -45,17 +51,29 @@ export default {
     },
   },
 
-  axios: {
-    proxy: true,
+  auth: {
+    strategies: {
+      prologin: {
+        provider: "~/schemes/prologin",
+        clientId: "tVOgJ4hxT8uV0bjMIjT4psPARaR1XgxhIYoXcqnGIFZVmCpMTrhDKEK2qy6TT9VO",
+        clientSecret: "t9pvgKnwB37CeutWpPOEKMDv3gmp9kjUtQ5ifDzF9gBPMGO4yhHLdUNnh7AjRuWH",
+        endpoints: {
+          configuration: "https://auth.prologin.org/application/o/prologin-public-test-client/.well-known/openid-configuration",
+        },
+      },
+    },
+    redirect: {
+      login: "/LoginRegisterView",
+      callback: "/callback",
+      home: "/",
+    }
   },
 
-  proxy: {
-    "/rest/": {
-      target:
-        process.env.BACKEND_URL == undefined
-          ? "http://localhost:8000"
-          : process.env.BACKEND_URL,
-    },
+  axios: {
+    baseURL: process.env.BACKEND_URL == undefined ? "http://backend_dev:8000" : process.env.BACKEND_URL,
+    browserBaseURL: process.env.BROWSER_BACKEND_URL == undefined ? "http://localhost:8000" : process.env.BROWSER_BACKEND_URL,
+    proxy: true,
+    proxyHeaders: true,
   },
 
   /*

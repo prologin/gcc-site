@@ -33,6 +33,7 @@ import Header from "@/components/Header.vue";
 
 export default Vue.extend({
   name: 'Candidatures',
+  middleware: 'auth',
   components: {
     Header,
     ApplicationsList,

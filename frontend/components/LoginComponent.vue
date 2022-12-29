@@ -84,7 +84,8 @@ export default Vue.extend({
   },
   methods: {
     async login() {
-      this.emptyFields = false;
+      this.$auth.loginWith('prologin');
+      /*this.emptyFields = false;
       if (this.loginForm.email === "" || this.loginForm.password === "") {
         this.emptyFields = true;
       } else {
@@ -107,7 +108,7 @@ export default Vue.extend({
                 "Une erreur inconnue est survenue. Si le problème persiste, nous vous invitons à réessayer plus tard.";
             }
           });
-      }
+      }*/
     },
   }
 });

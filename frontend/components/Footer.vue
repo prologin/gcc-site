@@ -12,7 +12,7 @@
       </b-col>
       <b-col class="col-12 col-lg-auto text-center text-lg-left">
         <NuxtLink
-          to="Privacy"
+          to="/Privacy"
           class="secondary-button footer-link-style my-auto"
         >
           Politique de confidentialité
@@ -20,7 +20,7 @@
       </b-col>
       <b-col class="col-12 col-lg-auto text-center text-lg-left">
         <NuxtLink
-          to="LegalNotices"
+          to="/LegalNotices"
           class="secondary-button footer-link-style my-auto"
         >
           Mentions légales

@@ -13,7 +13,7 @@
     </NuxtLink>
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav v-if="isAuthenticated" class="ml-auto">
+      <b-navbar-nav v-if="loggedIn" class="ml-auto">
         <b-nav-item>
           <b-dropdown
             right
@@ -89,6 +89,7 @@ export default Vue.extend({
   name: "Header",
   data() {
     return {
+      loggedIn: this.$auth.loggedIn,
       showNavbar: true,
       lastScrollPosition: 0,
     }
