@@ -105,8 +105,8 @@ export default Vue.extend({
         town: '',
         phone: '',
       }
-    };
-  }
+    }
+  },
 });
 </script>
 

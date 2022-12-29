@@ -27,8 +27,8 @@ export default Vue.extend({
   methods: {
     scrollTo (index) {
       document.getElementById(index).scrollIntoView({ behavior: 'smooth' })
-    },
-  }
+    }
+  },
 });
 </script>
 

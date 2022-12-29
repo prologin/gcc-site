@@ -12,7 +12,7 @@ export default class PartnersAPIService extends BaseAPIService {
       params: {
         is_on_front_page: isOnFrontPage,
         featured: isFeatured
-      },
+      }
     })
   }
 

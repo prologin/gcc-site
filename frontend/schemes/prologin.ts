@@ -1,8 +1,13 @@
-import axios from 'axios'
-import bodyParser from 'body-parser'
-import defu from 'defu'
-import qs from 'querystring'
-import type { StrategyOptions, ProviderOptions, ProviderPartialOptions, Oauth2SchemeOptions } from '@nuxt-auth/types'
+import qs from "querystring";
+import axios from "axios";
+import bodyParser from "body-parser";
+import defu from "defu";
+import type {
+  StrategyOptions,
+  ProviderOptions,
+  ProviderPartialOptions,
+  Oauth2SchemeOptions
+} from '@nuxt-auth/types';
 
 // From https://github.com/nuxt-community/auth-module/blob/dfbbb540c5e6c1f0bff0b356c46f50d48ee3f9a5/src/utils/provider.ts
 function assignDefaults<SOptions extends StrategyOptions>(
@@ -13,12 +18,10 @@ function assignDefaults<SOptions extends StrategyOptions>(
 }
 
 // From https://github.com/nuxt-community/auth-module/blob/dfbbb540c5e6c1f0bff0b356c46f50d48ee3f9a5/src/utils/provider.ts
-function addAuthorize<
-  SOptions extends StrategyOptions<Oauth2SchemeOptions>
->(
-  nuxt: any, // eslint-disable-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+function addAuthorize<SOptions extends StrategyOptions<Oauth2SchemeOptions>>(
+  nuxt: any,
   strategy: SOptions,
-  useForms: boolean = false
+  useForms = false
 ): void {
   // Get clientSecret, clientId, endpoints.token and audience
   const clientSecret = strategy.clientSecret
@@ -34,7 +37,7 @@ function addAuthorize<
   strategy.endpoints.token = endpoint
 
   // Set response_type to code
-  strategy.responseType = 'code'
+  strategy.responseType = 'code';
 
   // Form data parser
   const formMiddleware = bodyParser.urlencoded({ extended: true })
@@ -77,18 +80,18 @@ function addAuthorize<
           audience,
           code_verifier: codeVerifier,
           code
-        }
+        };
 
         console.log(data)
 
         const headers = {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         }
 
         if (useForms) {
           data = qs.stringify(data)
-          headers['Content-Type'] = 'application/x-www-form-urlencoded'
+          headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
         axios
@@ -106,9 +109,9 @@ function addAuthorize<
             console.log(error.response.data)
             res.statusCode = error.response.status
             res.end(JSON.stringify(error.response.data))
-          })
+          });
       })
-    }
+    },
   })
 }
 
@@ -116,15 +119,15 @@ export interface ProloginProviderOptions
   extends ProviderOptions,
     Oauth2SchemeOptions {}
 
-export default function(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+export default function (
   nuxt: any,
   strategy: ProviderPartialOptions<ProloginProviderOptions>
 ): void {
   const DEFAULTS: typeof strategy = {
     scheme: 'openIDConnect',
     endpoints: {
-      configuration: "https://auth.prologin.org/application/o/prologin-public-test-client/.well-known/openid-configuration",
+      configuration:
+        "https://auth.prologin.org/application/o/prologin-public-test-client/.well-known/openid-configuration",
       token: "https://auth.prologin.org/application/o/token/",
     },
     acrValues: "goauthentik.io/providers/oauth2/default",

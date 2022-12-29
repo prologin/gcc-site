@@ -30,4 +30,4 @@ export const formatDate = function (dateUtc: string) {
     ' ' +
     monthsNames[date.getMonth()]
   )
-};
+}

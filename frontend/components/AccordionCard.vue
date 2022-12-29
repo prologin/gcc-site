@@ -43,8 +43,8 @@ export default Vue.extend({
     colorClass: function () {
       const colors = ["gcc-pink", "gcc-green", "gcc-blue"];
       return colors[this.index % colors.length]
-    },
-  }
+    }
+  },
 });
 </script>
 

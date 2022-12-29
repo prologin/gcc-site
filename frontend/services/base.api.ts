@@ -10,7 +10,7 @@ import { authAPI } from '@/services/auth.api';
 export default class BaseAPIService {
   private axiosInstance: AxiosInstance
 
-  constructor(resource: string) {
+  constructor (resource: string) {
     this.axiosInstance = axios.create({
       baseURL: '/rest/v1/' + resource
     });
@@ -23,7 +23,7 @@ export default class BaseAPIService {
         config.headers = {
           ...config.headers,
           authorization: `Bearer ${access}`
-        };
+        }
       }
 
       return config

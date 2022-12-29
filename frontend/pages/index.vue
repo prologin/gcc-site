@@ -84,7 +84,7 @@ export default Vue.extend({
     FAQ,
     Newsletter,
     Footer,
-  }
+  },
 });
 </script>
 

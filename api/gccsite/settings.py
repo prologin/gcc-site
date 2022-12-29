@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
-from django_utils.settings.common import *
-from django_utils.settings.logging import *
 from django_utils.settings.caches import *
+from django_utils.settings.common import *
 from django_utils.settings.databases import *
+from django_utils.settings.logging import *
 
 from django_utils.settings.auth import *  # isort:skip
 from django_utils.settings.celery import *  # isort:skip
@@ -34,16 +34,13 @@ INSTALLED_APPS = installed_apps(
     with_auth=True, with_celery=True, with_drf=True
 ) + [
     "django_filters",
-
     "events",
     "partners",
     "users",
 ]
 
 
-
 AUTH_USER_MODEL = "users.User"
-
 
 
 MIDDLEWARE = middleware(with_auth=True)

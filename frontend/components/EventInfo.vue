@@ -11,7 +11,7 @@
       />
     </div>
     <b-row class="p-3 d-flex" style="flex-direction: column">
-      <hr class="eventInfo-line" :class="colorClass + '-back'" md="auto" >
+      <hr class="eventInfo-line" :class="colorClass + '-back'" md="auto">
       <b-tbody class="mb-4">
         <h1>Stage : {{ info.name }}</h1>
         <b-row align-h="around" class="m-3">
@@ -127,7 +127,7 @@ export default Vue.extend({
         signup_start_date: '',
         start_date: '',
       }
-    };
+    }
   },
   computed: {
     startdate: function () {
@@ -135,7 +135,7 @@ export default Vue.extend({
     },
     enddate: function () {
       return 'Fin : ' + formatDate(this.info.end_date)
-    },
+    }
   },
   async created () {
     await eventsAPI.eventsRead(this.id).then(
@@ -146,7 +146,7 @@ export default Vue.extend({
         this.showError = true
       }
     )
-  },
+  }
 })
 </script>
 

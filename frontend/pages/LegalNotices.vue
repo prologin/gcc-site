@@ -12,27 +12,27 @@
             pour les jeunes collégiennes et lycéennes pour leur faire découvrir
             l'informatique.
           </template>
-          <hr class="my-4" />
+          <hr class="my-4" >
           <b-row>
             <b-col class="my-auto">
-              <span class="light-text">Adresse :</span><br />
-              {{ Constants.ADDRESS_LINE_1 }}<br />
-              {{ Constants.ADDRESS_LINE_2 }}<br />
-              {{ Constants.ADDRESS_LINE_3 }}<br /><br />
+              <span class="light-text">Adresse :</span><br >
+              {{ Constants.ADDRESS_LINE_1 }}<br >
+              {{ Constants.ADDRESS_LINE_2 }}<br >
+              {{ Constants.ADDRESS_LINE_3 }}<br ><br >
 
-              <span class="light-text">Téléphone :</span><br />
-              {{ Constants.CONTACT_PHONE }}<br /><br />
+              <span class="light-text">Téléphone :</span><br >
+              {{ Constants.CONTACT_PHONE }}<br ><br >
 
-              <span class="light-text">E-mail :</span><br />
-              {{ Constants.CONTACT_EMAIL }}<br /><br />
+              <span class="light-text">E-mail :</span><br >
+              {{ Constants.CONTACT_EMAIL }}<br ><br >
             </b-col>
             <b-col>
-              <span class="light-text">Statut légal</span><br />
+              <span class="light-text">Statut légal</span><br >
               Prologin est une association loi de 1901, déclarée à la
-              sous-préfecture de L'Hay-les-Roses le 04-08-2000.<br /><br />
+              sous-préfecture de L'Hay-les-Roses le 04-08-2000.<br ><br >
 
-              <span class="light-text">Numéro de déclaration CNIL :</span><br />
-              {{ Constants.CNIL_DECL_NUM }}<br /><br />
+              <span class="light-text">Numéro de déclaration CNIL :</span><br >
+              {{ Constants.CNIL_DECL_NUM }}<br ><br >
 
               <span class="light-text">Conformément à l'article 34 de la loi « Informatique et Liberté
                 », vous disposez d'un droit d'accès, de rectification et
@@ -63,6 +63,6 @@ export default Vue.extend({
   },
   created () {
     this.Constants = Constants
-  },
+  }
 })
 </script>

@@ -9,9 +9,9 @@
             Merci à tous nos partenaires qui nous permettent d'organiser les
             stages.
           </p>
-          <hr />
+          <hr >
           <Partners />
-          <hr />
+          <hr >
           <h4>
             Si vous souhaitez nous soutenir, vous pouvez nous envoyer un mail à
             <a :href="`mailto:${Constants.PARTNERS_EMAIL}`">
@@ -42,6 +42,6 @@ export default Vue.extend({
   },
   created () {
     this.Constants = Constants
-  },
+  }
 })
 </script>

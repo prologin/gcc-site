@@ -57,7 +57,7 @@ export default Vue.extend({
     return {
       globalStartHour: 8,
       schedules: null
-    };
+    }
   },
   created () {
     if (this.scheduleType === ScheduleTypeEnum.WEEKEND) {
@@ -78,8 +78,8 @@ export default Vue.extend({
         }
       }
       return activities
-    },
-  }
+    }
+  },
 });
 </script>
 

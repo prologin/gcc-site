@@ -30,7 +30,7 @@
         <b-button class="primary-button mt-4" block @click="login">
           Se connecter
         </b-button>
-        <hr class="hr-text mt-5" data-content="Ou se connecter avec :" >
+        <hr class="hr-text mt-5" data-content="Ou se connecter avec :">
 
         <b-button block class="login-button">
           <b-row align-v="center">
@@ -77,7 +77,7 @@ export default Vue.extend({
       error: '',
       showError: false,
       emptyFields: false
-    };
+    }
   },
   created() {
     this.Constants = Constants;
@@ -85,7 +85,7 @@ export default Vue.extend({
   methods: {
     async login() {
       this.$auth.loginWith('prologin');
-      /*this.emptyFields = false;
+      /* this.emptyFields = false;
       if (this.loginForm.email === "" || this.loginForm.password === "") {
         this.emptyFields = true;
       } else {
@@ -108,9 +108,9 @@ export default Vue.extend({
                 "Une erreur inconnue est survenue. Si le problème persiste, nous vous invitons à réessayer plus tard.";
             }
           });
-      }*/
+      } */
     },
-  }
+  },
 });
 </script>
 

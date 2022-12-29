@@ -44,7 +44,7 @@ export default Vue.extend({
       event.preventDefault()
       console.log('TOTO');
     }
-  },
+  }
 })
 </script>
 

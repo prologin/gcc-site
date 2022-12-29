@@ -61,7 +61,7 @@ export default Vue.extend({
       events: null,
       showError: false,
       Constants
-    }
+    };
   },
   async created() {
     await eventsAPI.eventsList(true).then(
@@ -73,7 +73,7 @@ export default Vue.extend({
         this.showError = true;
       }
     );
-  }
+  },
 });
 </script>
 

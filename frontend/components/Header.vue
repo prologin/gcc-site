@@ -59,7 +59,7 @@
           </b-dropdown>
         </b-nav-item>
         <b-nav-item>
-          <hr class="my-1" >
+          <hr class="my-1">
         </b-nav-item>
       </b-navbar-nav>
 
@@ -74,7 +74,7 @@
           </NuxtLink>
         </b-nav-item>
         <b-nav-item>
-          <hr class="my-1" >
+          <hr class="my-1">
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -92,7 +92,7 @@ export default Vue.extend({
       loggedIn: this.$auth.loggedIn,
       showNavbar: true,
       lastScrollPosition: 0,
-    }
+    };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
@@ -134,7 +134,7 @@ export default Vue.extend({
       await this.$store.dispatch("user/logout").then(() => {
         (this as any).$router.push("/");
       });
-    }
+    },
   },
   computed: {
     ...mapGetters("user", [
@@ -143,7 +143,7 @@ export default Vue.extend({
       "getLastName",
       "getEmail",
     ]),
-  }
+  },
 });
 </script>
 

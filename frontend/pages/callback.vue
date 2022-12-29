@@ -8,12 +8,12 @@
         Connexion en cours, veuillez patienter.
       </b-list-group-item>
     </b-list-group>
-      User status:
-      <b-badge>{{ $auth.$state.loggedIn ? 'Logged In' : 'Guest' }}</b-badge>
+    User status:
+    <b-badge>{{ $auth.$state.loggedIn ? "Logged In" : "Guest" }}</b-badge>
 
-      State: <pre>{{ state }}</pre>
+    State:
+    <pre>{{ state }}</pre>
   </b-container>
-
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default Vue.extend({
   computed: {
     state() {
       return JSON.stringify(this.$auth.$state, undefined, 2)
-    },
-  },
-})
+    }
+  }
+});
 </script>

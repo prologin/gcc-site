@@ -48,9 +48,9 @@ export default Vue.extend({
   data() {
     return {
       showLogin: true,
-    }
+    };
   }
-})
+});
 </script>
 <style scoped>
 label {

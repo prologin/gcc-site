@@ -34,8 +34,8 @@ export const getters = {
   },
   getCountry: (state) => {
     return state.user ? state.user.country : null;
-  },
-}
+  }
+};
 
 export const actions = {
   async login({ commit }, user) {
@@ -81,8 +81,8 @@ export const actions = {
         localStorage.removeItem("refresh");
       }
     );
-  },
-}
+  }
+};
 
 export const mutations = {
   loginSuccess(state, user) {
@@ -95,5 +95,5 @@ export const mutations = {
 
   logout (state) {
     state.user = null
-  },
-}
+  }
+};

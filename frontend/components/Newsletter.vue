@@ -43,14 +43,14 @@ export default Vue.extend({
       form: {
         email: '',
       }
-    };
+    }
   },
   methods: {
     onSubmit (event) {
       event.preventDefault()
       alert(JSON.stringify(this.form))
-    },
-  }
+    }
+  },
 });
 </script>
 

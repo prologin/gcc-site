@@ -295,11 +295,11 @@ import Footer from "@/components/Footer.vue";
 
 export default Vue.extend({
   name: 'AccountPage',
-  middleware: 'auth',
   components: {
     Header,
-    Footer
+    Footer,
   },
+  middleware: "auth",
   data () {
     return {
       accountInfo: null,
@@ -323,7 +323,7 @@ export default Vue.extend({
       newsletter: 'NO',
     }
     this.email = this.$store.getters.getEmail
-  },
+  }
 })
 </script>
 

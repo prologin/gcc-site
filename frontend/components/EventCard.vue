@@ -73,9 +73,9 @@ export default Vue.extend({
       return (
         "Du " + formatDate(this.start_date) + " au " + formatDate(this.end_date)
       );
-    }
+    },
   }
-})
+});
 </script>
 
 <style>

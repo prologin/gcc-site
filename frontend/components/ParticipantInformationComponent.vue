@@ -78,8 +78,8 @@
 
     <h3>Sélectionner votre classe</h3>
     <b-form-input
-      required
       v-model="class_level"
+      required
       class="slider"
       type="range"
       min="0"
@@ -131,8 +131,8 @@ export default Vue.extend({
         town: '',
         phone: '',
       }
-    };
-  }
+    }
+  },
 });
 </script>
 

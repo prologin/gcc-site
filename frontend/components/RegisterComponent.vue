@@ -261,7 +261,7 @@ export default Vue.extend({
           'background: linear-gradient(90deg, var(--main-hover-color) 100%, #dbdbdb 100%);';
       }
     }
-  },
+  }
 })
 </script>
 

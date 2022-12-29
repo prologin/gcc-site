@@ -18,13 +18,11 @@ export default {
         name: "description",
         content: "description",
       },
-    ]
+    ],
   },
 
   build: {
-    transpile: [
-      'defu'
-    ]
+    transpile: ['defu'],
   },
   buildModules: ["@nuxt/typescript-build"],
 
@@ -48,19 +46,22 @@ export default {
         path: "*",
         component: resolve(__dirname, "pages/404.vue"),
       });
-    },
+    }
   },
 
   auth: {
     strategies: {
       prologin: {
         provider: "~/schemes/prologin",
-        clientId: "tVOgJ4hxT8uV0bjMIjT4psPARaR1XgxhIYoXcqnGIFZVmCpMTrhDKEK2qy6TT9VO",
-        clientSecret: "t9pvgKnwB37CeutWpPOEKMDv3gmp9kjUtQ5ifDzF9gBPMGO4yhHLdUNnh7AjRuWH",
+        clientId:
+          "tVOgJ4hxT8uV0bjMIjT4psPARaR1XgxhIYoXcqnGIFZVmCpMTrhDKEK2qy6TT9VO",
+        clientSecret:
+          "t9pvgKnwB37CeutWpPOEKMDv3gmp9kjUtQ5ifDzF9gBPMGO4yhHLdUNnh7AjRuWH",
         endpoints: {
-          configuration: "https://auth.prologin.org/application/o/prologin-public-test-client/.well-known/openid-configuration",
+          configuration:
+            "https://auth.prologin.org/application/o/prologin-public-test-client/.well-known/openid-configuration",
         },
-      },
+      }
     },
     redirect: {
       login: "/LoginRegisterView",
@@ -70,8 +71,14 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.BACKEND_URL == undefined ? "http://backend_dev:8000" : process.env.BACKEND_URL,
-    browserBaseURL: process.env.BROWSER_BACKEND_URL == undefined ? "http://localhost:8000" : process.env.BROWSER_BACKEND_URL,
+    baseURL:
+      process.env.BACKEND_URL == undefined
+        ? 'http://backend_dev:8000'
+        : process.env.BACKEND_URL,
+    browserBaseURL:
+      process.env.BROWSER_BACKEND_URL == undefined
+        ? 'http://localhost:8000'
+        : process.env.BROWSER_BACKEND_URL,
     proxy: true,
     proxyHeaders: true,
   },

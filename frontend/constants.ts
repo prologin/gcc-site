@@ -36,8 +36,8 @@ export const SOCIAL_NETWORKS = [
     link: 'https://twitter.com/prologin',
     logo: 'fa-brands fa-square-twitter',
     alt: "Page Twitter de l'association Prologin"
-  },
-]
+  }
+];
 
 export const PRIVACY_LIST = [
   {
@@ -73,8 +73,8 @@ export const PRIVACY_LIST = [
   {
     title: 'Vos droits sur vos données',
     content: `<h4>L'essentiel</h4><p>Vous disposez (le cas échéant <em>via</em> le responsable légal) des droits d'accéder et d'obtenir copie des données vous concernant, de vous opposer au traitement de ces données, de les faire rectifier ou les faire effacer. Vous disposez également d'un droit à la limitation du traitement de vos données. <a href="https://www.cnil.fr/fr/comprendre-vos-droits">Rendez-vous sur le site de la CNIL pour mieux comprendre vos droits.</a></p><h4>Exercer vos droits</h4><p>Toute demande d'exercice de vos droits doit être adressée par voie électronique à <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.</p><h4>Réclamation auprès de la CNIL</h4><p>Si vous estimez, après nous avoir contacté, que vos droits sur vos données ne sont pas respectés, vous pouvez alors <a href="https://www.cnil.fr/fr/webform/adresser-une-plainte">adresser une réclamation à la CNIL</a>.</p>`
-  },
-]
+  }
+];
 
 export const FAQ_ENTRIES = [
   {
@@ -119,8 +119,8 @@ export const FAQ_ENTRIES = [
     question: 'Je ne suis pas éligible aux stages GCC!, que me suggérez-vous ?',
     answer:
       '<h4>Si tu as déjà codé</h4><p>Nous te proposons de participer au concours <a href="https://prologin.org">Prologin</a>.<h4>Si tu souhaites débuter</h4> Tu peux te laisser guider par les exercices de <a href="http://www.france-ioi.org/">France-IOI</a> et si tu te débrouilles en anglais, il y a <a href="https://www.codecademy.com/">Codecademy</a>.</p>'
-  },
-]
+  }
+];
 
 export const BUTTON_SNS = [
   {
@@ -139,4 +139,4 @@ export const BUTTON_SNS = [
     logo: "fa-brands fa-facebook",
     name: 'Facebook',
   }
-];
+]

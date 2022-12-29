@@ -55,6 +55,6 @@ export default Vue.extend({
           return '';
       }
     }
-  },
+  }
 })
 </script>
