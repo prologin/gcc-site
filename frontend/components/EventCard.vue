@@ -44,16 +44,26 @@
     </b-row>
   </div>
 
-  <div v-else>
-    <b-row class="event-card mb-4 p-3">
-      <b-col class="my-auto d-none d-sm-block" md="auto">
+  <tbody v-else>
+    <tr>
+          <th scope="row"> <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" /> </th>
+          <td> {{ title }} </td>
+          <td> {{ CampsType[camps_type] }} </td>
+          <td> {{ date }} </td>
+          <td>
+            <NuxtLink to="/review">
+              Review
+            </NuxtLink>
+          </td>
+        </tr>
+      </tbody>
+<!--   <b-row class="event-card mb-4 p-3">
+      <b-col>
         <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
       </b-col>
-      <!-- Event infos verticaly centered -->
-      <b-col class="d-none d-sm-block" md="2">
+      <b-col>
         {{ title }}
       </b-col>
-      <!-- type -->
       <b-col>
         {{ CampsType[camps_type] }}
       </b-col>
@@ -61,15 +71,11 @@
         {{ date }}
       </b-col>
       <b-col>
-        {{ address }}
-      </b-col>
-      <b-col>
         <NuxtLink to="/review">
           Review
         </NuxtLink>
       </b-col>
-    </b-row>
-  </div>
+    </b-row> -->
 </template>
 
 <script>
