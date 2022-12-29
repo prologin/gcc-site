@@ -1,9 +1,10 @@
 <template>
   <b-container fluid>
+    <b-row align-h="center">
       <b-link
         v-b-modal="'modal-' + partner.name"
         v-for="(partner, index) in partnersSortedByOrder"
-        :key="index" class="m-5">
+        :key="index">
         <b-img
           class="partners-logo-style"
           :src="partner.logo"
@@ -34,6 +35,7 @@
           </b-card>
         </b-modal>
       </b-link>
+    </b-row>
   </b-container>
 </template>
 
