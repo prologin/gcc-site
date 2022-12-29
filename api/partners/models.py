@@ -9,7 +9,6 @@ class Partner(models.Model):
 
     description = models.TextField(
         verbose_name="Description",
-        max_length=2_000,
         blank=True,
         null=True,
     )
