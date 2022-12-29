@@ -124,7 +124,7 @@ lint:frontend:
     name: $CI_REGISTRY_IMAGE/frontend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
     entrypoint: [""]
   before_script:
-    - cd backend
+    - cd frontend
   script:
     - yarn lint
   allow_failure: true
