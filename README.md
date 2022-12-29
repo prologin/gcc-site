@@ -93,13 +93,15 @@ Database: 'gccsite_dev'
 
 #### Loading development data
 
-Some development data is provided in the `api/fixtures/` directory. You can
+Some development data is provided in the `backend/fixtures/` directory. You can
 load this data in your DB by running:
 
 ``` sh
 $ cd docker/
-$ ./manage.sh loaddata <fixture>.json
+$ ./manage.sh loaddata fixtures/<fixture>.json # replace <fixture> with the one you want to load
 ```
+
+/!\ Note that you will need to import users before importing events.
 
 For the `users` fixture, user passwords are the same as their usernames.
 
