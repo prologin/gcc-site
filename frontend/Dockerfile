@@ -16,7 +16,7 @@ WORKDIR /build
 RUN --mount=type=bind,target=./package.json,src=./package.json \
     --mount=type=bind,target=./yarn.lock,src=./yarn.lock \
     --mount=type=cache,target=/root/.yarn \
-    yarn install
+    yarn install --frozen-lockfile
 
 COPY ./ ./
 
