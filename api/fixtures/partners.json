@@ -7,7 +7,7 @@
       "description": "",
       "website_url": "https://epita.fr",
       "is_on_front_page": true,
-      "featured": true,
+      "featured": false,
       "logo": "epita.jpg",
       "enabled": true,
       "order": 0
@@ -16,20 +16,6 @@
   {
     "model": "partners.partner",
     "pk": 2,
-    "fields": {
-      "name": "EPITECH",
-      "description": "",
-      "website_url": "https://www.epitech.eu",
-      "is_on_front_page": true,
-      "featured": false,
-      "logo": "epitech.png",
-      "enabled": true,
-      "order": 0
-    }
-  },
-  {
-    "model": "partners.partner",
-    "pk": 3,
     "fields": {
       "name": "Ville du Kremlin-Bicêtre",
       "description": "",
@@ -43,7 +29,7 @@
   },
   {
     "model": "partners.partner",
-    "pk": 4,
+    "pk": 3,
     "fields": {
       "name": "42",
       "description": "",
@@ -57,7 +43,7 @@
   },
   {
     "model": "partners.partner",
-    "pk": 5,
+    "pk": 4,
     "fields": {
       "name": "Académie de Paris",
       "description": "",
@@ -71,7 +57,7 @@
   },
   {
     "model": "partners.partner",
-    "pk": 6,
+    "pk": 5,
     "fields": {
       "name": "Académie d'Orléans-Tours",
       "description": "",
@@ -85,7 +71,7 @@
   },
   {
     "model": "partners.partner",
-    "pk": 7,
+    "pk": 6,
     "fields": {
       "name": "AFER",
       "description": "Avec plus de 750 000 adhérents ayant souscrit un contrat d’Assurance vie, une épargne gérée de près de 60 milliards d’euros et quelque 2 millions de bénéficiaires, l’Afer est aujourd’hui la plus puissante association représentative des épargnants français. Elle souhaite maintenir et renforcer son rôle d’étendard pour valoriser le rôle social et humain de l’assurance vie auprès des épargnants. Depuis 1976, date de sa création, elle est force de proposition vis-à-vis des parlementaires et des pouvoirs publics. Sa puissance lui permet de faire entendre sa voix chaque fois que les avantages de l’assurance vie sont remis en cause et chaque fois que l’intérêt de ses adhérents le rend nécessaire.",
@@ -99,21 +85,7 @@
   },
   {
     "model": "partners.partner",
-    "pk": 8,
-    "fields": {
-      "name": "Alsace Digitale",
-      "description": "",
-      "website_url": "https://www.alsacedigitale.org/",
-      "is_on_front_page": false,
-      "featured": false,
-      "logo": "ad.png",
-      "enabled": false,
-      "order": 0
-    }
-  },
-  {
-    "model": "partners.partner",
-    "pk": 9,
+    "pk": 7,
     "fields": {
       "name": "Jane Street",
       "description": "",
@@ -127,7 +99,7 @@
   },
   {
     "model": "partners.partner",
-    "pk": 10,
+    "pk": 8,
     "fields": {
       "name": "Ministère chargé de l'égalité entre les femmes et les hommes, de la diversité et de l'égalité des chances",
       "description": "",
@@ -135,6 +107,202 @@
       "is_on_front_page": true,
       "featured": true,
       "logo": "minfh.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 9,
+    "fields": {
+      "name": "LABEX Milyon",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "epita-logo_OM3Qcaz.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 10,
+    "fields": {
+      "name": "Tarides",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "epita-logo_yRB5cX6.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 11,
+    "fields": {
+      "name": "Google For Education",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "epita-logo_CdTzRsd.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 12,
+    "fields": {
+      "name": "SNCF Mixité",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "epita-logo_p9PTLR9.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 13,
+    "fields": {
+      "name": "ENS Lyon",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "epita-logo_Z7WtUlh.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 14,
+    "fields": {
+      "name": "Banque des Territoires",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "epita-logo_YQLThq3.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 15,
+    "fields": {
+      "name": "BNP",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": false,
+      "logo": "epita-logo_GnF8EHc.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 16,
+    "fields": {
+      "name": "Ville de Strasbourg",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": false,
+      "featured": false,
+      "logo": "strasbourg-logo_qJ6yWQo.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 17,
+    "fields": {
+      "name": "Ministere des l'education national",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": true,
+      "logo": "ministere-logo_ozHRxod.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 18,
+    "fields": {
+      "name": "Ministère de l'enseignement supérieur et de la recherche",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": true,
+      "logo": "ministere-logo_9aOs4fl.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 19,
+    "fields": {
+      "name": "Ministère des armées",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": true,
+      "logo": "ministere-logo_3aPqjNj.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 20,
+    "fields": {
+      "name": "SNCF Reseau",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": false,
+      "logo": "epita-logo_8fhcbY1.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 21,
+    "fields": {
+      "name": "Société Général",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": false,
+      "logo": "epita-logo_vvSIr35.png",
+      "enabled": true,
+      "order": 0
+    }
+  },
+  {
+    "model": "partners.partner",
+    "pk": 22,
+    "fields": {
+      "name": "Le Bon Coin",
+      "description": "",
+      "website_url": null,
+      "is_on_front_page": true,
+      "featured": false,
+      "logo": "epita-logo_gStQ8hV.png",
       "enabled": true,
       "order": 0
     }
