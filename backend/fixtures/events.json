@@ -276,6 +276,7 @@
     "pk": 1,
     "fields": {
       "name": "GCC! Strasbourg été 2022",
+      "camps_type": "short",
       "center": 2,
       "signup_start_date": "2022-05-31T22:00:00Z",
       "signup_end_date": "2022-07-16T21:59:00Z",
@@ -291,6 +292,7 @@
     "pk": 2,
     "fields": {
       "name": "GCC! Paris été 2022",
+      "camps_type": "short",
       "center": 1,
       "signup_start_date": "2022-05-31T22:00:00Z",
       "signup_end_date": "2022-08-15T21:59:00Z",
@@ -306,6 +308,7 @@
     "pk": 3,
     "fields": {
       "name": "GCC! Test. (Always open)",
+      "camps_type": "short",
       "center": 1,
       "signup_start_date": "1899-12-31T23:51:00Z",
       "signup_end_date": "2099-12-31T23:00:00Z",
