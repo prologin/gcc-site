@@ -82,15 +82,15 @@ license_scanning:
         --local context=$CI_JOB_NAME \
         --local dockerfile=$CI_JOB_NAME \
         --output type=image,\"name=$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA,$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:${CI_COMMIT_TAG:-latest}\",push=true \
-        --import-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:buildcache \
-        --export-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:buildcache,mode=max
+        --import-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME:buildcache \
+        --export-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME:buildcache,mode=max
       buildctl-daemonless.sh build --progress=plain \
         --frontend=dockerfile.v0 \
         --local context=$CI_JOB_NAME \
         --local dockerfile=$CI_JOB_NAME \
         --output type=image,\"name=$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA,$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:${CI_COMMIT_TAG:-latest}\",push=true \
-        --import-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:buildcache \
-        --export-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME/$CI_COMMIT_REF_SLUG:buildcache,mode=max
+        --import-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME:buildcache \
+        --export-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME:buildcache,mode=max
 
 backend:
   extends: .build
