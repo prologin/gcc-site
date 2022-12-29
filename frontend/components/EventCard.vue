@@ -46,36 +46,18 @@
 
   <tbody v-else>
     <tr>
-          <th scope="row"> <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" /> </th>
-          <td> {{ title }} </td>
-          <td> {{ CampsType[camps_type] }} </td>
-          <td> {{ date }} </td>
-          <td>
-            <NuxtLink to="/review">
-              Review
-            </NuxtLink>
-          </td>
-        </tr>
-      </tbody>
-<!--   <b-row class="event-card mb-4 p-3">
-      <b-col>
-        <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
-      </b-col>
-      <b-col>
-        {{ title }}
-      </b-col>
-      <b-col>
-        {{ CampsType[camps_type] }}
-      </b-col>
-      <b-col>
-        {{ date }}
-      </b-col>
-      <b-col>
-        <NuxtLink to="/review">
-          Review
-        </NuxtLink>
-      </b-col>
-    </b-row> -->
+    <th scope="row"> <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" /> </th>
+    <td> {{ title }} </td>
+    <td> {{ CampsType[camps_type] }} </td>
+    <td> {{ date }} {{ this.id }}</td>
+    <td>
+      <NuxtLink to="/candidatures">
+        Review
+      </NuxtLink>
+    </td>
+    </tr>
+  </tbody>
+
 </template>
 
 <script>
