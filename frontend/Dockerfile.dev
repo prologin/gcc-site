@@ -5,7 +5,8 @@ FROM node:18 AS base
 ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8 \
     LANG=C.UTF-8 \
-    NODE_OPTIONS=--openssl-legacy-provider
+    NODE_OPTIONS=--openssl-legacy-provider \
+    NODE_ENV=development
 
 RUN userdel node
 ARG NODE_UID=1000

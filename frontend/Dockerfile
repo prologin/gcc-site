@@ -42,4 +42,6 @@ WORKDIR /app/gccsite
 
 USER app:${NODE_GID}
 
+ENV NODE_ENV=production
+
 ENTRYPOINT ["/app/entrypoint.sh"]
