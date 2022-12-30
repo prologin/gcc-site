@@ -18,7 +18,7 @@ django-filter = "^21.1"
 gunicorn = "^20.1"
 ipython = "*"
 jsonschema = "^4.13.0"
-prologin-django-utils = { version = "0.1.0", extras = ["auth", "celery-extra", "drf", "redis"] }
+prologin-django-utils = { version = "0.2.0", extras = ["auth", "celery-extra", "drf", "redis"] }
 prospector = {extras = ["with_everything"], version = "*"}
 psycopg2 = "^2.9"
 

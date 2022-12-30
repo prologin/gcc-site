@@ -1336,19 +1336,19 @@ files = [
 
 [[package]]
 name = "mozilla-django-oidc"
-version = "2.0.0"
+version = "3.0.0"
 description = "A lightweight authentication and access management library for integration with OpenID Connect enabled authentication services."
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "mozilla-django-oidc-2.0.0.tar.gz", hash = "sha256:a8b2f27c69c122d2f4d801c3759761d33debf06ae9dabbab8aed82887bba3bb8"},
-    {file = "mozilla_django_oidc-2.0.0-py2.py3-none-any.whl", hash = "sha256:53c39755b667e8c5923b1dffc3c29673198d03aa107aa42ac86b8a38b4720c25"},
+    {file = "mozilla-django-oidc-3.0.0.tar.gz", hash = "sha256:a7d447af83cb5aa1671a24009b0ce6b2f0d259e9c58d8c88c7a8d0c27c05c04d"},
+    {file = "mozilla_django_oidc-3.0.0-py2.py3-none-any.whl", hash = "sha256:f535eeddf03698ad9fd89dd87037828e9c7d503771acef21f0509f6cc42fc875"},
 ]
 
 [package.dependencies]
 cryptography = "*"
-Django = ">=2.2"
+Django = ">=3.2"
 josepy = "*"
 requests = "*"
 
@@ -1603,13 +1603,13 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "prologin-django-utils"
-version = "0.1.0"
+version = "0.2.0"
 description = "Utils for Prologin's Django applications"
 category = "main"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "prologin_django_utils-0.1.0.tar.gz", hash = "sha256:52e05d30b239a2a5e70ea3fff64e64b5ffab8dc41ef449dd93d0f2dfb9b2c5e7"},
+    {file = "prologin_django_utils-0.2.0.tar.gz", hash = "sha256:e24fc4fd39a5bf8259e12e5770eb3aa1815debb06f09db96af273671d3354167"},
 ]
 
 [package.dependencies]
@@ -1627,12 +1627,13 @@ django-storages = ">=1.12,<2.0"
 django-structlog = {version = ">=4.0,<5.0", extras = ["celery"]}
 djangorestframework = {version = ">=3.13,<4.0", optional = true, markers = "extra == \"drf\""}
 drf-spectacular = {version = "*", extras = ["offline"], optional = true, markers = "extra == \"drf\""}
-mozilla-django-oidc = {version = ">=2.0,<3.0", optional = true, markers = "extra == \"auth\""}
+mozilla-django-oidc = {version = ">=3.0,<4.0", optional = true, markers = "extra == \"auth\""}
 
 [package.extras]
-auth = ["mozilla-django-oidc (>=2.0,<3.0)"]
+auth = ["mozilla-django-oidc (>=3.0,<4.0)"]
 celery-extra = ["celery (>=5.2,<6.0)", "django-celery-beat (>=2.4,<3.0)"]
 drf = ["django-rest-knox (>=4.2,<5.0)", "djangorestframework (>=3.13,<4.0)", "drf-spectacular[offline]"]
+pprof = ["django-pypprof (==1.0.0)"]
 redis = ["django-redis (>=5,<6)"]
 
 [package.source]
@@ -2591,4 +2592,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "19db7dd3bcbb5b08faf4becc1760d0d630480ca0af47cb135ec1695ebee006a8"
+content-hash = "230916c47098efc6a86c1c8910d86819e3d92ca72afecad04d3d0a0d0e939afb"
