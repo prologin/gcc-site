@@ -22,7 +22,7 @@ services:
       - s3_dev_metadata:/metadata
 
   db_dev:
-    image: postgres:13
+    image: postgres:15
     hostname: db_dev
     restart: unless-stopped
     shm_size: 256M
