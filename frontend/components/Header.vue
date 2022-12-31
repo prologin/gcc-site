@@ -13,8 +13,8 @@
     </NuxtLink>
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item v-if="loggedIn && isAdmin">
+      <b-navbar-nav v-if="loggedIn" class="ml-auto">
+        <b-nav-item v-if="isStaff">
           <b-dropdown
             right
             no-caret
