@@ -5,7 +5,8 @@
       <Header />
 
       <div>
-        <p> Event ID : {{ $route.parmas.id }} </p>
+        <p> Event ID : {{ this.eventID }} </p>
+        <p> Event Date : {{this.eventDATE}} </p>
       </div>
 
       <!-- Footer -->
@@ -16,9 +17,9 @@
 
 <script>
 import Vue from "vue";
-import Header from "../../components/Header.vue";
-import Footer from "../../components/Footer.vue";
-import { applicationsAPI } from "../../services/applications.api"
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import { applicationsAPI } from "@/services/applications.api"
 
 export default Vue.extend({
   name: "Candidatures",
@@ -29,6 +30,7 @@ export default Vue.extend({
   data() {
     return {
       eventID: this.$route.params.id,
+      eventDATE: this.$route.params.edition,
       applications: [],
       showError: false
     }

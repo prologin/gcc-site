@@ -51,9 +51,7 @@
     <td> {{ CampsType[camps_type] }} </td>
     <td> {{ date }} {{ this.id }}</td>
     <td>
-      <NuxtLink to="/candidatures/">
-        Review
-      </NuxtLink>
+
     </td>
     </tr>
   </tbody>
@@ -101,6 +99,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      path: "/candidatures/1",
       CampsType
     }
   }
