@@ -41,6 +41,12 @@ class User(AbstractUser):
         unique=True,
     )
 
+    can_review = models.BooleanField(
+        verbose_name="Droit de review",
+        default=False,
+        editable=True,
+    )
+
     def has_complete_address(self):
         return not any(
             f is None

@@ -14,7 +14,7 @@
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="loggedIn" class="ml-auto">
-        <b-nav-item v-if="$auth.user['groups'].includes('staff')">
+        <b-nav-item v-if="$auth.user['groups'].includes('staff') && this.user.can_review">
           <b-dropdown
             right
             no-caret
