@@ -14,7 +14,7 @@
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="loggedIn" class="ml-auto">
-        <b-nav-item v-if="isStaff">
+        <b-nav-item v-if="$auth.user['groups'].includes('staff')">
           <b-dropdown
             right
             no-caret
@@ -128,6 +128,7 @@ export default Vue.extend({
   data() {
     return {
       user: "",
+      loggedIn: this.$auth.loggedIn,
       showNavbar: true,
       lastScrollPosition: 0,
     };
