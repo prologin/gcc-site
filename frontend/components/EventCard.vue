@@ -51,7 +51,7 @@
     <td> {{ CampsType[camps_type] }} </td>
     <td> {{ date }} {{ this.id }}</td>
     <td>
-      <NuxtLink to="/candidatures">
+      <NuxtLink to="/candidatures/">
         Review
       </NuxtLink>
     </td>
