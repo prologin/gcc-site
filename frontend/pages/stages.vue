@@ -27,9 +27,6 @@
               v-bind:start_date="event.start_date"
               v-bind:end_date="event.end_date"
               v-bind:address="event.center.name"/>
-            <NuxtLink :to="this.path">
-              Review
-            </NuxtLink>
           </table>
         </div>
 
@@ -55,7 +52,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      path: "/candidatures/" + 2026 + "/" + 4,
       events: [],
       showError: false
     };

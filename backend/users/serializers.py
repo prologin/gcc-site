@@ -17,11 +17,11 @@ class UserSerializer(serializers.ModelSerializer):
             "zip_code",
             "country",
             "is_staff",
-            "can_review"
+            "user_permissions"
         )
 
         read_only_fields = (
             "email",
             "is_staff",
-            "can_review",
         )
+

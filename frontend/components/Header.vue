@@ -14,7 +14,7 @@
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="loggedIn" class="ml-auto">
-        <b-nav-item v-if="$auth.user['groups'].includes('staff') && this.user.can_review">
+        <b-nav-item v-if="this.user.is_staff && this.user['user_permissions'].includes(89)">
           <b-dropdown
             right
             no-caret
@@ -133,7 +133,7 @@ export default Vue.extend({
       lastScrollPosition: 0,
     };
   },
-  beforeMount() {
+  created() {
     usersAPI.usersMeRead().then((response) => {
       this.user = response;
     });

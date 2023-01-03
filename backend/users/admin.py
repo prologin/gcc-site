@@ -23,7 +23,6 @@ class UserAdmin(UpstreamUserAdmin):
             "Permissions",
             {
                 "fields": (
-                    "can_review",
                     "is_active",
                     "is_staff",
                     "is_superuser",

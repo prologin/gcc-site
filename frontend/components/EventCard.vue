@@ -49,9 +49,11 @@
     <th scope="row"> <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" /> </th>
     <td> {{ title }} </td>
     <td> {{ CampsType[camps_type] }} </td>
-    <td> {{ date }} {{ this.id }}</td>
+    <td> {{ date }}</td>
     <td>
-
+      <NuxtLink :to="this.path">
+        Review
+      </NuxtLink>
     </td>
     </tr>
   </tbody>
@@ -99,7 +101,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      path: "/candidatures/1",
+      path: "/candidatures/2026/" + this.id,
       CampsType
     }
   }
