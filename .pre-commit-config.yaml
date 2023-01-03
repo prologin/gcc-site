@@ -12,14 +12,14 @@ repos:
     hooks:
       - id: black
         language_version: python3.10
-        args: ["--config=api/pyproject.toml"]
+        args: ["--config=backend/pyproject.toml"]
 
   - repo: https://github.com/pycqa/isort
     rev: 5.11.4
     hooks:
       - id: isort
         name: isort
-        args: ["--settings-path=api/pyproject.toml"]
+        args: ["--settings-path=backend/pyproject.toml"]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v8.30.0

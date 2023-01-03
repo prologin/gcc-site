@@ -24,6 +24,7 @@
             git
             nodejs
             poetry
+            pre-commit
             shellcheck
             yarn
           ];
