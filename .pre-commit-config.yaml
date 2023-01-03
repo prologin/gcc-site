@@ -22,7 +22,7 @@ repos:
         args: ["--settings-path=backend/pyproject.toml"]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.30.0
+    rev: v8.31.0
     hooks:
       - id: eslint
         entry: bash -c 'cd frontend && yarn lint --fix'
