@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class SelectionStatus(models.IntegerChoices):
+    REJECTED = -2, _("Rejeté")
     ABANDONED = -1, _("Abandonné")
     ENROLLED = 0, _("Inscrit")
     NOT_SELECTED = 1, _("Non sélectionné")
