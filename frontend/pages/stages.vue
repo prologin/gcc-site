@@ -4,7 +4,6 @@
       <!-- Header -->
       <Header />
       <div class="basic-background">
-
         <div class="w-75 mx-auto table-responsive">
           <table class="table table-borderless">
             <thead>
@@ -29,7 +28,6 @@
               v-bind:address="event.center.name"/>
           </table>
         </div>
-
       </div>
       <!-- Footer -->
       <Footer />
@@ -41,6 +39,7 @@
 import Vue from "vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import EventCard from "../components/EventCard.vue";
 import { eventsAPI } from "../services/events.api";
 
 
@@ -48,6 +47,7 @@ export default Vue.extend({
   name: "Stages",
   components: {
     Header,
+    EventCard,
     Footer,
   },
   data() {

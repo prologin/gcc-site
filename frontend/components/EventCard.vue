@@ -12,9 +12,9 @@
       </b-col>
 
       <b-button-group vertical class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto">
-        <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button"
-          >S'inscrire à ce stage</b-button
-        >
+        <b-button class="mx-auto ml-lg-auto mr-lg-4 primary-button">
+          S'inscrire à ce stage
+        </b-button>
         <b-button
           v-b-modal="'modal-' + index"
           class="mx-auto ml-lg-auto mr-lg-4 secondary-button"
@@ -31,13 +31,13 @@
           size="xl"
           centered
           hide-footer
-          headerClass="p-2 border-bottom-0"
+          header-class="p-2 border-bottom-0"
           ok-variant="secondary-button"
         >
           <EventInfo
-            v-bind:id="id"
-            v-bind:colorClass="colorClass"
-            v-bind:scheduleType="scheduleType"
+            :id="id"
+            :color-class="colorClass"
+            :schedule-type="scheduleType"
           />
         </b-modal>
       </b-button-group>
@@ -46,18 +46,23 @@
 
   <tbody v-else>
     <tr>
-    <th scope="row"> <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" /> </th>
-    <td> {{ title }} </td>
-    <td> {{ CampsType[camps_type] }} </td>
-    <td> {{ date }}</td>
-    <td>
-      <NuxtLink :to="this.path">
-        Review
-      </NuxtLink>
-    </td>
+      <th scope="row">
+        <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
+      </th>
+      <td>{{ title }}</td>
+      <td>{{ CampsType[camps_type] }}</td>
+      <td>{{ date }}</td>
+      <td>
+        <NuxtLink
+          class="primary-button px-2 py-2"
+          style="color: white"
+          :to="path"
+        >
+          Review
+        </NuxtLink>
+      </td>
     </tr>
   </tbody>
-
 </template>
 
 <script>
@@ -68,7 +73,7 @@ import { formatDate } from "@/services/date";
 
 const CampsType = {
   short: "Stage Court",
-  long: "Stage Long"
+  long: "Stage Long",
 };
 
 export default Vue.extend({
@@ -88,21 +93,22 @@ export default Vue.extend({
     "index",
     "scheduleType",
   ],
+  data () {
+    return {
+      path:
+        "/candidatures/" + new Date(this.start_date).getFullYear() + '/' + this.id,
+      CampsType,
+    };
+  },
   computed: {
     colorClass: function () {
-      const colors = ['gcc-pink', 'gcc-green', 'gcc-blue'];
-      return colors[this.index % colors.length];
+      const colors = ["gcc-pink", "gcc-green", "gcc-blue"];
+      return colors[this.index % colors.length]
     },
     date: function () {
       return (
-        "Du " + formatDate(this.start_date) + " au " + formatDate(this.end_date)
-      );
-    },
-  },
-  data() {
-    return {
-      path: "/candidatures/2026/" + this.id,
-      CampsType
+        'Du ' + formatDate(this.start_date) + ' au ' + formatDate(this.end_date)
+      )
     }
   }
 });
