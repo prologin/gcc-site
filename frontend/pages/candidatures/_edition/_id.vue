@@ -23,7 +23,7 @@
 <script>
 import Vue from 'vue';
 import Header from '@/components/Header.vue';
-import AppListAdmin from "@/components/ApplicationListAdmin.vue"
+import AppListAdmin from "@/components/admin/ApplicationListAdmin.vue"
 import Footer from '@/components/Footer.vue';
 import { applicationsAPI } from '@/services/applications.api';
 

@@ -43,26 +43,6 @@
       </b-button-group>
     </b-row>
   </div>
-
-  <tbody v-else>
-    <tr>
-      <th scope="row">
-        <b-icon :class="colorClass" icon="circle-fill" aria-hidden="true" />
-      </th>
-      <td>{{ title }}</td>
-      <td>{{ CampsType[camps_type] }}</td>
-      <td>{{ date }}</td>
-      <td>
-        <NuxtLink
-          class="primary-button px-2 py-2"
-          style="color: white"
-          :to="path"
-        >
-          Review
-        </NuxtLink>
-      </td>
-    </tr>
-  </tbody>
 </template>
 
 <script>

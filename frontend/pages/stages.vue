@@ -15,17 +15,16 @@
                 <th scope="col"> </th>
               </tr>
             </thead>
-            <EventCard
+            <EventCardAdmin
               v-for="(event, index) in eventsSortedByDate"
-              v-bind:isFrontPage="false"
-              v-bind:index="index"
-              v-bind:key="event.id"
-              v-bind:title="event.name"
-              v-bind:camps_type="event.camps_type"
-              v-bind:id="event.id"
-              v-bind:start_date="event.start_date"
-              v-bind:end_date="event.end_date"
-              v-bind:address="event.center.name"/>
+              :id="event.id"
+              :key="event.id"
+              :index="index"
+              :title="event.name"
+              :camps_type="event.camps_type"
+              :start_date="event.start_date"
+              :end_date="event.end_date"
+            />
           </table>
         </div>
       </div>
@@ -39,15 +38,14 @@
 import Vue from "vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
-import EventCard from "../components/EventCard.vue";
+import EventCardAdmin from "../components/admin/EventCardAdmin.vue";
 import { eventsAPI } from "../services/events.api";
-
 
 export default Vue.extend({
   name: "Stages",
   components: {
     Header,
-    EventCard,
+    EventCardAdmin,
     Footer,
   },
   data() {

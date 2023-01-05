@@ -19,6 +19,10 @@ export default class ApplicationsAPIService extends BaseAPIService {
   async applicationsRead (id: number) {
     return this.axiosCall({ method: 'get', url: `/${id}/` })
   }
+
+  async applicationsUpdateStatus(id: number) {
+    return this.axiosCall(({method: 'patch', url: `/${id}/update_status/`}))
+  }
 }
 
 export const applicationsAPI = new ApplicationsAPIService()
