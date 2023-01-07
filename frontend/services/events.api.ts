@@ -37,8 +37,8 @@ export default class EventsAPIService extends BaseAPIService {
     return this.axiosCall({ method: 'get', url: `/${id}/docs/` })
   }
 
-  async eventsQuestions (id: number) {
-    return this.axiosCall({ method: 'get', url: `/${id}/questions/` })
+  async eventsForm (id: number) {
+    return this.axiosCall({ method: 'get', url: `/${id}/form/` })
   }
 }
 

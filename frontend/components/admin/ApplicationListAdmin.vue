@@ -19,27 +19,18 @@
             <b-button v-b-modal="'modal-' + app.user"> Infos Perso.</b-button>
           </td>
           <td>
-            <select
-              :id="'select-' + app.user"
-              value="Confirmé"
-              right
-              class="form-select"
-            >
+            <b-select :id="'select-' + app.user" right class="form-select">
               <option :selected="app.status == -2" value="-2"> Rejeté </option>
+              <option :selected="app.status == -1" value="-1"> Abandonné </option>
+              <option :selected="app.status == 0" value="0"> Inscrit </option>
+              <option :selected="app.status == 1" value="1"> Non sélectionné </option>
+              <option :selected="app.status == 2" value="2"> Sélectionné </option>
               <option :selected="app.status == 3" value="3"> Accepté </option>
               <option :selected="app.status == 4" value="4"> Confirmé </option>
-            </select>
+            </b-select>
           </td>
           <!-- Modal = component a part -->
-          <b-modal
-            :id="'modal-' + app.user"
-            centered
-            ok-title="Fermer"
-            ok-variant="secondary-button"
-            size="xl"
-          >
-            Infos de la candidate
-          </b-modal>
+          <AppCardAdmin :app_id="app.id" :event_id="event_id" />
         </tr>
       </tbody>
     </table>
