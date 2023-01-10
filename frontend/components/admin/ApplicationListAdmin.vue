@@ -50,9 +50,23 @@
       <template #row-details="data">
         <div v-if="data.item.status != -2" class="mb-2">
           <h3> Profil de {{ data.item.first_name }} {{ data.item.last_name }} </h3>
-          <p> <b> E-mail: </b>  <span :id="'email-' + data.item.id"> unjour@yaura.com </span> </p>
-          <p> <b> Date de naissance: </b>  <span :id="'dob-' + data.item.id"> {{ data.item.dob }} </span> </p>
-          <p> <b> Adresse: </b>  <span :id="'address-' + data.item.id"> {{ users[data.index].address }} </span> </p>
+          <p>
+            <b> E-mail: </b>
+            <span :id="'email-' + data.item.id">
+              {{ users[data.index].email }}
+            </span>
+          </p>
+          <p>
+            <b> Date de naissance: </b>
+            <span :id="'dob-' + data.item.id"> {{ data.item.dob }} </span>
+          </p>
+          <p>
+            <b> Adresse: </b>
+            <span :id="'address-' + data.item.id">
+              {{ users[data.index].address }}, {{ users[data.index].city }},
+              {{ users[data.index].country }}
+            </span>
+          </p>
 
           <b-row>
             <b-col>
@@ -119,6 +133,7 @@ export default Vue.extend({
     applicationsAPI.applicationsList(null, this.event_id).then((res) => {
       this.applications = res;
       this.applications.forEach((app) => {
+        console.log(app.first_name)
         usersAPI.usersRead(app.user).then((res) => {
           this.users.push(res);
         });
