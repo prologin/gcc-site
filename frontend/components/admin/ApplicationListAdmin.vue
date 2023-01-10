@@ -119,7 +119,7 @@ export default Vue.extend({
     applicationsAPI.applicationsList(null, this.event_id).then((res) => {
       this.applications = res;
       this.applications.forEach((app) => {
-        usersAPI.usersMeRead(app.user).then((res) => {
+        usersAPI.usersRead(app.user).then((res) => {
           this.users.push(res);
         });
       });
