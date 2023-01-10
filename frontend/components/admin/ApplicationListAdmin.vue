@@ -50,9 +50,9 @@
       <template #row-details="data">
         <div v-if="data.item.status != -2" class="mb-2">
           <h3> Profil de {{ data.item.first_name }} {{ data.item.last_name }} </h3>
-          <p> <b> E-mail: </b>  <span :id="'email-' + data.item.id"> unjour@yaura.com </span> </p>  <br>
-          <span> <b> Date de naissance: </b> {{ data.item.dob }} </span> <br />
-          <span> <b> Adresse: </b> {{ users[data.index].has_complete_address }} </span> <br />
+          <p> <b> E-mail: </b>  <span :id="'email-' + data.item.id"> unjour@yaura.com </span> </p>
+          <p> <b> Date de naissance: </b>  <span :id="'dob-' + data.item.id"> {{ data.item.dob }} </span> </p>
+          <p> <b> Adresse: </b>  <span :id="'address-' + data.item.id"> {{ users[data.index].address }} </span> </p>
 
           <b-row>
             <b-col>
