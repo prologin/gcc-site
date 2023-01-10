@@ -49,7 +49,15 @@
 
       <template #row-details="data">
         <div v-if="data.item.status != -2" class="mb-2">
-          <h3> Profil de {{ data.item.first_name }} {{ data.item.last_name }} </h3>
+          <h3>
+            Profil de {{ data.item.first_name }} {{ data.item.last_name }}
+          </h3>
+          <p>
+            <b> Nombre de participations: </b>
+            <span :id="'participations-' + data.item.id">
+              {{ users[data.index].participations_count }}
+            </span>
+          </p>
           <p>
             <b> E-mail: </b>
             <span :id="'email-' + data.item.id">
@@ -76,19 +84,27 @@
                 left
                 class="form-select"
               >
-                <option :selected="data.item.status == -2" value="-2">Rejeté</option>
+                <option :selected="data.item.status == -2" value="-2">
+                  Rejeté
+                </option>
                 <option :selected="data.item.status == -1" value="-1">
                   Abandonné
                 </option>
-                <option :selected="data.item.status == 0" value="0">Inscrit</option>
+                <option :selected="data.item.status == 0" value="0">
+                  Inscrit
+                </option>
                 <option :selected="data.item.status == 1" value="1">
                   Non sélectionné
                 </option>
                 <option :selected="data.item.status == 2" value="2">
                   Sélectionné
                 </option>
-                <option :selected="data.item.status == 3" value="3">Accepté</option>
-                <option :selected="data.item.status == 4" value="4">Confirmé</option>
+                <option :selected="data.item.status == 3" value="3">
+                  Accepté
+                </option>
+                <option :selected="data.item.status == 4" value="4">
+                  Confirmé
+                </option>
               </b-select>
             </b-col>
           </b-row>
@@ -104,7 +120,7 @@
 import Vue from "vue";
 import { applicationsAPI } from "../../services/applications.api";
 import { usersAPI } from "../../services/users.api";
-
+import { eventsAPI } from "../../services/events.api";
 import AppCardAdmin from "./ApplicationCardAdmin.vue";
 
 export default Vue.extend({
@@ -115,9 +131,15 @@ export default Vue.extend({
   props: ["event_id"],
   data() {
     return {
-      fields: ["name", {key: "status", sortable: true}, "Informations"],
+      fields: [
+        "name",
+        { key: "status", sortable: true },
+        "Informations",
+      ],
       applications: [],
       users: [],
+      formEvent: {},
+      formAnswers: [],
       Status: {
         "-2": "Rejeté",
         "-1": "Abandonné",
@@ -126,21 +148,34 @@ export default Vue.extend({
         2: "Sélectionné",
         3: "Accepté",
         4: "Confirmé",
-      }
-    }
+      },
+    };
   },
+
+
   created() {
     applicationsAPI.applicationsList(null, this.event_id).then((res) => {
       this.applications = res;
+
       this.applications.forEach((app) => {
-        console.log(app.first_name)
         usersAPI.usersRead(app.user).then((res) => {
           this.users.push(res);
         });
+
+        applicationsAPI.applicationsRead(app.id).then((res) => {
+          this.formAnswers.push(res["form_answer"]);
+        });
+
       });
-      console.log(this.users);
+
+      eventsAPI.eventsForm(this.event_id).then((res) => {
+        this.formEvent = res;
+      });
     });
   },
+
+
+
   methods: {
     async update_api(app, status) {
       const form = { status };
@@ -155,14 +190,14 @@ export default Vue.extend({
         const new_status = document.getElementById("select-" + app.user).value;
         this.update_api(app, new_status);
         app.status = new_status;
-      })
+      });
     },
     dlInfo() {
       this.applications.forEach((app) => {
-        console.log(document.getElementById(app.user));
-      })
-    }
-  }
+        console.log(document.getElementById("email-" + app.id));
+      });
+    },
+  },
 });
 </script>
 

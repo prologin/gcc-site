@@ -4,6 +4,7 @@ from . import models
 
 
 class UserSerializer(serializers.ModelSerializer):
+    participations_count = serializers.IntegerField()
     class Meta:
         model = models.User
 
@@ -16,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
             "city",
             "zip_code",
             "country",
+            "participations_count",
             "is_staff",
             "user_permissions"
         )
@@ -24,4 +26,3 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "is_staff",
         )
-

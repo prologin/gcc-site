@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.utils.functional import cached_property
+from events.models import signup
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
@@ -40,6 +41,10 @@ class User(AbstractUser):
         verbose_name="Adresse email",
         unique=True,
     )
+
+    def participations_count(self):
+        applications = signup.Application.objects.filter(user=self)
+        return sum((application.status == 4) for application in applications)
 
     def has_complete_address(self):
         return not any(
