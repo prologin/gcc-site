@@ -232,6 +232,7 @@ class ApplicationShortSerializer(serializers.ModelSerializer):
             "user",
             "first_name",
             "last_name",
+            "dob",
             "event",
             "status",
         )
