@@ -30,9 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Application definition
 
-INSTALLED_APPS = installed_apps(
-    with_auth=True, with_celery=True, with_drf=True
-) + [
+INSTALLED_APPS = installed_apps(with_auth=True) + [
     "django_filters",
     "events",
     "partners",

@@ -17,7 +17,7 @@ configure_s3_bucket() {
     export AWS_ACCESS_KEY_ID
     export AWS_SECRET_ACCESS_KEY
     aws --endpoint-url="${S3_ENDPOINT}" s3api create-bucket \
-        --bucket="${S3_BUCKET}" --acl "public-read"
+        --bucket="${S3_BUCKET}" --acl "private"
     aws --endpoint-url="${S3_ENDPOINT}" s3api put-bucket-cors \
         --bucket="${S3_BUCKET}" \
         --cors-configuration="file://${CORS_CONFIG_PATH:-/app/cors.json}"

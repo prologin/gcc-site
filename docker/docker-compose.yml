@@ -65,8 +65,6 @@ services:
     environment:
       DEV: 1
       DJANGO_DEBUG: 1
-      DJANGO_SETTINGS_MODULE: gccsite.settings
-      DJANGO_ALLOWED_HOSTS: "*"
       DJANGO_SECRET_KEY_FILE: /run/secrets/django-secret-key
       DB_NAME: gccsite_dev
       DB_USER: gccsite_dev
@@ -81,9 +79,9 @@ services:
       S3_SECURE_URLS: 0
       CELERY_BROKER_URL: redis://redis_dev:6379/1
       CELERY_RESULT_EXPIRES: 60
-      PROLOGIN_OIDC_URL: https://auth.prologin.org/application/o/prologin-public-test-client
-      PROLOGIN_OIDC_CLIENT_ID_FILE: /run/secrets/prologin-oidc-client-id
-      PROLOGIN_OIDC_CLIENT_SECRET_FILE: /run/secrets/prologin-oidc-client-secret
+      OIDC_OP_CONFIG_URL: https://auth.prologin.org/application/o/prologin-public-test-client
+      OIDC_RP_CLIENT_ID_FILE: /run/secrets/oidc-client-id
+      OIDC_RP_CLIENT_SECRET_FILE: /run/secrets/oidc-client-secret
     depends_on:
       - s3_dev
       - db_dev
@@ -105,12 +103,16 @@ services:
       - postgres-passwd
       - s3-access
       - s3-secret
-      - prologin-oidc-client-id
-      - prologin-oidc-client-secret
+      - oidc-client-id
+      - oidc-client-secret
 
-  celery_dev:
+  celery_dev: &celery_dev
     <<: *backend_dev
     command: celery -A gccsite worker -l DEBUG --concurrency=2
+
+  celery_beat_dev:
+    <<: *celery_dev
+    command: celery -A gccsite beat -l DEBUG -S django
 
   celery_dev_flower:
     image: mher/flower:latest
@@ -166,7 +168,7 @@ secrets:
     file: ./secrets/s3-access
   s3-secret:
     file: ./secrets/s3-secret
-  prologin-oidc-client-id:
-    file: ./secrets/prologin-oidc-client-id
-  prologin-oidc-client-secret:
-    file: ./secrets/prologin-oidc-client-secret
+  oidc-client-id:
+    file: ./secrets/oidc-client-id
+  oidc-client-secret:
+    file: ./secrets/oidc-client-secret

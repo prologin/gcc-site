@@ -193,6 +193,27 @@ jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
 uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
+name = "bleach"
+version = "5.0.1"
+description = "An easy safelist-based HTML-sanitizing tool."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "bleach-5.0.1-py3-none-any.whl", hash = "sha256:085f7f33c15bd408dd9b17a4ad77c577db66d76203e5984b1bd59baeee948b2a"},
+    {file = "bleach-5.0.1.tar.gz", hash = "sha256:0d03255c47eb9bd2f26aa9bb7f2107732e7e8fe195ca2f64709fcf3b0a4a085c"},
+]
+
+[package.dependencies]
+six = ">=1.9.0"
+tinycss2 = {version = ">=1.1.0,<1.2", optional = true, markers = "extra == \"css\""}
+webencodings = "*"
+
+[package.extras]
+css = ["tinycss2 (>=1.1.0,<1.2)"]
+dev = ["Sphinx (==4.3.2)", "black (==22.3.0)", "build (==0.8.0)", "flake8 (==4.0.1)", "hashin (==0.17.0)", "mypy (==0.961)", "pip-tools (==6.6.2)", "pytest (==7.1.2)", "tox (==3.25.0)", "twine (==4.0.1)", "wheel (==0.37.1)"]
+
+[[package]]
 name = "boto3"
 version = "1.26.39"
 description = "The AWS SDK for Python"
@@ -773,6 +794,28 @@ files = [
 django-debug-toolbar = ">=1.0"
 
 [[package]]
+name = "django-post-office"
+version = "3.6.3"
+description = "A Django app to monitor and send mail asynchronously, complete with template support."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-post_office-3.6.3.tar.gz", hash = "sha256:96a384ccb5ca68b5e35d05614a14625cffedcb911dbcfb5a8f6385362adafe3d"},
+    {file = "django_post_office-3.6.3-py3-none-any.whl", hash = "sha256:1e2747a6f3d6a75c0a9eb8fa99f69106308e5371dc8dad8e2bcdd00babbb5556"},
+]
+
+[package.dependencies]
+bleach = {version = "*", extras = ["css"]}
+django = ">=2.2"
+jsonfield = ">=3.0"
+pytz = "*"
+
+[package.extras]
+prevent-xss = ["bleach"]
+test = ["tox (>=2.3)"]
+
+[[package]]
 name = "django-prometheus"
 version = "2.2.0"
 description = "Django middlewares to monitor your application with Prometheus.io."
@@ -1227,6 +1270,21 @@ docs = ["Sphinx (>=1.0)", "sphinx-rtd-theme (>=1.0)"]
 tests = ["coverage (>=4.0)", "flake8 (<4)", "isort", "mypy", "pytest (>=2.8.0)", "pytest-cov", "pytest-flake8 (>=0.5)", "types-pyOpenSSL", "types-pyRFC3339", "types-requests", "types-setuptools"]
 
 [[package]]
+name = "jsonfield"
+version = "3.1.0"
+description = "A reusable Django field that allows you to store validated JSON in your model."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "jsonfield-3.1.0-py3-none-any.whl", hash = "sha256:df857811587f252b97bafba42e02805e70a398a7a47870bc6358a0308dd689ed"},
+    {file = "jsonfield-3.1.0.tar.gz", hash = "sha256:7e4e84597de21eeaeeaaa7cc5da08c61c48a9b64d0c446b2d71255d01812887a"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "jsonschema"
 version = "4.17.3"
 description = "An implementation of JSON Schema validation for Python"
@@ -1603,38 +1661,36 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "prologin-django-utils"
-version = "0.2.0"
+version = "0.4.0"
 description = "Utils for Prologin's Django applications"
 category = "main"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "prologin_django_utils-0.2.0.tar.gz", hash = "sha256:e24fc4fd39a5bf8259e12e5770eb3aa1815debb06f09db96af273671d3354167"},
+    {file = "prologin_django_utils-0.4.0.tar.gz", hash = "sha256:b271ee3f52f14560996f9b6318f274fe7d95cf44b3e4efabedada9c9b6c38cc2"},
 ]
 
 [package.dependencies]
 boto3 = ">=1.24,<2.0"
-celery = {version = ">=5.2,<6.0", optional = true, markers = "extra == \"celery-extra\""}
+celery = ">=5.2,<6.0"
 collectfast = "*"
 django = ">=4.0,<5.0"
-django-celery-beat = {version = ">=2.4,<3.0", optional = true, markers = "extra == \"celery-extra\""}
+django-celery-beat = ">=2.4,<3.0"
 django-debug-toolbar = "*"
 django-mail-panel = ">=4.0,<5.0"
+django-post-office = ">=3.6,<4.0"
 django-prometheus = ">=2.2,<3.0"
-django-redis = {version = ">=5,<6", optional = true, markers = "extra == \"redis\""}
-django-rest-knox = {version = ">=4.2,<5.0", optional = true, markers = "extra == \"drf\""}
+django-redis = ">=5,<6"
+django-rest-knox = ">=4.2,<5.0"
 django-storages = ">=1.12,<2.0"
 django-structlog = {version = ">=4.0,<5.0", extras = ["celery"]}
-djangorestframework = {version = ">=3.13,<4.0", optional = true, markers = "extra == \"drf\""}
-drf-spectacular = {version = "*", extras = ["offline"], optional = true, markers = "extra == \"drf\""}
+djangorestframework = ">=3.13,<4.0"
+drf-spectacular = {version = "*", extras = ["offline"]}
 mozilla-django-oidc = {version = ">=3.0,<4.0", optional = true, markers = "extra == \"auth\""}
 
 [package.extras]
 auth = ["mozilla-django-oidc (>=3.0,<4.0)"]
-celery-extra = ["celery (>=5.2,<6.0)", "django-celery-beat (>=2.4,<3.0)"]
-drf = ["django-rest-knox (>=4.2,<5.0)", "djangorestframework (>=3.13,<4.0)", "drf-spectacular[offline]"]
 pprof = ["django-pypprof (==1.0.0)"]
-redis = ["django-redis (>=5,<6)"]
 
 [package.source]
 type = "legacy"
@@ -2324,6 +2380,25 @@ tests = ["coverage[toml]", "freezegun (>=0.2.8)", "pretend", "pytest (>=6.0)", "
 typing = ["mypy", "rich", "twisted"]
 
 [[package]]
+name = "tinycss2"
+version = "1.1.1"
+description = "A tiny CSS parser"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "tinycss2-1.1.1-py3-none-any.whl", hash = "sha256:fe794ceaadfe3cf3e686b22155d0da5780dd0e273471a51846d0a02bc204fec8"},
+    {file = "tinycss2-1.1.1.tar.gz", hash = "sha256:b2e44dd8883c360c35dd0d1b5aad0b610e5156c2cb3b33434634e539ead9d8bf"},
+]
+
+[package.dependencies]
+webencodings = ">=0.4"
+
+[package.extras]
+doc = ["sphinx", "sphinx_rtd_theme"]
+test = ["coverage[toml]", "pytest", "pytest-cov", "pytest-flake8", "pytest-isort"]
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -2501,6 +2576,18 @@ files = [
 ]
 
 [[package]]
+name = "webencodings"
+version = "0.5.1"
+description = "Character encoding aliases for legacy web content"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "webencodings-0.5.1-py2.py3-none-any.whl", hash = "sha256:a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78"},
+    {file = "webencodings-0.5.1.tar.gz", hash = "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"},
+]
+
+[[package]]
 name = "wheel"
 version = "0.38.4"
 description = "A built-package format for Python"
@@ -2592,4 +2679,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "230916c47098efc6a86c1c8910d86819e3d92ca72afecad04d3d0a0d0e939afb"
+content-hash = "16cde615b62f062a2946700a357d3813cce669b1f6a06851c085209641127236"

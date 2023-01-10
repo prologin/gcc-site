@@ -12,5 +12,5 @@ done
 echo "accessKey1" > ./secrets/s3-access
 echo "verySecretKey1" > ./secrets/s3-secret
 
-echo "tVOgJ4hxT8uV0bjMIjT4psPARaR1XgxhIYoXcqnGIFZVmCpMTrhDKEK2qy6TT9VO" > ./secrets/prologin-oidc-client-id
-echo "t9pvgKnwB37CeutWpPOEKMDv3gmp9kjUtQ5ifDzF9gBPMGO4yhHLdUNnh7AjRuWH" > ./secrets/prologin-oidc-client-secret
+echo "tVOgJ4hxT8uV0bjMIjT4psPARaR1XgxhIYoXcqnGIFZVmCpMTrhDKEK2qy6TT9VO" > ./secrets/oidc-client-id
+echo "t9pvgKnwB37CeutWpPOEKMDv3gmp9kjUtQ5ifDzF9gBPMGO4yhHLdUNnh7AjRuWH" > ./secrets/oidc-client-secret
