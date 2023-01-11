@@ -15,7 +15,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="loggedIn" class="ml-auto">
         <b-nav-item
-          v-if="user.is_staff && user['user_permissions'].includes(89)"
+          v-if="user.is_staff && user['user_permissions'].includes(105)"
         >
           <b-dropdown
             right
