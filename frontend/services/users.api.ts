@@ -7,7 +7,7 @@ export default class UsersAPIService extends BaseAPIService {
     super('users');
   }
 
-  async usersList(email: string) {
+  async usersList(email?: string) {
     return this.axiosCall({
       method: 'get',
       url: '/',
@@ -20,7 +20,7 @@ export default class UsersAPIService extends BaseAPIService {
   async usersRead(id:number) {
     return this.axiosCall({
       method: 'get',
-      url: `/${id}`,
+      url: `/${id}/`,
     })
   }
 

@@ -78,12 +78,8 @@
 
           <b-row>
             <b-col>
-              <b> Changez le status </b> <br />
-              <b-select
-                :id="'select-' + data.item.user"
-                left
-                class="form-select"
-              >
+              <b> Changez le status </b> <br>
+              <select :id="'select-' + data.item.user" left class="form-select">
                 <option :selected="data.item.status == -2" value="-2">
                   Rejeté
                 </option>
@@ -105,7 +101,7 @@
                 <option :selected="data.item.status == 4" value="4">
                   Confirmé
                 </option>
-              </b-select>
+              </select>
             </b-col>
           </b-row>
         </div>
@@ -131,11 +127,7 @@ export default Vue.extend({
   props: ["event_id"],
   data() {
     return {
-      fields: [
-        "name",
-        { key: "status", sortable: true },
-        "Informations",
-      ],
+      fields: ["name", { key: "status", sortable: true }, "Informations"],
       applications: [],
       users: [],
       formEvent: {},
@@ -148,12 +140,11 @@ export default Vue.extend({
         2: "Sélectionné",
         3: "Accepté",
         4: "Confirmé",
-      },
-    };
+      }
+    }
   },
-
-
-  created() {
+  mounted () {
+    //Modfier ca c'est pas beau j'aime pas
     applicationsAPI.applicationsList(null, this.event_id).then((res) => {
       this.applications = res;
 
@@ -163,26 +154,24 @@ export default Vue.extend({
         });
 
         applicationsAPI.applicationsRead(app.id).then((res) => {
-          this.formAnswers.push(res["form_answer"]);
+          this.formAnswers.push(res.form_answer);
         });
-
-      });
+      })
 
       eventsAPI.eventsForm(this.event_id).then((res) => {
         this.formEvent = res;
       });
-    });
+    })
   },
 
-
-
   methods: {
+    //Myabe faire un .js a part ?
     async update_api(app, status) {
       const form = { status };
       const req = await this.$axios.patch(
         "/rest/v1/applications/" + app.id + "/update_status/",
         form
-      );
+      )
       return req;
     },
     update() {
@@ -193,12 +182,27 @@ export default Vue.extend({
       });
     },
     dlInfo() {
-      this.applications.forEach((app) => {
-        console.log(document.getElementById("email-" + app.id));
-      });
-    },
-  },
-});
+      let csv =
+        "Nom de famille,Prénom, Nom représentant légal, Prénom représentant légal, Email représentant légal\n";
+      for (let index = 0; index < this.applications.length; index++) {
+        //Arreter d'harcode ca et mettre l'enum
+        if (this.applications[index].status === 4) {
+          csv +=
+            this.applications[index].last_name +
+            "," +
+            this.applications[index].first_name;
+          csv += "\n";
+        }
+      }
+      const hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      //provide the name for the CSV file to be downloaded
+      hiddenElement.download = "Infos_GCC!.csv";
+      hiddenElement.click();
+    }
+  }
+})
 </script>
 
 <style></style>
