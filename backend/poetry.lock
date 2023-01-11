@@ -1661,13 +1661,13 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "prologin-django-utils"
-version = "0.4.0"
+version = "0.5.0"
 description = "Utils for Prologin's Django applications"
 category = "main"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "prologin_django_utils-0.4.0.tar.gz", hash = "sha256:b271ee3f52f14560996f9b6318f274fe7d95cf44b3e4efabedada9c9b6c38cc2"},
+    {file = "prologin_django_utils-0.5.0.tar.gz", hash = "sha256:0ba2ad74b5df7bddc692c9b3284db990820fa1cd6b834da1c29c3bc1f76ee033"},
 ]
 
 [package.dependencies]
@@ -2679,4 +2679,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "16cde615b62f062a2946700a357d3813cce669b1f6a06851c085209641127236"
+content-hash = "387c5e3918be7cd9edbde3ef88385fd1607d359ac7768c8e3677a3167074eee8"
