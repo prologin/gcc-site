@@ -134,9 +134,10 @@ export default Vue.extend({
     };
   },
   created() {
-    usersAPI.usersMeRead().then((response) => {
-      this.user = response;
-    });
+    //Trouver le moyen de remettre /users/me/ because pipline failed
+    this.$axios.get("rest/auth/user").then((response) => {
+      this.user = response.data;
+    })
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);

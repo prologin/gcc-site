@@ -24,6 +24,7 @@ export default class UsersAPIService extends BaseAPIService {
     })
   }
 
+  /*
   async usersMeRead () {
     return this.axiosCall({
       method: 'get',
@@ -45,7 +46,7 @@ export default class UsersAPIService extends BaseAPIService {
       url: '/me/',
       data: user
     });
-  }
+  } */
 }
 
 export const usersAPI = new UsersAPIService()
