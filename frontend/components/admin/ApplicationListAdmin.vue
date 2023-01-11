@@ -109,7 +109,7 @@
     </b-table>
 
     <b-button variant="primary" @click="update"> Sauvegarder </b-button>
-    <b-button variant="primary" @click="dlInfo(applications, users)"> Téléchargement </b-button>
+    <b-button variant="primary" @click="dlInfo"> Téléchargement </b-button>
   </div>
 </template>
 <script>
@@ -118,7 +118,6 @@ import { applicationsAPI } from "../../services/applications.api";
 import { usersAPI } from "../../services/users.api";
 import { eventsAPI } from "../../services/events.api";
 import AppCardAdmin from "./ApplicationCardAdmin.vue";
-import script from "@/scripts/methodsAdmin.js"
 
 export default Vue.extend({
   name: "ApplicationListAdmin",
@@ -166,23 +165,43 @@ export default Vue.extend({
   },
 
   methods: {
-    async update_api (app, status) {
-      const form = { status }
+    // Myabe faire un .js a part ?
+    async update_api(app, status) {
+      const form = { status };
       const req = await this.$axios.patch(
-        '/rest/v1/applications/' + app.id + '/update_status/',
+        "/rest/v1/applications/" + app.id + "/update_status/",
         form
       )
-      return req
+      return req;
     },
-    update () {
+    update() {
       this.applications.forEach((app) => {
-        const new_status = document.getElementById('select-' + app.user).value
-        this.update_api(app, new_status)
+        const new_status = document.getElementById("select-" + app.user).value;
+        this.update_api(app, new_status);
         app.status = new_status;
       })
     },
-    ...script,
-  }
+    dlInfo() {
+      let csv =
+        "Nom de famille,Prénom, Nom représentant légal, Prénom représentant légal, Email représentant légal\n";
+      for (let index = 0; index < this.applications.length; index++) {
+        // Arreter d'harcode ca et mettre l'enum
+        if (this.applications[index].status === 4) {
+          csv +=
+            this.applications[index].last_name +
+            "," +
+            this.applications[index].first_name;
+          csv += "\n";
+        }
+      }
+      const hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      // provide the name for the CSV file to be downloaded
+      hiddenElement.download = "Infos_GCC!.csv";
+      hiddenElement.click();
+    },
+  },
 })
 </script>
 
