@@ -37,8 +37,8 @@ class EventDocumentInlineAdmin(admin.TabularInline):
 
 @admin.register(models.Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("name", "camps_type" ,"center", "start_date", "end_date")
-    list_filter = ("camps_type","center")
+    list_display = ("name", "camps_type", "center", "start_date", "end_date")
+    list_filter = ("camps_type", "center")
     ordering = ("-start_date",)
     inlines = (EventDocumentInlineAdmin,)
 

@@ -6,13 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('events', '0004_event_camps_type'),
+        ("events", "0004_event_camps_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='application',
-            name='status',
-            field=models.SmallIntegerField(choices=[(-2, 'Rejeté'), (-1, 'Abandonné'), (0, 'Inscrit'), (1, 'Non sélectionné'), (2, 'Sélectionné'), (3, 'Accepté'), (4, 'Confirmé')], verbose_name='Statut de la candidature'),
+            model_name="application",
+            name="status",
+            field=models.SmallIntegerField(
+                choices=[
+                    (-2, "Rejeté"),
+                    (-1, "Abandonné"),
+                    (0, "Inscrit"),
+                    (1, "Non sélectionné"),
+                    (2, "Sélectionné"),
+                    (3, "Accepté"),
+                    (4, "Confirmé"),
+                ],
+                verbose_name="Statut de la candidature",
+            ),
         ),
     ]

@@ -1,17 +1,18 @@
-from rest_framework import generics, permissions, viewsets
 from django_filters import rest_framework as filters
+from rest_framework import generics, permissions, viewsets
+
 from gccsite.serializers import MultipleSerializerViewSetMixin
 
 from . import models, serializers
 
+
 class UserFilter(filters.FilterSet):
-    email = filters.CharFilter(
-        help_text = "Get user by email"
-    )
+    email = filters.CharFilter(help_text="Get user by email")
 
     class Meta:
         model = models.User
         fields = []
+
 
 class UserViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAdminUser]

@@ -5,6 +5,7 @@ from . import models
 
 class UserSerializer(serializers.ModelSerializer):
     participations_count = serializers.IntegerField()
+
     class Meta:
         model = models.User
 
@@ -19,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
             "country",
             "participations_count",
             "is_staff",
-            "user_permissions"
+            "user_permissions",
         )
 
         read_only_fields = (

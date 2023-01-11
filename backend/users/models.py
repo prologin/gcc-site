@@ -1,7 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.functional import cached_property
+
 from events.models import signup
+
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
@@ -58,4 +60,9 @@ class User(AbstractUser):
         )
 
     class Meta:
-        permissions = [("can_review_applications", "Can review the applications to a camps")]
+        permissions = [
+            (
+                "can_review_applications",
+                "Can review the applications to a camps",
+            )
+        ]

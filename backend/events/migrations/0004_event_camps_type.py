@@ -6,14 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('events', '0003_auto_20220820_1854'),
+        ("events", "0003_auto_20220820_1854"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='camps_type',
-            field=models.CharField(choices=[('long', 'Stage Long'), ('short', 'Stage Court')], default='Stage Court', max_length=256, verbose_name='Durée du stage'),
+            model_name="event",
+            name="camps_type",
+            field=models.CharField(
+                choices=[("long", "Stage Long"), ("short", "Stage Court")],
+                default="Stage Court",
+                max_length=256,
+                verbose_name="Durée du stage",
+            ),
             preserve_default=False,
         ),
     ]

@@ -8,11 +8,11 @@
           <table class="table table-borderless">
             <thead>
               <tr>
-                <th scope="col"> </th>
+                <th scope="col" />
                 <th scope="col">Nom</th>
                 <th scope="col">Durée</th>
                 <th scope="col">Date</th>
-                <th scope="col"> </th>
+                <th scope="col" />
               </tr>
             </thead>
             <EventCardAdmin
@@ -52,23 +52,25 @@ export default Vue.extend({
     return {
       events: [],
       showError: false
-    };
-  },
-  beforeMount() {
-    eventsAPI
-    .eventsList(false)
-    .then((response) => {
-      this.showError = false;
-      this.events = response;
-    },
-    () => {
-      this.showError = true;
-    })
-  },
-  computed: {
-    eventsSortedByDate(){
-      return this.events.slice().sort((a,b) => (new Date(b.start_date)) - (new Date(a.start_date)));
     }
   },
-});
+  computed: {
+    eventsSortedByDate () {
+      return this.events
+        .slice()
+        .sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+    },
+  },
+  beforeMount () {
+    eventsAPI.eventsList(false).then(
+      (response) => {
+        this.showError = false
+        this.events = response;
+      },
+      () => {
+        this.showError = true
+      }
+    )
+  },
+})
 </script>

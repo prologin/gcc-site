@@ -96,5 +96,9 @@ export default {
    ** Plugins to load before mounting the App
    ** Doc: https://nuxtjs.org/docs/2.x/directory-structure/plugins
    */
-  plugins: ["~/plugins/scrollto.ts", "~/plugins/fontawesome.js", "~/plugins/axios.js"],
+  plugins: [
+    "~/plugins/scrollto.ts",
+    "~/plugins/fontawesome.js",
+    "~/plugins/axios.js",
+  ],
 };

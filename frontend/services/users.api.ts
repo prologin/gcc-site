@@ -14,10 +14,10 @@ export default class UsersAPIService extends BaseAPIService {
       params: {
         email,
       }
-    })
+    });
   }
 
-  async usersRead(id:number) {
+  async usersRead(id: number) {
     return this.axiosCall({
       method: 'get',
       url: `/${id}/`,

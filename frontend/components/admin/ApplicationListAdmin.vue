@@ -141,31 +141,31 @@ export default Vue.extend({
         3: "Accepté",
         4: "Confirmé",
       }
-    }
+    };
   },
   mounted () {
-    //Modfier ca c'est pas beau j'aime pas
+    // Modfier ca c'est pas beau j'aime pas
     applicationsAPI.applicationsList(null, this.event_id).then((res) => {
       this.applications = res;
 
       this.applications.forEach((app) => {
         usersAPI.usersRead(app.user).then((res) => {
           this.users.push(res);
-        });
+        })
 
         applicationsAPI.applicationsRead(app.id).then((res) => {
           this.formAnswers.push(res.form_answer);
-        });
-      })
+        })
+      });
 
       eventsAPI.eventsForm(this.event_id).then((res) => {
         this.formEvent = res;
-      });
-    })
+      })
+    });
   },
 
   methods: {
-    //Myabe faire un .js a part ?
+    // Myabe faire un .js a part ?
     async update_api(app, status) {
       const form = { status };
       const req = await this.$axios.patch(
@@ -179,13 +179,13 @@ export default Vue.extend({
         const new_status = document.getElementById("select-" + app.user).value;
         this.update_api(app, new_status);
         app.status = new_status;
-      });
+      })
     },
     dlInfo() {
       let csv =
         "Nom de famille,Prénom, Nom représentant légal, Prénom représentant légal, Email représentant légal\n";
       for (let index = 0; index < this.applications.length; index++) {
-        //Arreter d'harcode ca et mettre l'enum
+        // Arreter d'harcode ca et mettre l'enum
         if (this.applications[index].status === 4) {
           csv +=
             this.applications[index].last_name +
@@ -197,11 +197,11 @@ export default Vue.extend({
       const hiddenElement = document.createElement('a');
       hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
       hiddenElement.target = '_blank';
-      //provide the name for the CSV file to be downloaded
+      // provide the name for the CSV file to be downloaded
       hiddenElement.download = "Infos_GCC!.csv";
       hiddenElement.click();
-    }
-  }
+    },
+  },
 })
 </script>
 

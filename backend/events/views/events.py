@@ -39,10 +39,7 @@ class EventFilter(filters.FilterSet):
         ),
     )
     camps_type = filters.CharFilter(
-        field_name="camps_type",
-        help_text=(
-            "Filter by camps type. "
-        )
+        field_name="camps_type", help_text=("Filter by camps type. ")
     )
     center = filters.CharFilter(
         field_name="center_name",

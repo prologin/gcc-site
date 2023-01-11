@@ -31,20 +31,16 @@ const CampsType = {
 
 export default Vue.extend({
   name: "EventCardAdmin",
-  props: [
-    "title",
-    "index",
-    "camps_type",
-    "id",
-    "start_date",
-    "end_date"
-  ],
+  props: ['title', 'index', 'camps_type', 'id', 'start_date', 'end_date'],
   data () {
     return {
       path:
-        "/candidatures/" + new Date(this.start_date).getFullYear() + '/' + this.id,
+        "/candidatures/" +
+        new Date(this.start_date).getFullYear() +
+        '/' +
+        this.id,
       CampsType,
-    };
+    }
   },
   computed: {
     colorClass: function () {
@@ -55,9 +51,9 @@ export default Vue.extend({
       return (
         'Du ' + formatDate(this.start_date) + ' au ' + formatDate(this.end_date)
       )
-    }
-  }
-});
+    },
+  },
+})
 </script>
 
 <style>

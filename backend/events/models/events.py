@@ -81,9 +81,11 @@ class EventManager(models.Manager):
             signup_start_date__lte=timezone.now(),
         )
 
+
 class CampsType(models.TextChoices):
-    LONG = "long","Stage Long"
-    SHORT = "short","Stage Court"
+    LONG = "long", "Stage Long"
+    SHORT = "short", "Stage Court"
+
 
 class Event(models.Model):
     name = models.CharField(
@@ -93,7 +95,7 @@ class Event(models.Model):
 
     camps_type = models.CharField(
         max_length=256,
-        choices = CampsType.choices,
+        choices=CampsType.choices,
         verbose_name=_("Durée du stage"),
     )
 

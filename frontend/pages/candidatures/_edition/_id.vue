@@ -23,7 +23,7 @@
 <script>
 import Vue from 'vue';
 import Header from '@/components/Header.vue';
-import AppListAdmin from "@/components/admin/ApplicationListAdmin.vue"
+import AppListAdmin from "@/components/admin/ApplicationListAdmin.vue";
 import Footer from '@/components/Footer.vue';
 import { applicationsAPI } from '@/services/applications.api';
 
@@ -40,7 +40,7 @@ export default Vue.extend({
       eventDATE: this.$route.params.edition,
       applications: [],
       showError: false,
-    }
+    };
   },
   beforeMount () {
     applicationsAPI.applicationsList(this.id).then(
@@ -52,6 +52,6 @@ export default Vue.extend({
         this.showError = true;
       }
     );
-  },
+  }
 });
 </script>

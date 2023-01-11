@@ -14,7 +14,9 @@
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="loggedIn" class="ml-auto">
-        <b-nav-item v-if="this.user.is_staff && this.user['user_permissions'].includes(89)">
+        <b-nav-item
+          v-if="user.is_staff && user['user_permissions'].includes(89)"
+        >
           <b-dropdown
             right
             no-caret
@@ -134,7 +136,7 @@ export default Vue.extend({
     };
   },
   created() {
-    //Trouver le moyen de remettre /users/me/ because pipline failed
+    // Trouver le moyen de remettre /users/me/ because pipline failed
     this.$axios.get("rest/auth/user").then((response) => {
       this.user = response.data;
     })

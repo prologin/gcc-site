@@ -76,9 +76,12 @@ export default Vue.extend({
   data () {
     return {
       path:
-        "/candidatures/" + new Date(this.start_date).getFullYear() + '/' + this.id,
+        "/candidatures/" +
+        new Date(this.start_date).getFullYear() +
+        '/' +
+        this.id,
       CampsType,
-    };
+    }
   },
   computed: {
     colorClass: function () {
@@ -89,9 +92,9 @@ export default Vue.extend({
       return (
         'Du ' + formatDate(this.start_date) + ' au ' + formatDate(this.end_date)
       )
-    }
-  }
-});
+    },
+  },
+})
 </script>
 
 <style>
