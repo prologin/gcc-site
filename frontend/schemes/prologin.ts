@@ -133,7 +133,7 @@ export default function (
     acrValues: "goauthentik.io/providers/oauth2/default",
     grantType: 'authorization_code',
     codeChallengeMethod: 'S256',
-    scope: ["openid", "profile", "email"],
+    scope: ["openid", "profile", "email", "roles"],
   }
 
   assignDefaults(strategy, DEFAULTS)
