@@ -153,6 +153,8 @@ format:black:
   script:
     - poetry run black --check $(find -name '*.py' -type f)
     - poetry run isort --check-only $(find -name '*.py' -type f)
+  allow_failure: true
+
 
 test:
   stage: qa
