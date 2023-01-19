@@ -18,7 +18,7 @@ export default {
         name: "description",
         content: "description",
       },
-    ],
+    ]
   },
 
   build: {
@@ -46,7 +46,7 @@ export default {
         path: "*",
         component: resolve(__dirname, "pages/404.vue"),
       });
-    }
+    },
   },
 
   auth: {
@@ -61,11 +61,11 @@ export default {
           configuration:
             "https://auth.prologin.org/application/o/prologin-public-test-client/.well-known/openid-configuration",
         },
-      }
+      },
     },
     redirect: {
       login: "/LoginRegisterView",
-      callback: "/callback",
+      callback: "/api/auth/callback/prologin",
       home: "/",
     }
   },

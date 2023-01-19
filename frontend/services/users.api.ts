@@ -7,7 +7,7 @@ export default class UsersAPIService extends BaseAPIService {
     super('users');
   }
 
-  async usersMeRead (): Promise<UserType> {
+  async usersMeRead () {
     return this.axiosCall({
       method: 'get',
       url: '/me/',

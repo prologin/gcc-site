@@ -5,54 +5,13 @@
 
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-import { authAPI } from '@/services/auth.api';
-
 export default class BaseAPIService {
   private axiosInstance: AxiosInstance
 
-  constructor (resource: string) {
+  constructor(resource: string) {
     this.axiosInstance = axios.create({
       baseURL: '/rest/v1/' + resource
     });
-
-    // Add authorization header if there is one
-    this.axiosInstance.interceptors.request.use(async (config) => {
-      const access = localStorage.getItem('access');
-
-      if (access) {
-        config.headers = {
-          ...config.headers,
-          authorization: `Bearer ${access}`
-        }
-      }
-
-      return config
-    });
-
-    this.axiosInstance.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        const config = error.config
-        if (
-          config.url !== '/token/' &&
-          error.response &&
-          error.response.status === 401 &&
-          !config._retry
-        ) {
-          config._retry = true
-          await authAPI
-            .refreshToken(localStorage.getItem('refresh') || '')
-            .then(
-              (data) => {
-                localStorage.setItem('access', data.access)
-                return this.axiosCall(config)
-              },
-              (error) => Promise.reject(error)
-            )
-        }
-        return Promise.reject(error)
-      }
-    )
   }
 
   protected async axiosCall (config: AxiosRequestConfig) {

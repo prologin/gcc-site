@@ -9,54 +9,56 @@
         class="menu-logo ml-0 ml-sm-5 pl-3"
         :src="require('../assets/logo_gcc_text_right.svg')"
         alt="Logo des stages Girls Can Code"
-      />
+      >
     </NuxtLink>
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav v-if="loggedIn" class="ml-auto">
+      <b-navbar-nav v-if="$auth.$state.loggedIn" class="ml-auto">
         <b-nav-item>
-          <b-dropdown
-            right
-            no-caret
-            toggle-class="secondary-button"
-            variant="none"
-          >
-            <!-- Using 'button-content' slot -->
-            <template #button-content>
-              <b-row>
-                <b-col>
-                  <b-icon-person-circle aria-hidden="true" class="mr-2" />
-                  {{ getFirstName }} {{ getLastName }}
-                </b-col>
-                <b-col>
-                  <b-icon icon="chevron-compact-down" />
-                </b-col>
-              </b-row>
-            </template>
+          <ClientOnly>
+            <b-dropdown
+              right
+              no-caret
+              toggle-class="secondary-button"
+              variant="none"
+            >
+              <!-- Using 'button-content' slot -->
+              <template #button-content>
+                <b-row>
+                  <b-col>
+                    <b-icon-person-circle aria-hidden="true" class="mr-2" />
+                    {{ user.first_name }} {{ user.last_name }}
+                  </b-col>
+                  <b-col>
+                    <b-icon icon="chevron-compact-down" />
+                  </b-col>
+                </b-row>
+              </template>
 
-            <b-dropdown-header id="dropdown-header-label">
-              <h2>{{ getFirstName }} {{ getLastName }}</h2>
-              <h3>{{ getEmail }}</h3>
-            </b-dropdown-header>
-            <b-dropdown-divider />
-            <b-dropdown-item>
-              <font-awesome-icon icon="fa-solid fa-user" />
-              <NuxtLink style="color: black" to="/AccountInformationsView">
-                Mon compte
-              </NuxtLink>
-            </b-dropdown-item>
-            <b-dropdown-item>
-              <font-awesome-icon icon="fa-solid fa-inbox" />
-              <NuxtLink style="color: black" to="/ApplicationsView">
-                Mes candidatures
-              </NuxtLink>
-            </b-dropdown-item>
-            <b-dropdown-divider />
-            <b-dropdown-item-button @click="logout()">
-              <b-icon icon="power" aria-hidden="true" />
-              Se déconnecter
-            </b-dropdown-item-button>
-          </b-dropdown>
+              <b-dropdown-header id="dropdown-header-label">
+                <h2>{{ user.first_name }} {{ user.lastname }}</h2>
+                <h3>{{ user.email }}</h3>
+              </b-dropdown-header>
+              <b-dropdown-divider />
+              <b-dropdown-item>
+                <font-awesome-icon icon="fa-solid fa-user" />
+                <NuxtLink style="color: black" to="/AccountInformationsView">
+                  Mon compte
+                </NuxtLink>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <font-awesome-icon icon="fa-solid fa-inbox" />
+                <NuxtLink style="color: black" to="/ApplicationsView">
+                  Mes candidatures
+                </NuxtLink>
+              </b-dropdown-item>
+              <b-dropdown-divider />
+              <b-dropdown-item-button @click="logout()">
+                <b-icon icon="power" aria-hidden="true" />
+                Se déconnecter
+              </b-dropdown-item-button>
+            </b-dropdown>
+          </ClientOnly>
         </b-nav-item>
         <b-nav-item>
           <hr class="my-1">
@@ -65,13 +67,15 @@
 
       <b-navbar-nav v-else class="ml-auto">
         <b-nav-item>
-          <NuxtLink
-            to="/LoginRegisterView"
-            class="primary-button py-2 px-4"
-            style="color: white"
-          >
-            Connexion
-          </NuxtLink>
+          <ClientOnly>
+            <NuxtLink
+              to="/LoginRegisterView"
+              class="primary-button py-2 px-4"
+              style="color: white"
+            >
+              Connexion
+            </NuxtLink>
+          </ClientOnly>
         </b-nav-item>
         <b-nav-item>
           <hr class="my-1">
@@ -82,69 +86,66 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { mapGetters } from "vuex";
+import Vue from 'vue';
+import { usersAPI } from '@/services/users.api';
 
 export default Vue.extend({
-  name: "Header",
-  data() {
+  name: 'Header',
+  data () {
     return {
-      loggedIn: this.$auth.loggedIn,
+      user: "",
       showNavbar: true,
-      lastScrollPosition: 0,
+      lastScrollPosition: 0
     };
   },
-  mounted() {
-    window.addEventListener("scroll", this.onScroll);
+  beforeMount() {
+    usersAPI.usersMeRead().then((response) => {
+      this.user = response;
+    })
   },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll);
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
     currentLocation: function () {
       if (window.location !== undefined) {
-        return window.location.href;
+        return window.location.href
       }
-      return "filler";
+      return 'filler';
     },
-    onScroll() {
+    onScroll () {
       // Based on https://medium.com/@Taha_Shashtari/hide-navbar-on-scroll-down-in-vue-fb85acbdddfe
 
       // Get the current scroll position
       const currentScrollPosition =
-        window.pageYOffset || document.documentElement.scrollTop;
+        window.pageYOffset || document.documentElement.scrollTop
       // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero
       if (currentScrollPosition < 0) {
-        return;
+        return
       }
 
       // Stop executing this function if the difference between
       // current scroll position and last scroll position is less than some offset
       if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
-        return;
+        return
       }
 
       // Here we determine whether we need to show or hide the navbar
-      this.showNavbar = currentScrollPosition < this.lastScrollPosition;
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition
       // Set the current scroll position as the last scroll position
-      this.lastScrollPosition = currentScrollPosition;
+      this.lastScrollPosition = currentScrollPosition
     },
-    async logout() {
+    async logout () {
       // this as any: bypasses typescript checks
-      await this.$store.dispatch("user/logout").then(() => {
-        (this as any).$router.push("/");
-      });
+      await this.$auth.logout().then(() => {
+        (this as any).$router.push('/');
+      })
     },
   },
-  computed: {
-    ...mapGetters("user", [
-      "isAuthenticated",
-      "getFirstName",
-      "getLastName",
-      "getEmail",
-    ]),
-  },
-});
+})
 </script>
 
 <style>

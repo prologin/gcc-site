@@ -111,7 +111,7 @@ export default Vue.extend({
           possible_answers: [
             { value: 1, text: "first" },
             { value: 2, text: "second" },
-          ]
+          ],
         },
         {
           id: 5,
@@ -123,11 +123,11 @@ export default Vue.extend({
           possible_answers: [
             { value: 1, text: "first" },
             { value: 2, text: "second" },
-          ]
+          ],
         }
       ],
       answers: [],
-    }
+    };
   },
   created() {
     /* Sort questions to have them in order of appearance in the questions array */

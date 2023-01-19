@@ -27,7 +27,9 @@
       accordion="my-accordion"
     >
       <b-card-body>
-        <b-card-text v-html="content" />
+        <ClientOnly>
+          <b-card-text v-html="content" />
+        </ClientOnly>
       </b-card-body>
     </b-collapse>
   </b-card>
@@ -43,9 +45,9 @@ export default Vue.extend({
     colorClass: function () {
       const colors = ["gcc-pink", "gcc-green", "gcc-blue"];
       return colors[this.index % colors.length]
-    }
+    },
   },
-});
+})
 </script>
 
 <style scoped>

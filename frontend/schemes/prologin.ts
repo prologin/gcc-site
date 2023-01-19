@@ -80,7 +80,7 @@ function addAuthorize<SOptions extends StrategyOptions<Oauth2SchemeOptions>>(
           audience,
           code_verifier: codeVerifier,
           code
-        };
+        }
 
         console.log(data)
 
@@ -111,7 +111,7 @@ function addAuthorize<SOptions extends StrategyOptions<Oauth2SchemeOptions>>(
             res.end(JSON.stringify(error.response.data))
           });
       })
-    },
+    }
   })
 }
 

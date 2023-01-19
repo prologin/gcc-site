@@ -7,7 +7,7 @@ const ScheduleTypeEnum = {
 ScheduleTypeEnum.Mixin = {
   created () {
     this.ScheduleTypeEnum = ScheduleTypeEnum
-  }
+  },
 };
 
 export default ScheduleTypeEnum

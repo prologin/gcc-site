@@ -5,8 +5,8 @@
       <b-row class="page-not-found-background">
         <b-col class="my-auto content-background" md="auto" offset-md="6">
           <p class="text-center">
-            <span class="error-code">404</span><br>
-            <span class="error-message">Page introuvable</span><br>
+            <span class="error-code">404</span><br />
+            <span class="error-message">Page introuvable</span><br />
           </p>
           <NuxtLink to="/" class="primary-button" block>
             Retour a l'accueil
@@ -35,7 +35,7 @@ export default Vue.extend({
   props: ["error"],
   created() {
     this.Constants = Constants;
-  },
+  }
 });
 </script>
 

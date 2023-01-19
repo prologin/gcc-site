@@ -9,7 +9,7 @@ const QuestionsTypeEnum = {
 QuestionsTypeEnum.Mixin = {
   created () {
     this.QuestionsTypeEnum = QuestionsTypeEnum
-  }
+  },
 };
 
 export default QuestionsTypeEnum

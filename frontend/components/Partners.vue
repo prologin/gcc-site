@@ -66,12 +66,12 @@ export default Vue.extend({
   data() {
     return {
       partners: [],
-    };
+    }
   },
   computed: {
     partnersSortedByOrder () {
       return this.partners.slice().sort((a, b) => a.order - b.order)
-    }
+    },
   },
   beforeMount () {
     partnersAPI
@@ -79,7 +79,7 @@ export default Vue.extend({
       .then((res) => {
         this.partners = res;
       })
-  },
+  }
 })
 </script>
 

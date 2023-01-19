@@ -105,9 +105,9 @@ export default Vue.extend({
         town: '',
         phone: '',
       }
-    }
+    };
   },
-});
+})
 </script>
 
 <style scoped>

@@ -71,7 +71,7 @@ export default Vue.extend({
   },
   created() {
     this.Constants = Constants;
-  },
+  }
 });
 </script>
 

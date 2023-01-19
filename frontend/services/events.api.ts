@@ -23,7 +23,7 @@ export default class EventsAPIService extends BaseAPIService {
         ends_before: endsBefore,
         signup_starts_after: signupStartsAfter,
         signup_ends_before: signupEndsBefore
-      }
+      },
     })
   }
 

@@ -312,18 +312,18 @@ export default Vue.extend({
   created () {
     this.accountInfo = {
       address: {
-        numberAndRoad: this.$store.getters.getAddress,
-        postalCode: this.$store.getters.getZipCode,
-        city: this.$store.getters.getCity,
-        country: this.$store.getters.getCountry
+        numberAndRoad: "",
+        postalCode: "",
+        city: "",
+        country: "",
       },
-      email: this.$store.getters.getEmail,
-      firstName: this.$store.getters.getFirstName,
-      lastName: this.$store.getters.getLastName,
+      email: this.$auth.user.email,
+      firstName: this.$auth.user.given_name,
+      lastName: "",
       newsletter: 'NO',
     }
-    this.email = this.$store.getters.getEmail
-  }
+    this.email = this.$auth.user.email
+  },
 })
 </script>
 

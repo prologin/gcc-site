@@ -9,7 +9,7 @@ const ApplicationStatusEnum = {
 ApplicationStatusEnum.Mixin = {
   created () {
     this.ApplicationStatusEnum = ApplicationStatusEnum
-  }
+  },
 };
 
 export default ApplicationStatusEnum

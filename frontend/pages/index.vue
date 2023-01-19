@@ -1,41 +1,45 @@
 <template>
-  <body class="main-body-style">
+  <div class="main-body-style">
     <b-container fluid class="p-0">
       <!-- Header -->
       <Header />
 
       <!-- Home illustration -->
-      <b-container fluid class="home-banner">
-        <b-row class="h-100" align-v="center" align-h="center">
-          <b-col
-            class="text-center text-md-left col-md-5 col-lg-4 content-background home-title"
-          >
-            <span>
-              <h1>
-                Stage d'initiation à l'informatique pour collégiennes et
-                lycéennes.
-              </h1>
-            </span>
-            <span>
-              <b-button
-                class="primary-button subtitleSize mt-4"
-                block
-                @click="scrollTo('event-list')"
-              >
-                Voir les stages
-              </b-button>
-            </span>
-            <span>
-              <b-button
-                class="secondary-button subtitleSize"
-                block
-                @click="scrollTo('faq')"
-                >Plus d'informations
-              </b-button>
-            </span>
-          </b-col>
-        </b-row>
-      </b-container>
+      <client-only>
+        <b-container fluid class="home-banner">
+          <b-row class="h-100" align-v="center" align-h="center">
+            <b-col
+              class="text-center text-md-left col-md-5 col-lg-4 content-background home-title"
+            >
+              <span>
+                <h1>
+                  Stage d'initiation à l'informatique pour collégiennes et
+                  lycéennes.
+                </h1>
+              </span>
+              <span>
+                <b-button
+                  class="primary-button subtitleSize mt-4"
+                  block
+                  @click="scrollTo('event-list')"
+                >
+                  Voir les stages
+                </b-button>
+              </span>
+              <span>
+                <b-button
+                  class="secondary-button subtitleSize"
+                  block
+                  @click="scrollTo('faq')"
+                >
+                  Plus d'informations
+                </b-button>
+              </span>
+            </b-col>
+          </b-row>
+        </b-container>
+      </client-only>
+
       <!-- Featured partners -->
       <!-- TODO change style -->
       <Partners :is-front-page="true" :is-featured-space="true" />
@@ -63,7 +67,7 @@
       <!-- Footer -->
       <Footer />
     </b-container>
-  </body>
+  </div>
 </template>
 
 <script>
@@ -84,7 +88,7 @@ export default Vue.extend({
     FAQ,
     Newsletter,
     Footer,
-  },
+  }
 });
 </script>
 

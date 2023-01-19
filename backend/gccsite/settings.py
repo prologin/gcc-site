@@ -50,9 +50,6 @@ ROOT_URLCONF = root_urlconf(PROJECT_NAME)
 WSGI_APPLICATION = wsgi_application(PROJECT_NAME)
 
 REST_FRAMEWORK = rest_framework(with_auth=True)
-
-# The default filter backend does not properly set the field types, making all
-# query parameters string type.
-# Having proper types in the generated OpenAPI file is **extremely** important
-# since it will greatly help to use the API.
-# REST_FRAMEWORK["DEFAULT_FILTER_BACKENDS"] = ["gccsite.backends.FilterBackend"]
+REST_FRAMEWORK["DEFAULT_FILTER_BACKENDS"] = [
+    "django_filters.rest_framework.DjangoFilterBackend"
+]
