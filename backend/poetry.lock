@@ -717,6 +717,22 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-allow-cidr"
+version = "0.6.0"
+description = "A Django Middleware to enable use of CIDR IP ranges in ALLOWED_HOSTS."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-allow-cidr-0.6.0.tar.gz", hash = "sha256:24b71f70257e97bab9fdb5ad8342c96eeea1d45bc06a36332978574252219401"},
+    {file = "django_allow_cidr-0.6.0-py2.py3-none-any.whl", hash = "sha256:6709f4581dfd2a00476a134741a738a7f67714ec4f8596c55b22cf3b2ac5a12e"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+packaging = "*"
+
+[[package]]
 name = "django-celery-beat"
 version = "2.4.0"
 description = "Database-backed Periodic Tasks."
@@ -1661,13 +1677,13 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "prologin-django-utils"
-version = "0.6.0"
+version = "0.7.1"
 description = "Utils for Prologin's Django applications"
 category = "main"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "prologin_django_utils-0.6.0.tar.gz", hash = "sha256:8318534527ec618fbb2f17b146479a1a9225a4c6cae9ca60c97566249f040ad0"},
+    {file = "prologin_django_utils-0.7.1.tar.gz", hash = "sha256:c923d0cc467301c739020ff79d2d01d80ec1b3c5c23400f30768507393604a32"},
 ]
 
 [package.dependencies]
@@ -1675,6 +1691,7 @@ boto3 = ">=1.24,<2.0"
 celery = ">=5.2,<6.0"
 collectfast = "*"
 django = ">=4.0,<5.0"
+django-allow-cidr = ">=0.6,<0.7"
 django-celery-beat = ">=2.4,<3.0"
 django-debug-toolbar = "*"
 django-mail-panel = ">=4.0,<5.0"
@@ -2679,4 +2696,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "fbaa8e49e7c63e8663ac6698f1a40174734d3fab2e93eafdc6931269f7bc6e7a"
+content-hash = "7ad81fac2ac5f094c97561be9bcba41d614a8b2f77de85b418d17ee7974c6b91"
