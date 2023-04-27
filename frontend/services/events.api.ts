@@ -13,18 +13,7 @@ export default class EventsAPIService extends BaseAPIService {
     signupStartsAfter?: string,
     signupEndsBefore?: string
   ) {
-    return this.axiosCall({
-      method: 'get',
-      url: '/',
-      params: {
-        only_open: onlyOpen,
-        center,
-        starts_after: startsAfter,
-        ends_before: endsBefore,
-        signup_starts_after: signupStartsAfter,
-        signup_ends_before: signupEndsBefore
-      },
-    })
+    return [];
   }
 
   async eventsRead (id: number) {

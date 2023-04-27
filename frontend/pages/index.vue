@@ -42,7 +42,7 @@
 
       <!-- Featured partners -->
       <!-- TODO change style -->
-      <Partners :is-front-page="true" :is-featured-space="true" />
+      <!--<Partners :is-front-page="true" :is-featured-space="true" />-->
 
       <!-- Event list -->
       <EventList id="event-list" />
@@ -51,7 +51,7 @@
       <FAQ id="faq" />
 
       <!-- Partners -->
-      <Partners :is-front-page="true" :is-featured-space="false" />
+      <!--<Partners :is-front-page="true" :is-featured-space="false" />-->
 
       <!-- Newsletter -->
       <b-container fluid class="newsletter-background text-center">
