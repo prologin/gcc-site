@@ -1,0 +1,21 @@
+{% extends 'gccsite/base.html' %}
+
+{% block content %}
+
+{% if request.user.newsletter_subscribed %}
+<div class="alert alert-success">
+    <p>Merci de vous être abonné à la newsletter !</p>
+</div>
+{% endif %}
+
+<h1>Bonjour, {{ request.user }}</h1>
+
+{% for event in open_events %}
+<div class="card">
+    <div class="card-body">
+        <h3>{{ event.name }}</h3>
+        <p>{{ event.description }}</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
