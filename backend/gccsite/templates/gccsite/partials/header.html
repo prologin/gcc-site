@@ -1,0 +1,60 @@
+{% load static %}
+{% load bootstrap_icons %}
+<nav class="navbar fixed-top navbar-light navbar-expand-md">
+  <div class="container navbar-collapse collapse">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'img/logo_gcc_text_right.svg' %}" width="100">
+    </a>
+
+    {% if user.is_authenticated %}
+    <!-- TODO : ADD LINK + LOGOUT SYSTEM -->
+      
+    <div class="dropdown-center">
+      <button class="btn secondary-button py-2 px-4" data-bs-toggle="dropdown">
+        <b-row>
+          <b-col>
+            <a style=""> {% bs_icon 'person-circle' size='1.2em' %} </a>
+            {{ user.first_name }} {{ user.last_name }}
+          </b-col>
+          <b-col>
+            {% bs_icon 'chevron-compact-down' size='1.2em' %}
+          </b-col>
+        </b-row>
+      </button>
+
+      <ul class="dropdown-menu dropdown-menu-lg-end"> 
+        <li>
+          <a class="dropdown-header">
+            <h2>{{ user.first_name }} {{ user.lastname }}</h2>
+            <h3>{{ user.email }}</h3>
+          </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item" href="#AccountInformationsView"> 
+            {% bs_icon 'person-fill' %} Mon compte
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#ApplicationsView"> 
+            {% bs_icon 'inbox-fill' %} Mes candidatures 
+          </a>
+         </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item" href='#'> 
+          {% bs_icon 'power' %} Se déconnecter
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {% else %}
+
+    <a href="/LoginRegisterView" class="primary-button py-2 px-4" style="color: white;">
+      Connexion
+    </a>
+
+    {% endif%}
+  </div>
+</nav>

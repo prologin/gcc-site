@@ -1,0 +1,42 @@
+{% load static %}
+{% load bootstrap_icons %}
+<div class="modal-dialog modal-lg modal-dialog-centered">
+  <div class="modal-content mb-1">
+    <div class="modal-header mb-2 text-center" style="align-self: center;">
+      <img class="" src="{% static 'img/logo_gcc.svg' %}" alt="Logo des stages Girls Can Code"/>
+    </div>
+    <div class="modal-body p-3 pt-0 d-flex" style="flex-direction: column">
+      <hr class="eventInfo-line gcc-{{123|make_list|random}}-back md-auto" />
+      <tbody class="rowgroup">
+        <h1>Stage : </h1>
+        <div class="row m-3 justify-content-center">
+          <div class="col p-1 pl-3 eventInfo-icon">
+            {% bs_icon 'calendar-check' size='3em' %}
+          </div>
+          <ul class="col-md-auto m-0 p-0" style="list-style: none;">
+            <li>
+              <h2>{{ event.start_date }}</h2>
+            </li>
+            <li>
+              <h2>{{ event.end_date }}</h2>
+            </li>
+          </ul>
+        </div>
+        <div class="row m-3 justify-content-center">
+          <div class="col p-1 pl-3 eventInfo-icon">
+            {% bs_icon 'geo-alt-fill' size='3em' %}
+          </div>
+          <ul class="col-md-auto m-0 p-0" style="list-style: none;">
+            <li>
+              <h2>{{ event.center.address.street }}</h2>
+            </li>
+            <li>
+              <h2>{{ event.center.address.city }}</h2>
+            </li>
+          </ul>
+        </div>
+      </tbody>
+    </div>
+    <div class="modal-footer" style="display:none"></div>
+  </div>
+</div>

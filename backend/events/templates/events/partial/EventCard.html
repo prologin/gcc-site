@@ -1,0 +1,28 @@
+{% load static %}
+{% load bootstrap_icons %}
+<div class="row f-flex justify-content-between event-card mb-4 p-3">
+  <div class="col-lg-auto col row">
+    <div class="my-auto d-none d-sm-block col-md-auto gcc-color-{{123|make_list|random}}">
+      {% bs_icon 'circle-fill' size='1.2em' %}
+    </div>
+    
+    <!-- Event infos verticaly centered -->
+    <div class="col-lg-auto col">
+      <h1>{{ event.name }}</h1>
+      <h2>Du {{ event.start_date|date:"l d F Y" }} au {{ event.end_date|date:"l d F Y" }}</h2>
+      <h3>{{ event.center.address.city }}</h3>
+    </div>
+  </div>
+
+  <div class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto btn-group-vertical" role="group">
+    <button class="btn mx-auto ml-lg-auto mr-lg-4 primary-button">S'inscrire à ce stage</button>
+    <button class="btn mx-auto ml-lg-auto mr-lg-4 secondary-button" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">Plus d'informations</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="informationEventModal-{{id}}" tabindex="-1" aria-labelledby="informationEventModalLabel" aria-hidden="true">
+    {% include "events/partial/EventInfo.html" with event=event id=id%}
+  </div>
+
+</div>
+
