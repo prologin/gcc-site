@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_bootstrap_icons",
     "events",
     "users",
 ]
@@ -87,7 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "fr-fr"
 
 TIME_ZONE = "Europe/Paris"
@@ -99,6 +99,11 @@ USE_TZ = True
 AUTH_USER_MODEL = "users.User"
 
 
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_DIRS = (
+    BASE_DIR / 'static/',
+)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
