@@ -11,27 +11,27 @@ def my_context_processor(req):
     'SOCIAL_NETWORKS' : [
       {
         'link': 'https://www.facebook.com/stagegirlscancode/',
-        'logo': 'fa-brands fa-square-facebook',
+        'logo': 'facebook',
         'alt': 'Page Facebook des stages Girls Can Code!',
       },
       {
         'link': 'https://www.flickr.com/photos/prologin/',
-        'logo': 'fa-brands fa-flickr',
+        'logo': 'facebook',
         'alt': "Album photos de l'association Prologin"
       },
       {
         'link': 'https://www.instagram.com/association_prologin/',
-        'logo': 'fa-brands fa-square-instagram',
+        'logo': 'instagram',
         'alt': "Page Instagram de l'association Prologin"
       },
       {
         'link': 'https://fr.linkedin.com/company/prologin',
-        'logo': 'fa-brands fa-linkedin',
+        'logo': 'linkedin',
         'alt': "Page LinkedIn de l'association Prologin"
       },
       {
         'link': 'https://twitter.com/prologin',
-        'logo': 'fa-brands fa-square-twitter',
+        'logo': 'twitter',
         'alt': "Page Twitter de l'association Prologin"
       },
     ],
@@ -118,19 +118,19 @@ def my_context_processor(req):
     ],
     'BUTTON_SNS' : [
       {
-        'logo': "fa-brands fa-google",
+        'logo': "google",
         'name': 'Google',
       },
       {
-        'logo': "fa-brands fa-twitter",
+        'logo': "twitter",
         'name': 'Twitter',
       },
       {
-        'logo': "fa-brands fa-instagram",
+        'logo': "instagram",
         'name': 'Instagram',
       },
       {
-        'logo': "fa-brands fa-facebook",
+        'logo': "facebook",
         'name': 'Facebook',
       }
     ],
