@@ -1,7 +1,35 @@
-<footer>
-    <div class="navbar sticky-bottom bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">&copy; Prologin 2023</a>
-        </div>
+{% load static %}
+<footer class="footer-bg py-2 w-100 container-fluid">
+  <div class="row mx-5">
+    <a class="col-12 col-lg-auto mb-3 mb-lg-0 text-center text-lg-left" href="/">
+      <img src="{% static 'img/logo_gcc.svg' %}" alt="Logo des stages Girls Can Code!" class="container-fluid picture-size"/>
+    </a>
+    <div class="col-12 col-lg-auto text-center text-lg-left col">
+      <a href="/privacy" class="secondary-button footer-link-style my-auto" >
+        Politique de confidentialité
+      </a>
     </div>
+    <div class="col-12 col-lg-auto text-center text-lg-left col">
+      <a href="/privacy" class="secondary-button footer-link-style my-auto" >
+        Mentions légales
+      </a>
+    </div>
+    <div class="row col-12 col-lg-auto mx-auto ml-lg-auto mr-lg-0 p-0">
+      <h3 class="light-text my-auto col-lg-auto order-12 order-lg-1 text-center">
+        {{ CONTACT_EMAIL }}
+      </h3>
+      <!-- TODO: FIX LOGO flickr -->
+      <div class="row col-5 col-lg-auto order-1 order-lg-12 my-3 my-lg-0 mx-auto mr-lg-0" align-h="center">
+        {% for sn in SOCIAL_NETWORKS %}
+        {% include 'gccsite/partials/SocialNetwork.html' with sn=sn %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-12 col-lg-auto text-center text-lg-left">
+      Illustrations made with
+      <a href="https://storyset.com" class="secondary-button footer-link-style my-auto">
+        Storyset
+      </a>
+    </div>
+  </div>
 </footer>

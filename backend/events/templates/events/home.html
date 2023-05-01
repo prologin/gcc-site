@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<!-- Home illustration -->
 <div class="home-banner container-fluid">
   <div class="row h-100 align-items-center justify-content-center">
     <div class="text-md-left col-md-5 col-lg-4 content-background home-title col">
@@ -23,24 +24,23 @@
   </div>
 </div>
 
+<!-- Event list -->
 {% include 'events/partial/EventList.html' %}
 
+<!-- TODO: PARTNERS -->
+
+<!-- FAQ -->
 {% include 'events/partial/FAQ.html' %}
 
-
-{% if request.user.newsletter_subscribed %}
-<div class="alert alert-success">
-    <p>Merci de vous être abonné à la newsletter !</p>
-</div>
-{% endif %}
-
-<h1>Bonjour, {{ request.user }}</h1>
-{% for event in open_events %}
-<div class="card">
-    <div class="card-body">
-        <h3>{{ event.name }}</h3>
-        <p>{{ event.description }}</p>
+<!-- Newsletter -->
+<div class="newsletter-background text-center container-fluid">
+  <div class="row justify-content-center">
+    <div class="mt-5 col-md-8">
+      <h1>S'inscrire à la newsletter</h1>
+      <h3>Pour être tenu au courant de nos prochains évènements.</h3>
+      {% include 'events/partial/Newsletter.html' %}
     </div>
+  </div>
 </div>
-{% endfor %}
+
 {% endblock %}
