@@ -8,16 +8,16 @@
       <span>
         <h1>Stage d'initiation à l'informatique pour collégiennes et lycéennes.</h1>
       </span>
-      <!-- TODO : ADD SCROLL-->
+
       <span>
-        <button type="button" class="btn primary-button subtitleSize mt-4 btn-secondary btn-block">
+        <a type="button" href="#event-list" class="btn primary-button subtitleSize mt-4 btn-secondary btn-block">
           Voir les stages
-        </button>
+        </a>
       </span>
       <span>
-        <button type="button" class="btn secondary-button subtitleSize btn-secondary btn-block">
+        <a type="button" href="#faq" class="btn secondary-button subtitleSize btn-secondary btn-block">
           Plus d'informations
-        </button>
+        </a>
       </span>
     </div>
   </div>
@@ -25,6 +25,7 @@
 
 {% include 'events/partial/EventList.html' %}
 
+{% include 'events/partial/FAQ.html' %}
 
 
 {% if request.user.newsletter_subscribed %}
@@ -34,7 +35,6 @@
 {% endif %}
 
 <h1>Bonjour, {{ request.user }}</h1>
-
 {% for event in open_events %}
 <div class="card">
     <div class="card-body">

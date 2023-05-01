@@ -1,0 +1,26 @@
+{% load bootstrap_icons %}
+
+<div class="accordion-item border-0">
+  <h2 class="accordion-header">
+    <button class="accordion-button bg-transparent text-reset shadow-none collapsed row secondary-button pr-4 justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{index}}" aria-expanded="false" aria-controls="accordion-{{index}}">
+      <div class="row col pl-3">
+        <div class="my-auto d-none d-sm-block col-md-auto gcc-color-{{color}}">
+          {% bs_icon 'circle-fill' size='1em' %}
+        </div>
+        <p class="col my-auto">
+          {{ faq_elt.question }}
+        </p>
+      </div>
+    </button>
+  </h2>
+  <div id="accordion-{{index}}" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <div class="accordion-body">
+        {% autoescape off %}
+        {{ faq_elt.answer }}
+        {% endautoescape %}
+
+      </div>
+    </div>
+  </div>
+</div>

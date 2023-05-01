@@ -345,3 +345,29 @@ button.dropdown-item {
   max-width: 60px;
   padding-right: 25px;
 }
+
+/*
+ * FAQ
+ */
+ .faq-background {
+  background-color: #efefef;
+  background-image: url(../img/faq_bg.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom 0 right 0;
+}
+
+/*
+ * AccordionCard
+ */
+.card,
+.card-header {
+   background-color: white !important;
+   border-radius: var(--global-border-radius) !important;
+   border: none;
+ }
+ 
+.collapsed > .when-open,
+.not-collapsed > .when-closed {
+   display: none;
+ }

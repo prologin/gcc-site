@@ -1,0 +1,19 @@
+{% load static %}
+<div class="faq-background p-2 p-sm-0 container-fluid">
+  <div class="row w-100">
+    <div class="col-12 col-sm-8 col">
+      <img src="{% static 'img/photo_1.png' %}" alt="Photo des stages Girls Can Code!" class="container-fluid"/>
+      <div class="content-background ms-1 ms-sm-5 me-1 p-3 col"> 
+        <h1>Foire Aux Questions</h1>
+        <div class="accordion p-1" role="tablist">
+          {% for faq_elt in FAQ_ENTRIES %}
+          {% include 'events/partial/AccordionCard.html' with faq_elt=faq_elt index=forloop.counter color=123|make_list|random %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col d-none d-sm-block">
+      <img src="{% static 'img/photo_2.png' %}" alt="Photo des stages Girls Can Code!" class="container-fluid"/>
+    </div>
+  </div>
+</div>
