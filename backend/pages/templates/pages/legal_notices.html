@@ -1,0 +1,52 @@
+{% extends 'gccsite/base.html' %}
+
+{% block content %}
+<div class="basic-background">
+    <div class="rounded-3 mx-5 p-5"
+        style="background-color: rgb(233, 236, 239)">
+        <h1 class="display-3"> Mentions Légales </h1>
+        <p class="lead">
+            Les stages Girls Can Code! sont organisés par l'association
+            <a href="https://prologin.org/">Prologin</a>
+            pour les jeunes collégiennes et lycéennes pour leur faire
+            découvrir l'informatique.
+        </p>
+
+        <hr class="my-4" />
+
+        <div class="row">
+            <div class="col my-auto">
+                <span class="light-text">Adresse :</span><br />
+                {{ ADDRESS_LINE_1 }}<br />
+                {{ ADDRESS_LINE_2 }}<br />
+                {{ ADDRESS_LINE_3 }}<br /><br />
+
+                <span class="light-text">Téléphone :</span><br />
+                {{ CONTACT_PHONE }}<br /><br />
+
+                <span class="light-text">E-mail :</span><br />
+                {{ CONTACT_EMAIL }}<br /><br />
+            </div>
+            <div class="col">
+                <span class="light-text">Statut légal</span><br />
+                Prologin est une association loi de 1901, déclarée à la
+                sous-préfecture de L'Hay-les-Roses le 04-08-2000.<br /><br />
+
+                <span class="light-text"
+                    >Numéro de déclaration CNIL :</span
+                ><br />
+                {{ CNIL_DECL_NUM }}<br /><br />
+
+                <span class="light-text"
+                    >Conformément à l'article 34 de la loi «
+                    Informatique et Liberté », vous disposez d'un droit
+                    d'accès, de rectification et suppression des données
+                    à caractère personnel vous concernant. Pour exercer
+                    ce droit, veuillez contacter Prologin en utilisant
+                    l'une des méthodes listées sur cette page.</span
+                >
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
