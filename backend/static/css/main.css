@@ -29,6 +29,13 @@ body {
 }
 
 /*
+ * The default style of all links
+ * */
+a {
+  text-decoration: none;
+}
+
+/*
  * To use in each view that use header and footer.
  * */
 .main-body-style {
@@ -121,10 +128,6 @@ h4, .contentTextSize {
   color: var(--gcc-blue-color);
 }
 
-.jumbotron {
-  border-radius: var(--global-border-radius);
-}
-
 .content-background {
   background-color: white;
   border-radius: var(--global-border-radius);
@@ -135,7 +138,7 @@ h4, .contentTextSize {
   height: 100%;
   background-attachment: fixed;
   background-color: white;
-  background-image: url('~@/img/basic_background.svg');
+  background-image: url('../img/basic_background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
