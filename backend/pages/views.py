@@ -11,4 +11,4 @@ class LegalNoticesView(TemplateView):
     template_name = 'pages/legal_notices.html'
 
     def get_context_data(self, *args, **kwargs):
-        return my_context_processor(None)
+        return {}
