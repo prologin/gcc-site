@@ -5,6 +5,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("events.urls")),
     path("", include("pages.urls")),
+    path("", include("users.urls")),
 ]
-
-handler404 = "pages.views.error_404_view"
