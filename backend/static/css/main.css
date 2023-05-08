@@ -276,7 +276,7 @@ button.dropdown-item {
 
 .background-style {
   background-color: #efefef;
-  background-image: url("~@/assets/newsletter_bg.svg");
+  background-image: url("../img/newsletter_bg.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }

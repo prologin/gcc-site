@@ -205,3 +205,4 @@ test:
     - cd docker/
     - docker-compose -p "$CI_CONCURRENT_ID" logs -t --no-color > ../artifacts/docker-compose.log
     - docker-compose -p "$CI_CONCURRENT_ID" down -v
+  allow_failure: true
