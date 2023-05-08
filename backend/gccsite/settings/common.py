@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django_bootstrap_icons",
     "events",
     "users",
+    "pages",
 ]
 
 MIDDLEWARE = [
