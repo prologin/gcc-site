@@ -12,3 +12,9 @@ class LegalNoticesView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         return {}
+
+class PrivacyView(TemplateView):
+    template_name = 'pages/privacy.html'
+
+    def get_context_data(self, *args, **kwargs):
+        return {}

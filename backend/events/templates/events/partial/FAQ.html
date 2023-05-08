@@ -7,7 +7,7 @@
         <h1>Foire Aux Questions</h1>
         <div class="accordion p-1" role="tablist">
           {% for faq_elt in FAQ_ENTRIES %}
-          {% include 'events/partial/AccordionCard.html' with faq_elt=faq_elt index=forloop.counter color=123|make_list|random %}
+          {% include 'events/partial/AccordionCard.html' with title=faq_elt.question content=faq_elt.answer index=forloop.counter color=123|make_list|random %}
           {% endfor %}
         </div>
       </div>

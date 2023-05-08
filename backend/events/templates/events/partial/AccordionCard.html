@@ -8,7 +8,7 @@
           {% bs_icon 'circle-fill' size='1em' %}
         </div>
         <p class="col my-auto">
-          {{ faq_elt.question }}
+          {{ title }}
         </p>
       </div>
     </button>
@@ -17,7 +17,7 @@
     <div class="accordion-body">
       <div class="accordion-body">
         {% autoescape off %}
-        {{ faq_elt.answer }}
+        {{ content }}
         {% endautoescape %}
       </div>
     </div>
