@@ -22,11 +22,14 @@ $ ./manage.py runserver
 ```
 
 You can then go to http://localhost:8000/. 
+
+##### Super User creation
 To create a super User :
 
 ```sh
-$ cd docker/
-$ ./manage.sh shell
+$ cd backend/
+$ poetry shell
+$ ./manage.py shell
 >>> from django.contrib.auth import get_user_model
 >>> User = get_user_model();
 >>> User.objects.create_superuser('username', 'email@prologin.org', 'password')
