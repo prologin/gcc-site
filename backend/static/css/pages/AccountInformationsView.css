@@ -23,7 +23,7 @@
 .main-body-style {
   height: 100%;
   background-attachment: fixed;
-  background-image: url("~@/assets/basic_background.svg");
+  background-image: url("../../img/basic_background.svg");
   background-position: top left;
   background-repeat: no-repeat;
   background-size: cover;

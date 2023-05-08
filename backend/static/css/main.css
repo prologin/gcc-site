@@ -394,3 +394,7 @@ button.dropdown-item {
 .social-network-icon:hover {
   filter: brightness(2);
 }
+
+.bi {
+  margin-right: 1em;
+}
