@@ -3,7 +3,7 @@
 {% load bootstrap_icons %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/AccountInformationsView.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/AccountInformationsView.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -24,35 +24,68 @@
     <div class="col d-none d-md-block col-md-3">
       <div class="sidebar-item">
         <div class="make-me-sticky">
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#personal-info">
+            {% bs_icon 'person-circle' size='1.2em'  %} 
             Informations personnelles
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#email">
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#email">
             {% bs_icon 'envelope' size='1.2em' %} 
             E-mail
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#password">
+            {% bs_icon 'unlock-fill' size='1.2em' %} 
             Mot de passe
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#notifications">
+            {% bs_icon 'bell-fill' size='1.2em' %} 
             Gestion des notifications
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#rgpd">
+            {% bs_icon 'gear-fill' size='1.2em' %} 
             Archive des données
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %}
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#delete">
+            {% bs_icon 'exclamation-diamond-fill' size='1.2em' %}
             Suppression de compte
-          </button>
+          </a>
         </div>
       </div>
     </div>
     <div class="col">
-      sdsdsdsd
+      <div id="personal-info" md="12" class="col mb-5 p-5 account-group">
+        <h1>Informations personnelles</h1>
+        <h3>
+          Informations traitées seulement en cas de sélection à un stage,
+          d'appel d'urgence, d'envois de courrier ou d'email ou lors de la
+          connexion.
+        </h3>
+      </div>
+      <div id="email" md="12" class="col my-5 p-5 account-group">
+        <h1>Changer d'adresse email</h1>
+      </div>
+      <div id="password" md="12" class="col my-5 p-5 account-group">
+        <h1>Changer de mot de passe</h1>
+      </div>
+      <div id="notifications" md="12" class="col my-5 p-5 account-group">
+        <h1>Notifications</h1>
+        <h3>Gérez les autorisations.</h3>
+      </div>
+      <div id="rgpd" md="12" class="col my-5 p-5 account-group">
+        <h1>Exporter vos données personnelles</h1>
+        <h3>
+          Vous pouvez télécharger une archive contenant toutes vos données
+          personnelles, comme prévu par le Droit à la portabilité (Art. 20 du
+          RGPD).
+        </h3>
+      </div>
+      <div id="delete" md="12" class="col my-5 p-5 account-group">
+        <h1>Supprimer votre compte</h1>
+        <h3>
+          Vous pouvez supprimer votre compte et toutes les données
+          personnelles associées, comme prévu par votre Droit à la suppression
+          (Art. 17 du RGPD).
+        </h3>
+      </div>
     </div>
   </div>
 </div>
