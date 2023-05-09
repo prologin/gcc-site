@@ -1,0 +1,23 @@
+.page-not-found-background {
+  min-height: calc(100vh - 140px);
+  background-color: white;
+  background-image: url("../../img/page_not_found_bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.error-code {
+  font-size: 1000%;
+  font-weight: bold;
+}
+
+.error-message {
+  font-size: 300%;
+}
+
+.light-text {
+  color: #37474f;
+  font-size: 80%;
+  font-weight: 400;
+}

@@ -1,5 +1,10 @@
 from django.views.generic import TemplateView
-from gccsite.context_processors import my_context_processor
+from django.template.response import SimpleTemplateResponse
+
+def error_404_view(request, exception):
+    response = SimpleTemplateResponse("pages/404.html")
+    response.status_code = 404
+    return response
 
 class AboutView(TemplateView):
     template_name = 'pages/about.html'
