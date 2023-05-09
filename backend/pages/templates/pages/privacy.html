@@ -8,7 +8,7 @@
     <div class="container accordion mb-1" role="tablist">
         {% for privacy_elm in PRIVACY_LIST %}
             {% cycle 1 2 3 as color silent %}
-            {% include 'events/partial/AccordionCard.html' with title=privacy_elm.title content=privacy_elm.content index=forloop.counter color=color %}
+            {% include 'pages/partial/AccordionCard.html' with title=privacy_elm.title content=privacy_elm.content index=forloop.counter color=color %}
         {% endfor %}
     </div>
 </div>

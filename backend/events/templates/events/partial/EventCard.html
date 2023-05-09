@@ -1,11 +1,10 @@
 {% load static %}
-{% load bootstrap_icons %}
 <div class="row f-flex justify-content-between event-card mb-4 p-3">
   <div class="col-lg-auto col row">
     <div class="my-auto d-none d-sm-block col-md-auto gcc-color-{{123|make_list|random}}">
-      {% bs_icon 'circle-fill' size='1.2em' %}
+      <i class="fas fa-circle" style="font-size: 1.2em;"></i>
     </div>
-    
+
     <!-- Event infos verticaly centered -->
     <div class="col-lg-auto col">
       <h1>{{ event.name }}</h1>
