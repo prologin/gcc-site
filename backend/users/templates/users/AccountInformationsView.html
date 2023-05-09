@@ -1,11 +1,14 @@
 {% extends 'gccsite/base.html' %}
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/pages/AccountInformationsView.css' %}">
 {% endblock %}
 
 {% block content %}
+
 <div no-gutters class="container-fluid">
   <div class="mx-5 my-4">
     <h2>Gestion du compte</h2>
@@ -17,6 +20,10 @@
       gestion des données et de vos droits, consultez
       <a href="/Privacy"> page dédiée </a>
     </p>
+    <form method="post">
+      {% csrf_token %}
+      {{form|crispy}}
+    </form>
   </div>
 
   <div class="row mx-0 mx-md-5">
