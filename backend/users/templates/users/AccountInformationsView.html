@@ -1,6 +1,5 @@
 {% extends 'gccsite/base.html' %}
 {% load static %}
-{% load bootstrap_icons %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/pages/AccountInformationsView.css' %}">
@@ -25,27 +24,27 @@
       <div class="sidebar-item">
         <div class="make-me-sticky">
           <a type="button" class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em'  %} 
+            <i class="fas fa-user me-2"></i>
             Informations personnelles
           </a>
           <a type="button" class="btn secondary-button btn-secondary btn-block" href="#email">
-            {% bs_icon 'envelope' size='1.2em' %} 
+            <i class="fas fa-envelope me-2"></i>
             E-mail
           </a>
           <a type="button" class="btn secondary-button btn-secondary btn-block" href="#password">
-            {% bs_icon 'unlock-fill' size='1.2em' %} 
+            <i class="fas fa-unlock me-2"></i>
             Mot de passe
           </a>
           <a type="button" class="btn secondary-button btn-secondary btn-block" href="#notifications">
-            {% bs_icon 'bell-fill' size='1.2em' %} 
+            <i class="fas fa-bell me-2"></i>
             Gestion des notifications
           </a>
           <a type="button" class="btn secondary-button btn-secondary btn-block" href="#rgpd">
-            {% bs_icon 'gear-fill' size='1.2em' %} 
+            <i class="fas fa-gear me-2"></i>
             Archive des données
           </a>
           <a type="button" class="btn secondary-button btn-secondary btn-block" href="#delete">
-            {% bs_icon 'exclamation-diamond-fill' size='1.2em' %}
+            <i class="fas fa-triangle-exclamation me-2"></i>
             Suppression de compte
           </a>
         </div>
