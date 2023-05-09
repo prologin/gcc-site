@@ -61,10 +61,11 @@
           d'appel d'urgence, d'envois de courrier ou d'email ou lors de la
           connexion.
         </h3>
-        {% crispy form %}
+        {% crispy personal_info_form %}
       </div>
       <div id="email" md="12" class="col my-5 p-5 account-group">
         <h1>Changer d'adresse email</h1>
+        {% crispy email_form %}
       </div>
       <div id="password" md="12" class="col my-5 p-5 account-group">
         <h1>Changer de mot de passe</h1>
