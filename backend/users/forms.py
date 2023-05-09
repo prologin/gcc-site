@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import validate_email
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div, Row, Column, HTML
 
@@ -43,8 +44,7 @@ class PersonalInfoForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_id = 'id-exampleForm'
-        self.helper.form_class = 'blueForms'
+        self.helper.form_id = 'personal_info_form'
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
 
@@ -74,3 +74,22 @@ class PersonalInfoForm(forms.Form):
             Submit('submit', 'Sauvegarder', css_class='btn btn-primary'),
         )
 
+class EmailForm(forms.Form):
+    email = forms.EmailField(
+            label="E-mail",
+            max_length=320,
+            required=True,
+            validators=[validate_email]
+            )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'personal_info_form'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+
+        self.helper.layout = Layout(
+            Field('email', placeholder = "Nouvelle adresse e-mail"),
+            Submit('submit', 'Sauvegarder')
+        )
