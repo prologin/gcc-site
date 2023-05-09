@@ -6,3 +6,5 @@ urlpatterns = [
     path("", include("events.urls")),
     path("", include("pages.urls")),
 ]
+
+handler404 = "pages.views.error_404_view"
