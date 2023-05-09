@@ -18,10 +18,9 @@
       <h3 class="light-text my-auto col-lg-auto order-12 order-lg-1 text-center">
         {{ CONTACT_EMAIL }}
       </h3>
-      <!-- TODO: FIX LOGO flickr -->
       <div class="row col-5 col-lg-auto order-1 order-lg-12 my-3 my-lg-0 mx-auto mr-lg-0" align-h="center">
         {% for sn in SOCIAL_NETWORKS %}
-        {% include 'gccsite/partials/SocialNetwork.html' with sn=sn %}
+        {% include 'gccsite/partial/SocialNetwork.html' with sn=sn %}
         {% endfor %}
       </div>
     </div>

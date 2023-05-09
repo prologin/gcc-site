@@ -1,5 +1,4 @@
 {% load static %}
-{% load bootstrap_icons %}
 <nav class="navbar fixed-top navbar-light">
   <div class="container navbar-collapse collapse">
     <a class="navbar-brand" href="#">
@@ -8,21 +7,21 @@
 
     {% if user.is_authenticated %}
     <!-- TODO : ADD LINK + LOGOUT SYSTEM -->
-      
+
     <div class="dropdown-center">
       <button class="btn secondary-button py-2 px-4" data-bs-toggle="dropdown">
-        <b-row>
-          <b-col>
-            <a style=""> {% bs_icon 'person-circle' size='1.2em' %} </a>
+        <div class="row">
+          <div class="col">
+            <i class="fas fa-user me-2"></i>
             {{ user.first_name }} {{ user.last_name }}
-          </b-col>
-          <b-col>
-            {% bs_icon 'chevron-compact-down' size='1.2em' %}
-          </b-col>
-        </b-row>
+          </div>
+          <div class="col-2">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
       </button>
 
-      <ul class="dropdown-menu dropdown-menu-lg-end"> 
+      <ul class="dropdown-menu dropdown-menu-lg-end">
         <li>
           <a class="dropdown-header">
             <h2>{{ user.first_name }} {{ user.lastname }}</h2>
@@ -31,19 +30,19 @@
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-          <a class="dropdown-item" href="#AccountInformationsView"> 
-            {% bs_icon 'person-fill' %} Mon compte
+          <a class="dropdown-item" href="#AccountInformationsView">
+            <i class="fas fa-user"></i> Mon compte
           </a>
         </li>
         <li>
-          <a class="dropdown-item" href="#ApplicationsView"> 
-            {% bs_icon 'inbox-fill' %} Mes candidatures 
+          <a class="dropdown-item" href="#ApplicationsView">
+            <i class="fas fa-inbox"></i> Mes candidatures
           </a>
          </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-          <a class="dropdown-item" href='#'> 
-          {% bs_icon 'power' %} Se déconnecter
+          <a class="dropdown-item" href='#'>
+            <i class="fas fa-power-off"></i> Se déconnecter
           </a>
         </li>
       </ul>

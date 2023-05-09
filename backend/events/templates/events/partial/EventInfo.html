@@ -1,5 +1,4 @@
 {% load static %}
-{% load bootstrap_icons %}
 <div class="modal-dialog modal-xl modal-dialog-centered">
   <div class="modal-content mb-1">
     <div class="modal-header mb-2 text-center" style="align-self: center;">
@@ -11,7 +10,9 @@
         <h1>Stage : </h1>
         <div class="row m-3 justify-content-around">
           <div class="col row m-4  justify-content-center">
-            {% bs_icon 'calendar-check' size='3em' extra_classes="col-2" %}
+            <div class="col-2 text-center">
+              <i class="far fa-calendar-check" style="font-size: 3em"></i>
+            </div>
             <ul class="col m-0 p-0" style="list-style: none;">
               <li>
                 <h2>{{ event.start_date }}</h2>
@@ -22,7 +23,9 @@
             </ul>
           </div>
           <div class="col row m-4  justify-content-center">
-            {% bs_icon 'geo-alt-fill' size='3em' extra_classes="col-2" %}
+            <div class="col-2 text-center">
+              <i class="fas fa-location-dot" style="font-size: 3em"></i>
+            </div>
             <ul class="col m-0 p-0" style="list-style: none;">
               <li>
                 <h2>{{ event.center.address.street }}</h2>
