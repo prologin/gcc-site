@@ -37,3 +37,10 @@
 .red-button:hover {
   background-color: #900c3f;
 }
+
+.region_checkboxes {
+    max-width: min(75vw, 600px);
+}
+.region_checkboxes > .form-check-inline {
+    width: 200px;
+}
