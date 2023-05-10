@@ -36,6 +36,12 @@ class PersonalInfoForm(forms.Form):
         required = False,
     )
 
+    date_birth = forms.DateField(
+        label = "Date de naissance",
+        widget=forms.TextInput(attrs={'type': 'date'}),
+        required = True,
+    ) 
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -57,6 +63,10 @@ class PersonalInfoForm(forms.Form):
                 ),
             Row(Field('country', placeholder = self.fields['country'].label)),
         )
+        date_birth_layout = Div(
+            Field('date_birth')
+        )
+
         submit = Div(
             Submit('submit', 'Sauvegarder', css_class='btn primary-button btn-secondary btn-block'),
             css_class='mt-4 p-0 col-12 col-md-4 offset-md-8 col'
@@ -71,6 +81,7 @@ class PersonalInfoForm(forms.Form):
         self.helper.layout = Layout(
             name_layout,
             address_layout,
+            date_birth_layout,
             submit,
         )
 
