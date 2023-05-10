@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import validate_email
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div, Row, Column, HTML
+from crispy_forms.bootstrap import InlineCheckboxes
 
 class PersonalInfoForm(forms.Form):
     first_name = forms.CharField(
@@ -116,11 +117,16 @@ class PasswordUpdateForm(forms.Form):
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
 
+        submit = Div(
+            Submit('submit', 'Sauvegarder', css_class='btn primary-button btn-secondary btn-block'),
+            css_class='mt-4 p-0 col-12 col-md-4 offset-md-8 col'
+        )
+
         self.helper.layout = Layout(
             Field('current_pwd', placeholder = ""),
             Field('new_pwd', placeholder = ""),
             Field('new_pwd_ack', placeholder = ""),
-            Submit('submit', 'Sauvegarder')
+            submit
         )
 
 class NotificationsUpdateForm(forms.Form):
@@ -139,7 +145,12 @@ class NotificationsUpdateForm(forms.Form):
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
 
+        submit = Div(
+            Submit('submit', 'Sauvegarder', css_class='btn primary-button btn-secondary btn-block'),
+            css_class='mt-4 p-0 col-12 col-md-4 offset-md-8 col'
+        )
+
         self.helper.layout = Layout(
-            Div('accept_notifs'),
-            Submit('submit', 'Sauvegarder')
+            InlineCheckboxes('accept_notifs', css_class="region_checkboxes"),
+            submit
         )
