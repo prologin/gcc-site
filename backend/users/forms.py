@@ -54,12 +54,16 @@ class PersonalInfoForm(forms.Form):
                 )
         address_layout = Div(
             HTML("<div style=\"margin-bottom: 8px\">Adresse</div>"),
-            Row(Field('street', placeholder = self.fields['street'].label,)),
+            Row(Field('street', placeholder = self.fields['street'].label)),
             Row(
                 Column(Field('zip_code', placeholder = self.fields['zip_code'].label)),
                 Column(Field('city',placeholder = self.fields['city'].label)),
                 ),
             Row(Field('country', placeholder = self.fields['country'].label)),
+        )
+        submit = Div(
+            Submit('submit', 'Sauvegarder', css_class='btn primary-button btn-secondary btn-block'),
+            css_class='mt-4 p-0 col-12 col-md-4 offset-md-8 col'
         )
 
         # Disable the label of address fields
@@ -71,7 +75,7 @@ class PersonalInfoForm(forms.Form):
         self.helper.layout = Layout(
             name_layout,
             address_layout,
-            Submit('submit', 'Sauvegarder', css_class='btn btn-primary'),
+            submit,
         )
 
 class EmailForm(forms.Form):
@@ -89,7 +93,12 @@ class EmailForm(forms.Form):
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
 
+        submit = Div(
+            Submit('submit', 'Sauvegarder', css_class='btn primary-button btn-secondary btn-block'),
+            css_class='mt-4 p-0 col-12 col-md-4 offset-md-8 col'
+        )
+
         self.helper.layout = Layout(
             Field('email', placeholder = "Nouvelle adresse e-mail"),
-            Submit('submit', 'Sauvegarder')
+            submit,
         )
