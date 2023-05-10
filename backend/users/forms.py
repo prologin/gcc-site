@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Field, Layout, Row, Submit
 from django import forms
 from django.core.validators import validate_email
+from django_countries.fields import CountryField
 
 
 class PersonalInfoForm(forms.Form):
@@ -27,18 +28,14 @@ class PersonalInfoForm(forms.Form):
         max_length=80,
         required=False,
     )
-    country = forms.CharField(
-        label="Pays",
-        max_length=80,
-        required=False,
+    # According to https://pypi.org/project/django-countries/#custom-forms
+    country = CountryField().formfield(required=False)
+
+    birth_date = forms.DateField(
+        label="Date de naissance",
+        widget=forms.TextInput(attrs={"type": "date"}),
+        required=True,
     )
-
-    date_birth = forms.DateField(
-        label = "Date de naissance",
-        widget=forms.TextInput(attrs={'type': 'date'}),
-        required = True,
-    ) 
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,9 +67,7 @@ class PersonalInfoForm(forms.Form):
             ),
             Row(Field("country", placeholder=self.fields["country"].label)),
         )
-        date_birth_layout = Div(
-            Field('date_birth')
-        )
+        birth_date_layout = Div(Field("birth_date"))
 
         submit = Div(
             Submit(
@@ -91,8 +86,8 @@ class PersonalInfoForm(forms.Form):
 
         self.helper.layout = Layout(
             name_layout,
+            birth_date_layout,
             address_layout,
-            date_birth_layout,
             submit,
         )
 
