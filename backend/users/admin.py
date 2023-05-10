@@ -25,7 +25,10 @@ class UserAdmin(UpstreamUserAdmin):
                 ),
             },
         ),
-        ("Dates importantes", {"fields": ("last_login", "date_joined")}),
+        (
+            "Dates importantes",
+            {"fields": ("last_login", "date_joined", "birth_date")},
+        ),
     )
 
     add_fieldsets = (
@@ -33,7 +36,23 @@ class UserAdmin(UpstreamUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("username", "password1", "password2"),
+                "fields": (
+                    "username",
+                    "password1",
+                    "password2",
+                    "birth_date",
+                    "address",
+                ),
             },
         ),
+    )
+
+
+@admin.register(models.Address)
+class AddressAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {"fields": ("street", "zip_code", "city", "country")}),
+    )
+    add_fieldsets = (
+        (None, {"fields": ("street", "zip_code", "city", "country")}),
     )
