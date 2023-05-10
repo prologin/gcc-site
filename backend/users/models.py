@@ -19,9 +19,7 @@ class Address(models.Model):
 
     @classmethod
     def get_default_address(_):
-        return Address.objects.get_or_create(
-            id=1, street="14-16 rue Voltaire", city="El KB"
-        )[0].pk
+        return Address.objects.get_or_create(id=1)[0].pk
 
 
 class User(AbstractUser):
