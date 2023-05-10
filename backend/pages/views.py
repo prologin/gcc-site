@@ -7,7 +7,6 @@ def error_404_view(request, exception):
     response.status_code = 404
     return response
 
-
 from gccsite.context_processors import my_context_processor
 
 
