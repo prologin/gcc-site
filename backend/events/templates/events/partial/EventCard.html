@@ -1,4 +1,5 @@
 {% load static %}
+
 <div class="row f-flex justify-content-between event-card mb-4 p-3">
   <div class="col-lg-auto col row">
     <div class="my-auto d-none d-md-block col-md-auto gcc-color-{{123|make_list|random}}">
@@ -22,6 +23,8 @@
   <div class="modal" id="informationEventModal-{{id}}" tabindex="-1" aria-labelledby="informationEventModalLabel" aria-hidden="true">
     {% include "events/partial/EventInfo.html" with event=event id=id%}
   </div>
+
+
 
 </div>
 

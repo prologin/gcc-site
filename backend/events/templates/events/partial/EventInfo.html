@@ -1,11 +1,12 @@
 {% load static %}
+
 <div class="modal-dialog modal-xl modal-dialog-centered">
   <div class="modal-content mb-1">
     <div class="modal-header mb-2 text-center" style="align-self: center;">
-      <img class="" src="{% static 'img/logo_gcc.svg' %}" alt="Logo des stages Girls Can Code"/>
+      <img class="" src="{% static 'img/logo_gcc.svg' %}" alt="Logo des stages Girls Can Code" />
     </div>
     <div class="modal-body row m-3 d-flex" style="flex-direction: column">
-      <hr class="eventInfo-line gcc-{{123|make_list|random}}-back md-auto" />
+      <hr class="eventInfo-line gcc-{{ 123|make_list|random }}-back md-auto" />
       <tbody class="rowgroup mb-4">
         <h1>Stage : </h1>
         <div class="row m-3 justify-content-around">
@@ -57,6 +58,14 @@
         Calendrier du stage
         </button>
       </div>
+
+
+
+      <div class="modal" id="schedule" tabindex="-1" aria-labelledby="scheduleLabel" aria-hidden="true">
+        {% include "events/partial/Schedule.html" %}
+      </div>
+
+
     </div>
     <div class="modal-footer" style="display:none"></div>
   </div>
