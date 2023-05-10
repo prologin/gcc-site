@@ -9,5 +9,5 @@ class AccountInformationsView(TemplateView):
   def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
     return {
       'personal_info_form' : PersonalInfoForm(),
-      'email_form' : EmailForm()
+      'email_form' : EmailForm(),
       }
