@@ -9,31 +9,26 @@ class PersonalInfoForm(forms.Form):
         max_length = 80,
         required = True
     )
-
     last_name = forms.CharField(
         label = "Nom",
         max_length = 80,
         required = True,
     )
-
     street = forms.CharField(
         label = "Nom et numéro de voie",
         max_length = 256,
         required = False,
     )
-
     zip_code = forms.CharField(
         label = "Code postal",
         max_length = 10,
         required = False,
     )
-
     city = forms.CharField(
         label = "Ville",
         max_length = 80,
         required = False,
     )
-
     country = forms.CharField(
         label = "Pays",
         max_length = 80,
@@ -89,7 +84,7 @@ class EmailForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_id = 'personal_info_form'
+        self.helper.form_id = 'email_form'
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
 
@@ -101,4 +96,50 @@ class EmailForm(forms.Form):
         self.helper.layout = Layout(
             Field('email', placeholder = "Nouvelle adresse e-mail"),
             submit,
+        )
+
+class PasswordUpdateForm(forms.Form):
+    current_pwd = forms.CharField(label="Mot de passe actuel",
+                                  widget=forms.PasswordInput,
+                                  required=True)
+    new_pwd = forms.CharField(label="Nouveau mot de passe",
+                              widget=forms.PasswordInput,
+                              required=True)
+    new_pwd_ack = forms.CharField(label="Confirmer le nouveau mot de passe",
+                                  widget=forms.PasswordInput,
+                                  required=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'password_update_form'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+
+        self.helper.layout = Layout(
+            Field('current_pwd', placeholder = ""),
+            Field('new_pwd', placeholder = ""),
+            Field('new_pwd_ack', placeholder = ""),
+            Submit('submit', 'Sauvegarder')
+        )
+
+class NotificationsUpdateForm(forms.Form):
+    accept_notifs = forms.MultipleChoiceField(
+        label="Je souhaite être notifiée par e-mail des prochains stages ayant lieu dans les régions suivantes",
+        choices=(('1', "Nord-Ouest"), ('2', "Est"), ('3', "Ile-de-France"), ('4', 'Ouest'), ('5', "Sud"),('6', "DROM-COM")),
+        required=True,
+        widget=forms.CheckboxSelectMultiple
+        )
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'notifs_update_form'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+
+        self.helper.layout = Layout(
+            Div('accept_notifs'),
+            Submit('submit', 'Sauvegarder')
         )

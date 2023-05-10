@@ -71,11 +71,13 @@
 
       <div id="password" md="12" class="col my-5 p-5 account-group">
         <h1>Changer de mot de passe</h1>
+        {% crispy password_update_form %}
       </div>
 
       <div id="notifications" md="12" class="col my-5 p-5 account-group">
         <h1>Notifications</h1>
         <h3>Gérez les autorisations.</h3>
+        {% crispy notifs_update_form %}
       </div>
 
       <div id="rgpd" md="12" class="col my-5 p-5 account-group">
