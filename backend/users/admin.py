@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as UpstreamUserAdmin
 
 from . import models
 
+
 @admin.register(models.User)
 class UserAdmin(UpstreamUserAdmin):
     fieldsets = (
@@ -11,10 +12,7 @@ class UserAdmin(UpstreamUserAdmin):
             "Informations personnelles",
             {"fields": ("first_name", "last_name", "email")},
         ),
-        (
-            "Paramètres newsletter",
-            {"fields": ("newsletter_subscribed", )}
-        ),
+        ("Paramètres newsletter", {"fields": ("newsletter_subscribed",)}),
         (
             "Permissions",
             {
