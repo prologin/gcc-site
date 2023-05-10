@@ -45,7 +45,7 @@ ROOT_URLCONF = "gccsite.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [ BASE_DIR / "gccsite" / "templates" ],
+        "DIRS": [BASE_DIR / "gccsite" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -102,12 +102,10 @@ USE_TZ = True
 AUTH_USER_MODEL = "users.User"
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_DIRS = (
-    BASE_DIR / 'static/',
-)
+STATICFILES_DIRS = (BASE_DIR / "static/",)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
