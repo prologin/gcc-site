@@ -24,6 +24,9 @@
     {% include "events/partial/EventInfo.html" with event=event id=id%}
   </div>
 
+  <div class="modal fade" id="scheduleModal" aria-hidden="true" aria-labelledby="scheduleModalLabel" tabindex="-1">
+    {% include "events/partial/Schedule.html" with event=event id=id %}
+  </div>
 
 
 </div>

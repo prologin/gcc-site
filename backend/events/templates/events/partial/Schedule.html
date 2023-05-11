@@ -7,10 +7,16 @@
 
 
 
-<div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content mb-1">
-        <div class="modal-header mb-2 text-center" style="align-self: center;">
-            <img class="" src="{% static 'img/schedule_week.png' %}" alt="Calendrier de la semaine" style="width: 100%;"/>
-        </div>
+<div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img class="" src="{% static 'img/schedule_week.png' %}" alt="Calendrier de la semaine" style="width: 100%;"/>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#informationEventModal-{{id}}" data-bs-toggle="modal" data-bs-dismiss="modal fade">Retourner à l'évènement</button>
+      </div>
     </div>
-</div>
+  </div>
