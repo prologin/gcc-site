@@ -10,7 +10,7 @@ class UserAdmin(UpstreamUserAdmin):
         (None, {"fields": ("username", "password")}),
         (
             "Informations personnelles",
-            {"fields": ("first_name", "last_name", "email")},
+            {"fields": ("first_name", "last_name", "email", "birth_date")},
         ),
         ("Paramètres newsletter", {"fields": ("newsletter_subscribed",)}),
         (
