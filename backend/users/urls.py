@@ -6,8 +6,8 @@ app_name = "users"
 
 urlpatterns = [
     path(
-        "accountinformationsview",
+        "account-info",
         views.AccountInformationsView.as_view(),
-        name="AccountInformationsView",
+        name="account_information",
     )
 ]

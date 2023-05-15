@@ -1,7 +1,9 @@
 from typing import Any, Dict
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import TemplateView
 
 from .forms import (
@@ -11,6 +13,9 @@ from .forms import (
     PersonalInfoForm,
 )
 from .models import User
+
+# Extra message tags
+TAG_PERSONAL_INFO = "personal_info"
 
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
@@ -37,8 +42,15 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
                 # Update user in the database.
                 user.save()
 
-                return HttpResponse(
-                    f"Updated\n{request.POST['first_name']} {request.POST['last_name']}"
+                # Send a message to display
+                messages.success(
+                    request,
+                    "Informations personnelles mises à jour",
+                    extra_tags=TAG_PERSONAL_INFO,
+                )
+
+                return HttpResponseRedirect(
+                    reverse("users:account_information")
                 )
 
             elif email_form.is_valid():
