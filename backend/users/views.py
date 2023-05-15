@@ -20,12 +20,6 @@ TAG_PERSONAL_INFO = "personal_info"
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
     template_name = "users/AccountInformationsView.html"
-    form_classes = {
-        "personal_info_form": PersonalInfoForm(),
-        "email_form": EmailForm(),
-        "password_update_form": PasswordUpdateForm(),
-        "notifs_update_form": NotificationsUpdateForm(),
-    }
 
     def post(self, request, *agrs, **kwargs):
         if request.method == "POST":
@@ -66,4 +60,17 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
         return HttpResponse("nothing")
 
     def get_context_data(self, **kwargs: Any):
-        return self.form_classes
+        # Get the request user to prefill the forms
+        user = User.objects.get(id=self.request.user.id)
+
+        user_data = {
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        }
+
+        return {
+            "personal_info_form": PersonalInfoForm(user_data),
+            "email_form": EmailForm(),
+            "password_update_form": PasswordUpdateForm(),
+            "notifs_update_form": NotificationsUpdateForm(),
+        }
