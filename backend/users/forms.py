@@ -33,7 +33,7 @@ class PersonalInfoForm(forms.Form):
         required=False,
     )
 
-    date_birth = forms.DateField(
+    birth_date = forms.DateField(
         label="Date de naissance",
         widget=forms.TextInput(attrs={"type": "date"}),
         required=True,
@@ -68,7 +68,7 @@ class PersonalInfoForm(forms.Form):
             ),
             Row(Field("country", placeholder=self.fields["country"].label)),
         )
-        date_birth_layout = Div(Field("date_birth"))
+        date_birth_layout = Div(Field("birth_date"))
 
         submit = Div(
             Submit(
