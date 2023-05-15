@@ -45,7 +45,6 @@ class PersonalInfoForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "personal_info_form"
         self.helper.form_method = "post"
-        self.helper.form_action = "submit_survey"
 
         name_layout = Row(
             Column(
@@ -110,7 +109,6 @@ class EmailForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "email_form"
         self.helper.form_method = "post"
-        self.helper.form_action = "submit_survey"
 
         submit = Div(
             Submit(
@@ -145,7 +143,6 @@ class PasswordUpdateForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "password_update_form"
         self.helper.form_method = "post"
-        self.helper.form_action = "submit_survey"
 
         submit = Div(
             Submit(
@@ -184,7 +181,6 @@ class NotificationsUpdateForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "notifs_update_form"
         self.helper.form_method = "post"
-        self.helper.form_action = "submit_survey"
 
         submit = Div(
             Submit(
