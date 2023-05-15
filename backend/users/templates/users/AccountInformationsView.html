@@ -62,6 +62,14 @@
           connexion.
         </h3>
         {% crispy personal_info_form %}
+        {# Show the success or error messages #}
+        {% for msg in messages %}
+          {% if msg.extra_tags == "personal_info" %}
+            <div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
+              {{msg.message}}
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
 
       <div id="email" md="12" class="col my-5 p-5 account-group">
