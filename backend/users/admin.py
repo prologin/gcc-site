@@ -6,11 +6,14 @@ from . import models
 
 @admin.register(models.User)
 class UserAdmin(UpstreamUserAdmin):
+    # Override UpstreamUserAdmin's ordering which depends on removed "username"
+    ordering = ("email",)
+
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
+        (None, {"fields": ("email", "password")}),
         (
             "Informations personnelles",
-            {"fields": ("first_name", "last_name", "email", "birth_date")},
+            {"fields": ("first_name", "last_name")},
         ),
         ("Paramètres newsletter", {"fields": ("newsletter_subscribed",)}),
         (

@@ -1,14 +1,14 @@
 from typing import Any, Dict
 
 from django.contrib import messages
+
+# password check
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView
-
-# password check
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth import update_session_auth_hash
 
 from .forms import (
     EmailForm,
@@ -93,7 +93,7 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
                 # check if currect_pwd == pwd
                 if check_password(current_pwd, user.password):
                     new_pwd = request.POST["new_pwd"]
-                    
+
                     # check if the 2 new passord are the same
                     if new_pwd == request.POST["new_pwd_ack"]:
                         user.set_password(new_pwd)
@@ -105,14 +105,14 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
                             "Votre mot de passe à été changé !",
                             extra_tags=TAG_PWD,
                         )
-                    else :
+                    else:
                         # Send a Warning to display
                         messages.warning(
                             request,
                             "Les deux mot de passes ne correspondent pas !",
                             extra_tags=TAG_PWD,
                         )
-                else :
+                else:
                     # Send a Warning to display
                     messages.warning(
                         request,
@@ -136,8 +136,7 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
         user_data = {
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "birth_date": user.birth_date,
-            "email" : user.email,
+            "email": user.email,
         }
 
         return {
