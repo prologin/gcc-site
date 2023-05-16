@@ -117,7 +117,7 @@ class EmailForm(forms.Form):
         )
 
         self.helper.layout = Layout(
-            Field("email", placeholder="Nouvelle adresse e-mail"),
+            Field("email", placeholder=self.fields["email"].label),
             submit,
         )
 

@@ -16,6 +16,7 @@ from .models import User
 
 # Extra message tags
 TAG_PERSONAL_INFO = "personal_info"
+TAG_EMAIL = "email"
 
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
@@ -48,8 +49,36 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
                 )
 
             elif email_form.is_valid():
-                print(request.POST["email"])
-                return HttpResponse(request.POST["email"])
+                # user cannot be None because the page requires login
+                user = User.objects.get(id=request.user.id)
+
+                email = request.POST["email"]
+
+                try:
+                    # Try to find existing account with this email
+                    match = User.objects.get(email=email)
+                    # Send a message to display
+                    messages.warning(
+                        request,
+                        "Un utilisateur avec cet email existe déjà !",
+                        extra_tags=TAG_EMAIL,
+                    )
+                except User.DoesNotExist:
+                    # Unable to find a user, this is fine
+                    user.email = email
+                    # Update user in the database.
+                    user.save()
+
+                    # Send a message to display
+                    messages.success(
+                        request,
+                        "Informations personnelles mises à jour",
+                        extra_tags=TAG_EMAIL,
+                    )
+
+                return HttpResponseRedirect(
+                    reverse("users:account_information")
+                )
 
             elif password_update_form.is_valid():
                 return HttpResponse("Password update form valid")
@@ -67,11 +96,12 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "birth_date": user.birth_date,
+            "email" : user.email,
         }
 
         return {
             "personal_info_form": PersonalInfoForm(user_data),
-            "email_form": EmailForm(),
+            "email_form": EmailForm(user_data),
             "password_update_form": PasswordUpdateForm(),
             "notifs_update_form": NotificationsUpdateForm(),
         }
