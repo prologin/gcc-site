@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any
 
 from django.contrib import messages
 
@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
 from .forms import (
@@ -28,17 +29,46 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
     template_name = "users/AccountInformationsView.html"
 
     def post(self, request, *agrs, **kwargs):
-        if request.method == "POST":
-            personal_info_form = PersonalInfoForm(request.POST)
-            email_form = EmailForm(request.POST)
-            password_update_form = PasswordUpdateForm(request.POST)
-            notifs_update_form = NotificationsUpdateForm(request.POST)
+        personal_info_form = PersonalInfoForm(request.POST)
+        email_form = EmailForm(request.POST)
+        password_update_form = PasswordUpdateForm(request.POST)
+        notifs_update_form = NotificationsUpdateForm(request.POST)
 
-            if personal_info_form.is_valid():
-                # user cannot be None because the page requires login
-                user = User.objects.get(id=request.user.id)
-                user.first_name = request.POST["first_name"]
-                user.last_name = request.POST["last_name"]
+        if "submit-personal_info" in request.POST:
+            # user cannot be None because the page requires login
+            user = User.objects.get(id=request.user.id)
+            user.first_name = request.POST["first_name"]
+            user.last_name = request.POST["last_name"]
+            # Update user in the database.
+            user.save()
+
+            # Send a message to display
+            messages.success(
+                request,
+                "Informations personnelles mises à jour",
+                extra_tags=TAG_PERSONAL_INFO,
+            )
+
+            return HttpResponseRedirect(reverse("users:account_information"))
+
+        elif "submit-email" in request.POST:
+            # user cannot be None because the page requires login
+            user = User.objects.get(id=request.user.id)
+
+            email = request.POST["email"]
+
+            try:
+                # Try to find existing account with this email
+                match = User.objects.get(email=email)
+                # Send a message to display
+                messages.warning(
+                    request,
+                    "Un utilisateur avec cet email existe déjà !",
+                    extra_tags=TAG_EMAIL,
+                )
+            except User.DoesNotExist:
+                # Unable to find a user, this is fine
+                user.email = email
                 # Update user in the database.
                 user.save()
 
@@ -46,86 +76,69 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
                 messages.success(
                     request,
                     "Informations personnelles mises à jour",
-                    extra_tags=TAG_PERSONAL_INFO,
+                    extra_tags=TAG_EMAIL,
                 )
 
-                return HttpResponseRedirect(
-                    reverse("users:account_information")
+            return HttpResponseRedirect(reverse("users:account_information"))
+
+        elif "submit-password" in request.POST:
+            url_password = reverse("users:account_information") + "#password"
+            # Check if the new password is valid (minimum length, common pwd, etc)
+            if not password_update_form.is_valid():
+                messages.warning(
+                    request,
+                    str(password_update_form.errors),
+                    extra_tags=TAG_PWD,
                 )
+                return HttpResponseRedirect(url_password)
 
-            elif email_form.is_valid():
-                # user cannot be None because the page requires login
-                user = User.objects.get(id=request.user.id)
+            new_pwd = request.POST["new_pwd"]
+            new_pwd_ack = request.POST["new_pwd_ack"]
 
-                email = request.POST["email"]
-
-                try:
-                    # Try to find existing account with this email
-                    match = User.objects.get(email=email)
-                    # Send a message to display
-                    messages.warning(
-                        request,
-                        "Un utilisateur avec cet email existe déjà !",
-                        extra_tags=TAG_EMAIL,
-                    )
-                except User.DoesNotExist:
-                    # Unable to find a user, this is fine
-                    user.email = email
-                    # Update user in the database.
-                    user.save()
-
-                    # Send a message to display
-                    messages.success(
-                        request,
-                        "Informations personnelles mises à jour",
-                        extra_tags=TAG_EMAIL,
-                    )
-
-                return HttpResponseRedirect(
-                    reverse("users:account_information")
+            # Check if the 2 passwords match
+            if new_pwd != new_pwd_ack:
+                messages.warning(
+                    request,
+                    _("Les deux mot de passes ne correspondent pas !"),
+                    extra_tags=TAG_PWD,
                 )
+                return HttpResponseRedirect(url_password)
 
-            elif password_update_form.is_valid():
-                # user cannot be None because the page requires login
-                user = User.objects.get(id=request.user.id)
-                current_pwd = request.POST["current_pwd"]
+            # user cannot be None because the page requires login
+            user = User.objects.get(id=request.user.id)
+            current_pwd = request.POST["current_pwd"]
 
-                # check if currect_pwd == pwd
-                if check_password(current_pwd, user.password):
-                    new_pwd = request.POST["new_pwd"]
-
-                    # check if the 2 new passord are the same
-                    if new_pwd == request.POST["new_pwd_ack"]:
-                        user.set_password(new_pwd)
-                        user.save()
-                        update_session_auth_hash(request, user)
-                        # Send a message to display
-                        messages.success(
-                            request,
-                            "Votre mot de passe à été changé !",
-                            extra_tags=TAG_PWD,
-                        )
-                    else:
-                        # Send a Warning to display
-                        messages.warning(
-                            request,
-                            "Les deux mot de passes ne correspondent pas !",
-                            extra_tags=TAG_PWD,
-                        )
-                else:
-                    # Send a Warning to display
-                    messages.warning(
-                        request,
-                        "Votre mot de passe n'est pas bon !",
-                        extra_tags=TAG_PWD,
-                    )
-
-                return HttpResponseRedirect(
-                    reverse("users:account_information")
+            # Check if new password is the same than current one
+            if check_password(new_pwd, user.password):
+                messages.warning(
+                    request,
+                    _("Votre nouveau mot de passe est identique à l'actuel"),
+                    extra_tags=TAG_PWD,
                 )
+                return HttpResponseRedirect(url_password)
 
-            elif notifs_update_form.is_valid():
-                return HttpResponse("Notifs update form valid")
+            # Check if current password is correct
+            if check_password(current_pwd, user.password):
+                user.set_password(new_pwd)
+                user.save()
+                update_session_auth_hash(request, user)
+                # Send a message to display
+                messages.success(
+                    request,
+                    _("Votre mot de passe à été mis à jour !"),
+                    extra_tags=TAG_PWD,
+                )
+                return HttpResponseRedirect(url_password)
+            else:
+                messages.warning(
+                    request,
+                    _("Votre mot de passe est incorrect."),
+                    extra_tags=TAG_PWD,
+                )
+                return HttpResponseRedirect(url_password)
+
+        elif "submit-notifications" in request.POST:
+            return HttpResponse("Notifs update form valid")
 
         return HttpResponse("nothing")
 
