@@ -2,6 +2,7 @@ from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Field, Layout, Row, Submit
 from django import forms
+from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 
 
@@ -65,7 +66,7 @@ class PersonalInfoForm(forms.Form):
 
         submit = Div(
             Submit(
-                "submit",
+                "submit-personal_info",
                 "Sauvegarder",
                 css_class="btn primary-button btn-secondary btn-block",
             ),
@@ -101,7 +102,7 @@ class EmailForm(forms.Form):
 
         submit = Div(
             Submit(
-                "submit",
+                "submit-email",
                 "Sauvegarder",
                 css_class="btn primary-button btn-secondary btn-block",
             ),
@@ -119,7 +120,10 @@ class PasswordUpdateForm(forms.Form):
         label="Mot de passe actuel", widget=forms.PasswordInput, required=True
     )
     new_pwd = forms.CharField(
-        label="Nouveau mot de passe", widget=forms.PasswordInput, required=True
+        label="Nouveau mot de passe",
+        widget=forms.PasswordInput,
+        required=True,
+        validators=[validate_password],
     )
     new_pwd_ack = forms.CharField(
         label="Confirmer le nouveau mot de passe",
@@ -135,7 +139,7 @@ class PasswordUpdateForm(forms.Form):
 
         submit = Div(
             Submit(
-                "submit",
+                "submit-password",
                 "Sauvegarder",
                 css_class="btn primary-button btn-secondary btn-block",
             ),
@@ -173,7 +177,7 @@ class NotificationsUpdateForm(forms.Form):
 
         submit = Div(
             Submit(
-                "submit",
+                "submit-notifications",
                 "Sauvegarder",
                 css_class="btn primary-button btn-secondary btn-block",
             ),
