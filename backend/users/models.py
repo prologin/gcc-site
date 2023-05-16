@@ -9,15 +9,14 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    # Remove the username field from AbstractUser
+    username = None
+
     email = models.EmailField(
         verbose_name=_("Adresse email"),
         null=False,
         blank=False,
         unique=True,
-    )
-
-    birth_date = models.DateField(
-        _("Birth date"), null=False, default=date.today
     )
 
     newsletter_subscribed = models.BooleanField(
