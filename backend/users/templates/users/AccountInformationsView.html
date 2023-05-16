@@ -88,6 +88,14 @@
       <div id="password" md="12" class="col my-5 p-5 account-group">
         <h1>Changer de mot de passe</h1>
         {% crispy password_update_form %}
+          {# Show the success or error messages #}
+        {% for msg in messages %}
+          {% if msg.extra_tags == "pwd" %}
+            <div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
+              {{msg.message}}
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
 
       <div id="notifications" md="12" class="col my-5 p-5 account-group">
