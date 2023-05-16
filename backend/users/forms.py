@@ -33,12 +33,6 @@ class PersonalInfoForm(forms.Form):
         required=False,
     )
 
-    birth_date = forms.DateField(
-        label="Date de naissance",
-        widget=forms.TextInput(attrs={"type": "date"}),
-        required=True,
-    )
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -68,7 +62,6 @@ class PersonalInfoForm(forms.Form):
             ),
             Row(Field("country", placeholder=self.fields["country"].label)),
         )
-        date_birth_layout = Div(Field("birth_date"))
 
         submit = Div(
             Submit(
@@ -88,7 +81,6 @@ class PersonalInfoForm(forms.Form):
         self.helper.layout = Layout(
             name_layout,
             address_layout,
-            date_birth_layout,
             submit,
         )
 
