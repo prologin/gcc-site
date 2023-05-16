@@ -5,6 +5,7 @@ from django.contrib import messages
 from urllib.parse import urlencode
 from users.models import User
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import events, signup
 
 from .forms import (
@@ -86,4 +87,13 @@ class ApplicationsReviewView(TemplateView):
         print(kwargs)
         ctx["applications"] = signup.Application.objects.get_applicants(
             kwargs['event'])
+        return ctx
+        return ctx
+
+class ApplicationsView(LoginRequiredMixin, TemplateView):
+    template_name = 'events/mes-candidatures.html'
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        ctx['application_documents'] = signup.Application.objects.filter(user=self.request.user.id)
         return ctx

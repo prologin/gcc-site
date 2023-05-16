@@ -11,4 +11,5 @@ urlpatterns = [
     path('review/', views.ReviewIndexView.as_view(), name="review"),
     path('review/<int:year>/<int:event>',
          views.ApplicationsReviewView.as_view(), name="application_review")
+    path('mes-candidatures', views.ApplicationsView.as_view(), name='home')
 ]

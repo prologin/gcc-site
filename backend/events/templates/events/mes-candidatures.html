@@ -1,0 +1,9 @@
+{% extends 'gccsite/base.html' %}
+
+{% block content %}
+
+{% for e in  application_documents %}
+{{ e }}
+<br>
+{% endfor %}
+{% endblock %}
