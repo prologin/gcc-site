@@ -4,6 +4,7 @@ from django.contrib import messages
 
 # password check
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
@@ -12,6 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
 from .forms import (
+    AuthLoginForm,
     EmailForm,
     NotificationsUpdateForm,
     PasswordUpdateForm,
@@ -158,3 +160,8 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
             "password_update_form": PasswordUpdateForm(),
             "notifs_update_form": NotificationsUpdateForm(),
         }
+
+
+class LoginView(auth_views.LoginView):
+    template_name = "users/login.html"
+    form_class = AuthLoginForm

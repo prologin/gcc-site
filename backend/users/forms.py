@@ -2,6 +2,7 @@ from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Field, Layout, Row, Submit
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 
@@ -187,4 +188,25 @@ class NotificationsUpdateForm(forms.Form):
         self.helper.layout = Layout(
             InlineCheckboxes("accept_notifs", css_class="region_checkboxes"),
             submit,
+        )
+
+
+class AuthLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "notifs_update_form"
+        self.helper.form_method = "post"
+
+        submit = Div(
+            Submit(
+                "submit-notifications",
+                "Se connecter",
+                css_class="btn primary-button btn-secondary btn-block",
+            ),
+            css_class="mt-4 p-0",
+        )
+
+        self.helper.layout = Layout(
+            Field("username"), Field("password"), submit
         )
