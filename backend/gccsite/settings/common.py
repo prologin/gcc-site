@@ -91,6 +91,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# By default, bring back user to home when successfully logging in
+LOGIN_REDIRECT_URL = "/"
+
 LANGUAGE_CODE = "fr-fr"
 
 TIME_ZONE = "Europe/Paris"
