@@ -9,5 +9,6 @@ urlpatterns = [
         "account-info",
         views.AccountInformationsView.as_view(),
         name="account_information",
-    )
+    ),
+    path("login", views.LoginView.as_view()),
 ]
