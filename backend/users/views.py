@@ -165,3 +165,4 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
 class LoginView(auth_views.LoginView):
     template_name = "users/login.html"
     form_class = AuthLoginForm
+    redirect_authenticated_user = True
