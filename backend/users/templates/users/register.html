@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-Se connecter sur <b>Girls can code!</b>
+Créer un compte sur <b>Girls can code!</b>
 {% endblock %}
 
 {% block form %}
@@ -11,6 +11,6 @@ Se connecter sur <b>Girls can code!</b>
 {% endblock %}
 
 {% block bottom %}
-Je n'ai pas de compte,
-<a href="{% url 'users:register' %}"> s'inscrire </a>
+J'ai déjà un compte,
+<a href="{% url 'users:login' %}"> se connecter </a>
 {% endblock %}
