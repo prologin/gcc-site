@@ -2,7 +2,8 @@ from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Field, Layout, Row, Submit
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm, BaseUserCreationForm
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 
@@ -209,4 +210,33 @@ class AuthLoginForm(AuthenticationForm):
 
         self.helper.layout = Layout(
             Field("username"), Field("password"), submit
+        )
+
+
+class AuthRegisterForm(BaseUserCreationForm):
+    class Meta:
+        model = get_user_model()
+        fields = ("email",)
+        field_classes = {"email": forms.EmailField}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "register_form"
+        self.helper.form_method = "post"
+
+        submit = Div(
+            Submit(
+                "submit-notifications",
+                "Se connecter",
+                css_class="btn primary-button btn-secondary btn-block",
+            ),
+            css_class="mt-4 p-0",
+        )
+
+        self.helper.layout = Layout(
+            Field("email"),
+            Field("password1"),
+            Field("password2"),
+            submit,
         )
