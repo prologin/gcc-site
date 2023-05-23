@@ -93,6 +93,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # By default, bring back user to home when successfully logging in
 LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/"
 
 LANGUAGE_CODE = "fr-fr"
 
