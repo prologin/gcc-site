@@ -12,8 +12,7 @@
       <button class="btn secondary-button py-2 px-4" data-bs-toggle="dropdown">
         <div class="row">
           <div class="col">
-            <i class="fas fa-user me-2"></i>
-            {{ user.first_name }} {{ user.last_name }}
+            <i class="fas fa-user me-2"></i>{{ user.first_name }} {{ user.last_name }}
           </div>
           <div class="col-2">
             <i class="fas fa-chevron-down"></i>
@@ -41,7 +40,7 @@
          </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-          <a class="dropdown-item" href='#'>
+          <a class="dropdown-item" href="{% url 'users:logout' %}">
             <i class="fas fa-power-off"></i> Se déconnecter
           </a>
         </li>
@@ -50,10 +49,10 @@
 
     {% else %}
 
-    <a href="/LoginRegisterView" class="primary-button py-2 px-4" style="color: white;">
+    <a href="{% url 'users:login' %}" class="primary-button py-2 px-4" style="color: white;">
       Connexion
     </a>
 
-    {% endif%}
+    {% endif %}
   </div>
 </nav>
