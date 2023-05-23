@@ -1,8 +1,6 @@
 from typing import Any
 
 from django.contrib import messages
-
-# password check
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.hashers import check_password
@@ -10,10 +8,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import TemplateView
+from django.views.generic import CreateView, TemplateView
 
 from .forms import (
     AuthLoginForm,
+    AuthRegisterForm,
     EmailForm,
     NotificationsUpdateForm,
     PasswordUpdateForm,
@@ -166,3 +165,9 @@ class LoginView(auth_views.LoginView):
     template_name = "users/login.html"
     form_class = AuthLoginForm
     redirect_authenticated_user = True
+
+
+class RegisterView(CreateView):
+    template_name = "users/login.html"
+    form_class = AuthRegisterForm
+    success_url = "/"
