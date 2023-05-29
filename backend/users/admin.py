@@ -36,7 +36,7 @@ class UserAdmin(UpstreamUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("username", "password1", "password2"),
+                "fields": ("password1", "password2"),
             },
         ),
     )
