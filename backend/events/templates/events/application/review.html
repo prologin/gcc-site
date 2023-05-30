@@ -2,4 +2,25 @@
 
 {% block content %}
 
+<table class="table">
+    <thead>
+        <tr>
+            <td scope="col"> Nom </td>
+            <td scope="col"> Nombre de participations </td>
+            <td scope="col"> Labels </td>
+            <td scope="col"> Status </td>
+            <td scope="col"> Form </td>
+        </tr>
+
+        {% for application in applications %}
+            <tr scope="row">
+                <td> {{application.last_name }} {{application.first_name}} </td>
+                <td> {{application.participations_count}} </td>
+                <td> {{application.labels}} </td>
+                <td> {{application.status}} </td>
+            </tr>
+        {% endfor%}
+    </thead>
+</table>
+
 {% endblock %}
