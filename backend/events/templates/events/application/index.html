@@ -26,7 +26,7 @@
         <tr>
             <th scope="row"> {{ event.year }} </th>
             <td> {{ event.center }} </td>
-            <td> <button href="/review/{{ event.year }}/{{ event.pk }}"> Review </button></td>
+            <td> <a href="{% url 'events:application_review' year=event.year event=event.id %}"> Review </a></td>
         </tr>
         {% endfor %}
     </tbody>

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.utils.functional import cached_property
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -11,6 +12,9 @@ class SelectionStatus(models.IntegerChoices):
     ACCEPTED = 3, _("Accepté")
     CONFIRMED = 4, _("Confirmé")
 
+class ApplicationManager(models.Manager):
+    def get_applicants(self, event):
+        return self.filter(event=event)
 
 class Application(models.Model):
     user = models.ForeignKey(
@@ -57,9 +61,15 @@ class Application(models.Model):
         auto_now_add=True,
     )
 
-    form_answer = models.JSONField(
-        verbose_name=_("Réponse de formulaire"), default=dict
-    )
+    objects = ApplicationManager()
+
+    @cached_property
+    def participations_count(self):
+        applicants = Application.objects.filter(event=self.event)
+        return sum(
+            (applicant.status == SelectionStatus.CONFIRMED.value)
+            for applicant in applicants if (applicant.last_name == self.last_name and applicant.first_name == self.first_name)
+        )
 
     class Meta:
         verbose_name = _("candidatures")
@@ -67,36 +77,6 @@ class Application(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
-
-
-class Form(models.Model):
-    name = models.CharField(verbose_name=_("Nom"), max_length=120)
-
-    json_schema = models.JSONField(
-        verbose_name=_("JSON Schema"),
-        help_text=_(
-            "The JSON schema of the Form.\n"
-            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
-            " website</a> to generate your form"
-        ),
-        default=dict,
-    )
-    ui_schema = models.JSONField(
-        verbose_name=_("UI Schema"),
-        help_text=_(
-            "The UI schema of the Form.\n"
-            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
-            " website</a> to generate your form"
-        ),
-        default=dict,
-    )
-
-    class Meta:
-        verbose_name = _("formulaire")
-        verbose_name_plural = _("formulaires")
-
-    def __str__(self):
-        return self.name
 
 
 class ApplicationLabel(models.Model):
