@@ -94,6 +94,10 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
 
+    year = models.PositiveIntegerField(
+        verbose_name=_("Année de l'événement")
+    )
+
     signup_start_date = models.DateTimeField(
         verbose_name=_("Date de début d'inscription")
     )
@@ -103,13 +107,6 @@ class Event(models.Model):
 
     start_date = models.DateTimeField(verbose_name=_("Date de début"))
     end_date = models.DateTimeField(verbose_name=_("Date de fin"))
-
-    form = models.ForeignKey(
-        to="events.Form",
-        verbose_name=_("Formulaire"),
-        on_delete=models.SET_DEFAULT,
-        default=1,
-    )
 
     documents = models.ManyToManyField(
         to="events.Document",
