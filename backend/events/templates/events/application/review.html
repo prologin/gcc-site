@@ -2,25 +2,53 @@
 
 {% block content %}
 
-<table class="table">
-    <thead>
-        <tr>
-            <td scope="col"> Nom </td>
-            <td scope="col"> Nombre de participations </td>
-            <td scope="col"> Labels </td>
-            <td scope="col"> Status </td>
-            <td scope="col"> Form </td>
-        </tr>
-
-        {% for application in applications %}
-            <tr scope="row">
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col"> Nom </th>
+                <th scope="col"> Nombre de participations </th>
+                <th scope="col"> Labels </th>
+                <th scope="col"> Status </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr data-bs-toggle="collapse" data-bs-target="#row-{{forloop.counter}}" aria-expanded="false"
+                aria-controls="row-{{forloop.counter}}">
+                <th scope="row"> {{forloop.counter}}</th>
                 <td> {{application.last_name }} {{application.first_name}} </td>
                 <td> {{application.participations_count}} </td>
                 <td> {{application.labels}} </td>
                 <td> {{application.status}} </td>
             </tr>
-        {% endfor%}
-    </thead>
-</table>
+            <tr class="collapse" id="row-{{forloop.counter}}">
+                <td colspan="5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Informations de {{application.first_name}} {{application.last_name}}</h3>
+                            <dl class="dl-horizontal">
+                                <dt>Responsable légal:</dt>
+                                <dd>{{application.user.first_name}} {{application.user.last_name}}</dd>
+                                <dt>Email</dt>
+                                <dd>{{application.user.email}}</dd>
+                                <dt>Date d'anniversaire de la participante</dt>
+                                <dd>{{application.dob}}</dd>
+                                <dt>Nombre de participations</dt>
+                                <dd> {{application.participations_count}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            Faut mettre l'event ici
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>
+
 
 {% endblock %}
