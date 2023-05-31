@@ -97,7 +97,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         (None, {"fields": ("user", "event")}),
         (
             "Informations participante",
-            {"fields": ("first_name", "last_name", "dob")},
+            {"fields": ("first_name", "last_name", "dob", "form_answer")},
         ),
         (
             "Sélection",
@@ -105,12 +105,6 @@ class ApplicationAdmin(admin.ModelAdmin):
                 "fields": ("status", "labels"),
             },
         ),
-        (
-            "Informations supplémentaires",
-            {
-                "fields": ("tshirt", "allergies", "diet", "learning", "programming", "studies", "about")
-            }
-        )
     )
 
 

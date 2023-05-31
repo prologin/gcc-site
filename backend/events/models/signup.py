@@ -12,17 +12,20 @@ class SelectionStatus(models.IntegerChoices):
     ACCEPTED = 3, _("Accepté")
     CONFIRMED = 4, _("Confirmé")
 
+
 class TshirtSizes(models.IntegerChoices):
-    XS = 1,_("XS")
-    S = 2,_("S")
-    M = 3,_("M")
-    L = 4,_("L")
-    XL = 5,_("XL")
-    XXL = 6,_("XXL")
+    XS = 1, _("XS")
+    S = 2, _("S")
+    M = 3, _("M")
+    L = 4, _("L")
+    XL = 5, _("XL")
+    XXL = 6, _("XXL")
+
 
 class ApplicationManager(models.Manager):
     def get_applicants(self, event):
         return self.filter(event=event)
+
 
 class Application(models.Model):
     user = models.ForeignKey(
@@ -64,38 +67,14 @@ class Application(models.Model):
         verbose_name=_("Labels"),
     )
 
-    tshirt = models.SmallIntegerField(
-        choices=TshirtSizes.choices,
-        verbose_name=_("Taille du t-shirt"),
-    )
-
-    allergies = models.TextField(
-        verbose_name=_("Allergies")
-    )
-
-    diet = models.TextField(
-        verbose_name=_("Régime Alimentaire")
-    )
-
-    learning = models.TextField(
-        verbose_name=_("Apprentisage")
-    )
-
-    programming = models.TextField(
-        verbose_name=_("Programmation")
-    )
-
-    studies = models.TextField(
-        verbose_name=_("Etudes")
-    )
-
-    about = models.TextField(
-        verbose_name=("Association et stages")
-    )
-
     created_at = models.DateTimeField(
         verbose_name=_("Date d'inscription"),
         auto_now_add=True,
+    )
+
+
+    form_answer = models.JSONField(
+        verbose_name=_("Réponse de formulaire"), default=dict
     )
 
     objects = ApplicationManager()
