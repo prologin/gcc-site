@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, BaseUserCreationForm
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
+from django.utils.translation import gettext_lazy as _
 
 
 class PersonalInfoForm(forms.Form):
@@ -201,8 +202,8 @@ class AuthLoginForm(AuthenticationForm):
 
         submit = Div(
             Submit(
-                "submit-notifications",
-                "Se connecter",
+                name="submit-notifications",
+                value="Se connecter",
                 css_class="btn primary-button btn-secondary btn-block",
             ),
             css_class="mt-4 p-0",
@@ -219,6 +220,18 @@ class AuthRegisterForm(BaseUserCreationForm):
         fields = ("email",)
         field_classes = {"email": forms.EmailField}
 
+    authorization = forms.BooleanField(
+        label=_(
+            "J'ai plus de 15 ans OU l'autorisation de mon responsable légal pour m'inscrire"
+        ),
+        error_messages={
+            "required": _(
+                "Tu ne peux pas t'inscrire sur ce site sans l'autorisation de ton responsable légal si tu as 15 ans ou moins"
+            ),
+        },
+        required=True,
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -227,8 +240,8 @@ class AuthRegisterForm(BaseUserCreationForm):
 
         submit = Div(
             Submit(
-                "submit-notifications",
-                "Se connecter",
+                name="submit-notifications",
+                value="Créer mon compte",
                 css_class="btn primary-button btn-secondary btn-block",
             ),
             css_class="mt-4 p-0",
@@ -238,5 +251,6 @@ class AuthRegisterForm(BaseUserCreationForm):
             Field("email"),
             Field("password1"),
             Field("password2"),
+            Field("authorization"),
             submit,
         )
