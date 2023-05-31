@@ -1,7 +1,6 @@
-from datetime import date
-
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
@@ -93,14 +92,16 @@ class User(AbstractUser):
     # Remove the username field from AbstractUser
     username = None
 
+    first_name = models.CharField(
+        verbose_name=_("Prénom"), max_length=150, null=False, blank=False
+    )
+    last_name = models.CharField(
+        verbose_name=_("Nom"), max_length=150, null=False, blank=False
+    )
+
     email = models.EmailField(
         verbose_name=_("Adresse email"),
         null=False,
         blank=False,
         unique=True,
-    )
-
-    newsletter_subscribed = models.BooleanField(
-        default=False,
-        editable=True,
     )
