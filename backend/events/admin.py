@@ -105,6 +105,12 @@ class ApplicationAdmin(admin.ModelAdmin):
                 "fields": ("status", "labels"),
             },
         ),
+        (
+            "Informations supplémentaires",
+            {
+                "fields": ("tshirt", "allergies", "diet", "learning", "programming", "studies", "about")
+            }
+        )
     )
 
 
