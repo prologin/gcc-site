@@ -21,7 +21,7 @@ $ ./manage.py migrate
 $ ./manage.py runserver
 ```
 
-You can then go to http://localhost:8000/. 
+You can then go to http://localhost:8000/.
 
 ##### Super User creation
 To create a super User :
@@ -32,7 +32,7 @@ $ poetry shell
 $ ./manage.py shell
 >>> from django.contrib.auth import get_user_model
 >>> User = get_user_model();
->>> User.objects.create_superuser('username', 'email@prologin.org', 'password')
+>>> User.objects.create_superuser('email@prologin.org', 'password')
 >>> exit
 ```
 
