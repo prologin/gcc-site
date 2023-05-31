@@ -15,7 +15,6 @@ class UserAdmin(UpstreamUserAdmin):
             "Informations personnelles",
             {"fields": ("first_name", "last_name")},
         ),
-        ("Paramètres newsletter", {"fields": ("newsletter_subscribed",)}),
         (
             "Permissions",
             {
