@@ -167,7 +167,6 @@ class LoginView(auth_views.LoginView):
     redirect_authenticated_user = True
 
 
-# TODO: Registration must not be accessible to already connected users
 class RegisterView(CreateView):
     template_name = "users/register.html"
     form_class = AuthRegisterForm
