@@ -108,6 +108,11 @@ class ApplicationAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(models.Form)
+class FormAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
+
+
 @admin.register(models.ApplicationLabel)
 class ApplicationLabelAdmin(admin.ModelAdmin):
     search_fields = ("title",)
