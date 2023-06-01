@@ -177,7 +177,6 @@ class LoginView(auth_views.LoginView):
 class RegisterView(RedirectURLMixin, CreateView):
     template_name = "users/register.html"
     form_class = AuthRegisterForm
-    success_url = "/"
 
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
