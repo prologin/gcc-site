@@ -1,6 +1,15 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Column, Div, Field, Layout, Row, Submit
+from crispy_forms.layout import (
+    HTML,
+    Button,
+    Column,
+    Div,
+    Field,
+    Layout,
+    Row,
+    Submit,
+)
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, BaseUserCreationForm
@@ -217,7 +226,7 @@ class AuthLoginForm(AuthenticationForm):
 class AuthRegisterForm(BaseUserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ("email",)
+        fields = ("email", "first_name", "last_name")
         field_classes = {"email": forms.EmailField}
 
     authorization = forms.BooleanField(
@@ -238,19 +247,38 @@ class AuthRegisterForm(BaseUserCreationForm):
         self.helper.form_id = "register_form"
         self.helper.form_method = "post"
 
-        submit = Div(
-            Submit(
-                name="submit-notifications",
-                value="Créer mon compte",
-                css_class="btn primary-button btn-secondary btn-block",
-            ),
-            css_class="mt-4 p-0",
-        )
-
         self.helper.layout = Layout(
-            Field("email"),
-            Field("password1"),
-            Field("password2"),
-            Field("authorization"),
-            submit,
+            Div(
+                Field("first_name"),
+                Field("last_name"),
+                Div(
+                    Button(
+                        name="next",
+                        value="Suivant",
+                        css_class="next-click btn primary-button btn-secondary btn-block",
+                    ),
+                    css_class="mt-4 p-0",
+                ),
+                css_class="tab active",
+            ),
+            Div(
+                Field("email"),
+                Field("password1"),
+                Field("password2"),
+                Field("authorization"),
+                Button(
+                    name="back",
+                    value="Précédent",
+                    css_class="back-click btn primary-button btn-secondary btn-block",
+                ),
+                Div(
+                    Submit(
+                        name="submit-registration",
+                        value="Créer mon compte",
+                        css_class="finish-click btn primary-button btn-secondary btn-block",
+                    ),
+                    css_class="mt-4 p-0",
+                ),
+                css_class="tab",
+            ),
         )
