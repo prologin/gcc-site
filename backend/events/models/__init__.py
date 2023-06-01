@@ -6,7 +6,7 @@ from .events import (
     Event,
     EventDocument,
 )
-from .signup import Application, ApplicationLabel, SelectionStatus
+from .signup import Application, ApplicationLabel, SelectionStatus, Form
 
 __all__ = (
     "Project",
