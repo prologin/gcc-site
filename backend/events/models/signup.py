@@ -94,6 +94,34 @@ class Application(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
 
+class Form(models.Model):
+    name = models.CharField(verbose_name=_("Nom"), max_length=120)
+
+    json_schema = models.JSONField(
+        verbose_name=_("JSON Schema"),
+        help_text=_(
+            "The JSON schema of the Form.\n"
+            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
+            " website</a> to generate your form"
+        ),
+        default=dict,
+    )
+    ui_schema = models.JSONField(
+        verbose_name=_("UI Schema"),
+        help_text=_(
+            "The UI schema of the Form.\n"
+            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
+            " website</a> to generate your form"
+        ),
+        default=dict,
+    )
+
+    class Meta:
+        verbose_name = _("formulaire")
+        verbose_name_plural = _("formulaires")
+
+    def __str__(self):
+        return self.name
 
 class ApplicationLabel(models.Model):
     title = models.CharField(max_length=120, verbose_name=_("Titre"))

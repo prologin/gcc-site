@@ -77,9 +77,7 @@ class EventManager(models.Manager):
         )
 
     def get_visible_events(self):
-        return self.filter(
-            signup_start_date__lte=timezone.now(),
-        )
+        return self.filter()
 
 
 class Event(models.Model):
@@ -115,6 +113,14 @@ class Event(models.Model):
         through="events.EventDocument",
         blank=True,
     )
+
+    form = models.ForeignKey(
+        to="events.Form",
+        verbose_name=_("Formulaire"),
+        on_delete=models.SET_DEFAULT,
+        default=1,
+    )
+
 
     notes = models.TextField(
         verbose_name=_("Notes"),
