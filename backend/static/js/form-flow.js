@@ -2,7 +2,7 @@ var next_click = document.querySelectorAll(".next-click");
 var back_click = document.querySelectorAll(".back-click");
 var finish_click = document.querySelector(".finish-click");
 var main_form = document.querySelectorAll(".tab");
-var list = document.querySelectorAll(".progress-bar li");
+//var list = document.querySelectorAll(".progress-bar li");
 let formnumber = 0;
 
 next_click.forEach(function (next_page) {
@@ -34,9 +34,9 @@ back_click.forEach(function (back_page) {
 //     remove_progress.classList.add("d-none");
 // });
 
-function progress_forward() {
+/* function progress_forward() {
     list[formnumber].classList.add("active");
-}
+} */
 
 function updateform() {
     main_form.forEach(function (main_number) {
