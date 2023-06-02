@@ -3,8 +3,10 @@ var next_click = document.querySelectorAll(".next-click");
 var back_click = document.querySelectorAll(".back-click");
 var finish_click = document.querySelector(".finish-click");
 var main_form = document.querySelectorAll(".tab");
-var list = document.querySelectorAll(".progress-bar li");
+var progress_bar = document.querySelector(".progress .progress-bar");
+
 let formnumber = 0;
+const MAX_FORMNUMBER = 2;
 
 next_click.forEach(function (next_page) {
     next_page.addEventListener("click", function () {
@@ -13,7 +15,7 @@ next_click.forEach(function (next_page) {
         }
         formnumber++;
         updateform();
-        progress_forward();
+        updateProgressBar();
     });
 });
 
@@ -21,21 +23,14 @@ back_click.forEach(function (back_page) {
     back_page.addEventListener("click", function () {
         formnumber--;
         updateform();
+        updateProgressBar();
     });
 });
 
-// finish_click.addEventListener("click", function () {
-//     //   if(!validateform()){
-//     //         return false;
-//     //         }
-//     formnumber++;
-//     updateform();
-//     var remove_progress = document.querySelector(".progress-bar");
-//     remove_progress.classList.add("d-none");
-// });
-
-function progress_forward() {
-    list[formnumber].classList.add("active");
+function updateProgressBar() {
+    const percentage_progress = (formnumber + 1) * 100 / MAX_FORMNUMBER;
+    progress_bar.style.width = percentage_progress.toString() + "%";
+    console.log(progress_bar);
 }
 
 function updateform() {
@@ -65,6 +60,7 @@ function validateform() {
 }
 
 function initForm() {
+    // The form activates the first tab containing errors.
     formnumber = 0;
     tabs = document.querySelectorAll(".tab");
 
@@ -78,7 +74,7 @@ function initForm() {
         }
     }
     updateform();
-    progress_forward();
+    updateProgressBar();
 }
 
 console.log("test");
