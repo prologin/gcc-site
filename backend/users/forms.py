@@ -248,6 +248,7 @@ class AuthRegisterForm(BaseUserCreationForm):
         self.helper.form_method = "post"
 
         self.helper.layout = Layout(
+            # First tab
             Div(
                 Field("first_name"),
                 Field("last_name"),
@@ -259,8 +260,9 @@ class AuthRegisterForm(BaseUserCreationForm):
                     ),
                     css_class="mt-4 p-0",
                 ),
-                css_class="tab active",
+                css_class="tab",
             ),
+            # Second tab
             Div(
                 Field("email"),
                 Field("password1"),

@@ -1,3 +1,4 @@
+const INVALID_CLS = "is-invalid";
 var next_click = document.querySelectorAll(".next-click");
 var back_click = document.querySelectorAll(".back-click");
 var finish_click = document.querySelector(".finish-click");
@@ -8,7 +9,6 @@ let formnumber = 0;
 next_click.forEach(function (next_page) {
     next_page.addEventListener("click", function () {
         if (!validateform()) {
-            console.log("INVALID FORM")
             return false;
         }
         formnumber++;
@@ -53,13 +53,33 @@ function validateform() {
     var active_tab = document.querySelector(".tab.active");
     var fields = active_tab.querySelectorAll("input");
     fields.forEach(function (val) {
-        val.classList.remove("is-invalid");
+        val.classList.remove(INVALID_CLS);
         if (val.hasAttribute("required")) {
             if (val.value.length == 0) {
                 validate = false;
-                val.classList.add("is-invalid");
+                val.classList.add(INVALID_CLS);
             }
         }
     });
     return validate;
 }
+
+function initForm() {
+    formnumber = 0;
+    tabs = document.querySelectorAll(".tab");
+
+    for ([i,tab] of tabs.entries()) {
+        inputs = tab.querySelectorAll("input");
+        for (input of inputs) {
+            if (input.classList.contains(INVALID_CLS)) {
+                formnumber = i;
+                break;
+            }
+        }
+    }
+    updateform();
+    progress_forward();
+}
+
+console.log("test");
+initForm();
