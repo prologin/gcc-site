@@ -1,32 +1,36 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import (
+    HTML,
+    Button,
+    Column,
+    Div,
+    Field,
+    Layout,
+    Row,
+    Submit,
+)
 from django import forms
-
+from django.utils.translation import gettext_lazy as _
 
 class EventSignupForm(forms.Form):
+
     def __init__(self, *args, **kwargs):
-        self.form_object = kwargs.pop("form_object")  # noqa
         super().__init__(*args, **kwargs)
-        first_name = forms.fields.CharField(
-            label="Prénom (*)",
-            max_length=256,
-            label_suffix="",
-            required=True,
-        )
+        self.helper = FormHelper()
+        self.helper.form_id = "application_form"
+        self.helper.form_method = "post"
 
-        last_name = forms.fields.CharField(
-            label="Nom (*)",
-            max_length=256,
-            label_suffix="",
-            required=True,
+        self.helper.layout = Layout(
+            Div(
+                Field("first_name"),
+                Field("last_name"),
+                Div(
+                    Button(
+                        name="next",
+                        value="Suivant",
+                        css_class="btn primary-button",
+                    ),
+                    css_class="mt-4 p-0",
+                ),
+            ),
         )
-
-        dob = forms.fields.DateField(
-            label="Date de naisssance (*)",
-            required=True,
-        )
-
-        initial_fields = {
-            "first_name": first_name,
-            "last_name": last_name,
-            "dob": dob,
-        }
-        self.fields = initial_fields | self.form_object.get_form_fields()
