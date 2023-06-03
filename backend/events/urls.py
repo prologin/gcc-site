@@ -10,6 +10,6 @@ urlpatterns = [
          views.HomePageView.as_view(http_method_names=['post']), name="event_signup"),
     path('review/', views.ReviewIndexView.as_view(), name="review"),
     path('review/<int:year>/<int:event>',
-         views.ApplicationsReviewView.as_view(), name="application_review")
+         views.ApplicationsReviewView.as_view(), name="application_review"),
     path('mes-candidatures', views.ApplicationsView.as_view(), name='home')
 ]
