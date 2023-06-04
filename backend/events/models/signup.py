@@ -5,12 +5,13 @@ from django.utils.translation import gettext_lazy as _
 
 
 class SelectionStatus(models.IntegerChoices):
-    ABANDONED = -1, _("Abandonné")
-    ENROLLED = 0, _("Inscrit")
-    NOT_SELECTED = 1, _("Non sélectionné")
-    SELECTED = 2, _("Sélectionné")
-    ACCEPTED = 3, _("Accepté")
-    CONFIRMED = 4, _("Confirmé")
+    REJECTED = -3, _("Candidature rejetée")
+    WITHDRAWN = -2, _("Candidature annulée de la part de la candidate")
+    CANCELLED = -1, _("Candidature annulée de la part des organisateurs")
+    PENDING = 0, _("Candidature en cours de traitement")
+    ACCEPTED = 1, _("Candidature acceptée")
+    CONFIRMED = 2, _("Candidature confirmée")
+    ENDED = 3, _("Stage terminé")
 
 
 class TshirtSizes(models.IntegerChoices):
