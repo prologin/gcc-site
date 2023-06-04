@@ -51,31 +51,44 @@
             {% if e.status == 4 %}
             <!-- CONFIRMED Application -->
             <h2>Félicitation !</h2>
-            Nous vous attendons le {{ e.event.start_date|date:"l d F Y" }} à {{ e.event.center }},
-            <!-- Center street? -->
-              {{ e.event.center.address }}
+            Nous vous attendons le <strong>{{ e.event.start_date|date:"l d F Y" }}</strong>
             <br>
-            <iframe 
-            width="300" 
-            height="170" 
-            frameborder="0" 
-            scrolling="no" 
-            marginheight="0" 
-            marginwidth="0" 
-            src="https://maps.google.com/maps?q='+{{ e.event.center.lat }}+','+{{ e.event.center.lng }}+'&hl=es&z=14&amp;output=embed"
-           >
-           </iframe>
-           <br />
-           <small>
-             <a 
-              href="https://maps.google.com/maps?q='+data.lat+','+data.lon+'&hl=es;z=14&amp;output=embed" 
-              style="color:#0000FF;text-align:left" 
-              target="_blank"
-             >
-               See map bigger
-             </a>
-           </small>
-
+            <div class="m-3 row justify-content-around">
+              <iframe class="col" src="https://maps.google.com/maps?q={{ e.event.center.address.lat|floatformat:"u" }},{{ e.event.center.address.lng|floatformat:"u" }}&hl=es;z=14&amp;output=embed"></iframe>
+              <div class="col row justify-content-center">
+                <div class="col-2 text-center">
+                  <i class="far fa-calendar-check" style="font-size: 3em"></i>
+                </div>
+                <ul class="col m-0 p-0" style="list-style: none;">
+                  <li>
+                    <h2>{{ e.event.start_date }}</h2>
+                  </li>
+                  <li>
+                    <h2>{{ e.event.end_date }}</h2>
+                  </li>
+                </ul>
+                <div class="col-2 text-center">
+                  <i class="fas fa-location-dot" style="font-size: 3em"></i>
+                </div>
+                <ul class="col m-0 p-0" style="list-style: none;">
+                  <li>
+                    <h2>{{ e.event.center.address.street }}</h2>
+                  </li>
+                  <li>
+                    <h2>{{ e.event.center.address.city }}</h2>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="m-4 row">
+              <p class="col"> Les documents suivant seront à fournir le 1er jour, si vous n’avez pas d’imprimante, des exemplaires seront disponnible sur place.</p>
+              <button class="btn primary-button py-2 col-3">Télécharger les documents</button>
+            </div>
+            <div class="m-4">
+              <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
+              <i class="fa-regular fa-comment-question fa-xl"></i> Des question ? Envoyez un mail à <stron>{{ CONTACT_EMAIL }}</strong>
+            </div>
+            {% elif e.status == 3%}
             {% endif %}
           </div>
         </div>
