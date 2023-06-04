@@ -3,7 +3,10 @@
 
 <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
-        {% crispy form %}
+        <form method="post" action="{% url 'events:event_signup' %}">
+            <input type="hidden" name="event-id" value="{{ id }}">
+            {% crispy form %}
+        </form>
     </div>
 </div>
 <script src="{% static 'js/events/events.js'%}"></script>
