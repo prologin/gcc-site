@@ -50,11 +50,8 @@ class Application(models.Model):
         verbose_name=_("Date de naissance"),
     )
 
-    event = models.ForeignKey(
-        to="events.Event",
-        verbose_name=_("Évènement"),
-        on_delete=models.CASCADE,
-        related_name="applications",
+    address = models.JSONField(
+        verbose_name=_("Adresse partielle de la participante"), default=dict
     )
 
     status = models.SmallIntegerField(
@@ -62,17 +59,17 @@ class Application(models.Model):
         verbose_name=_("Statut de la candidature"),
     )
 
-    labels = models.ManyToManyField(
-        to="events.ApplicationLabel",
-        blank=True,
-        verbose_name=_("Labels"),
+    event = models.ForeignKey(
+        to="events.Event",
+        verbose_name=_("Évènement"),
+        on_delete=models.CASCADE,
+        related_name="applications",
     )
 
     created_at = models.DateTimeField(
         verbose_name=_("Date d'inscription"),
         auto_now_add=True,
     )
-
 
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
@@ -94,6 +91,7 @@ class Application(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
+
 
 class Form(models.Model):
     name = models.CharField(verbose_name=_("Nom"), max_length=120)
@@ -123,6 +121,7 @@ class Form(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class ApplicationLabel(models.Model):
     title = models.CharField(max_length=120, verbose_name=_("Titre"))

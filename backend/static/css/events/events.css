@@ -5,3 +5,16 @@
 .tab.active {
     display: block;
 }
+
+dl {
+    display: grid;
+    grid-template-columns: 33% auto;
+}
+
+dt {
+    grid-column: 1;
+}
+
+dd {
+    grid-column: 2;
+}

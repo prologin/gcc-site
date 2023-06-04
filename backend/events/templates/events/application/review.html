@@ -1,4 +1,9 @@
 {% extends 'gccsite/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -21,26 +26,37 @@
                 <td> {{application.last_name }} {{application.first_name}} </td>
                 <td> {{application.participations_count}} </td>
                 <td> {{application.labels}} </td>
-                <td> {{application.status}} </td>
+                <td>
+                    {% if application.status == -3 %} Candidature rejetée {% endif %}
+                    {% if application.status == -2 %} Candidature annulée de la part de la candidate {% endif %}
+                    {% if application.status == -1 %} Candidature annulée de la part des organisateurs {% endif %}
+                    {% if application.status == 0 %} Candidature en cours de traitement {% endif %}
+                    {% if application.status == 1 %} Candidature acceptée {% endif %}
+                    {% if application.status == 2 %} Candidature confirmée {% endif %}
+                    {% if application.status == 3 %} Candidature confirmée {% endif %}
+                </td>
             </tr>
             <tr class="collapse" id="row-{{forloop.counter}}">
                 <td colspan="5">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3>Informations de {{application.first_name}} {{application.last_name}}</h3>
-                            <dl class="dl-horizontal">
-                                <dt>Responsable légal:</dt>
-                                <dd>{{application.user.first_name}} {{application.user.last_name}}</dd>
-                                <dt>Email</dt>
-                                <dd>{{application.user.email}}</dd>
-                                <dt>Date d'anniversaire de la participante</dt>
-                                <dd>{{application.dob}}</dd>
-                                <dt>Nombre de participations</dt>
-                                <dd> {{application.participations_count}}</dd>
+                            <h3> Informations de {{application.first_name}} {{application.last_name}} </h3>
+                            <dl>
+                                <dt> Responsable légal: </dt>
+                                <dd> {{application.user.first_name}} {{application.user.last_name}} </dd>
+                                <dt> Email du responsable légal </dt>
+                                <dd> {{application.user.email}} </dd>
+                                <dt> Adresse de la participante </dt>
+                                <dd> {{application.address.zip_code}} {{application.address.city}},
+                                    {{application.address.country}} </dd>
+                                <dt> Date d'anniversaire de la participante </dt>
+                                <dd> {{application.dob}} </dd>
+                                <dt> Nombre de participations </dt>
+                                <dd> {{application.participations_count}} </dd>
                             </dl>
                         </div>
                         <div class="col-md-6">
-                            Faut mettre l'event ici
+                            Réponse aux formulaires:
                         </div>
                     </div>
                 </td>

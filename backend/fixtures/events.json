@@ -7,10 +7,14 @@
       "first_name": "Kenji",
       "last_name": "Gaillac",
       "dob": "1999-08-11",
-      "event": 2,
+      "address": {
+        "city": "Test.",
+        "zip_code": "42042",
+        "country": "France"
+      },
       "status": 1,
+      "event": 2,
       "created_at": "2022-08-29T20:57:16.943Z",
-      "labels": [],
       "form_answer": {
         "tshirt": 1,
         "allergies": "aucune",
@@ -30,10 +34,14 @@
       "first_name": "Toto",
       "last_name": "Tutu",
       "dob": "2011-09-03",
-      "event": 3,
+      "address": {
+        "city": "Test.",
+        "zip_code": "42042",
+        "country": "France"
+      },
       "status": 0,
+      "event": 3,
       "created_at": "2022-09-03T10:39:01.411Z",
-      "labels": [],
       "form_answer": {
         "tshirt": 1,
         "allergies": "aucune",
