@@ -15,21 +15,21 @@ from django.utils.translation import gettext_lazy as _
 
 
 class EventSignupForm(forms.Form):
-    ### Info sur la participante
+    # Info sur la participante
     first_name = forms.CharField(
-        label="Prénom",
+        label="Prénom de la participante:",
         max_length=256,
         required=True
     )
 
     last_name = forms.CharField(
-        label="Nom de famille",
+        label="Nom de famille de la participante: ",
         max_length=256,
         required=True
     )
 
     dob = forms.DateField(
-        label="Date de naissance",
+        label="Date de naissance de la participante: ",
         widget=forms.widgets.DateInput(attrs={'type': 'date'}),
         required=True
     )
@@ -40,17 +40,17 @@ class EventSignupForm(forms.Form):
     )
 
     email = forms.EmailField(
-        label="E-mail",
+        label="E-mail du responsable légal: ",
         max_length=320,
         required=True,
         validators=[validate_email],
     )
 
     phone = forms.DecimalField(
-        label="Numéro de téléphone",
+        label="Numéro de téléphone du responsable légal",
         validators=[RegexValidator(
-            regex="^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$", 
-            message="Not a phone number", 
+            regex="^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
+            message="Not a phone number",
             code="invalid_phone")],
         required=True,
     )
@@ -67,11 +67,9 @@ class EventSignupForm(forms.Form):
         required=True,
     )
 
-    ### Responsable légal
+    # Responsable légal
 
-
-
-    ### Info supplémentaires participantes
+    # Info supplémentaires participantes
 
     diet = forms.CharField(
         label="As-tu un régime alimentaire particulier ?",
@@ -141,8 +139,8 @@ class EventSignupForm(forms.Form):
                 Field("first_name"),
                 Field("last_name"),
                 Field("dob"),
-                Field("email"),
                 Field("address"),
+                Field("email"),
                 Field("phone"),
                 Field("authorization"),
                 Div(

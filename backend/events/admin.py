@@ -88,10 +88,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_filter = (
         "status",
         "event",
-        "labels",
     )
-
-    filter_horizontal = ("labels",)
 
     fieldsets = (
         (None, {"fields": ("user", "event")}),
@@ -102,7 +99,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         (
             "Sélection",
             {
-                "fields": ("status", "labels"),
+                "fields": ("status",),
             },
         ),
     )
