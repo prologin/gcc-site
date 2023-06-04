@@ -10,7 +10,7 @@ from crispy_forms.layout import (
     Submit,
 )
 from django import forms
-from django.core.validators import validate_email, RegexValidator, MaxLengthValidator
+from django.core.validators import RegexValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 
@@ -34,10 +34,9 @@ class EventSignupForm(forms.Form):
         required=True
     )
 
-    address = forms.CharField(
-        label=("Addresse: Ville, zipcode, pays"),
-        required=True
-    )
+    city = forms.CharField(label="Ville", max_length=50)
+    zip_code = forms.IntegerField(label="Code postal")
+    country = forms.CharField(label="Pays", max_length=30, initial="France")
 
     authorization = forms.BooleanField(
         label=_(
@@ -84,25 +83,25 @@ class EventSignupForm(forms.Form):
     )
 
     learn = forms.CharField(
-        label="Prénom",
+        label="Y-a-t’il quelque chose en particulier que tu espères apprendre pendant le stage ? (2 à 3 phrases)",
         max_length=256,
         required=True
     )
 
     programing = forms.CharField(
-        label="Prénom",
+        label="As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels outils ou langages de programmation as-tu essayés ?",
         max_length=256,
         required=True
     )
 
     studies = forms.CharField(
-        label="Prénom",
+        label="Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu préciser lesquelles ?",
         max_length=256,
         required=True
     )
 
     association = forms.CharField(
-        label="Prénom",
+        label="Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela nous aide beaucoup !",
         max_length=256,
         required=True
     )
@@ -117,7 +116,9 @@ class EventSignupForm(forms.Form):
                 Field("first_name"),
                 Field("last_name"),
                 Field("dob"),
-                Field("address"),
+                Field("city"),
+                Field("zip_code"),
+                Field("country"),
                 Field("phone"),
                 Field("authorization"),
                 Div(
@@ -144,10 +145,10 @@ class EventSignupForm(forms.Form):
                         value="Retour",
                         css_class="btn primary-button"
                     ),
-                    Button(
-                        name="next",
-                        value="Suivant",
-                        css_class="btn primary-button"
+                    Submit(
+                        name="submit-application",
+                        value="Candidater pour ce stage",
+                        css_class="mt-4 btn btn-block",
                     ),
                     css_class="mt-4 p-0"
                 ),
