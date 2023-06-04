@@ -51,9 +51,9 @@
             {% if e.status == 4 %}
             <!-- CONFIRMED Application -->
             <h2>Félicitation !</h2>
-            Nous vous attendons le {{ e.event.start_date|date:"l d F Y" }} à {{ e.event.center }}
+            Nous vous attendons le {{ e.event.start_date|date:"l d F Y" }} à {{ e.event.center }},
             <!-- Center street? -->
-              {{ e.event.center.street }}
+              {{ e.event.center.address }}
             <br>
             <iframe 
             width="300" 

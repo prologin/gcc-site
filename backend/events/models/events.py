@@ -57,6 +57,7 @@ class Address(models.Model):
 
 class Center(models.Model):
     name = models.CharField(verbose_name=_("Nom"), max_length=120)
+
     private_notes = models.TextField(
         verbose_name=_("Notes privées"), max_length=2000, blank=True, null=True
     )
