@@ -1,0 +1,86 @@
+<div class="container-fluid p-0">
+  <div class="accordion" id="ApplicationsListAccordion">
+    {% for e in  application_documents %}
+    <div class="accordion-item border-1">
+      <h2 class="accordion-header">
+        <button class="accordion-button bg-transparent text-reset shadow-none collapsed row secondary-button justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{forloop.counter}}" aria-expanded="false" aria-controls="accordion-{{forloop.counter}}">
+          <div class="col row">
+            <div class="col my-auto">
+              <i class="fas fa-user me-2"></i>
+              {{ e.first_name|title }} {{ e.last_name|title }}
+            </div>
+            <div class="col my-auto">
+              <strong>Stage à {{ e.event}}</strong>
+              <p>Du {{ e.event.start_date|date:"l d F" }} au {{ e.event.end_date|date:"l d F Y" }}</p>
+            </div>
+            <div class="col my-auto">
+              {% if e.status == 4 %}
+              <!-- CONFIRMED Application -->
+              <i class="fa-regular fa-circle-check me-2 fa-2xl" style="color: #10c001;"></i>
+              Acceptée et complete
+              {% elif e.status == 3 %}
+              <!-- ACCEPTED Application -->
+              <i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i>
+              Candidature acceptée,
+              confirmation non reçue
+              {% elif e.status == 2 %}
+              <!-- SELECTED Application -->
+              <i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i>
+              Candidature acceptée,
+              confirmation non reçue
+              {% elif e.status == 1 %}
+              <!-- NOT_SELECTED Application -->
+              <i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i>
+              Rejetée
+              {% elif e.status == 0 %}
+              <!-- ENROLLED Application -->
+              <i class="fa-solid fa-spinner me-2 fa-2xl"></i>
+              Candidature en cours de traitement
+              {% elif e.status == -1 %}
+              <!-- ABANDONED Application -->
+              <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
+              Désistée
+              {% endif %}
+            </div>
+          </div>
+        </button>
+      </h2>
+      <div id="accordion-{{forloop.counter}}" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <div class="accordion-body">
+            {% if e.status == 4 %}
+            <!-- CONFIRMED Application -->
+            <h2>Félicitation !</h2>
+            Nous vous attendons le {{ e.event.start_date|date:"l d F Y" }} à {{ e.event.center }}
+            <!-- Center street? -->
+              {{ e.event.center.street }}
+            <br>
+            <iframe 
+            width="300" 
+            height="170" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://maps.google.com/maps?q='+{{ e.event.center.lat }}+','+{{ e.event.center.lng }}+'&hl=es&z=14&amp;output=embed"
+           >
+           </iframe>
+           <br />
+           <small>
+             <a 
+              href="https://maps.google.com/maps?q='+data.lat+','+data.lon+'&hl=es;z=14&amp;output=embed" 
+              style="color:#0000FF;text-align:left" 
+              target="_blank"
+             >
+               See map bigger
+             </a>
+           </small>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

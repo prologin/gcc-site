@@ -1,9 +1,26 @@
 {% extends 'gccsite/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+{% endblock %}
 
 {% block content %}
 
-{% for e in  application_documents %}
-{{ e }}
-<br>
-{% endfor %}
+<div class="candidatures-background">
+  <div class="me-5">
+    <div class="col-9 offset-3">
+      <div class="row mt-5">
+        <h1 class="col">Candidature(s)</h1>
+        <a class="col-4 btn primary-button py-2">
+          S'inscrire à un stage
+        </a>
+      </div>
+      <div class="row mt-3">
+        {% include 'events/partial/ApplicationsList.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
