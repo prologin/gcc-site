@@ -39,22 +39,6 @@ class EventSignupForm(forms.Form):
         required=True
     )
 
-    email = forms.EmailField(
-        label="E-mail du responsable légal: ",
-        max_length=320,
-        required=True,
-        validators=[validate_email],
-    )
-
-    phone = forms.DecimalField(
-        label="Numéro de téléphone du responsable légal",
-        validators=[RegexValidator(
-            regex="^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
-            message="Not a phone number",
-            code="invalid_phone")],
-        required=True,
-    )
-
     authorization = forms.BooleanField(
         label=_(
             "Je certifie que je m'identifie comme une femme"
@@ -68,6 +52,15 @@ class EventSignupForm(forms.Form):
     )
 
     # Responsable légal
+
+    phone = forms.DecimalField(
+        label="Numéro de téléphone du responsable légal",
+        validators=[RegexValidator(
+            regex="^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
+            message="Not a phone number",
+            code="invalid_phone")],
+        required=True,
+    )
 
     # Info supplémentaires participantes
 
@@ -120,27 +113,11 @@ class EventSignupForm(forms.Form):
         self.helper.form_id = "application_form"
         self.helper.form_method = "post"
         self.helper.layout = Layout(
-            # Div(
-            #    Button(
-            #        id="self-inscription",
-            #        name="self-inscription",
-            #        value="M'inscrire",
-            #        css_class = "next-click btn primary-button",
-            #    ),
-            #    Button(
-            #        id="child-inscription",
-            #         name="child-inscription",
-            #         value="Inscrire ma fille",
-            #         css_class = "next-click btn primary-button",
-            #     ),
-            #     css_class = "tab active"
-            # ),
             Div(
                 Field("first_name"),
                 Field("last_name"),
                 Field("dob"),
                 Field("address"),
-                Field("email"),
                 Field("phone"),
                 Field("authorization"),
                 Div(
