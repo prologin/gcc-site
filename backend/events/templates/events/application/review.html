@@ -39,7 +39,7 @@
             <tr class="collapse" id="row-{{forloop.counter}}">
                 <td colspan="5">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <h3> Informations de {{application.first_name}} {{application.last_name}} </h3>
                             <dl>
                                 <dt> Responsable légal: </dt>
@@ -55,8 +55,30 @@
                                 <dd> {{application.participations_count}} </dd>
                             </dl>
                         </div>
-                        <div class="col-md-6">
-                            Réponse aux formulaires:
+                        <div class="col-md-8">
+                            <h3> Réponse au questionnaires</h3>
+                            <dl>
+                                <dt> Quelle est ta taille de t-shirt ? </dt>
+                                <dd> {{application.form_answer.tshirt }}</dd>
+                                
+                                <dt> As-tu des allergies ? </dt>
+                                <dd> {{application.form_answer.allergies }} </dd>
+
+                                <dt> As-tu un régime alimentaire particulier ? </dt>
+                                <dd> {{application.form_answer.diet }} </dd>
+
+                                <dt> Y-a-t’il quelque chose en particulier que tu espères apprendre pendant le stage ? </dt>
+                                <dd> {{application.form_answer.learning }} </dd>
+
+                                <dt> As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels outils ou langages de programmation as-tu essayés ? </dt>
+                                <dd> {{application.form_answer.programing }} </dd>
+
+                                <dt> Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu préciser lesquelles ? </dt>
+                                <dd> {{application.form_answer.studies }} </dd>
+
+                                <dt> Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela nous aide beaucoup ! </dt>
+                                <dd> {{application.form_answer.association }} </dd>
+                            </dl>
                         </div>
                     </div>
                 </td>
