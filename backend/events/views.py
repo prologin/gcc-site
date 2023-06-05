@@ -17,12 +17,8 @@ class HomePageView(TemplateView):
     form_class = EventSignupForm
 
     def post(self, request, *args, **kwargs):
-        application_form = EventSignupForm(request.POST)
-        print(request.POST)
         if "submit-application" in request.POST:
-            print(request.user)
             event = events.Event.objects.get(id=request.POST["event-id"])
-            print(event)
             user = User.objects.get(id=request.user.id)
             address = {
                 "city": request.POST["city"], "zip_code": request.POST["zip_code"], "country": request.POST["country"]}
@@ -34,6 +30,7 @@ class HomePageView(TemplateView):
                 "last_name": request.POST["last_name"],
                 "dob": request.POST["dob"],
                 "address": address,
+                "phone": request.POST["phone"],
                 "event": event,
                 "form_answer": form_answer
             }
@@ -53,7 +50,6 @@ class HomePageView(TemplateView):
                 request,
                 "Votre candidature a été enregistré!"
             )
-
         return HttpResponseRedirect(reverse("events:home"))
 
     def get_context_data(self, *args, **kwargs):

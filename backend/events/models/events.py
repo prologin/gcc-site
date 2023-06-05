@@ -114,14 +114,6 @@ class Event(models.Model):
         blank=True,
     )
 
-    form = models.ForeignKey(
-        to="events.Form",
-        verbose_name=_("Formulaire"),
-        on_delete=models.SET_DEFAULT,
-        default=1,
-    )
-
-
     notes = models.TextField(
         verbose_name=_("Notes"),
         help_text=_(

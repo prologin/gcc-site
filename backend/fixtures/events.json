@@ -7,6 +7,7 @@
       "first_name": "Kenji",
       "last_name": "Gaillac",
       "dob": "1999-08-11",
+      "phone": "0123456789",
       "address": {
         "city": "Test.",
         "zip_code": "42042",
@@ -34,6 +35,7 @@
       "first_name": "Toto",
       "last_name": "Tutu",
       "dob": "2011-09-03",
+      "phone": "0123456789",
       "address": {
         "city": "Test.",
         "zip_code": "42042",

@@ -97,17 +97,16 @@ class ApplicationAdmin(admin.ModelAdmin):
             {"fields": ("first_name", "last_name", "dob", "form_answer")},
         ),
         (
+            "Responsable légal",
+            {"fields": ("phone", "address")},
+        ),
+        (
             "Sélection",
             {
                 "fields": ("status",),
             },
         ),
     )
-
-
-@admin.register(models.Form)
-class FormAdmin(admin.ModelAdmin):
-    search_fields = ("name",)
 
 
 @admin.register(models.ApplicationLabel)
