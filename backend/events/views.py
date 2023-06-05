@@ -18,12 +18,26 @@ class HomePageView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         if "submit-application" in request.POST:
+
             event = events.Event.objects.get(id=request.POST["event-id"])
             user = User.objects.get(id=request.user.id)
+
             address = {
                 "city": request.POST["city"], "zip_code": request.POST["zip_code"], "country": request.POST["country"]}
+            
             form_answer = {"tshirt": request.POST["tshirt"], "allergies": request.POST["allergies"], "diet": request.POST["diet"], "learning": request.POST["learn"],
                            "programing": request.POST["programing"], "studies": request.POST["studies"], "association": request.POST["association"]},
+
+            application = signup.Application.objects.create(
+                user=user,
+                first_name=request.POST["first_name"],
+                last_name=request.POST["last_name"],
+                dob=request.POST["dob"],
+                address=address,
+                event=event,
+                form_answer=form_answer
+            )
+
             dict_post = {
                 "user": user,
                 "first_name": request.POST["first_name"],
@@ -34,23 +48,16 @@ class HomePageView(TemplateView):
                 "event": event,
                 "form_answer": form_answer
             }
-            application = signup.Application.objects.create(
-                user=user,
-                first_name=request.POST["first_name"],
-                last_name=request.POST["last_name"],
-                dob=request.POST["dob"],
-                address=address,
-                event=event,
-                form_answer=form_answer
-            )
-            print(application)
+
             new_request_post = QueryDict(urlencode(dict_post))
             request.POST = new_request_post
+
             messages.success(
                 request,
                 "Votre candidature a été enregistré!"
             )
-        return HttpResponseRedirect(reverse("events:home"))
+
+            return HttpResponseRedirect(reverse("events:home"))
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)

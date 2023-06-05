@@ -17,7 +17,7 @@
   {% else %}
   <div class="w-75 mx-auto pt-5">
     {% for event in open_events %}
-    {% include "events/partial/EventCard.html" with event=event id=event.pk %}
+    {% include "events/partial/EventCard.html" with event=event id=event.pk color=123|make_list|random%}
     {% endfor %}
   </div>
   {% endif %}

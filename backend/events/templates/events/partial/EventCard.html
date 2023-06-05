@@ -1,7 +1,7 @@
 {% load static %}
 <div class="row f-flex justify-content-between event-card mb-4 p-3">
   <div class="col-lg-auto col row">
-    <div class="my-auto d-none d-sm-block col-md-auto gcc-color-{{123|make_list|random}}">
+    <div class="my-auto d-none d-sm-block col-md-auto gcc-color-{{color}}">
       <i class="fas fa-circle" style="font-size: 1.2em;"></i>
     </div>
 
@@ -20,7 +20,7 @@
 
   <!-- Modal -->
   <div class="modal fade" id="inscriptionEventModal-{{id}}" tabindex="-1" aria-labelledby="inscriptionEventModalLabel" aria-hidden="true">
-    {% include "events/partial/EventInscription.html" with event=event id=id%}
+    {% include "events/partial/EventInscription.html" with event=event id=id color=color%}
   </div>
   <div class="modal" id="informationEventModal-{{id}}" tabindex="-1" aria-labelledby="informationEventModalLabel" aria-hidden="true">
     {% include "events/partial/EventInfo.html" with event=event id=id%}
