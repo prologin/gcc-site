@@ -22,7 +22,7 @@ class HomePageView(TemplateView):
             user = User.objects.get(id=request.user.id)
             address = {
                 "city": request.POST["city"], "zip_code": request.POST["zip_code"], "country": request.POST["country"]}
-            form_answer = {"tshirt": request.POST["tshirt"], "allergies": request.POST["allergies"], "diet": request.POST["diet"], "learn": request.POST["learn"],
+            form_answer = {"tshirt": request.POST["tshirt"], "allergies": request.POST["allergies"], "diet": request.POST["diet"], "learning": request.POST["learn"],
                            "programing": request.POST["programing"], "studies": request.POST["studies"], "association": request.POST["association"]},
             dict_post = {
                 "user": user,
