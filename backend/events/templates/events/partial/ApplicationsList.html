@@ -14,21 +14,16 @@
               <p>Du {{ e.event.start_date|date:"l d F" }} au {{ e.event.end_date|date:"l d F Y" }}</p>
             </div>
             <div class="col my-auto">
-              {% if e.status == 4 %}
+              {% if e.status == 2 %}
               <!-- CONFIRMED Application -->
               <i class="fa-regular fa-circle-check me-2 fa-2xl" style="color: #10c001;"></i>
               Acceptée et complete
-              {% elif e.status == 3 %}
+              {% elif e.status == 1 %}
               <!-- ACCEPTED Application -->
               <i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i>
               Candidature acceptée,
               confirmation non reçue
-              {% elif e.status == 2 %}
-              <!-- SELECTED Application -->
-              <i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i>
-              Candidature acceptée,
-              confirmation non reçue
-              {% elif e.status == 1 %}
+              {% elif e.status == -3 %}
               <!-- NOT_SELECTED Application -->
               <i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i>
               Rejetée
@@ -36,7 +31,7 @@
               <!-- ENROLLED Application -->
               <i class="fa-solid fa-spinner me-2 fa-2xl"></i>
               Candidature en cours de traitement
-              {% elif e.status == -1 %}
+              {% elif e.status == -2 %}
               <!-- ABANDONED Application -->
               <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
               Désistée
@@ -48,7 +43,7 @@
       <div id="accordion-{{forloop.counter}}" class="accordion-collapse collapse">
         <div class="accordion-body">
           <div class="accordion-body">
-            {% if e.status == 4 %}
+            {% if e.status == 2 %}
             <!-- CONFIRMED Application -->
             <h2>Félicitation !</h2>
             Nous vous attendons le <strong>{{ e.event.start_date|date:"l d F Y" }}</strong>
@@ -86,7 +81,7 @@
             </div>
             <div class="m-4">
               <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
-              <i class="fa-regular fa-comment-question fa-xl"></i> Des question ? Envoyez un mail à <stron>{{ CONTACT_EMAIL }}</strong>
+              <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <stron>{{ CONTACT_EMAIL }}</strong>
             </div>
             {% elif e.status == 3%}
             {% endif %}
