@@ -29,7 +29,7 @@ class EventSignupForm(forms.Form):
         widget=forms.TextInput(
             attrs={'placeholder': 'Entrez le nom de famille de la participante'}),
         max_length=256,
-        required=True
+        required=True,
     )
 
     dob = forms.DateField(
@@ -43,15 +43,17 @@ class EventSignupForm(forms.Form):
         widget=forms.TextInput(
             attrs={'placeholder': 'Entrez la ville de résidence de la participante'})
     )
+
     zip_code = forms.IntegerField(
         label="Code postal",
         widget=forms.TextInput(
-            attrs={'placeholder': 'Entrez le code postal de résidence de la participante'})
+            attrs={'placeholder': 'Entrez le code postal de résidence de la participante', 'type': 'number'})
     )
+    
     country = forms.CharField(
         label="Pays", max_length=30, initial="France",
         widget=forms.TextInput(
-            attrs={'placeholder': 'Entrez le pays de résidence de la participante'})
+            attrs={'placeholder': 'Entrez le pays de résidence de la participante'}),
     )
 
     authorization = forms.BooleanField(
@@ -71,7 +73,7 @@ class EventSignupForm(forms.Form):
     phone = forms.DecimalField(
         label="Numéro de téléphone du responsable légal",
         widget=forms.TextInput(
-            attrs={'placeholder': 'Entrez le numéro de téléphone du reponsable légal'}),
+            attrs={'placeholder': 'Entrez le numéro de téléphone du reponsable légal', 'type': 'number'}),
         validators=[RegexValidator(
             regex="^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
             message="Not a phone number",
@@ -140,6 +142,7 @@ class EventSignupForm(forms.Form):
                     Column(Field("city")),
                     Column(Field("zip_code")),
                 ),
+                Field("zip_code"),
                 Field("country"),
                 Field("phone"),
                 Field("authorization"),
