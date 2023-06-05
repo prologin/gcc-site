@@ -17,13 +17,17 @@ from django.utils.translation import gettext_lazy as _
 class EventSignupForm(forms.Form):
     # Info sur la participante
     first_name = forms.CharField(
-        label="Prénom de la participante:",
+        label="Prénom:",
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Entrez le prénom de la participante'}),
         max_length=256,
         required=True
     )
 
     last_name = forms.CharField(
-        label="Nom de famille de la participante: ",
+        label="Nom de famille: ",
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Entrez le nom de famille de la participante'}),
         max_length=256,
         required=True
     )
@@ -34,9 +38,21 @@ class EventSignupForm(forms.Form):
         required=True
     )
 
-    city = forms.CharField(label="Ville", max_length=50)
-    zip_code = forms.IntegerField(label="Code postal")
-    country = forms.CharField(label="Pays", max_length=30, initial="France")
+    city = forms.CharField(
+        label="Ville", max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Entrez la ville de résidence de la participante'})
+    )
+    zip_code = forms.IntegerField(
+        label="Code postal",
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Entrez le code postal de résidence de la participante'})
+    )
+    country = forms.CharField(
+        label="Pays", max_length=30, initial="France",
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Entrez le pays de résidence de la participante'})
+    )
 
     authorization = forms.BooleanField(
         label=_(
@@ -54,6 +70,8 @@ class EventSignupForm(forms.Form):
 
     phone = forms.DecimalField(
         label="Numéro de téléphone du responsable légal",
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Entrez le numéro de téléphone du reponsable légal'}),
         validators=[RegexValidator(
             regex="^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$",
             message="Not a phone number",
@@ -83,7 +101,7 @@ class EventSignupForm(forms.Form):
     )
 
     learn = forms.CharField(
-        label="Y-a-t’il quelque chose en particulier que tu espères apprendre pendant le stage ? (2 à 3 phrases)",
+        label="Y-a-t'il quelque chose en particulier que tu espères apprendre pendant le stage ?",
         max_length=256,
         required=True
     )
@@ -113,11 +131,15 @@ class EventSignupForm(forms.Form):
         self.helper.form_method = "post"
         self.helper.layout = Layout(
             Div(
-                Field("first_name"),
-                Field("last_name"),
+                Row(
+                    Column(Field("first_name")),
+                    Column(Field("last_name")),
+                ),
                 Field("dob"),
-                Field("city"),
-                Field("zip_code"),
+                Row(
+                    Column(Field("city")),
+                    Column(Field("zip_code")),
+                ),
                 Field("country"),
                 Field("phone"),
                 Field("authorization"),
@@ -125,7 +147,7 @@ class EventSignupForm(forms.Form):
                     Button(
                         name="next",
                         value="Suivant",
-                        css_class="btn primary-button"
+                        css_class="my-4 btn primary-button btn-secondary btn-block"
                     ),
                     css_class="mt-4 p-0"
                 ),
@@ -140,15 +162,21 @@ class EventSignupForm(forms.Form):
                 Field("studies"),
                 Field("association"),
                 Div(
-                    Button(
-                        name="back",
-                        value="Retour",
-                        css_class="btn primary-button"
-                    ),
-                    Submit(
-                        name="submit-application",
-                        value="Candidater pour ce stage",
-                        css_class="mt-4 btn btn-block",
+                    Row(
+                        Column(
+                            Button(
+                                name="back",
+                                value="Retour",
+                                css_class="my-4 btn primary-button btn-secondary btn-block"
+                            )
+                        ),
+                        Column(
+                            Submit(
+                                name="submit-application",
+                                value="Candidater pour ce stage",
+                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                            )
+                        )
                     ),
                     css_class="mt-4 p-0"
                 ),
