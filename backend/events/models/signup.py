@@ -57,6 +57,7 @@ class Application(models.Model):
     status = models.SmallIntegerField(
         choices=SelectionStatus.choices,
         verbose_name=_("Statut de la candidature"),
+        default=0,
     )
 
     event = models.ForeignKey(

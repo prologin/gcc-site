@@ -24,54 +24,34 @@ class HomePageView(TemplateView):
             event = events.Event.objects.get(id=request.POST["event-id"])
             print(event)
             user = User.objects.get(id=request.user.id)
-            # dict_post ={
-            #     "user": user,
-            #     "first_name": request.POST["first_name"],
-            #     "last_name": request.POST["last_name"],
-            #     "dob": request.POST["dob"],
-            #     "address": {
-            #         "city": request.POST["city"],
-            #         "zip_code": request.POST["zip_code"],
-            #         "country": request.POST["country"]
-            #     },
-            #     "event": event,
-            #     "form_answer": [
-            #         "tshirt": request.POST["tshirt"],
-            #         "allergies": request.POST["allergies"],
-            #         "diet": request.POST["diet"],
-            #         "learn": request.POST["learn"],
-            #         "programing": request.POST["programing"],
-            #         "studies": request.POST["studies"],
-            #         "association": request.POST["association"]
-            #     ],
-            # }
-            # new_request_post = urlencode(dict_post)
-            # new_request_post = QueryDict.fromkeys(
-            #     ["user", "first_name", "last_name", "dob",
-            #         "address", "event", "form_answer"],
-            #     value=[user,
-            #            request.POST["first_name"],
-            #            request.POST["last_name"],
-            #            request.POST["dob"],
-            #            {
-            #                "city": request.POST["city"],
-            #                "zip_code": request.POST["zip_code"],
-            #                "country": request.POST["country"]
-            #            },
-            #            event,
-            #            {
-            #                "tshirt": request.POST["tshirt"],
-            #                "allergies": request.POST["allergies"],
-            #                "diet": request.POST["diet"],
-            #                "learn": request.POST["learn"],
-            #                "programing": request.POST["programing"],
-            #                "studies": request.POST["studies"],
-            #                "association": request.POST["association"]
-            #            }])
-            # print(new_request_post)
+            address = {
+                "city": request.POST["city"], "zip_code": request.POST["zip_code"], "country": request.POST["country"]}
+            form_answer = {"tshirt": request.POST["tshirt"], "allergies": request.POST["allergies"], "diet": request.POST["diet"], "learn": request.POST["learn"],
+                           "programing": request.POST["programing"], "studies": request.POST["studies"], "association": request.POST["association"]},
+            dict_post = {
+                "user": user,
+                "first_name": request.POST["first_name"],
+                "last_name": request.POST["last_name"],
+                "dob": request.POST["dob"],
+                "address": address,
+                "event": event,
+                "form_answer": form_answer
+            }
+            application = signup.Application.objects.create(
+                user=user,
+                first_name=request.POST["first_name"],
+                last_name=request.POST["last_name"],
+                dob=request.POST["dob"],
+                address=address,
+                event=event,
+                form_answer=form_answer
+            )
+            print(application)
+            new_request_post = QueryDict(urlencode(dict_post))
+            request.POST = new_request_post
             messages.success(
                 request,
-                "Test"
+                "Votre candidature a été enregistré!"
             )
 
         return HttpResponseRedirect(reverse("events:home"))
