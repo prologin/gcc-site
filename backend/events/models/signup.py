@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.utils.functional import cached_property
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -12,15 +13,6 @@ class SelectionStatus(models.IntegerChoices):
     ACCEPTED = 1, _("Candidature acceptée")
     CONFIRMED = 2, _("Candidature confirmée")
     ENDED = 3, _("Stage terminé")
-
-
-class TshirtSizes(models.IntegerChoices):
-    XS = 1, _("XS")
-    S = 2, _("S")
-    M = 3, _("M")
-    L = 4, _("L")
-    XL = 5, _("XL")
-    XXL = 6, _("XXL")
 
 
 class ApplicationManager(models.Manager):
@@ -48,6 +40,10 @@ class Application(models.Model):
 
     dob = models.DateField(
         verbose_name=_("Date de naissance"),
+    )
+
+    phone = models.CharField(
+        max_length=16, blank=True, verbose_name=_("Numéro de téléphone")
     )
 
     address = models.JSONField(
@@ -92,36 +88,6 @@ class Application(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
-
-
-class Form(models.Model):
-    name = models.CharField(verbose_name=_("Nom"), max_length=120)
-
-    json_schema = models.JSONField(
-        verbose_name=_("JSON Schema"),
-        help_text=_(
-            "The JSON schema of the Form.\n"
-            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
-            " website</a> to generate your form"
-        ),
-        default=dict,
-    )
-    ui_schema = models.JSONField(
-        verbose_name=_("UI Schema"),
-        help_text=_(
-            "The UI schema of the Form.\n"
-            'You can use <a href="https://jsonforms-editor.netlify.app/">this'
-            " website</a> to generate your form"
-        ),
-        default=dict,
-    )
-
-    class Meta:
-        verbose_name = _("formulaire")
-        verbose_name_plural = _("formulaires")
-
-    def __str__(self):
-        return self.name
 
 
 class ApplicationLabel(models.Model):

@@ -6,7 +6,7 @@ from .events import (
     Event,
     EventDocument,
 )
-from .signup import Application, ApplicationLabel, SelectionStatus, Form
+from .signup import Application, ApplicationLabel, SelectionStatus
 
 __all__ = (
     "Project",
@@ -18,6 +18,5 @@ __all__ = (
     "EventDocument",
     "SelectionStatus",
     "Application",
-    "Form",
     "ApplicationLabel",
 )

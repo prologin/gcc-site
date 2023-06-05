@@ -17,7 +17,7 @@
   {% else %}
   <div class="w-75 mx-auto pt-5">
     {% for event in open_events %}
-    {% include "events/partial/EventCard.html" with event=event id=forloop.counter %}
+    {% include "events/partial/EventCard.html" with event=event id=event.pk %}
     {% endfor %}
   </div>
   {% endif %}
