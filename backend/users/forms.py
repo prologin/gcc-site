@@ -284,12 +284,12 @@ class AuthRegisterForm(BaseUserCreationForm):
                 Submit(
                     name="submit-registration",
                     value="Créer mon compte",
-                    css_class="mt-4 btn btn-block",
+                    css_class="btn btn-block",
                 ),
                 Button(
                     name="back",
                     value="Précédent",
-                    css_class="btn btn-block btn-secondary",
+                    css_class="mt-4 btn btn-block btn-secondary",
                 ),
                 css_class="tab",
             ),
