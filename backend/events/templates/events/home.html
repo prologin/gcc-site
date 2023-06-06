@@ -1,7 +1,11 @@
 {% extends 'gccsite/base.html' %}
 
 {% block content %}
-
+{% for msg in messages %}
+<div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
+  {{msg.message}}
+</div>
+{% endfor %}
 <!-- Home illustration -->
 <div class="home-banner container-fluid">
   <div class="row h-100 align-items-center justify-content-center">

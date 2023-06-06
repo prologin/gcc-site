@@ -24,6 +24,7 @@ from .forms import (
     NotificationsUpdateForm,
     PasswordUpdateForm,
     PersonalInfoForm,
+    DeleteUserForm,
 )
 from .models import User
 
@@ -148,6 +149,21 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
         elif "submit-notifications" in request.POST:
             return HttpResponse("Notifs update form valid")
 
+        elif "submit-delete-user" in request.POST:
+            try:
+                user = User.objects.get(id=request.user.id)
+                user.delete()
+                messages.success(
+                    request,
+                    _("L'utilisateur a été supprimé"),
+                )
+            except:
+                messages.error(
+                    request,
+                    _("L'utilisateur n'existe pas ou a déjà été supprimé"),
+                )
+            return HttpResponseRedirect(reverse("events:home"))
+
         return HttpResponse("nothing")
 
     def get_context_data(self, **kwargs: Any):
@@ -165,6 +181,7 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
             "email_form": EmailForm(user_data),
             "password_update_form": PasswordUpdateForm(),
             "notifs_update_form": NotificationsUpdateForm(),
+            "delete_user_form": DeleteUserForm(),
         }
 
 

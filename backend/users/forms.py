@@ -202,6 +202,22 @@ class NotificationsUpdateForm(forms.Form):
         )
 
 
+class DeleteUserForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "delete_user_form"
+        self.form_method = "post"
+
+        self.helper.layout = Layout(
+            Submit(
+                name="submit-delete-user",
+                value="Supprimer",
+                css_class="btn primary-button red-button btn-secondary btn-block"
+            )
+        )
+
+
 class AuthLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
