@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load custom_filters %}
 
 
 
@@ -13,7 +13,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        {% with delta=event.end_date|subtract:event.start_date %}
+        {%if delta.days > 3 %}
         <img class="" src="{% static 'img/schedule_week.png' %}" alt="Calendrier de la semaine" style="width: 100%;"/>
+        {%else%}
+        <img class="" src="{% static 'img/schedule_weekend.png' %}" alt="Calendrier de la semaine" style="width: 100%;"/>
+        {%endif%}
+        {% endwith %}
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn primary-button" class="btn btn-primary" data-bs-target="#informationEventModal-{{id}}" data-bs-toggle="modal" data-bs-dismiss="modal fade">Retourner à l'évènement</button>
