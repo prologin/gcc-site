@@ -1,3 +1,4 @@
+import re
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
     HTML,
@@ -10,7 +11,7 @@ from crispy_forms.layout import (
     Submit,
 )
 from django import forms
-from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
@@ -31,6 +32,9 @@ TSHIRT = [
     ("XL", "XL")
 ]
 
+def phoneNumberTest(phone):
+    if(re.match("^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",str(phone))):
+        raise ValidationError("Not a phone number")
 
 class EventSignupForm(forms.Form):
     # Info sur la participante
@@ -73,12 +77,7 @@ class EventSignupForm(forms.Form):
 
     phone = forms.DecimalField(
         label="Numéro de téléphone du responsable légal",
-        widget=forms.TextInput(
-            attrs={'type': 'number'}),
-        validators=[RegexValidator(
-            regex="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$",
-            message="Not a phone number",
-            code="invalid_phone")],
+        validators=[phoneNumberTest],
     )
 
     # Addresse de la participante
@@ -86,14 +85,14 @@ class EventSignupForm(forms.Form):
     street_applicant = forms.CharField(
         label="",
         widget=forms.TextInput(
-            attrs={'placeholder': "Nom et numero de voie", 'type': 'text'}),
+            attrs={'placeholder': "Nom et numero de voie"}),
         max_length=250,
     )
 
     complement_applicant = forms.CharField(
         label="",
         widget=forms.TextInput(
-            attrs={'placeholder': "Complément d'addresse", 'type': 'text', 'blank': True}),
+            attrs={'placeholder': "Complément d'addresse", 'blank': True}),
         max_length=200,
         required=False
     )
@@ -101,7 +100,7 @@ class EventSignupForm(forms.Form):
     city_applicant = forms.CharField(
         label="", max_length=50, required=True,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Ville', 'type': 'text'})
+            attrs={'placeholder': 'Ville'})
     )
 
     zip_code_applicant = forms.IntegerField(
@@ -113,7 +112,7 @@ class EventSignupForm(forms.Form):
     country_applicant = forms.CharField(
         label="", max_length=30, initial="France", required=True,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Pays', 'type': 'text'}),
+            attrs={'placeholder': 'Pays'}),
     )
 
     # Etablissement scolaire
@@ -121,7 +120,7 @@ class EventSignupForm(forms.Form):
     name_school = forms.CharField(
         label="Nom:",
         widget=forms.TextInput(
-            attrs={'placeholder': "Nom de l'établissement scolaire", 'type': 'text'}),
+            attrs={'placeholder': "Nom de l'établissement scolaire"}),
         max_length=350,
 
     )
@@ -129,14 +128,14 @@ class EventSignupForm(forms.Form):
     street_school = forms.CharField(
         label="Numéro et nom de voie:",
         widget=forms.TextInput(
-            attrs={'placeholder': "Nom et numero de voie", 'type': 'text'}),
+            attrs={'placeholder': "Nom et numero de voie"}),
         max_length=250,
     )
 
     complement_school = forms.CharField(
         label="Complément d'adresse:",
         widget=forms.TextInput(
-            attrs={'placeholder': "Complément d'addresse", 'type': 'text'}),
+            attrs={'placeholder': "Complément d'addresse"}),
         max_length=200,
         required=False
     )
@@ -144,7 +143,7 @@ class EventSignupForm(forms.Form):
     city_school = forms.CharField(
         label="Ville:", max_length=50, required=True,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Ville', 'type': 'text'})
+            attrs={'placeholder': 'Ville'})
     )
 
     zip_code_school = forms.IntegerField(
@@ -156,7 +155,7 @@ class EventSignupForm(forms.Form):
     country_school = forms.CharField(
         label="Pays:", max_length=30, initial="France", required=True,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Pays', 'type': 'text'}),
+            attrs={'placeholder': 'Pays'}),
     )
 
     school_level = forms.CharField(
