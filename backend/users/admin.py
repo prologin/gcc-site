@@ -17,9 +17,8 @@ class UserAdmin(UpstreamUserAdmin):
         (None, {"fields": ("email", "password")}),
         (
             "Informations personnelles",
-            {"fields": ("first_name", "last_name", "email")},
+            {"fields": ("first_name", "last_name")},
         ),
-        ("Paramètres newsletter", {"fields": ("newsletter_subscribed",)}),
         (
             "Permissions",
             {
@@ -32,7 +31,6 @@ class UserAdmin(UpstreamUserAdmin):
                 ),
             },
         ),
-        ("Dates importantes", {"fields": ("last_login", "date_joined")}),
     )
 
     add_fieldsets = (

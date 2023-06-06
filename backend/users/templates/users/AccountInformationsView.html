@@ -1,9 +1,10 @@
 {% extends 'gccsite/base.html' %}
 {% load static %}
-{% load bootstrap_icons %}
+
+{% load crispy_forms_tags %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/AccountInformationsView.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/account_information.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -24,30 +25,30 @@
     <div class="col d-none d-md-block col-md-3">
       <div class="sidebar-item">
         <div class="make-me-sticky">
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#personal-info">
+            <i class="fas fa-user me-2"></i>
             Informations personnelles
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#email">
-            {% bs_icon 'envelope' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#email">
+            <i class="fas fa-envelope me-2"></i>
             E-mail
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#password">
+            <i class="fas fa-unlock me-2"></i>
             Mot de passe
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#notifications">
+            <i class="fas fa-bell me-2"></i>
             Gestion des notifications
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %} 
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#rgpd">
+            <i class="fas fa-gear me-2"></i>
             Archive des données
-          </button>
-          <button class="btn secondary-button btn-secondary btn-block" href="#personal-info">
-            {% bs_icon 'person-circle' size='1.2em' %}
+          </a>
+          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#delete">
+            <i class="fas fa-triangle-exclamation me-2"></i>
             Suppression de compte
-          </button>
+          </a>
         </div>
       </div>
     </div>
