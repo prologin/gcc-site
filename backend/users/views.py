@@ -1,17 +1,25 @@
 from typing import Any
 
+from django.conf import settings
 from django.contrib import messages
-
-# password check
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.views import RedirectURLMixin
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import resolve_url
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import TemplateView
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.generic import CreateView, TemplateView
 
 from .forms import (
+    AuthLoginForm,
+    AuthRegisterForm,
     EmailForm,
     NotificationsUpdateForm,
     PasswordUpdateForm,
@@ -158,3 +166,33 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
             "password_update_form": PasswordUpdateForm(),
             "notifs_update_form": NotificationsUpdateForm(),
         }
+
+
+class LoginView(auth_views.LoginView):
+    template_name = "users/login.html"
+    form_class = AuthLoginForm
+    redirect_authenticated_user = True
+
+
+class RegisterView(RedirectURLMixin, CreateView):
+    template_name = "users/register.html"
+    form_class = AuthRegisterForm
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(
+        self, request: HttpRequest, *args: Any, **kwargs: Any
+    ) -> HttpResponse:
+        """
+        Like for the Login View, prevent the access of logged users to this page
+        """
+        if self.request.user.is_authenticated:
+            return HttpResponseRedirect(self.get_success_url())
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_default_redirect_url(self):
+        if self.success_url:
+            return resolve_url(self.success_url)
+        else:
+            return resolve_url(settings.LOGIN_REDIRECT_URL)
