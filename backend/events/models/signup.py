@@ -21,6 +21,13 @@ class ApplicationManager(models.Manager):
 
 
 class Application(models.Model):
+    event = models.ForeignKey(
+        to="events.Event",
+        verbose_name=_("Évènement"),
+        on_delete=models.CASCADE,
+        related_name="applications",
+    )
+
     user = models.ForeignKey(
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
@@ -50,26 +57,23 @@ class Application(models.Model):
         verbose_name=_("Adresse partielle de la participante"), default=dict
     )
 
+    school = models.JSONField(
+        verbose_name=_("Etablissement scolaire de la participante"), default=dict
+    )
+
+    form_answer = models.JSONField(
+        verbose_name=_("Réponse de formulaire"), default=dict
+    )
+
     status = models.SmallIntegerField(
         choices=SelectionStatus.choices,
         verbose_name=_("Statut de la candidature"),
         default=0,
     )
 
-    event = models.ForeignKey(
-        to="events.Event",
-        verbose_name=_("Évènement"),
-        on_delete=models.CASCADE,
-        related_name="applications",
-    )
-
     created_at = models.DateTimeField(
         verbose_name=_("Date d'inscription"),
         auto_now_add=True,
-    )
-
-    form_answer = models.JSONField(
-        verbose_name=_("Réponse de formulaire"), default=dict
     )
 
     objects = ApplicationManager()

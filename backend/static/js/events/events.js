@@ -53,10 +53,13 @@ function validateform() {
     validate = true;
     var active_tab = document.querySelector(".tab.active");
     var fields = active_tab.querySelectorAll("input");
-    console.log(fields)
     fields.forEach(function (val) {
         val.classList.remove("is-invalid");
         if (val.hasAttribute("required")) {
+            if (val.type === "checkbox" && val.checked === false) {
+                validate = false
+                val.classList.add("is-invalid")
+            }
             if (val.value.length == 0) {
                 validate = false;
                 val.classList.add("is-invalid");
