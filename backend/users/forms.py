@@ -80,7 +80,7 @@ class PersonalInfoForm(forms.Form):
             Submit(
                 "submit-personal_info",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -116,7 +116,7 @@ class EmailForm(forms.Form):
             Submit(
                 "submit-email",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -153,7 +153,7 @@ class PasswordUpdateForm(forms.Form):
             Submit(
                 "submit-password",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -191,7 +191,7 @@ class NotificationsUpdateForm(forms.Form):
             Submit(
                 "submit-notifications",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -213,7 +213,7 @@ class DeleteUserForm(forms.Form):
             Submit(
                 name="submit-delete-user",
                 value="Supprimer",
-                css_class="btn primary-button red-button btn-secondary btn-block"
+                css_class="btn btn-primary btn-block red-button"
             )
         )
 
@@ -271,7 +271,7 @@ class AuthRegisterForm(BaseUserCreationForm):
                 Button(
                     name="next",
                     value="Suivant",
-                    css_class="btn btn-secondary btn-block",
+                    css_class="btn btn-primary btn-block",
                 ),
                 css_class="tab",
             ),
@@ -284,12 +284,12 @@ class AuthRegisterForm(BaseUserCreationForm):
                 Submit(
                     name="submit-registration",
                     value="Créer mon compte",
-                    css_class="btn btn-block",
+                    css_class="btn btn-primary btn-block",
                 ),
                 Button(
                     name="back",
                     value="Précédent",
-                    css_class="mt-4 btn btn-block btn-secondary",
+                    css_class="mt-4 btn btn-block btn-light",
                 ),
                 css_class="tab",
             ),

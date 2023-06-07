@@ -1,7 +1,7 @@
 {% load static %}
 <div class="row f-flex justify-content-between event-card mb-4 p-3">
   <div class="col-lg-auto col row">
-    <div class="my-auto d-none d-sm-block col-md-auto gcc-color-{{123|make_list|random}}">
+    <div class="my-auto d-none d-md-block col-md-auto gcc-color-{{123|make_list|random}}">
       <i class="fas fa-circle" style="font-size: 1.2em;"></i>
     </div>
 
@@ -13,9 +13,9 @@
     </div>
   </div>
 
-  <div class="col-lg-auto ml-auto mt-4 mb-1 my-lg-auto btn-group-vertical" role="group">
-    <button class="btn mx-auto ml-lg-auto mr-lg-4 primary-button">S'inscrire à ce stage</button>
-    <button class="btn mx-auto ml-lg-auto mr-lg-4 secondary-button" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">Plus d'informations</button>
+  <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto btn-group-vertical" role="group">
+    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary">S'inscrire à ce stage</button>
+    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">Plus d'informations</button>
   </div>
 
   <!-- Modal -->
