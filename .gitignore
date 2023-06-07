@@ -17,5 +17,5 @@ docker/volumes/
 docker/secrets/
 docker/.env
 
-backend/db.sqlite3
 pg-data/
+**/db.sqlite3
