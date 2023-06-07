@@ -213,7 +213,7 @@ class DeleteUserForm(forms.Form):
             Submit(
                 name="submit-delete-user",
                 value="Supprimer",
-                css_class="btn btn-primary btn-block red-button"
+                css_class="btn btn-primary btn-block red-button",
             )
         )
 

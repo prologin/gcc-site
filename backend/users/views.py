@@ -20,11 +20,11 @@ from django.views.generic import CreateView, TemplateView
 from .forms import (
     AuthLoginForm,
     AuthRegisterForm,
+    DeleteUserForm,
     EmailForm,
     NotificationsUpdateForm,
     PasswordUpdateForm,
     PersonalInfoForm,
-    DeleteUserForm,
 )
 from .models import User
 
