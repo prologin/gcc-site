@@ -1,7 +1,11 @@
 {% extends 'gccsite/base.html' %}
 
 {% block content %}
-
+{% for msg in messages %}
+<div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
+  {{msg.message}}
+</div>
+{% endfor %}
 <!-- Home illustration -->
 <div class="home-banner container-fluid">
   <div class="row h-100 align-items-center justify-content-center">
@@ -11,18 +15,20 @@
       </span>
 
       <span>
-        <a type="button" href="#event-list" class="btn primary-button subtitleSize mt-4 btn-secondary btn-block">
+        <a type="button" href="#event-list" class="btn btn-primary subtitleSize mt-4 btn-block">
           Voir les stages
         </a>
       </span>
       <span>
-        <a type="button" href="#faq" class="btn secondary-button subtitleSize btn-secondary btn-block">
+        <a type="button" href="#faq" class="btn subtitleSize btn-light btn-block">
           Plus d'informations
         </a>
       </span>
     </div>
   </div>
 </div>
+
+<!-- TODO: PARTNERS -->
 
 <!-- Event list -->
 {% include 'events/partial/EventList.html' %}

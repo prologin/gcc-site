@@ -10,7 +10,7 @@
 /* If the screen size is 600px wide or less */
 @media screen and (max-width: 600px) {
   body {
-    font-size: 4vw;;
+    font-size: 4vw;
   }
 }
 
@@ -24,7 +24,7 @@ body {
   --main-dark-color: #222A35;
   --main-light-color: #eff2f5;
   --global-border-radius: 12px;
-  --main-hover-color: #46566D;
+  --main-hover-color: #46566d;
   --light-text-color: #92a2b9;
 }
 
@@ -63,35 +63,6 @@ a {
   flex: 1;
 }
 
-.btn-block {
-  display: block;
-  width: 100%;
-}
-
-.primary-button {
-  background-color: var(--main-dark-color);
-  border-color: var(--main-dark-color);
-  color: white;
-  border-radius: var(--global-border-radius);
-}
-
-.primary-button:hover {
-  background-color: var(--main-hover-color);
-}
-
-.secondary-button {
-  color: var(--main-dark-color);
-  background-color: white;
-  border-color: white;
-  border-radius: var(--global-border-radius);
-}
-
-.secondary-button:hover, .secondary-button:focus {
-  color: var(--main-hover-color);
-  background-color: white;
-  border-color: var(--main-hover-color);
-  text-decoration: underline;
-}
 
 h1, .titleSize {
   font-size: 200%;
@@ -275,7 +246,7 @@ button.dropdown-item {
 
 /*
  * Newsletter
- */ 
+ */
 
 .background-style {
   background-color: #efefef;
@@ -369,7 +340,7 @@ button.dropdown-item {
   border-radius: var(--global-border-radius) !important;
   border: none;
 }
- 
+
 .collapsed > .when-open,
 .not-collapsed > .when-closed {
   display: none;
@@ -393,4 +364,8 @@ button.dropdown-item {
 
 .social-network-icon:hover {
   filter: brightness(2);
+}
+
+.bi {
+  margin-right: 1em;
 }

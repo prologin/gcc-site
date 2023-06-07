@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
+    "crispy_bootstrap5",
     "events",
     "users",
     "pages",
@@ -43,7 +45,7 @@ ROOT_URLCONF = "gccsite.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [ BASE_DIR / "gccsite" / "templates" ],
+        "DIRS": [BASE_DIR / "gccsite" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -89,6 +91,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# By default, bring back user to home when successfully logging in
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/"
+
 LANGUAGE_CODE = "fr-fr"
 
 TIME_ZONE = "Europe/Paris"
@@ -100,11 +107,12 @@ USE_TZ = True
 AUTH_USER_MODEL = "users.User"
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_DIRS = (
-    BASE_DIR / 'static/',
-)
+STATICFILES_DIRS = (BASE_DIR / "static/",)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
