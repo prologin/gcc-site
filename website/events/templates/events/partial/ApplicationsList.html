@@ -3,7 +3,7 @@
     {% for e in  application_documents %}
     <div class="accordion-item border-1">
       <h2 class="accordion-header">
-        <button class="accordion-button bg-transparent text-reset shadow-none collapsed row btn-light justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{forloop.counter}}" aria-expanded="false" aria-controls="accordion-{{forloop.counter}}">
+        <button class="accordion-button bg-transparent text-reset shadow-none row btn-light justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{forloop.counter}}" aria-expanded="false" aria-controls="accordion-{{forloop.counter}}">
           <div class="col row">
             <div class="col my-auto">
               <i class="fas fa-user me-2"></i>
@@ -34,11 +34,11 @@
               {% elif e.status == -1 %}
               <!-- Cancel Application -->
               <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
-              Désitée
+              Annulé par les organisateurs
               {% elif e.status == -2 %}
               <!-- Cancel Application -->
               <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
-              Annulé
+              Désitée
               {% elif e.status == -3 %}
               <!-- NOT_SELECTED Application -->
               <i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i>
@@ -48,7 +48,7 @@
           </div>
         </button>
       </h2>
-      <div id="accordion-{{forloop.counter}}" class="accordion-collapse collapse">
+      <div id="accordion-{{forloop.counter}}" {% if e.status == 1 or forloop.counter == 1 %} class="accordion-collapse collapse show" {% else %} class="accordion-collapse collapse" {% endif %} >
         <div class="accordion-body">
           <div class="accordion-body">
             {% if e.status == 3 %}
@@ -57,63 +57,97 @@
             Tu peux retrouver les photos du stags sur notre <a href="https://www.flickr.com/photos/prologin/">flickr</a></p>
             {% elif e.status == 2 %}
             <!-- CONFIRMED Application -->
-            <h1>Félicitation !</h1>
-              Nous vous attendons le <strong>{{ e.event.start_date|date:"l d F Y" }}</strong>
-            <br>
-            <div class="m-3 row justify-content-around">
-              <iframe class="col" src="https://maps.google.com/maps?q={{ e.event.center.address.lat|floatformat:"u" }},{{ e.event.center.address.lng|floatformat:"u" }}&hl=es;z=14&amp;output=embed"></iframe>
-              <div class="row m-3 justify-content-around">
-                <div class="col-md-auto row justify-content-center">
-                  <div class="col-auto text-center">
-                    <i class="far fa-calendar-check" style="font-size: 2em"></i>
+            <div>
+              <h1>Félicitations !</h1>
+                Nous vous attendons le <strong>{{ e.event.start_date|date:"l d F Y" }}</strong>
+              <br>
+              <div class="m-3 row justify-content-around">
+                <iframe class="col" src="https://maps.google.com/maps?q={{ e.event.center.address.lat|floatformat:"u" }},{{ e.event.center.address.lng|floatformat:"u" }}&hl=es;z=14&amp;output=embed"></iframe>
+                <div class="row m-3 justify-content-around">
+                  <div class="col-md-auto row justify-content-center">
+                    <div class="col-auto text-center">
+                      <i class="far fa-calendar-check" style="font-size: 2em"></i>
+                    </div>
+                    <ul class="col m-0 p-0" style="list-style: none;">
+                      <li>
+                        <p class="h3">{{ e.event.start_date }}</p>
+                      </li>
+                      <li>
+                        <p class="h3">{{ e.event.end_date }}</p>
+                      </li>
+                    </ul>
                   </div>
-                  <ul class="col m-0 p-0" style="list-style: none;">
-                    <li>
-                      <p class="h3">{{ e.event.start_date }}</p>
-                    </li>
-                    <li>
-                      <p class="h3">{{ e.event.end_date }}</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-md-auto row justify-content-center">
-                  <div class="col-auto text-center">
-                    <i class="fas fa-location-dot" style="font-size: 2em"></i>
+                  <div class="col-md-auto row justify-content-center">
+                    <div class="col-auto text-center">
+                      <i class="fas fa-location-dot" style="font-size: 2em"></i>
+                    </div>
+                    <ul class="col m-0 p-0" style="list-style: none;">
+                      <li>
+                        <p class="h3">{{ e.event.center.address.street }}</p>
+                      </li>
+                      <li>
+                        <p class="h3">{{ e.event.center.address.city }}</p>
+                      </li>
+                    </ul>
                   </div>
-                  <ul class="col m-0 p-0" style="list-style: none;">
-                    <li>
-                      <p class="h3">{{ e.event.center.address.street }}</p>
-                    </li>
-                    <li>
-                      <p class="h3">{{ e.event.center.address.city }}</p>
-                    </li>
-                  </ul>
                 </div>
               </div>
-            </div>
-            
-            <div class="m-4 row">
-              <p class="col-auto"> Les documents suivant seront à fournir le 1er jour, si vous n’avez pas d’imprimante, des exemplaires seront disponnible sur place.</p>
-              <!-- TODO : DOCUMENT GENERATOR -->
-              <button class="btn btn-primary py-2 col-auto">Télécharger les documents</button>
-            </div>
-            <div class="m-4">
-              <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
-              <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <strong>{{ CONTACT_EMAIL }}</strong>
+              
+              <div class="m-4 row">
+                <p class="col-auto"> Les documents suivant seront à fournir le 1er jour, si vous n’avez pas d’imprimante, des exemplaires seront disponnible sur place.</p>
+                <!-- TODO : DOCUMENT GENERATOR -->
+                <button class="btn btn-primary py-2 col-auto">Télécharger les documents</button>
+              </div>
+              <div class="m-4">
+                <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
+                <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <strong>{{ CONTACT_EMAIL }}</strong>
+              </div>
             </div>
             {% elif e.status == 1 %}
-            <p class="h4">
-              Félicitation, tu as étée sélectionnée !
-              Il faut maintenant que tu valides ta candidature pour confirmer ta venue
-            </p>
-            
-            <div class="btn-group d-none d-sm-block text-center" role="group">
-              <button type="button" class="btn btn-primary">
-                Confirmer sa venue
-              </button>
-              <button type="button" class="btn btn-light">
-                Annuler sa candidature
-              </button>
+            <!-- ACCEPTED Application -->
+            <div>
+              <p class="h4">
+                Félicitation, tu as étée sélectionnée !
+                Il faut maintenant que tu valides ta candidature pour confirmer ta venue
+              </p>
+              
+              <div class="btn-group d-none d-sm-block text-center" role="group">
+                <!-- TODO: add back -->
+                <button type="button" class="btn btn-primary">
+                  Confirmer sa venue
+                </button>
+                <button type="button" class="btn btn-light">
+                  Annuler sa candidature
+                </button>
+              </div>
+            </div>
+            {% elif e.status == 0 %}
+            <!-- PENDING Application -->
+            <div>
+              <p class="h6">
+                Reviens plus tard pour voir si tu es sélectionnée !
+              </p>
+            </div>
+            {% elif e.status == -1 %}
+            <!-- CANCELLED Application -->
+            <div>
+              <p class="h6">
+                Ta candidature à étée annulée par les organisateurs. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+              </p>
+            </div>
+            {% elif e.status == -2 %}
+            <!-- WITHDRAWN Application -->
+            <div>
+              <p class="h6">
+                Tu as annulé ta candidature. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+              </p>
+            </div>
+            {% elif e.status == -3 %}
+            <!-- WITHDRAWN Application -->
+            <div>
+              <p class="h6">
+                Ta candidature a été rejetée. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+              </p>
             </div>
             {% endif %}
           </div>

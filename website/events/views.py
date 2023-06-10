@@ -104,5 +104,5 @@ class ApplicationsView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx['application_documents'] = signup.Application.objects.filter(user=self.request.user.id)
+        ctx['application_documents'] = signup.Application.objects.filter(user=self.request.user.id).order_by('-created_at')
         return ctx
