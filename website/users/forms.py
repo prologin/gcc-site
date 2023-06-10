@@ -1,5 +1,6 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
+from django.urls import reverse_lazy
 from crispy_forms.layout import (
     HTML,
     Button,
@@ -51,6 +52,7 @@ class PersonalInfoForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "personal_info_form"
         self.helper.form_method = "post"
+        self.helper.form_action = reverse_lazy("users:update_user_info")
 
         name_layout = Row(
             Column(
@@ -128,16 +130,16 @@ class EmailForm(forms.Form):
 
 
 class PasswordUpdateForm(forms.Form):
-    current_pwd = forms.CharField(
+    old_password = forms.CharField(
         label="Mot de passe actuel", widget=forms.PasswordInput, required=True
     )
-    new_pwd = forms.CharField(
+    new_password1 = forms.CharField(
         label="Nouveau mot de passe",
         widget=forms.PasswordInput,
         required=True,
         validators=[validate_password],
     )
-    new_pwd_ack = forms.CharField(
+    new_password2 = forms.CharField(
         label="Confirmer le nouveau mot de passe",
         widget=forms.PasswordInput,
         required=True,
@@ -148,6 +150,7 @@ class PasswordUpdateForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "password_update_form"
         self.helper.form_method = "post"
+        self.helper.form_action = reverse_lazy("users:update_user_password")
 
         submit = Div(
             Submit(
@@ -159,9 +162,9 @@ class PasswordUpdateForm(forms.Form):
         )
 
         self.helper.layout = Layout(
-            Field("current_pwd", placeholder=""),
-            Field("new_pwd", placeholder=""),
-            Field("new_pwd_ack", placeholder=""),
+            Field("old_password", placeholder=""),
+            Field("new_password1", placeholder=""),
+            Field("new_password2", placeholder=""),
             submit,
         )
 
