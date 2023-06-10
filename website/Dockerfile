@@ -18,7 +18,8 @@ RUN apt-get update && \
         git make \
         curl ca-certificates gnupg apt-transport-https \
         libpq-dev postgresql-client \
-        libssl-dev
+        libssl-dev \
+        libmagic1
 
 FROM base as builder
 

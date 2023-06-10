@@ -34,7 +34,8 @@ services:
     volumes:
       - redis_dev_data:/data
 
-  backend_dev: &backend_dev
+  backend_dev:
+    &backend_dev
     image: backend_dev
     build:
       context: ../website

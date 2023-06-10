@@ -15,18 +15,19 @@ gunicorn = "^20.1.0"
 ipython = "^8.12.0"
 psycopg2-binary = "^2.9.6"
 django-crispy-forms = "^2.0"
+django-storages = "^1.12"
 crispy-bootstrap5 = "^0.7"
 django-bootstrap-icons = "^0.8.3"
 django-structlog = { version = "^5.1", extras = [ "celery" ] }
-django-storages = "^1.12"
 django-redis = { version = "^5" }
 django-rest-knox = { version = "^4.2" }
 django-celery-beat = { version = "^2.4"}
-django-debug-toolbar = "*"
 django-mail-panel = "^4.0"
 django-post-office = "^3.6"
 prospector = {extras = ["with_everything"], version = "*"}
-mozilla-django-oidc = "^3.0.0"
+pypdf = "^3.2"
+python-magic = "^0.4"
+mozilla-django-oidc = { version = "^3.0" }
 
 [tool.poetry.dev-dependencies]
 black = "*"

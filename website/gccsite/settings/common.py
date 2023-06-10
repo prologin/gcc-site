@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "mozilla_django_oidc",
     "django_celery_beat",
     "post_office",
+    "mozilla_django_oidc",
     "crispy_forms",
     "crispy_bootstrap5",
     "events",

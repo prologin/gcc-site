@@ -17,6 +17,13 @@
   <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto btn-group-vertical" role="group">
     <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">S'inscrire à ce stage</button>
     <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">Plus d'informations</button>
+    <form action="." method="post"> 
+      {% csrf_token %}
+      <input type="hidden" name="event-id" value="{{ id }}">
+      <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" type="submit" name="generate"> générer </button> 
+    </form>
+    {% if object.document %} <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" onclick="{{ event.document.url }}"> télécharger </button> {% endif %}
+
   </div>
 
   <!-- Modal -->
