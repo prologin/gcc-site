@@ -25,27 +25,27 @@
     <div class="col d-none d-md-block col-md-3">
       <div class="sidebar-item">
         <div class="make-me-sticky">
-          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#personal-info">
+          <a type="button" class="btn btn-light m-1 btn-block text-start" href="#personal-info">
             <i class="fas fa-user me-2"></i>
             Informations personnelles
           </a>
-          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#email">
+          <a type="button" class="btn btn-light m-1 btn-block text-start" href="#email">
             <i class="fas fa-envelope me-2"></i>
             E-mail
           </a>
-          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#password">
+          <a type="button" class="btn btn-light m-1 btn-block text-start" href="#password">
             <i class="fas fa-unlock me-2"></i>
             Mot de passe
           </a>
-          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#notifications">
+          <a type="button" class="btn btn-light m-1 btn-block text-start" href="#notifications">
             <i class="fas fa-bell me-2"></i>
             Gestion des notifications
           </a>
-          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#rgpd">
+          <a type="button" class="btn btn-light m-1 btn-block text-start" href="#rgpd">
             <i class="fas fa-gear me-2"></i>
             Archive des données
           </a>
-          <a type="button" class="btn secondary-button btn-secondary btn-block" href="#delete">
+          <a type="button" class="btn btn-light m-1 btn-block text-start" href="#delete">
             <i class="fas fa-triangle-exclamation me-2"></i>
             Suppression de compte
           </a>
@@ -111,7 +111,7 @@
           RGPD).
         </h3>
         <div class="mt-4 p-0 col-12 col-md-4 offset-md-8 col">
-          <button class="btn primary-button btn-secondary btn-block">
+          <button class="btn btn-primary btn-block">
             Télécharger
           </button>
         </div>
@@ -125,9 +125,7 @@
           (Art. 17 du RGPD).
         </h3>
         <div class="mt-4 p-0 col-12 col-md-4 offset-md-8 col">
-          <button class="btn primary-button red-button btn-secondary btn-block">
-            Supprimer
-          </button>
+          {% crispy delete_user_form %}
         </div>
       </div>
     </div>

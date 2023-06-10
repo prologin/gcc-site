@@ -1,5 +1,6 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
+from django.urls import reverse_lazy
 from crispy_forms.layout import (
     HTML,
     Button,
@@ -51,7 +52,7 @@ class PersonalInfoForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "personal_info_form"
         self.helper.form_method = "post"
-        self.helper.form_action = "submit_survey"
+        self.helper.form_action = reverse_lazy("users:update_user_info")
 
         name_layout = Row(
             Column(
@@ -81,7 +82,7 @@ class PersonalInfoForm(forms.Form):
             Submit(
                 "submit-personal_info",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -117,7 +118,7 @@ class EmailForm(forms.Form):
             Submit(
                 "submit-email",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -129,16 +130,16 @@ class EmailForm(forms.Form):
 
 
 class PasswordUpdateForm(forms.Form):
-    current_pwd = forms.CharField(
+    old_password = forms.CharField(
         label="Mot de passe actuel", widget=forms.PasswordInput, required=True
     )
-    new_pwd = forms.CharField(
+    new_password1 = forms.CharField(
         label="Nouveau mot de passe",
         widget=forms.PasswordInput,
         required=True,
         validators=[validate_password],
     )
-    new_pwd_ack = forms.CharField(
+    new_password2 = forms.CharField(
         label="Confirmer le nouveau mot de passe",
         widget=forms.PasswordInput,
         required=True,
@@ -149,20 +150,21 @@ class PasswordUpdateForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "password_update_form"
         self.helper.form_method = "post"
+        self.helper.form_action = reverse_lazy("users:update_user_password")
 
         submit = Div(
             Submit(
                 "submit-password",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
 
         self.helper.layout = Layout(
-            Field("current_pwd", placeholder=""),
-            Field("new_pwd", placeholder=""),
-            Field("new_pwd_ack", placeholder=""),
+            Field("old_password", placeholder=""),
+            Field("new_password1", placeholder=""),
+            Field("new_password2", placeholder=""),
             submit,
         )
 
@@ -192,7 +194,7 @@ class NotificationsUpdateForm(forms.Form):
             Submit(
                 "submit-notifications",
                 "Sauvegarder",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-primary btn-block",
             ),
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
@@ -200,6 +202,22 @@ class NotificationsUpdateForm(forms.Form):
         self.helper.layout = Layout(
             InlineCheckboxes("accept_notifs", css_class="region_checkboxes"),
             submit,
+        )
+
+
+class DeleteUserForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "delete_user_form"
+        self.form_method = "post"
+
+        self.helper.layout = Layout(
+            Submit(
+                name="submit-delete-user",
+                value="Supprimer",
+                css_class="btn btn-primary btn-block red-button",
+            )
         )
 
 
@@ -214,7 +232,7 @@ class AuthLoginForm(AuthenticationForm):
             Submit(
                 name="submit-notifications",
                 value="Se connecter",
-                css_class="btn primary-button btn-secondary btn-block",
+                css_class="btn btn-block",
             ),
             css_class="mt-4 p-0",
         )
@@ -253,13 +271,10 @@ class AuthRegisterForm(BaseUserCreationForm):
             Div(
                 Field("first_name"),
                 Field("last_name"),
-                Div(
-                    Button(
-                        name="next",
-                        value="Suivant",
-                        css_class="next-click btn primary-button btn-secondary btn-block",
-                    ),
-                    css_class="mt-4 p-0",
+                Button(
+                    name="next",
+                    value="Suivant",
+                    css_class="btn btn-primary btn-block",
                 ),
                 css_class="tab",
             ),
@@ -269,18 +284,15 @@ class AuthRegisterForm(BaseUserCreationForm):
                 Field("password1"),
                 Field("password2"),
                 Field("authorization"),
+                Submit(
+                    name="submit-registration",
+                    value="Créer mon compte",
+                    css_class="btn btn-primary btn-block",
+                ),
                 Button(
                     name="back",
                     value="Précédent",
-                    css_class="back-click btn primary-button btn-secondary btn-block",
-                ),
-                Div(
-                    Submit(
-                        name="submit-registration",
-                        value="Créer mon compte",
-                        css_class="finish-click btn primary-button btn-secondary btn-block",
-                    ),
-                    css_class="mt-4 p-0",
+                    css_class="mt-4 btn btn-block btn-light",
                 ),
                 css_class="tab",
             ),

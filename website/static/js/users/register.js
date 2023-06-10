@@ -73,9 +73,8 @@ function initForm() {
             }
         }
     }
-    updateform();
+    updateForm();
     updateProgressBar();
 }
 
-console.log("test");
 initForm();
