@@ -58,7 +58,6 @@
             <!-- CONFIRMED Application -->
             <div>
               <h1>Félicitations !</h1>
-                Nous vous attendons le <strong>{{ e.event.start_date|date:"l d F Y" }}</strong>
               <br>
               <div class="m-3 row justify-content-around">
                 <iframe class="col" src="https://maps.google.com/maps?q={{ e.event.center.address.lat|floatformat:"u" }},{{ e.event.center.address.lng|floatformat:"u" }}&hl=es;z=14&amp;output=embed"></iframe>
@@ -93,7 +92,7 @@
               </div>
               
               <div class="m-4 row">
-                <p class="col-auto"> Les documents suivant seront à fournir le 1er jour, si vous n’avez pas d’imprimante, des exemplaires seront disponnible sur place.</p>
+                <p class="col-auto"> Les documents suivants seront à fournir le 1er jour. Si vous n’avez pas d’imprimante, des exemplaires seront disponibles sur place.</p>
                 <!-- TODO : DOCUMENT GENERATOR -->
                 <button class="btn btn-primary py-2 col-auto">Télécharger les documents</button>
               </div>
