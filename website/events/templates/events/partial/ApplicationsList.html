@@ -21,16 +21,15 @@
               {% elif e.status == 2 %}
               <!-- CONFIRMED Application -->
               <i class="fa-regular fa-circle-check me-2 fa-2xl" style="color: #10c001;"></i>
-              Acceptée et complete
+              Acceptée et confirmée
               {% elif e.status == 1 %}
               <!-- ACCEPTED Application -->
               <i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i>
-              Candidature acceptée,
-              confirmation non reçue
+               Acceptée, non confirmée
               {% elif e.status == 0 %}
               <!-- ENROLLED Application -->
               <i class="fa-solid fa-spinner me-2 fa-2xl"></i>
-              Candidature en cours de traitement
+              En cours de traitement
               {% elif e.status == -1 %}
               <!-- Cancel Application -->
               <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
@@ -42,7 +41,7 @@
               {% elif e.status == -3 %}
               <!-- NOT_SELECTED Application -->
               <i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i>
-              Rejetée
+              Stage complet
               {% endif %}
             </div>
           </div>
@@ -146,7 +145,7 @@
             <!-- WITHDRAWN Application -->
             <div>
               <p class="h6">
-                Ta candidature a été rejetée. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+                Le stage est déjà complet. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
               </p>
             </div>
             {% endif %}
