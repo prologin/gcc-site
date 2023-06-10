@@ -13,7 +13,7 @@ For those using Nix, everything is ready in the `flake.nix` file.
 #### Initial setup
 
 ```sh
-$ cd backend
+$ cd website
 $ poetry install
 $ poetry shell
 $ ./manage.py makemigrations
@@ -27,7 +27,7 @@ You can then go to http://localhost:8000/.
 To create a super User :
 
 ```sh
-$ cd backend/
+$ cd website/
 $ poetry shell
 $ ./manage.py shell
 >>> from django.contrib.auth import get_user_model
@@ -41,7 +41,7 @@ You can then go to http://localhost:8000/admin and login.
 #### Regular usage
 
 ```sh
-$ cd backend
+$ cd website
 $ poetry install
 $ poetry shell
 $ ./manage.py makemigrations
@@ -65,16 +65,16 @@ can use the following commands to check your code:
 
 ```sh
 $ cd docker/
-$ docker-compose -p gccsite exec backend_dev prospector --profile base
+$ docker-compose -p gccsite exec website_dev prospector --profile base
 ```
 
 #### Loading development data
 
-Some development data is provided in the `backend/fixtures/` directory. You can
+Some development data is provided in the `website/fixtures/` directory. You can
 load this data in your DB by running:
 
 ``` sh
-$ cd docker/
+$ cd website/
 $ ./manage.sh loaddata fixtures/<fixture>.json # replace <fixture> with the one you want to load
 ```
 

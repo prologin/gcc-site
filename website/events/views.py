@@ -27,23 +27,36 @@ class HomePageView(TemplateView):
                     str(form.errors),
                 )
                 return HttpResponseRedirect(reverse("events:home"))
-            
             else:
                 event = events.Event.objects.get(id=request.POST["event-id"])
                 user = User.objects.get(id=request.user.id)
 
                 address = {
-                    "city": request.POST["city"], "zip_code": request.POST["zip_code"], "country": request.POST["country"]}
-                
-                form_answer = {"tshirt": request.POST["tshirt"], "allergies": request.POST["allergies"], "diet": request.POST["diet"], "learning": request.POST["learn"],
-                            "programing": request.POST["programing"], "studies": request.POST["studies"], "association": request.POST["association"]},
+                    "street": request.POST["street_applicant"], "complement": request.POST["complement_applicant"],
+                    "city": request.POST["city_applicant"], "zip_code": request.POST["zip_code_applicant"],
+                    "country": request.POST["country_applicant"]
+                }
+
+                form_answer = {"tshirt": request.POST["tshirt"], "allergies": request.POST["allergies"],
+                               "diet": request.POST["diet"], "learning": request.POST["learn"],
+                               "programing": request.POST["programing"], "studies": request.POST["studies"],
+                               "association": request.POST["association"]},
+
+                school = {
+                    "school_level": request.POST["school_level"],
+                    "name": request.POST["name_school"], "street": request.POST["street_school"],
+                    "complement": request.POST["complement_school"], "city": request.POST["city_school"],
+                    "zip_code": request.POST["zip_code_school"], "country": request.POST["country_school"]
+                }
 
                 application = signup.Application.objects.create(
                     user=user,
                     first_name=request.POST["first_name"],
                     last_name=request.POST["last_name"],
                     dob=request.POST["dob"],
+                    phone=request.POST["phone"],
                     address=address,
+                    school=school,
                     event=event,
                     form_answer=form_answer
                 )
@@ -54,13 +67,10 @@ class HomePageView(TemplateView):
                 )
 
                 return HttpResponseRedirect(reverse("events:home"))
-        
         elif "submit-newsletter" in request.POST:
             # DO SOMETHING HERE ?
 
             return HttpResponseRedirect(reverse("events:home"))
-        
-
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
@@ -87,7 +97,6 @@ class ApplicationsReviewView(TemplateView):
         print(kwargs)
         ctx["applications"] = signup.Application.objects.get_applicants(
             kwargs['event'])
-        return ctx
         return ctx
 
 class ApplicationsView(LoginRequiredMixin, TemplateView):

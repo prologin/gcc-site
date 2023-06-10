@@ -3,7 +3,7 @@
     {% for e in  application_documents %}
     <div class="accordion-item border-1">
       <h2 class="accordion-header">
-        <button class="accordion-button bg-transparent text-reset shadow-none collapsed row secondary-button justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{forloop.counter}}" aria-expanded="false" aria-controls="accordion-{{forloop.counter}}">
+        <button class="accordion-button bg-transparent text-reset shadow-none collapsed row btn-light justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{forloop.counter}}" aria-expanded="false" aria-controls="accordion-{{forloop.counter}}">
           <div class="col row">
             <div class="col my-auto">
               <i class="fas fa-user me-2"></i>
@@ -95,7 +95,7 @@
             <div class="m-4 row">
               <p class="col-auto"> Les documents suivant seront à fournir le 1er jour, si vous n’avez pas d’imprimante, des exemplaires seront disponnible sur place.</p>
               <!-- TODO : DOCUMENT GENERATOR -->
-              <button class="btn primary-button py-2 col-auto">Télécharger les documents</button>
+              <button class="btn btn-primary py-2 col-auto">Télécharger les documents</button>
             </div>
             <div class="m-4">
               <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
@@ -120,6 +120,10 @@
         </div>
       </div>
     </div>
+    {% empty %}
+    <h2> Vous n'avez pas de candidatures.
+      <a href="/#event-list">Tout nos stages ici !</a>
+    </h2>
     {% endfor %}
   </div>
 </div>

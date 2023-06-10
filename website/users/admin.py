@@ -31,7 +31,6 @@ class UserAdmin(UpstreamUserAdmin):
                 ),
             },
         ),
-        ("Dates importantes", {"fields": ("last_login", "date_joined")}),
     )
 
     add_fieldsets = (
