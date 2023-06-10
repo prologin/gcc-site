@@ -106,7 +106,7 @@
             <!-- ACCEPTED Application -->
             <div>
               <p class="h4">
-                Félicitation, tu as étée sélectionnée !
+                Félicitations, tu as été sélectionnée !
                 Il faut maintenant que tu valides ta candidature pour confirmer ta venue
               </p>
               
@@ -131,21 +131,21 @@
             <!-- CANCELLED Application -->
             <div>
               <p class="h6">
-                Ta candidature à étée annulée par les organisateurs. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+                Ta candidature a été annulée par les organisateurs. <a href="/#event-list">Inscris-toi à d'autres stages ici</a>
               </p>
             </div>
             {% elif e.status == -2 %}
             <!-- WITHDRAWN Application -->
             <div>
               <p class="h6">
-                Tu as annulé ta candidature. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+                Tu as annulé ta candidature. <a href="/#event-list">Inscris-toi à d'autres stages ici</a>
               </p>
             </div>
             {% elif e.status == -3 %}
             <!-- WITHDRAWN Application -->
             <div>
               <p class="h6">
-                Le stage est déjà complet. <a href="/#event-list">Inscrit toi à d'autres stages ici</a>
+                Le stage est déjà complet. <a href="/#event-list">Inscris-toi à d'autres stages ici</a>
               </p>
             </div>
             {% endif %}
@@ -154,8 +154,8 @@
       </div>
     </div>
     {% empty %}
-    <h2> Vous n'avez pas de candidatures.
-      <a href="/#event-list">Tout nos stages ici !</a>
+    <h2> Vous n'avez pas de candidature.
+      <a href="/#event-list">Tous nos stages ici !</a>
     </h2>
     {% endfor %}
   </div>
