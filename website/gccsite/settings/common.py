@@ -187,6 +187,8 @@ EMAIL_SUBJECT_PREFIX = env.get_string(
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATICFILES_DIRS = (BASE_DIR / "static/",)
+
 AWS_ACCESS_KEY_ID = env.get_secret("S3_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY = env.get_secret("S3_SECRET_KEY")
 AWS_STORAGE_BUCKET_NAME = env.get_string("S3_BUCKET")
