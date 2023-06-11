@@ -67,11 +67,6 @@ INSTALLED_APPS = [
     "gccsite.storage",
 ]
 
-if DEBUG:
-    INSTALLED_APPS += [
-        "debug_toolbar",
-    ]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -189,20 +184,8 @@ EMAIL_SUBJECT_PREFIX = env.get_string(
 )
 
 
-# Django debug toolbar
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": "gccsite.settings.debug.show_toolbar",
-    "SHOW_COLLAPSED": True,
-}
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-COLLECTFAST_DEBUG = DEBUG
-
-COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 AWS_ACCESS_KEY_ID = env.get_secret("S3_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY = env.get_secret("S3_SECRET_KEY")
