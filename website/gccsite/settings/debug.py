@@ -7,7 +7,6 @@ from gccsite import env
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.get_bool("DJANGO_DEBUG", False)
 
-
 def show_toolbar(request):
     from django.conf import settings  # pylint:disable=import-outside-toplevel
 
