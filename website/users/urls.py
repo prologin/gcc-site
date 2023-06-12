@@ -14,12 +14,12 @@ urlpatterns = [
     path(
         "update-user-info",
         views.UserEditView.as_view(),
-        name = "update_user_info"
+        name="update_user_info",
     ),
     path(
         "update-user-password",
         views.UserPasswordChangeView.as_view(),
-        name = "update_user_password"
+        name="update_user_password",
     ),
     path("login", views.LoginView.as_view(), name="login"),
     path("logout", LogoutView.as_view(), name="logout"),

@@ -31,5 +31,3 @@ echo "accessKey1" > ./secrets/s3-access
 echo "verySecretKey1" > ./secrets/s3-secret
 
 echo "BOAGOnqH0OyR086rYF8oT6VUcCo1tNYITWlRTyyOU5BzJpLjV6VWBom3boADe4Z0" > ./secrets/documents-generator-client-id
-
-

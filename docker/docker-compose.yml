@@ -160,4 +160,3 @@ secrets:
     file: ./secrets/documents-generator-username
   documents-generator-password:
     file: ./secrets/documents-generator-password
-
