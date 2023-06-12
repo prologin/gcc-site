@@ -13,10 +13,10 @@ For those using Nix, everything is ready in the `flake.nix` file.
 #### Initial setup
 
 ```sh
-$ pushd backend && poetry install && popd
+$ pushd website && poetry install && popd
 $ cd docker/
 $ ./gen_secrets.sh
-$ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p gccsite up --build
+$ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p gccsite up --build # You can use the flag -d if you to detach the containers from your shell
 ```
 
 You can then go to http://localhost:8000/.
