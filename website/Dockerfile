@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     POETRY_VIRTUALENVS_CREATE=false \
     VENV_PATH="/opt/venv" \
     PATH="/opt/venv/bin:$PATH" \
-    DJANGO_SETTINGS_MODULE=gccsite.settings
+    DJANGO_SETTINGS_MODULE=gccsite.settings.dev
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

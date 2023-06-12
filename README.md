@@ -2,9 +2,9 @@
 
 ### Setup a development environment
 
-Install `poetry` using your distribution's documentation.
+Install `docker` and `docker-compose` using your distribution's documentation.
 
-You will also need `nodejs`, `yarn` and `pre-commit`. Those are not
+You will also need `poetry`, `nodejs`, `yarn` and `pre-commit`. Those are not
 strictly needed to develop on this project, but they will become very handy for
 things like adding dependencies, or pre-commit hooks.
 
@@ -13,12 +13,10 @@ For those using Nix, everything is ready in the `flake.nix` file.
 #### Initial setup
 
 ```sh
-$ cd website
-$ poetry install
-$ poetry shell
-$ ./manage.py makemigrations
-$ ./manage.py migrate
-$ ./manage.py runserver
+$ pushd website && poetry install && popd
+$ cd docker/
+$ ./gen_secrets.sh
+$ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p gccsite up --build # You can use the flag -d if you to detach the containers from your shell
 ```
 
 You can then go to http://localhost:8000/.
@@ -27,13 +25,9 @@ You can then go to http://localhost:8000/.
 To create a super User :
 
 ```sh
-$ cd website/
-$ poetry shell
-$ ./manage.py shell
->>> from django.contrib.auth import get_user_model
->>> User = get_user_model();
->>> User.objects.create_superuser('email@prologin.org', 'password')
->>> exit
+$ cd docker/
+$ ./manage.sh createsuperuser
+# Then follow the given instructions.
 ```
 
 You can then go to http://localhost:8000/admin and login.
@@ -41,12 +35,8 @@ You can then go to http://localhost:8000/admin and login.
 #### Regular usage
 
 ```sh
-$ cd website
-$ poetry install
-$ poetry shell
-$ ./manage.py makemigrations
-$ ./manage.py migrate
-$ ./manage.py runserver
+$ cd docker/
+$ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p ndf up --build
 ```
 
 #### Formatting
@@ -74,7 +64,7 @@ Some development data is provided in the `website/fixtures/` directory. You can
 load this data in your DB by running:
 
 ``` sh
-$ cd website/
+$ cd docker/
 $ ./manage.sh loaddata fixtures/<fixture>.json # replace <fixture> with the one you want to load
 ```
 

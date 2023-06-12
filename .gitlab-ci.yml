@@ -30,19 +30,11 @@ container_scanning:
   stage: security
   interruptible: true
   needs:
-    - backend
+    - website
   variables:
     DOCKER_SERVICE: localhost
-    DOCKERFILE_PATH: backend/Dockerfile
-    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/backend/$CI_COMMIT_REF_SLUG
-
-container_scanning_frontend:
-  extends: container_scanning
-  needs:
-    - frontend
-  variables:
-    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/frontend/$CI_COMMIT_REF_SLUG
-    DOCKERFILE_PATH: frontend/Dockerfile
+    DOCKERFILE_PATH: website/Dockerfile
+    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG
 
 code_quality:
   stage: qa
@@ -57,7 +49,7 @@ license_scanning:
       apt-get update
       apt-get install -y --no-install-recommends python3 python3-venv
       curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python3 -
-      pushd backend
+      pushd website
       poetry export --format requirements.txt > requirements.txt
       popd
   variables:
@@ -92,41 +84,24 @@ license_scanning:
         --import-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME:buildcache \
         --export-cache type=registry,ref=$CI_REGISTRY_IMAGE/$CI_JOB_NAME:buildcache,mode=max
 
-backend:
+website:
   extends: .build
 
-frontend:
-  extends: .build
-
-lint:backend:
+lint:website:
   stage: qa
   interruptible: true
   needs:
-    - backend
+    - website
   image:
-    name: $CI_REGISTRY_IMAGE/backend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    name: $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
     entrypoint: [""]
   before_script:
-    - cd backend
+    - cd website
   script:
     - prospector --profile ci > prospector-output.xml
   artifacts:
     reports:
-      junit: backend/prospector-output.xml
-  allow_failure: true
-
-lint:frontend:
-  stage: qa
-  interruptible: true
-  needs:
-    - frontend
-  image:
-    name: $CI_REGISTRY_IMAGE/frontend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
-    entrypoint: [""]
-  before_script:
-    - cd frontend
-  script:
-    - yarn lint
+      junit: website/prospector-output.xml
   allow_failure: true
 
 lint:shellcheck:
@@ -147,7 +122,7 @@ format:black:
     name: python:3.10-slim
     entrypoint: [""]
   before_script:
-    - cd backend
+    - cd website
     - pip3 install poetry
     - poetry install || true
   script:
@@ -160,8 +135,7 @@ test:
   stage: qa
   interruptible: true
   needs:
-    - backend
-    - frontend
+    - website
   image:
     name: docker/compose:1.29.2
     entrypoint: [""]
@@ -172,25 +146,22 @@ test:
     DOCKER_TLS_CERTDIR: ""
   artifacts:
     reports:
-      junit: backend/test-reports/*.xml
+      junit: website/test-reports/*.xml
     paths:
       - artifacts/
-      - backend/artifacts/
-      - frontend/artifacts/
+      - website/artifacts
     when: always
   coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%)$/'
   before_script:
     - apk update && apk add openssl
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - mkdir artifacts backend/artifacts frontend/artifacts
-    - chmod a+rwx artifacts backend/artifacts frontend/artifacts
+    - mkdir artifacts website/artifacts
+    - chmod a+rwx artifacts website/artifacts
   script:
     - cd docker/
     - ./gen_secrets.sh
-    - docker pull $CI_REGISTRY_IMAGE/backend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
-    - docker tag $CI_REGISTRY_IMAGE/backend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA backend_dev
-    - docker pull $CI_REGISTRY_IMAGE/frontend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
-    - docker tag $CI_REGISTRY_IMAGE/frontend/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA frontend_dev
+    - docker pull $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA backend_dev
     - docker-compose pull --ignore-pull-failures
     - export COMPOSE_PARALLEL_LIMIT=1000
     - docker network prune --force

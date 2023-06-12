@@ -6,7 +6,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import RedirectURLMixin
+from django.contrib.auth.views import PasswordChangeView, RedirectURLMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import resolve_url
 from django.urls import reverse, reverse_lazy
@@ -15,10 +15,9 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import CreateView, TemplateView, DeleteView
+from django.views.generic import CreateView, DeleteView, TemplateView
 from django.views.generic.edit import UpdateView
 
-from django.contrib.auth.views import PasswordChangeView
 from .forms import (
     AuthLoginForm,
     AuthRegisterForm,
@@ -35,21 +34,22 @@ TAG_PERSONAL_INFO = "personal_info"
 TAG_EMAIL = "email"
 TAG_PWD = "pwd"
 
+
 class UserDeleteView(DeleteView):
     model = User
-    http_method_names = ['POST']
+    http_method_names = ["POST"]
     # succes_url = ...
 
     def get_object(self, *args, **kwargs):
-        return User.objects.get(
-            id = self.request.user.id
-        )
+        return User.objects.get(id=self.request.user.id)
+
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     success_url = reverse_lazy("users:account_information")
 
+
 class UserEditView(LoginRequiredMixin, UpdateView):
-    http_method_names = ('post',)
+    http_method_names = ("post",)
     model = User
     success_url = reverse_lazy("users:account_information")
     fields = (
@@ -58,11 +58,7 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     )
 
     def get_object(self, *args, **kwargs):
-        return User.objects.get(
-            id = self.request.user.id
-        )
-
-
+        return User.objects.get(id=self.request.user.id)
 
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
