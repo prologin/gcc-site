@@ -33,15 +33,15 @@
               {% elif e.status == -1 %}
               <!-- Cancel Application -->
               <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
-              Annulé par les organisateurs
+              Annulée par les organisateurs
               {% elif e.status == -2 %}
               <!-- Cancel Application -->
               <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
-              Désitée
+              Désistée
               {% elif e.status == -3 %}
               <!-- NOT_SELECTED Application -->
               <i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i>
-              Stage complet
+              Candidature non retenue
               {% endif %}
             </div>
           </div>
@@ -98,7 +98,7 @@
               </div>
               <div class="m-4">
                 <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
-                <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <strong>{{ CONTACT_EMAIL }}</strong>
+                <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <strong>{{ CONTACT_EMAIL }}.</strong>
               </div>
             </div>
             {% elif e.status == 1 %}
@@ -106,16 +106,16 @@
             <div>
               <p class="h4">
                 Félicitations, tu as été sélectionnée !
-                Il faut maintenant que tu valides ta candidature pour confirmer ta venue
+                Il faut maintenant que tu valides ta candidature pour confirmer ta venue.
               </p>
               
               <div class="btn-group d-none d-sm-block text-center" role="group">
                 <!-- TODO: add back -->
                 <button type="button" class="btn btn-primary">
-                  Confirmer sa venue
+                  Confirmer ma venue
                 </button>
                 <button type="button" class="btn btn-light">
-                  Annuler sa candidature
+                  Annuler ma candidature
                 </button>
               </div>
             </div>
@@ -123,7 +123,7 @@
             <!-- PENDING Application -->
             <div>
               <p class="h6">
-                Reviens plus tard pour voir si tu es sélectionnée !
+                Nous avons bien reçu ta candidature. Reviens plus tard pour voir si tu es sélectionnée !
               </p>
             </div>
             {% elif e.status == -1 %}

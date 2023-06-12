@@ -68,7 +68,7 @@ class HomePageView(TemplateView):
 
                 return HttpResponseRedirect(reverse("events:home"))
         elif "submit-newsletter" in request.POST:
-            # DO SOMETHING HERE ?
+            # TODO : DO SOMETHING HERE ?
 
             return HttpResponseRedirect(reverse("events:home"))
 
