@@ -11,23 +11,8 @@ getsecret() {
     fi
 }
 
-configure_s3_bucket() {
-    AWS_ACCESS_KEY_ID="$(getsecret S3_ACCESS_KEY)"
-    AWS_SECRET_ACCESS_KEY="$(getsecret S3_SECRET_KEY)"
-    export AWS_ACCESS_KEY_ID
-    export AWS_SECRET_ACCESS_KEY
-    aws --endpoint-url="${S3_ENDPOINT}" s3api create-bucket \
-        --bucket="${S3_BUCKET}" --acl "private"
-    aws --endpoint-url="${S3_ENDPOINT}" s3api put-bucket-cors \
-        --bucket="${S3_BUCKET}" \
-        --cors-configuration="file://${CORS_CONFIG_PATH:-/app/cors.json}"
-    unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
-}
 
 init() {
-    if [ -z "${SKIP_S3_CONFIGURATION}" ]; then
-        configure_s3_bucket
-    fi
     ./manage.py collectstatic --noinput
     ./manage.py migrate
 }
