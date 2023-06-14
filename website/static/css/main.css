@@ -340,7 +340,6 @@ button.dropdown-item {
   border-radius: var(--global-border-radius) !important;
   border: none;
 }
-
 .collapsed > .when-open,
 .not-collapsed > .when-closed {
   display: none;

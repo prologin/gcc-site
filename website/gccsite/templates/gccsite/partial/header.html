@@ -9,7 +9,38 @@
     <!-- TODO : ADD LINK + LOGOUT SYSTEM -->
 
     <div class="dropdown-center">
-      <button class="btn secondary-button py-2 px-4" data-bs-toggle="dropdown">
+      {% if user.is_staff%}
+      <button class="btn secondary-button py-2 px-4" data-bs-toggle="dropdown" data-bs-target="#dropdown-admin">
+        <div class="row">
+          <div class="col">
+            <i class="fa-solid fa-star"></i>
+            Admin
+          </div>
+          <div class="col-2">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </button>
+
+      <ul class="dropdown-menu dropdown-menu-lg-start" id="dropdown-admin">
+        <li class="dropdown-header">
+          Panel Admin
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin">
+            Admin django
+          </a>
+          <a class="dropdown-item" href="/review">
+            Review candidatures
+          </a>
+        </li>
+      </ul>
+      {% endif %}
+
+      <button class="btn secondary-button py-2 px-4" data-bs-target="#dropdown-user" data-bs-toggle="dropdown">
         <div class="row">
           <div class="col">
             <i class="fas fa-user me-2"></i>{{ user.first_name }} {{ user.last_name }}
@@ -20,7 +51,7 @@
         </div>
       </button>
 
-      <ul class="dropdown-menu dropdown-menu-lg-end">
+      <ul class="dropdown-menu dropdown-menu-lg-end" id="dropdown-user">
         <li>
           <a class="dropdown-header">
             <h2>{{ user.first_name }} {{ user.last_name }}</h2>
