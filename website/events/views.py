@@ -112,7 +112,7 @@ class ApplicationsReviewView(TemplateView):
 
 
 class ApplicationsView(LoginRequiredMixin, TemplateView):
-    template_name = "events/mes-candidatures.html"
+    template_name = "events/my_applications.html"
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
