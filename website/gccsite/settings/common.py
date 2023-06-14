@@ -193,4 +193,4 @@ STATIC_URL = "/static/" # Django will search for /src/
 STATICFILES_DIRS = [
     path.join(BASE_DIR, "static/"), # Django will search for /src/
 ]
-STATIC_ROOT = BASE_DIR / "static"# Basic configuration when using manage.py collectstatic
+STATIC_ROOT = BASE_DIR / "staticfiles" # Basic configuration when using manage.py collectstatic
