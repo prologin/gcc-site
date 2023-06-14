@@ -51,6 +51,7 @@
         <div class="accordion-body">
           <div class="accordion-body">
             {% if e.status == 3 %}
+            <!-- ENDED Application -->
             <!-- TODO: Add field in back to have the good link of flickr -->
             <p class="h6">Le stage est terminé, bravo à toi pour ta participation !<br>
             Tu peux retrouver les photos du stags sur notre <a href="https://www.flickr.com/photos/prologin/">flickr</a></p>
@@ -142,7 +143,7 @@
               </p>
             </div>
             {% elif e.status == -3 %}
-            <!-- WITHDRAWN Application -->
+            <!-- REJECTED Application -->
             <div>
               <p class="h6">
                 Le stage est déjà complet. <a href="/#event-list">Inscris-toi à d'autres stages ici.</a>
