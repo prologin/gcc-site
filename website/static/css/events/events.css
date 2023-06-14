@@ -1,0 +1,37 @@
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+.eventInfo-line {
+    height: 3px;
+    width: 100%;
+    border-radius: 40%;
+  }
+
+dl {
+    display: grid;
+    grid-template-columns: 33% auto;
+}
+
+dt {
+    grid-column: 1;
+    padding: 10px 0;
+}
+
+dd {
+    grid-column: 2;
+    padding: 10px 0;
+}
+/* ApplicationsView */
+.candidatures-background {
+    height: 100%;
+    background-attachment: fixed;
+    background-image: url("./../../img/candidatures_bg.svg");
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

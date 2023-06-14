@@ -15,11 +15,14 @@
   </div>
 
   <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto btn-group-vertical" role="group">
-    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary">S'inscrire à ce stage</button>
+    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">S'inscrire à ce stage</button>
     <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">Plus d'informations</button>
   </div>
 
   <!-- Modal -->
+  <div class="modal fade" id="inscriptionEventModal-{{id}}" tabindex="-1" aria-labelledby="inscriptionEventModalLabel" aria-hidden="true">
+    {% include "events/partial/EventInscription.html" with event=event id=id color=color%}
+  </div>
   <div class="modal" id="informationEventModal-{{id}}" tabindex="-1" aria-labelledby="informationEventModalLabel" aria-hidden="true">
     {% include "events/partial/EventInfo.html" with event=event id=id%}
   </div>

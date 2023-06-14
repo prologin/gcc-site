@@ -37,13 +37,13 @@ class EventDocumentInlineAdmin(admin.TabularInline):
 
 @admin.register(models.Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("name", "center", "start_date", "end_date")
-    list_filter = ("center",)
+    list_display = ("name", "center", "year", "start_date", "end_date")
+    list_filter = ("center", "year")
     ordering = ("-start_date",)
     inlines = (EventDocumentInlineAdmin,)
 
     fieldsets = (
-        (None, {"fields": ("name", "center")}),
+        (None, {"fields": ("name", "center", "year")}),
         (
             "Dates de l'évènement",
             {
@@ -55,19 +55,10 @@ class EventAdmin(admin.ModelAdmin):
             {"fields": ("signup_start_date", "signup_end_date")},
         ),
         (
-            "Formulaires d'inscription",
-            {"fields": ("form",)},
-        ),
-        (
             "Informations aux participantes",
             {"fields": ("description", "notes")},
         ),
     )
-
-
-@admin.register(models.Form)
-class FormAdmin(admin.ModelAdmin):
-    search_fields = ("name",)
 
 
 @admin.register(models.Application)
@@ -97,10 +88,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_filter = (
         "status",
         "event",
-        "labels",
     )
-
-    filter_horizontal = ("labels",)
 
     fieldsets = (
         (None, {"fields": ("user", "event")}),
@@ -109,9 +97,13 @@ class ApplicationAdmin(admin.ModelAdmin):
             {"fields": ("first_name", "last_name", "dob", "form_answer")},
         ),
         (
+            "Responsable légal",
+            {"fields": ("phone", "address")},
+        ),
+        (
             "Sélection",
             {
-                "fields": ("status", "labels"),
+                "fields": ("status",),
             },
         ),
     )
