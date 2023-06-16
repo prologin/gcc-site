@@ -17,5 +17,9 @@ urlpatterns = [
         views.ApplicationsReviewView.as_view(),
         name="application_review",
     ),
-    path("my-applications", views.ApplicationsView.as_view(), name="my_applications"),
+    path(
+        "my-applications",
+        views.ApplicationsView.as_view(),
+        name="my_applications",
+    ),
 ]

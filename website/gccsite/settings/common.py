@@ -1,5 +1,6 @@
-from pathlib import Path
 from os import path
+from pathlib import Path
+
 from gccsite import env
 
 from .debug import DEBUG
@@ -189,8 +190,10 @@ EMAIL_SUBJECT_PREFIX = env.get_string(
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = "/static/" # Django will search for /src/
+STATIC_URL = "/static/"  # Django will search for /src/
 STATICFILES_DIRS = [
-    path.join(BASE_DIR, "static/"), # Django will search for /src/
+    path.join(BASE_DIR, "static/"),  # Django will search for /src/
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles" # Basic configuration when using manage.py collectstatic
+STATIC_ROOT = (
+    BASE_DIR / "staticfiles"
+)  # Basic configuration when using manage.py collectstatic
