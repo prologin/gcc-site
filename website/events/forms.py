@@ -37,12 +37,12 @@ class EventSignupForm(forms.Form):
     # Info sur la participante
     first_name = forms.CharField(
         label="Prénom:",
-        max_length=256,
+        max_length=255,
     )
 
     last_name = forms.CharField(
         label="Nom de famille:",
-        max_length=256,
+        max_length=255,
     )
 
     dob = forms.DateField(
@@ -124,7 +124,7 @@ class EventSignupForm(forms.Form):
         widget=forms.TextInput(
             attrs={"placeholder": "Nom de l'établissement scolaire"}
         ),
-        max_length=350,
+        max_length=255,
     )
 
     street_school = forms.CharField(
@@ -170,39 +170,38 @@ class EventSignupForm(forms.Form):
     # Info supplémentaires sur la participante
     allergies = forms.CharField(
         label="La participante a t'elle des allergies ?",
-        max_length=256,
+        widget=forms.Textarea(attrs={"rows":3, "cols":20})
     )
 
     diet = forms.CharField(
         label="La participante a t'elle un régime alimentaire particulier ?",
-        max_length=256,
+        widget=forms.Textarea(attrs={"rows":3, "cols":20})
     )
 
     tshirt = forms.CharField(
         label="Quelle est la taille de t-shirt de la participante ?",
         widget=forms.Select(choices=TSHIRT),
         help_text="Un t-shirt sera donné aux participantes pendant le stage",
-        max_length=256,
     )
 
     learn = forms.CharField(
         label="Y-a-t'il quelque chose en particulier que la participante espère apprendre pendant le stage ?",
-        max_length=256,
+        widget=forms.Textarea(attrs={"rows":3, "cols":20})
     )
 
     programing = forms.CharField(
         label="La participante a t'elle déjà programmé, si oui, quand est-ce qu'elle a codé pour la première fois et quels outils ou langages de programmation a t'elle essayé ?",
-        max_length=256,
+        widget=forms.Textarea(attrs={"rows":3, "cols":20})
     )
 
     studies = forms.CharField(
         label="Y a-t-il des études en informatique qui intéresseraient la participante ? Si oui, pourrais-t'elle préciser lesquelles ?",
-        max_length=256,
+        widget=forms.Textarea(attrs={"rows":3, "cols":20})
     )
 
     association = forms.CharField(
         label="Comment la participante a connu l'association et les stages ?",
-        max_length=256,
+        widget=forms.Textarea(attrs={"rows":3, "cols":20})
     )
 
     def __init__(self, *args, **kwargs):
