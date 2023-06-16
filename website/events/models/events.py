@@ -78,7 +78,9 @@ class EventManager(models.Manager):
         )
 
     def get_visible_events(self):
-        return self.filter()
+        return self.filter(
+            signup_start_date__lte=timezone.now()
+)
 
 
 class Event(models.Model):

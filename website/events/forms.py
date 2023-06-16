@@ -225,7 +225,7 @@ class EventSignupForm(forms.Form):
                     Button(
                         name="next",
                         value="Suivant",
-                        css_class="my-4 btn primary-button btn-secondary btn-block",
+                        css_class="my-4 btn btn-primary btn-block",
                     ),
                     css_class="mt-4 p-0",
                 ),
@@ -246,14 +246,14 @@ class EventSignupForm(forms.Form):
                             Button(
                                 name="back",
                                 value="Retour",
-                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                                css_class="my-4 btn btn-light btn-block",
                             ),
                         ),
                         Column(
                             Button(
                                 name="next",
                                 value="Suivant",
-                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                                css_class="my-4 btn btn-primary btn-block",
                             ),
                         ),
                     ),
@@ -278,14 +278,14 @@ class EventSignupForm(forms.Form):
                             Button(
                                 name="back",
                                 value="Retour",
-                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                                css_class="my-4 btn btn-light btn-block",
                             ),
                         ),
                         Column(
                             Button(
                                 name="next",
                                 value="Suivant",
-                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                                css_class="my-4 btn btn-primary btn-block",
                             ),
                         ),
                     ),
@@ -307,14 +307,14 @@ class EventSignupForm(forms.Form):
                             Button(
                                 name="back",
                                 value="Retour",
-                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                                css_class="my-4 btn btn-light btn-block",
                             )
                         ),
                         Column(
                             Submit(
                                 name="submit-application",
                                 value="Candidater pour ce stage",
-                                css_class="my-4 btn primary-button btn-secondary btn-block",
+                                css_class="my-4 btn btn-primary btn-block",
                             )
                         ),
                     ),
