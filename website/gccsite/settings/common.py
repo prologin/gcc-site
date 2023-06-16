@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from os import path
 from gccsite import env
 
 from .debug import DEBUG
@@ -189,28 +189,8 @@ EMAIL_SUBJECT_PREFIX = env.get_string(
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATICFILES_DIRS = (BASE_DIR / "static/",)
-
-AWS_ACCESS_KEY_ID = env.get_secret("S3_ACCESS_KEY")
-AWS_SECRET_ACCESS_KEY = env.get_secret("S3_SECRET_KEY")
-AWS_STORAGE_BUCKET_NAME = env.get_string("S3_BUCKET")
-AWS_S3_ENDPOINT_URL = env.get_string("S3_ENDPOINT")
-AWS_S3_CUSTOM_DOMAIN = env.get_string("S3_CUSTOM_DOMAIN", "") or None
-AWS_S3_URL_PROTOCOL = (
-    "https:" if env.get_bool("S3_SECURE_URLS", True) else "http:"
-)
-
-AWS_S3_BASE_URL = (f"{AWS_S3_URL_PROTOCOL}//") + (
-    AWS_S3_CUSTOM_DOMAIN or f"localhost:8020/{AWS_STORAGE_BUCKET_NAME}"
-)
-
-AWS_STATIC_LOCATION = "static"
-STATIC_URL = f"{AWS_S3_BASE_URL}/{AWS_STATIC_LOCATION}/"
-STATICFILES_STORAGE = "gccsite.storage.backends.StaticStorage"
-
-AWS_PUBLIC_MEDIA_LOCATION = "media/public"
-MEDIA_URL = f"{AWS_S3_BASE_URL}/{AWS_PUBLIC_MEDIA_LOCATION}/"
-DEFAULT_FILE_STORAGE = "gccsite.storage.backends.PublicMediaStorage"
-
-AWS_PRIVATE_MEDIA_LOCATION = "media/private"
-PRIVATE_FILE_STORAGE = "gccsite.storage.backends.PrivateMediaStorage"
+STATIC_URL = "/static/" # Django will search for /src/
+STATICFILES_DIRS = [
+    path.join(BASE_DIR, "static/"), # Django will search for /src/
+]
+STATIC_ROOT = BASE_DIR / "staticfiles" # Basic configuration when using manage.py collectstatic
