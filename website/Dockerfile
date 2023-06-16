@@ -24,7 +24,7 @@ FROM base as builder
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        gcc python-dev bison
+        gcc python3-dev bison
 
 RUN --mount=type=bind,target=./pyproject.toml,src=./pyproject.toml \
     --mount=type=bind,target=./poetry.lock,src=./poetry.lock \
