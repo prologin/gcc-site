@@ -2,7 +2,10 @@ import datetime
 from urllib.parse import urlencode
 
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+)
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -144,17 +147,18 @@ class HomePageView(ListView):
         return ctx
 
 
-class ReviewIndexView(TemplateView):
+class ReviewIndexView(PermissionRequiredMixin, TemplateView):
+    permission_required = "users.can_view_applications"
     template_name = "events/application/index.html"
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx["open_events"] = events.Event.objects.get_open_events()
         ctx["events"] = events.Event.objects.get_visible_events()
         return ctx
 
 
 class ApplicationsReviewView(TemplateView):
+    permission_required = "users.can_view_applications"
     template_name = "events/application/review.html"
 
     def get_context_data(self, *args, **kwargs):
