@@ -44,6 +44,12 @@ class Application(models.Model):
         related_name="applications",
     )
 
+    status = models.SmallIntegerField(
+        choices=SelectionStatus.choices,
+        verbose_name=_("Statut de la candidature"),
+        default=0,
+    )
+
     user = models.ForeignKey(
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
@@ -86,11 +92,7 @@ class Application(models.Model):
         verbose_name=_("Réponse de formulaire"), default=dict
     )
 
-    status = models.SmallIntegerField(
-        choices=SelectionStatus.choices,
-        verbose_name=_("Statut de la candidature"),
-        default=0,
-    )
+    notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
 
     created_at = models.DateTimeField(
         verbose_name=_("Date d'inscription"),
@@ -98,32 +100,6 @@ class Application(models.Model):
     )
 
     objects = ApplicationManager()
-
-    @cached_property
-    def participations_count(self):
-        applicants = Application.objects.filter(event=self.event)
-        return sum(
-            (applicant.status == SelectionStatus.CONFIRMED.value)
-            for applicant in applicants
-            if (
-                applicant.last_name == self.last_name
-                and applicant.first_name == self.first_name
-            )
-        )
-
-    objects = ApplicationManager()
-
-    @cached_property
-    def participations_count(self):
-        applicants = Application.objects.filter(event=self.event)
-        return sum(
-            (applicant.status == SelectionStatus.CONFIRMED.value)
-            for applicant in applicants
-            if (
-                applicant.last_name == self.last_name
-                and applicant.first_name == self.first_name
-            )
-        )
 
     class Meta:
         verbose_name = _("candidatures")

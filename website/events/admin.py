@@ -111,7 +111,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         (
             "Sélection",
             {
-                "fields": ("status",),
+                "fields": ("status", "notes",),
             },
         ),
     )
