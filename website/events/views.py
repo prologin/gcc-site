@@ -67,18 +67,6 @@ class HomePageView(ListView):
                     "country": request.POST["country_applicant_resp"],
                 }
 
-                form_answer = (
-                    {
-                        "tshirt": request.POST["tshirt"],
-                        "allergies": request.POST["allergies"],
-                        "diet": request.POST["diet"],
-                        "learning": request.POST["learn"],
-                        "programing": request.POST["programing"],
-                        "studies": request.POST["studies"],
-                        "association": request.POST["association"],
-                    },
-                )
-
                 school = {
                     "school_level": request.POST["school_level"],
                     "name": request.POST["name_school"],
@@ -88,6 +76,22 @@ class HomePageView(ListView):
                     "zip_code": request.POST["zip_code_school"],
                     "country": request.POST["country_school"],
                 }
+
+
+                form_answer = (
+                    {
+                        "tshirt": form.cleaned_data["tshirt"],
+                        "allergies": form.cleaned_data["allergies"],
+                        "diet": form.cleaned_data["diet"],
+                        "learning": form.cleaned_data["learn"],
+                        "programing": form.cleaned_data["programing"],
+                        "studies": form.cleaned_data["studies"],
+                        "association": form.cleaned_data["association"],
+                    },
+                )
+
+
+                school_level = form.cleaned_data["school_level"]
 
                 application = signup.Application.objects.create(
                     user=user,
