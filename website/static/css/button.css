@@ -82,3 +82,11 @@
 .btn-light:hover, .btn-light:focus {
     text-decoration: underline;
 }
+
+.pagination {
+    --bs-pagination-color: var(--main-dark-color);
+    --bs-pagination-hover-color: var(--main-hover-color);
+    --bs-pagination-focus-color: var(--main-dark-color);
+    --bs-pagination-active-bg: var(--main-dark-color);
+    --bs-pagination-active-border-color: var(--main-dark-color);
+}

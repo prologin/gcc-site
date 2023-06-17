@@ -6,15 +6,20 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView
 
+from django.core.paginator import Paginator
+from django.views.generic import ListView
+
 from users.models import User
 
 from .forms import EventSignupForm
 from .models import events, signup
 
 
-class HomePageView(TemplateView):
+class HomePageView(ListView):
+    model = events.Event
     template_name = "events/home.html"
     form_class = EventSignupForm
+    paginate_by = 5
 
     def post(self, request, *args, **kwargs):
         if "submit-application" in request.POST:
@@ -84,7 +89,19 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx["open_events"] = events.Event.objects.get_open_events()
+        p = Paginator(events.Event.objects.get_open_events(), self.paginate_by)
+
+        page = ctx['page_obj'].number
+
+        try:
+            events_list = p.page(page)
+        except PageNotAnInteger:
+            events_list = p.page(1)
+        except EmptyPage:
+            events_list = p.page(p.num_pages)
+
+        ctx['paginator'] = p
+        ctx['open_events'] = events_list
         ctx["form"] = EventSignupForm
         return ctx
 
