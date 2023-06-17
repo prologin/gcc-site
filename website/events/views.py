@@ -2,12 +2,10 @@ from urllib.parse import urlencode
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import TemplateView
-
-from django.core.paginator import Paginator
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from users.models import User
 
@@ -91,7 +89,7 @@ class HomePageView(ListView):
         ctx = super().get_context_data(*args, **kwargs)
         p = Paginator(events.Event.objects.get_open_events(), self.paginate_by)
 
-        page = ctx['page_obj'].number
+        page = ctx["page_obj"].number
 
         try:
             events_list = p.page(page)
@@ -100,8 +98,8 @@ class HomePageView(ListView):
         except EmptyPage:
             events_list = p.page(p.num_pages)
 
-        ctx['paginator'] = p
-        ctx['open_events'] = events_list
+        ctx["paginator"] = p
+        ctx["open_events"] = events_list
         ctx["form"] = EventSignupForm
         return ctx
 
