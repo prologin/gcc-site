@@ -67,7 +67,6 @@ INSTALLED_APPS = [
     "events",
     "users",
     "pages",
-    "gccsite.storage",
 ]
 
 MIDDLEWARE = [
