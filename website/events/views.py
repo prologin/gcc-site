@@ -11,7 +11,7 @@ from users.models import User
 
 from .forms import EventSignupForm
 from .models import events, signup
-
+from partners.models import Partner
 
 class HomePageView(ListView):
     model = events.Event
@@ -101,6 +101,7 @@ class HomePageView(ListView):
         ctx["paginator"] = p
         ctx["open_events"] = events_list
         ctx["form"] = EventSignupForm
+        ctx["partners"] = Partner.objects.filter()
         return ctx
 
 

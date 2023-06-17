@@ -1,13 +1,14 @@
 from django.db import models
-
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 
 class Partner(models.Model):
 
     STATUS_CHOICES = (
-        ('public', 'Public'),
-        ('private', 'Private'),
+        ('avant', 'Avant'),
+        ('financement', 'Financement'),
+        ('accueil','Accueil'),
     )
 
     name = models.CharField(
@@ -29,9 +30,10 @@ class Partner(models.Model):
 
 
     def upload_to(instance, filename):
-    # Define the custom folder path
-        return 'static/img/{}'.format(filename)
+        return 'static/img/sponsors/{}'.format(filename)
 
+
+    #Ne pas mettre une image trop grande
     logo = models.FileField(
         verbose_name="Logo",
         default="",
@@ -47,11 +49,7 @@ class Partner(models.Model):
         default='public',
     )
 
-    featured = models.BooleanField(
-        verbose_name="Mis en avant",
-        default=False,
-        editable=True,
-    )
+
 
 
     def __str__(self):
