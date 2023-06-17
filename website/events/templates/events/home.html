@@ -38,10 +38,13 @@
 {% include 'events/partial/EventList.html' %}
 
 <!-- Partners: mis en avant-->
+
 {% include 'partners/partial/Partners.html' with status="avant" %}
 
 <!-- FAQ -->
 {% include 'pages/partial/FAQ.html' %}
+
+{% include 'partners/partial/Partners.html' with status="financement" %}
 
 <!-- Newsletter -->
 <div class="newsletter-background text-center container-fluid">
@@ -53,5 +56,7 @@
     </div>
   </div>
 </div>
+
+{% include 'partners/partial/Partners.html' with status="accueil" %}
 
 {% endblock %}
