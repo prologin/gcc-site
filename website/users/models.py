@@ -105,3 +105,21 @@ class User(AbstractUser):
         blank=False,
         unique=True,
     )
+
+    class Meta:
+        permissions = [
+            ("can_view_applications", "Can view event applications"),
+            (
+                "can_view_applications_details",
+                "Can view details of event applications",
+            ),
+            (
+                "can_view_applications_private_details",
+                "Can view private details of event applications",
+            ),
+            ("can_change_applications", "Can change applications"),
+            (
+                "can_download_informations",
+                "Can download applications informations",
+            ),
+        ]
