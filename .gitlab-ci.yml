@@ -119,7 +119,7 @@ format:black:
   interruptible: true
   needs: []
   image:
-    name: python:3.10-slim
+    name: python:3.11-slim
     entrypoint: [""]
   before_script:
     - cd website
