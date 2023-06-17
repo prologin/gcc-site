@@ -36,7 +36,7 @@ You can then go to http://localhost:8000/admin and login.
 
 ```sh
 $ cd docker/
-$ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p ndf up --build
+$ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p gccsite up --build
 ```
 
 #### Formatting
