@@ -2,8 +2,6 @@
 # Copyright (c) 2022 Association Prologin <association@prologin.org>
 # Copyright (c) 2022 Marc 'risson' Schmitt <marc.schmitt@prologin.org>
 
-print("je suis load")
-
 from django.urls import reverse_lazy
 
 from gccsite import env
@@ -17,7 +15,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = reverse_lazy("oidc_authentication_init")
-LOGOUT_URL = reverse_lazy("oidc_logout")
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
