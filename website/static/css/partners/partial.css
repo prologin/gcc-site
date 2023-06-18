@@ -30,3 +30,32 @@
 .carousel-inner .carousel-item-start { 
     transform: translateX(0%);
 }
+
+.carousel-control-prev {
+    margin-left: -110px;
+}
+
+.carousel-control-next {
+    margin-right: -110px;
+}
+
+
+/* Pour changer la taille de la "slide" */
+.card-img {
+    height:175px;
+    width:auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+/* changer la taille de l'image du partenaires */
+.partner {
+    height:150px;
+    width:auto;
+}
+
+/* Changer taille du texte de presentation */
+h2.text {
+    padding-bottom: 25px;
+    font-size: 25px;
+}
