@@ -1,5 +1,6 @@
 {% extends 'gccsite/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/events/events.css' %}">
@@ -20,8 +21,9 @@
         </thead>
         <tbody>
             {% for application in applications %}
-            <tr {% if 'users.can_view_applications_details' in perms %} data-bs-toggle="collapse" data-bs-target="#row-{{forloop.counter}}" aria-expanded="false"
-                aria-controls="row-{{forloop.counter}}" {% endif %}>
+            <tr {% if 'users.can_view_applications_details' in perms %} data-bs-toggle="collapse"
+                data-bs-target="#row-{{forloop.counter}}" aria-expanded="false" aria-controls="row-{{forloop.counter}}"
+                {% endif %}>
                 <th scope="row"> {{forloop.counter}}</th>
                 <td> {{application.last_name }} {{application.first_name}} </td>
                 <td> {{application.participations_count}} </td>
@@ -37,71 +39,80 @@
                 </td>
             </tr>
             {% if 'users.can_view_applications_details' in perms %}
-                <tr class="collapse" id="row-{{forloop.counter}}">
-                    <td colspan="5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <dl>
-                                    <dt> Responsable légal: </dt>
-                                    <dd> {{application.user.first_name}} {{application.user.last_name}} </dd>
+            <tr class="collapse" id="row-{{forloop.counter}}">
+                <td colspan="5">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dl>
+                                <dt> Responsable légal: </dt>
+                                <dd> {{application.user.first_name}} {{application.user.last_name}} </dd>
 
-                                    {% if "users.can_view_applications_private_details" in perms%}
-                                    <dt> Email du responsable légal </dt>
-                                    <dd> {{application.user.email}} </dd>
+                                {% if "users.can_view_applications_private_details" in perms%}
+                                <dt> Email du responsable légal </dt>
+                                <dd> {{application.user.email}} </dd>
 
-                                    <dt> Numéro du responsable légal</dt>
-                                    <dd> {{ application.phone }}</dd>
+                                <dt> Numéro du responsable légal</dt>
+                                <dd> {{ application.phone }}</dd>
 
-                                    <dt> Adresse de la participante </dt>
-                                    <dd> {{application.address.zip_code}} {{application.address.city}},
-                                        {{application.address.country}} </dd>
-                                    {% endif %}
+                                <dt> Adresse de la participante </dt>
+                                <dd> {{application.address.zip_code}} {{application.address.city}},
+                                    {{application.address.country}} </dd>
+                                {% endif %}
 
-                                    <dt> Date d'anniversaire de la participante </dt>
-                                    <dd> {{application.dob}} </dd>
+                                <dt> Date d'anniversaire de la participante </dt>
+                                <dd> {{application.dob}} </dd>
 
-                                    <dt> Nombre de participations </dt>
-                                    <dd> {{application.participations_count}} </dd>
-                                </dl>
-                            </div>
-                            <div class="col-md-8">
-                                <h3> Réponse au questionnaires</h3>
-                                <dl>
-                                    <dt> Quelle est ta taille de t-shirt ? </dt>
-                                    <dd> {{application.form_answer.tshirt }}</dd>
-
-                                    <dt> Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage ? </dt>
-                                    <dd> {{application.form_answer.learning }} </dd>
-
-                                    <dt> As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels outils ou langages de programmation as-tu essayés ? </dt>
-                                    <dd> {{application.form_answer.programing }} </dd>
-
-                                    <dt> Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu préciser lesquelles ? </dt>
-                                    <dd> {{application.form_answer.studies }} </dd>
-
-                                    <dt> Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela nous aide beaucoup ! </dt>
-                                    <dd> {{application.form_answer.association }} </dd>
-
-                                    {% if "users.can_view_applications_private_details" in perms%}
-                                    <dt> As-tu des allergies ? </dt>
-                                    <dd> {{application.form_answer.allergies }} </dd>
-
-                                    <dt> As-tu un régime alimentaire particulier ? </dt>
-                                    <dd> {{application.form_answer.diet }} </dd>
-                                    {% endif %}
-                                </dl>
-                            </div>
+                                <dt> Nombre de participations </dt>
+                                <dd> {{application.participations_count}} </dd>
+                            </dl>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <form action="" method="post">
-                                    <textarea rows="5" cols="120">{{application.notes}}</textarea>
-                                    <input type="submit">
-                                </form>
-                            </div>
+                        <div class="col-md-8">
+                            <h3> Réponse au questionnaires</h3>
+                            <dl>
+                                <dt> Quelle est ta taille de t-shirt ? </dt>
+                                <dd> {{application.form_answer.tshirt }}</dd>
+
+                                <dt> Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage ?
+                                </dt>
+                                <dd> {{application.form_answer.learning }} </dd>
+
+                                <dt> As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels
+                                    outils ou langages de programmation as-tu essayés ? </dt>
+                                <dd> {{application.form_answer.programing }} </dd>
+
+                                <dt> Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu
+                                    préciser lesquelles ? </dt>
+                                <dd> {{application.form_answer.studies }} </dd>
+
+                                <dt> Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela nous
+                                    aide beaucoup ! </dt>
+                                <dd> {{application.form_answer.association }} </dd>
+
+                                {% if "users.can_view_applications_private_details" in perms%}
+                                <dt> As-tu des allergies ? </dt>
+                                <dd> {{application.form_answer.allergies }} </dd>
+
+                                <dt> As-tu un régime alimentaire particulier ? </dt>
+                                <dd> {{application.form_answer.diet }} </dd>
+                                {% endif %}
+                            </dl>
                         </div>
-                    </td>
-                </tr>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post" action="{% url 'events:update_application_notes' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="application-id" value="{{ application.pk }}">
+                                <input type="hidden" name="event-year" value="{{ application.event.year }}">
+                                <input type="hidden" name="event-id" value="{{ application.event.pk }}">
+                                <textarea name="notes">{{application.notes}}</textarea>
+                                <input type="submit" name="submit-application-notes" , value="Modifier les notes" ,
+                                    class="my-4 btn btn-primary btn-block" , />
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             {% endif %}
             {% endfor%}
         </tbody>

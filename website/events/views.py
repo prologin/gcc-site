@@ -9,7 +9,8 @@ from django.contrib.auth.mixins import (
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, TemplateView, UpdateView
+from django.views.generic import ListView, TemplateView
+from django.views.generic.edit import UpdateView
 
 from partners.models import Partner
 from users.models import User
@@ -167,7 +168,6 @@ class ApplicationsReviewView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        print(kwargs)
         ctx["applications"] = signup.Application.objects.get_applicants(
             kwargs["event"]
         )
