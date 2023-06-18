@@ -17,7 +17,9 @@
       <img src="{% static 'img/photo_2.png' %}" alt="Photo des stages Girls Can Code!" class="container-fluid"/>
     </div>
   </div>
-  {% include 'partners/partial/Partners.html' with status="financement" %}
+  <div class="partners-background my-5">
+    {% include 'partners/partial/Partners.html' with status="financement" %}
+  </div>
   <div class="row w-100">
     <div class="col d-none d-sm-block">
       <img src="{% static 'img/photo_3.png' %}" alt="Photo des stages Girls Can Code!" class="container-fluid"/>

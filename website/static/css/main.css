@@ -115,6 +115,11 @@ h4, .contentTextSize {
   background-position: center center;
 }
 
+.partners-background {
+  background-color: white;
+  padding: 15px;
+}
+
 /*
  * Main
  */
