@@ -54,6 +54,9 @@ services:
       DJANGO_CACHE_URL: redis://redis_dev:6379/0
       CELERY_BROKER_URL: redis://redis_dev:6379/1
       CELERY_RESULT_EXPIRES: 60
+      OIDC_OP_CONFIG_URL: https://auth.prologin.org/application/o/prologin-public-test-client
+      OIDC_RP_CLIENT_ID_FILE: /run/secrets/oidc-client-id
+      OIDC_RP_CLIENT_SECRET_FILE: /run/secrets/oidc-client-secret
       DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT: https://documents.prologin.org/rest/generator/templates/6/render/
       OIDC_DOCUMENTS_GENERATOR_RP_CLIENT_ID_FILE: /run/secrets/documents-generator-client-id
       OIDC_DOCUMENTS_GENERATOR_M2M_USERNAME_FILE: /run/secrets/documents-generator-username
@@ -74,6 +77,8 @@ services:
     secrets:
       - django-secret-key
       - postgres-passwd
+      - oidc-client-id
+      - oidc-client-secret
       - documents-generator-client-id
       - documents-generator-username
       - documents-generator-password
@@ -118,6 +123,10 @@ secrets:
     file: ./secrets/django-secret-key
   postgres-passwd:
     file: ./secrets/postgres-passwd
+  oidc-client-id:
+    file: ./secrets/oidc-client-id
+  oidc-client-secret:
+    file: ./secrets/oidc-client-secret
   documents-generator-client-id:
     file: ./secrets/documents-generator-client-id
   documents-generator-username:

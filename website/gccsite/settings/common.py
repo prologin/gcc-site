@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mozilla_django_oidc",
     "django_celery_beat",
     "post_office",
     "crispy_forms",
@@ -110,6 +111,14 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# Auth
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 
 
 # Password validation
@@ -196,3 +205,13 @@ STATICFILES_DIRS = [
 STATIC_ROOT = (
     BASE_DIR / "staticfiles"
 )  # Basic configuration when using manage.py collectstatic
+
+
+OIDC_OP_CONFIG_URL = (
+    env.get_string("OIDC_OP_CONFIG_URL") + "/.well-known/openid-configuration"
+)
+
+
+DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT = env.get_string(
+    "DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT", ""
+)
