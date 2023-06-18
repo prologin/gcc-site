@@ -7,11 +7,12 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, TemplateView
 
+from partners.models import Partner
 from users.models import User
 
 from .forms import EventSignupForm
 from .models import events, signup
-from partners.models import Partner
+
 
 class HomePageView(ListView):
     model = events.Event
@@ -101,7 +102,13 @@ class HomePageView(ListView):
         ctx["paginator"] = p
         ctx["open_events"] = events_list
         ctx["form"] = EventSignupForm
-        ctx["partners"] = Partner.objects.filter()
+
+        ctx["partners_avant"] = Partner.objects.filter(status="avant")
+        ctx["partners_financement"] = Partner.objects.filter(
+            status="financement"
+        )
+        ctx["partners_accueil"] = Partner.objects.filter(status="accueil")
+
         return ctx
 
 

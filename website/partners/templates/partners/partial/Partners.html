@@ -1,4 +1,3 @@
-{% regroup partners by status as partners_status %}
 
 {% block head%}
 <link rel="stylesheet" href="static/css/partners/partial.css">
@@ -16,23 +15,39 @@
             <h2>Ils nous accueillent</h2>
         {% endif %}
 
-
         <div id="carousel-sponsors-{{status}}" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                {% for sponsors in partners_status %}
-                    {{ partner }}
-                    {% if sponsors.grouper == status %}
-                        {% for sponsor in sponsors.list %}
-                            <div class="carousel-item active">
-                                <div class="col-md-3">
-                                    <div class="card-img">
-                                        <img src="{{sponsor.logo}}" class="img-fluid" width="400px" height="400px">
-                                    </div>
+                {% if status == "avant" %}
+                    {% for partner in partners_avant %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <div class="col-md-3">
+                                <div class="card-img">
+                                    <img src="{{partner.logo}}" class="img-fluid" width="400px" height="400px" />
                                 </div>
                             </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% elif status == "financement" %}
+                    {% for partner in partners_financement %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <div class="col-md-3">
+                                <div class="card-img">
+                                    <img src="{{partner.logo}}" class="img-fluid" width="400px" height="400px" />
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for partner in partners_accueil %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <div class="col-md-3">
+                                <div class="card-img">
+                                    <img src="{{partner.logo}}" class="img-fluid" width="400px" height="400px" />
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
             <a class="carousel-control-prev bg-transparent w-aut" href="#carousel-sponsors-{{status}}" role="button"
                 data-bs-slide="prev">
@@ -42,7 +57,6 @@
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
-
         </div>
     </div>
 </div>
