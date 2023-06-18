@@ -3,26 +3,27 @@
 <link rel="stylesheet" href="static/css/partners/partial.css">
 {% endblock %}
 
-<!-- Les sponsors mis en avant -->
+
+
 
 <div class="container text-center my-3">
     <div class="row mx-auto my-auto justify-content-center">
         {% if status == "avant" %}
-            <h2>Ils nous soutiennent</h2>
+            <h2 class="text">Ils nous font confiance</h2>
         {% elif status == "financement" %}
-            <h2>Ils nous financent</h2>
+            <h2 class="text">Ils nous soutiennent</h2>
         {% else %}
-            <h2>Ils nous accueillent</h2>
+            <h2 class="text">Ils nous accueillent</h2>
         {% endif %}
 
-        <div id="carousel-sponsors-{{status}}" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel-sponsors-{{status}}" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 {% if status == "avant" %}
                     {% for partner in partners_avant %}
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             <div class="col-md-3">
                                 <div class="card-img">
-                                    <img src="{{partner.logo}}" class="img-fluid" width="400px" height="400px" />
+                                    <img src="{{partner.logo}}" class="img-fluid partner"  />
                                 </div>
                             </div>
                         </div>
@@ -32,7 +33,7 @@
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             <div class="col-md-3">
                                 <div class="card-img">
-                                    <img src="{{partner.logo}}" class="img-fluid" width="400px" height="400px" />
+                                    <img src="{{partner.logo}}" class="img-fluid partner" />
                                 </div>
                             </div>
                         </div>
@@ -42,18 +43,18 @@
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             <div class="col-md-3">
                                 <div class="card-img">
-                                    <img src="{{partner.logo}}" class="img-fluid" width="400px" height="400px" />
+                                    <img src="{{partner.logo}}" class="img-fluid partner" />
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 {% endif %}
             </div>
-            <a class="carousel-control-prev bg-transparent w-aut" href="#carousel-sponsors-{{status}}" role="button"
+            <a class="carousel-control-prev" href="#carousel-sponsors-{{status}}" role="button"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </a>
-            <a class="carousel-control-next bg-transparent w-aut" href="#carousel-sponsors-{{status}}" role="button"
+            <a class="carousel-control-next" href="#carousel-sponsors-{{status}}" role="button"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
