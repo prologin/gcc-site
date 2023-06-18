@@ -51,6 +51,7 @@ class EventAdmin(admin.ModelAdmin):
             "Informations aux participantes",
             {"fields": ("description", "notes")},
         ),
+        ("Documents du stage", {"fields": ("document",)}),
     )
 
 
@@ -106,4 +107,3 @@ class ApplicationAdmin(admin.ModelAdmin):
 @admin.register(models.ApplicationLabel)
 class ApplicationLabelAdmin(admin.ModelAdmin):
     search_fields = ("title",)
-    

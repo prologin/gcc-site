@@ -1,11 +1,3 @@
-from urllib.parse import urlencode
-from django.views.generic import TemplateView, DetailView
-
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-
-from .tasks import expense_report_generate_document
-
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
@@ -18,6 +10,7 @@ from users.models import User
 
 from .forms import EventSignupForm
 from .models import events, signup
+from .tasks import expense_report_generate_document
 
 
 class HomePageView(ListView):
@@ -87,6 +80,12 @@ class HomePageView(ListView):
                 )
 
                 return HttpResponseRedirect(reverse("events:home"))
+        elif "generate" in request.POST:
+            self.object = events.Event.objects.get(id=request.POST["event-id"])
+            expense_report_generate_document.delay(self.object.pk)
+            self.object.save()
+            return HttpResponseRedirect(reverse("events:home"))
+
         elif "submit-newsletter" in request.POST:
             # TODO : DO SOMETHING HERE ?
 
@@ -120,15 +119,6 @@ class HomePageView(ListView):
 
 class ReviewIndexView(TemplateView):
     template_name = "events/application/index.html"
-
-    def post(self, request, *args, **kwargs):
-        print("yo")
-        if "generate" in request.POST:
-            self.object = events.Event.objects.get(id=request.POST["event-id"])
-            expense_report_generate_document(self.object.pk)
-            self.object.save()
-            
-        return HttpResponseRedirect(reverse("events:home"))
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)

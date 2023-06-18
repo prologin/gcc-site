@@ -2,13 +2,13 @@
 
 import django.core.validators
 from django.db import migrations, models
+
 import events.validators
-import gccsite.storage.backends
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("events", "0002_initial"),
+        ("events", "0001_initial"),
     ]
 
     operations = [
@@ -30,7 +30,6 @@ class Migration(migrations.Migration):
             field=models.FileField(
                 blank=True,
                 null=True,
-                storage=gccsite.storage.backends.PrivateMediaStorage,
                 upload_to="events_gcc/",
                 validators=[
                     django.core.validators.FileExtensionValidator(
