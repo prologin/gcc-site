@@ -42,6 +42,36 @@
             <tr class="collapse" id="row-{{forloop.counter}}">
                 <td colspan="5">
                     <div class="row">
+                        <div class="col-7">
+                            <form method="post" action="{% url 'events:update_application_notes' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="application-id" value="{{ application.pk }}">
+                                <input type="hidden" name="event-year" value="{{ application.event.year }}">
+                                <input type="hidden" name="event-id" value="{{ application.event.pk }}">
+                                <textarea name="notes" class="textarea form-control">{{application.notes}}</textarea>
+                                <input type="submit" name="submit-application-notes" , value="Modifier les notes" ,
+                                    class="my-4 btn btn-primary btn-block" , />
+                            </form>
+                        </div>
+                        <div class="col-5">
+                            <ul class="list-group">
+                                <li class="list-group-item highlighted">
+                                    <span status="0" class="badge bg-danger" {% if application.status != -3 %}style="display: none;"{% endif %}> Rejetée </span>
+                                    <span status="1" class="badge bg-danger" {% if application.status != -2 %}style="display: none;"{% endif %}> Retirée </span>
+                                    <span status="2" class="badge bg-danger" {% if application.status != -1 %}style="display: none;"{% endif %}> Annulée </span>
+                                    <span status="3" class="badge bg-secondary" {% if application.status != 0 %}style="display: none;"{% endif %}> En attente </span>
+                                    <span status="4" class="badge bg-warning" {% if application.status != 1 %}style="display: none;"{% endif %}> Acceptée </span>
+                                    <span status="5" class="badge bg-success" {% if application.status != 2 %}style="display: none;"{% endif %}> Confirmée </span>
+                                    <span status="6" class="badge bg-success" {% if application.status != 3 %}style="display: none;"{% endif %}> Fini </span>
+
+                                    <h4 class="list-group-item-heading">{{application.event.center}}</h4>
+                                    <p class="list-group-item-text">{{application.event.start_date}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-4">
                             <dl>
                                 <dt> Responsable légal: </dt>
@@ -96,19 +126,6 @@
                                 <dd> {{application.form_answer.diet }} </dd>
                                 {% endif %}
                             </dl>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <form method="post" action="{% url 'events:update_application_notes' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="application-id" value="{{ application.pk }}">
-                                <input type="hidden" name="event-year" value="{{ application.event.year }}">
-                                <input type="hidden" name="event-id" value="{{ application.event.pk }}">
-                                <textarea name="notes">{{application.notes}}</textarea>
-                                <input type="submit" name="submit-application-notes" , value="Modifier les notes" ,
-                                    class="my-4 btn btn-primary btn-block" , />
-                            </form>
                         </div>
                     </div>
                 </td>
