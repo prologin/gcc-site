@@ -11,7 +11,7 @@
 
 
 <!-- Les sponsors mis en avant -->
-
+{% regroup partners by status as partners_status %}
 
 {% if status == "avant" %}
 <div class="container text-center my-3">
@@ -20,18 +20,19 @@
 
         <div id="AvantSponsorCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                {% for p in partners %}
-                {% if p.status == "avant" %}
-        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-            <div class="col-md-3">
-                    <div class="card-img">
-                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
-                    </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% endfor %}
+                {% for partners_s in partners_status %}
+                    {% if partners_s.grouper == status %}
+                        {% for p in partners_s.list %}
+                            <div class="carousel-item active">
+                                <div class="col-md-3">
+                                    <div class="card-img">
+                                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
             </div>
             <a class="carousel-control-prev bg-transparent w-aut" href="#AvantSponsorCarousel" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -56,17 +57,19 @@
 
         <div id="FinSponsorCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                {% for p in partners %}
-                {% if p.status == "financement" %}
-        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-            <div class="col-md-3">
-                    <div class="card-img">
-                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
-                    </div>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
+                {% for partners_s in partners_status %}
+                {% if partners_s.grouper == status %}
+                    {% for p in partners_s.list %}
+                        <div class="carousel-item active">
+                            <div class="col-md-3">
+                                <div class="card-img">
+                                    <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
             </div>
             <a class="carousel-control-prev bg-transparent w-aut" href="#FinSponsorCarousel" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -91,17 +94,19 @@
 
         <div id="AccSponsorCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                {% for p in partners %}
-                {% if p.status == "accueil" %}
-        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-            <div class="col-md-3">
-                    <div class="card-img">
-                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
-                    </div>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
+                {% for partners_s in partners_status %}
+                    {% if partners_s.grouper == status %}
+                        {% for p in partners_s.list %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="col-md-3">
+                                    <div class="card-img">
+                                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
             </div>
             <a class="carousel-control-prev bg-transparent w-aut" href="#AccSponsorCarousel" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -118,4 +123,3 @@
 
 
 
-<script src="static/js/partners.js"></script>
