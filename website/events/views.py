@@ -103,11 +103,11 @@ class HomePageView(ListView):
         ctx["open_events"] = events_list
         ctx["form"] = EventSignupForm
 
-        ctx["partners_avant"] = Partner.objects.filter(status="avant")
+        ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
         ctx["partners_financement"] = Partner.objects.filter(
-            status="financement"
+            status="Financing"
         )
-        ctx["partners_accueil"] = Partner.objects.filter(status="accueil")
+        ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
 
         return ctx
 
