@@ -2,10 +2,12 @@
 # Copyright (c) 2022 Association Prologin <association@prologin.org>
 # Copyright (c) 2022 Marc 'risson' Schmitt <marc.schmitt@prologin.org>
 
-from gccsite.urls import reverse_lazy
+print("je suis load")
+
+from django.urls import reverse_lazy
 
 from gccsite import env
-from gccsite.auth.utils import get_oidc_config
+from gccsite.tools import get_oidc_config
 
 OIDC_DRF_AUTH_BACKEND = "gccsite.auth.backend.ProloginOIDCAB"
 
