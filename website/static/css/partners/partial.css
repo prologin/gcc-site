@@ -1,4 +1,4 @@
-@media (max-width: 500px) {
+@media (max-width: 400px) {
     .carousel-inner .carousel-item > div {
         display: none;
     }
@@ -14,7 +14,7 @@
 }
 
 /* medium and up screens */
-@media (min-width: 500px) {
+@media (min-width: 400px) {
     .carousel-inner .carousel-item-end.active,
     .carousel-inner .carousel-item-next {
         transform: translateX(25%);

@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class PartnersConfig(AppConfig):
     name = 'partners'
-    label = 'partenaires'
+    label = 'partners'
     verbose_name = 'Partenaires'

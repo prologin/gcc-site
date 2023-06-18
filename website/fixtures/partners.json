@@ -6,11 +6,8 @@
       "name": "EPITA",
       "description": "",
       "website_url": "https://epita.fr",
-      "is_on_front_page": true,
-      "featured": true,
-      "logo": "epita.jpg",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/epita.png",
+      "status": "financement"
     }
   },
   {
@@ -20,11 +17,8 @@
       "name": "EPITECH",
       "description": "",
       "website_url": "https://www.epitech.eu",
-      "is_on_front_page": true,
-      "featured": false,
-      "logo": "epitech.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/epitech.png",
+      "status": "accueil"
     }
   },
   {
@@ -34,11 +28,8 @@
       "name": "Ville du Kremlin-Bicêtre",
       "description": "",
       "website_url": "https://www.kremlinbicetre.fr/",
-      "is_on_front_page": false,
-      "featured": false,
-      "logo": "kb.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/kb.png",
+      "status": "financement"
     }
   },
   {
@@ -48,11 +39,8 @@
       "name": "42",
       "description": "",
       "website_url": "https://42.fr",
-      "is_on_front_page": true,
-      "featured": false,
-      "logo": "42.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/42.png",
+      "status": "accueil"
     }
   },
   {
@@ -62,11 +50,8 @@
       "name": "Académie de Paris",
       "description": "",
       "website_url": "https://www.ac-paris.fr",
-      "is_on_front_page": true,
-      "featured": true,
-      "logo": "ac-paris.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/ac-paris.png",
+      "status": "avant"
     }
   },
   {
@@ -76,11 +61,8 @@
       "name": "Académie d'Orléans-Tours",
       "description": "",
       "website_url": "https://www.ac-orleans-tours.fr",
-      "is_on_front_page": true,
-      "featured": true,
-      "logo": "ac-ot.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/ac-ot.png",
+      "status": "avant"
     }
   },
   {
@@ -90,53 +72,30 @@
       "name": "AFER",
       "description": "Avec plus de 750 000 adhérents ayant souscrit un contrat d’Assurance vie, une épargne gérée de près de 60 milliards d’euros et quelque 2 millions de bénéficiaires, l’Afer est aujourd’hui la plus puissante association représentative des épargnants français. Elle souhaite maintenir et renforcer son rôle d’étendard pour valoriser le rôle social et humain de l’assurance vie auprès des épargnants. Depuis 1976, date de sa création, elle est force de proposition vis-à-vis des parlementaires et des pouvoirs publics. Sa puissance lui permet de faire entendre sa voix chaque fois que les avantages de l’assurance vie sont remis en cause et chaque fois que l’intérêt de ses adhérents le rend nécessaire.",
       "website_url": "https://afer.fr",
-      "is_on_front_page": false,
-      "featured": false,
-      "logo": "afer.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/afer.png",
+      "status": "financement"
     }
   },
   {
     "model": "partners.partner",
     "pk": 8,
     "fields": {
-      "name": "Alsace Digitale",
+      "name": "Jane Street",
       "description": "",
-      "website_url": "https://www.alsacedigitale.org/",
-      "is_on_front_page": false,
-      "featured": false,
-      "logo": "ad.png",
-      "enabled": false,
-      "order": 0
+      "website_url": "https://www.janestreet.com/",
+      "logo": "static/img/sponsors/js.png",
+      "status": "financement"
     }
   },
   {
     "model": "partners.partner",
     "pk": 9,
     "fields": {
-      "name": "Jane Street",
-      "description": "",
-      "website_url": "https://www.janestreet.com/",
-      "is_on_front_page": true,
-      "featured": false,
-      "logo": "js.png",
-      "enabled": true,
-      "order": 0
-    }
-  },
-  {
-    "model": "partners.partner",
-    "pk": 10,
-    "fields": {
       "name": "Ministère chargé de l'égalité entre les femmes et les hommes, de la diversité et de l'égalité des chances",
       "description": "",
       "website_url": "https://www.egalite-femmes-hommes.gouv.fr/",
-      "is_on_front_page": true,
-      "featured": true,
-      "logo": "minfh.png",
-      "enabled": true,
-      "order": 0
+      "logo": "static/img/sponsors/minfh.png",
+      "status": "avant"
     }
   }
 ]
