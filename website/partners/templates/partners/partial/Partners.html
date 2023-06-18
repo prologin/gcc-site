@@ -1,32 +1,32 @@
-<!--
-    1 Argument -> nous soutiennent, nous accueillent, mis en avant
-    avant: mis en avant
-    financement: nous soutiennent
-    accueil: nous accueillent
--->
-
-
-
-<link rel="stylesheet" href="static/css/partners/partial.css">
-
-
-<!-- Les sponsors mis en avant -->
 {% regroup partners by status as partners_status %}
 
-{% if status == "avant" %}
+{% block head%}
+<link rel="stylesheet" href="static/css/partners/partial.css">
+{% endblock %}
+
+<!-- Les sponsors mis en avant -->
+
 <div class="container text-center my-3">
     <div class="row mx-auto my-auto justify-content-center">
-        <h2>Ils nous soutiennent</h2>
+        {% if status == "avant" %}
+            <h2>Ils nous soutiennent</h2>
+        {% elif status == "financement" %}
+            <h2>Ils nous financent</h2>
+        {% else %}
+            <h2>Ils nous accueillent</h2>
+        {% endif %}
 
-        <div id="AvantSponsorCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div id="carousel-sponsors-{{status}}" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                {% for partners_s in partners_status %}
-                    {% if partners_s.grouper == status %}
-                        {% for p in partners_s.list %}
+                {% for sponsors in partners_status %}
+                    {{ partner }}
+                    {% if sponsors.grouper == status %}
+                        {% for sponsor in sponsors.list %}
                             <div class="carousel-item active">
                                 <div class="col-md-3">
                                     <div class="card-img">
-                                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
+                                        <img src="{{sponsor.logo}}" class="img-fluid" width="400px" height="400px">
                                     </div>
                                 </div>
                             </div>
@@ -34,92 +34,14 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <a class="carousel-control-prev bg-transparent w-aut" href="#AvantSponsorCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next bg-transparent w-aut" href="#AvantSponsorCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
         </div>
+        <a class="carousel-control-prev bg-transparent w-aut" href="#carousel-sponsors-{{status}}" role="button"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next bg-transparent w-aut" href="#carousel-sponsors-{{status}}" role="button"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
     </div>
 </div>
-
-
-<!-- Fin des sponsors mis en avant -->
-
-
-<!-- Les sponsors qui financent -->
-{% elif status == "financement" %}
-
-<div class="container text-center my-3">
-    <div class="row mx-auto my-auto justify-content-center">
-        <h2>Ils nous financent</h2>
-
-        <div id="FinSponsorCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" role="listbox">
-                {% for partners_s in partners_status %}
-                {% if partners_s.grouper == status %}
-                    {% for p in partners_s.list %}
-                        <div class="carousel-item active">
-                            <div class="col-md-3">
-                                <div class="card-img">
-                                    <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-            </div>
-            <a class="carousel-control-prev bg-transparent w-aut" href="#FinSponsorCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next bg-transparent w-aut" href="#FinSponsorCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
-</div>
-
-
-<!-- fin des sponsors qui financent -->
-
-
-<!-- Les sponsors qui accueillent -->
-{% else %}
-
-<div class="container text-center my-3">
-    <div class="row mx-auto my-auto justify-content-center">
-        <h2>Ils nous accueillent</h2>
-
-        <div id="AccSponsorCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" role="listbox">
-                {% for partners_s in partners_status %}
-                    {% if partners_s.grouper == status %}
-                        {% for p in partners_s.list %}
-                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <div class="col-md-3">
-                                    <div class="card-img">
-                                        <img src="{{p.logo}}" class="img-fluid" width="400px" height="400px">
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <a class="carousel-control-prev bg-transparent w-aut" href="#AccSponsorCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next bg-transparent w-aut" href="#AccSponsorCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
-</div>
-
-{% endif %}
-<!-- fin des sponsors qui accueillent -->
-
-
-
