@@ -80,7 +80,7 @@ class ProloginOIDCAB(OIDCAuthenticationBackend):
 
     def set_permissions(self, user, claims, save=True):
         roles = claims.get("roles")
-        user.is_superuser = False
+        user.is_superuser = "superuser" in roles
         user.is_staff = "staff" in roles
         if save:
             user.save()
