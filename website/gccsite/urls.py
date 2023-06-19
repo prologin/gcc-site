@@ -6,5 +6,5 @@ urlpatterns = [
     path("", include("events.urls")),
     path("", include("pages.urls")),
     path("", include("users.urls")),
-    path("auth/oidc/", include("mozilla_django_oidc.urls")),
+    path("rest/auth/oidc/", include("mozilla_django_oidc.urls")),
 ]
