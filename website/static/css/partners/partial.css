@@ -32,11 +32,13 @@
 }
 
 .carousel-control-prev {
-    margin-left: -110px;
+    top: -25%;
+    margin-left: -10%;
 }
 
 .carousel-control-next {
-    margin-right: -110px;
+    top: -25%;
+    margin-right: -10%;
 }
 
 
@@ -44,18 +46,26 @@
 .card-img {
     height:175px;
     width:auto;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* changer la taille de l'image du partenaires */
 .partner {
-    height:150px;
+    height:70%;
     width:auto;
+    max-height: 175px;
 }
 
 /* Changer taille du texte de presentation */
 h2.text {
+    text-align: center;
     padding-bottom: 25px;
-    font-size: 25px;
+    font-size: 35px;
+}
+
+#partnerBand {
+    margin-left: 10%;
+    margin-right: 10%;
+    /*text-align: center;*/
 }
