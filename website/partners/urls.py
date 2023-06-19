@@ -2,7 +2,8 @@ from django.urls import path
 
 from . import views
 
+app_name = "partners"
+
 urlpatterns = [
-    path("", views.partners_view, name="partners_view"),
-    path("featured/", views.partners_view_featured, name="partners_view_featured"),
+    path("partners/", views.PartnersView.as_view(), name="partners"),
 ]

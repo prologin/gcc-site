@@ -1,18 +1,16 @@
-from django.shortcuts import render
-from django.views.generic import ListView
-
-# Create your views here.
-
+from typing import Any, Dict
 
 from django.http import HttpResponse
+from django.views.generic import ListView
+
 from .models import Partner
 
 
-class partners_view(ListView):
+class PartnersView(ListView):
     model = Partner
+    template_name = "partners/partners.html"
 
-def partners_view(request):
-    partners = Partner.objects.all()
-    context = {'partners': partners}
-    return render(request, 'partners/partners.html', context)
-
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        ctx["partners"] = Partner.objects.filter().order_by("name")
+        return ctx
