@@ -100,6 +100,7 @@ class ApplicationAdmin(admin.ModelAdmin):
             "Responsable légal",
             {"fields": ("phone", "address")},
         ),
+        ("Etablissement scolaire", {"fields": ("school",)}),
         (
             "Sélection",
             {

@@ -17,26 +17,12 @@ class ProloginOIDCAB(OIDCAuthenticationBackend):
         super().__init__(*args, **kwargs)
         self.GroupModel = Group
 
-    def get_name(self, claims):
-        if "name" in claims:
-            return claims.get("name")
-        return ""
-
     def create_user(self, claims):
         email = claims.get("email")
 
         _logger.debug("Creating user %s", email)
-        OIDC_SYNC_GIVEN_NAME = import_from_settings(
-            "OIDC_SYNC_GIVEN_NAME", False
-        )
 
-        if OIDC_SYNC_GIVEN_NAME:
-            name = self.get_name(claims)
-            user = self.UserModel.objects.create_user(
-                email=email, first_name=name
-            )
-        else:
-            user = self.UserModel.objects.create_user(email=email)
+        user = self.UserModel.objects.create_user(email=email)
 
         self.update_groups(user, claims)
 
@@ -47,17 +33,9 @@ class ProloginOIDCAB(OIDCAuthenticationBackend):
     def update_user(self, user, claims):
         username = self.get_username(claims)
 
-        OIDC_SYNC_GIVEN_NAME = import_from_settings(
-            "OIDC_SYNC_GIVEN_NAME", False
-        )
-        if OIDC_SYNC_GIVEN_NAME:
-            name = self.get_name(claims)
-
         _logger.debug("Updating user %s", username)
 
         user.username = username
-        if OIDC_SYNC_GIVEN_NAME:
-            user.first_name = name
 
         self.set_permissions(user, claims, save=False)
 

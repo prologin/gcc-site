@@ -26,26 +26,6 @@ class PersonalInfoForm(forms.Form):
         max_length=80,
         required=True,
     )
-    street = forms.CharField(
-        label="Nom et numéro de voie",
-        max_length=256,
-        required=False,
-    )
-    zip_code = forms.CharField(
-        label="Code postal",
-        max_length=10,
-        required=False,
-    )
-    city = forms.CharField(
-        label="Ville",
-        max_length=80,
-        required=False,
-    )
-    country = forms.CharField(
-        label="Pays",
-        max_length=80,
-        required=False,
-    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,19 +44,6 @@ class PersonalInfoForm(forms.Form):
                 )
             ),
         )
-        address_layout = Div(
-            HTML('<div style="margin-bottom: 8px">Adresse</div>'),
-            Row(Field("street", placeholder=self.fields["street"].label)),
-            Row(
-                Column(
-                    Field(
-                        "zip_code", placeholder=self.fields["zip_code"].label
-                    )
-                ),
-                Column(Field("city", placeholder=self.fields["city"].label)),
-            ),
-            Row(Field("country", placeholder=self.fields["country"].label)),
-        )
 
         submit = Div(
             Submit(
@@ -87,15 +54,8 @@ class PersonalInfoForm(forms.Form):
             css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
         )
 
-        # Disable the label of address fields
-        self.fields["street"].label = False
-        self.fields["zip_code"].label = False
-        self.fields["city"].label = False
-        self.fields["country"].label = False
-
         self.helper.layout = Layout(
             name_layout,
-            address_layout,
             submit,
         )
 
