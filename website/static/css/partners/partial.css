@@ -48,11 +48,12 @@
     width:auto;
     padding-left: 15px;
     padding-right: 15px;
+    text-align: center;
 }
 
 /* changer la taille de l'image du partenaires */
 .partner {
-    height:70%;
+    height:85%;
     width:auto;
     max-height: 175px;
 }
@@ -62,6 +63,7 @@ h2.text {
     text-align: center;
     padding-bottom: 25px;
     font-size: 35px;
+    
 }
 
 #partnerBand {
