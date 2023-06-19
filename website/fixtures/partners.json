@@ -50,7 +50,7 @@
       "name": "Banque des territoires",
       "description": "",
       "website_url": "https://www.banquedesterritoires.fr/",
-      "logo": "static/img/sponsors/BdT.jpg",
+      "logo": "static/img/sponsors/BdT.png",
       "status": "Promoted"
     }
   },
@@ -259,7 +259,7 @@
       "name": "ENS",
       "description": "",
       "website_url": "https://www.ens.psl.eu/",
-      "logo": "static/img/sponsors/ensParis.jpg",
+      "logo": "static/img/sponsors/ensParis.png",
       "status": "Welcoming"
     }
   },
@@ -347,7 +347,7 @@
       "name": "ISTY",
       "description": "",
       "website_url": "https://www.isty.uvsq.fr/",
-      "logo": "static/img/sponsors/isty.jpg",
+      "logo": "static/img/sponsors/isty.png",
       "status": "Welcoming"
     }
   },
@@ -369,7 +369,7 @@
       "name": "ESAIP",
       "description": "",
       "website_url": "https://www.esaip.org/",
-      "logo": "static/img/sponsors/esaip.jpg",
+      "logo": "static/img/sponsors/esaip.png",
       "status": "Welcoming"
     }
   }
