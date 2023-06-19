@@ -19,15 +19,15 @@
     .carousel-inner .carousel-item-next {
         transform: translateX(25%);
     }
-    
-    .carousel-inner .carousel-item-start.active, 
+
+    .carousel-inner .carousel-item-start.active,
     .carousel-inner .carousel-item-prev {
         transform: translateX(-25%);
     }
 }
 
 .carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start { 
+.carousel-inner .carousel-item-start {
     transform: translateX(0%);
 }
 
@@ -56,14 +56,6 @@
     height:85%;
     width:auto;
     max-height: 175px;
-}
-
-/* Changer taille du texte de presentation */
-h2.text {
-    text-align: center;
-    padding-bottom: 25px;
-    font-size: 35px;
-    
 }
 
 #partnerBand {

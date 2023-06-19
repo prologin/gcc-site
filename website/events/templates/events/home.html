@@ -44,6 +44,8 @@
 <!-- FAQ -->
 {% include 'pages/partial/FAQ.html' %}
 
+{% include 'partners/partial/Partners.html' with status="accueil" %}
+
 <!-- Newsletter -->
 <div class="newsletter-background text-center container-fluid">
   <div class="row justify-content-center">
@@ -55,7 +57,6 @@
   </div>
 </div>
 
-{% include 'partners/partial/Partners.html' with status="accueil" %}
 
 {% endblock %}
 

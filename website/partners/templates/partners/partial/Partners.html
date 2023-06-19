@@ -9,14 +9,14 @@
 <div id="partnerBand" class="">
     <div class="row mx-auto my-auto justify-content-center">
         {% if status == "avant" %}
-            <h2 class="text">Ils nous font confiance</h2>
+            <p class="h2 pt-4 pb-4 text-center">Ils nous font confiance</p>
         {% elif status == "financement" %}
-            <h2 class="text">Ils nous soutiennent</h2>
+            <p class="h2 pt-4 pb-4 text-center">Ils nous soutiennent</p>
         {% else %}
-            <h2 class="text">Ils nous accueillent</h2>
+            <p class="h2 pt-4 pb-4 text-center">Ils nous accueillent</p>
         {% endif %}
 
-        <div id="carousel-sponsors-{{status}}" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div id="carousel-sponsors-{{status}}" class="carousel carousel-dark slide pb-3" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 {% if status == "avant" %}
                     {% for partner in partners_avant %}
