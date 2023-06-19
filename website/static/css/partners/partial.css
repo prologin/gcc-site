@@ -44,19 +44,14 @@
 
 /* Pour changer la taille de la "slide" */
 .card-img {
-    height:175px;
-    width:auto;
+
     padding-left: 15px;
     padding-right: 15px;
     text-align: center;
 }
 
 /* changer la taille de l'image du partenaires */
-.partner {
-    height:85%;
-    width:auto;
-    max-height: 175px;
-}
+
 
 #partnerBand {
     margin-left: 10%;
