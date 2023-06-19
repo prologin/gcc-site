@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mozilla_django_oidc",
     "django_celery_beat",
     "post_office",
     "crispy_forms",
@@ -111,7 +112,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -132,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # By default, bring back user to home when successfully logging in
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
 
 LANGUAGE_CODE = "fr-fr"
@@ -196,3 +195,13 @@ STATICFILES_DIRS = [
 STATIC_ROOT = (
     BASE_DIR / "staticfiles"
 )  # Basic configuration when using manage.py collectstatic
+
+
+OIDC_OP_CONFIG_URL = (
+    env.get_string("OIDC_OP_CONFIG_URL") + "/.well-known/openid-configuration"
+)
+
+
+DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT = env.get_string(
+    "DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT", ""
+)
