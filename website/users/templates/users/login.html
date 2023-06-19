@@ -10,7 +10,7 @@ Se connecter sur <b>Girls can code!</b>
 <div class="pt-3">
     {% crispy form %}
 </div>
-<a href="{% url 'oidc_authentication_init' %}">Se connecter (staff)</a>
+<a class="btn btn-light btn-block mt-2" href="{% url 'oidc_authentication_init' %}">Se connecter (staff)</a>
 {% endblock %}
 
 {% block bottom %}
