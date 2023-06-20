@@ -107,7 +107,6 @@ class ApplicationAdmin(admin.ModelAdmin):
             "Responsable légal",
             {"fields": ("phone", "address_resp")},
         ),
-        ("Etablissement scolaire", {"fields": ("school",)}),
         (
             "Sélection",
             {
