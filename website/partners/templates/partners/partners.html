@@ -1,0 +1,43 @@
+{% extends 'gccsite/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/partners/partial.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="partnerBand" class="">
+    <div class="row mx-auto my-auto justify-content-center">
+        <p class="h2 pt-4 pb-4 text-center">Nos partenaires: (Affichage temporaire)</p>
+
+        <div id="carousel-sponsors" class="carousel carousel-dark slide pb-3" data-bs-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% for partner in partners %}
+                    <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                        <div class="col-md-3">
+                            <div class="card-img">
+                                <a href="{{partner.website_url}}">
+                                    <img src="/{{partner.logo}}" class="img-fluid partner" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carousel-sponsor" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-sponsors" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/partners.js' %}"></script>
+{% endblock %}

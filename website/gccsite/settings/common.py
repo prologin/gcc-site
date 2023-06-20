@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "events",
     "users",
     "pages",
+    "partners",
 ]
 
 MIDDLEWARE = [
