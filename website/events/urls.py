@@ -11,6 +11,11 @@ urlpatterns = [
         views.HomePageView.as_view(http_method_names=["post"]),
         name="event_signup",
     ),
+    path(
+        "update-status-applicant",
+        views.UpdateStatusView.as_view(),
+        name="update_status_applicant",
+    ),
     path("review/", views.ReviewIndexView.as_view(), name="review"),
     path(
         "review/<int:year>/<int:event>",

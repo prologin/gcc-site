@@ -4,14 +4,27 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.views.generic import ListView, TemplateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, TemplateView, UpdateView
 
 from partners.models import Partner
 from users.models import User
 
 from .forms import EventSignupForm
 from .models import events, signup
+
+
+class UpdateStatusView(UpdateView):
+    http_method_names = ("post",)
+    modal = signup.Application
+    success_url = reverse_lazy("events:my_applications")
+
+    fields = ("status",)
+
+    def get_object(self, *args, **kwargs):
+        return signup.Application.objects.get(
+            id=self.request.POST["application-id"]
+        )
 
 
 class HomePageView(ListView):
