@@ -49,7 +49,6 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # SECURITY WARNING: don't run with debug turned on in production!
 
 PROJECT_NAME = "gccsite"
-ALLOWED_HOSTS = []
 
 # Application definition
 
