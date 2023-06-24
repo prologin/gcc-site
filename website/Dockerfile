@@ -9,8 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     POETRY_VIRTUALENVS_CREATE=false \
     VENV_PATH="/opt/venv" \
-    PATH="/opt/venv/bin:$PATH" \
-    DJANGO_SETTINGS_MODULE=gccsite.settings.dev
+    PATH="/opt/venv/bin:$PATH"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -36,18 +35,21 @@ RUN --mount=type=bind,target=./pyproject.toml,src=./pyproject.toml \
 
 FROM base
 
+ARG WORKDIR=/app/gccsite
 ARG DJANGO_UID=1000
 ARG DJANGO_GID=1000
 
 COPY --from=builder /opt/venv/ /opt/venv/
 
-RUN mkdir -p /app/gccsite && \
+RUN mkdir -p /app && \
     useradd -d /app -r -u ${DJANGO_UID} app && \
-    chown app:${DJANGO_GID} -R /app
+    chown app:${DJANGO_GID} -R /app && \
+    mkdir -p ${WORKDIR}/staticfiles && \
+    chown app:${DJANGO_GID} -R ${WORKDIR}/staticfiles
 
 USER app:${DJANGO_GID}
 
-WORKDIR /app/gccsite
+WORKDIR ${WORKDIR}
 
 COPY ./ ./
 

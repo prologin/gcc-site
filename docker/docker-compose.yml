@@ -46,6 +46,7 @@ services:
     environment:
       DEV: 1
       DJANGO_DEBUG: 1
+      DJANGO_SETTINGS_MODULE: gccsite.settings.dev
       DJANGO_SECRET_KEY_FILE: /run/secrets/django-secret-key
       DB_NAME: gccsite_dev
       DB_USER: gccsite_dev
@@ -105,7 +106,7 @@ services:
   reverse_dev:
     image: nginx
     ports:
-      - $REVERSE_PORT:80
+      - 0.0.0.0:$REVERSE_PORT:80
     restart: unless-stopped
     depends_on:
       - backend_dev

@@ -49,7 +49,6 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # SECURITY WARNING: don't run with debug turned on in production!
 
 PROJECT_NAME = "gccsite"
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -108,8 +107,12 @@ WSGI_APPLICATION = "gccsite.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django_prometheus.db.backends.postgresql",
+        "NAME": env.get_string("DB_NAME", "gccsite"),
+        "USER": env.get_string("DB_USER", "gccsite"),
+        "PASSWORD": env.get_secret("DB_PASSWORD"),
+        "HOST": env.get_string("DB_HOST", "localhost"),
+        "PORT": env.get_int("DB_PORT", 5432),
     }
 }
 
@@ -165,6 +168,7 @@ POST_OFFICE = {
     "MAX_RETRIES": 3,
     "LOG_LEVEL": 1 if not DEBUG else 2,
 }
+
 if DEBUG:
     POST_OFFICE["BACKENDS"] = {
         "default": "django.core.mail.backends.console.EmailBackend",
