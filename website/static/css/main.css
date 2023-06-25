@@ -125,7 +125,7 @@ h4, .contentTextSize {
  */
 
  .home-banner {
-  height: 70vh;
+  height: 95vh;
   background-image: url("../img/girl-class-v2.svg"),
     url("../img/code-background-v2.svg");
   background-repeat: no-repeat;
