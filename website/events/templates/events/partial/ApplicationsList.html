@@ -102,6 +102,16 @@
                 <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <strong>{{ CONTACT_EMAIL }}.</strong>
               </div>
             </div>
+
+            <div class="btn-group d-none d-sm-block text-center" role="group">
+              <form method="post" action="{% url 'events:update_status_applicant' %}">
+                {% csrf_token %}
+                <input type="hidden" name="application-id" value="{{ e.pk }}">
+                <input type="hidden" name="status" value="-2">
+                <input type="submit" class="btn btn-primary" value="Annuler ma venue">
+              </form>
+            </div>
+          </div>
             {% elif e.status == 1 %}
             <!-- ACCEPTED Application -->
             <div>
@@ -112,12 +122,20 @@
 
               <div class="btn-group d-none d-sm-block text-center" role="group">
                 <!-- TODO: add back -->
-                <button type="button" class="btn btn-primary">
-                  Confirmer ma venue
-                </button>
-                <button type="button" class="btn btn-light">
-                  Annuler ma candidature
-                </button>
+
+                <form method="post" action="{% url 'events:update_status_applicant' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="application-id" value="{{ e.pk }}">
+                  <input type="hidden" name="status" value="2">
+                  <input type="submit" class="btn btn-primary" value="Confirmer ma venue">
+                </form>
+
+                <form method="post" action="{% url 'events:update_status_applicant' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="application-id" value="{{ e.pk }}">
+                  <input type="hidden" name="status" value="-2">
+                  <input type="submit" class="btn btn-primary" value="Annuler ma venue">
+                </form>
               </div>
             </div>
             {% elif e.status == 0 %}
@@ -132,21 +150,21 @@
             <div>
               <p class="h6">
                 Ta candidature a été annulée par les organisateurs. Pour toute question ou réclamation, tu peux envoyer un mail à {{ CONTACT_EMAIL }}.
-                 <a href="/#event-list">Tu peux t'inscrire à d'autres stages ici.</a>
+                 <a href="{% url 'events:home' %}">Tu peux t'inscrire à d'autres stages ici.</a>
               </p>
             </div>
             {% elif e.status == -2 %}
             <!-- WITHDRAWN Application -->
             <div>
               <p class="h6">
-                Tu as annulé ta candidature. <a href="/#event-list">Inscris-toi à d'autres stages ici.</a>
+                Tu as annulé ta candidature. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
               </p>
             </div>
             {% elif e.status == -3 %}
             <!-- REJECTED Application -->
             <div>
               <p class="h6">
-                Le stage est déjà complet. <a href="/#event-list">Inscris-toi à d'autres stages ici.</a>
+                Le stage est déjà complet. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
               </p>
             </div>
             {% endif %}
@@ -156,7 +174,7 @@
     </div>
     {% empty %}
     <h2> Tu n'as pas de candidatures.
-      <a href="/#event-list">Retrouve tous nos stages ici !</a>
+      <a href="{% url 'events:home' %}">Retrouve tous nos stages ici !</a>
     </h2>
     {% endfor %}
   </div>
