@@ -8,7 +8,7 @@ class PartnerAdmin(admin.ModelAdmin):
     ordering = ("name",)
     list_display = (
         "name",
-        "description",
+        "status",
         "website_url",
     )
     search_fields = (
@@ -32,7 +32,6 @@ class PartnerAdmin(admin.ModelAdmin):
             "Status du partenaire",
             {
                 "fields": (
-                    "is_active",
                     "status",
                 )
             },
