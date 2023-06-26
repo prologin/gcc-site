@@ -28,7 +28,7 @@ class Partner(models.Model):
     )
 
     def upload_to(instance, filename):
-        return "upload/sponsors/{}".format(filename)
+        return "uploads/sponsors/{}".format(filename)
 
     # Ne pas mettre une image trop grande
     logo = models.FileField(
