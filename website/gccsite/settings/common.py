@@ -91,6 +91,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                "django.template.context_processors.media",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "gccsite.context_processors.my_context_processor",
@@ -201,6 +202,8 @@ STATIC_ROOT = (
     BASE_DIR / "staticfiles"
 )  # Basic configuration when using manage.py collectstatic
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = path.join(BASE_DIR, "media")
 
 OIDC_OP_CONFIG_URL = (
     env.get_string("OIDC_OP_CONFIG_URL") + "/.well-known/openid-configuration"

@@ -21,3 +21,4 @@ pg-data/
 **/db.sqlite3
 
 staticfiles/
+media/
