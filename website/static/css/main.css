@@ -3,19 +3,20 @@
 /* If the screen size is 601px wide or more */
 @media screen and (min-width: 601px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 /* If the screen size is 600px wide or less */
 @media screen and (max-width: 600px) {
   body {
-    font-size: 4vw;
+    font-size: 14px;
   }
 }
 
+
 body {
-  font-family: 'Inter',sans-serif;
+  font-family: proxima-nova, 'Inter',sans-serif;
   color: var(--main-dark-color);
 
   --gcc-pink-color: #FF0079;
@@ -135,6 +136,7 @@ h4, .contentTextSize {
 
 /* title animation */
 .home-title span {
+  text-align: center;
   position: relative;
   overflow: hidden;
   display: block;
@@ -216,12 +218,12 @@ h4, .contentTextSize {
 
 .navbar {
   background-color: white;
-  transition: top 0.5s ease;
 }
 
-.navbar.navbar-hidden {
-  top: -100px;
+.navbar-brand {
+  opacity: 0;
 }
+
 
 button.dropdown-item {
   z-index: 10;

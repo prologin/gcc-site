@@ -3,10 +3,7 @@ let carousels = document.querySelectorAll('.carousel');
 carousels.forEach((carousel) => {
     let items = carousel.querySelectorAll('.carousel-item');
 
-    console.log(items)
-
     items.forEach((el) => {
-        console.log(el)
         const minPerSlide = 4
         let next = el.nextElementSibling
         
@@ -21,5 +18,4 @@ carousels.forEach((carousel) => {
             next = next.nextElementSibling
         }
     });
-    console.log("")
 });

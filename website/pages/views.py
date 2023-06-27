@@ -30,3 +30,9 @@ class PrivacyView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         return {}
+
+class FAQView(TemplateView):
+    template_name = "pages/FAQ.html"
+
+    def get_context_data(self, *args, **kwargs):
+        return {}

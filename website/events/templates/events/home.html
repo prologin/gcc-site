@@ -11,18 +11,18 @@
 </div>
 {% endfor %}
 <!-- Home illustration -->
-<div class="home-banner container-fluid">
-  <div class="row h-100 align-items-center justify-content-center">
-    <div class="col-md-5 col-lg-5 content-background home-title col">
-      <div class="mb-4 text-center">
-        <img class="img-fluid" src="{% static 'img/logo_gcc.svg' %}" width="200">
+<div class="home-banner">
+  <div class="row h-100 align-items-center justify-content-center container-fluid">
+    <div class="col-xl-4 col-md-6 content-background home-title col">
+      <div class="mb-5 text-center">
+        <img class="img-fluid" src="{% static 'img/logo_gcc_blacktext.png' %}" width="500">
       </div>
       <span>
-        <h1 class=>Stage <strong>gratuit</strong> d'initiation à l'informatique pour collégiennes et lycéennes.</h1>
+        <h1>Stage <strong>gratuit</strong> d'initiation à l'informatique pour collégiennes et lycéennes.</h1>
       </span>
+    </div>
   </div>
 </div>
-
 
 
 <!-- Event list -->
@@ -31,11 +31,6 @@
 <!-- Partners: mis en avant-->
 
 {% include 'partners/partial/Partners.html' with status="avant" %}
-
-<!-- FAQ -->
-{% include 'pages/partial/FAQ.html' %}
-
-{% include 'partners/partial/Partners.html' with status="accueil" %}
 
 <!-- Newsletter -->
 <div class="newsletter-background text-center container-fluid">
