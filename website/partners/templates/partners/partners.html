@@ -7,37 +7,32 @@
 
 {% block content %}
 
-<div id="partnerBand" class="">
+<div id="partnerBand" class="newsletter-background">
     <div class="row mx-auto my-auto justify-content-center">
         <p class="h2 pt-4 pb-4 text-center">Nos partenaires: (Affichage temporaire)</p>
 
-        <div id="carousel-sponsors" class="carousel carousel-dark slide pb-3" data-bs-ride="carousel">
-            <div class="carousel-inner" role="listbox">
+        <div class="container text-center m-5 p-5">
+            <div class="row">
                 {% for partner in partners %}
-                    <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                        <div class="col-md-3">
-                            <div class="card-img">
-                                <a href="{{partner.website_url}}">
-                                    <img src="/{{partner.logo}}" class="img-fluid partner" />
-                                </a>
-                            </div>
+                    <div class="col-md-6 col-lg-4 col-xl-2">
+                        <div class="card-img m-2 p-2">
+                            <a href="{{partner.website_url}}">
+                                <img src="/{{partner.logo}}" class="img-fluid d-block mx-auto" />
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-            <a class="carousel-control-prev" href="#carousel-sponsor" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next" href="#carousel-sponsors" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
         </div>
     </div>
 </div>
 
+{% include 'partners/partial/Partners.html' with status="avant" %}
 
-{% endblock %}
+{% include 'partners/partial/Partners.html' with status="financement" %}
 
-{% block scripts %}
-<script src="{% static 'js/partners.js' %}"></script>
+{% include 'partners/partial/Partners.html' with status="accueil" %}
+
+
+
 {% endblock %}

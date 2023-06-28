@@ -4,56 +4,89 @@
 <link rel="stylesheet" href="{% static 'css/partners/partial.css' %}">
 {% endblock %}
 
-<div id="partnerBand" class="">
+<div class="partnerBand">
     <div class="row mx-auto my-auto justify-content-center">
         {% if status == "avant" %}
-        <p class="h2 pt-4 pb-4 text-center">Ils nous font confiance</p>
+            <p class="h2 pt-4 pb-4 text-center">Ils nous font confiance</p>
         {% elif status == "financement" %}
-        <p class="h2 pt-4 pb-4 text-center">Ils nous soutiennent</p>
+            <p class="h2 pt-4 pb-4 text-center">Ils nous soutiennent</p>
         {% else %}
-        <p class="h2 pt-4 pb-4 text-center">Ils nous accueillent</p>
+            <p class="h2 pt-4 pb-4 text-center">Ils nous accueillent</p>
         {% endif %}
 
-        <div id="carousel-sponsors-{{status}}" class="carousel carousel-dark slide pb-3" data-bs-ride="carousel">
-            <div class="carousel-inner" role="listbox">
+        {# If large screen #}
+        <div class="container text-center d-none d-md-block">
+            <div class="row">
                 {% if status == "avant" %}
-                {% for partner in partners_avant %}
-                <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                    <div class="col-md-3">
-                        <div class="card-img">
-                            <a href="{{partner.website_url}}">
-                                <img src="{{partner.logo.url}}" class="img-fluid partner" />
-                            </a>
+                    {% for partner in partners_avant %}
+                        <div class="col-md-6 col-lg-4 col-xl-2">
+                            <div class="card-img">
+                                <a href="{{partner.website_url}}">
+                                    <img src="{{partner.logo}}" class="img-fluid d-block mx-auto" />
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
                 {% elif status == "financement" %}
-                {% for partner in partners_financement %}
-                <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                    <div class="col-md-3">
-                        <div class="card-img">
-                            <a href="{{partner.website_url}}">
-                                <img src="{{partner.logo.url}}" class="img-fluid partner" />
-                            </a>
+                    {% for partner in partners_financement %}
+                        <div class="col-md-6 col-lg-4 col-xl-2">
+                            <div class="card-img">
+                                <a href="{{partner.website_url}}">
+                                    <img src="{{partner.logo}}" class="img-fluid partner" />
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
                 {% else %}
-                {% for partner in partners_accueil %}
-                <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                    <div class="col-md-3">
-                        <div class="card-img">
-                            <a href="{{partner.website_url}}">
-                                <img src="{{partner.logo.url}}" class="img-fluid partner" />
-                            </a>
+                    {% for partner in partners_accueil %}
+                        <div class="col-md-6 col-lg-4 col-xl-2">
+                            <div class="card-img">
+                                <a href="{{partner.website_url}}">
+                                    <img src="{{partner.logo}}" class="img-fluid partner" />
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
                 {% endif %}
             </div>
+        </div>
+
+        {# If small screen #}
+        <div id="carousel-sponsors-{{status}}" class="partnerBand carousel carousel-dark slide pb-3 d-block d-md-none" data-bs-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% if status == "avant" %}
+                    {% for partner in partners_avant %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <div class="card-img partner">
+                                <a href="{{partner.website_url}}">
+                                    <img src="{{partner.logo}}" class="img-fluid partner d-block mx-auto"/>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% elif status == "financement" %}
+                    {% for partner in partners_financement %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <div class="card-img partner">
+                                <a href="{{partner.website_url}}">
+                                    <img src="{{partner.logo}}" class="img-fluid partner d-block mx-auto"/>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for partner in partners_accueil %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            <div class="card-img partner">
+                                <a href="{{partner.website_url}}">
+                                    <img src="{{partner.logo}}" class="img-fluid partner d-block mx-auto"/>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
             <a class="carousel-control-prev" href="#carousel-sponsors-{{status}}" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </a>
@@ -62,16 +95,13 @@
             </a>
         </div>
 
-
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <a type="button" href="{% url 'partners:partners' %}"
-                        class="btn btn-light btn-block subtitleSize mb-3">
-                        Tous nos partenaires
-                    </a>
-                </div>
-                <div class="col-md-4"></div>
+        <div class="row">
+            <div class="col d-flex justify-content-center align-items-center">
+                <a type="button" href="{% url 'partners:partners' %}"
+                    class="btn btn-light btn-block subtitleSize mb-3">
+                    Tous nos partenaires
+                </a>
             </div>
+        </div>
     </div>
 </div>
