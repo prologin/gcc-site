@@ -1,6 +1,12 @@
 from django.template.response import SimpleTemplateResponse
 from django.views.generic import TemplateView
 
+from gccsite.context_processors import (
+    privacy_inscription_list,
+    privacy_newsletter_list,
+    privacy_stage_list,
+)
+
 
 def error_404_view(request, exception):
     response = SimpleTemplateResponse("pages/404.html")
@@ -32,11 +38,25 @@ class PrivacyMainView(TemplateView):
         return {}
 
 
-class PrivacyView(TemplateView):
+class PrivacyInscriptionView(TemplateView):
     template_name = "pages/privacy.html"
 
     def get_context_data(self, *args, **kwargs):
-        return {}
+        return {"PRIVACY_LIST": privacy_inscription_list()}
+
+
+class PrivacyStageView(TemplateView):
+    template_name = "pages/privacy.html"
+
+    def get_context_data(self, *args, **kwargs):
+        return {"PRIVACY_LIST": privacy_stage_list()}
+
+
+class PrivacyNewsletterView(TemplateView):
+    template_name = "pages/privacy.html"
+
+    def get_context_data(self, *args, **kwargs):
+        return {"PRIVACY_LIST": privacy_newsletter_list()}
 
 class FAQView(TemplateView):
     template_name = "pages/FAQ.html"
