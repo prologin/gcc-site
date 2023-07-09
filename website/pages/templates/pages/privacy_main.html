@@ -10,12 +10,13 @@
             Cette page regroupe les informations relatives à la collecte et au
             traitement de vos données personnelles par l'association Prologin et ses
             partenaires. Cliquez sur l'un des liens suivants pour consulter les
-            données récoltées dans le cadre de :
+            données que nous récoltons dans le cadre de :
         </p>
 
         {# Inscription site #}
-        <a class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 justify-content-between align-items-center">
-            <div class="col-11">
+        <a href="{% url 'pages:privacy_inscription' %}"
+           class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 align-items-center">
+            <div class="col">
                 L'inscription sur le site Girls Can Code!.
             </div>
             <div class="col-1">
@@ -24,7 +25,8 @@
         </a>
 
         {# Inscription stage #}
-        <a class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 justify-content-between align-items-center">
+        <a href="{% url 'pages:privacy_stage' %}"
+           class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 align-items-center">
             <div class="col-11">
                 L'inscription à un stage Girls Can Code!.
             </div>
@@ -34,7 +36,8 @@
         </a>
 
         {# Inscription newsletter #}
-        <a class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 justify-content-between align-items-center">
+        <a href="{% url 'pages:privacy_newsletter' %}"
+           class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 align-items-center">
             <div class="col-11">
                 L'inscription à la newsletter Girls Can Code!.
             </div>
