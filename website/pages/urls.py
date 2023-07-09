@@ -11,7 +11,7 @@ urlpatterns = [
         views.LegalNoticesView.as_view(),
         name="legal_notices",
     ),
-    path("privacy/", views.PrivacyView.as_view(), name="privacy"),
+    path("privacy/", views.PrivacyMainView.as_view(), name="privacy"),
     # TODO: Create appropriate pages
     path(
         "privacy-inscription/",

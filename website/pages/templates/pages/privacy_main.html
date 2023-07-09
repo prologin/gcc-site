@@ -1,0 +1,48 @@
+{% extends 'gccsite/base.html' %}
+
+{% block content %}
+<div class="basic-background">
+    <h1 class="text-center m-3">
+        Girls Can Code! (GCC!) et vos données personnelles
+    </h1>
+    <div class="col-6 offset-3" align="center">
+        <p>
+            Cette page regroupe les informations relatives à la collecte et au
+            traitement de vos données personnelles par l'association Prologin et ses
+            partenaires. Cliquez sur l'un des liens suivants pour consulter les
+            données récoltées dans le cadre de :
+        </p>
+
+        {# Inscription site #}
+        <a class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 justify-content-between align-items-center">
+            <div class="col-11">
+                L'inscription sur le site Girls Can Code!.
+            </div>
+            <div class="col-1">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </a>
+
+        {# Inscription stage #}
+        <a class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 justify-content-between align-items-center">
+            <div class="col-11">
+                L'inscription à un stage Girls Can Code!.
+            </div>
+            <div class="col-1">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </a>
+
+        {# Inscription newsletter #}
+        <a class="d-flex btn p-3 mb-3 rounded text-dark bg-dark bg-opacity-10 justify-content-between align-items-center">
+            <div class="col-11">
+                L'inscription à la newsletter Girls Can Code!.
+            </div>
+            <div class="col-1">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </a>
+
+    </div>
+</div>
+{% endblock %}
