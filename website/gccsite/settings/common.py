@@ -197,10 +197,6 @@ STATIC_URL = "/static/"  # Django will search for /src/
 STATICFILES_DIRS = [
     path.join(BASE_DIR, "static/"),  # Django will search for /src/
 ]
-STATIC_ROOT = (
-    BASE_DIR / "staticfiles"
-)  # Basic configuration when using manage.py collectstatic
-
 
 OIDC_OP_CONFIG_URL = (
     env.get_string("OIDC_OP_CONFIG_URL") + "/.well-known/openid-configuration"
@@ -210,3 +206,23 @@ OIDC_OP_CONFIG_URL = (
 DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT = env.get_string(
     "DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT", ""
 )
+
+STORAGES = {
+    "default": {
+        "BACKEND": "gccsite.storages.GCCMediaStorage"
+    },
+
+    "staticfiles": {
+        "BACKEND": "gccsite.storages.GCCStaticStorage"
+    }
+}
+
+AWS_ACCESS_KEY_ID = env.get_secret("DJANGO_S3_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = env.get_secret("DJANGO_S3_SECRET_KEY")
+
+DJANGO_S3_MEDIA_BUCKET = env.get_string("DJANGO_S3_MEDIA_BUCKET")
+DJANGO_S3_STATIC_BUCKET = env.get_string("DJANGO_S3_STATIC_BUCKET")
+AWS_S3_ENDPOINT_URL = env.get_string("DJANGO_S3_URL")
+AWS_S3_URL_PROTOCOL = "https:" if env.get_bool("DJANGO_S3_SECURE_URLS", True) else "http:"
+AWS_S3_CUSTOM_DOMAIN = env.get_string("DJANGO_S3_CUSTOM_DOMAIN", None)
+AWS_STATIC_LOCATION = "static"
