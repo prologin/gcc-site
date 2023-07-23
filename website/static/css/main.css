@@ -67,7 +67,6 @@ a {
 
 h1, .titleSize {
   font-size: 200%;
-  font-weight: bold;
 }
 
 h2, .subtitleSize {
@@ -366,6 +365,12 @@ button.dropdown-item {
 
 .footer-link-style {
   font-size: 80%;
+  color: inherit;
+}
+
+.footer-link-style:hover {
+  color: inherit;
+  text-decoration: underline;
 }
 
 .social-network-icon:hover {
