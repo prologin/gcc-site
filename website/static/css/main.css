@@ -33,7 +33,12 @@ body {
  * The default style of all links
  * */
 a {
-  text-decoration: none;
+  color: inherit;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--main-hover-color);
 }
 
 /*
@@ -363,14 +368,8 @@ button.dropdown-item {
   max-height: 30px;
 }
 
-.link-style {
+.footer-link-style {
   font-size: 80%;
-  color: inherit;
-}
-
-.link-style:hover {
-  color: inherit;
-  text-decoration: underline;
 }
 
 .social-network-icon:hover {
