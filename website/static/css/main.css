@@ -363,12 +363,12 @@ button.dropdown-item {
   max-height: 30px;
 }
 
-.footer-link-style {
+.link-style {
   font-size: 80%;
   color: inherit;
 }
 
-.footer-link-style:hover {
+.link-style:hover {
   color: inherit;
   text-decoration: underline;
 }
