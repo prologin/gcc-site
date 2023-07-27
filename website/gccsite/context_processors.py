@@ -11,9 +11,9 @@ def my_context_processor(req):
     }
     social_networks = [
         {
-            "link": "https://www.facebook.com/stagegirlscancode/",
-            "logo": "fa-facebook",
-            "alt": "Page Facebook des stages Girls Can Code!",
+            "link": "https://www.instagram.com/association_prologin/",
+            "logo": "fa-instagram",
+            "alt": "Page Instagram de l'association Prologin",
         },
         {
             "link": "https://www.flickr.com/photos/prologin/",
@@ -21,14 +21,14 @@ def my_context_processor(req):
             "alt": "Album photos de l'association Prologin",
         },
         {
-            "link": "https://www.instagram.com/association_prologin/",
-            "logo": "fa-instagram",
-            "alt": "Page Instagram de l'association Prologin",
-        },
-        {
             "link": "https://fr.linkedin.com/company/prologin",
             "logo": "fa-linkedin",
             "alt": "Page LinkedIn de l'association Prologin",
+        },
+        {
+            "link": "https://www.facebook.com/stagegirlscancode/",
+            "logo": "fa-facebook",
+            "alt": "Page Facebook des stages Girls Can Code!",
         },
         {
             "link": "https://twitter.com/prologin",

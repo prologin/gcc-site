@@ -12,12 +12,12 @@
   <div class="mx-5 my-4">
     <h2>Gestion du compte</h2>
     <p>
-      Les stages Girls Can Code! sont organisés par l'Association Prologin,
+      Les stages Girls Can Code! sont organisés par l'association Prologin,
       qui agit en tant que contrôleur de données. Les réponses collectées dans
-      ce formulaire nous permettent de préparer le stage: sélections,
-      documents, nourritures, etc. Pour en apprendre plus à propos de notre
+      ce formulaire nous permettent de préparer le stage : sélections,
+      documents, nourritures, etc. Pour en savoit plus à propos de notre
       gestion des données et de vos droits, consultez
-      <a href="/Privacy"> page dédiée </a>
+      <a href="/privacy"> page dédiée.</a>
     </p>
   </div>
 
@@ -53,7 +53,8 @@
       </div>
     </div>
     <div class="col">
-      <div id="personal-info" md="12" class="col mb-5 p-5 account-group">
+      <div md="12" class="col mb-5 p-5 account-group">
+        <div id="personal-info" style="display: block; position: relative; top: -120px; visibility: hidden"></div>
         <h1>Informations personnelles</h1>
         <h3>
           Informations traitées seulement en cas de sélection à un stage,
@@ -71,7 +72,8 @@
         {% endfor %}
       </div>
 
-      <div id="email" md="12" class="col my-5 p-5 account-group">
+      <div md="12" class="col my-5 p-5 account-group">
+        <div id="email" style="display: block; position: relative; top: -120px; visibility: hidden"></div>
         <h1>Changer d'adresse email</h1>
         {% crispy email_form %}
         {# Show the success or error messages #}
@@ -83,8 +85,8 @@
         {% endif %}
         {% endfor %}
       </div>
-
-      <div id="password" md="12" class="col my-5 p-5 account-group">
+      <div md="12" class="col my-5 p-5 account-group">
+        <div id="password" style="display: block; position: relative; top: -120px; visibility: hidden"></div>
         <h1>Changer de mot de passe</h1>
         {% crispy password_update_form %}
         {# Show the success or error messages #}
@@ -97,13 +99,19 @@
         {% endfor %}
       </div>
 
-      <div id="notifications" md="12" class="col my-5 p-5 account-group">
+      <div md="12" class="col my-5 p-5 account-group">
+        <div id="notifications" style="display: block; position: relative; top: -120px; visibility: hidden"></div>
+
         <h1>Notifications</h1>
         <h3>Gérez les autorisations.</h3>
         {% crispy notifs_update_form %}
       </div>
 
-      <div id="rgpd" md="12" class="col my-5 p-5 account-group">
+      <div id="rgpd" ></div>
+
+      <div md="12" class="col my-5 p-5 account-group">
+        <div id="rgpd" style="display: block; position: relative; top: -120px; visibility: hidden"></div>
+
         <h1>Exporter vos données personnelles</h1>
         <h3>
           Vous pouvez télécharger une archive contenant toutes vos données
