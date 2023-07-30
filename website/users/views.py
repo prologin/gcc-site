@@ -1,4 +1,5 @@
 from typing import Any
+import csv
 
 from django.conf import settings
 from django.contrib import messages
@@ -7,11 +8,14 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView, RedirectURLMixin
+from django.core.exceptions import ValidationError
+from django.core.validators import EmailValidator
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import resolve_url
+from django.shortcuts import resolve_url, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
+from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
@@ -28,30 +32,16 @@ from .forms import (
     PersonalInfoForm,
 )
 from .models import User
+from events.models import events, signup
 
 # Extra message tags
 TAG_PERSONAL_INFO = "personal_info"
 TAG_EMAIL = "email"
 TAG_PWD = "pwd"
 
-
-class UserDeleteView(DeleteView):
-    model = User
-    http_method_names = ["POST"]
-    # succes_url = ...
-
-    def get_object(self, *args, **kwargs):
-        return User.objects.get(id=self.request.user.id)
-
-
-class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
-    success_url = reverse_lazy("users:account_information")
-
-
 class UserEditView(LoginRequiredMixin, UpdateView):
     http_method_names = ("post",)
     model = User
-    success_url = reverse_lazy("users:account_information")
     fields = (
         "first_name",
         "last_name",
@@ -59,6 +49,57 @@ class UserEditView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, *args, **kwargs):
         return User.objects.get(id=self.request.user.id)
+
+    def get_success_url(self):
+        return reverse_lazy("users:account_information") + '#personal-info'
+
+class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    def get_success_url(self):
+        return reverse_lazy("users:account_information") + '#password'
+
+class ExportUsersCSVView(View):
+    model = User
+
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="users.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['First Name', 'Last Name', 'Email', 'Application Title', 'Application Description'])
+
+        users = User.objects.all()
+        applications = signup.Application.objects.filter(
+            user=self.request.user.id
+        ).order_by("-created_at")
+
+
+        for user in users:
+            writer.writerow([user.first_name, user.last_name, user.email])
+
+
+        for application in applications:
+            # Add application data to the CSV row
+            writer.writerow([application.title, application.description])
+        return response
+
+    def get_object(self, *args, **kwargs):
+        return User.objects.get(id=self.request.user.id)
+
+class UserDeleteView(DeleteView):
+    model = User
+    http_method_names = ("post",)
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        messages.success(self.request, _("L'utilisateur a été supprimé"))
+        return reverse('events:home')
+
+    def delete(self, request, *args, **kwargs):
+        # You can add additional checks here if needed before deletion
+        return super().delete(request, *args, **kwargs)
+
 
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
@@ -70,28 +111,23 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
         password_update_form = PasswordUpdateForm(request.POST)
         notifs_update_form = NotificationsUpdateForm(request.POST)
 
-        # if "submit-personal_info" in request.POST:
-        #     # user cannot be None because the page requires login
-        #     user = User.objects.get(id=request.user.id)
-        #     user.first_name = request.POST["first_name"]
-        #     user.last_name = request.POST["last_name"]
-        #     # Update user in the database.
-        #     user.save()
-
-        #     # Send a message to display
-        #     messages.success(
-        #         request,
-        #         "Informations personnelles mises à jour",
-        #         extra_tags=TAG_PERSONAL_INFO,
-        #     )
-
-        #     return HttpResponseRedirect(reverse("users:account_information"))
 
         if "submit-email" in request.POST:
             # user cannot be None because the page requires login
             user = User.objects.get(id=request.user.id)
 
             email = request.POST["email"]
+            email_validator = EmailValidator()
+
+            try:
+                email_validator(email)  # This will raise ValidationError if email is invalid
+            except ValidationError:
+                messages.warning(
+                    request,
+                    "L'email est invalide !",
+                    extra_tags=TAG_EMAIL,
+                )
+                return HttpResponseRedirect(reverse("users:account_information") + '#email')
 
             try:
                 # Try to find existing account with this email
@@ -115,83 +151,11 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
                     extra_tags=TAG_EMAIL,
                 )
 
-            return HttpResponseRedirect(reverse("users:account_information"))
-
-        # elif "submit-password" in request.POST:
-        #     url_password = reverse("users:account_information") + "#password"
-        #     # Check if the new password is valid (minimum length, common pwd, etc)
-        #     if not password_update_form.is_valid():
-        #         messages.warning(
-        #             request,
-        #             str(password_update_form.errors),
-        #             extra_tags=TAG_PWD,
-        #         )
-        #         return HttpResponseRedirect(url_password)
-
-        #     new_pwd = request.POST["new_pwd"]
-        #     new_pwd_ack = request.POST["new_pwd_ack"]
-
-        #     # Check if the 2 passwords match
-        #     if new_pwd != new_pwd_ack:
-        #         messages.warning(
-        #             request,
-        #             _("Les deux mot de passes ne correspondent pas !"),
-        #             extra_tags=TAG_PWD,
-        #         )
-        #         return HttpResponseRedirect(url_password)
-
-        #     # user cannot be None because the page requires login
-        #     user = User.objects.get(id=request.user.id)
-        #     current_pwd = request.POST["current_pwd"]
-
-        #     # Check if new password is the same than current one
-        #     if check_password(new_pwd, user.password):
-        #         messages.warning(
-        #             request,
-        #             _("Votre nouveau mot de passe est identique à l'actuel"),
-        #             extra_tags=TAG_PWD,
-        #         )
-        #         return HttpResponseRedirect(url_password)
-
-        #     # Check if current password is correct
-        #     if check_password(current_pwd, user.password):
-        #         user.set_password(new_pwd)
-        #         user.save()
-        #         update_session_auth_hash(request, user)
-        #         # Send a message to display
-        #         messages.success(
-        #             request,
-        #             _("Votre mot de passe à été mis à jour !"),
-        #             extra_tags=TAG_PWD,
-        #         )
-        #         return HttpResponseRedirect(url_password)
-        #     else:
-        #         messages.warning(
-        #             request,
-        #             _("Votre mot de passe est incorrect."),
-        #             extra_tags=TAG_PWD,
-        #         )
-        #         return HttpResponseRedirect(url_password)
+            return HttpResponseRedirect(reverse("users:account_information") + '#email')
 
         elif "submit-notifications" in request.POST:
             return HttpResponse("Notifs update form valid")
 
-        elif "submit-delete-user" in request.POST:
-            try:
-                user = User.objects.get(id=request.user.id)
-                user.delete()
-                messages.success(
-                    request,
-                    _("L'utilisateur a été supprimé"),
-                )
-            except:
-                messages.error(
-                    request,
-                    _("L'utilisateur n'existe pas ou a déjà été supprimé"),
-                )
-            return HttpResponseRedirect(reverse("events:home"))
-
-        return HttpResponse("nothing")
 
     def get_context_data(self, **kwargs: Any):
         # Get the request user to prefill the forms

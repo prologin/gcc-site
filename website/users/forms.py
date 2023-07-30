@@ -170,8 +170,8 @@ class DeleteUserForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "delete_user_form"
-        self.form_method = "post"
-
+        self.helper.form_method = "post"  # Corrected typo here
+        self.helper.form_action = reverse_lazy("users:delete_user")
         self.helper.layout = Layout(
             Submit(
                 name="submit-delete-user",
