@@ -49,7 +49,18 @@ function validateform() {
     fields.forEach(function (val) {
         val.classList.remove(INVALID_CLS);
         if (val.hasAttribute("required")) {
-            if (val.value.length == 0) {
+            if (val.type === "checkbox" || val.type === "radio") {
+                if (!val.checked) {
+                    validate = false;
+                    val.classList.add(INVALID_CLS);
+                }
+            } else if (val.tagName === "SELECT") {
+                // Handle select elements (dropdowns)
+                if (val.value === "start") {
+                    validate = false;
+                    val.classList.add(INVALID_CLS);
+                }
+            } else if (val.value.length == 0) {
                 validate = false;
                 val.classList.add(INVALID_CLS);
             }
