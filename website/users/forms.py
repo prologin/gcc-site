@@ -73,6 +73,7 @@ class EmailForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "email_form"
         self.helper.form_method = "post"
+        self.helper.form_action = reverse_lazy("users:update_user_email")
 
         submit = Div(
             Submit(

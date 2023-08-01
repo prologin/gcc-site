@@ -16,7 +16,11 @@ urlpatterns = [
         views.UserEditView.as_view(),
         name="update_user_info",
     ),
-
+    path(
+        "update-user-email",
+        views.UserEmailEditView.as_view(),
+        name="update_user_email",
+    ),
     path(
         "update-user-password",
         views.UserPasswordChangeView.as_view(),

@@ -59,6 +59,60 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy("users:account_information") + '#personal-info'
 
+class UserEmailEditView(LoginRequiredMixin, UpdateView):
+    http_method_names = ("post",)
+    model = User
+    fields = (
+        "email",
+    )
+
+    def save(self, form):
+        # Check if the email is valid using the EmailValidator
+        email = form.cleaned_data["email"]
+        email_validator = EmailValidator()
+
+        try:
+            email_validator(email)
+        except ValidationError:
+            messages.warning(
+                self.request,
+                "L'email est invalide !",
+                extra_tags=TAG_EMAIL,
+            )
+
+        # Check if another user already uses the same email address
+        try:
+            existing_user = User.objects.get(email=email)
+            messages.warning(
+                self.request,
+                "Un utilisateur avec cet email existe déjà !",
+                extra_tags=TAG_EMAIL,
+            )
+        except User.DoesNotExist:
+            # Unable to find a user, this is fine
+            user.email = email
+            # Update user in the database.
+            user.save()
+
+            # Send a message to display
+            messages.success(
+                request,
+                "Informations personnelles mises à jour",
+                extra_tags=TAG_EMAIL,
+            )
+
+        # Save the updated email for the user
+        return super().form_valid(form)
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy("users:account_information") + '#email'
+
+    def form_invalid(self, form):
+        return reverse_lazy("users:account_information") + '#email'
+
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     def get_success_url(self):
         return reverse_lazy("users:account_information") + '#password'
@@ -118,48 +172,48 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
         notifs_update_form = NotificationsUpdateForm(request.POST)
 
 
-        if "submit-email" in request.POST:
+        #if "submit-email" in request.POST:
             # user cannot be None because the page requires login
-            user = User.objects.get(id=request.user.id)
+  #          user = User.objects.get(id=request.user.id)
 
-            email = request.POST["email"]
-            email_validator = EmailValidator()
+ #           email = request.POST["email"]
+            #email_validator = EmailValidator()
 
-            try:
-                email_validator(email)  # This will raise ValidationError if email is invalid
-            except ValidationError:
-                messages.warning(
-                    request,
-                    "L'email est invalide !",
-                    extra_tags=TAG_EMAIL,
-                )
-                return HttpResponseRedirect(reverse("users:account_information") + '#email')
+           # try:
+          #      email_validator(email)  # This will raise ValidationError if email is invalid
+         #   except ValidationError:
+        #        messages.warning(
+       #             request,
+      #              "L'email est invalide !",
+     #               extra_tags=TAG_EMAIL,
+    #            )
+   #             return HttpResponseRedirect(reverse("users:account_information") + '#email')
 
-            try:
+  #          try:
                 # Try to find existing account with this email
-                match = User.objects.get(email=email)
+ #               match = User.objects.get(email=email)
                 # Send a message to display
-                messages.warning(
-                    request,
-                    "Un utilisateur avec cet email existe déjà !",
-                    extra_tags=TAG_EMAIL,
-                )
-            except User.DoesNotExist:
+#                messages.warning(
+                #    request,
+               #     "Un utilisateur avec cet email existe déjà !",
+              #      extra_tags=TAG_EMAIL,
+             #   )
+            #except User.DoesNotExist:
                 # Unable to find a user, this is fine
-                user.email = email
+            #    user.email = email
                 # Update user in the database.
-                user.save()
+           #     user.save()
 
                 # Send a message to display
-                messages.success(
-                    request,
-                    "Informations personnelles mises à jour",
-                    extra_tags=TAG_EMAIL,
-                )
+                #messages.success(
+               #     request,
+              #      "Informations personnelles mises à jour",
+             #       extra_tags=TAG_EMAIL,
+            #    )
 
-            return HttpResponseRedirect(reverse("users:account_information") + '#email')
+            #return HttpResponseRedirect(reverse("users:account_information") + '#email')
 
-        elif "submit-notifications" in request.POST:
+        if "submit-notifications" in request.POST:
             return HttpResponse("Notifs update form valid")
 
 
