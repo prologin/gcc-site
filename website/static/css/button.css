@@ -76,7 +76,7 @@
 
     --bs-btn-active-color: var(--main-dark-color);
     --bs-btn-active-bg: white;
-    --bs-btn-active-border-color: var(--main-hover-color);
+    --bs-btn-active-border-color: var(--main-dark-color);
     --bs-btn-active-shadow: inset 0 3px 5px white;
 
     --bs-btn-disabled-color: #fff;
@@ -88,6 +88,9 @@
     text-decoration: underline;
 }
 
+.btn-group>.btn-light{
+    border: 1px solid var(--main-dark-color)
+}
 
 .pagination {
     --bs-pagination-color: var(--main-dark-color);

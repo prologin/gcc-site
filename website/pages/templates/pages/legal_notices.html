@@ -1,9 +1,13 @@
 {% extends 'gccsite/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/pages/legal-notice.css' %}" />
+{% endblock %}
 
 {% block content %}
 <div class="basic-background">
-    <div class="container rounded-3 mx-auto p-auto row-sm-auto"
-        style="background-color: rgb(233, 236, 239)">
+    <div class="container rounded-3 mx-auto p-auto row-sm-auto m-4 legal-notice-container">
         <h1 class="display-3"> Mentions Légales </h1>
         <p class="lead">
             Les stages Girls Can Code! sont organisés par l'association
@@ -47,6 +51,16 @@
                 >
             </div>
         </div>
+    </div>
+
+    <div class="container rounded-3 mx-auto p-auto row-sm-auto m-4 legal-notice-container">
+        <h2>Utilisé pour le site :</h2>
+        <a href="https://storyset.com" class="secondary-button footer-link-style my-auto">
+            Illustrations fait avec Storyset
+        </a><br>
+        <a href="https://fontawesome.com/" class="secondary-button footer-link-style my-auto">
+            Icones importées depuis FontAwesome
+        </a>
     </div>
 </div>
 {% endblock %}

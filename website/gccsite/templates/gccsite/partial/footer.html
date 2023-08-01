@@ -1,34 +1,28 @@
 {% load static %}
 <footer class="footer-bg py-2 w-100 container-fluid">
   <div class="row mx-5">
-    <a class="col-12 col-lg-auto mb-3 mb-lg-0 text-center text-lg-left p-3" href="/">
+    <a class=" mb-3 mb-lg-0 text-center text-lg-left p-3" href="/">
       <img src="{% static 'img/logo_gcc.svg' %}" alt="Logo des stages Girls Can Code!" class="container-fluid picture-size pe-2"/>
     </a>
-    <div class="col-12 col-lg-auto text-center text-lg-left col " style="align-self: center">
+    <div class="text-center text-lg-left " style="align-self: center">
       <a href="/privacy" class="secondary-button footer-link-style my-auto">
         Politique de confidentialité
       </a>
     </div>
-    <div class="col-12 col-lg-auto text-center text-lg-left col" style="align-self: center">
+    <div class=" text-center text-lg-left" style="align-self: center">
       <a href="/legal-notices" class="secondary-button footer-link-style my-auto">
         Mentions légales
       </a>
     </div>
-    <div class="row col-12 col-lg-auto mx-auto ml-lg-auto mr-lg-0 p-0" style="align-item: center">
+    <div class="text-center text-lg-left" style="align-item: center">
       <a class="footer-link-style my-auto col-lg-auto order-12 order-lg-1 text-center" href="mailto:{{ CONTACT_EMAIL }}">
         {{ CONTACT_EMAIL }}
       </a>
-      <div class="row col-6 col-lg-auto order-1 order-lg-12 my-3 my-lg-0 mx-auto mr-lg-0 justify-content-center" align-h="center" style="align-content: center">
-        {% for sn in SOCIAL_NETWORKS %}
-        {% include 'gccsite/partial/SocialNetwork.html' with sn=sn %}
-        {% endfor %}
-      </div>
     </div>
-    <div class="col-12 col-lg-auto text-center text-lg-left" style="align-self: center">
-      Illustrations made with
-      <a href="https://storyset.com" class="secondary-button footer-link-style my-auto">
-        Storyset
-      </a>
+    <div class="row order-lg-12 justify-content-center mt-4 mb-4 ms-0 me-0" align-h="center" style="align-content: center">
+      {% for sn in SOCIAL_NETWORKS %}
+      {% include 'gccsite/partial/SocialNetwork.html' with sn=sn %}
+      {% endfor %}
     </div>
   </div>
 </footer>

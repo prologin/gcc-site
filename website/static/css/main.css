@@ -50,6 +50,11 @@ a:hover {
 .asteriskField{
   padding-left: 8px;
 }
+
+.accordion-button {
+  font-size: 20px;
+}
+
 /*
  * To use in each view that use header and footer.
  * */
@@ -116,7 +121,8 @@ h4, .contentTextSize {
 .content-background {
   background-color: white;
   border-radius: var(--global-border-radius);
-  padding: 15px;
+  border-radius: var(--global-border-radius);
+  border: 1px solid var(--light-text-color);
 }
 
 .basic-background {

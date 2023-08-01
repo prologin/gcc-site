@@ -11,37 +11,51 @@
             </div>
             <div class="my-auto col-sm-5 offset-sm-2 col-md-6 offset-md-0">
               <strong>Stage à {{ e.event}}</strong>
-              <p class="d-none d-sm-block">Du {{ e.event.start_date|date:"l d F" }} au {{ e.event.end_date|date:"l d F Y" }}</p>
+              <p class="d-none d-sm-block m-0">Du {{ e.event.start_date|date:"l d F" }} au {{ e.event.end_date|date:"l d F Y" }}</p>
             </div>
             <div class="col d-none d-lg-block my-auto">
               {% if e.status == 3 %}
               <!-- ENDED Application -->
-              <i class="fa-solid fa-flag-checkered me-2 fa-2xl"></i>
-              Stage terminé
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2"><i class="row fa-solid fa-flag-checkered me-2 fa-2xl"></i></div>
+                <div class="col p-0"> Stage terminé</div>
+              </div>
               {% elif e.status == 2 %}
               <!-- CONFIRMED Application -->
-              <i class="fa-regular fa-circle-check me-2 fa-2xl" style="color: #10c001;"></i>
-              Acceptée et confirmée
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2 align-self-center"><i class="fa-regular fa-circle-check me-2 fa-2xl" style="color: #10c001;"></i></div>
+                <div class="col p-0"> Acceptée et confirmée</div>
+              </div>
               {% elif e.status == 1 %}
               <!-- ACCEPTED Application -->
-              <i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i>
-               Acceptée, non confirmée
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2 align-self-center"><i class="fa-regular fa-circle-check me-2 fa-2xl"  style="color: #c4c4c4;"></i></div>
+                <div class="col p-0"> À confirmer</div>
+              </div>
               {% elif e.status == 0 %}
               <!-- PENDING Application -->
-              <i class="fa-solid fa-spinner me-2 fa-2xl"></i>
-              En cours de traitement
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2 align-self-center"><i class="fa-regular fa-clock me-2 fa-2xl"></i></div>
+                <div class="col p-0"> En cours de traitement</div>
+              </div>
               {% elif e.status == -1 %}
               <!-- CANCELLED Application -->
-              <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
-              Annulée par les organisateurs
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2 align-self-center"><i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i></div>
+                <div class="col p-0"> Annulée par les organisateurs</div>
+              </div>
               {% elif e.status == -2 %}
               <!-- WITHDRAWN Application -->
-              <i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i>
-              Désistée
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2 align-self-center"><i class="fa-regular fa-hand me-2 fa-2xl" style="color: #FF0000;"></i></div>
+                <div class="col p-0"> Désistée</div>
+              </div>
               {% elif e.status == -3 %}
               <!-- REJECTED Application -->
-              <i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i>
-              Candidature non retenue
+              <div class="row justify-content-center">
+                <div class="col-auto p-0 ps-2 align-self-center"><i class="fa-regular fa-circle-xmark me-2 fa-2xl" style="color: #FF0000;"></i></div>
+                <div class="col p-0"> Candidature non retenue</div>
+              </div>
               {% endif %}
             </div>
           </div>
@@ -62,36 +76,35 @@
               <br>
               <div class="m-3 row justify-content-around">
                 <iframe class="col" src="https://maps.google.com/maps?q={{ e.event.center.address.lat|floatformat:"u" }},{{ e.event.center.address.lng|floatformat:"u" }}&hl=es;z=14&amp;output=embed"></iframe>
-                <div class="row m-3 justify-content-around">
-                  <div class="col-md-auto row justify-content-center">
-                    <div class="col-auto text-center">
-                      <i class="far fa-calendar-check" style="font-size: 2em"></i>
-                    </div>
-                    <ul class="col m-0 p-0" style="list-style: none;">
-                      <li>
-                        <strong>{{ e.event.start_date }}</strong>
-                      </li>
-                      <li>
-                        <strong>{{ e.event.end_date }}</strong>
-                      </li>
-                    </ul>
+              </div>
+              <div class="row m-3 justify-content-around">
+                <div class="col-md-auto row justify-content-center">
+                  <div class="col-auto text-center align-self-center">
+                    <i class="far fa-calendar-check" style="font-size: 2em"></i>
                   </div>
-                  <div class="col-md-auto row justify-content-center">
-                    <div class="col-auto text-center">
-                      <i class="fas fa-location-dot" style="font-size: 2em"></i>
-                    </div>
-                    <ul class="col m-0 p-0" style="list-style: none;">
-                      <li>
-                        <p class="h3">{{ e.event.center.address.street }}</p>
-                      </li>
-                      <li>
-                        <p class="h3">{{ e.event.center.address.city }}</p>
-                      </li>
-                    </ul>
+                  <ul class="col m-0 p-0" style="list-style: none;">
+                    <li>
+                      <strong>{{ e.event.start_date }}</strong>
+                    </li>
+                    <li>
+                      <strong>{{ e.event.end_date }}</strong>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-auto row justify-content-center">
+                  <div class="col-auto text-center align-self-center">
+                    <i class="fas fa-location-dot" style="font-size: 2em"></i>
                   </div>
+                  <ul class="col m-0 p-0" style="list-style: none;">
+                    <li>
+                      <strong>{{ e.event.center.address.street }}</strong>
+                    </li>
+                    <li>
+                      <strong>{{ e.event.center.address.city }}</strong>
+                    </li>
+                  </ul>
                 </div>
               </div>
-
               <div class="m-4 row">
                 <p class="col-auto"> Les documents suivants seront à fournir le 1er jour. Si vous n'avez pas d'imprimante, des exemplaires seront disponibles sur place.</p>
                 <!-- TODO : DOCUMENT GENERATOR -->
@@ -99,7 +112,7 @@
               </div>
               <div class="m-4">
                 <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i> Les repas sont pris en charge par l'association <br>
-                <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <a href="mailto:{{ CONTACT_EMAIL }}"><strong>{{ CONTACT_EMAIL }}.</strong></a>
+                <i class="fa-solid fa-circle-question fa-xl"></i> Des question ? Envoyez un mail à <a href="mailto:{{ CONTACT_EMAIL }}"><strong>{{ CONTACT_EMAIL }}</strong></a>
               </div>
             </div>
 
@@ -111,30 +124,27 @@
                 <input type="submit" class="btn btn-primary" value="Annuler ma venue">
               </form>
             </div>
-          </div>
             {% elif e.status == 1 %}
             <!-- ACCEPTED Application -->
             <div>
-              <p class="h4">
+              <p class="h6">
                 Félicitations, tu as été sélectionnée !
-                Il faut maintenant que tu valides ta candidature pour confirmer ta venue.
+                Il faut maintenant que tu confirmes ta venue.
               </p>
 
-              <div class="btn-group d-none d-sm-block text-center" role="group">
-                <!-- TODO: add back -->
-
-                <form method="post" action="{% url 'events:update_status_applicant' %}">
+              <div class="row justify-content-center text-center mt-4" role="group">
+                <form class="col-md-4 col-lg-3" method="post" action="{% url 'events:update_status_applicant' %}">
                   {% csrf_token %}
                   <input type="hidden" name="application-id" value="{{ e.pk }}">
                   <input type="hidden" name="status" value="2">
                   <input type="submit" class="btn btn-primary" value="Confirmer ma venue">
                 </form>
 
-                <form method="post" action="{% url 'events:update_status_applicant' %}">
+                <form class="col-md-4 col-lg-3" method="post" action="{% url 'events:update_status_applicant' %}">
                   {% csrf_token %}
                   <input type="hidden" name="application-id" value="{{ e.pk }}">
                   <input type="hidden" name="status" value="-2">
-                  <input type="submit" class="btn btn-primary" value="Annuler ma venue">
+                  <input type="submit" class="btn btn-light" value="Annuler ma venue">
                 </form>
               </div>
             </div>
@@ -149,7 +159,7 @@
             <!-- CANCELLED Application -->
             <div>
               <p class="h6">
-                Ta candidature a été annulée par les organisateurs. Pour toute question ou réclamation, tu peux envoyer un mail à {{ CONTACT_EMAIL }}.
+                Ta candidature a été annulée par les organisateurs. Pour toute question ou réclamation, tu peux envoyer un mail à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL}}</a>
                  <a href="{% url 'events:home' %}">Tu peux t'inscrire à d'autres stages ici.</a>
               </p>
             </div>
