@@ -66,9 +66,9 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
         "email",
     )
 
-    def save(self, form):
+    def post(self, request, *agrs, **kwargs):
         # Check if the email is valid using the EmailValidator
-        email = form.cleaned_data["email"]
+        email = request.POST["email"]
         email_validator = EmailValidator()
 
         try:
@@ -79,15 +79,17 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
                 "L'email est invalide !",
                 extra_tags=TAG_EMAIL,
             )
+            return HttpResponseRedirect(reverse("users:account_information") + '#email')
 
         # Check if another user already uses the same email address
         try:
-            existing_user = User.objects.get(email=email)
+            match = User.objects.get(email=email)
             messages.warning(
                 self.request,
                 "Un utilisateur avec cet email existe déjà !",
                 extra_tags=TAG_EMAIL,
             )
+            return HttpResponseRedirect(reverse("users:account_information") + '#email')
         except User.DoesNotExist:
             # Unable to find a user, this is fine
             user.email = email
@@ -108,9 +110,6 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse_lazy("users:account_information") + '#email'
-
-    def form_invalid(self, form):
         return reverse_lazy("users:account_information") + '#email'
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
