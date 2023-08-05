@@ -252,4 +252,64 @@ def privacy_stage_list():
 
 def privacy_newsletter_list():
     # TODO: Update document and fill this
-    return {}
+    return [
+        _PRIVACY_BASE_CTX,
+        {
+            "title": "Objet du traitement de données",
+            "content": """
+            <h4>Finalités</h4>
+            <p>Le traitement a pour objet <strong>l'inscription à la newsletter Girls Can Code! (GCC!)</strong>.<br>Il permet à l'association Prologin :</p>
+            <ul>
+                <li>de communiquer autour des stages Girls Can Code!</li>
+            </ul>
+            <h4>Base légale</h4>
+            <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineures de 16 ans), ce sont les articles 6(1)a et 8 du RGPD.</p>
+            """,
+        },
+        {
+            "title": "Données traitées",
+            "content": """
+            <h4>Catégories de données traitées</h4>
+            <ul>
+                <li>Données d'identification : adresse email ;</li>
+                <li>Internet : mesure d'audience.</li>
+            </ul>
+            <h4>Source des données</h4>
+            <p>Ces informations sont recueillies directement auprès de la participante, et/ou de son responsable légal le cas échéant (mineures de 16 ans).</p>
+            <h4>Caractère obligatoire des réponses</h4>
+            <p>L'inscription à la newsletter GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p>
+            <h4>Prise de décision automatisée</h4>
+            <p>Le traitement ne prévoit pas de prise de décision automatisée.</p>
+            """,
+        },
+        {
+            "title": "Personnes concernées",
+            "content": """
+            <p>Le traitement de données concerne :</p>
+            <ul>
+                <li>les personnes physiques souhaitant être informées des activités l'association Prologin relatives aux stages GCC! ;</li>
+                <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
+            </ul>
+            """,
+        },
+        {
+            "title": "Destinataires des données",
+            "content": """
+            <h4>Catégories de destinataires</h4>
+            <p>En fonction de leurs besoins respectifs, sont destinataires de tout ou partie des données : </p>
+            <ul>
+                <li>les membres autorisés de Prologin.</li>
+            </ul>
+            <h4>Transfert des données hors UE</h4>
+            <p>Aucun transfert de données hors de l'Union européenne n'est réalisé.</p>
+            """,
+        },
+        {
+            "title": "Durée de conservation",
+            "content": "<p>Les données d’identification sont conservées jusqu'à la désinscription de la personne.</p>",
+        },
+        {
+            "title": "Sécurité",
+            "content": "<p>Des mesures de sécurité visant à garantir la confidentialité, l'intégrité et la disponibilité des données collectées, issues du référentiel ISO/IEC27002 ont été mises en œuvre. Elles comprennent, sans s'y limiter, le chiffrement des données en transit et leur sauvegarde régulière externalisée.</p>",
+        },
+    ]
