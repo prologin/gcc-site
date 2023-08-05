@@ -105,7 +105,7 @@ def my_context_processor(req):
 
 
 # -------------------------------#
-#        PRIVACY CONTEXTS       #
+#        PRIVACY CONTEXTS        #
 # -------------------------------#
 
 # Le premier élément de la liste à puce est le même pour
@@ -121,11 +121,28 @@ def privacy_inscription_list():
         _PRIVACY_BASE_CTX,
         {
             "title": "Objet du traitement de données",
-            "content": "<h4>Finalités</h4><p>Le traitement a pour objet <strong>l’inscription sur le site Girls Can Code! (GCC!)</strong>.<h4>Base légale</h4><p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineurs de 15 ans), ce sont les articles 6(1)a et 8 du RGPD,  et 45 de la Loi Informatique et Libertés.</p>",
+            "content": """
+            <h4>Finalités</h4>
+            <p>Le traitement a pour objet <strong>l’inscription sur le site Girls Can Code! (GCC!)</strong>.</p>
+            <h4>Base légale</h4>
+            <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineurs de 15 ans), ce sont les articles 6(1)a et 8 du RGPD,  et 45 de la Loi Informatique et Libertés.</p>
+            """,
         },
         {
             "title": "Données traitées",
-            "content": "<h4>Catégories de données traitées</h4><ul> <li>Données d'identification : nom, prénom, adresse email</li> <li>Internet : mesure d'audience ;</li> </ul><h4>Source des données</h4><p>Ces informations sont recueillies directement auprès de la participante, et/ou de son responsable légal le cas échéant (mineurs de 15 ans).</p><h4>Caractère obligatoire des réponses</h4><p>L'inscription au site GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p><h4>Prise de décision automatisée</h4><p>Le traitement ne prévoit pas de prise de décision automatisée.</p>",
+            "content": """
+            <h4>Catégories de données traitées</h4>
+            <ul>
+                <li>Données d'identification : nom, prénom, adresse email ;</li>
+                <li>Internet : mesure d'audience.</li>
+            </ul>
+            <h4>Source des données</h4>
+            <p>Ces informations sont recueillies directement auprès de la participante, et/ou de son responsable légal le cas échéant (mineurs de 15 ans).</p>
+            <h4>Caractère obligatoire des réponses</h4>
+            <p>L'inscription au site GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p>
+            <h4>Prise de décision automatisée</h4>
+            <p>Le traitement ne prévoit pas de prise de décision automatisée.</p>
+            """,
         },
         {
             "title": "Personnes concernées",
@@ -133,7 +150,16 @@ def privacy_inscription_list():
         },
         {
             "title": "Destinataires des données",
-            "content": "<h4>Catégories de destinataires</h4><p>En fonction de leurs besoins respectifs, sont destinataires de tout ou partie des données : </p><ul> <li>les membres autorisés de Prologin ;</li> <li>les membres autorisés des sous-traitants de Prologin ;</li> </ul><p></p><h4>Transfert des données hors UE</h4><p>Aucun transfert de données hors de l'Union européenne n'est réalisé.</p>",
+            "content": """
+            <h4>Catégories de destinataires</h4>
+            <p>En fonction de leurs besoins respectifs, sont destinataires de tout ou partie des données : </p>
+            <ul>
+                <li>les membres autorisés de Prologin ;</li>
+                <li>les membres autorisés des sous-traitants de Prologin ;</li>
+            </ul>
+            <h4>Transfert des données hors UE</h4>
+            <p>Aucun transfert de données hors de l'Union européenne n'est réalisé.</p>
+            """,
         },
         {
             "title": "Durée de conservation",
@@ -151,19 +177,67 @@ def privacy_stage_list():
         _PRIVACY_BASE_CTX,
         {
             "title": "Objet du traitement de données",
-            "content": "<h4>Finalités</h4><p>Le traitement a pour objet <strong>l'organisation des stages Girls Can Code! (GCC!)</strong>.<br>Il permet à l'association Prologin :</p><ul><li>de traiter les demandes de participation ;</li> <li>d'attribuer ou non une bourse financière ;</li> <li>d'adapter le contenu pédagogique aux attentes des participantes ;</li> <li>d'adapter les repas aux contraintes alimentaires de chacune ;</li> <li>de répondre aux sollicitations de la part des participantes ;</li> <li>de piloter les stages (évaluation de la satisfaction des participantes, production de statistiques).</li> </ul><p></p><h4>Base légale</h4><p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineures de 16 ans), ce sont les articles 6(1)a et 8 du RGPD.</p>",
+            "content": """
+            <h4>Finalités</h4>
+            <p>Le traitement a pour objet <strong>l'organisation des stages Girls Can Code! (GCC!)</strong>.<br>Il permet à l'association Prologin :</p>
+            <ul>
+                <li>de traiter les demandes de participation ;</li>
+                <li>d'attribuer ou non une bourse financière ;</li>
+                <li>d'adapter le contenu pédagogique aux attentes des participantes ;</li>
+                <li>d'adapter les repas aux contraintes alimentaires de chacune ;</li>
+                <li>de répondre aux sollicitations de la part des participantes ;</li>
+                <li>de piloter les stages (évaluation de la satisfaction des participantes, production de statistiques).</li>
+            </ul>
+            <h4>Base légale</h4>
+            <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineures de 16 ans), ce sont les articles 6(1)a et 8 du RGPD.</p>
+            """,
         },
         {
             "title": "Données traitées",
-            "content": "<h4>Catégories de données traitées</h4><ul> <li>Données d'identification : nom, prénom, adresse postale... ;</li> <li>Vie scolaire (dite professionnelle) : niveau d'étude ;</li> <li>Vie personnelle : habitudes alimentaires ;</li> <li>Informations d'ordre économique et financier, si une demande de bourse est faite par la participante ;</li> <li>Internet : mesure d'audience ;</li> <li>Données de santé : éventuels traitements médicaux et allergies.</li></ul><h4>Source des données</h4><p>Ces informations sont recueillies directement auprès de la participante, et/ou de son responsable légal le cas échéant (mineures de 16 ans).</p><h4>Caractère obligatoire des réponses</h4><p>L'inscription à un stage GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p><h4>Prise de décision automatisée</h4><p>Le traitement ne prévoit pas de prise de décision automatisée : toutes les demandes d'inscription sont revues par un être humain :)</p>",
+            "content": """
+            <h4>Catégories de données traitées</h4>
+            <ul>
+            <li>Données d'identification : nom, prénom, adresse postale... ;</li>
+            <li>Vie scolaire (dite professionnelle) : niveau d'étude ;</li>
+            <li>Vie personnelle : habitudes alimentaires ;</li>
+            <li>Informations d'ordre économique et financier, si une demande de bourse est faite par la participante ;</li>
+            <li>Internet : mesure d'audience ;</li>
+            <li>Données de santé : éventuels traitements médicaux et allergies.</li>
+        </ul>
+        <h4>Source des données</h4>
+        <p>Ces informations sont recueillies directement auprès de la participante, et/ou de son responsable légal le cas échéant (mineures de 16 ans).</p>
+        <h4>Caractère obligatoire des réponses</h4>
+        <p>L'inscription à un stage GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p>
+        <h4>Prise de décision automatisée</h4>
+        <p>Le traitement ne prévoit pas de prise de décision automatisée : toutes les demandes d'inscription sont revues par un être humain :)</p>
+            """,
         },
         {
             "title": "Personnes concernées",
-            "content": "<p>Le traitement de données concerne :</p><ul> <li>les personnes physiques souhaitant participer à un stage GCC! ;</li> <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li> <li>les membres de Prologin chargés de l'organisation des stages ;</li> <li>les personnes physiques ou morales partenaires ou sous-traitants de Prologin.</li> </ul><p></p>",
+            "content": """
+            <p>Le traitement de données concerne :</p>
+            <ul>
+                <li>les personnes physiques souhaitant participer à un stage GCC! ;</li>
+                <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
+                <li>les membres de Prologin chargés de l'organisation des stages ;</li>
+                <li>les personnes physiques ou morales partenaires ou sous-traitants de Prologin.</li>
+            </ul>
+            """,
         },
         {
             "title": "Destinataires des données",
-            "content": "<h4>Catégories de destinataires</h4><p>En fonction de leurs besoins respectifs, sont destinataires de tout ou partie des données : </p><ul> <li>les membres autorisés de Prologin ;</li> <li>les membres autorisés des partenaires et/ou sous-traitants de Prologin ;</li> <li>les autres participantes à un même stage ;</li> <li>les services de secours d'urgence en cas de besoin.</li> </ul><p></p><h4>Transfert des données hors UE</h4><p>Aucun transfert de données hors de l'Union européenne n'est réalisé.</p>",
+            "content": """
+            <h4>Catégories de destinataires</h4>
+            <p>En fonction de leurs besoins respectifs, sont destinataires de tout ou partie des données : </p>
+            <ul>
+                <li>les membres autorisés de Prologin ;</li>
+                <li>les membres autorisés des partenaires et/ou sous-traitants de Prologin ;</li>
+                <li>les autres participantes à un même stage ;</li>
+                <li>les services de secours d'urgence en cas de besoin.</li>
+            </ul>
+            <h4>Transfert des données hors UE</h4>
+            <p>Aucun transfert de données hors de l'Union européenne n'est réalisé.</p>
+            """,
         },
         {
             "title": "Durée de conservation",
