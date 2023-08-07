@@ -125,7 +125,7 @@ def privacy_inscription_list():
             <h4>Finalités</h4>
             <p>Le traitement a pour objet <strong>l’inscription sur le site Girls Can Code! (GCC!)</strong>.</p>
             <h4>Base légale</h4>
-            <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineurs de 15 ans), ce sont les articles 6(1)a et 8 du RGPD,  et 45 de la Loi Informatique et Libertés.</p>
+            <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineurs de 15 ans), ce sont les articles 6(1)a et 8 du RGPD, et 45 de la Loi Informatique et Libertés.</p>
             """,
         },
         {
@@ -298,7 +298,8 @@ def privacy_newsletter_list():
             <h4>Catégories de destinataires</h4>
             <p>En fonction de leurs besoins respectifs, sont destinataires de tout ou partie des données : </p>
             <ul>
-                <li>les membres autorisés de Prologin.</li>
+                <li>les membres autorisés de Prologin ;</li>
+<li>les sous-traitants autorisés de Prologin pour la gestion de l'inscription et l'envoi de la newsletter.</li>
             </ul>
             <h4>Transfert des données hors UE</h4>
             <p>Aucun transfert de données hors de l'Union européenne n'est réalisé.</p>
