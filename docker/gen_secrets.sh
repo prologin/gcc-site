@@ -31,3 +31,6 @@ echo "tVOgJ4hxT8uV0bjMIjT4psPARaR1XgxhIYoXcqnGIFZVmCpMTrhDKEK2qy6TT9VO" > ./secr
 echo "t9pvgKnwB37CeutWpPOEKMDv3gmp9kjUtQ5ifDzF9gBPMGO4yhHLdUNnh7AjRuWH" > ./secrets/oidc-client-secret
 
 echo "BOAGOnqH0OyR086rYF8oT6VUcCo1tNYITWlRTyyOU5BzJpLjV6VWBom3boADe4Z0" > ./secrets/documents-generator-client-id
+
+echo "accessKey1" > ./secrets/s3-access
+echo "verySecretKey1" > ./secrets/s3-secret
