@@ -219,8 +219,6 @@ def privacy_stage_list():
             <ul>
                 <li>les personnes physiques souhaitant participer à un stage GCC! ;</li>
                 <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
-                <li>les membres de Prologin chargés de l'organisation des stages ;</li>
-                <li>les personnes physiques ou morales partenaires ou sous-traitants de Prologin.</li>
             </ul>
             """,
         },
