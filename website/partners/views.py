@@ -8,7 +8,7 @@ from .models import Partner
 
 class PartnersView(ListView):
     model = Partner
-    template_name = "partners/partners.html"
+    template_name = "partners/partners_page.html"
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)

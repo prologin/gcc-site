@@ -16,7 +16,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
-    ("start", "Selectionne ton niveau actuel"),  # Start choice
+    ("start", "------ Selectionner ton niveau d'étude actuel ------"),  # Start choice
     ("6ème", "6ème"),
     ("5ème", "5ème"),
     ("4ème", "4ème"),
@@ -27,7 +27,7 @@ SCHOOL_LEVEL = [
 ]
 
 TSHIRT = [
-    ("start", "selectionne la taille du t-shirt"),
+    ("start", "------ Selectionner une taille de t-shirt ------"),
     ("XS", "XS"),
     ("S", "S"),
     ("M", "M"),

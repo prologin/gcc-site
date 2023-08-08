@@ -243,6 +243,9 @@ h4, .contentTextSize {
 .navbar-brand {
   opacity: 0;
 }
+.navbar-brand:hover {
+  text-decoration: none;
+}
 
 .dropdown-header:hover {
   color: var(--bs-dropdown-header-color)
@@ -257,6 +260,7 @@ button.dropdown-item {
   align-self: center;
   font-size: x-large;
 }
+
 /*
  * Event List
  */
