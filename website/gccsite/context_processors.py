@@ -272,9 +272,12 @@ def privacy_stage_list():
         {
             "title": "Durée de conservation",
             "content": """
-            <p>Les données d’identification, de vie scolaire et personnelle sont conservées jusqu'à la désinscription de la personne.
-            <br>Les informations d'ordre économique et financier sont conservées le temps d'attribuer ou non une bourse plus un mois.
-            <br>Les données de santé sont conservées jusqu'à 3 ans après la fin du stage.</p>
+            <p>
+                Les données d’identification, de vie scolaire et personnelle sont conservées jusqu'à la fin du stage en base active,
+                puis 6 mois supplémentaires en sauvegarde.
+                <br>Les informations d'ordre économique et financier sont conservées le temps d'attribuer ou non une bourse plus un mois.
+                <br>Les données de santé sont conservées jusqu'à 3 ans après la fin du stage.
+            </p>
             """,
         },
         {
