@@ -192,7 +192,10 @@ def privacy_inscription_list():
         },
         {
             "title": "Durée de conservation",
-            "content": "<p>Les données d’identification sont conservées jusqu'à la désinscription de la personne.</p>",
+            "content": """
+            <p>Les nom et prénom de la personne sont conservés en base active jusqu'à sa désinscription.
+            L'adresse email est gardée dans les sauvegardes 6 mois supplémentaires après la désinscription.</p>
+            """,
         },
         {
             "title": "Sécurité",
