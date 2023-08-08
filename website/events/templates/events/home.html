@@ -11,27 +11,18 @@
 </div>
 {% endfor %}
 <!-- Home illustration -->
-<div class="home-banner container-fluid">
-  <div class="row h-100 align-items-center justify-content-center">
-    <div class="text-md-left col-md-5 col-lg-4 content-background home-title col">
+<div class="home-banner">
+  <div class="row h-100 align-items-center justify-content-center container-fluid">
+    <div class="col-xl-5 col-md-6 home-title col">
+      <div class="mb-5 text-center">
+        <img class="img-fluid" src="{% static 'img/logo_gcc_blacktext.png' %}" width="500">
+      </div>
       <span>
-        <h1>Stage d'initiation gratuit à l'informatique pour collégiennes et lycéennes.</h1>
-      </span>
-
-      <span>
-        <a type="button" href="#event-list" class="btn btn-primary subtitleSize mt-4 btn-block">
-          Voir les stages
-        </a>
-      </span>
-      <span>
-        <a type="button" href="#faq" class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block">
-          Plus d'informations
-        </a>
+        <h1>Stages <strong>gratuits</strong> d'initiation à l'informatique pour collégiennes et lycéennes.</h1>
       </span>
     </div>
   </div>
 </div>
-
 
 
 <!-- Event list -->
@@ -39,12 +30,7 @@
 
 <!-- Partners: mis en avant-->
 
-{% include 'partners/partial/Partners.html' with status="avant" %}
-
-<!-- FAQ -->
-{% include 'pages/partial/FAQ.html' %}
-
-{% include 'partners/partial/Partners.html' with status="accueil" %}
+{% include 'partners/partial/partners_carousel.html' with status="avant" %}
 
 <!-- Newsletter -->
 <div class="newsletter-background text-center container-fluid">
@@ -60,7 +46,3 @@
 
 {% endblock %}
 
-
-{% block scripts %}
-<script src="{% static 'js/partners.js' %}"></script>
-{% endblock %}

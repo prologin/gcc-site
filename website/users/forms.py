@@ -36,11 +36,13 @@ class PersonalInfoForm(forms.Form):
 
         name_layout = Row(
             Column(
-                Field("last_name", placeholder=self.fields["last_name"].label)
+                Field(
+                    "last_name", placeholder=self.fields["last_name"].label,
+                )
             ),
             Column(
                 Field(
-                    "first_name", placeholder=self.fields["first_name"].label
+                    "first_name", placeholder=self.fields["first_name"].label,
                 )
             ),
         )
@@ -73,6 +75,7 @@ class EmailForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "email_form"
         self.helper.form_method = "post"
+        self.helper.form_action = reverse_lazy("users:update_user_email")
 
         submit = Div(
             Submit(
@@ -170,8 +173,8 @@ class DeleteUserForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "delete_user_form"
-        self.form_method = "post"
-
+        self.helper.form_method = "post"  # Corrected typo here
+        self.helper.form_action = reverse_lazy("users:delete_user")
         self.helper.layout = Layout(
             Submit(
                 name="submit-delete-user",

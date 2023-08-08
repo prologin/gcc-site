@@ -16,6 +16,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
+    ("start", "------ Selectionner ton niveau d'étude actuel ------"),  # Start choice
     ("6ème", "6ème"),
     ("5ème", "5ème"),
     ("4ème", "4ème"),
@@ -25,7 +26,14 @@ SCHOOL_LEVEL = [
     ("Terminale", "Terminale"),
 ]
 
-TSHIRT = [("XS", "XS"), ("S", "S"), ("M", "M"), ("L", "L"), ("XL", "XL")]
+TSHIRT = [
+    ("start", "------ Selectionner une taille de t-shirt ------"),
+    ("XS", "XS"),
+    ("S", "S"),
+    ("M", "M"),
+    ("L", "L"),
+    ("XL", "XL")
+]
 
 
 def phoneNumberTest(phone):
@@ -36,12 +44,14 @@ def phoneNumberTest(phone):
 class EventSignupForm(forms.Form):
     # Info sur la participante
     first_name = forms.CharField(
-        label="Prénom:",
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Prénom"}),
         max_length=255,
     )
 
     last_name = forms.CharField(
-        label="Nom de famille:",
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Nom de famille"}),
         max_length=255,
     )
 
@@ -69,26 +79,19 @@ class EventSignupForm(forms.Form):
             ),
         },
     )
-
-    # Responsable légal de la participante
-
-    phone = forms.DecimalField(
-        label="Numéro de téléphone du responsable légal",
-        validators=[phoneNumberTest],
-    )
-
-    # Addresse de la participante
+    
+    # Adresse de la participante
 
     street_applicant = forms.CharField(
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Nom et numero de voie"}),
+        widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie"}),
         max_length=250,
     )
 
     complement_applicant = forms.CharField(
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Complément d'addresse", "blank": True}
+            attrs={"placeholder": "Complément d'adresse", "blank": True}
         ),
         max_length=200,
         required=False,
@@ -117,10 +120,59 @@ class EventSignupForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Pays"}),
     )
 
+    # Responsable légal de la participante
+
+    phone = forms.DecimalField(
+        label="",
+        validators=[phoneNumberTest],
+        widget=forms.TextInput(
+            attrs={"placeholder": "Numéro de téléphone du responsable légal"}
+        ),
+    )
+
+    street_applicant_resp = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie du responsable légal"}),
+        max_length=250,
+    )
+
+    complement_applicant_resp = forms.CharField(
+        label="",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Complément d'adresse du responsable légal", "blank": True}
+        ),
+        max_length=200,
+        required=False,
+    )
+
+    city_applicant_resp = forms.CharField(
+        label="",
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Ville du responsable légal"}),
+    )
+
+    zip_code_applicant_resp = forms.IntegerField(
+        label="",
+        required=True,
+        widget=forms.TextInput(
+            attrs={"placeholder": "Code postal du responsable légal", "type": "number"}
+        ),
+    )
+
+    country_applicant_resp = forms.CharField(
+        label="",
+        max_length=30,
+        initial="France",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Pays"}),
+    )
+
+
     # Etablissement scolaire
 
     name_school = forms.CharField(
-        label="Nom:",
+        label="Nom :",
         widget=forms.TextInput(
             attrs={"placeholder": "Nom de l'établissement scolaire"}
         ),
@@ -128,14 +180,14 @@ class EventSignupForm(forms.Form):
     )
 
     street_school = forms.CharField(
-        label="Numéro et nom de voie:",
-        widget=forms.TextInput(attrs={"placeholder": "Nom et numero de voie"}),
+        label="Numéro et nom de voie :",
+        widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie"}),
         max_length=250,
     )
 
     complement_school = forms.CharField(
-        label="Complément d'adresse:",
-        widget=forms.TextInput(attrs={"placeholder": "Complément d'addresse"}),
+        label="Complément d'adresse :",
+        widget=forms.TextInput(attrs={"placeholder": "Complément d'adresse"}),
         max_length=200,
         required=False,
     )
@@ -148,7 +200,7 @@ class EventSignupForm(forms.Form):
     )
 
     zip_code_school = forms.IntegerField(
-        label="Code postal:",
+        label="Code postal :",
         required=True,
         widget=forms.TextInput(
             attrs={"placeholder": "Code postal", "type": "number"}
@@ -156,7 +208,7 @@ class EventSignupForm(forms.Form):
     )
 
     country_school = forms.CharField(
-        label="Pays:",
+        label="Pays :",
         max_length=30,
         initial="France",
         required=True,
@@ -169,12 +221,12 @@ class EventSignupForm(forms.Form):
 
     # Info supplémentaires sur la participante
     allergies = forms.CharField(
-        label="La participante a t'elle des allergies ?",
+        label="La participante a-t-elle des allergies ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
     diet = forms.CharField(
-        label="La participante a t'elle un régime alimentaire particulier ?",
+        label="La participante a-t-elle un régime alimentaire particulier ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
@@ -185,12 +237,12 @@ class EventSignupForm(forms.Form):
     )
 
     learn = forms.CharField(
-        label="Y-a-t'il quelque chose en particulier que la participante espère apprendre pendant le stage ?",
+        label="Y a-t'il quelque chose en particulier que la participante espère apprendre pendant le stage ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
     programing = forms.CharField(
-        label="La participante a t'elle déjà programmé, si oui, quand est-ce qu'elle a codé pour la première fois et quels outils ou langages de programmation a t'elle essayé ?",
+        label="La participante a t'elle déjà programmé ? Si oui, quand a-t-elle codé pour la première fois et quels outils ou langages de programmation a-t-elle essayées ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
@@ -200,7 +252,7 @@ class EventSignupForm(forms.Form):
     )
 
     association = forms.CharField(
-        label="Comment la participante a connu l'association et les stages ?",
+        label="Par quel moyen a-t-elle connu l'association et les stages ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
@@ -217,7 +269,14 @@ class EventSignupForm(forms.Form):
                     Column(Field("last_name")),
                 ),
                 Field("dob"),
-                Field("phone"),
+                HTML("<h3> Adresse de la participante : </h3>"),
+                Field("street_applicant"),
+                Field("complement_applicant"),
+                Field("city_applicant"),
+                Row(
+                    Column(Field("zip_code_applicant")),
+                    Column(Field("country_applicant")),
+                ),
                 Field("is_women"),
                 Field("legal_authorization"),
                 Div(
@@ -231,13 +290,14 @@ class EventSignupForm(forms.Form):
                 css_class="tab active",
             ),
             Div(
-                HTML("<h3> Addresse de la participante: </h3>"),
-                Field("street_applicant"),
-                Field("complement_applicant"),
-                Field("city_applicant"),
+                HTML("<h3> Informations du responsable légal : </h3>"),
+                Field("phone"),
+                Field("street_applicant_resp"),
+                Field("complement_applicant_resp"),
+                Field("city_applicant_resp"),
                 Row(
-                    Column(Field("zip_code_applicant")),
-                    Column(Field("country_applicant")),
+                    Column(Field("zip_code_applicant_resp")),
+                    Column(Field("country_applicant_resp")),
                 ),
                 Div(
                     Row(

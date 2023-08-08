@@ -6,14 +6,17 @@
 
 {% block content %}
 
-<div class="candidatures-background">
+<div class="basic-background candidatures-background p-4">
   <div class="me-xl-5 m-5">
     <div class="col-auto offset-xl-3">
       <div class="row mt-5">
-        <h1 class="col">Candidature(s)</h1>
-        <a href="{% url 'events:home' %}" class="col-auto btn btn-primary py-2">
-          S'inscrire à un stage
-        </a>
+        {% if application_documents|length > 1 %}
+          <h1 class="col">Candidatures</h1>
+        {% else%}
+          <h1 class="col">Candidature</h1>
+        {% endif %}
+        <a class="col-auto btn btn-primary align-self-center py-2" href="{% url 'events:home' %}">
+          S'inscrire à un stage</a>
       </div>
       <div class="row mt-3">
         {% include 'events/partial/ApplicationsList.html' %}

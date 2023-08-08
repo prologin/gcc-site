@@ -29,9 +29,7 @@ dd {
 /* ApplicationsView */
 .candidatures-background {
     height: 100%;
-    background-attachment: fixed;
     background-image: url("./../../img/candidatures_bg.svg");
-    background-position: top left;
+    background-position: 0% -25px;
     background-repeat: no-repeat;
-    background-size: cover;
 }

@@ -57,6 +57,10 @@ class Application(models.Model):
         verbose_name=_("Adresse partielle de la participante"), default=dict
     )
 
+    address_resp = models.JSONField(
+        verbose_name=_("Adresse partielle du responsable légal"), default=dict
+    )
+
     school = models.JSONField(
         verbose_name=_("Etablissement scolaire de la participante"),
         default=dict,

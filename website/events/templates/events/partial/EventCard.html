@@ -1,13 +1,13 @@
 {% load static %}
 
 <div class="row f-flex justify-content-between event-card mb-4 p-3">
-  <div class="col-lg-auto col row">
+  <div class="col row">
     <div class="my-auto d-none d-md-block col-md-auto gcc-color-{{color}}">
       <i class="fas fa-circle" style="font-size: 1.2em;"></i>
     </div>
 
     <!-- Event infos verticaly centered -->
-    <div class="col-lg-auto col">
+    <div class="col">
       <h1>{{ event.name }}</h1>
       <h2>Du {{ event.start_date|date:"l d F Y" }} au {{ event.end_date|date:"l d F Y" }}</h2>
       <h3>{{ event.center.address.city }}</h3>

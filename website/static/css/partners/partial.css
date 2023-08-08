@@ -1,60 +1,13 @@
-@media (max-width: 400px) {
-    .carousel-inner .carousel-item > div {
-        display: none;
-    }
-    .carousel-inner .carousel-item > div:first-child {
-        display: block;
-    }
-}
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
+.carousel-inner .partner {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 20vh; /* Adjust the desired maximum width */
+    height: auto;
+    margin: 0 auto;
 }
-
-/* medium and up screens */
-@media (min-width: 400px) {
-    .carousel-inner .carousel-item-end.active,
-    .carousel-inner .carousel-item-next {
-        transform: translateX(25%);
-    }
-
-    .carousel-inner .carousel-item-start.active,
-    .carousel-inner .carousel-item-prev {
-        transform: translateX(-25%);
-    }
-}
-
-.carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start {
-    transform: translateX(0%);
-}
-
-.carousel-control-prev {
-    top: -25%;
-    margin-left: -10%;
-}
-
-.carousel-control-next {
-    top: -25%;
-    margin-right: -10%;
-}
-
-
-/* Pour changer la taille de la "slide" */
-.card-img {
-
-    padding-left: 15px;
-    padding-right: 15px;
-    text-align: center;
-}
-
-/* changer la taille de l'image du partenaires */
-
-
-#partnerBand {
-    margin-left: 10%;
-    margin-right: 10%;
-    /*text-align: center;*/
+  
+.carousel-inner .partner img {
+    max-width: 40vh;
+    height: auto;
 }

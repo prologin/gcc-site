@@ -55,6 +55,14 @@ class HomePageView(ListView):
                     "country": request.POST["country_applicant"],
                 }
 
+                address_resp = {
+                    "street": request.POST["street_applicant_resp"],
+                    "complement": request.POST["complement_applicant_resp"],
+                    "city": request.POST["city_applicant_resp"],
+                    "zip_code": request.POST["zip_code_applicant_resp"],
+                    "country": request.POST["country_applicant_resp"],
+                }
+
                 form_answer = (
                     {
                         "tshirt": request.POST["tshirt"],
@@ -84,6 +92,7 @@ class HomePageView(ListView):
                     dob=request.POST["dob"],
                     phone=request.POST["phone"],
                     address=address,
+                    address_resp=address_resp,
                     school=school,
                     event=event,
                     form_answer=form_answer,

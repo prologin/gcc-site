@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="basic-background about-background">
-    <div class="content-about container">
-        <h1>À propos de Girls Can Code!</h1>
+<div class="basic-background about-background p-4">
+    <div class="pt-4 container-fluid">
+        <h1 class="m-4">À propos de Girls Can Code!</h1>
         Les stages Girls Can Code! sont organisés par
         <a href="https://prologin.org">l'association Prologin</a> pour
         les collégiennes et lycéennes pour leur faire découvrir
         l'informatique.
 
         <div class="row w-100 mt-5 align-items-center">
-            <div class="col d-none d-sm-block">
+            <div class="col-lg-4 d-none d-sm-block">
                 <img
                     src={% static 'img/girl-class-v3.svg' %}
                     alt="Photo des stages Girls Can Code!"
@@ -23,7 +23,7 @@
             </div>
             <div class="col">
                 <div class="content-background p-4 mx-auto">
-                    <h2>Girls Can Code!</h2>
+                    <h1>Girls Can Code!</h1>
                     Les stages Girls Can Code! sont organisés par
                     l'association Prologin dans le but d'initier les
                     collégiennes et lycéennes à la programmation. Ces
@@ -43,6 +43,7 @@
         </div>
 
         <div class="content-background mt-4 p-4 mx-auto">
+            <h2>Déroulement</h2>
             Les stages Girls Can Code! ont débuté en 2014, et depuis,
             de nombreux stages ont été organisés chaque année. Pendant
             les stages, des conférences sont organisées pour permettre à
@@ -57,6 +58,7 @@
         <div class="row w-100 mt-4 align-items-center">
             <div class="col">
                 <div class="content-background p-4 mx-auto">
+                    <h2>Encadrement</h2>
                     Les stages sont encadrés par des passionnés et des
                     étudiants en informatique qui accompagent les
                     participantes tout au long de leur découverte. Les
@@ -79,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="col d-none d-sm-block">
+            <div class="col-lg-4 d-none d-sm-block">
                 <img
                     src={% static 'img/girl-class-v4.svg' %}
                     alt="Photo des stages Girls Can Code!"
@@ -89,6 +91,7 @@
         </div>
 
         <div class="content-background mt-4 p-4 mx-auto">
+            <h2>Organisation</h2>
             Les stages Girls Can Code! sont organisés par
             l’association Prologin. Elle organise également le
             concours national d'informatique et propose des
@@ -101,10 +104,10 @@
         </div>
 
         <div class="content-background mt-4 p-4 mx-auto">
-            Plus d'informations peuvent être trouvées sur
+            Plus d'informations sur
             <a href="https://prologin.org">le site Prologin</a>. Pour
             toute demande, veuillez
-            <a href="LegalNotices">nous contacter</a>.
+            <a href="mailto:{{CONTACT_EMAIL}}">nous contacter</a>.
         </div>
     </div>
 </div>
