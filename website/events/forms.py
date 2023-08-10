@@ -16,7 +16,10 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
-    ("start", "------ Selectionner ton niveau d'étude actuel ------"),  # Start choice
+    (
+        "start",
+        "------ Selectionner ton niveau d'étude actuel ------",
+    ),  # Start choice
     ("6ème", "6ème"),
     ("5ème", "5ème"),
     ("4ème", "4ème"),
@@ -32,7 +35,7 @@ TSHIRT = [
     ("S", "S"),
     ("M", "M"),
     ("L", "L"),
-    ("XL", "XL")
+    ("XL", "XL")("XXL", "XXL"),
 ]
 
 
@@ -79,7 +82,7 @@ class EventSignupForm(forms.Form):
             ),
         },
     )
-    
+
     # Adresse de la participante
 
     street_applicant = forms.CharField(
@@ -132,14 +135,19 @@ class EventSignupForm(forms.Form):
 
     street_applicant_resp = forms.CharField(
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie du responsable légal"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "Nom et numéro de voie du responsable légal"}
+        ),
         max_length=250,
     )
 
     complement_applicant_resp = forms.CharField(
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Complément d'adresse du responsable légal", "blank": True}
+            attrs={
+                "placeholder": "Complément d'adresse du responsable légal",
+                "blank": True,
+            }
         ),
         max_length=200,
         required=False,
@@ -149,14 +157,19 @@ class EventSignupForm(forms.Form):
         label="",
         max_length=50,
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Ville du responsable légal"}),
+        widget=forms.TextInput(
+            attrs={"placeholder": "Ville du responsable légal"}
+        ),
     )
 
     zip_code_applicant_resp = forms.IntegerField(
         label="",
         required=True,
         widget=forms.TextInput(
-            attrs={"placeholder": "Code postal du responsable légal", "type": "number"}
+            attrs={
+                "placeholder": "Code postal du responsable légal",
+                "type": "number",
+            }
         ),
     )
 
@@ -167,7 +180,6 @@ class EventSignupForm(forms.Form):
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "Pays"}),
     )
-
 
     # Etablissement scolaire
 
