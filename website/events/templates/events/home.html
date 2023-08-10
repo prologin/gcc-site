@@ -10,7 +10,7 @@
   {{msg.message}}
 </div>
 {% endfor %}
-<!-- Home illustration -->
+{# Home illustration #}
 <div class="home-banner">
   <div class="row h-100 mh-75 pb-4 align-items-center justify-content-center container-fluid">
     <div class="col-xl-5 col-md-6 home-title col">
@@ -25,14 +25,14 @@
 </div>
 
 
-<!-- Event list -->
+{# Event list #}
 {% include 'events/partial/EventList.html' %}
 
-<!-- Partners: mis en avant-->
+{# Partners: mis en avant #}
 
 {% include 'partners/partial/partners_carousel.html' with status="avant" %}
 
-<!-- Newsletter -->
+{# Newsletter #}
 <div class="newsletter-background text-center container-fluid">
   <div class="row justify-content-center">
     <div class="mt-5 col-md-8">
@@ -45,4 +45,3 @@
 
 
 {% endblock %}
-
