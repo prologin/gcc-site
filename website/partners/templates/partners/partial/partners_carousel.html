@@ -22,7 +22,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-2">
                             <div class="card-img">
                                 <a href="{{partner.website_url}}">
-                                    <img src="/{{partner.logo}}" class="img-fluid d-block mx-auto" />
+                                    <img src="{{ partner.logo_url }}" class="img-fluid d-block mx-auto" />
                                 </a>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-2">
                             <div class="card-img">
                                 <a href="{{partner.website_url}}">
-                                    <img src="/{{partner.logo}}" class="img-fluid partner" />
+                                    <img src="{{ partner.logo_url }}" class="img-fluid partner" />
                                 </a>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-2">
                             <div class="card-img">
                                 <a href="{{partner.website_url}}">
-                                    <img src="/{{partner.logo}}" class="img-fluid partner" />
+                                    <img src="{{ partner.logo_url }}" class="img-fluid partner" />
                                 </a>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            
+
             <a class="carousel-control-prev" href="#carousel-sponsors-{{status}}" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </a>
