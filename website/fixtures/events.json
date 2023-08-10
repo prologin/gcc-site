@@ -1,7 +1,7 @@
 [
   {
     "model": "events.application",
-    "pk": 9,
+    "pk": 1,
     "fields": {
       "user": 1,
       "first_name": "Kenji",
@@ -11,6 +11,20 @@
       "address": {
         "city": "Test.",
         "zip_code": "42042",
+        "country": "France"
+      },
+      "address_resp": {
+        "city": "Test.",
+        "zip_code": "42042",
+        "country": "France"
+      },
+      "school": {
+        "school_level": "3ème",
+        "name": "Lycée Jean Moulin",
+        "street": "14 rue Jean Moulin",
+        "complement": "",
+        "city": "Bertrand",
+        "zip_code": 24042,
         "country": "France"
       },
       "status": 1,
@@ -29,7 +43,7 @@
   },
   {
     "model": "events.application",
-    "pk": 10,
+    "pk": 2,
     "fields": {
       "user": 2,
       "first_name": "Toto",
@@ -39,6 +53,20 @@
       "address": {
         "city": "Test.",
         "zip_code": "42042",
+        "country": "France"
+      },
+      "address_resp": {
+        "city": "Test.",
+        "zip_code": "42042",
+        "country": "France"
+      },
+      "school": {
+        "school_level": "3ème",
+        "name": "Lycée Jean Moulin",
+        "street": "14 rue Jean Moulin",
+        "complement": "",
+        "city": "Bertrand",
+        "zip_code": 24042,
         "country": "France"
       },
       "status": 0,
