@@ -255,7 +255,7 @@ class EventSignupForm(forms.Form):
     )
 
     programing = forms.CharField(
-        label="La participante a t'elle déjà programmé ? Si oui, quand a-t-elle codé pour la première fois et quels outils ou langages de programmation a-t-elle essayées ?",
+        label="La participante a-t-elle déjà programmé ? Si oui, quand a-t-elle codé pour la première fois et quels outils ou langages de programmation a-t-elle essayées ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
