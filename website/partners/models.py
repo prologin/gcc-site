@@ -37,7 +37,7 @@ class Partner(models.Model):
     logo = models.FileField(
         verbose_name="Logo",
         upload_to=upload_to,
-        storage=GCCStaticStorage,
+        storage=GCCMediaStorage,
         validators=[FileExtensionValidator(["jpg", "jpeg", "png", "gif"])],
     )
 
@@ -50,7 +50,7 @@ class Partner(models.Model):
 
     @property
     def logo_url(self):
-        storage = GCCStaticStorage()
+        storage = GCCMediaStorage()
         return storage.url("sponsors/" + self.name)
 
     def __str__(self):
