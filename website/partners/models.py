@@ -2,6 +2,9 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from gccsite.settings.common import AWS_S3_ENDPOINT_URL
+from gccsite.storages import GCCMediaStorage, GCCStaticStorage
+
 
 class PartnerStatus(models.TextChoices):
     PROMOTED = "Promoted", _("Partenaires qui nous soutiennent")
@@ -28,13 +31,13 @@ class Partner(models.Model):
     )
 
     def upload_to(instance, filename):
-        return "static/img/sponsors/{}".format(filename)
+        return "sponsors/{}".format(instance.name)
 
     # Ne pas mettre une image trop grande
     logo = models.FileField(
         verbose_name="Logo",
-        default="",
         upload_to=upload_to,
+        storage=GCCMediaStorage,
         validators=[FileExtensionValidator(["jpg", "jpeg", "png", "gif"])],
     )
 
@@ -44,6 +47,11 @@ class Partner(models.Model):
         max_length=20,
         default="Promoted",
     )
+
+    @property
+    def logo_url(self):
+        storage = GCCMediaStorage()
+        return storage.url("sponsors/" + self.name)
 
     def __str__(self):
         return self.name
