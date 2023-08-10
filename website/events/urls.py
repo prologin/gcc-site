@@ -28,6 +28,11 @@ urlpatterns = [
         name="update_application_notes",
     ),
     path(
+        "update-application-status",
+        views.ApplicationEditView.as_view(),
+        name="update_application_status",
+    ),
+    path(
         "my-applications",
         views.ApplicationsView.as_view(),
         name="my_applications",
