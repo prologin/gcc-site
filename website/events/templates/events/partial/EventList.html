@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 <div id="event-list" class="event-list-background py-4 container-fluid">
   {% if open_events|length == 0 %}
   <div fluid="sm" class="row no-gutters align-items-baseline justify-content-center">
@@ -18,7 +19,7 @@
   <div class="w-75 mx-auto pt-5">
     {% for event in open_events %}
     {% cycle 1 2 3 as color silent %}
-    {% include "events/partial/EventCard.html" with event=event id=event.pk color=color%}
+    {% include "events/partial/EventCard.html" with event=event id=event.pk color=color applications=applications|match_event:event.pk %}
     {% endfor %}
   </div>
   {% if is_paginated %}

@@ -14,9 +14,21 @@
     </div>
   </div>
 
-  <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto btn-group-vertical" role="group">
-    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">S'inscrire à ce stage</button>
-    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">Plus d'informations</button>
+  <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto" role="group">
+    {% comment %} Issue#80 : If user is authenticated and has at least 1 application for the stage,
+    use "mes candidatures" button instead. {% endcomment %}
+    {% if user.is_authenticated and applications|length != 0 %}
+      <a type="button" href="{% url 'events:my_applications' %}" class="btn btn-primary py-2 px-4 w-100 mb-2" >
+        Mes candidatures
+      </a>
+    {% else %}
+      <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">
+        S'inscrire à ce stage
+      </button>
+    {% endif %}
+    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block" data-bs-toggle="modal" data-bs-target="#informationEventModal-{{id}}">
+      Plus d'informations
+    </button>
   </div>
 
   {# Modal #}

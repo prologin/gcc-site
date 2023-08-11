@@ -132,6 +132,12 @@ class HomePageView(ListView):
         )
         ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
 
+        # Add user applications if is_authenticateed
+        if self.request.user.is_authenticated:
+            ctx["applications"] = signup.Application.objects.filter(
+                user=self.request.user.id
+            )
+
         return ctx
 
 

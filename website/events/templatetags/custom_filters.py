@@ -2,6 +2,9 @@ from django import template
 from django.utils import timezone
 from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
+from django.db.models import QuerySet
+
+from ..models.signup import ApplicationManager
 
 register = template.Library()
 
@@ -42,3 +45,11 @@ def signup_status_string(event):
         return f"Les inscriptions ouvriront le {fmt_signup_start}."
     else:
         return "Les inscriptions pour ce stage sont ouvertes."
+
+
+@register.filter
+def match_event(application, event_pk):
+    if isinstance(application, (QuerySet, ApplicationManager)):
+        return application.filter(event=event_pk)
+    else:
+        return []
