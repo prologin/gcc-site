@@ -6,20 +6,35 @@
 
 {% block content %}
 
-<div class="basic-background candidatures-background p-4">
-  <div class="me-xl-5 m-5">
-    <div class="col-auto offset-xl-3">
+<div class="basic-background candidatures-background p-sm-4">
+  <div class="container-fluid me-xl-5">
+    <div class="col-auto offset-xl-3 items-align-center">
       <div class="row mt-5">
-        {% if application_documents|length > 1 %}
-          <h1 class="col">Candidatures</h1>
-        {% else%}
-          <h1 class="col">Candidature</h1>
-        {% endif %}
-        <a class="col-auto btn btn-primary align-self-center py-2" href="{% url 'events:home' %}">
-          S'inscrire à un stage</a>
+          <h1 class="col text-center text-center text-sm-start">
+            Candidature{{ applications|length|pluralize:"s" }}
+          </h1>
+          <div class="col-12 col-sm-auto d-flex d-sm-block justify-content-center">
+            <a class="btn btn-primary py-2"
+              href="{% url 'events:home' %}"
+              >
+              Voir tous les stages
+            </a>
+          </div>
       </div>
       <div class="row mt-3">
-        {% include 'events/partial/ApplicationsList.html' %}
+        {% comment %} {% include 'events/partial/ApplicationsList.html' %} {% endcomment %}
+        {% if applications|length != 0 %}
+        {% regroup applications by event as event_list %}
+        <div>
+          {% for event in event_list %}
+            {% with event.list|first as application %} {# Get the actual event object to fetch its informations #}
+              {% include 'events/partial/event_applications_card.html' with event=application.event event_applications=event.list %}
+            {% endwith %}
+          {% endfor %}
+        </div>
+        {% else %}
+        <h2>Vous n'avez pas de candidature active</h2>
+        {% endif %}
       </div>
     </div>
   </div>

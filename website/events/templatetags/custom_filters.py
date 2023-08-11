@@ -4,7 +4,7 @@ from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
 from django.db.models import QuerySet
 
-from ..models.signup import ApplicationManager
+from ..models.signup import APPLICATION_STATUS, ApplicationManager
 
 register = template.Library()
 
@@ -53,3 +53,14 @@ def match_event(application, event_pk):
         return application.filter(event=event_pk)
     else:
         return []
+
+
+@register.filter
+def any_confirmed(applications):
+    """
+    Given a list of applications, return True if any of them is Confirmed
+    """
+    for app in applications:
+        if app.status == APPLICATION_STATUS["CONFIRMED"]:
+            return True
+    return False
