@@ -45,18 +45,19 @@ function updateForm() {
 function validateform() {
     validate = true;
     var active_tab = document.querySelector(".tab.active");
-    var fields = active_tab.querySelectorAll("input");
+    var fields = active_tab.querySelectorAll("input, select");
     fields.forEach(function (val) {
         val.classList.remove(INVALID_CLS);
+
         if (val.hasAttribute("required")) {
             if (val.type === "checkbox" || val.type === "radio") {
                 if (!val.checked) {
                     validate = false;
                     val.classList.add(INVALID_CLS);
                 }
-            } else if (val.tagName === "SELECT") {
+            } else if (val.tagName === "select") {
                 // Handle select elements (dropdowns)
-                if (val.value === "start") {
+                if (val.value === "") {
                     validate = false;
                     val.classList.add(INVALID_CLS);
                 }
