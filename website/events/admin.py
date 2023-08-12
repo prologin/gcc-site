@@ -94,7 +94,15 @@ class ApplicationAdmin(admin.ModelAdmin):
         (None, {"fields": ("user", "event")}),
         (
             "Informations participante",
-            {"fields": ("first_name", "last_name", "dob", "form_answer", "address")},
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "dob",
+                    "form_answer",
+                    "address",
+                )
+            },
         ),
         (
             "Responsable légal",

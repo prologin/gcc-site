@@ -2,26 +2,67 @@
 
 import django.core.validators
 from django.db import migrations, models
+
 import partners.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Partner',
+            name="Partner",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, verbose_name='Nom')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Description')),
-                ('website_url', models.URLField(blank=True, null=True, verbose_name='URL du site')),
-                ('logo', models.FileField(default='', upload_to=partners.models.Partner.upload_to, validators=[django.core.validators.FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif'])], verbose_name='Logo')),
-                ('status', models.CharField(choices=[('avant', 'Avant'), ('financement', 'Financement'), ('accueil', 'Accueil')], default='public', max_length=20, verbose_name='Statut')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, verbose_name="Nom")),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="Description"
+                    ),
+                ),
+                (
+                    "website_url",
+                    models.URLField(
+                        blank=True, null=True, verbose_name="URL du site"
+                    ),
+                ),
+                (
+                    "logo",
+                    models.FileField(
+                        default="",
+                        upload_to=partners.models.Partner.upload_to,
+                        validators=[
+                            django.core.validators.FileExtensionValidator(
+                                ["jpg", "jpeg", "png", "gif"]
+                            )
+                        ],
+                        verbose_name="Logo",
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("avant", "Avant"),
+                            ("financement", "Financement"),
+                            ("accueil", "Accueil"),
+                        ],
+                        default="public",
+                        max_length=20,
+                        verbose_name="Statut",
+                    ),
+                ),
             ],
         ),
     ]
