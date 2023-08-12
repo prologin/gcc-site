@@ -39,9 +39,12 @@ TSHIRT = [
     ("XXL", "XXL"),
 ]
 
+# Must be the same as static/js/form_flow.js:PHONE_REGEX
+PHONE_REGEX = "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+
 
 def phoneNumberTest(phone):
-    if re.match("^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$", str(phone)):
+    if re.match(PHONE_REGEX, str(phone)):
         raise ValidationError("Not a phone number")
 
 

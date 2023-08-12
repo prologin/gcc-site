@@ -1,3 +1,6 @@
+// Must be the same as events/forms.py:PHONE_REGEX
+const PHONE_REGEX = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
+
 const INVALID_CLS = "is-invalid";
 var next_click = document.querySelectorAll("#button-id-next");
 var back_click = document.querySelectorAll("#button-id-back");
@@ -64,6 +67,12 @@ function validateform() {
             } else if (val.value.length == 0) {
                 validate = false;
                 val.classList.add(INVALID_CLS);
+            } else if (val.id === "id_phone") {
+                // Handle phone validation
+                if (!PHONE_REGEX.test(val.value)) {
+                    validate = false;
+                    val.classList.add(INVALID_CLS);
+                }
             }
         }
     });
