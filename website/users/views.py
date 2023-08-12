@@ -1,24 +1,26 @@
-from typing import Any
 import csv
+from typing import Any
 
 from django.conf import settings
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import (
+    default_token_generator as account_activation_token,
+)
 from django.contrib.auth.views import PasswordChangeView, RedirectURLMixin
-from django.contrib.auth.tokens import default_token_generator as account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.core.validators import EmailValidator
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import resolve_url, redirect
+from django.shortcuts import redirect, resolve_url
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.decorators.cache import never_cache
@@ -26,7 +28,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, DeleteView, TemplateView
 from django.views.generic.edit import UpdateView
-from typing import Any
+
+from events.models import events, signup
 
 from .forms import (
     AuthLoginForm,
@@ -38,12 +41,12 @@ from .forms import (
     PersonalInfoForm,
 )
 from .models import User
-from events.models import events, signup
 
 # Extra message tags
 TAG_PERSONAL_INFO = "personal_info"
 TAG_EMAIL = "email"
 TAG_PWD = "pwd"
+
 
 class UserEditView(LoginRequiredMixin, UpdateView):
     http_method_names = ("post",)
@@ -57,14 +60,13 @@ class UserEditView(LoginRequiredMixin, UpdateView):
         return User.objects.get(id=self.request.user.id)
 
     def get_success_url(self):
-        return reverse_lazy("users:account_information") + '#personal-info'
+        return reverse_lazy("users:account_information") + "#personal-info"
+
 
 class UserEmailEditView(LoginRequiredMixin, UpdateView):
     http_method_names = ("post",)
     model = User
-    fields = (
-        "email",
-    )
+    fields = ("email",)
 
     def post(self, request, *agrs, **kwargs):
         # Check if the email is valid using the EmailValidator
@@ -79,7 +81,9 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
                 "L'email est invalide !",
                 extra_tags=TAG_EMAIL,
             )
-            return HttpResponseRedirect(reverse("users:account_information") + '#personal-info')
+            return HttpResponseRedirect(
+                reverse("users:account_information") + "#personal-info"
+            )
 
         # Check if another user already uses the same email address
         try:
@@ -89,7 +93,9 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
                 "Un utilisateur avec cet email existe déjà !",
                 extra_tags=TAG_EMAIL,
             )
-            return HttpResponseRedirect(reverse("users:account_information") + '#personal-info')
+            return HttpResponseRedirect(
+                reverse("users:account_information") + "#personal-info"
+            )
         except User.DoesNotExist:
             # Unable to find a user, this is fine
             user.email = email
@@ -110,41 +116,69 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse_lazy("users:account_information") + '#personal-info'
+        return reverse_lazy("users:account_information") + "#personal-info"
+
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     def get_success_url(self):
-        return reverse_lazy("users:account_information") + '#password'
+        return reverse_lazy("users:account_information") + "#password"
+
 
 class ExportUsersCSVView(LoginRequiredMixin, View):
     model = User
 
     def get(self, request):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="users.csv"'
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="users.csv"'
 
         writer = csv.writer(response)
-        writer.writerow(['First Name', 'Last Name', 'Email'])
+        writer.writerow(["First Name", "Last Name", "Email"])
 
         user = User.objects.get(id=self.request.user.id)
-        applications = signup.Application.objects.filter(
-            user=user
-        ).order_by("-created_at")
-
+        applications = signup.Application.objects.filter(user=user).order_by(
+            "-created_at"
+        )
 
         writer.writerow([user.first_name, user.last_name, user.email])
 
         writer.writerow([])
-        writer.writerow(['Application first name', 'Application last name', 'Application event name', 'Application status', 'Application dob', 'Application phone', 'Application address', 'Application school', 'Application form answer', 'created at'])
+        writer.writerow(
+            [
+                "Application first name",
+                "Application last name",
+                "Application event name",
+                "Application status",
+                "Application dob",
+                "Application phone",
+                "Application address",
+                "Application school",
+                "Application form answer",
+                "created at",
+            ]
+        )
 
         for application in applications:
             # Add application data to the CSV row
-            writer.writerow([application.first_name, application.last_name, application.event, application.status, application.dob, application.phone, application.address, application.school, application.form_answer, application.created_at])
+            writer.writerow(
+                [
+                    application.first_name,
+                    application.last_name,
+                    application.event,
+                    application.status,
+                    application.dob,
+                    application.phone,
+                    application.address,
+                    application.school,
+                    application.form_answer,
+                    application.created_at,
+                ]
+            )
 
         return response
 
     def get_object(self, *args, **kwargs):
         return User.objects.get(id=self.request.user.id)
+
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     model = User
@@ -155,11 +189,12 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, _("L'utilisateur a été supprimé"))
-        return reverse('events:home')
+        return reverse("events:home")
 
     def delete(self, request, *args, **kwargs):
         # You can add additional checks here if needed before deletion
         return super().delete(request, *args, **kwargs)
+
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
     template_name = "users/AccountInformationsView.html"
@@ -172,7 +207,6 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
 
         if "submit-notifications" in request.POST:
             return HttpResponse("Notifs update form valid")
-
 
     def get_context_data(self, **kwargs: Any):
         # Get the request user to prefill the forms
@@ -197,6 +231,7 @@ class LoginView(auth_views.LoginView):
     template_name = "users/login.html"
     form_class = AuthLoginForm
     redirect_authenticated_user = True
+
 
 class RegisterView(RedirectURLMixin, CreateView):
     template_name = "users/register.html"
@@ -225,24 +260,31 @@ class RegisterView(RedirectURLMixin, CreateView):
         user.save()
 
         # Send the activation email to the user
-        self.send_activation_email(user, form.cleaned_data['email'])
+        self.send_activation_email(user, form.cleaned_data["email"])
 
         return self.get_default_redirect_url()
 
     def send_activation_email(self, user, email):
         current_site = get_current_site(self.request)
-        subject = _('Activate your account on Girls Can Code!')
+        subject = _("Activate your account on Girls Can Code!")
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = account_activation_token.make_token(user)
 
-        activation_link = "{0}/activate/{1}/{2}".format(current_site, uid, token)
+        activation_link = "{0}/activate/{1}/{2}".format(
+            current_site, uid, token
+        )
 
         email_from = settings.EMAIL_HOST_USER
-        message = _("Bonjour {0},\n Please activate your account using this link: {1}").format(user.first_name, activation_link)
+        message = _(
+            "Bonjour {0},\n Please activate your account using this link: {1}"
+        ).format(user.first_name, activation_link)
         send_mail(subject, message, email_from, [email])
 
     def get_default_redirect_url(self):
-        return HttpResponse(_('Please check your email to confirm your registration.'))
+        return HttpResponse(
+            _("Please check your email to confirm your registration.")
+        )
+
 
 class ActivateAccountView(View):
     def get(self, request, uidb64, token):
@@ -255,8 +297,17 @@ class ActivateAccountView(View):
         if user and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            messages.success(request, _('Your account has been activated. You can now log in.'))
-            return redirect(settings.LOGIN_REDIRECT_URL)  # Redirect to the login page or any other desired page
+            messages.success(
+                request,
+                _("Your account has been activated. You can now log in."),
+            )
+            return redirect(
+                settings.LOGIN_REDIRECT_URL
+            )  # Redirect to the login page or any other desired page
         else:
-            messages.error(request, _('Activation link is invalid or has expired.'))
-            return redirect('activation_error')  # Redirect to an error page if activation fails
+            messages.error(
+                request, _("Activation link is invalid or has expired.")
+            )
+            return redirect(
+                "activation_error"
+            )  # Redirect to an error page if activation fails

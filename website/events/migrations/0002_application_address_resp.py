@@ -4,15 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('events', '0001_initial'),
+        ("events", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='application',
-            name='address_resp',
-            field=models.JSONField(default=dict, verbose_name='Adresse partielle du responsable légal'),
+            model_name="application",
+            name="address_resp",
+            field=models.JSONField(
+                default=dict,
+                verbose_name="Adresse partielle du responsable légal",
+            ),
         ),
     ]

@@ -36,7 +36,7 @@ TSHIRT = [
     ("M", "M"),
     ("L", "L"),
     ("XL", "XL"),
-    ("XXL", "XXL")
+    ("XXL", "XXL"),
 ]
 
 
