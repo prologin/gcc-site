@@ -39,13 +39,14 @@ a {
   text-decoration: none;
 }
 
+/* Remove the underline between icon and text in links */
+a:hover > :not(i) {
+    text-decoration: underline;
+}
 a:hover {
-  text-decoration: underline;
+    text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
 
 .asteriskField{
   padding-left: 8px;
