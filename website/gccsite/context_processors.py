@@ -42,11 +42,34 @@ def my_context_processor(req):
     faq_entries = [
         {
             "question": "Qu'est-ce qu'un stage GCC! ?",
-            "answer": "<p>C'est un stage où vous apprenez et pratiquez la programmation, accompagnées par des étudiants et étudiantes en informatique.</br>Nous proposons deux type de stages :<ul><li> les stages longs qui durent du lundi matin au samedi midi</li><li>les stages courts qui durent le temps d'un week-end</li></ul>Le tout dans une atmosphère détendue, nous ne forçons personne, ce stage est là pour vous faire découvrir un domaine afin de vous aider dans votre orientation. Nous ne vous en voudrons pas si vous n'aimez pas la programmation.<br><br>Nous organisons aussi des conférences animées par des femmes du numérique pour qu'elles partagent leur vécu dans le monde du travail.</p>",
+            "answer": """
+            <p>
+                Pendant un stage Girls Can Code!, vous aurez l'occasion
+                d'apprendre et de pratiquer la programmation tout en étant
+                accompagnée par des étudiantes et des étudiants en
+                informatique. Ce sera l'occasion pour vous de découvrir le
+                domaine du numérique et vous aider dans votre orientation.
+            </p>
+
+            <p>
+                Deux types de stages sont proposés, les stages courts qui
+                se déroulent le temps d'un week-end et les stages longs
+                qui durent une semaine.
+            </p>
+
+            <p>
+                Des femmes venant du monde du numérique interviennent lors
+                des stages sur leur parcours scolaire et professionnel.
+            </p>
+            """,
         },
         {
             "question": "Qui peux s'inscrire aux stages ?",
-            "answer": "Toute personne s'identifiant comme une femme et étant actuellement ou à la rentrée prochaine dans l'enseignement secondaire (collège et lycée) ou équivalent.",
+            "answer": """
+            Toute personne s'identifiant comme une femme et étant actuellement
+            ou à la rentrée prochaine dans l'enseignement secondaire (collège
+            et lycée) ou équivalent peut s'inscire aux stages Girls Can Code!.
+            """,
         },
         {
             "question": "Combien coûte un stage ?",
