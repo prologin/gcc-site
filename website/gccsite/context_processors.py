@@ -66,7 +66,7 @@ def my_context_processor(req):
         },
         {
             "question": "Comment bénéficier de la bourse ?",
-            "answer": f"""Il suffit d'envoyer un mail à <a href="mailto:{context['SCHOLARSHIP_EMAIL']}">{context['SCHOLARSHIP_EMAIL']}</a>. et l'ensemble de la procedure vous sera transmise par un responsable de l'association.""",
+            "answer": f"""Il suffit d'envoyer un mail à <a href="mailto:{context['SCHOLARSHIP_EMAIL']}">{context['SCHOLARSHIP_EMAIL']}</a>. et l'ensemble de la procédure vous sera transmise par un responsable de l'association.""",
         },
         {
             "question": "Peut-on faire le stage plusieurs fois ?",
