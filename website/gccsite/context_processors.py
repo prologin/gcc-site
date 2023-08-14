@@ -147,7 +147,6 @@ _PRIVACY_BASE_CTX = {
 
 def privacy_inscription_list():
     return [
-        _PRIVACY_BASE_CTX,
         {
             "title": "Objet du traitement de données",
             "content": """
@@ -156,6 +155,10 @@ def privacy_inscription_list():
             <h4>Base légale</h4>
             <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineurs de 15 ans), ce sont les articles 6(1)a et 8 du RGPD, et 45 de la Loi Informatique et Libertés.</p>
             """,
+        },
+        {
+            "title": "Personnes concernées",
+            "content": "<p>Le traitement de données concerne les personnes physiques souhaitant s’inscrire au site GCC!.</p>",
         },
         {
             "title": "Données traitées",
@@ -172,10 +175,6 @@ def privacy_inscription_list():
             <h4>Prise de décision automatisée</h4>
             <p>Le traitement ne prévoit pas de prise de décision automatisée.</p>
             """,
-        },
-        {
-            "title": "Personnes concernées",
-            "content": "<p>Le traitement de données concerne les personnes physiques souhaitant s’inscrire au site GCC!.</p>",
         },
         {
             "title": "Destinataires des données",
@@ -201,12 +200,12 @@ def privacy_inscription_list():
             "title": "Sécurité",
             "content": "<p>Des mesures de sécurité visant à garantir la confidentialité, l'intégrité et la disponibilité des données collectées, issues du référentiel ISO/IEC27002 ont été mises en œuvre. Elles comprennent, sans s'y limiter, le chiffrement des données en transit et leur sauvegarde régulière externalisée.</p>",
         },
+        _PRIVACY_BASE_CTX,
     ]
 
 
 def privacy_stage_list():
     return [
-        _PRIVACY_BASE_CTX,
         {
             "title": "Objet du traitement de données",
             "content": """
@@ -222,6 +221,16 @@ def privacy_stage_list():
             </ul>
             <h4>Base légale</h4>
             <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineures de 16 ans), ce sont les articles 6(1)a et 8 du RGPD.</p>
+            """,
+        },
+        {
+            "title": "Personnes concernées",
+            "content": """
+            <p>Le traitement de données concerne :</p>
+            <ul>
+                <li>les personnes physiques souhaitant participer à un stage GCC! ;</li>
+                <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
+            </ul>
             """,
         },
         {
@@ -242,16 +251,6 @@ def privacy_stage_list():
         <p>L'inscription à un stage GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p>
         <h4>Prise de décision automatisée</h4>
         <p>Le traitement ne prévoit pas de prise de décision automatisée : toutes les demandes d'inscription sont revues par un être humain :)</p>
-            """,
-        },
-        {
-            "title": "Personnes concernées",
-            "content": """
-            <p>Le traitement de données concerne :</p>
-            <ul>
-                <li>les personnes physiques souhaitant participer à un stage GCC! ;</li>
-                <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
-            </ul>
             """,
         },
         {
@@ -284,13 +283,12 @@ def privacy_stage_list():
             "title": "Sécurité",
             "content": "<p>Des mesures de sécurité visant à garantir la confidentialité, l'intégrité et la disponibilité des données collectées, issues du référentiel ISO/IEC27002 ont été mises en œuvre. Elles comprennent, sans s'y limiter, le chiffrement des données en transit et leur sauvegarde régulière externalisée.</p>",
         },
+        _PRIVACY_BASE_CTX,
     ]
 
 
 def privacy_newsletter_list():
-    # TODO: Update document and fill this
     return [
-        _PRIVACY_BASE_CTX,
         {
             "title": "Objet du traitement de données",
             "content": """
@@ -301,6 +299,16 @@ def privacy_newsletter_list():
             </ul>
             <h4>Base légale</h4>
             <p>Ce traitement repose sur le consentement des inscrits et de leur responsable légal le cas échéant (mineures de 16 ans), ce sont les articles 6(1)a et 8 du RGPD.</p>
+            """,
+        },
+        {
+            "title": "Personnes concernées",
+            "content": """
+            <p>Le traitement de données concerne :</p>
+            <ul>
+                <li>les personnes physiques souhaitant être informées des activités l'association Prologin relatives aux stages GCC! ;</li>
+                <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
+            </ul>
             """,
         },
         {
@@ -317,16 +325,6 @@ def privacy_newsletter_list():
             <p>L'inscription à la newsletter GCC! prévoit, sauf mention contraire, le recueil obligatoire de données qui sont nécessaires au traitement de l'inscription.</p>
             <h4>Prise de décision automatisée</h4>
             <p>Le traitement ne prévoit pas de prise de décision automatisée.</p>
-            """,
-        },
-        {
-            "title": "Personnes concernées",
-            "content": """
-            <p>Le traitement de données concerne :</p>
-            <ul>
-                <li>les personnes physiques souhaitant être informées des activités l'association Prologin relatives aux stages GCC! ;</li>
-                <li>les responsables légaux des personnes ci-dessus le cas échéant (mineures de 16 ans) ;</li>
-            </ul>
             """,
         },
         {
@@ -350,4 +348,5 @@ def privacy_newsletter_list():
             "title": "Sécurité",
             "content": "<p>Des mesures de sécurité visant à garantir la confidentialité, l'intégrité et la disponibilité des données collectées, issues du référentiel ISO/IEC27002 ont été mises en œuvre. Elles comprennent, sans s'y limiter, le chiffrement des données en transit et leur sauvegarde régulière externalisée.</p>",
         },
+        _PRIVACY_BASE_CTX,
     ]
