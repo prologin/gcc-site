@@ -47,9 +47,11 @@ a:hover {
     text-decoration: none;
 }
 
-
-.asteriskField{
-  padding-left: 8px;
+/* Crispy form class put on asteriks of required fields */
+.asteriskField {
+  padding-left: .2em;
+  font-weight: bold;
+  color: red;
 }
 
 .accordion-button {

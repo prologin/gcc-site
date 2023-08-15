@@ -22,6 +22,11 @@
                             <input type="hidden" name="event-id" value="{{ id }}">
                             {% crispy form %}
                         </form>
+                        <div class="fst-italic fs-footnote">
+                            Les champs avec un astérisque
+                            <span class="asteriskField">*</span>
+                            sont à remplir obligatoirement.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +53,10 @@
 
         <div class="modal-footer justify-content-center">
             <a href="{% url 'users:login' %}" class="btn btn-primary py-2 px-4">
-                Connexion
+                Se connecter
+            </a>
+            <a href="{% url 'users:register' %}" class="btn btn-primary py-2 px-4">
+                S'inscrire
             </a>
         </div>
     </div>
