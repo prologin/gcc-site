@@ -63,7 +63,7 @@ class EventSignupForm(forms.Form):
     )
 
     dob = forms.DateField(
-        label="Date de naissance: ",
+        label="Date de naissance",
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
     )
 
@@ -188,7 +188,7 @@ class EventSignupForm(forms.Form):
     # Etablissement scolaire
 
     name_school = forms.CharField(
-        label="Nom :",
+        label="Nom",
         widget=forms.TextInput(
             attrs={"placeholder": "Nom de l'établissement scolaire"}
         ),
@@ -196,27 +196,27 @@ class EventSignupForm(forms.Form):
     )
 
     street_school = forms.CharField(
-        label="Numéro et nom de voie :",
+        label="",
         widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie"}),
         max_length=250,
     )
 
     complement_school = forms.CharField(
-        label="Complément d'adresse :",
+        label="",
         widget=forms.TextInput(attrs={"placeholder": "Complément d'adresse"}),
         max_length=200,
         required=False,
     )
 
     city_school = forms.CharField(
-        label="Ville:",
+        label="",
         max_length=50,
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
     zip_code_school = forms.IntegerField(
-        label="Code postal :",
+        label="",
         required=True,
         widget=forms.TextInput(
             attrs={"placeholder": "Code postal", "type": "number"}
@@ -224,7 +224,7 @@ class EventSignupForm(forms.Form):
     )
 
     country_school = forms.CharField(
-        label="Pays :",
+        label="",
         max_length=30,
         initial="France",
         required=True,
@@ -277,22 +277,47 @@ class EventSignupForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = "application_form"
         self.helper.form_method = "post"
+
+        address_applicant = (
+            HTML("<h3>Adresse de la participante *</h3>"),
+            Field("street_applicant"),
+            Field("complement_applicant"),
+            Field("city_applicant"),
+            Row(
+                Column(Field("zip_code_applicant")),
+                Column(Field("country_applicant")),
+            ),
+        )
+        address_applicant_resp = (
+            HTML("<h3>Adresse du responsable légal *</h3>"),
+            Field("street_applicant_resp"),
+            Field("complement_applicant_resp"),
+            Field("city_applicant_resp"),
+            Row(
+                Column(Field("zip_code_applicant_resp")),
+                Column(Field("country_applicant_resp")),
+            ),
+        )
+        address_school = (
+            HTML("<h3>Adresse de l'établissement scolaire *</h3>"),
+            Field("street_school"),
+            Field("complement_school"),
+            Field("city_school"),
+            Row(
+                Column(Field("zip_code_school")),
+                Column(Field("country_school")),
+            ),
+        )
+
         self.helper.layout = Layout(
             Div(
-                HTML("<h3> Informations de la participante: </h3>"),
+                HTML("<h3>Informations de la participante *</h3>"),
                 Row(
                     Column(Field("first_name")),
                     Column(Field("last_name")),
                 ),
                 Field("dob"),
-                HTML("<h3> Adresse de la participante : </h3>"),
-                Field("street_applicant"),
-                Field("complement_applicant"),
-                Field("city_applicant"),
-                Row(
-                    Column(Field("zip_code_applicant")),
-                    Column(Field("country_applicant")),
-                ),
+                *address_applicant,
                 Field("is_women"),
                 Field("legal_authorization"),
                 Div(
@@ -306,15 +331,9 @@ class EventSignupForm(forms.Form):
                 css_class="tab active",
             ),
             Div(
-                HTML("<h3> Informations du responsable légal : </h3>"),
+                HTML("<h3>Informations du responsable légal *</h3>"),
                 Field("phone"),
-                Field("street_applicant_resp"),
-                Field("complement_applicant_resp"),
-                Field("city_applicant_resp"),
-                Row(
-                    Column(Field("zip_code_applicant_resp")),
-                    Column(Field("country_applicant_resp")),
-                ),
+                *address_applicant_resp,
                 Div(
                     Row(
                         Column(
@@ -337,15 +356,9 @@ class EventSignupForm(forms.Form):
                 css_class="tab",
             ),
             Div(
-                HTML("<h3> Etablissement scolaire: </h3>"),
+                HTML("<h3>Établissement scolaire</h3>"),
                 Field("name_school"),
-                Field("street_school"),
-                Field("complement_school"),
-                Field("city_school"),
-                Row(
-                    Column(Field("zip_code_school")),
-                    Column(Field("country_school")),
-                ),
+                *address_school,
                 Field("school_level"),
                 Div(
                     Row(
