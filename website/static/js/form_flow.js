@@ -1,3 +1,6 @@
+// Must be the same as events/forms.py:PHONE_REGEX
+const PHONE_REGEX = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
+
 const INVALID_CLS = "is-invalid";
 var next_click = document.querySelectorAll("#button-id-next");
 var back_click = document.querySelectorAll("#button-id-back");
@@ -45,24 +48,31 @@ function updateForm() {
 function validateform() {
     validate = true;
     var active_tab = document.querySelector(".tab.active");
-    var fields = active_tab.querySelectorAll("input");
+    var fields = active_tab.querySelectorAll("input, select");
     fields.forEach(function (val) {
         val.classList.remove(INVALID_CLS);
+
         if (val.hasAttribute("required")) {
             if (val.type === "checkbox" || val.type === "radio") {
                 if (!val.checked) {
                     validate = false;
                     val.classList.add(INVALID_CLS);
                 }
-            } else if (val.tagName === "SELECT") {
+            } else if (val.tagName === "select") {
                 // Handle select elements (dropdowns)
-                if (val.value === "start") {
+                if (val.value === "") {
                     validate = false;
                     val.classList.add(INVALID_CLS);
                 }
             } else if (val.value.length == 0) {
                 validate = false;
                 val.classList.add(INVALID_CLS);
+            } else if (val.id === "id_phone") {
+                // Handle phone validation
+                if (!PHONE_REGEX.test(val.value)) {
+                    validate = false;
+                    val.classList.add(INVALID_CLS);
+                }
             }
         }
     });

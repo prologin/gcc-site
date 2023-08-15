@@ -17,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
     (
-        "start",
+        None,
         "------ Selectionner ton niveau d'étude actuel ------",
     ),  # Start choice
     ("6ème", "6ème"),
@@ -30,18 +30,21 @@ SCHOOL_LEVEL = [
 ]
 
 TSHIRT = [
-    ("start", "------ Selectionner une taille de t-shirt ------"),
+    (None, "------ Selectionner une taille de t-shirt ------"),
     ("XS", "XS"),
     ("S", "S"),
     ("M", "M"),
     ("L", "L"),
     ("XL", "XL"),
-    ("XXL", "XXL")
+    ("XXL", "XXL"),
 ]
+
+# Must be the same as static/js/form_flow.js:PHONE_REGEX
+PHONE_REGEX = "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
 def phoneNumberTest(phone):
-    if re.match("^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$", str(phone)):
+    if re.match(PHONE_REGEX, str(phone)):
         raise ValidationError("Not a phone number")
 
 
@@ -228,8 +231,8 @@ class EventSignupForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Pays"}),
     )
 
-    school_level = forms.CharField(
-        label="Niveau d'études", widget=forms.Select(choices=SCHOOL_LEVEL)
+    school_level = forms.ChoiceField(
+        label="Niveau d'études", choices=SCHOOL_LEVEL
     )
 
     # Info supplémentaires sur la participante
@@ -243,9 +246,9 @@ class EventSignupForm(forms.Form):
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
-    tshirt = forms.CharField(
+    tshirt = forms.ChoiceField(
         label="Quelle est la taille de t-shirt de la participante ?",
-        widget=forms.Select(choices=TSHIRT),
+        choices=TSHIRT,
         help_text="Un t-shirt sera donné aux participantes pendant le stage",
     )
 
