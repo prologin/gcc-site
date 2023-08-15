@@ -6,8 +6,7 @@
         <button class="accordion-button bg-transparent text-reset shadow-none row btn-light justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{forloop.counter}}" aria-expanded="false" aria-controls="accordion-{{forloop.counter}}">
           <div class="col row">
             <div class="col my-auto">
-              <i class="fas fa-user me-2"></i>
-              {{ e.first_name|title }} {{ e.last_name|title }}
+              <i class="fas fa-user me-2"></i>{{ e.first_name|title }} {{ e.last_name|title }}
             </div>
             <div class="my-auto col-sm-5 offset-sm-2 col-md-6 offset-md-0">
               <strong>Stage à {{ e.event}}</strong>
