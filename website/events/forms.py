@@ -133,7 +133,10 @@ class EventSignupForm(forms.Form):
         label="",
         validators=[phoneNumberTest],
         widget=forms.TextInput(
-            attrs={"placeholder": "Numéro de téléphone du responsable légal"}
+            attrs={
+                "placeholder": "Numéro de téléphone du responsable légal",
+                "type": "tel",
+            }
         ),
     )
 
@@ -278,8 +281,17 @@ class EventSignupForm(forms.Form):
         self.helper.form_id = "application_form"
         self.helper.form_method = "post"
 
+        # Utility function to format a label tag ahead of input groups
+        def labelize(s, required=False):
+            label_class = 'class="requiredField"' if required else ""
+            asterisk = (
+                '<span class="asteriskField">*</span>' if required else ""
+            )
+
+            return HTML(f"<label {label_class}>{s}{asterisk}</label>")
+
         address_applicant = (
-            HTML("<h3>Adresse de la participante *</h3>"),
+            labelize("Adresse de la participante", True),
             Field("street_applicant"),
             Field("complement_applicant"),
             Field("city_applicant"),
@@ -289,7 +301,7 @@ class EventSignupForm(forms.Form):
             ),
         )
         address_applicant_resp = (
-            HTML("<h3>Adresse du responsable légal *</h3>"),
+            labelize("Adresse du responsable légal", True),
             Field("street_applicant_resp"),
             Field("complement_applicant_resp"),
             Field("city_applicant_resp"),
@@ -299,7 +311,7 @@ class EventSignupForm(forms.Form):
             ),
         )
         address_school = (
-            HTML("<h3>Adresse de l'établissement scolaire *</h3>"),
+            labelize("Adresse de l'établissement scolaire", True),
             Field("street_school"),
             Field("complement_school"),
             Field("city_school"),
@@ -311,7 +323,7 @@ class EventSignupForm(forms.Form):
 
         self.helper.layout = Layout(
             Div(
-                HTML("<h3>Informations de la participante *</h3>"),
+                labelize("Informations de la participante", True),
                 Row(
                     Column(Field("first_name")),
                     Column(Field("last_name")),
@@ -331,7 +343,7 @@ class EventSignupForm(forms.Form):
                 css_class="tab active",
             ),
             Div(
-                HTML("<h3>Informations du responsable légal *</h3>"),
+                labelize("Informations du responsable légal", True),
                 Field("phone"),
                 *address_applicant_resp,
                 Div(
@@ -356,7 +368,7 @@ class EventSignupForm(forms.Form):
                 css_class="tab",
             ),
             Div(
-                HTML("<h3>Établissement scolaire</h3>"),
+                labelize("Établissement scolaire"),
                 Field("name_school"),
                 *address_school,
                 Field("school_level"),
