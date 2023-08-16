@@ -30,6 +30,8 @@ back_click.forEach(function (back_page) {
 });
 
 function updateProgressBar() {
+    if (progress_bar == null)
+        return;
     const percentage_progress = ((formnumber + 1) * 100) / MAX_FORMNUMBER;
     progress_bar.style.width = percentage_progress.toString() + "%";
     console.log(progress_bar);
