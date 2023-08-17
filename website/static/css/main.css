@@ -51,6 +51,7 @@ a:hover {
 .asteriskField {
   padding-left: .2em;
   font-weight: bold;
+  color: red;
 }
 
 .accordion-button {
