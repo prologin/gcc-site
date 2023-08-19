@@ -5,7 +5,6 @@ const INVALID_CLS = "is-invalid";
 var next_click = document.querySelectorAll("#button-id-next");
 var back_click = document.querySelectorAll("#button-id-back");
 var main_form = document.querySelectorAll(".tab");
-var progress_bar = document.querySelector(".progress .progress-bar");
 
 let formnumber = 0;
 const MAX_FORMNUMBER = 2;
@@ -17,7 +16,6 @@ next_click.forEach(function (next_page) {
         }
         formnumber++;
         updateForm();
-        updateProgressBar();
     });
 });
 
@@ -25,15 +23,8 @@ back_click.forEach(function (back_page) {
     back_page.addEventListener("click", function () {
         formnumber--;
         updateForm();
-        updateProgressBar();
     });
 });
-
-function updateProgressBar() {
-    const percentage_progress = ((formnumber + 1) * 100) / MAX_FORMNUMBER;
-    progress_bar.style.width = percentage_progress.toString() + "%";
-    console.log(progress_bar);
-}
 
 function updateForm() {
     main_form.forEach(function (main_number) {
@@ -94,7 +85,6 @@ function initForm() {
         }
     }
     updateForm();
-    updateProgressBar();
 }
 
 initForm();
