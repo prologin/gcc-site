@@ -58,7 +58,7 @@ function validateform() {
             } else if (val.value.length == 0) {
                 validate = false;
                 val.classList.add(INVALID_CLS);
-            } else if (val.id === "id_phone") {
+            } else if (val.type === "tel") {
                 // Handle phone validation
                 if (!PHONE_REGEX.test(val.value)) {
                     validate = false;
