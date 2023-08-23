@@ -13,6 +13,7 @@ from crispy_forms.layout import (
 )
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -129,6 +130,24 @@ class EventSignupForm(forms.Form):
     )
 
     # Responsable légal de la participante
+    first_name_resp = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Prénom"}),
+        max_length=255,
+    )
+
+    last_name_resp = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Nom de famille"}),
+        max_length=255,
+    )
+
+    email_resp = forms.EmailField(
+        label="E-mail",
+        max_length=320,
+        required=True,
+        validators=[validate_email],
+    )
 
     phone = forms.DecimalField(
         label="Numéro de téléphone",
@@ -346,6 +365,12 @@ class EventSignupForm(forms.Form):
             ),
             Div(
                 HTML("<h2>Informations du responsable légal</h2>"),
+                labelize("Identité", True),
+                Row(
+                    Column(Field("first_name_resp")),
+                    Column(Field("last_name_resp")),
+                ),
+                Field("email_resp"),
                 Field("phone"),
                 *address_applicant_resp,
                 Div(

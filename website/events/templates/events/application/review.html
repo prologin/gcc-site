@@ -56,10 +56,10 @@
                                     <p>
                                     <h2> Informations sur le responsable légal: </h2>
                                     </p>
-                                    <p> <i class="fa-solid fa-user"></i> {{application.user.first_name}}
-                                        {{application.user.last_name}}</p>
+                                    <p> <i class="fa-solid fa-user"></i> {{application.first_name_resp}}
+                                        {{application.last_name_resp}}</p>
                                     {% if "users.can_view_applications_private_details" in perms%}
-                                    <p> <i class="fa-solid fa-at"></i> {{application.user.email}} </p>
+                                    <p> <i class="fa-solid fa-at"></i> {{application.email_resp}} </p>
                                     <p> <i class="fa-solid fa-phone"></i> {{ application.phone }}</p>
                                     <p> <i class="fa-solid fa-house-user"></i> {{application.address_resp.zip_code}}
                                         {{application.address_resp.city}},

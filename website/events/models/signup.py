@@ -44,12 +44,6 @@ class Application(models.Model):
         related_name="applications",
     )
 
-    status = models.SmallIntegerField(
-        choices=SelectionStatus.choices,
-        verbose_name=_("Statut de la candidature"),
-        default=0,
-    )
-
     user = models.ForeignKey(
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
@@ -59,28 +53,44 @@ class Application(models.Model):
 
     first_name = models.CharField(
         max_length=256,
-        verbose_name=_("Prénom"),
+        verbose_name=_("Prénom de la participante"),
     )
 
     last_name = models.CharField(
         max_length=256,
-        verbose_name=_("Nom"),
+        verbose_name=_("Nom de la participante"),
     )
 
     dob = models.DateField(
-        verbose_name=_("Date de naissance"),
-    )
-
-    phone = models.CharField(
-        max_length=16, blank=True, verbose_name=_("Numéro de téléphone")
+        verbose_name=_("Date de naissance de la participante"),
     )
 
     address = models.JSONField(
-        verbose_name=_("Adresse partielle de la participante"), default=dict
+        verbose_name=_("Adresse de la participante"), default=dict
+    )
+
+    first_name_resp = models.CharField(
+        max_length=256,
+        verbose_name=_("Prénom du responsable légal"),
+    )
+
+    last_name_resp = models.CharField(
+        max_length=256,
+        verbose_name=_("Nom du responsable légal"),
+    )
+
+    email_resp = models.EmailField(
+        verbose_name=_("Adresse email du responable légal")
+    )
+
+    phone = models.CharField(
+        max_length=16,
+        blank=True,
+        verbose_name=_("Numéro de téléphone du responsable légal"),
     )
 
     address_resp = models.JSONField(
-        verbose_name=_("Adresse partielle du responsable légal"), default=dict
+        verbose_name=_("Adresse du responsable légal"), default=dict
     )
 
     school = models.JSONField(
@@ -93,6 +103,12 @@ class Application(models.Model):
     )
 
     notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
+
+    status = models.SmallIntegerField(
+        choices=SelectionStatus.choices,
+        verbose_name=_("Statut de la candidature"),
+        default=0,
+    )
 
     created_at = models.DateTimeField(
         verbose_name=_("Date d'inscription"),

@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
 )
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView
@@ -53,29 +53,31 @@ class HomePageView(ListView):
                 user = User.objects.get(id=request.user.id)
 
                 address = {
-                    "street": request.POST["street_applicant"],
-                    "complement": request.POST["complement_applicant"],
-                    "city": request.POST["city_applicant"],
-                    "zip_code": request.POST["zip_code_applicant"],
-                    "country": request.POST["country_applicant"],
+                    "street": form.cleaned_data["street_applicant"],
+                    "complement": form.cleaned_data["complement_applicant"],
+                    "city": form.cleaned_data["city_applicant"],
+                    "zip_code": form.cleaned_data["zip_code_applicant"],
+                    "country": form.cleaned_data["country_applicant"],
                 }
 
                 address_resp = {
-                    "street": request.POST["street_applicant_resp"],
-                    "complement": request.POST["complement_applicant_resp"],
-                    "city": request.POST["city_applicant_resp"],
-                    "zip_code": request.POST["zip_code_applicant_resp"],
-                    "country": request.POST["country_applicant_resp"],
+                    "street": form.cleaned_data["street_applicant_resp"],
+                    "complement": form.cleaned_data[
+                        "complement_applicant_resp"
+                    ],
+                    "city": form.cleaned_data["city_applicant_resp"],
+                    "zip_code": form.cleaned_data["zip_code_applicant_resp"],
+                    "country": form.cleaned_data["country_applicant_resp"],
                 }
 
                 school = {
-                    "school_level": request.POST["school_level"],
-                    "name": request.POST["name_school"],
-                    "street": request.POST["street_school"],
-                    "complement": request.POST["complement_school"],
-                    "city": request.POST["city_school"],
-                    "zip_code": request.POST["zip_code_school"],
-                    "country": request.POST["country_school"],
+                    "school_level": form.cleaned_data["school_level"],
+                    "name": form.cleaned_data["name_school"],
+                    "street": form.cleaned_data["street_school"],
+                    "complement": form.cleaned_data["complement_school"],
+                    "city": form.cleaned_data["city_school"],
+                    "zip_code": form.cleaned_data["zip_code_school"],
+                    "country": form.cleaned_data["country_school"],
                 }
 
                 form_answer = (
@@ -92,11 +94,14 @@ class HomePageView(ListView):
 
                 application = signup.Application.objects.create(
                     user=user,
-                    first_name=request.POST["first_name"],
-                    last_name=request.POST["last_name"],
-                    dob=request.POST["dob"],
-                    phone=request.POST["phone"],
+                    first_name=form.cleaned_data["first_name"],
+                    last_name=form.cleaned_data["last_name"],
+                    dob=form.cleaned_data["dob"],
                     address=address,
+                    first_name_resp=form.cleaned_data["first_name_resp"],
+                    last_name_resp=form.cleaned_data["last_name_resp"],
+                    email_resp=form.cleaned_data["email_resp"],
+                    phone=form.cleaned_data["phone"],
                     address_resp=address_resp,
                     school=school,
                     event=event,
