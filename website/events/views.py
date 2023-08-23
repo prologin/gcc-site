@@ -160,7 +160,13 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx["events"] = events.Event.objects.get_visible_events()
+        ctx["years"] = events.Event.objects.years()
+        if self.request.GET:
+            ctx["events"] = events.Event.objects.filter(
+                year=self.request.GET["year"]
+            )
+        else:
+            ctx["events"] = events.Event.objects.get_visible_events()
         return ctx
 
 

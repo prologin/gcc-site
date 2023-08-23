@@ -73,6 +73,13 @@ class EventManager(models.Manager):
     def get_visible_events(self):
         return self.filter(signup_start_date__lte=timezone.now())
 
+    def years(self):
+        years_list = list()
+        for year in self.all().values_list("year"):
+            if year[0] not in years_list:
+                years_list.append(year[0])
+        return years_list
+
 
 class Event(models.Model):
     name = models.CharField(
@@ -130,6 +137,7 @@ class Event(models.Model):
         )
 
     class Meta:
+        ordering = ("year",)
         verbose_name = _("évènement")
         verbose_name_plural = _("évènements")
 

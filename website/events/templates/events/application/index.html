@@ -10,10 +10,8 @@
 
 <h1> Review des candidatures </h1>
 <ul>
-    {% for group in grouped_events %}
-        {% with year=group.grouper %}
-         <li><a href="#year-{{ year }}"> {{ year }} </a></li>
-        {% endwith %}
+    {% for year in years %}
+         <li><a href="?year={{year}}"> {{ year }} </a></li>
     {% endfor %}
 </ul>
 
@@ -29,13 +27,23 @@
 
             </thead>
             <tbody>
-                {% for event in events %}
-                <tr>
-                    <th scope="row"> {{ event.year }} </th>
-                    <td> {{ event.center }} </td>
-                    <td> <a href="{% url 'events:application_review' year=event.year event=event.id %}"> Review </a></td>
-                </tr>
-                {% endfor %}
+                {% if events_year %}
+                    {% for event in events_year %}
+                    <tr>
+                        <th scope="row"> {{ event.year }} </th>
+                        <td> {{ event.center }} </td>
+                        <td> <a href="{% url 'events:application_review' year=event.year event=event.id %}"> Review </a></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    {% for event in events %}
+                    <tr>
+                        <th scope="row"> {{ event.year }} </th>
+                        <td> {{ event.center }} </td>
+                        <td> <a href="{% url 'events:application_review' year=event.year event=event.id %}"> Review </a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>
