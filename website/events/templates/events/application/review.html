@@ -39,64 +39,83 @@
                 <tr class="collapse" id="row-{{forloop.counter}}">
                     <td colspan="5">
                         <div class="row">
-                            <div class="col-md-4">
-                                <dl>
-                                    <dt> Responsable légal: </dt>
-                                    <dd> {{application.user.first_name}} {{application.user.last_name}} </dd>
-
+                            <div class="col-md-6">
+                                <div class="p-2">
                                     {% if "users.can_view_applications_private_details" in perms%}
-                                    <dt> Email du responsable légal </dt>
-                                    <dd> {{application.user.email}} </dd>
-
-                                    <dt> Numéro du responsable légal</dt>
-                                    <dd> {{ application.phone }}</dd>
-
-                                    <dt> Adresse de la participante </dt>
-                                    <dd> {{application.address.zip_code}} {{application.address.city}},
-                                        {{application.address.country}} </dd>
+                                    <p>
+                                    <h2> Informations sur la participante: </h2>
+                                    </p>
+                                    <p> <i class="fa-solid fa-house-user"></i> {{application.address.zip_code}}
+                                        {{application.address.city}},
+                                        {{application.address.country}} </p>
+                                    <p> <i class="fa-solid fa-cake-candles"></i> {{application.dob}} </p>
                                     {% endif %}
+                                </div>
 
-                                    <dt> Date d'anniversaire de la participante </dt>
-                                    <dd> {{application.dob}} </dd>
-                                </dl>
+                                <div class="p-2">
+                                    <p>
+                                    <h2> Informations sur le responsable légal: </h2>
+                                    </p>
+                                    <p> <i class="fa-solid fa-user"></i> {{application.user.first_name}}
+                                        {{application.user.last_name}}</p>
+                                    {% if "users.can_view_applications_private_details" in perms%}
+                                    <p> <i class="fa-solid fa-at"></i> {{application.user.email}} </p>
+                                    <p> <i class="fa-solid fa-phone"></i> {{ application.phone }}</p>
+                                    <p> <i class="fa-solid fa-house-user"></i> {{application.address_resp.zip_code}}
+                                        {{application.address_resp.city}},
+                                        {{application.address_resp.country}} </p>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <h3> Réponse au questionnaires</h3>
-                                <dl>
-                                    <dt> Quelle est ta taille de t-shirt ? </dt>
-                                    <dd> {{application.form_answer.tshirt }}</dd>
 
-                                    <dt> Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage
+                            <div class="col-md-6">
+                                <p>
+                                <h2> <i class="fa-solid fa-school"></i> Etablissement scolaire:
+                                    {{application.school.name}}</h2>
+                                </p>
+                                <p> <i class="fa-solid fa-location-dot"></i> {{application.school.street}},
+                                    {{application.school.zip_code}} {{application.school.city}}</p>
+                                <p> <i class="fa-solid fa-user-graduate"></i> {{application.school.school_level}} </p>
+                            </div>
+                        </div>
+
+                        <div class="row p-2">
+                            <div class="col-md">
+                                <h2> Réponse au questionnaires</h2>
+                                <dl class="py-2">
+                                    <h3> Quelle est ta taille de t-shirt ? </h3> {{application.form_answer.tshirt }}
+
+                                    <h3> Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage
                                         ?
-                                    </dt>
-                                    <dd> {{application.form_answer.learning }} </dd>
+                                    </h3> {{application.form_answer.learning }}
 
-                                    <dt> As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels
-                                        outils ou langages de programmation as-tu essayés ? </dt>
-                                    <dd> {{application.form_answer.programing }} </dd>
+                                    <h3> As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels
+                                        outils ou langages de programmation as-tu essayés ? </h3>
+                                    {{application.form_answer.programing }}
 
-                                    <dt> Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu
-                                        préciser lesquelles ? </dt>
-                                    <dd> {{application.form_answer.studies }} </dd>
+                                    <h3> Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu
+                                        préciser lesquelles ? </h3>
+                                    {{application.form_answer.studies }}
 
-                                    <dt> Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela
-                                        nous
-                                        aide beaucoup ! </dt>
-                                    <dd> {{application.form_answer.association }} </dd>
+                                    <h3> Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela
+                                        nous aide beaucoup ! </h3>
+                                    {{application.form_answer.association }}
 
-                                    {% if "users.can_view_applications_private_details" in perms%}
-                                    <dt> As-tu des allergies ? </dt>
-                                    <dd> {{application.form_answer.allergies }} </dd>
+                                    {% if "users.can_view_applications_private_details" in perms %}
+                                    <h3> As-tu des allergies ? </h3>
+                                    {{application.form_answer.allergies }}
 
-                                    <dt> As-tu un régime alimentaire particulier ? </dt>
-                                    <dd> {{application.form_answer.diet }} </dd>
+                                    <h3> As-tu un régime alimentaire particulier ? </h3>
+                                    {{application.form_answer.diet }}
                                     {% endif %}
+
                                 </dl>
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row py-3 px-2">
                             <div class="col-12">
+                                <h2> Notes sur la candidature: </h2>
                                 <form method="post" action="{% url 'events:update_application_notes' %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="application-id" value="{{ application.pk }}">
@@ -110,7 +129,8 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row py-3 px-2">
+                            <h2> Statut de la candidature:</h2>
                             <form method="post" action="{% url 'events:update_application_status' %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="application-id" value="{{ application.pk }}">
@@ -118,13 +138,20 @@
                                 <input type="hidden" name="event-id" value="{{ application.event.pk }}">
 
                                 <select class="form-select" name="status">
-                                    <option value="-3" {% if application.status == -3 %} selected {% endif %}> Candidature rejetée </option>
-                                    <option value="-2" {% if application.status == -2 %} selected {% endif %}> Candidature annulée de la part de la candidate </option>
-                                    <option value="-1" {% if application.status == -1 %} selected {% endif %}> Candidature annulée de la part des organisateurs </option>
-                                    <option value="0" {% if application.status == 0 %} selected {% endif %}> Candidature en cours de traitement </option>
-                                    <option value="1" {% if application.status == 1 %} selected {% endif %}> Candidature acceptée </option>
-                                    <option value="2" {% if application.status == 2 %} selected {% endif %}> Candidature confirmée </option>
-                                    <option value="3" {% if application.status == 3 %} selected {% endif %}> Stage terminé </option>
+                                    <option value="-3" {% if application.status == -3 %} selected {% endif %}> Candidature
+                                        rejetée </option>
+                                    <option value="-2" {% if application.status == -2 %} selected {% endif %}> Candidature
+                                        annulée de la part de la candidate </option>
+                                    <option value="-1" {% if application.status == -1 %} selected {% endif %}> Candidature
+                                        annulée de la part des organisateurs </option>
+                                    <option value="0" {% if application.status == 0 %} selected {% endif %}> Candidature
+                                        en cours de traitement </option>
+                                    <option value="1" {% if application.status == 1 %} selected {% endif %}> Candidature
+                                        acceptée </option>
+                                    <option value="2" {% if application.status == 2 %} selected {% endif %}> Candidature
+                                        confirmée </option>
+                                    <option value="3" {% if application.status == 3 %} selected {% endif %}> Stage terminé
+                                    </option>
                                 </select>
 
                                 <input type="submit" name="submit-application-status" , value="Modifier le status" ,

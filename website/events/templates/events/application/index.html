@@ -1,4 +1,9 @@
 {% extends 'gccsite/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+{% endblock %}
 
 {% block content %}
 {% regroup events by year as grouped_events %}
@@ -12,24 +17,28 @@
     {% endfor %}
 </ul>
 
-<table class="table">
-    <thead>
-        <tr>
-            <td scope="col"> Année </td>
-            <td scope="col"> Centre </td>
-            <td scope="col"> </td>
-        </tr>
+<div class="container-fluid">
+    <div class="table-responsive custom-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td scope="col"> Année </td>
+                    <td scope="col"> Centre </td>
+                    <td scope="col"> </td>
+                </tr>
 
-    </thead>
-    <tbody>
-        {% for event in events %}
-        <tr>
-            <th scope="row"> {{ event.year }} </th>
-            <td> {{ event.center }} </td>
-            <td> <a href="{% url 'events:application_review' year=event.year event=event.id %}"> Review </a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <th scope="row"> {{ event.year }} </th>
+                    <td> {{ event.center }} </td>
+                    <td> <a href="{% url 'events:application_review' year=event.year event=event.id %}"> Review </a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock %}

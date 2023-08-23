@@ -12,19 +12,8 @@
     border-radius: 40%;
 }
 
-dl {
-    display: grid;
-    grid-template-columns: 33% auto;
-}
-
-dt {
-    grid-column: 1;
-    padding: 10px 0;
-}
-
-dd {
-    grid-column: 2;
-    padding: 10px 0;
+ul > li {
+    display: inline-block;
 }
 
 /* ApplicationsView */
@@ -38,6 +27,8 @@ dd {
 .custom-table {
     border: 1px solid lightgray;
     border-radius: 15px;
+    width: 85%;
+    margin: 0 auto;
 }
 
 .custom-table > .table {
