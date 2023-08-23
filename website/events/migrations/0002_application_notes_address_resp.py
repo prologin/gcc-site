@@ -12,6 +12,14 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name="application",
+            name="address_resp",
+            field=models.JSONField(
+                default=dict,
+                verbose_name="Adresse partielle du responsable légal",
+            ),
+        ),
+        migrations.AddField(
+            model_name="application",
             name="notes",
             field=models.TextField(
                 default="", verbose_name="Notes sur la candidatures"
