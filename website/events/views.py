@@ -78,7 +78,6 @@ class HomePageView(ListView):
                     "country": request.POST["country_school"],
                 }
 
-
                 form_answer = (
                     {
                         "tshirt": form.cleaned_data["tshirt"],
@@ -91,9 +90,6 @@ class HomePageView(ListView):
                     },
                 )
 
-
-                school_level = form.cleaned_data["school_level"]
-
                 application = signup.Application.objects.create(
                     user=user,
                     first_name=request.POST["first_name"],
@@ -104,7 +100,7 @@ class HomePageView(ListView):
                     address_resp=address_resp,
                     school=school,
                     event=event,
-                    form_answer=form_answer,
+                    form_answer=form_answer[0],
                 )
 
                 messages.success(
@@ -154,6 +150,7 @@ class HomePageView(ListView):
 
 class ReviewIndexView(PermissionRequiredMixin, TemplateView):
     permission_required = "users.can_view_applications"
+    raise_exception = True
     template_name = "events/application/index.html"
 
     def get_context_data(self, *args, **kwargs):
@@ -162,7 +159,7 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
         return ctx
 
 
-class ApplicationsReviewView(TemplateView):
+class ApplicationsReviewView(PermissionRequiredMixin, TemplateView):
     permission_required = "users.can_view_applications"
     template_name = "events/application/review.html"
 
