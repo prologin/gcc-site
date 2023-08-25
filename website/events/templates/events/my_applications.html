@@ -22,7 +22,6 @@
           </div>
       </div>
       <div class="row mt-3">
-        {% comment %} {% include 'events/partial/ApplicationsList.html' %} {% endcomment %}
         {% if applications|length != 0 %}
         {% regroup applications by event as event_list %}
         <div>

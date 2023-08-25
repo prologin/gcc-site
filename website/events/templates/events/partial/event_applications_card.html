@@ -22,18 +22,20 @@
         </div>
 
         {# Buttons #}
-        <div class="col-md-3 ms-auto border">
-            {# TODO: nouvelle candidature, confirmer candidatures acceptées #}
-            <div>
+        <div class="col-md-3 ms-auto">
+            {# TODO: confirmer candidatures acceptées #}
+            {% comment %} <div>
                 Boutons :)
+            </div> {% endcomment %}
+            <div class="d-flex ms-auto justify-content-center justify-content-lg-end">
+                <button
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#inscriptionEventModal-{{id}}"
+                    >
+                    Ajouter une candidature
+                </button>
             </div>
-            <button
-                class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#inscriptionEventModal-{{id}}"
-                >
-                TODO: Nouvelle candidature
-            </button>
         </div>
     </div>
 
@@ -215,4 +217,15 @@
         </div>
         {% endfor %}
     </div>
+</div>
+
+{# Modal #}
+<div
+    class="modal fade"
+    id="inscriptionEventModal-{{id}}"
+    tabindex="-1"
+    aria-labelledby="inscriptionEventModalLabel"
+    aria-hidden="true"
+    >
+    {% include "events/partial/EventInscription.html" with event=event id=event.id color=1 %}
 </div>
