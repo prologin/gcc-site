@@ -33,14 +33,14 @@
 
   {# Modal #}
   <div class="modal fade" id="inscriptionEventModal-{{id}}" tabindex="-1" aria-labelledby="inscriptionEventModalLabel" aria-hidden="true">
-    {% include "events/partial/EventInscription.html" with event=event id=id color=color%}
+    {% include "events/partial/event_application_form_modal.html" with event=event id=id color=color%}
   </div>
   <div class="modal" id="informationEventModal-{{id}}" tabindex="-1" aria-labelledby="informationEventModalLabel" aria-hidden="true">
-    {% include "events/partial/EventInfo.html" with event=event id=id%}
+    {% include "events/partial/event_info_modal.html" with event=event id=id%}
   </div>
 
   <div class="modal fade" id="scheduleModal" aria-hidden="true" aria-labelledby="scheduleModalLabel" tabindex="-1">
-    {% include "events/partial/Schedule.html" with event=event id=id %}
+    {% include "events/partial/event_schedule_modal.html" with event=event id=id %}
   </div>
 
 </div>
