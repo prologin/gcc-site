@@ -1,3 +1,4 @@
+import datetime
 from urllib.parse import urlencode
 
 from django.contrib import messages
@@ -165,3 +166,30 @@ class ApplicationsView(LoginRequiredMixin, TemplateView):
             user=self.request.user.id
         ).order_by("-created_at")
         return ctx
+
+
+class EventListView(ListView):
+    """
+    This view might be given a "passed" keyword in the GET request.
+    If so, it should
+    """
+
+    model = events.Event
+    template_name = "events/event_list.html"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs_passed = qs.filter(end_date__date__lte=datetime.date.today())
+        if "passed" in self.request.GET:
+            # Only get events which ended today or before.
+            # Show the most recent first
+            return qs_passed.order_by("-end_date")
+        else:
+            # All event which are not passed
+            # Show the soonest first
+            return qs.difference(qs_passed).order_by("start_date")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = EventSignupForm
+        return context

@@ -27,4 +27,9 @@ urlpatterns = [
         views.ApplicationsView.as_view(),
         name="my_applications",
     ),
+    path(
+        "events",
+        views.EventListView.as_view(),
+        name="events",
+    ),
 ]

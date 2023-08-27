@@ -9,6 +9,8 @@ _BASE_CTX = {
     "CNIL_DECL_NUM": "830039",
 }
 
+FLICKR_URL = "https://www.flickr.com/photos/prologin/"
+
 
 def my_context_processor(req):
     context = _BASE_CTX
@@ -19,7 +21,7 @@ def my_context_processor(req):
             "alt": "Page Instagram de l'association Prologin",
         },
         {
-            "link": "https://www.flickr.com/photos/prologin/",
+            "link": FLICKR_URL,
             "logo": "fa-flickr",
             "alt": "Album photos de l'association Prologin",
         },
@@ -100,6 +102,7 @@ def my_context_processor(req):
     context["SOCIAL_NETWORKS"] = social_networks  # type: ignore
     context["FAQ_ENTRIES"] = faq_entries  # type: ignore
     context["BUTTON_SNS"] = button_sns  # type: ignore
+    context["FLICKR_URL"] = FLICKR_URL
 
     return context
 
