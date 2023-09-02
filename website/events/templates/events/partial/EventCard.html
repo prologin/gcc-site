@@ -1,3 +1,4 @@
+{% load custom_filters %}
 {% load static %}
 
 <div class="row f-flex justify-content-between event-card mb-4 p-3">
@@ -39,8 +40,6 @@
     {% include "events/partial/event_info_modal.html" with event=event id=id%}
   </div>
 
-  <div class="modal fade" id="scheduleModal" aria-hidden="true" aria-labelledby="scheduleModalLabel" tabindex="-1">
-    {% include "events/partial/event_schedule_modal.html" with event=event id=id %}
-  </div>
+  {% include "events/partial/event_schedule_modal.html" with event_format=event|event_format %}
 
 </div>

@@ -39,4 +39,8 @@
   </div>
 </div>
 
+{# Include the schedule modals so it is not included in each event card #}
+{% include "events/partial/event_schedule_modal.html" with event_format="week" %}
+{% include "events/partial/event_schedule_modal.html" with event_format="weekend" %}
+
 {% endblock %}

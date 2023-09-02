@@ -87,12 +87,24 @@
             {#<button class="btn btn-primary py-2 col-auto">Télécharger les documents</button>#}
         </div>
         <div class="m-2">
-            <i class="fa-sharp fa-solid fa-circle-info fa-xl"></i>
+            <i class="fa-sharp fa-solid fa-circle-info fa-lg"></i>
             Les repas sont pris en charge par l'association.
             <br>
-            <i class="fa-solid fa-circle-question fa-xl"></i>
-            Des question ? Envoyez un mail à
+            <i class="fa-solid fa-circle-question fa-lg"></i>
+            Des questions ? Envoyez un mail à
             <a href="mailto:{{ CONTACT_EMAIL }}"><strong>{{ CONTACT_EMAIL }}</strong></a>
+            <br>
+            <i class="fa-solid fa-circle-plus fa-lg"></i>
+            Clique
+            <a
+                href=""
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#scheduleModal-{{ event|event_format }}"
+                >
+                ici
+            </a>
+            pour voir le programme prévu.
         </div>
     </div>
     {% endif %}

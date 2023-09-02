@@ -1,8 +1,8 @@
 from django import template
+from django.db.models import QuerySet
 from django.utils import timezone
 from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
-from django.db.models import QuerySet
 
 from ..models.signup import APPLICATION_STATUS, ApplicationManager
 
@@ -10,8 +10,12 @@ register = template.Library()
 
 
 @register.filter
-def subtract(value, arg):
-    return value - arg
+def event_format(event):
+    """
+    Return the format of the event as a string "week" or "weekend"
+    """
+    duration = event.end_date - event.start_date
+    return "week" if duration.days > 2 else "weekend"
 
 
 @register.filter
