@@ -189,7 +189,7 @@ class EventListView(ListView):
     """
 
     model = events.Event
-    template_name = "events/event_list.html"
+    template_name = "events/event_list_page.html"
 
     def get_queryset(self):
         qs = super().get_queryset()

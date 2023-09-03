@@ -20,9 +20,9 @@
     {% for event in open_events %}
     {% cycle 1 2 3 as color silent %}
     {% if event in already_applied %}
-    {% include "events/partial/EventCard.html" with event=event id=event.pk color=color already_applied=True %}
+    {% include "events/partial/event_card.html" with event=event id=event.pk color=color already_applied=True %}
     {% else %}
-    {% include "events/partial/EventCard.html" with event=event id=event.pk color=color already_applied=False %}
+    {% include "events/partial/event_card.html" with event=event id=event.pk color=color already_applied=False %}
     {% endif %}
     {% endfor %}
   </div>
