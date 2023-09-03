@@ -8,13 +8,17 @@ include:
   - template: SAST.gitlab-ci.yml
   - template: Security/Container-Scanning.gitlab-ci.yml
   - template: Code-Quality.gitlab-ci.yml
-  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
 
 stages:
   - build
   - qa
   - security
+
+variables:
+  # Use now deprecadet License-Scanning
+  LICENSE_MANAGEMENT_VERSION: 4
 
 sast:
   stage: security
@@ -40,18 +44,18 @@ code_quality:
   stage: qa
   interruptible: true
 
-dependency_scanning:
+license_scanning:
   stage: qa
   interruptible: true
   needs: []
   before_script:
     - |
+      set -x
       apt update
-      apt install -y --no-install-recommends python3 python3-venv curl
+      apt install -y --no-install-recommends python3 python3-venv
       curl -sSL https://install.python-poetry.org/ | python3 -
-      export PATH="/tmp/.local/bin:$PATH"
       pushd website
-      poetry export --format requirements.txt > requirements.txt
+      /root/.local/bin/poetry export --format requirements.txt > ../requirements.txt
       popd
   variables:
     LM_PYTHON_VERSION: 3
