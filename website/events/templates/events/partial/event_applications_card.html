@@ -16,8 +16,8 @@
                 </div>
             </div>
             <p>
-                Tu as soumis {{ applications|length }}
-                candidature{{ application|length|pluralize:"s" }} pour ce stage.
+                Tu as soumis {{ event_applications|length }}
+                candidature{{ event_applications|length|pluralize:"s" }} pour ce stage.
             </p>
         </div>
 
@@ -114,7 +114,7 @@
         Détail des candidatures
     </h2>
     <div id="event-{{ event.id }}-applications" class="accordion">
-        {% for application in applications %}
+        {% for application in event_applications %}
         <div class="accordion-item border-1">
             {# Header #}
             <h2
