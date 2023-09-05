@@ -3,6 +3,7 @@
     - event_format: String, should be "week" or "weekend"
 {% endcomment %}
 {% load static %}
+
 <div
     class="modal fade"
     id="scheduleModal-{{ event_format }}"
@@ -16,6 +17,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body col-md-auto text-center">
+        <a 
+          {% if event_format == "week" %}
+          href="{% static 'img/schedule_week.png' %}"
+          {% else %}
+          href="{% static 'img/schedule_weekend.png' %}"
+          {% endif %}
+          target="_blank">
         <img
           class="img-fluid"
           {% if event_format == "week" %}
@@ -23,19 +31,22 @@
           {% else %}
           src="{% static 'img/schedule_weekend.png' %}"
           {% endif %}
-          alt="Programme du stage"/>
-
+          alt="Programme du stage"
+          style="max-height: calc(100vh - 225px);"/>
       </div>
 
-      {% comment %} <div class="modal-footer">
+      <div class="modal-footer">
+        Clique sur l'image pour l'ouvrir en grand.
+      {% comment %}
         <button type="button"
                 class="btn btn-primary"
                 data-bs-target="#informationEventModal-{{ event_format }}"
                 data-bs-toggle="modal" data-bs-dismiss="modal fade"
                 >
                 Fermer
-        </button>
-      </div> {% endcomment %}
+        </button>{% endcomment %}
+
+      </div> 
     </div>
   </div>
 </div>
