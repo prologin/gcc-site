@@ -65,6 +65,16 @@ class Application(models.Model):
         verbose_name=_("Date de naissance de la participante"),
     )
 
+    email = models.EmailField(
+        verbose_name=_("Adresse email de la participante")
+    )
+
+    phone = models.CharField(
+        max_length=16,
+        blank=True,
+        verbose_name=_("Numéro de téléphone de la participante"),
+    )
+
     address = models.JSONField(
         verbose_name=_("Adresse de la participante"), default=dict
     )
@@ -83,7 +93,7 @@ class Application(models.Model):
         verbose_name=_("Adresse email du responable légal")
     )
 
-    phone = models.CharField(
+    phone_resp = models.CharField(
         max_length=16,
         blank=True,
         verbose_name=_("Numéro de téléphone du responsable légal"),
