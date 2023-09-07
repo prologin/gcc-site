@@ -18,14 +18,13 @@
   <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto" role="group">
     {% comment %} Issue#80 : If user is authenticated and has at least 1 application for the stage,
     use "mes candidatures" button instead. {% endcomment %}
-    {{ already_applied }}
 
     {% if already_applied %}
       <a type="button" href="{% url 'events:my_applications' %}" class="btn btn-primary py-2 px-4 w-100 mb-2" >
         Mes candidatures
       </a>
     {% else %}
-      <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">
+      <button class="btn btn-primary py-2 px-4 w-100 mb-2" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">
         S'inscrire à ce stage
       </button>
     {% endif %}

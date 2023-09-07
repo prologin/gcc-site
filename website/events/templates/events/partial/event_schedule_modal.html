@@ -24,15 +24,16 @@
           href="{% static 'img/schedule_weekend.png' %}"
           {% endif %}
           target="_blank">
-        <img
-          class="img-fluid"
-          {% if event_format == "week" %}
-          src="{% static 'img/schedule_week.png' %}"
-          {% else %}
-          src="{% static 'img/schedule_weekend.png' %}"
-          {% endif %}
-          alt="Programme du stage"
-          style="max-height: calc(100vh - 225px);"/>
+          <img
+            class="img-fluid"
+            {% if event_format == "week" %}
+            src="{% static 'img/schedule_week.png' %}"
+            {% else %}
+            src="{% static 'img/schedule_weekend.png' %}"
+            {% endif %}
+            alt="Programme du stage"
+            style="max-height: calc(100vh - 225px);"/>
+        </a>
       </div>
 
       <div class="modal-footer">
