@@ -82,7 +82,7 @@
                     <button
                         class="btn mx-auto btn-light btn-block mt-1"
                         data-bs-toggle="modal"
-                        data-bs-target="#scheduleModal"
+                        data-bs-target="#scheduleModal-{{ event|event_format }}"
                         >
                         Calendrier du stage
                     </button>
@@ -99,21 +99,16 @@
                 aria-labelledby="inscriptionEventModalLabel"
                 aria-hidden="true"
                 >
-                {% include "events/partial/EventInscription.html" with event=event id=event.id color=1 %}
-            </div>
-
-            <div
-                class="modal fade"
-                id="scheduleModal"
-                aria-hidden="true"
-                aria-labelledby="scheduleModalLabel"
-                tabindex="-1"
-                >
-                {% include "events/partial/Schedule.html" with event=event id=event.id %}
+                {% include "events/partial/event_application_form_modal.html" with event=event id=event.id color=1 %}
             </div>
 
             {% endfor %}
         </div>
     </div>
 </div>
+
+{# Include the schedule modals so it is not included in each event card #}
+{% include "events/partial/event_schedule_modal.html" with event_format="week" %}
+{% include "events/partial/event_schedule_modal.html" with event_format="weekend" %}
+
 {% endblock %}

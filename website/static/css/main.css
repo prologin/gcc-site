@@ -24,6 +24,7 @@ body {
   --gcc-blue-color: #00AED3;
   --main-dark-color: #222A35;
   --main-light-color: #eff2f5;
+  --main-grey-background: #efefef;
   --global-border-radius: 12px;
   --main-hover-color: #46566d;
   --light-text-color: #92a2b9;
@@ -226,7 +227,7 @@ h3, .subsubtitleSize {
 }
 
 .newsletter-background {
-  background-color: #efefef;
+  background-color: var(--main-grey-background);
   background-image: url("../img/newsletter_bg.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -269,7 +270,7 @@ button.dropdown-item {
  */
 
 .event-list-background {
-  background-color: #efefef;
+  background-color: var(--main-grey-background);
   background-image: url("../img/event_list_bg.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -291,7 +292,7 @@ button.dropdown-item {
  */
 
 .background-style {
-  background-color: #efefef;
+  background-color: var(--main-grey-background);
   background-image: url("../img/newsletter_bg.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -366,7 +367,7 @@ button.dropdown-item {
  * FAQ
  */
  .faq-background {
-  background-color: #efefef;
+  background-color: var(--main-grey-background);
   background-image: url(../img/faq_bg.svg);
   background-size: contain;
   background-repeat: no-repeat;

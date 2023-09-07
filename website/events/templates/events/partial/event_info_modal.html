@@ -1,3 +1,4 @@
+{% load custom_filters %}
 {% load static %}
 
 <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -44,7 +45,7 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inscriptionEventModal-{{id}}">
           S'inscrire à ce stage
         </button>
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#scheduleModal" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#scheduleModal-{{ event|event_format }}" data-bs-dismiss="modal">
         Calendrier du stage
         </button>
       </div>
@@ -52,7 +53,7 @@
         <button type="button" class="btn btn-primary">
           S'inscrire à ce stage
         </button>
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#scheduleModal" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#scheduleModal-{{ event|event_format }}" data-bs-dismiss="modal">
         Calendrier du stage
         </button>
       </div>

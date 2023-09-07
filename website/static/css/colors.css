@@ -99,3 +99,11 @@
     --bs-pagination-active-bg: var(--main-dark-color);
     --bs-pagination-active-border-color: var(--main-dark-color);
 }
+
+.accordion {
+    --bs-accordion-active-color: var(--main-dark-color);
+    --bs-accordion-btn-focus-border-color: var(--main-grey-background);
+    --bs-accordion-active-bg: var(--main-grey-background);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem var(--main-grey-background);
+    --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}

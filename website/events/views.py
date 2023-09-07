@@ -132,6 +132,15 @@ class HomePageView(ListView):
         )
         ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
 
+        # Add a list of already applied events if authenticated
+        if self.request.user.is_authenticated:
+            ctx["already_applied"] = events.Event.objects.filter(
+                id__in=signup.Application.objects.filter(
+                    user=self.request.user.id
+                ).values_list("event", flat=True)
+            )
+
+        ctx.update(signup.APPLICATION_STATUS)
         return ctx
 
 
@@ -154,6 +163,7 @@ class ApplicationsReviewView(TemplateView):
         ctx["applications"] = signup.Application.objects.get_applicants(
             kwargs["event"]
         )
+        ctx.update(signup.APPLICATION_STATUS)
         return ctx
 
 
@@ -162,9 +172,13 @@ class ApplicationsView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx["application_documents"] = signup.Application.objects.filter(
+        user_applications = signup.Application.objects.filter(
             user=self.request.user.id
         ).order_by("-created_at")
+        ctx["applications"] = user_applications
+
+        ctx["form"] = EventSignupForm
+        ctx.update(signup.APPLICATION_STATUS)
         return ctx
 
 
@@ -175,7 +189,7 @@ class EventListView(ListView):
     """
 
     model = events.Event
-    template_name = "events/event_list.html"
+    template_name = "events/event_list_page.html"
 
     def get_queryset(self):
         qs = super().get_queryset()
