@@ -69,6 +69,25 @@ class EventSignupForm(forms.Form):
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
     )
 
+    phone = forms.DecimalField(
+        label="Numéro de téléphone",
+        validators=[phoneNumberTest],
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Numéro de téléphone",
+                "type": "tel",
+            }
+        ),
+    )
+
+    email = forms.EmailField(
+        label="E-mail",
+        widget=forms.TextInput(attrs={"placeholder": "Email"}),
+        max_length=320,
+        required=True,
+        validators=[validate_email],
+    )
+
     is_women = forms.BooleanField(
         label=_("La participante se considère comme une femme."),
         error_messages={
@@ -150,12 +169,12 @@ class EventSignupForm(forms.Form):
         validators=[validate_email],
     )
 
-    phone = forms.DecimalField(
+    phone_resp = forms.DecimalField(
         label="Numéro de téléphone",
         validators=[phoneNumberTest],
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Numéro de téléphone du responsable légal",
+                "placeholder": "Numéro de téléphone",
                 "type": "tel",
             }
         ),
@@ -351,6 +370,8 @@ class EventSignupForm(forms.Form):
                     Column(Field("last_name")),
                 ),
                 Field("dob"),
+                Field("email"),
+                Field("phone"),
                 *address_applicant,
                 Field("is_women"),
                 Field("legal_authorization"),
@@ -372,7 +393,7 @@ class EventSignupForm(forms.Form):
                     Column(Field("last_name_resp")),
                 ),
                 Field("email_resp"),
-                Field("phone"),
+                Field("phone_resp"),
                 *address_applicant_resp,
                 Div(
                     Row(
