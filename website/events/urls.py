@@ -24,12 +24,12 @@ urlpatterns = [
     ),
     path(
         "update-application-notes",
-        views.ApplicationEditView.as_view(),
+        views.ApplicationEditNotesView.as_view(),
         name="update_application_notes",
     ),
     path(
         "update-application-status",
-        views.ApplicationEditView.as_view(),
+        views.ApplicationEditStatusView.as_view(),
         name="update_application_status",
     ),
     path(

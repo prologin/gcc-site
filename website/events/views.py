@@ -21,10 +21,52 @@ from .models import events, signup
 
 class UpdateStatusView(UpdateView):
     http_method_names = ("post",)
-    modal = signup.Application
+    model = signup.Application
     success_url = reverse_lazy("events:my_applications")
 
     fields = ("status",)
+
+    def get_object(self, *args, **kwargs):
+        return signup.Application.objects.get(
+            id=self.request.POST["application-id"]
+        )
+
+
+class ApplicationEditNotesView(UpdateView):
+    http_method_names = ("post",)
+    model = signup.Application
+
+    fields = ("notes",)
+
+    def get_success_url(self):
+        return reverse(
+            "events:application_review",
+            kwargs={
+                "year": self.request.POST["event-year"],
+                "event": self.request.POST["event-id"],
+            },
+        )
+
+    def get_object(self, *args, **kwargs):
+        return signup.Application.objects.get(
+            id=self.request.POST["application-id"]
+        )
+
+
+class ApplicationEditStatusView(UpdateView):
+    http_method_names = ("post",)
+    model = signup.Application
+
+    fields = ("status",)
+
+    def get_success_url(self):
+        return reverse(
+            "events:application_review",
+            kwargs={
+                "year": self.request.POST["event-year"],
+                "event": self.request.POST["event-id"],
+            },
+        )
 
     def get_object(self, *args, **kwargs):
         return signup.Application.objects.get(
