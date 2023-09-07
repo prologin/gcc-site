@@ -97,6 +97,8 @@ class ApplicationAdmin(admin.ModelAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
+                    "email",
+                    "phone",
                     "dob",
                     "form_answer",
                     "address",
@@ -105,12 +107,15 @@ class ApplicationAdmin(admin.ModelAdmin):
         ),
         (
             "Responsable légal",
-            {"fields": ("phone", "address_resp")},
+            {"fields": ("email_resp", "phone_resp", "address_resp")},
         ),
         (
             "Sélection",
             {
-                "fields": ("status", "notes",),
+                "fields": (
+                    "status",
+                    "notes",
+                ),
             },
         ),
     )
