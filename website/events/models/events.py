@@ -32,17 +32,10 @@ class Address(models.Model):
         verbose_name=_("Centre"),
     )
 
-    lat = models.DecimalField(
-        verbose_name=_("Latitude"),
-        max_digits=14,
-        decimal_places=10,
-        null=True,
-        blank=True,
-    )
-    lng = models.DecimalField(
-        verbose_name=_("Longitude"),
-        max_digits=14,
-        decimal_places=10,
+    gg_maps_query = models.TextField(
+        verbose_name=_("Query Google Maps"),
+        # help="A deterministic query passed to Google Maps for the embed",
+        max_length="100",
         null=True,
         blank=True,
     )

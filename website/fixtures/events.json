@@ -93,8 +93,7 @@
       "zip_code": 94270,
       "country": "France",
       "center": 1,
-      "lat": "48.8157348632",
-      "lng": "2.3623597621"
+      "gg_maps_query": "R987+74 Le Kremlin-Bicêtre"
     }
   },
   {
@@ -107,8 +106,7 @@
       "zip_code": 67000,
       "country": "France",
       "center": 2,
-      "lat": "48.5836830139",
-      "lng": "7.7499365806"
+      "gg_maps_query": "HQM2+C2 Strasbourg, France"
     }
   },
   {

@@ -11,8 +11,7 @@ class AddressAdmin(admin.StackedInline):
         "zip_code",
         "city",
         "country",
-        "lat",
-        "lng",
+        "gg_maps_query",
     )
     extra = 0
     min_num = 1
@@ -94,7 +93,15 @@ class ApplicationAdmin(admin.ModelAdmin):
         (None, {"fields": ("user", "event")}),
         (
             "Informations participante",
-            {"fields": ("first_name", "last_name", "dob", "form_answer", "address")},
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "dob",
+                    "form_answer",
+                    "address",
+                )
+            },
         ),
         (
             "Responsable légal",

@@ -47,9 +47,19 @@
     <div class="p-2 m-2 rounded rounded-2 bg-dark bg-opacity-10">
         <h2 class="m-2">Félicitations ! 🎉</h2>
         <p class="m-2">Au moins une de tes candidatures à été confirmée !</p>
-        <div class="m-3 row justify-content-around">
-            <iframe class="col" src="https://maps.google.com/maps?q={{ application.event.center.address.lat|floatformat:"u" }},{{ application.event.center.address.lng|floatformat:"u" }}&hl=es;z=14&amp;output=embed"></iframe>
-        </div>
+
+        {# Display a Google map embed if the query is given #}
+        {% with application.event.center.address.gg_maps_query as query %}
+        {% if query %}
+            <div class="m-3 row justify-content-around">
+                <iframe
+                    class="col"
+                    src="https://maps.google.com/maps?q={{ query|urlencode }}&hl=es;z=14&amp;output=embed">
+                </iframe>
+            </div>
+        {% endif %}
+        {% endwith %}
+
         <div class="row m-3 justify-content-around">
             <div class="col-sm-auto row justify-content-center">
                 <div class="col-md-auto text-center align-self-center">
