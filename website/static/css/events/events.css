@@ -16,6 +16,17 @@ ul > li {
     display: inline-block;
 }
 
+.answer {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.questions {
+    margin: 0;
+}
+
 /* ApplicationsView */
 .candidatures-background {
     height: 100%;

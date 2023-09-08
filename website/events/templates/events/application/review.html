@@ -85,32 +85,32 @@
                             <div class="col-md">
                                 <h2> Réponse au questionnaires</h2>
                                 <dl class="py-2">
-                                    <h3> • Quelle est ta taille de t-shirt ? </h3>
-                                    <p> {{application.form_answer.tshirt }} </p>
+                                    <h3 class="questions"> • Quelle est ta taille de t-shirt ? </h3>
+                                    <p class="answer"> {{application.form_answer.tshirt }} </p>
 
-                                    <h3> • Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage
+                                    <h3 class="questions"> • Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage
                                         ?
                                     </h3>
-                                    <p> {{application.form_answer.learning }} </p>
+                                    <p class="answer"> {{application.form_answer.learning }} </p>
 
-                                    <h3> • As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels
+                                    <h3 class="questions"> • As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels
                                         outils ou langages de programmation as-tu essayés ? </h3>
-                                    <p> {{application.form_answer.programing }} </p>
+                                    <p class="answer"> {{application.form_answer.programing }} </p>
 
-                                    <h3> • Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu
+                                    <h3 class="questions"> • Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu
                                         préciser lesquelles ? </h3>
-                                    <p> {{application.form_answer.studies }} </p>
+                                    <p class="answer"> {{application.form_answer.studies }} </p>
 
-                                    <h3> • Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela
+                                    <h3 class="questions"> • Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela
                                         nous aide beaucoup ! </h3>
-                                    <p> {{application.form_answer.association }} </p>
+                                    <p class="answer"> {{application.form_answer.association }} </p>
 
                                     {% if "users.can_view_applications_private_details" in perms %}
-                                    <h3> • As-tu des allergies ? </h3>
-                                    <p> {{application.form_answer.allergies }} </p>
+                                    <h3 class="questions"> • As-tu des allergies ? </h3>
+                                    <p class="answer"> {{application.form_answer.allergies }} </p>
 
-                                    <h3> • As-tu un régime alimentaire particulier ? </h3>
-                                    <p> {{application.form_answer.diet }} </p>
+                                    <h3 class="questions"> • As-tu un régime alimentaire particulier ? </h3>
+                                    <p class="answer"> {{application.form_answer.diet }} </p>
                                     {% endif %}
 
                                 </dl>
