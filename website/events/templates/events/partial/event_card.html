@@ -33,11 +33,11 @@
     </button>
   </div>
 
-  {# Modal #}
-  {% include "events/partial/event_application_form_modal.html" with event=event id=id color=color%}
+  {# Modals #}
+  {% include "events/partial/event_application_form_modal.html" with event=event color=color%}
 
   <div class="modal" id="informationEventModal-{{id}}" tabindex="-1" aria-labelledby="informationEventModalLabel" aria-hidden="true">
-    {% include "events/partial/event_info_modal.html" with event=event id=id%}
+    {% include "events/partial/event_info_modal.html" with event=event id=id %}
   </div>
 
   {% include "events/partial/event_schedule_modal.html" with event_format=event|event_format %}
