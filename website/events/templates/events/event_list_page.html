@@ -92,15 +92,7 @@
             </div>
 
             {# MODALS #}
-            <div
-                class="modal fade"
-                id="inscriptionEventModal-{{ event.id }}"
-                tabindex="-1"
-                aria-labelledby="inscriptionEventModalLabel"
-                aria-hidden="true"
-                >
-                {% include "events/partial/event_application_form_modal.html" with event=event id=event.id color=1 %}
-            </div>
+            {% include "events/partial/event_application_form_modal.html" with event=event id=event.id color=1 %}
 
             {% endfor %}
         </div>
