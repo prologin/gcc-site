@@ -1,19 +1,4 @@
-const PHONE_REGEX = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
-const INVALID_CLASS = "is-invalid";
-const TAB_ACTIVE_CLASS = "active";
-
-/// Take a form HTML element and a positive integer as arguments.
-/// Add display: none to all the disabled tabs.
-function formDisplayNthTab(form, n) {
-    form.querySelectorAll(".tab")
-        .forEach((tab, index) => {
-            if (index === n) {
-                tab.classList.add(TAB_ACTIVE_CLASS);
-            } else {
-                tab.classList.remove(TAB_ACTIVE_CLASS);
-            }
-        });
-}
+import { INVALID_CLASS, formDisplayNthTab, validateForm } from "./form.js"
 
 /// Take the form HTML element in argument.
 /// - Removes all user added data and reset all placeholders to defaults
@@ -51,42 +36,6 @@ function clearApplicationForm(form) {
 
     // Reset application form tab.
     formDisplayNthTab(form, 0);
-}
-
-/// Take the form HTML element as argument.
-/// @return true if the current form tab is correctly filled.
-function validateApplicationForm(form) {
-    let valid = true;
-    let active_tab = form.querySelector(".tab.active");
-    let fields = active_tab.querySelectorAll("input, select");
-    fields.forEach(function (val) {
-        val.classList.remove(INVALID_CLS);
-
-        if (val.hasAttribute("required")) {
-            if (val.type === "checkbox" || val.type === "radio") {
-                if (!val.checked) {
-                    valid = false;
-                    val.classList.add(INVALID_CLS);
-                }
-            } else if (val.tagName === "select") {
-                // Handle select elements (dropdowns)
-                if (val.value === "") {
-                    valid = false;
-                    val.classList.add(INVALID_CLS);
-                }
-            } else if (val.value.length == 0) {
-                valid = false;
-                val.classList.add(INVALID_CLS);
-            } else if (val.type === "tel") {
-                // Handle phone validation
-                if (!PHONE_REGEX.test(val.value)) {
-                    valid = false;
-                    val.classList.add(INVALID_CLS);
-                }
-            }
-        }
-    });
-    return validate;
 }
 
 /// Take the modal id in argument
@@ -133,21 +82,21 @@ function setupApplicationFormModal(modal_id) {
         btn.addEventListener("click",
             function () {
                 // Do not go to next page if there is invalid data
-                if (!validateApplicationForm(form)) {
+                if (!validateForm(form)) {
                     return false;
                 }
-                formDisplayNthTab(++tab_index);
+                formDisplayNthTab(form, ++tab_index);
             })
     });
     back_buttons.forEach(function (btn) {
         btn.addEventListener("click",
             function () {
-                formDisplayNthTab(--tab_index);
+                formDisplayNthTab(form, --tab_index);
             })
     });
 
     // Ensure the first tab is opened at page loading
-    formDisplayNthTab(tab_index);
+    formDisplayNthTab(form, tab_index);
 }
 
 setupApplicationFormModal("application-form-modal");
