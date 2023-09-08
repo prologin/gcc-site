@@ -9,9 +9,9 @@
 
 <div
     class="modal fade"
-    id="inscriptionEventModal-{{event.id}}"
+    id="application-form-modal"
     tabindex="-1"
-    aria-labelledby="inscriptionEventModalLabel"
+    aria-labelledby="application-form-modal"
     aria-hidden="true"
     >
     {% if user.is_authenticated %}
@@ -31,7 +31,12 @@
                     <div class="row justify-content-center">
                         <div class="col-11">
                             <form method="post" action="{% url 'events:event_signup' %}">
-                                <input type="hidden" name="event-id" value="{{ event.id }}">
+                                {% comment %}
+                                    The event id value attribute should be set
+                                    by JS when opening the modal.
+                                {% endcomment %}
+                                <input id="event-id-input" type="hidden" name="event-id">
+
                                 {% crispy form %}
                             </form>
                             <div class="fst-italic fs-footnote">
@@ -77,5 +82,6 @@
 </div>
 
 {% block scripts %}
+<script src="{% static 'js/application_form.js'%}"></script>
 <script src="{% static 'js/form_flow.js'%}"></script>
 {% endblock %}
