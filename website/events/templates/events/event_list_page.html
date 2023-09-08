@@ -73,7 +73,8 @@
                     <button
                         class="btn mx-auto btn-primary btn-block"
                         data-bs-toggle="modal"
-                        data-bs-target="#inscriptionEventModal-{{ event.id }}"
+                        data-bs-target="#application-form-modal"
+                        data-bs-event-id="{{ event.id }}"
                         {# Disable the registration button if not signup period #}
                         {% if not event|signup_opened %}disabled{% endif %}
                         >
@@ -91,15 +92,14 @@
 
             </div>
 
-            {# MODALS #}
-            {% include "events/partial/event_application_form_modal.html" with event=event color=1 %}
 
             {% endfor %}
         </div>
     </div>
 </div>
 
-{# Include the schedule modals so it is not included in each event card #}
+{# MODALS #}
+{% include "events/partial/event_application_form_modal.html" with color=1 %}
 {% include "events/partial/event_schedule_modal.html" with event_format="week" %}
 {% include "events/partial/event_schedule_modal.html" with event_format="weekend" %}
 
