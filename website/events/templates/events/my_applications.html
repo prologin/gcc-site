@@ -39,8 +39,13 @@
   </div>
 </div>
 
-{# Include the schedule modals so it is not included in each event card #}
+{# MODALS #}
+{% include "events/partial/event_application_form_modal.html" with color=1 %}
 {% include "events/partial/event_schedule_modal.html" with event_format="week" %}
 {% include "events/partial/event_schedule_modal.html" with event_format="weekend" %}
 
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{% static 'js/forms/application_form.js'%}"></script>
 {% endblock %}

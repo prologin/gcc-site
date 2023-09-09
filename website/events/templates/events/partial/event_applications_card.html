@@ -31,7 +31,8 @@
                 <button
                     class="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#inscriptionEventModal-{{id}}"
+                    data-bs-target="#application-form-modal"
+                    data-bs-event-id="{{ event.id }}"
                     >
                     Ajouter une candidature
                 </button>
@@ -239,15 +240,4 @@
         </div>
         {% endfor %}
     </div>
-</div>
-
-{# Modal #}
-<div
-    class="modal fade"
-    id="inscriptionEventModal-{{id}}"
-    tabindex="-1"
-    aria-labelledby="inscriptionEventModalLabel"
-    aria-hidden="true"
-    >
-    {% include "events/partial/event_application_form_modal.html" with event=event id=event.id color=1 %}
 </div>

@@ -39,7 +39,7 @@ TSHIRT = [
     ("XXL", "XXL"),
 ]
 
-# Must be the same as static/js/form_flow.js:PHONE_REGEX
+# Must be the same as static/js/forms/form.js:PHONE_REGEX
 PHONE_REGEX = "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
