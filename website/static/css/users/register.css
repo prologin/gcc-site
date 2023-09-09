@@ -4,10 +4,3 @@
 .tab.active {
     display: block;
 }
-
-.progress {
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.progress > .progress-bar {
-    background-color: var(--gcc-blue-color);
-}
