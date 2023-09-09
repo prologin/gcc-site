@@ -104,3 +104,7 @@
 {% include "events/partial/event_schedule_modal.html" with event_format="weekend" %}
 
 {% endblock %}
+
+{% block scripts %}
+<script type="module" src="{% static 'js/forms/application_form.js'%}"></script>
+{% endblock %}
