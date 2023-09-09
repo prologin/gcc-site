@@ -63,7 +63,12 @@
           <h2 class="on_change_active_personal_info">Changer de nom et prénom</h2>
           {% crispy personal_info_form %}
           <div class="mt-4 p-0 col-12 col-md-4 offset-md-8 col">
-            <button class="btn btn-primary btn-block" onClick="activeFormPersonalInfo()" id="active_personal_info">Modifier</button>
+            <button
+              class="btn btn-primary btn-block"
+              onClick="activeFormPersonalInfo()"
+              id="active_personal_info">
+              Modifier
+            </button>
           </div>
           {# Show the success or error messages #}
           {% for msg in messages %}
@@ -79,7 +84,12 @@
           <h2 class="on_change_active_email">Changer d'adresse email</h2>
           {% crispy email_form %}
           <div class="mt-4 p-0 col-12 col-md-4 offset-md-8 col">
-            <button class="btn btn-primary btn-block" onClick="activeFormEmail()" id="active_email">modifier</button>
+            <button
+              class="btn btn-primary btn-block"
+              onClick="activeFormEmail()"
+              id="active_email">
+              Modifier
+            </button>
           </div>
           {# Show the success or error messages #}
           {% for msg in messages %}
