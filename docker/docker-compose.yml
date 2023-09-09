@@ -34,6 +34,7 @@ services:
       /usr/bin/mc mb dev/gcc-static;
       /usr/bin/mc anonymous set-json /policies/public-read.json dev/gcc-static;
       /usr/bin/mc mb dev/gcc-media;
+      /usr/bin/mc anonymous set-json /policies/public-read.json dev/gcc-media;
       exit 0;
       "
     secrets:

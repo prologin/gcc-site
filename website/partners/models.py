@@ -2,7 +2,11 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from gccsite.settings.common import AWS_S3_ENDPOINT_URL
+from gccsite.settings.common import (
+    AWS_S3_CUSTOM_DOMAIN,
+    AWS_S3_ENDPOINT_URL,
+    AWS_S3_URL_PROTOCOL,
+)
 from gccsite.storages import GCCMediaStorage, GCCStaticStorage
 
 
@@ -51,7 +55,8 @@ class Partner(models.Model):
     @property
     def logo_url(self):
         storage = GCCMediaStorage()
-        return storage.url("sponsors/" + self.name)
+        # return storage.url("sponsors/" + self.name)
+        return f"{AWS_S3_URL_PROTOCOL}//{AWS_S3_CUSTOM_DOMAIN}/gcc-media/sponsors/{self.name}"
 
     def __str__(self):
         return self.name
