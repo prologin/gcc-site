@@ -112,8 +112,8 @@ class Application(models.Model):
         verbose_name=_("Réponse de formulaire"), default=dict
     )
 
-    nb_participations = models.IntegerField(
-        default=0,
+    nb_participations = models.CharField(
+        default="",
         verbose_name=_("Nombre de participations de la participante"),
     )
 

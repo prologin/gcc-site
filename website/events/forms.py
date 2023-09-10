@@ -41,6 +41,15 @@ TSHIRT = [
     ("XXL", "XXL"),
 ]
 
+NB_PARTICIPATIONS = [
+    (None, "------ Selectionner un nombre de participations ------"),
+    ("0", "0"),
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4 ou plus", "4 ou plus"),
+]
+
 # Must be the same as static/js/forms/form.js:PHONE_REGEX
 PHONE_REGEX = "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
@@ -279,8 +288,9 @@ class EventSignupForm(forms.Form):
     )
 
     # Info supplémentaires sur la participante
-    nb_participations = forms.IntegerField(
+    nb_participations = forms.ChoiceField(
         label="La participante a-t-elle déjà participé à un stage Girls Can Code! ? Si oui, combien de fois ?",
+        choices=NB_PARTICIPATIONS,
     )
 
     allergies = forms.CharField(
