@@ -91,7 +91,7 @@ class EventSignupForm(forms.Form):
 
     email = forms.EmailField(
         label="E-mail",
-        widget=forms.TextInput(attrs={"placeholder": "Email"}),
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
         max_length=320,
         required=True,
         validators=[validate_email],
@@ -172,7 +172,7 @@ class EventSignupForm(forms.Form):
 
     email_resp = forms.EmailField(
         label="E-mail",
-        widget=forms.TextInput(attrs={"placeholder": "Email"}),
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
         max_length=320,
         required=True,
         validators=[validate_email],
