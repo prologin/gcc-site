@@ -30,7 +30,6 @@ body {
   --light-text-color: #92a2b9;
   --bs-link-color: #00AED3;
   --bs-link-hover-color: #00AED3;
-
 }
 
 /*
@@ -386,33 +385,4 @@ button.dropdown-item {
 .collapsed > .when-open,
 .not-collapsed > .when-closed {
   display: none;
-}
-
-/*
- * Footer
- */
-.footer-bg {
-  flex-shrink: 0;
-  background-color: white;
-}
-
-.picture-size {
-  max-height: 60px;
-}
-
-.footer-link-style {
-  font-size: 100%;
-  color: var(--main-dark-color);
-}
-
-.footer-link-style:hover {
-  color: var(--main-dark-color);
-}
-
-.social-network-icon:hover {
-  filter: brightness(2);
-}
-
-.bi {
-  margin-right: 1em;
 }
