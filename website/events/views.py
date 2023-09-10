@@ -212,6 +212,7 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
             )
         else:
             ctx["events"] = events.Event.objects.get_visible_events()
+        ctx.update(signup.APPLICATION_STATUS)
         return ctx
 
 
