@@ -150,6 +150,7 @@ class HomePageView(ListView):
                     school=school,
                     event=event,
                     form_answer=form_answer[0],
+                    nb_participations=form.cleaned_data["nb_participations"],
                 )
 
                 messages.success(

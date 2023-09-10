@@ -113,6 +113,7 @@ class ApplicationAdmin(admin.ModelAdmin):
             "Sélection",
             {
                 "fields": (
+                    "nb_participations",
                     "status",
                     "notes",
                 ),

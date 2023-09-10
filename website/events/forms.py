@@ -279,6 +279,10 @@ class EventSignupForm(forms.Form):
     )
 
     # Info supplémentaires sur la participante
+    nb_participations = forms.IntegerField(
+        label="La participante a-t-elle deja participee aux stages Girls Can Code! ? Si oui combien de fois ?",
+    )
+
     allergies = forms.CharField(
         label="La participante a-t-elle des allergies ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
@@ -443,6 +447,7 @@ class EventSignupForm(forms.Form):
                 css_class="tab",
             ),
             Div(
+                Field("nb_participations"),
                 Field("tshirt"),
                 Field("allergies"),
                 Field("diet"),

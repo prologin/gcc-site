@@ -15,6 +15,7 @@
                 <tr>
                     <th scope="col"> # </th>
                     <th scope="col"> Nom </th>
+                    <th scope="col"> Nombre de participations</th>
                     <th scope="col"> Statut </th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                     aria-controls="row-{{forloop.counter}}" {% endif %}>
                     <th scope="row"> {{forloop.counter}}</th>
                     <td> {{application.last_name }} {{application.first_name}} </td>
+                    <td> {{application.nb_participations}}</td>
                     <td>
                         {% if application.status == -3 %} Candidature rejetée {% endif %}
                         {% if application.status == -2 %} Candidature annulée de la part de la candidate {% endif %}
