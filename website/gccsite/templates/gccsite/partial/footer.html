@@ -1,28 +1,53 @@
 {% load static %}
 <footer class="footer-bg py-2 w-100 container-fluid">
-  <div class="row mx-5">
-    <a class=" mb-3 mb-lg-0 text-center text-lg-left p-3" href="/">
-      <img src="{% static 'img/logo_gcc.svg' %}" alt="Logo des stages Girls Can Code!" class="container-fluid picture-size pe-2"/>
-    </a>
-    <div class="text-center text-lg-left " style="align-self: center">
-      <a href="/privacy" class="secondary-button footer-link-style my-auto">
-        Politique de confidentialité
-      </a>
+
+    {# Logo #}
+    <div class="row my-3">
+        <a class="col text-center" href="{% url 'events:home' %}">
+            <img src="{% static 'img/logo_gcc_text_right.svg' %}"
+                 alt="Logo des stages Girls Can Code!"
+                 class="container-fluid picture-size" />
+        </a>
     </div>
-    <div class=" text-center text-lg-left" style="align-self: center">
-      <a href="/legal-notices" class="secondary-button footer-link-style my-auto">
-        Mentions légales
-      </a>
+
+    {# Links #}
+    <div class="row justify-content-center my-2">
+        <div class="col-auto text-center">
+            <a href="{% url 'pages:privacy' %}"
+               class="secondary-button footer-link my-auto">
+                Politique de confidentialité
+            </a>
+        </div>
+        <div class="col-auto text-center">
+            <a href="{% url 'pages:legal_notices' %}"
+               class="secondary-button footer-link my-auto">
+                Mentions légales
+            </a>
+        </div>
+        <div class="col-auto text-center">
+            <a href="mailto:{{ CONTACT_EMAIL }}"
+               class="secondary-button footer-link my-auto">{{ CONTACT_EMAIL }}</a>
+        </div>
     </div>
-    <div class="text-center text-lg-left" style="align-item: center">
-      <a class="footer-link-style my-auto col-lg-auto order-12 order-lg-1 text-center" href="mailto:{{ CONTACT_EMAIL }}">
-        {{ CONTACT_EMAIL }}
-      </a>
+
+    {# Social Networks #}
+    <div class="row col order-lg-12 justify-content-center my-2 mx-0"
+         align-h="center">
+        {% for sn in SOCIAL_NETWORKS %}
+            <a href="{{ sn.link }}"
+               class="col-auto text-center footer-link"
+               target="_blank"
+               rel="noopener noreferrer"
+               title="{{ sn.alt }}">
+                <i class="fa fa-brands {{ sn.logo }}"></i>
+            </a>
+        {% endfor %}
     </div>
-    <div class="row order-lg-12 justify-content-center mt-4 mb-4 ms-0 me-0" align-h="center" style="align-content: center">
-      {% for sn in SOCIAL_NETWORKS %}
-      {% include 'gccsite/partial/SocialNetwork.html' with sn=sn %}
-      {% endfor %}
+
+    <div class="row">
+        <div class="col text-center fs-footnote text-gray">
+            2023 @ Association Prologin
+        </div>
     </div>
-  </div>
+
 </footer>
