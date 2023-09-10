@@ -280,7 +280,7 @@ class EventSignupForm(forms.Form):
 
     # Info supplémentaires sur la participante
     nb_participations = forms.IntegerField(
-        label="La participante a-t-elle deja participee aux stages Girls Can Code! ? Si oui combien de fois ?",
+        label="La participante a-t-elle déjà participé à un stage Girls Can Code! ? Si oui, combien de fois ?",
     )
 
     allergies = forms.CharField(
