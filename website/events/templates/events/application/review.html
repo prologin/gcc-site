@@ -144,19 +144,19 @@
                                 <input type="hidden" name="event-id" value="{{ application.event.pk }}">
 
                                 <select class="form-select" name="status">
-                                    <option value="-3" {% if application.status == -3 %} selected {% endif %}> Candidature
+                                    <option value="-3" {% if application.status == REJECTED %} selected {% endif %}> Candidature
                                         rejetée </option>
-                                    <option value="-2" {% if application.status == -2 %} selected {% endif %}> Candidature
+                                    <option value="-2" {% if application.status == WITHDRAWN %} selected {% endif %}> Candidature
                                         annulée de la part de la candidate </option>
-                                    <option value="-1" {% if application.status == -1 %} selected {% endif %}> Candidature
+                                    <option value="-1" {% if application.status == CANCELLED %} selected {% endif %}> Candidature
                                         annulée de la part des organisateurs </option>
-                                    <option value="0" {% if application.status == 0 %} selected {% endif %}> Candidature
+                                    <option value="0" {% if application.status == PENDING %} selected {% endif %}> Candidature
                                         en cours de traitement </option>
-                                    <option value="1" {% if application.status == 1 %} selected {% endif %}> Candidature
+                                    <option value="1" {% if application.status == ACCEPTED %} selected {% endif %}> Candidature
                                         acceptée </option>
-                                    <option value="2" {% if application.status == 2 %} selected {% endif %}> Candidature
+                                    <option value="2" {% if application.status == CONFIRMED %} selected {% endif %}> Candidature
                                         confirmée </option>
-                                    <option value="3" {% if application.status == 3 %} selected {% endif %}> Stage terminé
+                                    <option value="3" {% if application.status == ENDED %} selected {% endif %}> Stage terminé
                                     </option>
                                 </select>
 
