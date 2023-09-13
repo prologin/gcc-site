@@ -8,14 +8,14 @@
 
 /* If the screen size is 401px wide or more */
 @media screen and (min-width: 401px) {
-  .picture-size {
+  .footer-logo {
     max-height: 60px;
   }
 }
 
 /* If the screen size is 400px wide or less */
 @media screen and (max-width: 400px) {
-  .picture-size {
+  .footer-logo {
     width: 60%;
   }
 }

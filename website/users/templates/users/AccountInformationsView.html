@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<div no-gutters class="container-fluid">
+<div class="basic-background">
   <div class="mx-5 my-4">
     <h2>Gestion du compte</h2>
     <p>
@@ -17,7 +17,7 @@
       ce formulaire nous permettent de préparer le stage : sélections,
       documents, nourritures, etc. Pour en savoit plus à propos de notre
       gestion des données et de vos droits, consultez
-      <a href="/privacy"> page dédiée.</a>
+      <a href="{% url 'pages:privacy' %}"> page dédiée.</a>
     </p>
   </div>
 
@@ -51,8 +51,7 @@
       </div>
     </div>
     <div class="col">
-      <div md="12" class="col mb-5 p-5 account-group">
-        <div id="personal-info" style="display: block; position: relative; top: -130px; visibility: hidden"></div>
+      <div md="12" class="col mb-5 p-5 content-background">
         <h1>Informations personnelles</h1>
         <h3>
           Informations traitées seulement en cas de sélection à un stage,
@@ -73,8 +72,8 @@
           {# Show the success or error messages #}
           {% for msg in messages %}
           {% if msg.extra_tags == "personal_info" %}
-          <div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
-            {{msg.message}}
+          <div class="mt-2 alert alert-{{ msg.level_tag }}" role="alert">
+            {{ msg.message }}
           </div>
           {% endif %}
           {% endfor %}
@@ -94,8 +93,8 @@
           {# Show the success or error messages #}
           {% for msg in messages %}
           {% if msg.extra_tags == "email" %}
-          <div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
-            {{msg.message}}
+          <div class="mt-2 alert alert-{{ msg.level_tag }}" role="alert">
+            {{ msg.message }}
           </div>
           {% endif %}
           {% endfor %}
@@ -103,22 +102,21 @@
         </div>
       </div>
 
-      <div md="12" class="col my-5 p-5 account-group">
-        <div id="password" style="display: block; position: relative; top: -130px; visibility: hidden"></div>
+      <div md="12" class="col my-5 p-5 content-background">
         <h1>Changer de mot de passe</h1>
         {% crispy password_update_form %}
         {# Show the success or error messages #}
         {% for msg in messages %}
         {% if msg.extra_tags == "pwd" %}
-        <div class="mt-2 alert alert-{{msg.level_tag}}" role="alert">
-          {{msg.message}}
+        <div class="mt-2 alert alert-{{ msg.level_tag }}" role="alert">
+          {{ msg.message }}
         </div>
         {% endif %}
         {% endfor %}
       </div>
 
       {% comment %}
-      <div md="12" class="col my-5 p-5 account-group">
+      <div md="12" class="col my-5 p-5 content-background">
         <div id="notifications" style="display: block; position: relative; top: -130px; visibility: hidden"></div>
 
         <h1>Notifications</h1>
@@ -129,8 +127,7 @@
 
       <div id="rgpd" ></div>
 
-      <div md="12" class="col my-5 p-5 account-group">
-        <div id="rgpd" style="display: block; position: relative; top: -130px; visibility: hidden"></div>
+      <div md="12" class="col my-5 p-5 content-background">
 
         <h1>Exporter vos données personnelles</h1>
         <h3>
@@ -145,7 +142,7 @@
         </div>
       </div>
 
-      <div id="delete" md="12" class="col my-5 p-5 account-group">
+      <div id="delete" md="12" class="col my-5 p-5 content-background">
         <h1>Supprimer votre compte</h1>
         <h3>
           Vous pouvez supprimer votre compte et toutes les données
@@ -179,8 +176,8 @@
     </div>
   </div>
 </div>
-{% endblock %}
+{% endblock content %}
 
 {% block scripts %}
 <script src="{% static 'js/personal_info_form.js'%}"></script>
-{% endblock %}
+{% endblock scripts %}
