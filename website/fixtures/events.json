@@ -7,12 +7,15 @@
       "first_name": "Kenji",
       "last_name": "Gaillac",
       "dob": "1999-08-11",
-      "phone": "0123456789",
       "address": {
         "city": "Test.",
         "zip_code": "42042",
         "country": "France"
       },
+      "first_name_resp": "Test.",
+      "last_name_resp": "Test.",
+      "email_resp": "Test.",
+      "phone": "0123456789",
       "address_resp": {
         "city": "Test.",
         "zip_code": "42042",
@@ -38,7 +41,8 @@
         "programming": "rien du tout",
         "studies": "je sais pas encore",
         "about": "ma prof!"
-      }
+      },
+      "notes": " "
     }
   },
   {
@@ -49,12 +53,15 @@
       "first_name": "Toto",
       "last_name": "Tutu",
       "dob": "2011-09-03",
-      "phone": "0123456789",
       "address": {
         "city": "Test.",
         "zip_code": "42042",
         "country": "France"
       },
+      "first_name_resp": "Test.",
+      "last_name_resp": "Test.",
+      "email_resp": "Test.",
+      "phone": "0123456789",
       "address_resp": {
         "city": "Test.",
         "zip_code": "42042",
@@ -80,7 +87,8 @@
         "programming": "rien du tout",
         "studies": "je sais pas encore",
         "about": "ma prof!"
-      }
+      },
+      "notes": ""
     }
   },
   {

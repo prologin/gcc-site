@@ -13,6 +13,8 @@ from crispy_forms.layout import (
 )
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
@@ -37,6 +39,15 @@ TSHIRT = [
     ("L", "L"),
     ("XL", "XL"),
     ("XXL", "XXL"),
+]
+
+NB_PARTICIPATIONS = [
+    (None, "------ Selectionner un nombre de participations ------"),
+    ("0", "0"),
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4 ou plus", "4 ou plus"),
 ]
 
 # Must be the same as static/js/forms/form.js:PHONE_REGEX
@@ -65,6 +76,25 @@ class EventSignupForm(forms.Form):
     dob = forms.DateField(
         label="Date de naissance",
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
+    )
+
+    phone = forms.DecimalField(
+        label="Numéro de téléphone",
+        validators=[phoneNumberTest],
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Numéro de téléphone",
+                "type": "tel",
+            }
+        ),
+    )
+
+    email = forms.EmailField(
+        label="E-mail",
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
+        max_length=320,
+        required=True,
+        validators=[validate_email],
     )
 
     is_women = forms.BooleanField(
@@ -128,13 +158,32 @@ class EventSignupForm(forms.Form):
     )
 
     # Responsable légal de la participante
+    first_name_resp = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Prénom"}),
+        max_length=255,
+    )
 
-    phone = forms.DecimalField(
+    last_name_resp = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Nom de famille"}),
+        max_length=255,
+    )
+
+    email_resp = forms.EmailField(
+        label="E-mail",
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
+        max_length=320,
+        required=True,
+        validators=[validate_email],
+    )
+
+    phone_resp = forms.DecimalField(
         label="Numéro de téléphone",
         validators=[phoneNumberTest],
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Numéro de téléphone du responsable légal",
+                "placeholder": "Numéro de téléphone",
                 "type": "tel",
             }
         ),
@@ -239,6 +288,11 @@ class EventSignupForm(forms.Form):
     )
 
     # Info supplémentaires sur la participante
+    nb_participations = forms.ChoiceField(
+        label="La participante a-t-elle déjà participé à un stage Girls Can Code! ? Si oui, combien de fois ?",
+        choices=NB_PARTICIPATIONS,
+    )
+
     allergies = forms.CharField(
         label="La participante a-t-elle des allergies ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
@@ -330,6 +384,8 @@ class EventSignupForm(forms.Form):
                     Column(Field("last_name")),
                 ),
                 Field("dob"),
+                Field("email"),
+                Field("phone"),
                 *address_applicant,
                 Field("is_women"),
                 Field("legal_authorization"),
@@ -345,7 +401,13 @@ class EventSignupForm(forms.Form):
             ),
             Div(
                 HTML("<h2>Informations du responsable légal</h2>"),
-                Field("phone"),
+                labelize("Identité", True),
+                Row(
+                    Column(Field("first_name_resp")),
+                    Column(Field("last_name_resp")),
+                ),
+                Field("email_resp"),
+                Field("phone_resp"),
                 *address_applicant_resp,
                 Div(
                     Row(
@@ -395,6 +457,7 @@ class EventSignupForm(forms.Form):
                 css_class="tab",
             ),
             Div(
+                Field("nb_participations"),
                 Field("tshirt"),
                 Field("allergies"),
                 Field("diet"),
