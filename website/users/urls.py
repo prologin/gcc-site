@@ -31,8 +31,16 @@ urlpatterns = [
         views.UserDeleteView.as_view(),
         name="delete_user",
     ),
-    path('activate/<uidb64>/<token>', views.ActivateAccountView.as_view(), name='activate'),
-    path('export-users/', views.ExportUsersCSVView.as_view(), name='export_users_csv'),
+    path(
+        "activate/<uidb64>/<token>",
+        views.ActivateAccountView.as_view(),
+        name="activate",
+    ),
+    path(
+        "export-users/",
+        views.ExportUsersCSVView.as_view(),
+        name="export_users_csv",
+    ),
     path("login", views.LoginView.as_view(), name="login"),
     path("logout", LogoutView.as_view(), name="logout"),
     path("register", views.RegisterView.as_view(), name="register"),

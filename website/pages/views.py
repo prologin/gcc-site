@@ -67,6 +67,7 @@ class PrivacyNewsletterView(TemplateView):
             "PRIVACY_LIST": privacy_newsletter_list(),
         }
 
+
 class FAQView(TemplateView):
     template_name = "pages/FAQ.html"
 

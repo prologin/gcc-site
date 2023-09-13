@@ -11,7 +11,7 @@ function activeFormPersonalInfo() {
 
   document.getElementById('submit-id-submit-personal_info').style.display = modifyPersonalInfo ? 'block' : 'none';
   document.getElementById('active_personal_info').style.display = modifyPersonalInfo ? 'none' : 'block';
-  
+
   for (let i = 0; i < formPersonalInfo.length; i++) {
     if (modifyPersonalInfo)
     formPersonalInfo[i].removeAttribute('disabled');
@@ -33,7 +33,7 @@ function activeFormEmail() {
 
   document.getElementById('submit-id-submit-email').style.display = modifyEmail ? 'block' : 'none';
   document.getElementById('active_email').style.display = modifyEmail ? 'none' : 'block';
-  
+
   for (let i = 0; i < formEmail.length; i++) {
     if (modifyEmail)
       formEmail[i].removeAttribute('disabled');

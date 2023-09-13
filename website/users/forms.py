@@ -37,12 +37,14 @@ class PersonalInfoForm(forms.Form):
         name_layout = Row(
             Column(
                 Field(
-                    "last_name", placeholder=self.fields["last_name"].label,
+                    "last_name",
+                    placeholder=self.fields["last_name"].label,
                 )
             ),
             Column(
                 Field(
-                    "first_name", placeholder=self.fields["first_name"].label,
+                    "first_name",
+                    placeholder=self.fields["first_name"].label,
                 )
             ),
         )
