@@ -1,6 +1,8 @@
 // Must be the same as events/forms.py:PHONE_REGEX
 const PHONE_REGEX = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
 
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const INVALID_CLASS = "is-invalid";
 const TAB_ACTIVE_CLASS = "active";
 
@@ -44,6 +46,11 @@ function validateForm(form) {
             } else if (val.type === "tel") {
                 // Handle phone validation
                 if (!PHONE_REGEX.test(val.value)) {
+                    valid = false;
+                    val.classList.add(INVALID_CLASS);
+                }
+            } else if (val.type === "email") {
+                if (!EMAIL_REGEX.test(val.value)) {
                     valid = false;
                     val.classList.add(INVALID_CLASS);
                 }

@@ -23,6 +23,16 @@ urlpatterns = [
         name="application_review",
     ),
     path(
+        "update-application-notes",
+        views.ApplicationEditNotesView.as_view(),
+        name="update_application_notes",
+    ),
+    path(
+        "update-application-status",
+        views.ApplicationEditStatusView.as_view(),
+        name="update_application_status",
+    ),
+    path(
         "my-applications",
         views.ApplicationsView.as_view(),
         name="my_applications",

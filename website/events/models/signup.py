@@ -53,28 +53,54 @@ class Application(models.Model):
 
     first_name = models.CharField(
         max_length=256,
-        verbose_name=_("Prénom"),
+        verbose_name=_("Prénom de la participante"),
     )
 
     last_name = models.CharField(
         max_length=256,
-        verbose_name=_("Nom"),
+        verbose_name=_("Nom de la participante"),
     )
 
     dob = models.DateField(
-        verbose_name=_("Date de naissance"),
+        verbose_name=_("Date de naissance de la participante"),
+    )
+
+    email = models.EmailField(
+        verbose_name=_("Adresse email de la participante")
     )
 
     phone = models.CharField(
-        max_length=16, blank=True, verbose_name=_("Numéro de téléphone")
+        max_length=16,
+        blank=True,
+        verbose_name=_("Numéro de téléphone de la participante"),
     )
 
     address = models.JSONField(
-        verbose_name=_("Adresse partielle de la participante"), default=dict
+        verbose_name=_("Adresse de la participante"), default=dict
+    )
+
+    first_name_resp = models.CharField(
+        max_length=256,
+        verbose_name=_("Prénom du responsable légal"),
+    )
+
+    last_name_resp = models.CharField(
+        max_length=256,
+        verbose_name=_("Nom du responsable légal"),
+    )
+
+    email_resp = models.EmailField(
+        verbose_name=_("Adresse email du responable légal")
+    )
+
+    phone_resp = models.CharField(
+        max_length=16,
+        blank=True,
+        verbose_name=_("Numéro de téléphone du responsable légal"),
     )
 
     address_resp = models.JSONField(
-        verbose_name=_("Adresse partielle du responsable légal"), default=dict
+        verbose_name=_("Adresse du responsable légal"), default=dict
     )
 
     school = models.JSONField(
@@ -85,6 +111,13 @@ class Application(models.Model):
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
     )
+
+    nb_participations = models.CharField(
+        default="",
+        verbose_name=_("Nombre de participations de la participante"),
+    )
+
+    notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
 
     status = models.SmallIntegerField(
         choices=SelectionStatus.choices,
@@ -98,32 +131,6 @@ class Application(models.Model):
     )
 
     objects = ApplicationManager()
-
-    @cached_property
-    def participations_count(self):
-        applicants = Application.objects.filter(event=self.event)
-        return sum(
-            (applicant.status == SelectionStatus.CONFIRMED.value)
-            for applicant in applicants
-            if (
-                applicant.last_name == self.last_name
-                and applicant.first_name == self.first_name
-            )
-        )
-
-    objects = ApplicationManager()
-
-    @cached_property
-    def participations_count(self):
-        applicants = Application.objects.filter(event=self.event)
-        return sum(
-            (applicant.status == SelectionStatus.CONFIRMED.value)
-            for applicant in applicants
-            if (
-                applicant.last_name == self.last_name
-                and applicant.first_name == self.first_name
-            )
-        )
 
     class Meta:
         verbose_name = _("candidatures")
