@@ -30,10 +30,6 @@ class PartnerAdmin(admin.ModelAdmin):
         ),
         (
             "Status du partenaire",
-            {
-                "fields": (
-                    "status",
-                )
-            },
+            {"fields": ("status",)},
         ),
     )
