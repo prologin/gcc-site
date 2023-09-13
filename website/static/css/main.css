@@ -30,6 +30,8 @@ body {
   --light-text-color: #92a2b9;
   --bs-link-color: #00AED3;
   --bs-link-hover-color: #00AED3;
+
+  --gcc-navbar-height: 70px
 }
 
 /*
@@ -66,7 +68,7 @@ a:hover {
    * The fixed navbar overlay other contents, unless you add padding
    * to the top of the <body>.
    */
-  padding-top: 70px;
+  padding-top: var(--gcc-navbar-height);
 
   /*
    * Needed to fix the footer to the bottom of the screen or to the bottom of
@@ -123,7 +125,6 @@ h3, .subsubtitleSize {
 
 .content-background {
   background-color: white;
-  border-radius: var(--global-border-radius);
   border-radius: var(--global-border-radius);
   border: 1px solid var(--light-text-color);
 }
@@ -235,10 +236,6 @@ h3, .subsubtitleSize {
 /*
  *  Header
  */
-.menu-logo {
-  width: 6em;
-}
-
 .navbar {
   background-color: white;
 }
@@ -355,11 +352,6 @@ button.dropdown-item {
 }
 .gcc-3-back {
   background-color: var(--gcc-blue-color);
-}
-.eventInfo-icon {
-  min-width: 60px;
-  max-width: 60px;
-  padding-right: 25px;
 }
 
 /*
