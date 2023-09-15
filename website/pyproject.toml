@@ -64,6 +64,12 @@ exclude_lines = [
 
 [tool.black]
 line-length = 79
+force_exclude = '''
+# Do not format Django generated files
+/(
+  migrations
+)/
+'''
 
 [tool.isort]
 profile = "black"
