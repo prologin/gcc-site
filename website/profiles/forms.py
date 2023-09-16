@@ -374,6 +374,19 @@ class ProfileCreationForm(forms.ModelForm):
                 *address_applicant_resp,
                 Div(
                     Row(
+                        Column(),
+                        Column(
+                            Button(
+                                name="copy_postal_address",
+                                value="Copier l'adresse de la participante",
+                                css_class="my-2 btn btn-primary btn-block",
+                                onclick="copyPostalAddress(this.id)",
+                            )
+                        ),
+                    )
+                ),
+                Div(
+                    Row(
                         Column(
                             Button(
                                 name="back",

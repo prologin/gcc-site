@@ -64,6 +64,8 @@ function setupApplicationFormModal(modal_id) {
         // Update the form's event id, and reset its content.
         // Check current form id. if new event ID, reset its content.
         let event_it_input = form.querySelector("#event-id-input");
+        let btn_copy = form.querySelector("#button-id-copy_postal_address")
+        btn_copy.setAttribute("data-modal", modal_id)
         const previous_id = event_it_input.getAttribute("value");
 
         if (previous_id != null && previous_id != event_id) {
