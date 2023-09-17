@@ -41,8 +41,12 @@ $ DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -p gccsite up --bu
 
 #### Formatting
 
-We use `black`, `isort` and `eslint` as code formatters. They can be enabled
-through a git pre-commit with the following command:
+We use the following tools to format code:
+- `black` and `isort` for python files
+- `djlint` for Django HTML template files format (and linting)
+- `eslint` for JS files (this is not the case anymore, apparently)
+All these tools should be run by pre-commit to ensure the well formatting of
+your changes. You can install them directly using :
 
 ```sh
 $ pre-commit install
