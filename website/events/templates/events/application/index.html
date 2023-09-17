@@ -9,7 +9,7 @@
 {% regroup events by year as grouped_events %}
 
 <h1> Review des candidatures </h1>
-<ul>
+<ul class="review-edition-years">
     {% for year in years %}
          <li><a href="?year={{year}}"> {{ year }} </a></li>
     {% endfor %}

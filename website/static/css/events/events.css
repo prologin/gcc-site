@@ -12,7 +12,7 @@
     border-radius: 40%;
 }
 
-ul > li {
+ul.review-edition-years > li {
     display: inline-block;
 }
 
