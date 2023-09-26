@@ -28,6 +28,7 @@ django-post-office = "^3.6"
 prospector = {extras = ["with_everything"], version = "*"}
 mozilla-django-oidc = "^3.0.0"
 django-prometheus = "^2.3.1"
+axios = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 black = "*"
