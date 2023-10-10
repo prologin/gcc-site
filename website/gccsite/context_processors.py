@@ -137,24 +137,18 @@ _PRIVACY_BASE_CTX = {
         Vous disposez également d'un droit à la limitation du traitement de vos données.
         Vous pouvez retirer à tout moment votre consentement au traitement de vos données.
         Vous pouvez également exercer votre droit à la portabilité de vos données.
-        <a href="https://www.cnil.fr/fr/comprendre-vos-droits">
-            Rendez-vous sur le site de la CNIL pour mieux comprendre vos droits
-        </a>.
+        <a href="https://www.cnil.fr/fr/comprendre-vos-droits">Rendez-vous sur le site de la CNIL pour mieux comprendre vos droits</a>.
     </p>
     <h4>Exercer vos droits</h4>
     <p>
         Toute demande d'exercice de vos droits doit être adressée par voie électronique à
-        <a href="mailto:{_BASE_CTX['CONTACT_EMAIL']}">
-            {_BASE_CTX['CONTACT_EMAIL']}
-        </a>.
+        <a href="mailto:{_BASE_CTX['CONTACT_EMAIL']}">{_BASE_CTX['CONTACT_EMAIL']}</a>.
     </p>
     <h4>Réclamation auprès de la CNIL</h4>
     <p>
         Si vous estimez, après nous avoir contacté, que vos droits sur vos données ne sont pas respectés,
         vous pouvez alors
-        <a href="https://www.cnil.fr/fr/webform/adresser-une-plainte">
-            adresser une réclamation à la CNIL
-        </a>.
+        <a href="https://www.cnil.fr/fr/webform/adresser-une-plainte">adresser une réclamation à la CNIL</a>.
     </p>
     """,
 }
