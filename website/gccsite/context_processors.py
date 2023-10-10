@@ -11,6 +11,16 @@ _BASE_CTX = {
 
 FLICKR_URL = "https://www.flickr.com/photos/prologin/"
 
+SEO_DESC = "Stages d'initiation à la programmation Girls Can Code!"
+SEO_KEYWORDS = [
+    "programmation",
+    "stage",
+    "prologin",
+    "IOI",
+    "girlscancode",
+    "girls can code",
+]
+
 
 def my_context_processor(req):
     context = _BASE_CTX
@@ -103,6 +113,8 @@ def my_context_processor(req):
     context["FAQ_ENTRIES"] = faq_entries  # type: ignore
     context["BUTTON_SNS"] = button_sns  # type: ignore
     context["FLICKR_URL"] = FLICKR_URL
+    context["SEO_DESC"] = SEO_DESC
+    context["SEO_KEYWORDS"] = SEO_KEYWORDS
 
     return context
 
