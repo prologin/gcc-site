@@ -126,8 +126,8 @@ format:black:
     - pip3 install poetry
     - poetry install || true
   script:
-    - poetry run black --check $(find -name '*.py' -type f)
-    - poetry run isort --check-only $(find -name '*.py' -type f)
+    - poetry run black --check .
+    - poetry run isort --check-only .
   allow_failure: true
 
 

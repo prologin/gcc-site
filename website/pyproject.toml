@@ -74,3 +74,4 @@ force_exclude = '''
 [tool.isort]
 profile = "black"
 line_length = 79
+skip_glob = [ "*migrations*" ]
