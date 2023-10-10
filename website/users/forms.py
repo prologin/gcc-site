@@ -257,7 +257,7 @@ class AuthRegisterForm(BaseUserCreationForm):
                 Button(
                     name="back",
                     value="Précédent",
-                    css_class="mt-4 btn btn-block btn-light",
+                    css_class="mt-2 btn btn-block btn-light",
                 ),
                 css_class="tab",
             ),
