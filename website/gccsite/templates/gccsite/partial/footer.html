@@ -3,11 +3,13 @@
 
     {# Logo #}
     <div class="row my-3">
-        <a class="col text-center" href="{% url 'events:home' %}">
-            <img src="{% static 'img/logo_gcc_text_right.svg' %}"
-                 alt="Logo des stages Girls Can Code!"
-                 class="container-fluid footer-logo" />
-        </a>
+        <div class="col text-center">
+            <a href="{% url 'events:home' %}">
+                <img src="{% static 'img/logo_gcc_text_right.svg' %}"
+                     alt="Logo des stages Girls Can Code!"
+                     class="footer-logo" />
+            </a>
+        </div>
     </div>
 
     {# Links #}
