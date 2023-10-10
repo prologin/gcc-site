@@ -8,8 +8,7 @@
             },
             "Action": ["s3:GetObject"],
             "Resource": [
-                "arn:aws:s3:::gcc-static/*",
-                "arn:aws:s3:::gcc-media/sponsors/*",
+                "arn:aws:s3:::gcc-media-pub/*"
             ]
         }
     ]

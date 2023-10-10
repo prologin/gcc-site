@@ -51,6 +51,18 @@ class GCCMediaStorage(GCCBaseStorage):
     default_acl = "private"
 
 
+# The Public Media storage a bucket for non static documents
+# That should be accessible without authentication
+# e.g.: partner logos
+# It allows for faster loading time when requesting several files at the
+# same time.
+class GCCPublicMediaStorage(GCCBaseStorage):
+    bucket_name = settings.DJANGO_S3_PUBLIC_MEDIA_BUCKET
+    custom_domain = settings.AWS_S3_CUSTOM_DOMAIN
+    default_acl = "public-read"
+    querystring_auth = False
+
+
 class GCCStaticStorage(GCCBaseStorage):
     bucket_name = settings.DJANGO_S3_STATIC_BUCKET
     custom_domain = settings.AWS_S3_CUSTOM_DOMAIN

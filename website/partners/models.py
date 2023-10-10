@@ -7,7 +7,7 @@ from gccsite.settings.common import (
     AWS_S3_ENDPOINT_URL,
     AWS_S3_URL_PROTOCOL,
 )
-from gccsite.storages import GCCMediaStorage, GCCStaticStorage
+from gccsite.storages import GCCPublicMediaStorage
 
 
 class PartnerStatus(models.TextChoices):
@@ -41,7 +41,7 @@ class Partner(models.Model):
     logo = models.FileField(
         verbose_name="Logo",
         upload_to=upload_to,
-        storage=GCCMediaStorage,
+        storage=GCCPublicMediaStorage,
         validators=[FileExtensionValidator(["jpg", "jpeg", "png", "gif"])],
     )
 
@@ -54,9 +54,9 @@ class Partner(models.Model):
 
     @property
     def logo_url(self):
-        storage = GCCMediaStorage()
-        # return storage.url("sponsors/" + self.name)
-        return f"{AWS_S3_URL_PROTOCOL}//{AWS_S3_CUSTOM_DOMAIN}/gcc-media/sponsors/{self.name}"
+        storage = GCCPublicMediaStorage()
+        return storage.url("sponsors/" + self.name)
+        # return f"{AWS_S3_URL_PROTOCOL}//{AWS_S3_CUSTOM_DOMAIN}/gcc-media/sponsors/{self.name}"
 
     def __str__(self):
         return self.name
