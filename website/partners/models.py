@@ -1,5 +1,6 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from gccsite.settings.common import (
@@ -14,6 +15,10 @@ class PartnerStatus(models.TextChoices):
     PROMOTED = "Promoted", _("Partenaires qui nous soutiennent")
     FUNDING = "Funding", _("Partenaires qui nous financent")
     WELCOMING = "Welcoming", _("Partenaires qui nous accueillent")
+
+
+def upload_path(name):
+    return "sponsors/{}".format(slugify(name))
 
 
 class Partner(models.Model):
@@ -34,8 +39,9 @@ class Partner(models.Model):
         null=True,
     )
 
+    # Cannot remove otherwise it breaks the migrations
     def upload_to(instance, filename):
-        return "sponsors/{}".format(instance.name)
+        return upload_path(instance.name)
 
     # Ne pas mettre une image trop grande
     logo = models.FileField(
@@ -55,7 +61,7 @@ class Partner(models.Model):
     @property
     def logo_url(self):
         storage = GCCPublicMediaStorage()
-        return storage.url("sponsors/" + self.name)
+        return storage.url(upload_path(self))
         # return f"{AWS_S3_URL_PROTOCOL}//{AWS_S3_CUSTOM_DOMAIN}/gcc-media/sponsors/{self.name}"
 
     def __str__(self):
