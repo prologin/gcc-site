@@ -1,11 +1,3 @@
-.tab {
-    display: none;
-}
-
-.tab.active {
-    display: block;
-}
-
 .eventInfo-line {
     height: 3px;
     width: 100%;
