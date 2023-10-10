@@ -9,7 +9,7 @@
 {% elif event|signup_finished %}
     <span class="badge rounded-pill opacity-100 text-bg-danger">Fermé</span>
 {% elif event|signup_not_yet_opened %}
-    <span class="badge rounded-pill opacity-100 text-bg-warning">Ouvre le {{event.signup_start_date|date:"d/m/y"}} </span>
+    <span class="badge rounded-pill opacity-100 text-bg-warning">Ouvre le {{ event.signup_start_date|date:"d/m/y" }} </span>
 {% else %}
     <span class="badge rounded-pill opacity-100 text-bg-success">Ouvert</span>
 {% endif %}
