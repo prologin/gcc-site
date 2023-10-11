@@ -1,4 +1,4 @@
-import { INVALID_CLASS, MultiTabForm, formDisplayNthTab, validateForm } from "./form.js"
+import { MultiTabForm } from "./form.js"
 
 /// Take the modal id in argument
 /// Add an event listener to the modal to reset the form upon opening.
@@ -17,7 +17,7 @@ function setupApplicationFormModal(modal_id) {
 
     // Add event effects on modal opening.
     // - Update event_id
-    // - Clear form, go to 1st tab
+    // - Reset form if id is changed
     application_form_modal.addEventListener("show.bs.modal", js_event => {
 
         // When the modal appears, find the id of the event related
@@ -36,7 +36,6 @@ function setupApplicationFormModal(modal_id) {
         }
         event_it_input.setAttribute("value", event_id);
     });
-
 }
 
 setupApplicationFormModal("application-form-modal");

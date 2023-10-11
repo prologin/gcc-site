@@ -106,6 +106,9 @@ class MultiTabForm {
                 }
             }
         );
+
+        // Make sure the first tab is showed
+        this.setActiveTab();
     }
 
     reset() {
