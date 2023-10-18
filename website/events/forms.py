@@ -70,7 +70,7 @@ class EventSignupForm(forms.Form):
         max_length=255,
     )
 
-    dob = forms.DateField(
+    birthdate = forms.DateField(
         label="Date de naissance",
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
     )
@@ -383,7 +383,7 @@ class EventSignupForm(forms.Form):
                     Column(Field("first_name")),
                     Column(Field("last_name")),
                 ),
-                Field("dob"),
+                Field("birthdate"),
                 Field("email"),
                 Field("phone"),
                 *address_applicant,
