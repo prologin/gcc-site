@@ -125,7 +125,10 @@ class EventSignupForm(forms.Form):
     complement_applicant = forms.CharField(
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Complément d'adresse", "blank": True}
+            attrs={
+                "placeholder": "Complément d'adresse (si nécessaire)",
+                "blank": True,
+            }
         ),
         max_length=200,
         required=False,
@@ -198,7 +201,7 @@ class EventSignupForm(forms.Form):
         label="",
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Complément d'adresse du responsable légal",
+                "placeholder": "Complément d'adresse du responsable légal (si nécessaire)",
                 "blank": True,
             }
         ),
