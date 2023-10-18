@@ -320,7 +320,7 @@ class EventSignupForm(forms.Form):
     )
 
     studies = forms.CharField(
-        label="Y a-t-il des études en informatique qui intéresseraient la participante ? Si oui, pourrais-t'elle préciser lesquelles ?",
+        label="Y a-t-il des études en informatique qui intéresseraient la participante ? Si oui, pourrait-elle préciser lesquelles ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 

@@ -154,7 +154,7 @@ class HomePageView(ListView):
                 )
 
                 messages.success(
-                    request, "Votre candidature a été enregistré!"
+                    request, "Votre candidature a été enregistrée!"
                 )
 
                 return HttpResponseRedirect(reverse("events:home"))
