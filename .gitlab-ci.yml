@@ -119,6 +119,21 @@ lint:shellcheck:
   script:
     - shellcheck --format tty $(find -name '*.sh' -type f)
 
+lint:djlint:
+  stage: qa
+  interruptible: true
+  needs: []
+  image:
+    name: python:3.11-slim
+    entrypoint: [""]
+  before_script:
+    - cd website
+    - pip3 install poetry
+    - poetry install || true
+  script:
+    - poetry run djlint --lint --profile=django .
+  allow_failure: true
+
 format:black:
   stage: qa
   interruptible: true
@@ -135,6 +150,20 @@ format:black:
     - poetry run isort --check-only .
   allow_failure: true
 
+format:djlint:
+  stage: qa
+  interruptible: true
+  needs: []
+  image:
+    name: python:3.11-slim
+    entrypoint: [""]
+  before_script:
+    - cd website
+    - pip3 install poetry
+    - poetry install || true
+  script:
+    - poetry run djlint --check .
+  allow_failure: true
 
 test:
   stage: qa

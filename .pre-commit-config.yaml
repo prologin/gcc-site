@@ -30,6 +30,6 @@ repos:
     rev: v1.34.0
     hooks:
       - id: djlint-reformat-django
-        args: ["--configuration=./.djlintrc"]
+        args: ["--configuration=./website/pyproject.toml"]
       - id: djlint-django
-        args: ["--configuration=./.djlintrc"]
+        args: ["--configuration=./website/pyproject.toml"]
