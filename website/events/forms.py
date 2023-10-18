@@ -18,10 +18,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
-    (
-        None,
-        "------ Selectionner ton niveau d'étude actuel ------",
-    ),  # Start choice
+    (None, "-"),  # Start choice
     ("6ème", "6ème"),
     ("5ème", "5ème"),
     ("4ème", "4ème"),
@@ -32,7 +29,7 @@ SCHOOL_LEVEL = [
 ]
 
 TSHIRT = [
-    (None, "------ Selectionner une taille de t-shirt ------"),
+    (None, "-"),
     ("XS", "XS"),
     ("S", "S"),
     ("M", "M"),
@@ -42,7 +39,7 @@ TSHIRT = [
 ]
 
 NB_PARTICIPATIONS = [
-    (None, "------ Selectionner un nombre de participations ------"),
+    (None, "-"),
     ("0", "0"),
     ("1", "1"),
     ("2", "2"),
