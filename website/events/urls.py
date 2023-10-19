@@ -42,4 +42,9 @@ urlpatterns = [
         views.EventListView.as_view(),
         name="events",
     ),
+    path(
+        "events/passed",
+        views.PassedEventListView.as_view(),
+        name="passed_events",
+    ),
 ]
