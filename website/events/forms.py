@@ -18,10 +18,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 SCHOOL_LEVEL = [
-    (
-        None,
-        "------ Selectionner ton niveau d'étude actuel ------",
-    ),  # Start choice
+    (None, "-"),  # Start choice
     ("6ème", "6ème"),
     ("5ème", "5ème"),
     ("4ème", "4ème"),
@@ -32,7 +29,7 @@ SCHOOL_LEVEL = [
 ]
 
 TSHIRT = [
-    (None, "------ Selectionner une taille de t-shirt ------"),
+    (None, "-"),
     ("XS", "XS"),
     ("S", "S"),
     ("M", "M"),
@@ -42,7 +39,7 @@ TSHIRT = [
 ]
 
 NB_PARTICIPATIONS = [
-    (None, "------ Selectionner un nombre de participations ------"),
+    (None, "-"),
     ("0", "0"),
     ("1", "1"),
     ("2", "2"),
@@ -73,7 +70,7 @@ class EventSignupForm(forms.Form):
         max_length=255,
     )
 
-    dob = forms.DateField(
+    birthdate = forms.DateField(
         label="Date de naissance",
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
     )
@@ -128,7 +125,10 @@ class EventSignupForm(forms.Form):
     complement_applicant = forms.CharField(
         label="",
         widget=forms.TextInput(
-            attrs={"placeholder": "Complément d'adresse", "blank": True}
+            attrs={
+                "placeholder": "Complément d'adresse (si nécessaire)",
+                "blank": True,
+            }
         ),
         max_length=200,
         required=False,
@@ -201,7 +201,7 @@ class EventSignupForm(forms.Form):
         label="",
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Complément d'adresse du responsable légal",
+                "placeholder": "Complément d'adresse du responsable légal (si nécessaire)",
                 "blank": True,
             }
         ),
@@ -320,7 +320,7 @@ class EventSignupForm(forms.Form):
     )
 
     studies = forms.CharField(
-        label="Y a-t-il des études en informatique qui intéresseraient la participante ? Si oui, pourrais-t'elle préciser lesquelles ?",
+        label="Y a-t-il des études en informatique qui intéresseraient la participante ? Si oui, pourrait-elle préciser lesquelles ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
     )
 
@@ -383,7 +383,7 @@ class EventSignupForm(forms.Form):
                     Column(Field("first_name")),
                     Column(Field("last_name")),
                 ),
-                Field("dob"),
+                Field("birthdate"),
                 Field("email"),
                 Field("phone"),
                 *address_applicant,
