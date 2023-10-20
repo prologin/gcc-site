@@ -37,7 +37,7 @@ class Partner(models.Model):
     logo = models.FileField(
         verbose_name="Logo",
         upload_to=upload_to,
-        storage=GCCMediaStorage,
+        storage=GCCStaticStorage,
         validators=[FileExtensionValidator(["jpg", "jpeg", "png", "gif"])],
     )
 
