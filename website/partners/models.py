@@ -50,7 +50,7 @@ class Partner(models.Model):
 
     @property
     def logo_url(self):
-        storage = GCCMediaStorage()
+        storage = GCCStaticStorage()
         return storage.url("sponsors/" + self.name)
 
     def __str__(self):
