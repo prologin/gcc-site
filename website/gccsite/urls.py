@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.conf import settings
 from django.urls import include, path
 
 urlpatterns = [
@@ -9,3 +10,6 @@ urlpatterns = [
     path("", include("partners.urls")),
     path("rest/auth/oidc/", include("mozilla_django_oidc.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
