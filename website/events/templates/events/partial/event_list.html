@@ -18,50 +18,13 @@
         </div>
     {% else %}
         <div class="w-75 mx-auto pt-5">
-            {% for event in open_events %}
-                {% cycle 1 2 3 as color silent %}
-                {% if event in already_applied %}
-                    {% include "events/partial/event_card.html" with event=event id=event.pk color=color already_applied=True %}
-                {% else %}
-                    {% include "events/partial/event_card.html" with event=event id=event.pk color=color already_applied=False %}
-                {% endif %}
-            {% endfor %}
+            <p class="h2 pt-4 pb-4 text-center">Nos prochains stages</p>
+            <div class="p-2 bg-white rounded-3">
+                {% for event in open_events %}
+                    {% include "events/partial/event_card_new.html" with event=event finished=False %}
+                {% endfor %}
+            </div>
         </div>
-        {% if is_paginated %}
-            <nav aria-label>
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédent</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link">Précédent</a>
-                        </li>
-                    {% endif %}
-                    {% for page in paginator.page_range %}
-                        {% if page == page_obj.number %}
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link">Suivant</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
     {% endif %}
 
 </div>
