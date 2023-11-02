@@ -64,11 +64,17 @@ class Center(models.Model):
 
 
 class EventManager(models.Manager):
-    def get_open_events(self):
-        return self.filter(
+    def get_open_events(self, count=None):
+        """
+        Return a QuerySet of events which signup is ongoing.
+        """
+        qs = self.filter(
             signup_start_date__lte=timezone.now(),
             signup_end_date__gt=timezone.now(),
         )
+        if count:
+            qs = qs[:count]
+        return qs
 
     def get_visible_events(self):
         return self.filter(signup_start_date__lte=timezone.now())

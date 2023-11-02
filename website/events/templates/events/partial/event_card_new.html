@@ -2,9 +2,10 @@
     Template parameters:
     - event: the event object.
     - finished: boolean true if the event is finished.
+    - class: class parameters to add to the top div
 {% endcomment %}
 {% load custom_filters %}
-<div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white">
+<div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
 
     <div class="col-md-8">
         {# Title + status badge #}

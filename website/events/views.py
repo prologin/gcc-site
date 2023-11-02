@@ -165,19 +165,8 @@ class HomePageView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        p = Paginator(events.Event.objects.get_open_events(), self.paginate_by)
 
-        page = ctx["page_obj"].number
-
-        try:
-            events_list = p.page(page)
-        except PageNotAnInteger:
-            events_list = p.page(1)
-        except EmptyPage:
-            events_list = p.page(p.num_pages)
-
-        ctx["paginator"] = p
-        ctx["open_events"] = events_list
+        ctx["open_events"] = events.Event.objects.get_open_events(3)
         ctx["form"] = EventSignupForm
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
@@ -185,14 +174,6 @@ class HomePageView(ListView):
             status="Financing"
         )
         ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
-
-        # Add a list of already applied events if authenticated
-        if self.request.user.is_authenticated:
-            ctx["already_applied"] = events.Event.objects.filter(
-                id__in=signup.Application.objects.filter(
-                    user=self.request.user.id
-                ).values_list("event", flat=True)
-            )
 
         ctx.update(signup.APPLICATION_STATUS)
         return ctx
