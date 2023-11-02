@@ -26,10 +26,6 @@
     --bs-btn-disabled-border-color: #3d3d3d;
 }
 
-.btn-primary:hover {
-    text-decoration: underline;
-}
-
 .btn-secondary {
     --bs-btn-border-radius: var(--global-border-radius);
 
@@ -82,10 +78,6 @@
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #6c757d;
     --bs-btn-disabled-border-color: #6c757d;
-}
-
-.btn-light:hover {
-    text-decoration: underline;
 }
 
 .btn-group>.btn-light{

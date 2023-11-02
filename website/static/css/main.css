@@ -42,11 +42,12 @@ a {
 }
 
 /* Remove the underline between icon and text in links */
-a:hover > :not(i) {
-    text-decoration: underline;
-}
 a:hover {
     text-decoration: none;
+}
+
+.hover-underline:hover {
+    text-decoration: underline !important;
 }
 
 /* Crispy form class put on asteriks of required fields */

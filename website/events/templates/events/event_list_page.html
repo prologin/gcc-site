@@ -15,12 +15,12 @@
             <div class="mb-3">
                 {% if passed %}
                     <h1>Nos stages passés</h1>
-                    <a href="{% url 'events:events' %}">
+                    <a class="hover-underline" href="{% url 'events:events' %}">
                         <h6>Voir nos stages à venir</h6>
                     </a>
                 {% else %}
                     <h1>Nos stages à venir</h1>
-                    <a href="{% url 'events:passed_events' %}">
+                    <a class="hover-underline" href="{% url 'events:passed_events' %}">
                         <h6>Voir nos stages passés</h6>
                     </a>
                 {% endif %}
