@@ -64,7 +64,7 @@ class Center(models.Model):
 
 
 class EventManager(models.Manager):
-    def get_open_events(self, count=None):
+    def get_open_events(self, count=None, sort=True):
         """
         Return a QuerySet of events which signup is ongoing.
         """
@@ -72,6 +72,8 @@ class EventManager(models.Manager):
             signup_start_date__lte=timezone.now(),
             signup_end_date__gt=timezone.now(),
         )
+        if sort:
+            qs = qs.order_by("start_date")
         if count:
             qs = qs[:count]
         return qs
