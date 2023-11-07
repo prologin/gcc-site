@@ -22,7 +22,7 @@ repos:
         args: ["--settings-path=./website/pyproject.toml"]
 
   - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.22
+    rev: v0.1.23
     hooks:
       - id: shellcheck
 
