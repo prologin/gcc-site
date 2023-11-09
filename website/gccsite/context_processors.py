@@ -52,27 +52,7 @@ def my_context_processor(req):
         },
     ]
 
-    button_sns = [
-        {
-            "logo": "google",
-            "name": "Google",
-        },
-        {
-            "logo": "twitter",
-            "name": "Twitter",
-        },
-        {
-            "logo": "instagram",
-            "name": "Instagram",
-        },
-        {
-            "logo": "facebook",
-            "name": "Facebook",
-        },
-    ]
-
     context["SOCIAL_NETWORKS"] = social_networks  # type: ignore
-    context["BUTTON_SNS"] = button_sns  # type: ignore
     context["FLICKR_URL"] = FLICKR_URL
     context["SEO_DESC"] = SEO_DESC
     context["SEO_KEYWORDS"] = SEO_KEYWORDS

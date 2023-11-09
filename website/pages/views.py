@@ -15,9 +15,6 @@ def error_404_view(request, exception):
     return response
 
 
-from gccsite.context_processors import my_context_processor
-
-
 class AboutView(TemplateView):
     template_name = "pages/about.html"
 
