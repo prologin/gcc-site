@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "post_office",
     "crispy_forms",
     "crispy_bootstrap5",
+    "template_profiler_panel",
     "events",
     "users",
     "pages",
@@ -223,3 +224,20 @@ AWS_S3_URL_PROTOCOL = (
 )
 AWS_S3_CUSTOM_DOMAIN = env.get_string("DJANGO_S3_CUSTOM_DOMAIN", None)
 AWS_STATIC_LOCATION = "static"
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.history.HistoryPanel',
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar.panels.profiling.ProfilingPanel',
+    "template_profiler_panel.panels.template.TemplateProfilerPanel",
+]
