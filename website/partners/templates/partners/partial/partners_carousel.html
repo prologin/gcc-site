@@ -14,45 +14,8 @@
             <p class="h2 pt-4 pb-4 text-center">Ils nous accueillent</p>
         {% endif %}
 
-        {# If large screen #}
-        <div class="container text-center d-none d-md-block">
-            <div class="row">
-                {% if status == "avant" %}
-                    {% for partner in partners_avant %}
-                        <div class="col-md-6 col-lg-4 col-xl-2">
-                            <div class="card-img">
-                                <a href="{{partner.website_url}}">
-                                    <img src="{{ partner.logo_url }}" class="img-fluid d-block mx-auto" />
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% elif status == "financement" %}
-                    {% for partner in partners_financement %}
-                        <div class="col-md-6 col-lg-4 col-xl-2">
-                            <div class="card-img">
-                                <a href="{{partner.website_url}}">
-                                    <img src="{{ partner.logo_url }}" class="img-fluid partner" />
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    {% for partner in partners_accueil %}
-                        <div class="col-md-6 col-lg-4 col-xl-2">
-                            <div class="card-img">
-                                <a href="{{partner.website_url}}">
-                                    <img src="{{ partner.logo_url }}" class="img-fluid partner" />
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-
         {# If small screen #}
-        <div id="carousel-sponsors-{{status}}" class="partnerBand carousel carousel-dark slide pb-3 d-block d-md-none" data-bs-ride="carousel">
+        <div id="carousel-sponsors-{{status}}" class="partnerBand carousel carousel-dark slide pb-3 d-block" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 {% if status == "avant" %}
                     {% for partner in partners_avant %}
