@@ -2,6 +2,7 @@ from django.template.response import SimpleTemplateResponse
 from django.views.generic import TemplateView
 
 from gccsite.context_processors import (
+    faq_entries_list,
     privacy_inscription_list,
     privacy_newsletter_list,
     privacy_stage_list,
@@ -12,9 +13,6 @@ def error_404_view(request, exception):
     response = SimpleTemplateResponse("pages/404.html")
     response.status_code = 404
     return response
-
-
-from gccsite.context_processors import my_context_processor
 
 
 class AboutView(TemplateView):
@@ -72,4 +70,4 @@ class FAQView(TemplateView):
     template_name = "pages/FAQ.html"
 
     def get_context_data(self, *args, **kwargs):
-        return {}
+        return faq_entries_list()
