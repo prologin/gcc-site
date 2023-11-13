@@ -46,6 +46,8 @@ RUN mkdir -p /app && \
     chown app:${DJANGO_GID} -R /app && \
     mkdir -p ${WORKDIR}/staticfiles && \
     chown app:${DJANGO_GID} -R ${WORKDIR}/staticfiles
+    mkdir -p ${WORKDIR}/media && \
+    chown app:${DJANGO_GID} -R ${WORKDIR}/media
 
 USER app:${DJANGO_GID}
 
