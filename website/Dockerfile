@@ -45,7 +45,7 @@ RUN mkdir -p /app && \
     useradd -d /app -r -u ${DJANGO_UID} app && \
     chown app:${DJANGO_GID} -R /app && \
     mkdir -p ${WORKDIR}/staticfiles && \
-    chown app:${DJANGO_GID} -R ${WORKDIR}/staticfiles
+    chown app:${DJANGO_GID} -R ${WORKDIR}/staticfiles && \
     mkdir -p ${WORKDIR}/media && \
     chown app:${DJANGO_GID} -R ${WORKDIR}/media
 
