@@ -5,6 +5,8 @@ from gccsite import env
 
 from .debug import DEBUG
 
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -201,6 +203,10 @@ STATICFILES_DIRS = [
 STATIC_ROOT = (
     BASE_DIR / "staticfiles"
 )  # Basic configuration when using manage.py collectstatic
+
+MEDIA_ROOT = 'media/'
+MEDIA_URL = os.path.join(BASE_DIR,'/media/')
+
 
 OIDC_OP_CONFIG_URL = (
     env.get_string("OIDC_OP_CONFIG_URL") + "/.well-known/openid-configuration"

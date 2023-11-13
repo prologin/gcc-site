@@ -32,7 +32,7 @@ class Partner(models.Model):
     # Ne pas mettre une image trop grande
     logo = models.FileField(
         verbose_name="Logo",
-        upload_to=upload_to,
+        upload_to="partners/sponsors/",
         validators=[FileExtensionValidator(["jpg", "jpeg", "png", "gif"])],
     )
 
