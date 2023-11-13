@@ -2,47 +2,6 @@
 version: "3.8"
 
 services:
-  s3_dev:
-    image: minio/minio
-    hostname: s3_dev
-    restart: unless-stopped
-    environment:
-      MINIO_ACCESS_KEY_FILE: s3-access
-      MINIO_SECRET_KEY_FILE: s3-secret
-      MINIO_DOMAIN: localhost
-    command: server /data --console-address :9001
-    volumes:
-      - s3_dev_data:/data
-    secrets:
-      - s3-access
-      - s3-secret
-    ports:
-      - 9000:9000
-      - 9001:9001
-
-  s3_createbuckets:
-    image: minio/mc
-    depends_on:
-      - s3_dev
-    links:
-      - s3_dev:s3-dev
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc config host add dev http://s3-dev:9000 $(cat /run/secrets/s3-access) $(cat /run/secrets/s3-secret);
-      [ -f /buckets/created ] && exit 0;
-      touch /buckets/created;
-      /usr/bin/mc mb dev/gcc-static;
-      /usr/bin/mc anonymous set-json /policies/public-read.json dev/gcc-static;
-      /usr/bin/mc mb dev/gcc-media;
-      exit 0;
-      "
-    secrets:
-      - s3-access
-      - s3-secret
-    volumes:
-      - s3_do_create_buckets:/buckets
-      - ./config/s3-public-readonly.json:/policies/public-read.json
-
   db_dev:
     image: postgres:15
     hostname: db_dev
@@ -84,8 +43,6 @@ services:
         DJANGO_GID: 1000
         BUILDKIT_INLINE_CACHE: 1
     restart: unless-stopped
-    links:
-      - s3_dev:s3-dev
     environment:
       DEV: 1
       DJANGO_DEBUG: 1
@@ -101,13 +58,6 @@ services:
       OIDC_OP_CONFIG_URL: https://auth.prologin.org/application/o/prologin-public-test-client
       OIDC_RP_CLIENT_ID_FILE: /run/secrets/oidc-client-id
       OIDC_RP_CLIENT_SECRET_FILE: /run/secrets/oidc-client-secret
-      DJANGO_S3_URL: http://s3-dev:9000
-      DJANGO_S3_STATIC_BUCKET: gcc-static
-      DJANGO_S3_MEDIA_BUCKET: gcc-media
-      DJANGO_S3_ACCESS_KEY_FILE: /run/secrets/s3-access
-      DJANGO_S3_SECRET_KEY_FILE: /run/secrets/s3-secret
-      DJANGO_S3_SECURE_URLS: false
-      DJANGO_S3_CUSTOM_DOMAIN: localhost:9000
       DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT: https://documents.prologin.org/rest/generator/templates/6/render/
       OIDC_DOCUMENTS_GENERATOR_RP_CLIENT_ID_FILE: /run/secrets/documents-generator-client-id
       OIDC_DOCUMENTS_GENERATOR_M2M_USERNAME_FILE: /run/secrets/documents-generator-username
@@ -133,8 +83,6 @@ services:
       - documents-generator-client-id
       - documents-generator-username
       - documents-generator-password
-      - s3-access
-      - s3-secret
 
   celery_dev: &celery_dev
     <<: *backend_dev
@@ -169,15 +117,9 @@ services:
 
 volumes:
   db_dev_data: {}
-  s3_dev_data: {}
-  s3_do_create_buckets: {}
   redis_dev_data: {}
 
 secrets:
-  s3-access:
-   file: ./secrets/s3-access
-  s3-secret:
-    file: ./secrets/s3-secret
   django-secret-key:
     file: ./secrets/django-secret-key
   postgres-passwd:

@@ -3,7 +3,6 @@
 import django.core.validators
 from django.db import migrations, models
 
-import gccsite.storages
 import partners.models
 
 
@@ -41,7 +40,6 @@ class Migration(migrations.Migration):
                 (
                     "logo",
                     models.FileField(
-                        storage=gccsite.storages.GCCMediaStorage,
                         upload_to=partners.models.Partner.upload_to,
                         validators=[
                             django.core.validators.FileExtensionValidator(
