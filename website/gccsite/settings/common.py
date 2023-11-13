@@ -204,8 +204,7 @@ STATIC_ROOT = (
     BASE_DIR / "staticfiles"
 )  # Basic configuration when using manage.py collectstatic
 
-MEDIA_ROOT = 'media/'
-MEDIA_URL = os.path.join(BASE_DIR,'/media/')
+MEDIA_ROOT = path.join(BASE_DIR, 'media/')
 
 
 OIDC_OP_CONFIG_URL = (
