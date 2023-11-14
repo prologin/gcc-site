@@ -13,6 +13,6 @@ INSTALLED_APPS.append("debug_toolbar")
 MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK" : "gccsite.settings.debug.show_toolbar",
+    "SHOW_TOOLBAR_CALLBACK": "gccsite.settings.debug.show_toolbar",
     "TOOLBAR_LANGUAGE": "en-us",
 }

@@ -118,6 +118,7 @@ lint:shellcheck:
     entrypoint: [""]
   script:
     - shellcheck --format tty $(find -name '*.sh' -type f)
+  allow_failure: false
 
 lint:djlint:
   stage: qa
@@ -132,7 +133,7 @@ lint:djlint:
     - poetry install || true
   script:
     - poetry run djlint --lint --profile=django .
-  allow_failure: true
+  allow_failure: false
 
 format:black:
   stage: qa
@@ -148,7 +149,7 @@ format:black:
   script:
     - poetry run black --check .
     - poetry run isort --check-only .
-  allow_failure: true
+  allow_failure: false
 
 format:djlint:
   stage: qa
@@ -163,7 +164,7 @@ format:djlint:
     - poetry install || true
   script:
     - poetry run djlint --check .
-  allow_failure: true
+  allow_failure: false
 
 test:
   stage: qa

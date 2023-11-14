@@ -20,6 +20,9 @@ repos:
       - id: isort
         name: isort
         args: ["--settings-path=./website/pyproject.toml"]
+        # Exclude migration files at pre-commit step
+        # because isort exclude is broken
+        exclude: ^.*/migrations/.*\.py$
 
   - repo: https://github.com/gruntwork-io/pre-commit
     rev: v0.1.23
