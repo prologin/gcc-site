@@ -241,9 +241,8 @@ class EventListView(EventListViewBase):
     def get_queryset(self):
         qs = super().get_queryset()
         qs_passed = qs.filter(end_date__date__lte=datetime.date.today())
-        # All event which are not passed
-        # Show the soonest first
-        return qs.difference(qs_passed).order_by("start_date")
+
+        return qs.difference(qs_passed).order_by("end_date")
 
 
 class PassedEventListView(EventListViewBase):
