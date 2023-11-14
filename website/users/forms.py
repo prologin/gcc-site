@@ -12,7 +12,11 @@ from crispy_forms.layout import (
 )
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, BaseUserCreationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    BaseUserCreationForm,
+    PasswordResetForm,
+)
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 from django.urls import reverse_lazy
@@ -261,4 +265,13 @@ class AuthRegisterForm(BaseUserCreationForm):
                 ),
                 css_class="tab",
             ),
+        )
+
+
+class GCCPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(
+            Submit("submit", "Réinitialiser mon mot de passe")
         )
