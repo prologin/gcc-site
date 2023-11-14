@@ -48,11 +48,6 @@ class Partner(models.Model):
         default="Promoted",
     )
 
-    @property
-    def logo_url(self):
-        storage = GCCMediaStorage()
-        return storage.url("sponsors/" + self.name)
-
     def __str__(self):
         return self.name
 

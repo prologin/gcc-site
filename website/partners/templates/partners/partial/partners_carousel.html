@@ -22,7 +22,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-2">
                             <div class="card-img">
                                 <a href="{{partner.website_url}}">
-                                    <img src="{{ partner.logo_url }}" class="img-fluid d-block mx-auto" />
+                                    <img src="{{ partner.logo.url }}" loading="lazy" class="img-fluid d-block mx-auto" />
                                 </a>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-2">
                             <div class="card-img">
                                 <a href="{{partner.website_url}}">
-                                    <img src="{{ partner.logo_url }}" class="img-fluid partner" />
+                                    <img src="{{ partner.logo.url }}" loading="lazy" class="img-fluid partner" />
                                 </a>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-2">
                             <div class="card-img">
                                 <a href="{{partner.website_url}}">
-                                    <img src="{{ partner.logo_url }}" class="img-fluid partner" />
+                                    <img src="{{ partner.logo.url }}" loading="lazy" class="img-fluid partner" />
                                 </a>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                 {% endif %}
             </div>
         </div>
-
+        
         {# If small screen #}
         <div id="carousel-sponsors-{{status}}" class="partnerBand carousel carousel-dark slide pb-3 d-block d-md-none" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
@@ -59,7 +59,7 @@
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             <div class="card-img partner">
                                 <a href="{{partner.website_url}}">
-                                    <img src="{{partner.logo_url}}" class="img-fluid partner d-block mx-auto"/>
+                                    <img src="{{partner.logo.url}}" loading="lazy" class="img-fluid partner d-block mx-auto"/>
                                 </a>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             <div class="card-img partner">
                                 <a href="{{partner.website_url}}">
-                                    <img src="{{partner.logo_url}}" class="img-fluid partner d-block mx-auto"/>
+                                    <img src="{{partner.logo.url}}" loading="lazy" class="img-fluid partner d-block mx-auto"/>
                                 </a>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                         <div class="carousel-item {% if forloop.first %} active {% endif %}">
                             <div class="card-img partner">
                                 <a href="{{partner.website_url}}">
-                                    <img src="{{partner.logo_url}}" class="img-fluid partner d-block mx-auto"/>
+                                    <img src="{{partner.logo.url}}" loading="lazy" class="img-fluid partner d-block mx-auto"/>
                                 </a>
                             </div>
                         </div>

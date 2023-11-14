@@ -22,12 +22,12 @@ django-storages = "^1.12"
 django-redis = { version = "^5" }
 django-rest-knox = { version = "^4.2" }
 django-celery-beat = { version = "^2.4"}
-django-debug-toolbar = "*"
 django-mail-panel = "^4.0"
 django-post-office = "^3.6"
 prospector = {extras = ["with_everything"], version = "*"}
 mozilla-django-oidc = "^3.0.0"
 django-prometheus = "^2.3.1"
+django-debug-toolbar = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "*"
