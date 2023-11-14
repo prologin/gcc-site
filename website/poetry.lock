@@ -967,13 +967,13 @@ sftp = ["paramiko (>=1.15)"]
 
 [[package]]
 name = "django-structlog"
-version = "5.3.0"
+version = "6.0.0"
 description = "Structured Logging for Django"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "django-structlog-5.3.0.tar.gz", hash = "sha256:078577c91e58cbaf66ecb47ec2b710ce4864b234f474691d29578e75c055ef8b"},
-    {file = "django_structlog-5.3.0-py3-none-any.whl", hash = "sha256:ab3e27671f6b6cea886eac86ab5b280c937adacff1a63bce9f716c7b3357571b"},
+    {file = "django-structlog-6.0.0.tar.gz", hash = "sha256:07d9b35cdc3aca6de1daacb0ad7a7c58e0506a858687844ff770eb4bde5d0236"},
+    {file = "django_structlog-6.0.0-py3-none-any.whl", hash = "sha256:233a5cc81981c547a702e141d1ece89a02a47e8127a8d0c80c8d9add4324dea2"},
 ]
 
 [package.dependencies]
@@ -985,6 +985,7 @@ structlog = ">=21.4.0"
 
 [package.extras]
 celery = ["celery (>=5.1)"]
+commands = ["django-extensions (>=1.4.9)"]
 
 [[package]]
 name = "django-timezone-field"
@@ -2829,4 +2830,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "7b2407439dc60a9256a06d02ab37a516a05415bedbe893f409cb6d2eded9773a"
+content-hash = "4763f2c0d10c343954084f018333f5971edd1931bdaa453df391424fdff15616"
