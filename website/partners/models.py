@@ -1,3 +1,5 @@
+import hashlib
+
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -31,7 +33,10 @@ class Partner(models.Model):
     )
 
     def upload_to(instance, filename):
-        return "sponsors/{}".format(instance.name)
+        hashval = hashlib.sha1(
+            (str(instance.id) + instance.name + filename).encode("utf-8")
+        ).hexdigest()
+        return "sponsors/{}".format(hashval)
 
     # Ne pas mettre une image trop grande
     logo = models.FileField(
