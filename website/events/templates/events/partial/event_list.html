@@ -17,56 +17,23 @@
             </div>
         </div>
     {% else %}
-        <div class="w-75 mx-auto pt-5">
+        <div class="w-75 mx-auto">
+            <p class="h2 pt-4 pb-2 text-center">Nos prochains stages</p>
             {% for event in open_events %}
-                {% cycle 1 2 3 as color silent %}
-                {% if event in already_applied %}
-                    {% include "events/partial/event_card.html" with event=event id=event.pk color=color already_applied=True %}
-                {% else %}
-                    {% include "events/partial/event_card.html" with event=event id=event.pk color=color already_applied=False %}
-                {% endif %}
+                {% include "events/partial/event_card.html" with event=event finished=False class="my-4" %}
             {% endfor %}
+
+            <div class="col d-flex justify-content-center align-items-center align-self-center m-2">
+                <a type="button"
+                   href="{% url 'events:events' %}"
+                   class="btn btn-primary my-3">Voir tous nos stages</a>
+            </div>
         </div>
-        {% if is_paginated %}
-            <nav aria-label>
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédent</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link">Précédent</a>
-                        </li>
-                    {% endif %}
-                    {% for page in paginator.page_range %}
-                        {% if page == page_obj.number %}
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link">Suivant</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
     {% endif %}
 
 </div>
 
 {% comment %}
-  Include here the application form modal, to avoid including it several times.
+Include here the application form modal, to avoid including it several times.
 {% endcomment %}
 {% include "events/partial/event_application_form_modal.html" with color=1 %}

@@ -1,57 +1,67 @@
+{% comment %}
+    Template parameters:
+    - event: the event object.
+    - finished: boolean true if the event is finished.
+    - class: class parameters to add to the top div
+{% endcomment %}
 {% load custom_filters %}
-{% load static %}
+<div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
 
-<div class="row f-flex justify-content-between event-card mb-4 p-3">
-    <div class="col row">
-        <div class="my-auto d-none d-md-block col-md-auto gcc-color-{{ color }}">
-            <i class="fas fa-circle" style="font-size: 1.2em;"></i>
+    <div class="col-md-8">
+        {# Title + status badge #}
+        <div class="d-flex align-items-center">
+            <span class="fs-4 fw-bold pe-2">{{ event.name }}</span>
+            {% include "events/partial/event_status_badge.html" with event=event %}
         </div>
 
-        {# Event infos verticaly centered #}
-        <div class="col">
-            <h1>{{ event.name }}</h1>
-            <h2>
-                Du {{ event.start_date|date:"l d F Y" }} au {{ event.end_date|date:"l d F Y" }}
-            </h2>
-            <h3>{{ event.center.address.city }}</h3>
+        {# Date #}
+        <div class="row">
+            <div class="col-auto">
+                <i class="far fa-calendar-check"></i>
+            </div>
+            <div class="col">
+                Du {{ event.start_date|date }}
+                au {{ event.end_date|date }}
+            </div>
+        </div>
+
+        {# Location #}
+        <div class="row">
+            <div class="col-auto">
+                <i class="fas fa-location-dot"></i>
+            </div>
+            <div class="col">
+                {{ event.center.address.zip_code }},
+                {{ event.center.address.city }}
+            </div>
         </div>
     </div>
 
-    <div class="col-xl-auto ml-auto mt-4 mb-1 my-lg-auto" role="group">
-        {% comment %} Issue#80 : If user is authenticated and has at least 1 application for the stage,
-        use "mes candidatures" button instead. {% endcomment %}
-
-        {% if already_applied %}
-            <a type="button"
-               href="{% url 'events:my_applications' %}"
-               class="btn btn-primary py-2 px-4 w-100 mb-2">
-                Mes candidatures
-            </a>
-        {% else %}
-            <button class="btn btn-primary py-2 px-4 w-100 mb-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#application-form-modal"
-                    data-bs-event-id="{{ event.id }}">
-                S'inscrire à ce stage
-            </button>
-        {% endif %}
-        <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-light btn-block"
+    {# Finished events #}
+    {% if finished %}
+        <div class="col-md-3 text-end">
+            <div class="fst-italic">
+                Ce stage est terminé. Consulte les photos
+                <a href="{{ FLICKR_URL }}" target="blank">ici</a> !
+            </div>
+        </div>
+        {# Ongoing events #}
+    {% else %}
+        <div class="col-md-3 offset-md-1 mt-3 mt-md-0" role="group">
+            <button
+                class="btn mx-auto btn-primary btn-block"
                 data-bs-toggle="modal"
-                data-bs-target="#informationEventModal-{{ id }}">
-            Plus d'informations
-        </button>
-    </div>
-
-    {# Modals #}
-
-    <div class="modal"
-         id="informationEventModal-{{ id }}"
-         tabindex="-1"
-         aria-labelledby="informationEventModalLabel"
-         aria-hidden="true">
-        {% include "events/partial/event_info_modal.html" with event=event id=id %}
-    </div>
-
-    {% include "events/partial/event_schedule_modal.html" with event_format=event|event_format %}
+                data-bs-target="#application-form-modal"
+                data-bs-event-id="{{ event.id }}"
+                {# Disable the registration button if not signup period #}
+                {% if not event|signup_opened %}disabled{% endif %}
+                >S'inscrire à ce stage</button>
+            <button class="btn mx-auto btn-light btn-block mt-1"
+                    data-bs-toggle="modal"
+                    data-bs-target="#scheduleModal-{{ event|event_format }}">
+                Calendrier du stage
+            </button>
+        </div>
+    {% endif %}
 
 </div>

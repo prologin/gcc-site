@@ -78,7 +78,6 @@ class HomePageView(ListView):
     model = events.Event
     template_name = "events/home.html"
     form_class = EventSignupForm
-    paginate_by = 5
 
     def post(self, request, *args, **kwargs):
         if "submit-application" in request.POST:
@@ -165,19 +164,8 @@ class HomePageView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        p = Paginator(events.Event.objects.get_open_events(), self.paginate_by)
 
-        page = ctx["page_obj"].number
-
-        try:
-            events_list = p.page(page)
-        except PageNotAnInteger:
-            events_list = p.page(1)
-        except EmptyPage:
-            events_list = p.page(p.num_pages)
-
-        ctx["paginator"] = p
-        ctx["open_events"] = events_list
+        ctx["open_events"] = events.Event.objects.get_open_events(5)
         ctx["form"] = EventSignupForm
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
@@ -185,14 +173,6 @@ class HomePageView(ListView):
             status="Financing"
         )
         ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
-
-        # Add a list of already applied events if authenticated
-        if self.request.user.is_authenticated:
-            ctx["already_applied"] = events.Event.objects.filter(
-                id__in=signup.Application.objects.filter(
-                    user=self.request.user.id
-                ).values_list("event", flat=True)
-            )
 
         ctx.update(signup.APPLICATION_STATUS)
         return ctx
@@ -248,7 +228,7 @@ class EventListViewBase(ListView):
     model = events.Event
     template_name = "events/event_list_page.html"
     # Show 5 elements per page
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -261,9 +241,8 @@ class EventListView(EventListViewBase):
     def get_queryset(self):
         qs = super().get_queryset()
         qs_passed = qs.filter(end_date__date__lte=datetime.date.today())
-        # All event which are not passed
-        # Show the soonest first
-        return qs.difference(qs_passed).order_by("start_date")
+
+        return qs.difference(qs_passed).order_by("end_date")
 
 
 class PassedEventListView(EventListViewBase):
