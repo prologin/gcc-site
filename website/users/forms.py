@@ -16,6 +16,7 @@ from django.contrib.auth.forms import (
     AuthenticationForm,
     BaseUserCreationForm,
     PasswordResetForm,
+    SetPasswordForm,
 )
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
@@ -269,6 +270,15 @@ class AuthRegisterForm(BaseUserCreationForm):
 
 
 class GCCPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(
+            Submit("submit", "Réinitialiser mon mot de passe")
+        )
+
+
+class GCCPasswordResetConfirmForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()

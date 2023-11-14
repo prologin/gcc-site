@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import (
 )
 from django.contrib.auth.views import (
     PasswordChangeView,
+    PasswordResetConfirmView,
     PasswordResetDoneView,
     PasswordResetView,
     RedirectURLMixin,
@@ -41,6 +42,7 @@ from .forms import (
     AuthRegisterForm,
     DeleteUserForm,
     EmailForm,
+    GCCPasswordResetConfirmForm,
     GCCPasswordResetForm,
     NotificationsUpdateForm,
     PasswordUpdateForm,
@@ -320,11 +322,17 @@ class ActivateAccountView(View):
 
 
 class GCCPasswordResetView(PasswordResetView):
-    template_name = "users/password_reset.html"
+    template_name = "users/password_reset/password_reset.html"
     form_class = GCCPasswordResetForm
-    email_template_name = "users/password_reset_email.html"
+    email_template_name = "users/password_reset/password_reset_email.html"
     success_url = reverse_lazy("users:password_reset_done")
 
 
 class GCCPasswordResetDoneView(PasswordResetDoneView):
-    template_name = "users/password_reset_done.html"
+    template_name = "users/password_reset/password_reset_done.html"
+
+
+class GCCPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "users/password_reset/password_reset_confirm.html"
+    form_class = GCCPasswordResetConfirmForm
+    success_url = reverse_lazy("users:login")

@@ -56,7 +56,7 @@ urlpatterns = [
     ),
     path(
         "reset-password/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(),
+        views.GCCPasswordResetConfirmView.as_view(),
         name="password_reset_confirm",
     ),
 ]
