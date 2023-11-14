@@ -124,7 +124,7 @@ lint:djlint:
   interruptible: true
   needs: []
   image:
-    name: python:3.11-slim
+    name: python:3.12-slim
     entrypoint: [""]
   before_script:
     - cd website
@@ -139,7 +139,7 @@ format:black:
   interruptible: true
   needs: []
   image:
-    name: python:3.11-slim
+    name: python:3.12-slim
     entrypoint: [""]
   before_script:
     - cd website
@@ -155,7 +155,7 @@ format:djlint:
   interruptible: true
   needs: []
   image:
-    name: python:3.11-slim
+    name: python:3.12-slim
     entrypoint: [""]
   before_script:
     - cd website
