@@ -78,7 +78,6 @@ class HomePageView(ListView):
     model = events.Event
     template_name = "events/home.html"
     form_class = EventSignupForm
-    paginate_by = 5
 
     def post(self, request, *args, **kwargs):
         if "submit-application" in request.POST:
@@ -166,7 +165,7 @@ class HomePageView(ListView):
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
 
-        ctx["open_events"] = events.Event.objects.get_open_events(3)
+        ctx["open_events"] = events.Event.objects.get_open_events(5)
         ctx["form"] = EventSignupForm
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
@@ -229,7 +228,7 @@ class EventListViewBase(ListView):
     model = events.Event
     template_name = "events/event_list_page.html"
     # Show 5 elements per page
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

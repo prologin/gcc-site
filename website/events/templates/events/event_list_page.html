@@ -27,7 +27,7 @@
 
             <div class="p-2 bg-white rounded-3">
                 {% for event in object_list %}
-                    {% include "events/partial/event_card_new.html" with event=event finished=passed %}
+                    {% include "events/partial/event_card.html" with event=event finished=passed %}
                 {% endfor %}
             </div>
 

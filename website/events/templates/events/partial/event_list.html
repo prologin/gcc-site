@@ -20,19 +20,20 @@
         <div class="w-75 mx-auto">
             <p class="h2 pt-4 pb-2 text-center">Nos prochains stages</p>
             {% for event in open_events %}
-                {% include "events/partial/event_card_new.html" with event=event finished=False class="my-4" %}
+                {% include "events/partial/event_card.html" with event=event finished=False class="my-4" %}
             {% endfor %}
+
             <div class="col d-flex justify-content-center align-items-center align-self-center m-2">
                 <a type="button"
                    href="{% url 'events:events' %}"
                    class="btn btn-primary my-3">Voir tous nos stages</a>
             </div>
         </div>
-    {% endif %}
+        {% endif %}
 
 </div>
 
 {% comment %}
-  Include here the application form modal, to avoid including it several times.
+Include here the application form modal, to avoid including it several times.
 {% endcomment %}
 {% include "events/partial/event_application_form_modal.html" with color=1 %}
