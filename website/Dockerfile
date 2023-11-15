@@ -31,7 +31,7 @@ RUN --mount=type=bind,target=./pyproject.toml,src=./pyproject.toml \
     python -m venv /opt/venv/ && \
     pip3 install --upgrade pip && \
     pip3 install poetry && \
-    poetry install --only=main
+    [ "$DEV" = 1 ] && poetry install --only=main || poetry install
 
 FROM base
 
