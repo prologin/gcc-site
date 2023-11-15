@@ -3,6 +3,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from django_fsm import FSMIntegerField, transition
 
 APPLICATION_STATUS = {
     "REJECTED": -3,
@@ -37,6 +38,17 @@ class ApplicationManager(models.Manager):
 
 
 class Application(models.Model):
+    class Meta:
+        verbose_name = _("candidatures")
+        verbose_name_plural = _("candidatures")
+        permissions = [
+            ("manage_applications", "Can manage the status of applications"),
+            (
+                "override_applications",
+                "Can override the application status flow",
+            ),
+        ]
+
     event = models.ForeignKey(
         to="events.Event",
         verbose_name=_("Évènement"),
@@ -119,10 +131,11 @@ class Application(models.Model):
 
     notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
 
-    status = models.SmallIntegerField(
+    status = FSMIntegerField(
+        default=SelectionStatus.PENDING,
         choices=SelectionStatus.choices,
         verbose_name=_("Statut de la candidature"),
-        default=0,
+        protected=True,
     )
 
     created_at = models.DateTimeField(
@@ -132,12 +145,92 @@ class Application(models.Model):
 
     objects = ApplicationManager()
 
-    class Meta:
-        verbose_name = _("candidatures")
-        verbose_name_plural = _("candidatures")
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
+
+    @transition(
+        field=status,
+        source=SelectionStatus.PENDING,
+        target=SelectionStatus.ACCEPTED,
+        permission="events.signup.manage_applications",
+    )
+    def accept(self):
+        """
+        A staff member accept an application
+        """
+        # TODO: Send mail to the girl
+        pass
+
+    @transition(
+        field=status,
+        source=SelectionStatus.PENDING,
+        target=SelectionStatus.REJECTED,
+        permission="events.signup.manage_applications",
+    )
+    def reject(self):
+        """
+        A staff member rejects an application
+        """
+        # TODO: Send mail to the girl
+        pass
+
+    @transition(
+        field=status,
+        source=SelectionStatus.ACCEPTED,
+        target=SelectionStatus.CONFIRMED,
+    )
+    def confirm(self):
+        """
+        A user confirms its presence to an event
+        """
+        # TODO: Send mail to prologin
+        pass
+
+    @transition(
+        field=status,
+        source=[
+            SelectionStatus.PENDING,
+            SelectionStatus.ACCEPTED,
+            SelectionStatus.CONFIRMED,
+        ],
+        target=SelectionStatus.WITHDRAWN,
+    )
+    def withdraw(self):
+        """
+        A user cancels its application
+        """
+        # TODO: Send a mail to prologin => with WARNING if source status was
+        # confirmed
+        pass
+
+    @transition(
+        field=status,
+        source=[
+            SelectionStatus.PENDING,
+            SelectionStatus.ACCEPTED,
+            SelectionStatus.CONFIRMED,
+        ],
+        target=SelectionStatus.CANCELLED,
+        permission="events.signup.manage_applications",
+    )
+    def cancel(self, reason: str):
+        """
+        An application is cancelled, mostly because the event is cancelled
+        """
+        # TODO: Send a mail to user => with WARNING if source status was
+        # confirmed
+        pass
+
+    @transition(
+        field=status,
+        source=SelectionStatus.CONFIRMED,
+        target=SelectionStatus.ENDED,
+    )
+    def set_event_ended(self):
+        """
+        A confirmed application is ended because the event has passed.
+        """
+        pass
 
 
 class ApplicationLabel(models.Model):
