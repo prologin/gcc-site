@@ -44,7 +44,7 @@ services:
       - ./config/s3-public-readonly.json:/policies/public-read.json
 
   db_dev:
-    image: postgres:16
+    image: postgres:15
     hostname: db_dev
     restart: unless-stopped
     shm_size: 256M
