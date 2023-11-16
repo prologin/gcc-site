@@ -44,11 +44,11 @@ NB_PARTICIPATIONS = [
     ("1", "1"),
     ("2", "2"),
     ("3", "3"),
-    ("4 ou plus", "4 ou plus"),
+    ("4+", "4 ou plus"),
 ]
 
 # Must be the same as static/js/forms/form.js:PHONE_REGEX
-PHONE_REGEX = "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
 def phoneNumberTest(phone):
@@ -56,7 +56,7 @@ def phoneNumberTest(phone):
         raise ValidationError("Not a phone number")
 
 
-class EventSignupForm(forms.Form):
+class EventApplicationForm(forms.Form):
     # Info sur la participante
     first_name = forms.CharField(
         label="",

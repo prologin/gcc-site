@@ -12,29 +12,28 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView
 
+from applications.forms import EventApplicationForm
+from applications.models import APPLICATION_STATUS, Application
 from partners.models import Partner
 from users.models import User
 
-from .forms import EventSignupForm
-from .models import events, signup
+from .models import events
 
 
 class UpdateStatusView(UpdateView):
     http_method_names = ("post",)
-    model = signup.Application
-    success_url = reverse_lazy("events:my_applications")
+    model = Application
+    success_url = reverse_lazy("applications:my_applications")
 
     fields = ("status",)
 
     def get_object(self, *args, **kwargs):
-        return signup.Application.objects.get(
-            id=self.request.POST["application-id"]
-        )
+        return Application.objects.get(id=self.request.POST["application-id"])
 
 
 class ApplicationEditNotesView(UpdateView):
     http_method_names = ("post",)
-    model = signup.Application
+    model = Application
 
     fields = ("notes",)
 
@@ -48,14 +47,12 @@ class ApplicationEditNotesView(UpdateView):
         )
 
     def get_object(self, *args, **kwargs):
-        return signup.Application.objects.get(
-            id=self.request.POST["application-id"]
-        )
+        return Application.objects.get(id=self.request.POST["application-id"])
 
 
 class ApplicationEditStatusView(UpdateView):
     http_method_names = ("post",)
-    model = signup.Application
+    model = Application
 
     fields = ("status",)
 
@@ -69,19 +66,17 @@ class ApplicationEditStatusView(UpdateView):
         )
 
     def get_object(self, *args, **kwargs):
-        return signup.Application.objects.get(
-            id=self.request.POST["application-id"]
-        )
+        return Application.objects.get(id=self.request.POST["application-id"])
 
 
 class HomePageView(ListView):
     model = events.Event
     template_name = "events/home.html"
-    form_class = EventSignupForm
+    form_class = EventApplicationForm
 
     def post(self, request, *args, **kwargs):
         if "submit-application" in request.POST:
-            form = EventSignupForm(request.POST)
+            form = EventApplicationForm(request.POST)
 
             if not form.is_valid():
                 messages.warning(
@@ -133,7 +128,7 @@ class HomePageView(ListView):
                     },
                 )
 
-                application = signup.Application.objects.create(
+                application = Application.objects.create(
                     user=user,
                     first_name=form.cleaned_data["first_name"],
                     last_name=form.cleaned_data["last_name"],
@@ -166,7 +161,7 @@ class HomePageView(ListView):
         ctx = super().get_context_data(*args, **kwargs)
 
         ctx["open_events"] = events.Event.objects.get_open_events(5)
-        ctx["form"] = EventSignupForm
+        ctx["form"] = EventApplicationForm
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
         ctx["partners_financement"] = Partner.objects.filter(
@@ -174,7 +169,7 @@ class HomePageView(ListView):
         )
         ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
 
-        ctx.update(signup.APPLICATION_STATUS)
+        ctx.update(APPLICATION_STATUS)
         return ctx
 
 
@@ -192,7 +187,7 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
             )
         else:
             ctx["events"] = events.Event.objects.get_visible_events()
-        ctx.update(signup.APPLICATION_STATUS)
+        ctx.update(APPLICATION_STATUS)
         return ctx
 
 
@@ -202,25 +197,10 @@ class ApplicationsReviewView(PermissionRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx["applications"] = signup.Application.objects.get_applicants(
+        ctx["applications"] = Application.objects.get_applicants(
             kwargs["event"]
         )
-        ctx.update(signup.APPLICATION_STATUS)
-        return ctx
-
-
-class ApplicationsView(LoginRequiredMixin, TemplateView):
-    template_name = "events/my_applications.html"
-
-    def get_context_data(self, *args, **kwargs):
-        ctx = super().get_context_data(*args, **kwargs)
-        user_applications = signup.Application.objects.filter(
-            user=self.request.user.id
-        ).order_by("-created_at")
-        ctx["applications"] = user_applications
-
-        ctx["form"] = EventSignupForm
-        ctx.update(signup.APPLICATION_STATUS)
+        ctx.update(APPLICATION_STATUS)
         return ctx
 
 
@@ -232,7 +212,7 @@ class EventListViewBase(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = EventSignupForm
+        context["form"] = EventApplicationForm
         context["passed"] = False
         return context
 

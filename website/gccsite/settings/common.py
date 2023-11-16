@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "users",
     "pages",
     "partners",
+    "applications",
 ]
 
 MIDDLEWARE = [

@@ -33,11 +33,6 @@ urlpatterns = [
         name="update_application_status",
     ),
     path(
-        "my-applications",
-        views.ApplicationsView.as_view(),
-        name="my_applications",
-    ),
-    path(
         "events",
         views.EventListView.as_view(),
         name="events",

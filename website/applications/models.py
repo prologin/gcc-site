@@ -15,13 +15,13 @@ APPLICATION_STATUS = {
 }
 
 
-class SelectionStatus(models.IntegerChoices):
+class ApplicationStatus(models.IntegerChoices):
     REJECTED = APPLICATION_STATUS["REJECTED"], _("Candidature rejetée")
     WITHDRAWN = APPLICATION_STATUS["WITHDRAWN"], _(
-        "Candidature annulée de la part de la candidate"
+        "Candidature annulée par la candidate"
     )
     CANCELLED = APPLICATION_STATUS["CANCELLED"], _(
-        "Candidature annulée de la part des organisateurs"
+        "Candidature annulée par les organisateurs"
     )
     PENDING = APPLICATION_STATUS["PENDING"], _(
         "Candidature en cours de traitement"
@@ -120,7 +120,7 @@ class Application(models.Model):
     notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
 
     status = models.SmallIntegerField(
-        choices=SelectionStatus.choices,
+        choices=ApplicationStatus.choices,
         verbose_name=_("Statut de la candidature"),
         default=0,
     )

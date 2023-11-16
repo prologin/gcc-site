@@ -140,7 +140,7 @@
                             </div>
 
                             {# Status Chip #}
-                            {% include "events/partial/application_status.html" with application=application class="col-sm-6 mx-auto" %}
+                            {% include "applications/partial/application_status.html" with application=application class="col-sm-6 mx-auto" %}
                         </div>
                     </button>
                 </h2>
@@ -168,7 +168,7 @@
 
                                 <div class="row justify-content-center text-center mt-4" role="group">
                                     {# Cancel bouton #}
-                                    {% include "events/partial/event_cancel_button.html" with application=application button_class="col-md-4 col-lg-3" %}
+                                    {% include "applications/partial/application_cancel_confirm_modal.html" with application=application button_class="col-md-4 col-lg-3" %}
                                 </div>
                             </div>
                         {% elif application.status == ACCEPTED %}
@@ -195,7 +195,7 @@
 
                                     <div class="col-md-4 col-lg-3">
                                         {# Cancel bouton #}
-                                        {% include "events/partial/event_cancel_button.html" with application=application button_class="w-100" %}
+                                        {% include "applications/partial/application_cancel_confirm_modal.html" with application=application button_class="w-100" %}
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
 
                                 <div class="row justify-content-center text-center mt-4" role="group">
                                     {# Cancel bouton #}
-                                    {% include "events/partial/event_cancel_button.html" with application=application button_class="col-md-4 col-lg-3" %}
+                                    {% include "applications/partial/application_cancel_confirm_modal.html" with application=application button_class="col-md-4 col-lg-3" %}
                                 </div>
                             </div>
                         {% elif application.status == CANCELLED %}
