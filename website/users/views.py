@@ -37,7 +37,6 @@ from django.views.generic import CreateView, DeleteView, TemplateView
 from django.views.generic.edit import UpdateView
 
 from applications.models import Application
-from events.models import events
 
 from .forms import (
     AuthLoginForm,

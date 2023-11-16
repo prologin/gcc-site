@@ -17,7 +17,7 @@ from applications.models import APPLICATION_STATUS, Application
 from partners.models import Partner
 from users.models import User
 
-from .models import events
+from .models import Event
 
 
 class UpdateStatusView(UpdateView):
@@ -70,7 +70,7 @@ class ApplicationEditStatusView(UpdateView):
 
 
 class HomePageView(ListView):
-    model = events.Event
+    model = Event
     template_name = "events/home.html"
     form_class = EventApplicationForm
 
@@ -85,7 +85,7 @@ class HomePageView(ListView):
                 )
                 return HttpResponseRedirect(reverse("events:home"))
             else:
-                event = events.Event.objects.get(id=request.POST["event-id"])
+                event = Event.objects.get(id=request.POST["event-id"])
                 user = User.objects.get(id=request.user.id)
 
                 address = {
@@ -160,7 +160,7 @@ class HomePageView(ListView):
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
 
-        ctx["open_events"] = events.Event.objects.get_open_events(5)
+        ctx["open_events"] = Event.objects.get_open_events(5)
         ctx["form"] = EventApplicationForm
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
@@ -180,13 +180,11 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
-        ctx["years"] = events.Event.objects.years()
+        ctx["years"] = Event.objects.years()
         if self.request.GET:
-            ctx["events"] = events.Event.objects.filter(
-                year=self.request.GET["year"]
-            )
+            ctx["events"] = Event.objects.filter(year=self.request.GET["year"])
         else:
-            ctx["events"] = events.Event.objects.get_visible_events()
+            ctx["events"] = Event.objects.get_visible_events()
         ctx.update(APPLICATION_STATUS)
         return ctx
 
@@ -205,7 +203,7 @@ class ApplicationsReviewView(PermissionRequiredMixin, TemplateView):
 
 
 class EventListViewBase(ListView):
-    model = events.Event
+    model = Event
     template_name = "events/event_list_page.html"
     # Show 5 elements per page
     paginate_by = 10
