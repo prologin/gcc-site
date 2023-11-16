@@ -31,10 +31,9 @@
             </div>
             <div class="modal-footer">
                 <form method="post"
-                      action="{% url 'applications:application_status_update' %}">
+                      action="{% url 'applications:application_status_update' application.pk %}">
                     {% csrf_token %}
-                    <input type="hidden" name="application-id" value="{{ application.pk }}">
-                    <input type="hidden" name="status" value="{{ WITHDRAWN }}">
+                    <input type="hidden" name="transition" value="withdraw">
                     <input type="submit" class="btn btn-primary" value="Annuler ma venue">
                 </form>
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">

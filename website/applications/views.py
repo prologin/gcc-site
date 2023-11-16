@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin,
 )
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import UpdateView
@@ -90,16 +90,41 @@ class ApplicationCreateView(LoginRequiredMixin, View):
         raise Http404()
 
 
-class ApplicationStatusUpdateView(LoginRequiredMixin, UpdateView):
+class ApplicationStatusUpdateView(LoginRequiredMixin, View):
     http_method_names = ("post",)
-    model = Application
-    fields = ("status",)
 
-    def get_object(self, *args, **kwargs):
-        return Application.objects.get(id=self.request.POST["application-id"])
+    def post(self, request, *args, **kwargs):
+        appid = self.kwargs.get("appid")
+        transition = self.request.POST.get("transition")
+        if not transition or not appid:
+            return HttpResponseBadRequest("Bad request")
 
-    def get_success_url(self):
-        return self.request.META.get("HTTP_REFERER", None)
+        application = Application.objects.get(id=appid)
+        if not application:
+            # Unknown application id
+            return HttpResponseBadRequest("Bad request")
+
+        if transition not in application.get_available_transitions_names(
+            self.request.user
+        ):
+            # Illegal transition
+            return HttpResponseBadRequest("Bad request")
+
+        # The request is legitimate. Call the transition function of the
+        # application, then save the application to the DB because the
+        # transition does not do it.
+        getattr(application, transition)()
+        application.save()
+
+        # We don't want to change the page
+        current_page = request.META.get("HTTP_REFERER", None)
+        if not current_page:
+            return reverse("applications:my_applications")
+        else:
+            return HttpResponseRedirect(current_page)
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        return HttpResponseBadRequest("Invalid method")
 
 
 class ApplicationNotesUpdateView(PermissionRequiredMixin, UpdateView):

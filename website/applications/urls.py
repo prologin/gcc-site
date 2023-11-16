@@ -16,13 +16,14 @@ urlpatterns = [
         name="create_application",
     ),
     path(
-        "applications/status",
-        views.ApplicationStatusUpdateView.as_view(),
-        name="application_status_update",
-    ),
-    path(
         "applications/notes",
         views.ApplicationNotesUpdateView.as_view(),
         name="application_notes_update",
+    ),
+    # Application status update endpoint (POST)
+    path(
+        "application/<int:appid>/status",
+        views.ApplicationStatusUpdateView.as_view(),
+        name="application_status_update",
     ),
 ]
