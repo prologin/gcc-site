@@ -1,9 +1,11 @@
+import logging
+
 from django.contrib.auth import get_user_model
-from django.core.validators import RegexValidator
 from django.db import models
-from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django_fsm import FSMIntegerField, transition
+
+logger = logging.getLogger(__file__)
 
 APPLICATION_STATUS = {
     "REJECTED": -3,
@@ -148,11 +150,25 @@ class Application(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}@{self.event}"
 
+    @staticmethod
+    def _transition_perm_user_or_staff(instance, user):
+        return instance.user == user or user.has_perm(
+            "events.signup.manage_applications"
+        )
+
+    @staticmethod
+    def _transition_perm_staff(_, user):
+        return user.has_perm("events.signup.manage_applications")
+
+    @staticmethod
+    def _transition_perm_override(_, user):
+        return user.has_perm("events.signup.override_applications")
+
     @transition(
         field=status,
         source=SelectionStatus.PENDING,
         target=SelectionStatus.ACCEPTED,
-        permission="events.signup.manage_applications",
+        permission=_transition_perm_staff,
     )
     def accept(self):
         """
@@ -165,7 +181,7 @@ class Application(models.Model):
         field=status,
         source=SelectionStatus.PENDING,
         target=SelectionStatus.REJECTED,
-        permission="events.signup.manage_applications",
+        permission=_transition_perm_staff,
     )
     def reject(self):
         """
@@ -178,6 +194,7 @@ class Application(models.Model):
         field=status,
         source=SelectionStatus.ACCEPTED,
         target=SelectionStatus.CONFIRMED,
+        permission=_transition_perm_user_or_staff,
     )
     def confirm(self):
         """
@@ -194,6 +211,7 @@ class Application(models.Model):
             SelectionStatus.CONFIRMED,
         ],
         target=SelectionStatus.WITHDRAWN,
+        permission=_transition_perm_user_or_staff,
     )
     def withdraw(self):
         """
@@ -201,7 +219,9 @@ class Application(models.Model):
         """
         # TODO: Send a mail to prologin => with WARNING if source status was
         # confirmed
-        pass
+        logger.warn(
+            f"{self.first_name} {self.last_name} ({self.user.email}) has withdrawn their application for the event {self.event}"
+        )
 
     @transition(
         field=status,
@@ -211,9 +231,9 @@ class Application(models.Model):
             SelectionStatus.CONFIRMED,
         ],
         target=SelectionStatus.CANCELLED,
-        permission="events.signup.manage_applications",
+        permission=_transition_perm_staff,
     )
-    def cancel(self, reason: str):
+    def cancel(self, reason):
         """
         An application is cancelled, mostly because the event is cancelled
         """
@@ -229,8 +249,21 @@ class Application(models.Model):
     def set_event_ended(self):
         """
         A confirmed application is ended because the event has passed.
+        This transition should be triggered automatically,
+        not at someone's request.
         """
         pass
+
+    def get_available_transitions_names(self, user=None):
+        """
+        Return a list of currently possible transitions with the current user
+        """
+        transitions = []
+        if not user:
+            transitions = self.get_available_status_transitions()
+        else:
+            transitions = self.get_available_user_status_transitions(user)
+        return [t.name for t in transitions]
 
 
 class ApplicationLabel(models.Model):
