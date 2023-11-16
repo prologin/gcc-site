@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 
 from . import views
 
@@ -11,11 +11,11 @@ urlpatterns = [
         views.HomePageView.as_view(http_method_names=["post"]),
         name="event_signup",
     ),
-    path(
-        "update-status-applicant",
-        views.UpdateStatusView.as_view(),
-        name="update_status_applicant",
-    ),
+    # path(
+    #     "update-status-applicant",
+    #     views.UpdateStatusView.as_view(),
+    #     name="update_status_applicant",
+    # ),
     path("review/", views.ReviewIndexView.as_view(), name="review"),
     path(
         "review/<int:year>/<int:event>",
@@ -26,11 +26,6 @@ urlpatterns = [
         "update-application-notes",
         views.ApplicationEditNotesView.as_view(),
         name="update_application_notes",
-    ),
-    path(
-        "update-application-status",
-        views.ApplicationEditStatusView.as_view(),
-        name="update_application_status",
     ),
     path(
         "my-applications",
@@ -46,5 +41,11 @@ urlpatterns = [
         "events/passed",
         views.PassedEventListView.as_view(),
         name="passed_events",
+    ),
+    # Application status update endpoint
+    path(
+        "application/<int:appid>/status",
+        views.ApplicationStatusUpdateView.as_view(),
+        name="application_status_update",
     ),
 ]
