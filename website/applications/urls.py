@@ -10,4 +10,9 @@ urlpatterns = [
         views.ApplicationsView.as_view(),
         name="my_applications",
     ),
+    path(
+        "applications/new",
+        views.ApplicationCreateView.as_view(),
+        name="create_application",
+    ),
 ]

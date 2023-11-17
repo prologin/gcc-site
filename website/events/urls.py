@@ -7,11 +7,6 @@ app_name = "events"
 urlpatterns = [
     path("", views.HomePageView.as_view(), name="home"),
     path(
-        "event-signup",
-        views.HomePageView.as_view(http_method_names=["post"]),
-        name="event_signup",
-    ),
-    path(
         "update-status-applicant",
         views.UpdateStatusView.as_view(),
         name="update_status_applicant",
