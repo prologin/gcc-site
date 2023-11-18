@@ -13,11 +13,6 @@ urlpatterns = [
         name="application_review",
     ),
     path(
-        "update-application-notes",
-        views.ApplicationEditNotesView.as_view(),
-        name="update_application_notes",
-    ),
-    path(
         "events",
         views.EventListView.as_view(),
         name="events",

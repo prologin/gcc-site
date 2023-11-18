@@ -19,25 +19,6 @@ from partners.models import Partner
 from users.models import User
 
 
-class ApplicationEditNotesView(UpdateView):
-    http_method_names = ("post",)
-    model = Application
-
-    fields = ("notes",)
-
-    def get_success_url(self):
-        return reverse(
-            "events:application_review",
-            kwargs={
-                "year": self.request.POST["event-year"],
-                "event": self.request.POST["event-id"],
-            },
-        )
-
-    def get_object(self, *args, **kwargs):
-        return Application.objects.get(id=self.request.POST["application-id"])
-
-
 class HomePageView(ListView):
     model = Event
     template_name = "events/home.html"

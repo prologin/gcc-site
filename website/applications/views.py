@@ -128,3 +128,16 @@ class ApplicationStatusUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return self.request.META.get("HTTP_REFERER", None)
+
+
+class ApplicationNotesUpdateView(UpdateView):
+    http_method_names = ("post",)
+    model = Application
+
+    fields = ("notes",)
+
+    def get_success_url(self):
+        return self.request.META.get("HTTP_REFERER", None)
+
+    def get_object(self, *args, **kwargs):
+        return Application.objects.get(id=self.request.POST["application-id"])

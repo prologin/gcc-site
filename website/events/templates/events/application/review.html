@@ -155,7 +155,8 @@
                                     <div class="row py-3 px-2">
                                         <div class="col-12">
                                             <h2>Notes sur la candidature:</h2>
-                                            <form method="post" action="{% url 'events:update_application_notes' %}">
+                                            <form method="post"
+                                                  action="{% url 'applications:application_notes_update' %}">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="application-id" value="{{ application.pk }}">
                                                 <input type="hidden" name="event-year" value="{{ application.event.year }}">

@@ -20,4 +20,9 @@ urlpatterns = [
         views.ApplicationStatusUpdateView.as_view(),
         name="application_status_update",
     ),
+    path(
+        "applications/notes",
+        views.ApplicationNotesUpdateView.as_view(),
+        name="application_notes_update",
+    ),
 ]
