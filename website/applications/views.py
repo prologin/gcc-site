@@ -6,8 +6,8 @@ from django.views.generic import TemplateView, View
 from events.models import Event
 from users.models import User
 
-from .forms import EventApplicationForm
-from .models import APPLICATION_STATUS, Application
+from applications.forms import EventApplicationForm
+from applications.models import APPLICATION_STATUS, Application
 
 
 class ApplicationsView(LoginRequiredMixin, TemplateView):

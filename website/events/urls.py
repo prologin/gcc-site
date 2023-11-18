@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from . import views
+from events import views
 
 app_name = "events"
 

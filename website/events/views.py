@@ -17,7 +17,7 @@ from applications.models import APPLICATION_STATUS, Application
 from partners.models import Partner
 from users.models import User
 
-from .models import Event
+from events.models import Event
 
 
 class UpdateStatusView(UpdateView):
