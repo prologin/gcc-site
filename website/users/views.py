@@ -10,7 +10,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import (
     default_token_generator as account_activation_token,
 )
-from django.contrib.auth.views import PasswordChangeView, RedirectURLMixin
+from django.contrib.auth.views import (
+    PasswordChangeView,
+    PasswordResetCompleteView,
+    PasswordResetConfirmView,
+    PasswordResetDoneView,
+    PasswordResetView,
+    RedirectURLMixin,
+)
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -36,6 +43,8 @@ from .forms import (
     AuthRegisterForm,
     DeleteUserForm,
     EmailForm,
+    GCCPasswordResetConfirmForm,
+    GCCPasswordResetForm,
     NotificationsUpdateForm,
     PasswordUpdateForm,
     PersonalInfoForm,
@@ -311,3 +320,25 @@ class ActivateAccountView(View):
             return redirect(
                 "activation_error"
             )  # Redirect to an error page if activation fails
+
+
+class GCCPasswordResetView(PasswordResetView):
+    template_name = "users/password_reset/password_reset.html"
+    form_class = GCCPasswordResetForm
+    email_template_name = "users/password_reset/password_reset_email.html"
+    success_url = reverse_lazy("users:password_reset_done")
+
+
+class GCCPasswordResetDoneView(PasswordResetDoneView):
+    template_name = "users/password_reset/password_reset_done.html"
+
+
+class GCCPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "users/password_reset/password_reset_confirm.html"
+    form_class = GCCPasswordResetConfirmForm
+    success_url = reverse_lazy("users:password_reset_complete")
+
+
+class GCCPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "users/password_reset/password_reset_complete.html"
+    success_url = reverse_lazy("users:login")

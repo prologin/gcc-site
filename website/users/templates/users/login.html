@@ -14,8 +14,12 @@
 
 {% block bottom %}
     <hr class="my-2" />
-    <div class="fs-6 mb-3" align="center">
+    <div class="fs-6 my-1" align="center">
         Je n'ai pas de compte,
         <a href="{% url 'users:register' %}">s'inscrire</a>
+    </div>
+    <hr class="my-2" />
+    <div class="fs-6 mb-3" align="center">
+        <a href="{% url 'users:password_reset' %}">Mot de passe oublié</a>
     </div>
 {% endblock bottom %}
