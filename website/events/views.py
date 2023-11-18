@@ -14,21 +14,9 @@ from django.views.generic.edit import UpdateView
 
 from applications.forms import EventApplicationForm
 from applications.models import APPLICATION_STATUS, Application
+from events.models import Event
 from partners.models import Partner
 from users.models import User
-
-from events.models import Event
-
-
-class UpdateStatusView(UpdateView):
-    http_method_names = ("post",)
-    model = Application
-    success_url = reverse_lazy("applications:my_applications")
-
-    fields = ("status",)
-
-    def get_object(self, *args, **kwargs):
-        return Application.objects.get(id=self.request.POST["application-id"])
 
 
 class ApplicationEditNotesView(UpdateView):
@@ -36,25 +24,6 @@ class ApplicationEditNotesView(UpdateView):
     model = Application
 
     fields = ("notes",)
-
-    def get_success_url(self):
-        return reverse(
-            "events:application_review",
-            kwargs={
-                "year": self.request.POST["event-year"],
-                "event": self.request.POST["event-id"],
-            },
-        )
-
-    def get_object(self, *args, **kwargs):
-        return Application.objects.get(id=self.request.POST["application-id"])
-
-
-class ApplicationEditStatusView(UpdateView):
-    http_method_names = ("post",)
-    model = Application
-
-    fields = ("status",)
 
     def get_success_url(self):
         return reverse(

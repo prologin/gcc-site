@@ -2,12 +2,12 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseRedirect
 from django.views.generic import TemplateView, View
-
-from events.models import Event
-from users.models import User
+from django.views.generic.edit import UpdateView
 
 from applications.forms import EventApplicationForm
 from applications.models import APPLICATION_STATUS, Application
+from events.models import Event
+from users.models import User
 
 
 class ApplicationsView(LoginRequiredMixin, TemplateView):
@@ -116,3 +116,15 @@ class ApplicationCreateView(LoginRequiredMixin, View):
 
     def http_method_not_allowed(self, request, *args, **kwargs):
         raise Http404()
+
+
+class ApplicationStatusUpdateView(LoginRequiredMixin, UpdateView):
+    http_method_names = ("post",)
+    model = Application
+    fields = ("status",)
+
+    def get_object(self, *args, **kwargs):
+        return Application.objects.get(id=self.request.POST["application-id"])
+
+    def get_success_url(self):
+        return self.request.META.get("HTTP_REFERER", None)

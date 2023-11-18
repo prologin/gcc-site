@@ -15,4 +15,9 @@ urlpatterns = [
         views.ApplicationCreateView.as_view(),
         name="create_application",
     ),
+    path(
+        "applications/status",
+        views.ApplicationStatusUpdateView.as_view(),
+        name="application_status_update",
+    ),
 ]

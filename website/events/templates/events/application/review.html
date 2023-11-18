@@ -171,7 +171,8 @@
 
                                     <div class="row py-3 px-2">
                                         <h2>Statut de la candidature:</h2>
-                                        <form method="post" action="{% url 'events:update_application_status' %}">
+                                        <form method="post"
+                                              action="{% url 'applications:application_status_update' %}">
                                             {% csrf_token %}
                                             <input type="hidden" name="application-id" value="{{ application.pk }}">
                                             <input type="hidden" name="event-year" value="{{ application.event.year }}">

@@ -6,11 +6,6 @@ app_name = "events"
 
 urlpatterns = [
     path("", views.HomePageView.as_view(), name="home"),
-    path(
-        "update-status-applicant",
-        views.UpdateStatusView.as_view(),
-        name="update_status_applicant",
-    ),
     path("review/", views.ReviewIndexView.as_view(), name="review"),
     path(
         "review/<int:year>/<int:event>",
@@ -21,11 +16,6 @@ urlpatterns = [
         "update-application-notes",
         views.ApplicationEditNotesView.as_view(),
         name="update_application_notes",
-    ),
-    path(
-        "update-application-status",
-        views.ApplicationEditStatusView.as_view(),
-        name="update_application_status",
     ),
     path(
         "events",
