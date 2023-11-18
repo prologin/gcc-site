@@ -1,5 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+)
 from django.http import Http404, HttpResponseRedirect
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import UpdateView
@@ -130,7 +133,8 @@ class ApplicationStatusUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.META.get("HTTP_REFERER", None)
 
 
-class ApplicationNotesUpdateView(UpdateView):
+class ApplicationNotesUpdateView(PermissionRequiredMixin, UpdateView):
+    permission = "user.can_view_application"
     http_method_names = ("post",)
     model = Application
 

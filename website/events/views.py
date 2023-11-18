@@ -2,21 +2,16 @@ import datetime
 from urllib.parse import urlencode
 
 from django.contrib import messages
-from django.contrib.auth.mixins import (
-    LoginRequiredMixin,
-    PermissionRequiredMixin,
-)
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import UpdateView
 
 from applications.forms import EventApplicationForm
 from applications.models import APPLICATION_STATUS, Application
 from events.models import Event
 from partners.models import Partner
-from users.models import User
 
 
 class HomePageView(ListView):
