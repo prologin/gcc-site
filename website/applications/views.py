@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
 )
 from django.http import Http404, HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import UpdateView
 
@@ -52,45 +53,13 @@ class ApplicationCreateView(LoginRequiredMixin, View):
                 event = Event.objects.get(id=request.POST["event-id"])
                 user = User.objects.get(id=request.user.id)
 
-                address = {
-                    "street": form.cleaned_data["street_applicant"],
-                    "complement": form.cleaned_data["complement_applicant"],
-                    "city": form.cleaned_data["city_applicant"],
-                    "zip_code": form.cleaned_data["zip_code_applicant"],
-                    "country": form.cleaned_data["country_applicant"],
-                }
+                address = form.clean_address()
 
-                address_resp = {
-                    "street": form.cleaned_data["street_applicant_resp"],
-                    "complement": form.cleaned_data[
-                        "complement_applicant_resp"
-                    ],
-                    "city": form.cleaned_data["city_applicant_resp"],
-                    "zip_code": form.cleaned_data["zip_code_applicant_resp"],
-                    "country": form.cleaned_data["country_applicant_resp"],
-                }
+                address_resp = form.clean_address_resp()
 
-                school = {
-                    "school_level": form.cleaned_data["school_level"],
-                    "name": form.cleaned_data["name_school"],
-                    "street": form.cleaned_data["street_school"],
-                    "complement": form.cleaned_data["complement_school"],
-                    "city": form.cleaned_data["city_school"],
-                    "zip_code": form.cleaned_data["zip_code_school"],
-                    "country": form.cleaned_data["country_school"],
-                }
+                school = form.clean_school_info()
 
-                form_answer = (
-                    {
-                        "tshirt": form.cleaned_data["tshirt"],
-                        "allergies": form.cleaned_data["allergies"],
-                        "diet": form.cleaned_data["diet"],
-                        "learning": form.cleaned_data["learn"],
-                        "programing": form.cleaned_data["programing"],
-                        "studies": form.cleaned_data["studies"],
-                        "association": form.cleaned_data["association"],
-                    },
-                )
+                form_answer = form.clean_form_answers()
 
                 application = Application.objects.create(
                     user=user,
