@@ -8,6 +8,7 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("", include("users.urls")),
     path("", include("partners.urls")),
+    path("", include("applications.urls")),
     path("rest/auth/oidc/", include("mozilla_django_oidc.urls")),
 ]
 

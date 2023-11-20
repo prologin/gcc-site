@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
 
-from ..models.signup import APPLICATION_STATUS, ApplicationManager
+from applications.models import APPLICATION_STATUS, ApplicationManager
 
 register = template.Library()
 

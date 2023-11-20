@@ -7,7 +7,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .signup import SelectionStatus
+from applications.models import ApplicationStatus
 
 
 class Address(models.Model):
@@ -177,9 +177,9 @@ class Event(models.Model):
             raise ValidationError(errors)
 
     def get_application_documents(self, application):
-        if application.status == SelectionStatus.CONFIRMED.value:
+        if application.status == ApplicationStatus.CONFIRMED.value:
             return self.documents.all()
-        if application.status == SelectionStatus.ACCEPTED.value:
+        if application.status == ApplicationStatus.ACCEPTED.value:
             return self.documents.filter(
                 eventdocument__visibility__in=(
                     DocumentType.ACCEPTED_OR_CONFIRMED.value,

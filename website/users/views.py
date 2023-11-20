@@ -36,7 +36,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, DeleteView, TemplateView
 from django.views.generic.edit import UpdateView
 
-from events.models import events, signup
+from applications.models import Application
 
 from .forms import (
     AuthLoginForm,
@@ -144,7 +144,7 @@ class ExportUsersCSVView(LoginRequiredMixin, View):
         writer.writerow(["First Name", "Last Name", "Email"])
 
         user = User.objects.get(id=self.request.user.id)
-        applications = signup.Application.objects.filter(user=user).order_by(
+        applications = Application.objects.filter(user=user).order_by(
             "-created_at"
         )
 

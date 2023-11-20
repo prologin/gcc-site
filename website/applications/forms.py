@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
@@ -44,11 +45,11 @@ NB_PARTICIPATIONS = [
     ("1", "1"),
     ("2", "2"),
     ("3", "3"),
-    ("4 ou plus", "4 ou plus"),
+    ("4+", "4 ou plus"),
 ]
 
 # Must be the same as static/js/forms/form.js:PHONE_REGEX
-PHONE_REGEX = "^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
 def phoneNumberTest(phone):
@@ -56,7 +57,7 @@ def phoneNumberTest(phone):
         raise ValidationError("Not a phone number")
 
 
-class EventSignupForm(forms.Form):
+class EventApplicationForm(forms.Form):
     # Info sur la participante
     first_name = forms.CharField(
         label="",
@@ -487,3 +488,51 @@ class EventSignupForm(forms.Form):
                 css_class="tab",
             ),
         )
+
+    def clean_address(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "street": self.cleaned_data["street_applicant"],
+            "complement": self.cleaned_data["complement_applicant"],
+            "city": self.cleaned_data["city_applicant"],
+            "zip_code": self.cleaned_data["zip_code_applicant"],
+            "country": self.cleaned_data["country_applicant"],
+        }
+
+    def clean_address_resp(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "street": self.cleaned_data["street_applicant_resp"],
+            "complement": self.cleaned_data["complement_applicant_resp"],
+            "city": self.cleaned_data["city_applicant_resp"],
+            "zip_code": self.cleaned_data["zip_code_applicant_resp"],
+            "country": self.cleaned_data["country_applicant_resp"],
+        }
+
+    def clean_school_info(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "school_level": self.cleaned_data["school_level"],
+            "name": self.cleaned_data["name_school"],
+            "street": self.cleaned_data["street_school"],
+            "complement": self.cleaned_data["complement_school"],
+            "city": self.cleaned_data["city_school"],
+            "zip_code": self.cleaned_data["zip_code_school"],
+            "country": self.cleaned_data["country_school"],
+        }
+
+    def clean_form_answers(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "tshirt": self.cleaned_data["tshirt"],
+            "allergies": self.cleaned_data["allergies"],
+            "diet": self.cleaned_data["diet"],
+            "learning": self.cleaned_data["learn"],
+            "programing": self.cleaned_data["programing"],
+            "studies": self.cleaned_data["studies"],
+            "association": self.cleaned_data["association"],
+        }
