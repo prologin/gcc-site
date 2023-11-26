@@ -247,6 +247,82 @@ class Application(models.Model):
         """
         pass
 
+    # -----------------
+    # ADMIN TRANSITIONS
+    # -----------------
+
+    @transition(
+        field=status,
+        target=ApplicationStatus.REJECTED,
+        permission=_transition_perm_override,
+        custom=dict(admin=True),
+    )
+    def force_rejected(self):
+        """
+        Admin-resserved transition to rejected
+        """
+        pass
+
+    @transition(
+        field=status,
+        target=ApplicationStatus.ENDED,
+        permission=_transition_perm_override,
+        custom=dict(admin=True),
+    )
+    def force_ended(self):
+        """
+        Admin-resserved transition to ended
+        """
+        pass
+
+    @transition(
+        field=status,
+        target=ApplicationStatus.CANCELLED,
+        permission=_transition_perm_override,
+        custom=dict(admin=True),
+    )
+    def force_cancelled(self):
+        """
+        Admin-resserved transition to cancelled
+        """
+        pass
+
+    @transition(
+        field=status,
+        target=ApplicationStatus.PENDING,
+        permission=_transition_perm_override,
+        custom=dict(admin=True),
+    )
+    def force_pending(self):
+        """
+        Admin-resserved transition to pending
+        """
+        pass
+
+    @transition(
+        field=status,
+        target=ApplicationStatus.ACCEPTED,
+        permission=_transition_perm_override,
+        custom=dict(admin=True),
+    )
+    def force_accepted(self):
+        """
+        Admin-resserved transition to accepted
+        """
+        pass
+
+    @transition(
+        field=status,
+        target=ApplicationStatus.CONFIRMED,
+        permission=_transition_perm_override,
+        custom=dict(admin=True),
+    )
+    def force_confirmed(self):
+        """
+        Admin-resserved transition to accepted
+        """
+        pass
+
     def get_available_transitions_names(self, user=None):
         """
         Return a list of currently possible transitions with the current user

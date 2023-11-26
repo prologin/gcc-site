@@ -156,6 +156,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+# django-fsm-admin setting
+FSM_ADMIN_FORCE_PERMIT = True
+
 # Email settings
 
 DEFAULT_FROM_EMAIL = env.get_string(
