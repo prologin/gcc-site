@@ -861,6 +861,25 @@ files = [
 ]
 
 [[package]]
+name = "django-fsm-admin"
+version = "1.2.5"
+description = "Integrate django-fsm state transitions into the django admin"
+optional = false
+python-versions = "*"
+files = []
+develop = false
+
+[package.dependencies]
+Django = ">=1.6"
+django-fsm = ">=2.1.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/gadventures/django-fsm-admin"
+reference = "fe59a4b"
+resolved_reference = "fe59a4b09657e011c20e379d262e49c45ba430e7"
+
+[[package]]
 name = "django-ipware"
 version = "5.0.2"
 description = "A Django application to retrieve user's IP address"
@@ -2841,4 +2860,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "fb323cb415796ac176bcae57b3261eb5965fdd374d38ce6f7e9945e91aea82ed"
+content-hash = "e9c88407fc06ee76bc2d91779ec8134ebdbe9ebb142f6ba3392eee4fd7f758c7"

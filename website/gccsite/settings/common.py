@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_fsm",
+    "fsm_admin",
     "mozilla_django_oidc",
     "django_celery_beat",
     "post_office",
