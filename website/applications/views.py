@@ -76,7 +76,7 @@ class ApplicationCreateView(LoginRequiredMixin, View):
                     address_resp=address_resp,
                     school=school,
                     event=event,
-                    form_answer=form_answer[0],
+                    form_answer=form_answer,
                     nb_participations=form.cleaned_data["nb_participations"],
                 )
 
