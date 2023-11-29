@@ -161,7 +161,7 @@
                                 <br>
                                 Tu peux retrouver les photos du stags sur notre <a href="https://www.flickr.com/photos/prologin/">flickr</a>
                             </p>
-                        {% elif application.status == CONFIRMED %}
+                        {% elif application.status == AppStatus.CONFIRMED %}
                             {# CONFIRMED Application #}
                             <div>
                                 <h6>Félicitations ! Ta candidature a été confirmée !</h6>
@@ -171,7 +171,7 @@
                                     {% include "applications/partial/application_cancel_confirm_modal.html" with application=application button_class="col-md-4 col-lg-3" %}
                                 </div>
                             </div>
-                        {% elif application.status == ACCEPTED %}
+                        {% elif application.status == AppStatus.ACCEPTED %}
                             {# ACCEPTED Application #}
                             <div>
                                 <h6>
@@ -190,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {% elif application.status == PENDING %}
+                        {% elif application.status == AppStatus.PENDING %}
                             {# PENDING Application #}
                             <div>
                                 <h6>
@@ -202,7 +202,7 @@
                                     {% include "applications/partial/application_cancel_confirm_modal.html" with application=application button_class="col-md-4 col-lg-3" %}
                                 </div>
                             </div>
-                        {% elif application.status == CANCELLED %}
+                        {% elif application.status == AppStatus.CANCELLED %}
                             {# CANCELLED Application #}
                             <div>
                                 <h6>
@@ -210,14 +210,14 @@
                                     <a href="{% url 'events:home' %}">Tu peux t'inscrire à d'autres stages ici.</a>
                                 </h6>
                             </div>
-                        {% elif application.status == WITHDRAWN %}
+                        {% elif application.status == AppStatus.WITHDRAWN %}
                             {# WITHDRAWN Application #}
                             <div>
                                 <h6>
                                     Tu as annulé ta candidature. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
                                 </h6>
                             </div>
-                        {% elif application.status == REJECTED %}
+                        {% elif application.status == AppStatus.REJECTED %}
                             {# REJECTED Application #}
                             <div>
                                 <h6>

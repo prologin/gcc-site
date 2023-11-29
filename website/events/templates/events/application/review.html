@@ -25,21 +25,7 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ application.last_name }} {{ application.first_name }}</td>
                             <td>{{ application.nb_participations }}</td>
-                            <td>
-                                {% if application.status == REJECTED %}Candidature rejetée{% endif %}
-                                {% if application.status == WITHDRAWN %}
-                                    Candidature annulée de la part de la candidate
-                                {% endif %}
-                                {% if application.status == CANCELLED %}
-                                    Candidature annulée de la part des organisateurs
-                                {% endif %}
-                                {% if application.status == PENDING %}
-                                    Candidature en cours de traitement
-                                {% endif %}
-                                {% if application.status == ACCEPTED %}Candidature acceptée{% endif %}
-                                {% if application.status == CONFIRMED %}Candidature confirmée{% endif %}
-                                {% if application.status == ENDED %}Candidature confirmée{% endif %}
-                            </td>
+                            <td>{{ application.status.label }}</td>
                         </tr>
                         {% if 'users.can_view_applications_details' in perms %}
                             <tr class="collapse" id="row-{{ forloop.counter }}">

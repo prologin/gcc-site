@@ -3,31 +3,15 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_fsm import FSMIntegerField, transition
 
-APPLICATION_STATUS = {
-    "REJECTED": -3,
-    "WITHDRAWN": -2,
-    "CANCELLED": -1,
-    "PENDING": 0,
-    "ACCEPTED": 1,
-    "CONFIRMED": 2,
-    "ENDED": 3,
-}
-
 
 class ApplicationStatus(models.IntegerChoices):
-    REJECTED = APPLICATION_STATUS["REJECTED"], _("Candidature rejetée")
-    WITHDRAWN = APPLICATION_STATUS["WITHDRAWN"], _(
-        "Candidature annulée par la candidate"
-    )
-    CANCELLED = APPLICATION_STATUS["CANCELLED"], _(
-        "Candidature annulée par les organisateurs"
-    )
-    PENDING = APPLICATION_STATUS["PENDING"], _(
-        "Candidature en cours de traitement"
-    )
-    ACCEPTED = APPLICATION_STATUS["ACCEPTED"], _("Candidature acceptée")
-    CONFIRMED = APPLICATION_STATUS["CONFIRMED"], _("Candidature confirmée")
-    ENDED = APPLICATION_STATUS["ENDED"], _("Stage terminé")
+    REJECTED = -3, _("Candidature rejetée")
+    WITHDRAWN = -2, _("Candidature annulée par la candidate")
+    CANCELLED = -1, _("Candidature annulée par les organisateurs")
+    PENDING = 0, _("Candidature en cours de traitement")
+    ACCEPTED = 1, _("Candidature acceptée")
+    CONFIRMED = 2, _("Candidature confirmée")
+    ENDED = 3, _("Stage terminé")
 
 
 class ApplicationManager(models.Manager):

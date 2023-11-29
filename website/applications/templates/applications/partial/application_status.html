@@ -8,7 +8,7 @@
         {% with "col-lg-8 text-center text-lg-start p-0 mt-2 mt-lg-0" as label_class %}
             <div class="{{ class }}">
                 {# ENDED Application #}
-                {% if application.status == ENDED %}
+                {% if application.status == AppStatus.ENDED %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-solid fa-flag-checkered {{ icon_class }}"></i>
@@ -17,7 +17,7 @@
                     </div>
 
                     {# CONFIRMED Application #}
-                {% elif application.status == CONFIRMED %}
+                {% elif application.status == AppStatus.CONFIRMED %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-regular fa-circle-check {{ icon_class }}"
@@ -27,7 +27,7 @@
                     </div>
 
                     {# ACCEPTED Application #}
-                {% elif application.status == ACCEPTED %}
+                {% elif application.status == AppStatus.ACCEPTED %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-regular fa-circle-check {{ icon_class }}"
@@ -37,7 +37,7 @@
                     </div>
 
                     {# PENDING Application #}
-                {% elif application.status == PENDING %}
+                {% elif application.status == AppStatus.PENDING %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-regular fa-clock {{ icon_class }}"></i>
@@ -46,7 +46,7 @@
                     </div>
 
                     {# CANCELLED Application #}
-                {% elif application.status == CANCELLED %}
+                {% elif application.status == AppStatus.CANCELLED %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-regular fa-circle-stop {{ icon_class }} text-danger"></i>
@@ -55,7 +55,7 @@
                     </div>
 
                     {# WITHDRAWN Application #}
-                {% elif application.status == WITHDRAWN %}
+                {% elif application.status == AppStatus.WITHDRAWN %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-regular fa-circle-stop {{ icon_class }} text-danger"></i>
@@ -64,7 +64,7 @@
                     </div>
 
                     {# REJECTED Application #}
-                {% elif application.status == REJECTED %}
+                {% elif application.status == AppStatus.REJECTED %}
                     <div class="row justify-content-center">
                         <div class="{{ icon_div_class }}">
                             <i class="fa-regular fa-circle-xmark {{ icon_class }} text-danger"></i>

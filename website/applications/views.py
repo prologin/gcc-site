@@ -9,7 +9,7 @@ from django.views.generic import TemplateView, View
 from django.views.generic.edit import UpdateView
 
 from applications.forms import EventApplicationForm
-from applications.models import APPLICATION_STATUS, Application
+from applications.models import Application, ApplicationStatus
 from events.models import Event
 from users.models import User
 
@@ -27,7 +27,7 @@ class ApplicationsView(LoginRequiredMixin, TemplateView):
         ctx["applications"] = user_applications
 
         ctx["form"] = EventApplicationForm
-        ctx.update(APPLICATION_STATUS)
+        ctx["AppStatus"] = ApplicationStatus
 
         return ctx
 
