@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 {% for application in applications %}
-                <tr {% if 'users.can_view_applications_details' in perms %} data-bs-toggle="collapse"
+                <tr {% if 'users.can_view_applications' in perms %} data-bs-toggle="collapse"
                     data-bs-target="#row-{{forloop.counter}}" aria-expanded="false"
                     aria-controls="row-{{forloop.counter}}" {% endif %}>
                     <th scope="row"> {{forloop.counter}}</th>
