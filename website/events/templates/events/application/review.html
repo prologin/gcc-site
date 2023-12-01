@@ -3,14 +3,15 @@
 {% load crispy_forms_tags %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+<link rel="stylesheet" href="{% static '/css/events/events.css' %}">
+<script src="{% static 'js/review.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
 <div class="container-fluid mt-2">
     <div class="custom-table">
-        <table class="table">
+        <table class="table" data-length="{{applications|length}}">
             <thead>
                 <tr>
                     <th scope="col"> # </th>
@@ -27,7 +28,7 @@
                     <th scope="row"> {{forloop.counter}}</th>
                     <td> {{application.last_name }} {{application.first_name}} </td>
                     <td> {{application.nb_participations}}</td>
-                    <td>
+                    <td id="status-head-{{forloop.counter}}">
                         {% if application.status == REJECTED %} Candidature rejetée {% endif %}
                         {% if application.status == WITHDRAWN %} Candidature annulée de la part de la candidate {% endif %}
                         {% if application.status == CANCELLED %} Candidature annulée de la part des organisateurs {% endif %}
@@ -124,7 +125,7 @@
                                 <h2> Notes sur la candidature: </h2>
                                 <form method="post" action="{% url 'events:update_application_notes' %}">
                                     {% csrf_token %}
-                                    <input type="hidden" name="application-id" value="{{ application.pk }}">
+                                    <input type="hidden" name="application-id-notes" value="{{ application.pk }}">
                                     <input type="hidden" name="event-year" value="{{ application.event.year }}">
                                     <input type="hidden" name="event-id" value="{{ application.event.pk }}">
                                     <textarea name="notes"
@@ -139,24 +140,24 @@
                             <h2> Statut de la candidature:</h2>
                             <form method="post" action="{% url 'events:update_application_status' %}">
                                 {% csrf_token %}
-                                <input type="hidden" name="application-id" value="{{ application.pk }}">
+                                <input type="hidden" name="application-id-status" value="{{ application.pk }}">
                                 <input type="hidden" name="event-year" value="{{ application.event.year }}">
                                 <input type="hidden" name="event-id" value="{{ application.event.pk }}">
 
-                                <select class="form-select" name="status">
-                                    <option value="{{ REJECTED }}" {% if application.status == REJECTED %} selected {% endif %}> Candidature
+                                <select id="status-form-{{forloop.counter}}" class="form-select" name="status">
+                                    <option value="{{ REJECTED }}" {% if application.status == REJECTED %} selected data-initial {% endif %}> Candidature
                                         rejetée </option>
-                                    <option value="{{ WITHDRAWN }}" {% if application.status == WITHDRAWN %} selected {% endif %}> Candidature
+                                    <option value="{{ WITHDRAWN }}" {% if application.status == WITHDRAWN %} selected data-initial {% endif %}> Candidature
                                         annulée de la part de la candidate </option>
-                                    <option value="{{ CANCELLED }}" {% if application.status == CANCELLED %} selected {% endif %}> Candidature
+                                    <option value="{{ CANCELLED }}" {% if application.status == CANCELLED %} selected data-initial {% endif %}> Candidature
                                         annulée de la part des organisateurs </option>
-                                    <option value="{{ PENDING }}" {% if application.status == PENDING %} selected {% endif %}> Candidature
+                                    <option value="{{ PENDING }}" {% if application.status == PENDING %} selected data-initial {% endif %}> Candidature
                                         en cours de traitement </option>
-                                    <option value="{{ ACCEPTED }}" {% if application.status == ACCEPTED %} selected {% endif %}> Candidature
+                                    <option value="{{ ACCEPTED }}" {% if application.status == ACCEPTED %} selected data-initial {% endif %}> Candidature
                                         acceptée </option>
-                                    <option value="{{ CONFIRMED }}" {% if application.status == CONFIRMED %} selected {% endif %}> Candidature
+                                    <option value="{{ CONFIRMED }}" {% if application.status == CONFIRMED %} selected data-initial {% endif %}> Candidature
                                         confirmée </option>
-                                    <option value="{{ ENDED }}" {% if application.status == ENDED %} selected {% endif %}> Stage terminé
+                                    <option value="{{ ENDED }}" {% if application.status == ENDED %} selected data-initial {% endif %}> Stage terminé
                                     </option>
                                 </select>
 
@@ -171,6 +172,9 @@
             </tbody>
         </table>
     </div>
+    <button onclick="submitMultipleStatus(application.pk, application.event.year, application.event.pk)" name="submit-multiple-status" class="my-4 btn btn-primary">
+        Modifier les status
+    </button>
 </div>
 
 {% endblock %}
