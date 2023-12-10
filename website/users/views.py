@@ -245,6 +245,7 @@ class LoginView(auth_views.LoginView):
 class RegisterView(RedirectURLMixin, CreateView):
     template_name = "users/register.html"
     form_class = AuthRegisterForm
+    next_page = settings.LOGIN_REDIRECT_URL
 
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
@@ -259,9 +260,6 @@ class RegisterView(RedirectURLMixin, CreateView):
             return HttpResponseRedirect(self.get_success_url())
         return super().dispatch(request, *args, **kwargs)
 
-    def get_success_url(self):
-        return resolve_url(settings.LOGIN_REDIRECT_URL)
-
     def form_valid(self, form):
         # Save the user instance without committing it to the database yet
         user = form.save(commit=False)
@@ -271,7 +269,11 @@ class RegisterView(RedirectURLMixin, CreateView):
         # Send the activation email to the user
         self.send_activation_email(user, form.cleaned_data["email"])
 
-        return self.get_default_redirect_url()
+        messages.info(
+            self.request,
+            "Activez votre compte en cliquant sur le lien envoyé à votre adresse mail",
+        )
+        return HttpResponseRedirect(self.get_success_url())
 
     def send_activation_email(self, user, email):
         current_site = get_current_site(self.request)
@@ -285,14 +287,9 @@ class RegisterView(RedirectURLMixin, CreateView):
 
         email_from = settings.EMAIL_HOST_USER
         message = _(
-            "Bonjour {0},\n Please activate your account using this link: {1}"
+            "Bonjour {0},\n Activez votre compte Girls Can Code! en cliquant sur ce lien: {1}"
         ).format(user.first_name, activation_link)
         send_mail(subject, message, email_from, [email])
-
-    def get_default_redirect_url(self):
-        return HttpResponse(
-            _("Please check your email to confirm your registration.")
-        )
 
 
 class ActivateAccountView(View):
