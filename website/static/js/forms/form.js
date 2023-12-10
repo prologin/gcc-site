@@ -18,15 +18,18 @@ class MultiTabForm {
         this.form = form;
         this.next_buttons = form.querySelectorAll("#button-id-next");
         this.back_buttons = form.querySelectorAll("#button-id-back");
+        this.submit_button = form.querySelector("input[type=submit]");
 
         this.tabs = form.querySelectorAll(".tab");
         this.last_tab_index = this.tabs.length - 1;
 
         // Set event listeners
+        this.submit_button.addEventListener("click", () => {
+            return this.validateCurrentTab();
+        })
         this.next_buttons.forEach((btn) => {
             btn.addEventListener("click",
                 () => {
-                    console.log(this);
                     return this.gotoNextTab();
                 }
             )
@@ -52,7 +55,15 @@ class MultiTabForm {
             }
         );
 
-        // Make sure the first tab is showed
+        // Make sure the first tab is showed, or the first tab that has a problem.
+        let start_idx = 0;
+        for (const [index, tab] of this.tabs.entries()) {
+            if (tab.querySelector("." + INVALID_CLASS) !== null) {
+                start_idx = index;
+                break;
+            }
+        }
+        this.tab_index = start_idx;
         this.setActiveTab();
     }
 
