@@ -307,7 +307,7 @@ class Application(models.Model):
         """
         pass
 
-    def get_available_transitions_names(self, user=None):
+    def get_available_transitions_names(self, user=None, remove_forced=True):
         """
         Return a list of currently possible transitions with the current user
         """
@@ -316,7 +316,13 @@ class Application(models.Model):
             transitions = self.get_available_status_transitions()
         else:
             transitions = self.get_available_user_status_transitions(user)
-        return [t.name for t in transitions]
+
+        transition_names = [
+            t.name
+            for t in transitions
+            if not remove_forced or not t.name.startswith("force_")
+        ]
+        return transition_names
 
 
 class ApplicationLabel(models.Model):
