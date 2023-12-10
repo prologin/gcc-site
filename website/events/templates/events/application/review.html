@@ -1,6 +1,7 @@
 {% extends "gccsite/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load application_filters %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/events/events.css' %}">
@@ -25,7 +26,7 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ application.last_name }} {{ application.first_name }}</td>
                             <td>{{ application.nb_participations }}</td>
-                            <td>{{ application.status.label }}</td>
+                            <td>{{ application|status_label }}</td>
                         </tr>
                         {% if 'users.can_view_applications_details' in perms %}
                             <tr class="collapse" id="row-{{ forloop.counter }}">
@@ -156,58 +157,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="row py-3 px-2">
-                                        <h2>Statut de la candidature:</h2>
-                                        <form method="post"
-                                              action="{% url 'applications:application_status_update' %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="application-id" value="{{ application.pk }}">
-                                            <input type="hidden" name="event-year" value="{{ application.event.year }}">
-                                            <input type="hidden" name="event-id" value="{{ application.event.pk }}">
-
-                                            <select class="form-select" name="status">
-                                                <option value="{{ REJECTED }}"
-                                                        {% if application.status == REJECTED %}selected{% endif %}>
-                                                    Candidature
-                                                    rejetée
-                                                </option>
-                                                <option value="{{ WITHDRAWN }}"
-                                                        {% if application.status == WITHDRAWN %}selected{% endif %}>
-                                                    Candidature
-                                                    annulée de la part de la candidate
-                                                </option>
-                                                <option value="{{ CANCELLED }}"
-                                                        {% if application.status == CANCELLED %}selected{% endif %}>
-                                                    Candidature
-                                                    annulée de la part des organisateurs
-                                                </option>
-                                                <option value="{{ PENDING }}"
-                                                        {% if application.status == PENDING %}selected{% endif %}>
-                                                    Candidature
-                                                    en cours de traitement
-                                                </option>
-                                                <option value="{{ ACCEPTED }}"
-                                                        {% if application.status == ACCEPTED %}selected{% endif %}>
-                                                    Candidature
-                                                    acceptée
-                                                </option>
-                                                <option value="{{ CONFIRMED }}"
-                                                        {% if application.status == CONFIRMED %}selected{% endif %}>
-                                                    Candidature
-                                                    confirmée
-                                                </option>
-                                                <option value="{{ ENDED }}"
-                                                        {% if application.status == ENDED %}selected{% endif %}>
-                                                    Stage terminé
-                                                </option>
-                                            </select>
-
-                                            <input type="submit"
-                                                   name="submit-application-status"
-                                                   value="Modifier le statut"
-                                                   class="my-4 btn btn-primary" />
-                                        </form>
+                                    <div class="row pt-3 px-2">
+                                        <h2 class="col-auto">Statut de la candidature:</h2>
                                     </div>
+                                    <div class="row pb-2 px-2">
+                                        <span class="col">{{ application|status_label }}</span>
+                                    </div>
+                                    <div class="row pb-3 px-2">
+
+                                        {% for transition in application|get_available_transitions:request.user %}
+                                            {% include "applications/partial/application_transition_button.html" with application=application transition=transition text=transition|title form_class="col-auto" %}
+                                        {% endfor %}
+                                    </div>
+
                                 </td>
                             </tr>
                         {% endif %}
