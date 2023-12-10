@@ -43,7 +43,7 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
                     "last_name",
                     "email",
                     "phone",
-                    "dob",
+                    "birthdate",
                     "form_answer",
                     "address",
                 )

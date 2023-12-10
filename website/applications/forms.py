@@ -142,11 +142,14 @@ class EventApplicationForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_applicant = forms.IntegerField(
+    zip_code_applicant = forms.CharField(
         label="",
+        max_length=16,
         required=True,
         widget=forms.TextInput(
-            attrs={"placeholder": "Code postal", "type": "number"}
+            attrs={
+                "placeholder": "Code postal",
+            }
         ),
     )
 
@@ -219,13 +222,13 @@ class EventApplicationForm(forms.Form):
         ),
     )
 
-    zip_code_applicant_resp = forms.IntegerField(
+    zip_code_applicant_resp = forms.CharField(
         label="",
+        max_length=16,
         required=True,
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Code postal du responsable légal",
-                "type": "number",
             }
         ),
     )
@@ -268,11 +271,14 @@ class EventApplicationForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_school = forms.IntegerField(
+    zip_code_school = forms.CharField(
         label="",
+        max_length=16,
         required=True,
         widget=forms.TextInput(
-            attrs={"placeholder": "Code postal", "type": "number"}
+            attrs={
+                "placeholder": "Code postal",
+            }
         ),
     )
 
@@ -349,9 +355,9 @@ class EventApplicationForm(forms.Form):
             labelize("Adresse", True),
             Field("street_applicant"),
             Field("complement_applicant"),
-            Field("city_applicant"),
+            Field("zip_code_applicant"),
             Row(
-                Column(Field("zip_code_applicant")),
+                Column(Field("city_applicant")),
                 Column(Field("country_applicant")),
             ),
         )
@@ -359,9 +365,9 @@ class EventApplicationForm(forms.Form):
             labelize("Adresse", True),
             Field("street_applicant_resp"),
             Field("complement_applicant_resp"),
-            Field("city_applicant_resp"),
+            Field("zip_code_applicant_resp"),
             Row(
-                Column(Field("zip_code_applicant_resp")),
+                Column(Field("city_applicant_resp")),
                 Column(Field("country_applicant_resp")),
             ),
         )
@@ -369,9 +375,9 @@ class EventApplicationForm(forms.Form):
             labelize("Adresse", True),
             Field("street_school"),
             Field("complement_school"),
-            Field("city_school"),
+            Field("zip_code_school"),
             Row(
-                Column(Field("zip_code_school")),
+                Column(Field("city_school")),
                 Column(Field("country_school")),
             ),
         )

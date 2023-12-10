@@ -6,7 +6,7 @@
             "user": 1,
             "first_name": "Kenji",
             "last_name": "Gaillac",
-            "dob": "1999-08-11",
+            "birthdate": "1999-08-11",
             "address": {
                 "city": "Test.",
                 "zip_code": "42042",
@@ -52,7 +52,7 @@
             "user": 2,
             "first_name": "Toto",
             "last_name": "Tutu",
-            "dob": "2011-09-03",
+            "birthdate": "2011-09-03",
             "address": {
                 "city": "Test.",
                 "zip_code": "42042",

@@ -55,7 +55,7 @@ class Application(models.Model):
         verbose_name=_("Nom de la participante"),
     )
 
-    dob = models.DateField(
+    birthdate = models.DateField(
         verbose_name=_("Date de naissance de la participante"),
     )
 
