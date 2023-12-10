@@ -86,6 +86,10 @@ class MultiTabForm {
                 select.classList.remove(INVALID_CLASS);
                 select.selectedIndex = 0;
             });
+
+        // Reset tab index
+        this.tab_index = 0;
+        this.setActiveTab();
     }
 
     validateCurrentTab() {
