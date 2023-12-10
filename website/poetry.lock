@@ -850,6 +850,36 @@ django = ">=3.2.4"
 sqlparse = ">=0.2"
 
 [[package]]
+name = "django-fsm"
+version = "2.8.1"
+description = "Django friendly finite state machine support."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-fsm-2.8.1.tar.gz", hash = "sha256:fd9f8de9f33188e50f876ce53908fbd7289e5031a44ffdb97d43909e56699ef8"},
+    {file = "django_fsm-2.8.1-py2.py3-none-any.whl", hash = "sha256:e2c02cbf273fb9691aa9a907c29990afdd21a4adea09c5640344c93fbe03f8d9"},
+]
+
+[[package]]
+name = "django-fsm-admin"
+version = "1.2.5"
+description = "Integrate django-fsm state transitions into the django admin"
+optional = false
+python-versions = "*"
+files = []
+develop = false
+
+[package.dependencies]
+Django = ">=1.6"
+django-fsm = ">=2.1.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/gadventures/django-fsm-admin"
+reference = "fe59a4b"
+resolved_reference = "fe59a4b09657e011c20e379d262e49c45ba430e7"
+
+[[package]]
 name = "django-ipware"
 version = "5.0.2"
 description = "A Django application to retrieve user's IP address"
@@ -2830,4 +2860,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e033a601405b6431c7bcdaca42e803deb2b353d5024aed9307a0ddab67026cf2"
+content-hash = "e9c88407fc06ee76bc2d91779ec8134ebdbe9ebb142f6ba3392eee4fd7f758c7"

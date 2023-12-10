@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_fsm",
+    "fsm_admin",
     "mozilla_django_oidc",
     "django_celery_beat",
     "post_office",
@@ -153,6 +155,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# django-fsm-admin setting
+FSM_ADMIN_FORCE_PERMIT = True
 
 # Email settings
 

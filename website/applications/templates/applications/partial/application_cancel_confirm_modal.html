@@ -30,13 +30,7 @@
                 pour l'événement {{ application.event.name }} ?
             </div>
             <div class="modal-footer">
-                <form method="post"
-                      action="{% url 'applications:application_status_update' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="application-id" value="{{ application.pk }}">
-                    <input type="hidden" name="status" value="{{ WITHDRAWN }}">
-                    <input type="submit" class="btn btn-primary" value="Annuler ma venue">
-                </form>
+                {% include "applications/partial/application_transition_button.html" with application=application transition="withdraw" text="Annuler ma venue" %}
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">
                     Annuler
                 </button>

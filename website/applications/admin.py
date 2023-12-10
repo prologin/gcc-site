@@ -1,10 +1,11 @@
 from django.contrib import admin
+from fsm_admin.mixins import FSMTransitionMixin
 
 from applications import models
 
 
 @admin.register(models.Application)
-class ApplicationAdmin(admin.ModelAdmin):
+class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     list_display = (
         "user",
         "first_name",
@@ -56,13 +57,16 @@ class ApplicationAdmin(admin.ModelAdmin):
             "Sélection",
             {
                 "fields": (
-                    "nb_participations",
                     "status",
+                    "nb_participations",
                     "notes",
                 ),
             },
         ),
     )
+
+    fsm_field = ["status"]
+    readonly_fields = ["status"]
 
 
 @admin.register(models.ApplicationLabel)

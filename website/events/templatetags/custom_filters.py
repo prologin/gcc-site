@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.formats import date_format
 from django.utils.translation import gettext_lazy as _
 
-from applications.models import APPLICATION_STATUS, ApplicationManager
+from applications.models import ApplicationManager, ApplicationStatus
 
 register = template.Library()
 
@@ -65,6 +65,6 @@ def any_confirmed(applications):
     Given a list of applications, return True if any of them is Confirmed
     """
     for app in applications:
-        if app.status == APPLICATION_STATUS["CONFIRMED"]:
+        if app.status == ApplicationStatus.CONFIRMED:
             return True
     return False

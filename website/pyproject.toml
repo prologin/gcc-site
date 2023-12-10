@@ -24,6 +24,8 @@ django-rest-knox = { version = "^4.2" }
 django-celery-beat = { version = "^2.4"}
 django-mail-panel = "^4.0"
 django-post-office = "^3.6"
+django-fsm = "^2.8.1"
+django-fsm-admin = { git = "https://github.com/gadventures/django-fsm-admin", rev = "fe59a4b" }
 prospector = {extras = ["with_everything"], version = "*"}
 mozilla-django-oidc = "^3.0.0"
 django-prometheus = "^2.3.1"

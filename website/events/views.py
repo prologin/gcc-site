@@ -1,5 +1,4 @@
 import datetime
-from urllib.parse import urlencode
 
 from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -9,7 +8,7 @@ from django.urls import reverse
 from django.views.generic import ListView, TemplateView
 
 from applications.forms import EventApplicationForm
-from applications.models import APPLICATION_STATUS, Application
+from applications.models import Application, ApplicationStatus
 from events.models import Event
 from partners.models import Partner
 
@@ -37,7 +36,7 @@ class HomePageView(ListView):
         )
         ctx["partners_accueil"] = Partner.objects.filter(status="Welcoming")
 
-        ctx.update(APPLICATION_STATUS)
+        ctx["AppStatus"] = ApplicationStatus
         return ctx
 
 
@@ -53,7 +52,7 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
             ctx["events"] = Event.objects.filter(year=self.request.GET["year"])
         else:
             ctx["events"] = Event.objects.get_visible_events()
-        ctx.update(APPLICATION_STATUS)
+        ctx["AppStatus"] = ApplicationStatus
         return ctx
 
 
@@ -66,7 +65,7 @@ class ApplicationsReviewView(PermissionRequiredMixin, TemplateView):
         ctx["applications"] = Application.objects.get_applicants(
             kwargs["event"]
         )
-        ctx.update(APPLICATION_STATUS)
+        ctx["AppStatus"] = ApplicationStatus
         return ctx
 
 

@@ -1,0 +1,19 @@
+{% comment %}
+    Template parameters:
+        - application: the application object.
+        - transition: the wanted transition name.
+        - text: the text to be displayed in the button
+    optional:
+        - form_class: class applied on the form
+        - btn_class: class applied on the button
+{% endcomment %}
+
+<form method="post"
+      action="{% url 'applications:application_status_update' application.pk %}"
+      class="{{ form_class }}">
+    {% csrf_token %}
+    <input type="hidden" name="transition" value="{{ transition }}">
+    <input type="submit"
+           class="btn btn-primary {{ btn_class }}"
+           value="{{ text }}">
+</form>
