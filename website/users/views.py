@@ -24,6 +24,7 @@ from django.core.mail import send_mail
 from django.core.validators import EmailValidator
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, resolve_url
+from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes
@@ -286,9 +287,14 @@ class RegisterView(RedirectURLMixin, CreateView):
         )
 
         email_from = settings.EMAIL_HOST_USER
-        message = _(
-            "Bonjour {0},\n Activez votre compte Girls Can Code! en cliquant sur ce lien: {1}"
-        ).format(user.first_name, activation_link)
+        message = render_to_string(
+            template_name="users/mails/account_activation_link.txt",
+            context={
+                "firstname": user.first_name,
+                "lastname": user.last_name,
+                "link": activation_link,
+            },
+        )
         send_mail(subject, message, email_from, [email])
 
 

@@ -1,0 +1,10 @@
+Bonjour {{ firstname }} {{ lastname }},
+
+Activez votre compte Girls Can Code! en cliquant sur le lien ci-dessous :
+
+{{ link }}
+
+À bientôt !
+
+--
+L'équipe Girls Can Code!
