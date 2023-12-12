@@ -24,6 +24,33 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 
+class ProfileCreationForm(forms.Form):
+    email = forms.EmailField(
+        label=_("Email"),
+        max_length=150,
+    )
+    first_name = forms.CharField(
+        label=_("Prénom"),
+        max_length=150,
+        required=True,
+    )
+
+    last_name = forms.CharField(
+        label=_("Nom de famille"),
+        max_length=150,
+        required=True,
+    )
+
+    birth_date = forms.DateField(
+        label=_("Date de naissance"),
+        required=True,
+    )
+
+    phone = forms.CharField(
+        label=_("Numéro de téléphone"),
+        required=True
+    )
+
 class PersonalInfoForm(forms.Form):
     first_name = forms.CharField(label="Prénom", max_length=80, required=True)
     last_name = forms.CharField(

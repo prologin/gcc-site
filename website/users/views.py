@@ -48,6 +48,7 @@ from .forms import (
     NotificationsUpdateForm,
     PasswordUpdateForm,
     PersonalInfoForm,
+    ProfileCreationForm,
 )
 from .models import User, Profile
 
@@ -243,7 +244,7 @@ class LoginView(auth_views.LoginView):
 
 class CreateProfileView(CreateView):
     template_name = "users/profile_create.html"
-    model = Profile
+    form_class = ProfileCreationForm
 
 
 class RegisterView(RedirectURLMixin, CreateView):
