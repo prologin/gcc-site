@@ -8,8 +8,7 @@ from applications import models
 class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     list_display = (
         "user",
-        "first_name",
-        "last_name",
+        "profile",
         "status",
         "event",
     )
@@ -20,8 +19,8 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     )
 
     search_fields = (
-        "first_name",
-        "last_name",
+        "profile__first_name",
+        "profile__last_name",
         "user__username",
         "user__first_name",
         "user__last_name",
@@ -39,26 +38,16 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
             "Informations participante",
             {
                 "fields": (
-                    "first_name",
-                    "last_name",
-                    "email",
-                    "phone",
-                    "birthdate",
+                    "profile",
                     "form_answer",
-                    "address",
                 )
             },
-        ),
-        (
-            "Responsable légal",
-            {"fields": ("email_resp", "phone_resp", "address_resp")},
         ),
         (
             "Sélection",
             {
                 "fields": (
                     "status",
-                    "nb_participations",
                     "notes",
                 ),
             },

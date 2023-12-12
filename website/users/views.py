@@ -49,7 +49,7 @@ from .forms import (
     PasswordUpdateForm,
     PersonalInfoForm,
 )
-from .models import User
+from .models import User, Profile
 
 # Extra message tags
 TAG_PERSONAL_INFO = "personal_info"
@@ -240,6 +240,10 @@ class LoginView(auth_views.LoginView):
     template_name = "users/login.html"
     form_class = AuthLoginForm
     redirect_authenticated_user = True
+
+class CreateProfileView(CreateView):
+    template_name = "users/profile_create.html"
+    model = Profile
 
 
 class RegisterView(RedirectURLMixin, CreateView):

@@ -123,3 +123,59 @@ class User(AbstractUser):
                 "Can download applications informations",
             ),
         ]
+
+class Profile(models.Model):
+    first_name = models.CharField(
+        verbose_name=_("Prénom"),
+        max_length=150,
+        null=False,
+        blank=False
+    )
+
+    last_name = models.CharField(
+        verbose_name=_("Nom de famille"),
+        max_length=150,
+        null=False,
+        blank=False,
+    )
+
+    birth_date = models.DateField(
+        verbose_name=_("Date de naissance"),
+        null=False,
+        blank=False
+    )
+
+    email = models.EmailField(
+        verbose_name=_("Adresse email de la participante")
+    )
+
+    phone = models.CharField(
+        verbose_name=_("Numéro de téléphone de la participante"),
+        blank=True,
+        max_length=16,
+    )
+
+    address = models.JSONField(
+        verbose_name=_("Adresse de la participante"),
+        default=dict
+    )
+
+    nb_participations = models.IntegerField(
+        verbose_name=_("Nombre de participations"),
+        blank=True,
+        null=True,
+        default=0,
+    )
+
+    responsable = models.ForeignKey(
+        to="users.Profile",
+        verbose_name=_("Profile du responsable"),
+        blank=False,
+        null=False,
+        on_delete=models.CASCADE,
+    )
+
+    school = models.JSONField(
+        verbose_name=_("Établissement scolaire de la participante"),
+        default=dict,
+    )

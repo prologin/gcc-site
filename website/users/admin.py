@@ -3,6 +3,30 @@ from django.contrib.auth.admin import UserAdmin as UpstreamUserAdmin
 
 from . import models
 
+@admin.register(models.Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    ordering = ("email", )
+    list_display = ("email", "first_name", "last_name", )
+    search_fields = ("first_name", "last_name", "email", )
+
+    fieldsets = (
+        (None, {
+            "fields": ("email", "first_name", "last_name", )
+        }),
+        ("Coordonnées", {
+            "fields": (
+                "phone",
+                "birth_date",
+                "address",
+            ),
+        }),
+        ("Responsable", {
+            "fields": (
+                "responsable",
+            )
+        })
+    )
+
 
 @admin.register(models.User)
 class UserAdmin(UpstreamUserAdmin):
