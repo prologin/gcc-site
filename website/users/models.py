@@ -125,6 +125,15 @@ class User(AbstractUser):
         ]
 
 class Profile(models.Model):
+
+    owner = models.ForeignKey(
+        to=User,
+        verbose_name=_("Utilisateur lié"),
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+    )
+
     first_name = models.CharField(
         verbose_name=_("Prénom"),
         max_length=150,
@@ -146,7 +155,8 @@ class Profile(models.Model):
     )
 
     email = models.EmailField(
-        verbose_name=_("Adresse email")
+        verbose_name=_("Adresse email"),
+        unique=True,
     )
 
     phone = models.CharField(

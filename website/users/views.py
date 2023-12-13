@@ -50,7 +50,7 @@ from .forms import (
     PersonalInfoForm,
     ProfileCreationForm,
 )
-from .models import User, Profile
+from users.models import User, Profile
 
 # Extra message tags
 TAG_PERSONAL_INFO = "personal_info"
@@ -252,7 +252,11 @@ class CreateProfileView(CreateView):
         if not values.is_valid():
             return HttpResponse(values.errors.as_json(), status=400)
 
-        return HttpResponse(values.cleaned_data, status=200)
+        profile = values.save(commit=False)
+        profile.owner = request.user;
+        profile.save()
+
+        return HttpResponse(status=201)
 
 
 class RegisterView(RedirectURLMixin, CreateView):

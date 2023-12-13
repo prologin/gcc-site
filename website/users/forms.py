@@ -26,9 +26,21 @@ from users import models
 
 
 class ProfileCreationForm(forms.ModelForm):
+
+    email = forms.EmailField(
+        label=_("Adresse email"),
+        required=True
+    )
+
     class Meta:
         model = models.Profile
-        fields = "__all__"
+        fields = (
+            "last_name",
+            "first_name",
+            "phone",
+            "birth_date",
+            "address",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
