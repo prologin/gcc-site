@@ -21,6 +21,8 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     search_fields = (
         "profile__first_name",
         "profile__last_name",
+        "responsable__first_name",
+        "responsable__last_name",
         "user__username",
         "user__first_name",
         "user__last_name",
@@ -40,6 +42,14 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
                 "fields": (
                     "profile",
                     "form_answer",
+                )
+            },
+        ),
+        (
+            "Informations responsable",
+            {
+                "fields": (
+                    "responsable",
                 )
             },
         ),

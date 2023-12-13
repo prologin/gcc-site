@@ -1,1 +1,6 @@
 {% extends "users/base_auth.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block form %}
+    {% crispy form %}
+{% endblock form %}

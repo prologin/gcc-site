@@ -246,6 +246,14 @@ class CreateProfileView(CreateView):
     template_name = "users/profile_create.html"
     form_class = ProfileCreationForm
 
+    @method_decorator(csrf_protect)
+    def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        values = self.form_class(request.POST)
+        if not values.is_valid():
+            return HttpResponse(values.errors.as_json(), status=400)
+
+        return HttpResponse(values.cleaned_data, status=200)
+
 
 class RegisterView(RedirectURLMixin, CreateView):
     template_name = "users/register.html"

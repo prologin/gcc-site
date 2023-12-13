@@ -51,6 +51,13 @@ class Application(models.Model):
         on_delete=models.CASCADE,
     )
 
+    responsable = models.ForeignKey(
+        to="users.Profile",
+        verbose_name=_("Profil du responsable légal"),
+        on_delete=models.CASCADE,
+        related_name="responsable",
+    )
+
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
     )

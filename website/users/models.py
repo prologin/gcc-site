@@ -146,36 +146,30 @@ class Profile(models.Model):
     )
 
     email = models.EmailField(
-        verbose_name=_("Adresse email de la participante")
+        verbose_name=_("Adresse email")
     )
 
     phone = models.CharField(
-        verbose_name=_("Numéro de téléphone de la participante"),
+        verbose_name=_("Numéro de téléphone"),
         blank=True,
         max_length=16,
     )
 
     address = models.JSONField(
-        verbose_name=_("Adresse de la participante"),
+        verbose_name=_("Adresse"),
         default=dict
     )
 
     nb_participations = models.IntegerField(
-        verbose_name=_("Nombre de participations"),
+        verbose_name=_("Nombre"),
         blank=True,
         null=True,
         default=0,
     )
 
-    responsable = models.ForeignKey(
-        to="users.Profile",
-        verbose_name=_("Profile du responsable"),
-        blank=False,
-        null=False,
-        on_delete=models.CASCADE,
-    )
-
     school = models.JSONField(
-        verbose_name=_("Établissement scolaire de la participante"),
+        verbose_name=_("Établissement scolaire"),
         default=dict,
+        blank=True,
+        null=True,
     )

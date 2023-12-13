@@ -22,34 +22,61 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from users import models
 
 
-class ProfileCreationForm(forms.Form):
-    email = forms.EmailField(
-        label=_("Email"),
-        max_length=150,
-    )
-    first_name = forms.CharField(
-        label=_("Prénom"),
-        max_length=150,
-        required=True,
-    )
+class ProfileCreationForm(forms.ModelForm):
+    class Meta:
+        model = models.Profile
+        fields = "__all__"
 
-    last_name = forms.CharField(
-        label=_("Nom de famille"),
-        max_length=150,
-        required=True,
-    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "profile_creation_form"
+        self.helper.form_method = "post"
+        self.helper.form_action = reverse_lazy("users:profiles_create")
 
-    birth_date = forms.DateField(
-        label=_("Date de naissance"),
-        required=True,
-    )
+        name_layout = Row(
+            Column(Field(
+                "email",
+                placeholder=self.fields["email"].label
+            )),
+            Column(Field(
+                "last_name",
+                placeholder=self.fields["last_name"].label
+            )),
+            Column(Field(
+                "first_name",
+                placeholder=self.fields["first_name"].label,
+            )),
+            Column(Field(
+                "phone",
+                placeholder=self.fields["phone"].label,
+            )),
+            Column(Field(
+                "birth_date",
+                placeholder=self.fields["birth_date"].label
+            )),
+            Column(Field(
+                "address",
+                placeholder=self.fields["address"].label
+            )),
+        )
 
-    phone = forms.CharField(
-        label=_("Numéro de téléphone"),
-        required=True
-    )
+        submit = Div(
+            Submit(
+                "submit-create_profile",
+                "Sauvegarder",
+                css_class="btn btn-primary btn-block",
+            ),
+            css_class="mt-4 p-0 col-12 col-md-4 offset-md-8 col",
+        )
+
+        self.helper.layout = Layout(
+            name_layout,
+            submit,
+        )
 
 class PersonalInfoForm(forms.Form):
     first_name = forms.CharField(label="Prénom", max_length=80, required=True)

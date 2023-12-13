@@ -42,9 +42,9 @@ urlpatterns = [
         name="export_users_csv",
     ),
     path(
-        "my-profiles/create", 
+        "profiles/create", 
         views.CreateProfileView.as_view(),
-        name="my_profiles_create",
+        name="profiles_create",
     ),
     path("login", views.LoginView.as_view(), name="login"),
     path("logout", auth_views.LogoutView.as_view(), name="logout"),
