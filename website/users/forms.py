@@ -49,31 +49,44 @@ class ProfileCreationForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = reverse_lazy("users:profiles_create")
 
+        # Utility function to format a label tag ahead of input groups
+        def labelize(s, required=False):
+            label_class = 'class="requiredField"' if required else ""
+            asterisk = (
+                '<span class="asteriskField">*</span>' if required else ""
+            )
+
+            return HTML(f"<label {label_class}>{s}{asterisk}</label>")
+
         name_layout = Row(
-            Column(Field(
+            Field(
                 "email",
                 placeholder=self.fields["email"].label
-            )),
-            Column(Field(
-                "last_name",
-                placeholder=self.fields["last_name"].label
-            )),
-            Column(Field(
-                "first_name",
-                placeholder=self.fields["first_name"].label,
-            )),
-            Column(Field(
+            ),
+            Row(
+                Column(Field(
+                    "last_name",
+                    placeholder=self.fields["last_name"].label
+                )),
+                Column(Field(
+                    "first_name",
+                    placeholder=self.fields["first_name"].label,
+                ))
+            ),
+            Row(
+                Column(Field(
                 "phone",
                 placeholder=self.fields["phone"].label,
-            )),
-            Column(Field(
-                "birth_date",
+                )),
+                Column(Field(
+                    "birth_date",
                 placeholder=self.fields["birth_date"].label
-            )),
-            Column(Field(
+                )),
+            ),
+            Field(
                 "address",
                 placeholder=self.fields["address"].label
-            )),
+            ),
         )
 
         submit = Div(
