@@ -21,24 +21,21 @@ class ProfileAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (
-            None,
+            "Informations participante",
             {
                 "fields": (
-                    "email",
                     "first_name",
                     "last_name",
+                    "email",
+                    "phone",
+                    "dob",
+                    "form_answer",
+                    "address",
                 )
             },
         ),
         (
-            "Coordonnées",
-            {
-                "fields": (
-                    "phone",
-                    "birth_date",
-                    "address",
-                ),
-            },
+            "Responsable légal",
+            {"fields": ("email_resp", "phone_resp", "address_resp")},
         ),
-        ("Responsable", {"fields": ("responsable",)}),
     )
