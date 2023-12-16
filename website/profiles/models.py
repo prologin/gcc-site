@@ -1,11 +1,11 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
-class Profile(models.Model):
 
+class Profile(models.Model):
     user = models.ForeignKey(
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
@@ -14,10 +14,7 @@ class Profile(models.Model):
     )
 
     first_name = models.CharField(
-        verbose_name=_("Prénom"),
-        max_length=150,
-        null=False,
-        blank=False
+        verbose_name=_("Prénom"), max_length=150, null=False, blank=False
     )
 
     last_name = models.CharField(
@@ -28,9 +25,7 @@ class Profile(models.Model):
     )
 
     birth_date = models.DateField(
-        verbose_name=_("Date de naissance"),
-        null=False,
-        blank=False
+        verbose_name=_("Date de naissance"), null=False, blank=False
     )
 
     email = models.EmailField(
@@ -44,10 +39,7 @@ class Profile(models.Model):
         max_length=16,
     )
 
-    address = models.JSONField(
-        verbose_name=_("Adresse"),
-        default=dict
-    )
+    address = models.JSONField(verbose_name=_("Adresse"), default=dict)
 
     nb_participations = models.IntegerField(
         verbose_name=_("Nombre"),
