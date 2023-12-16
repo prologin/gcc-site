@@ -15,4 +15,9 @@ urlpatterns = [
         views.ProfileListView.as_view(),
         name="profiles_list",
     ),
+    path(
+        "profiles/<int:id>",
+        views.ProfileDetailView.as_view(),
+        name="profile_detail",
+    ),
 ]

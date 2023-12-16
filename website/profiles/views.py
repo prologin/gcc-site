@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
 
 from profiles.forms import ProfileCreationForm
@@ -73,3 +73,7 @@ class ProfileListView(LoginRequiredMixin, ListView):
         profiles = super().get_queryset()
 
         return profiles
+
+
+class ProfileDetailView(DetailView):
+    template_name = ""

@@ -12,9 +12,39 @@
                 <div class="col-11 ">
                     <h1>Mes profils candidatures</h1>
 
-                    <ul>
-                        {% for entry in object_list %}<li>{{ entry.first_name }}</li>{% endfor %}
-                    </ul>
+                    {% for entry in object_list %}
+                        <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
+                            <div class="col-md">
+                                {# Name #}
+                                <div class="d-flex align-items-center">
+                                    <span class="fs-4 fw-bold pe-2">{{ entry.first_name | title }} {{ entry.last_name | title }}</span>
+                                </div>
+
+                                {# Email #}
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="far fa-regular fa-envelope"></i>
+                                    </div>
+                                    {{ entry.email }}
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                {# Location #}
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fas fa-location-dot"></i>
+                                    </div>
+                                    <div class="col">
+                                        {{ entry.center.address.zip_code }},
+                                        {{ entry.center.address.city }}
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="col-md-3" href="{% url 'profiles:profile_detail' entry.id %}">
+                                <button class="btn btn-primary btn-block">Voir ce profil</button>
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
