@@ -16,7 +16,7 @@ urlpatterns = [
         name="profiles_list",
     ),
     path(
-        "profiles/<int:id>",
+        "profiles/<int:pk>",
         views.ProfileDetailView.as_view(),
         name="profile_detail",
     ),
