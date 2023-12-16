@@ -26,7 +26,6 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
         if "submit-application" in request.POST:
             form = ProfileCreationForm(request.POST)
 
-            print(form)
             if not form.is_valid():
                 messages.warning(
                     request,
@@ -72,4 +71,5 @@ class ProfileListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         profiles = super().get_queryset()
-        return profiles.filter(user=self.request.user)
+
+        return profiles
