@@ -14,7 +14,10 @@
 
                     {% for entry in object_list %}
                         <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
-                            <div class="col-md">
+                            <div class="col-md m-2">
+                                <div class="d-flex align-items-center">
+                                    <span class="fs-4 pe-2">La participante:</span>
+                                </div>
                                 {# Name #}
                                 <div class="d-flex align-items-center">
                                     <span class="fs-4 fw-bold pe-2">{{ entry.first_name | title }} {{ entry.last_name | title }}</span>
@@ -31,12 +34,18 @@
                             <div class="col-md">
                                 {# Location #}
                                 <div class="row">
-                                    <div class="col-auto">
-                                        <i class="fas fa-location-dot"></i>
+                                    <span class="fs-4 pe-1">Le responable legal:</span>
+                                    {# Name #}
+                                    <div class="d-flex align-items-center">
+                                        <span class="fs-4 fw-bold pe-2">{{ entry.first_name_resp | title }} {{ entry.last_name_resp | title }}</span>
                                     </div>
-                                    <div class="col">
-                                        {{ entry.center.address.zip_code }},
-                                        {{ entry.center.address.city }}
+
+                                    {# Email #}
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <i class="far fa-regular fa-envelope"></i>
+                                        </div>
+                                        {{ entry.email_resp }}
                                     </div>
                                 </div>
                             </div>
