@@ -1,5 +1,4 @@
 import re
-from typing import Optional
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
@@ -15,7 +14,6 @@ from crispy_forms.layout import (
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from profiles import models
@@ -114,14 +112,16 @@ class ProfileCreationForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_applicant = forms.IntegerField(
+    zip_code_applicant = forms.CharField(
         label="",
+        max_length=16,
         required=True,
         widget=forms.TextInput(
-            attrs={"placeholder": "Code postal", "type": "number"}
+            attrs={
+                "placeholder": "Code postal",
+            }
         ),
     )
-
     country_applicant = forms.CharField(
         label="",
         max_length=30,
@@ -164,9 +164,7 @@ class ProfileCreationForm(forms.ModelForm):
 
     street_applicant_resp = forms.CharField(
         label="",
-        widget=forms.TextInput(
-            attrs={"placeholder": "Nom et numéro de voie du responsable légal"}
-        ),
+        widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie"}),
         max_length=250,
     )
 
@@ -174,7 +172,7 @@ class ProfileCreationForm(forms.ModelForm):
         label="",
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Complément d'adresse du responsable légal (si nécessaire)",
+                "placeholder": "Complément d'adresse",
                 "blank": True,
             }
         ),
@@ -186,18 +184,16 @@ class ProfileCreationForm(forms.ModelForm):
         label="",
         max_length=50,
         required=True,
-        widget=forms.TextInput(
-            attrs={"placeholder": "Ville du responsable légal"}
-        ),
+        widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_applicant_resp = forms.IntegerField(
+    zip_code_applicant_resp = forms.CharField(
         label="",
+        max_length=16,
         required=True,
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Code postal du responsable légal",
-                "type": "number",
+                "placeholder": "Code postal",
             }
         ),
     )
@@ -212,7 +208,7 @@ class ProfileCreationForm(forms.ModelForm):
 
     # Etablissement scolaire
 
-    name_school = forms.CharField(
+    school_name = forms.CharField(
         label="Nom",
         widget=forms.TextInput(
             attrs={"placeholder": "Nom de l'établissement scolaire"}
@@ -240,11 +236,14 @@ class ProfileCreationForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_school = forms.IntegerField(
+    zip_code_school = forms.CharField(
         label="",
+        max_length=16,
         required=True,
         widget=forms.TextInput(
-            attrs={"placeholder": "Code postal", "type": "number"}
+            attrs={
+                "placeholder": "Code postal",
+            }
         ),
     )
 
@@ -259,19 +258,28 @@ class ProfileCreationForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = (
-            "last_name",
             "first_name",
+            "last_name",
             "email",
+            "birth_date",
             "phone",
+            # Legal Guardian
             "first_name_resp",
             "last_name_resp",
             "email_resp",
-            "phone",
-            "school",
+            "phone_resp",
+            # School
+            "school_name",
         )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.instance.user = user
+        self.instance.address = models.Address()
+        self.instance.address_resp = models.Address()
+        self.instance.school_address = models.Address()
+
         self.helper = FormHelper()
         self.helper.form_id = "profile_creation_form"
         self.helper.form_method = "post"
@@ -374,7 +382,7 @@ class ProfileCreationForm(forms.ModelForm):
             ),
             Div(
                 HTML("<h2>Informations sur l'établissement scolaire</h2>"),
-                Field("name_school"),
+                Field("school_name"),
                 *address_school,
                 Div(
                     Row(
@@ -399,36 +407,8 @@ class ProfileCreationForm(forms.ModelForm):
             ),
         )
 
-    def clean_address(self) -> Optional[dict]:
-        if not self.is_valid():
-            return None
-        return {
-            "street": self.cleaned_data["street_applicant"],
-            "complement": self.cleaned_data["complement_applicant"],
-            "city": self.cleaned_data["city_applicant"],
-            "zip_code": self.cleaned_data["zip_code_applicant"],
-            "country": self.cleaned_data["country_applicant"],
-        }
-
-    def clean_address_resp(self) -> Optional[dict]:
-        if not self.is_valid():
-            return None
-        return {
-            "street": self.cleaned_data["street_applicant_resp"],
-            "complement": self.cleaned_data["complement_applicant_resp"],
-            "city": self.cleaned_data["city_applicant_resp"],
-            "zip_code": self.cleaned_data["zip_code_applicant_resp"],
-            "country": self.cleaned_data["country_applicant_resp"],
-        }
-
-    def clean_school_info(self) -> Optional[dict]:
-        if not self.is_valid():
-            return None
-        return {
-            "name": self.cleaned_data["name_school"],
-            "street": self.cleaned_data["street_school"],
-            "complement": self.cleaned_data["complement_school"],
-            "city": self.cleaned_data["city_school"],
-            "zip_code": self.cleaned_data["zip_code_school"],
-            "country": self.cleaned_data["country_school"],
-        }
+    def save(self):
+        self.instance.address.save()
+        self.instance.address_resp.save()
+        self.instance.school_address.save()
+        return super().save(commit=True)

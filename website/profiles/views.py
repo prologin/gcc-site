@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
@@ -30,31 +29,13 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
             )
             return self.form_invalid(form)
         else:
-            address = form.clean_address()
-
-            address_resp = form.clean_address_resp()
-
-            school = form.clean_school_info()
-
-            profile = Profile.objects.create(
-                user=self.request.user,
-                first_name=form.cleaned_data["first_name"],
-                last_name=form.cleaned_data["last_name"],
-                birth_date=form.cleaned_data["birth_date"],
-                email=form.cleaned_data["email"],
-                phone=form.cleaned_data["phone"],
-                address=address,
-                first_name_resp=form.cleaned_data["first_name_resp"],
-                last_name_resp=form.cleaned_data["last_name_resp"],
-                email_resp=form.cleaned_data["email_resp"],
-                phone_resp=form.cleaned_data["phone"],
-                address_resp=address_resp,
-                school=school,
-            )
-
             messages.success(request, "Votre profil a été enregistré !")
+            return self.form_valid(form)
 
-            return HttpResponseRedirect(self.success_url)
+    def get_form_kwargs(self):
+        kw = super().get_form_kwargs()
+        kw.update({"user": self.request.user})
+        return kw
 
 
 class ProfileListView(LoginRequiredMixin, ListView):
