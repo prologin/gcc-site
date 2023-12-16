@@ -17,15 +17,12 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+
 from profiles import models
 
 
 class ProfileCreationForm(forms.ModelForm):
-
-    email = forms.EmailField(
-        label=_("Adresse email"),
-        required=True
-    )
+    email = forms.EmailField(label=_("Adresse email"), required=True)
 
     is_women = forms.BooleanField(
         label=_("La participante se considère comme une femme."),
@@ -108,7 +105,7 @@ class ProfileCreationForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id = "profile_creation_form"
         self.helper.form_method = "post"
-        self.helper.form_action = reverse_lazy("users:profiles_create")
+        self.helper.form_action = reverse_lazy("profiles:profiles_create")
 
         # Utility function to format a label tag ahead of input groups
         def labelize(s, required=False):
@@ -131,35 +128,36 @@ class ProfileCreationForm(forms.ModelForm):
         )
 
         name_layout = Row(
-            Field(
-                "email",
-                placeholder=self.fields["email"].label
+            Field("email", placeholder=self.fields["email"].label),
+            Row(
+                Column(
+                    Field(
+                        "last_name", placeholder=self.fields["last_name"].label
+                    )
+                ),
+                Column(
+                    Field(
+                        "first_name",
+                        placeholder=self.fields["first_name"].label,
+                    )
+                ),
             ),
             Row(
-                Column(Field(
-                    "last_name",
-                    placeholder=self.fields["last_name"].label
-                )),
-                Column(Field(
-                    "first_name",
-                    placeholder=self.fields["first_name"].label,
-                ))
-            ),
-            Row(
-                Column(Field(
-                "phone",
-                placeholder=self.fields["phone"].label,
-                )),
-                Column(Field(
-                    "birth_date",
-                placeholder=self.fields["birth_date"].label
-                )),
+                Column(
+                    Field(
+                        "phone",
+                        placeholder=self.fields["phone"].label,
+                    )
+                ),
+                Column(
+                    Field(
+                        "birth_date",
+                        placeholder=self.fields["birth_date"].label,
+                    )
+                ),
             ),
             *address_applicant,
-            Field(
-                    "is_women",
-                placeholder=self.fields["birth_date"].label
-            ),
+            Field("is_women", placeholder=self.fields["birth_date"].label),
         )
 
         submit = Div(

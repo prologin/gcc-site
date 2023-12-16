@@ -6,28 +6,28 @@
 {% endblock form %}
 
 {% block content %}
-<div class="basic-background candidatures-background">
-<div class="container-fluid">
-    <div class="row justify-content-center mt-4">
-        <div class="col-11 ">
-            <h1 class="">Mes profils candidatures</h1>
+    <div class="basic-background candidatures-background">
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-4">
+                <div class="col-11 ">
+                    <h1>Mes profils candidatures</h1>
 
-            <form method="post" action="{% url 'applications:create_application' %}">
-                {% comment %}
+                    <form method="post" action="{% url 'profiles:profiles_create' %}">
+                        {% comment %}
                 The event id value attribute should be set
                 by JS when opening the modal.
-                {% endcomment %}
-                <input id="event-id-input" type="hidden" name="event-id">
+                        {% endcomment %}
+                        <input id="event-id-input" type="hidden" name="event-id">
 
-                {% crispy form %}
-            </form>
-            <div class="fst-italic fs-footnote">
-                Les champs avec un astérisque
-                <span class="asteriskField">*</span>
-                sont à remplir obligatoirement.
+                        {% crispy form %}
+                    </form>
+                    <div class="fst-italic fs-footnote">
+                        Les champs avec un astérisque
+                        <span class="asteriskField">*</span>
+                        sont à remplir obligatoirement.
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-{% endblock %}
+{% endblock content %}
