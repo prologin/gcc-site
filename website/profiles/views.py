@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 
 from profiles.forms import ProfileCreationForm
 from profiles.models import Profile
@@ -48,6 +48,20 @@ class ProfileListView(LoginRequiredMixin, ListView):
         return profiles
 
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = "profiles/profiles_detail.html"
+
+
+class DeleteProfileView(LoginRequiredMixin, DeleteView):
+    model = Profile
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        message.success(self.request, _("Le profile a été supprimé"))
+        return reverse("profiles:profiles")
+
+    def delete(self, request, *args, **kwargs):
+        return super().delete(reqest, *args, **kwargs)

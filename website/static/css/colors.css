@@ -49,6 +49,10 @@
     --bs-btn-disabled-border-color: #6c757d;
 }
 
+.btn-danger {
+    --bs-btn-border-radius: var(--global-border-radius);
+}
+
 /*
 .btn-secondary:hover, .btn-secondary:focus {
   color: var(--main-hover-color);

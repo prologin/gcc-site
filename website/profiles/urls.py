@@ -20,4 +20,9 @@ urlpatterns = [
         views.ProfileDetailView.as_view(),
         name="profile_detail",
     ),
+    path(
+        "profiles/delete",
+        views.DeleteProfileView.as_view(),
+        name="profile_delete",
+    ),
 ]
