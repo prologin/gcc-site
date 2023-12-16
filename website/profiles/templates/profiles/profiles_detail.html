@@ -1,0 +1,136 @@
+{% extends "gccsite/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block form %}
+    {% crispy form %}
+{% endblock form %}
+
+{% block content %}
+    <div class="basic-background candidatures-background">
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-4">
+                <div class="col-11 ">
+                    <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
+                        <h1>Mon Profil:</h1>
+                        <h2>Information de la participante :</h2>
+                        <div class="col-md m-2 ms-4 me-4">
+                            {# Name #}
+                            <div class="d-flex align-items-center">
+                                <span class="fs-4 fw-bold pe-2">{{ object.first_name | title }} {{ object.last_name | title }}</span>
+                            </div>
+
+                            {# Email #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="far fa-regular fa-envelope"></i>
+                                </div>
+                                {{ object.email }}
+                            </div>
+
+                            {# Phone number #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="far fa-solid fa-phone"></i>
+                                </div>
+                                {{ object.phone }}
+                            </div>
+
+                            {# Birth date #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                </div>
+                                {{ object.birth_date }}
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            {# Location #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fas fa-location-dot"></i>
+                                </div>
+                                <div class="col">
+                                    {{ object.address.street }},
+                                    {{ object.address.complement }}
+                                    <br>
+                                    {{ object.address.zip_code }},
+                                    {{ object.address.city }}
+                                    <br>
+                                    {{ object.address.country }}
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="mt-4">Information du responsable legal:</h2>
+                        <div class="col-md m-2 ms-4 me-4">
+                            {# Name #}
+                            <div class="d-flex align-items-center">
+                                <span class="fs-4 fw-bold pe-2">{{ object.first_name_resp | title }} {{ object.last_name_resp | title }}</span>
+                            </div>
+
+                            {# Email #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="far fa-regular fa-envelope"></i>
+                                </div>
+                                {{ object.email_resp }}
+                            </div>
+
+                            {# Phone number #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="far fa-solid fa-phone"></i>
+                                </div>
+                                {{ object.phone_resp }}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md">
+                            {# Location #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fas fa-location-dot"></i>
+                                </div>
+                                <div class="col">
+                                    {{ object.address_resp.street }},
+                                    {{ object.address_resp.complement }}
+                                    <br>
+                                    {{ object.address_resp.zip_code }},
+                                    {{ object.address_resp.city }}
+                                    <br>
+                                    {{ object.address_resp.country }}
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="mt-4">Etablissement scolaire de la participante:</h2>
+                        <div class="col-md m-2 ms-4 me-4">
+                            {# Name #}
+                            <div class="d-flex align-items-center">
+                                <span class="fs-4 fw-bold pe-2">{{ object.school.name }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            {# Location #}
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fas fa-location-dot"></i>
+                                </div>
+                                <div class="col">
+                                    {{ object.school.street }},
+                                    {{ object.school.complement }}
+                                    <br>
+                                    {{ object.school.zip_code }},
+                                    {{ object.school.city }}
+                                    <br>
+                                    {{ object.school.country }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
