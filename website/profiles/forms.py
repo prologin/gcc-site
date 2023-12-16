@@ -29,7 +29,7 @@ def phoneNumberTest(phone):
         raise ValidationError("Not a phone number")
 
 
-class ProfileCreationForm(forms.ModelForm):
+class ProfileCreationForm(forms.Form):
     # Info sur la participante
     first_name = forms.CharField(
         label="",
@@ -255,16 +255,6 @@ class ProfileCreationForm(forms.ModelForm):
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "Pays"}),
     )
-
-    class Meta:
-        model = models.Profile
-        fields = (
-            "last_name",
-            "first_name",
-            "phone",
-            "dob",
-            "address",
-        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

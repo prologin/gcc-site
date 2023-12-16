@@ -46,7 +46,7 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
                     user=user,
                     first_name=form.cleaned_data["first_name"],
                     last_name=form.cleaned_data["last_name"],
-                    dob=form.cleaned_data["birthdate"],
+                    birth_date=form.cleaned_data["dob"],
                     email=form.cleaned_data["email"],
                     phone=form.cleaned_data["phone"],
                     address=address,
