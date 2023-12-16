@@ -68,4 +68,5 @@ class ProfileListView(LoginRequiredMixin, ListView):
 
 
 class ProfileDetailView(DetailView):
-    template_name = ""
+    model = Profile
+    template_name = "profiles/profiles_detail.html"
