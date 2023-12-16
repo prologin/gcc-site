@@ -372,7 +372,6 @@ class ProfileCreationForm(forms.ModelForm):
                 HTML("<h2>Informations sur l'établissement scolaire</h2>"),
                 Field("name_school"),
                 *address_school,
-                Field("school_level"),
                 Div(
                     Row(
                         Column(
@@ -422,7 +421,6 @@ class ProfileCreationForm(forms.ModelForm):
         if not self.is_valid():
             return None
         return {
-            "school_level": self.cleaned_data["school_level"],
             "name": self.cleaned_data["name_school"],
             "street": self.cleaned_data["street_school"],
             "complement": self.cleaned_data["complement_school"],
