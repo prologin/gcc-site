@@ -7,26 +7,14 @@ from applications import models
 @admin.register(models.Application)
 class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     list_display = (
-        "user",
-        "first_name",
-        "last_name",
+        "profile",
         "status",
         "event",
     )
 
-    raw_id_fields = (
-        "user",
-        "event",
-    )
+    raw_id_fields = ("event",)
 
-    search_fields = (
-        "first_name",
-        "last_name",
-        "user__username",
-        "user__first_name",
-        "user__last_name",
-        "user__email",
-    )
+    search_fields = ()
 
     list_filter = (
         "status",
@@ -34,25 +22,7 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     )
 
     fieldsets = (
-        (None, {"fields": ("user", "event")}),
-        (
-            "Informations participante",
-            {
-                "fields": (
-                    "first_name",
-                    "last_name",
-                    "email",
-                    "phone",
-                    "dob",
-                    "form_answer",
-                    "address",
-                )
-            },
-        ),
-        (
-            "Responsable légal",
-            {"fields": ("email_resp", "phone_resp", "address_resp")},
-        ),
+        (None, {"fields": ("event",)}),
         (
             "Sélection",
             {

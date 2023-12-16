@@ -38,68 +38,11 @@ class Application(models.Model):
         related_name="applications",
     )
 
-    user = models.ForeignKey(
-        to=get_user_model(),
-        verbose_name=_("Utilisateur"),
+    profile = models.ForeignKey(
+        "profiles.Profile",
+        default=0,
+        verbose_name=_("Profile candidature"),
         on_delete=models.CASCADE,
-        related_name="applications",
-    )
-
-    first_name = models.CharField(
-        max_length=256,
-        verbose_name=_("Prénom de la participante"),
-    )
-
-    last_name = models.CharField(
-        max_length=256,
-        verbose_name=_("Nom de la participante"),
-    )
-
-    dob = models.DateField(
-        verbose_name=_("Date de naissance de la participante"),
-    )
-
-    email = models.EmailField(
-        verbose_name=_("Adresse email de la participante")
-    )
-
-    phone = models.CharField(
-        max_length=16,
-        blank=True,
-        verbose_name=_("Numéro de téléphone de la participante"),
-    )
-
-    address = models.JSONField(
-        verbose_name=_("Adresse de la participante"), default=dict
-    )
-
-    first_name_resp = models.CharField(
-        max_length=256,
-        verbose_name=_("Prénom du responsable légal"),
-    )
-
-    last_name_resp = models.CharField(
-        max_length=256,
-        verbose_name=_("Nom du responsable légal"),
-    )
-
-    email_resp = models.EmailField(
-        verbose_name=_("Adresse email du responable légal")
-    )
-
-    phone_resp = models.CharField(
-        max_length=16,
-        blank=True,
-        verbose_name=_("Numéro de téléphone du responsable légal"),
-    )
-
-    address_resp = models.JSONField(
-        verbose_name=_("Adresse du responsable légal"), default=dict
-    )
-
-    school = models.JSONField(
-        verbose_name=_("Etablissement scolaire de la participante"),
-        default=dict,
     )
 
     form_answer = models.JSONField(

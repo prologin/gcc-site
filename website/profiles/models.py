@@ -10,46 +10,68 @@ class Profile(models.Model):
         to=get_user_model(),
         verbose_name=_("Utilisateur"),
         on_delete=models.CASCADE,
-        related_name="profiles",
+        related_name="applications",
     )
 
     first_name = models.CharField(
-        verbose_name=_("Prénom"), max_length=150, null=False, blank=False
+        null=False,
+        max_length=256,
+        verbose_name=_("Prénom de la participante"),
     )
 
     last_name = models.CharField(
-        verbose_name=_("Nom de famille"),
-        max_length=150,
         null=False,
-        blank=False,
+        max_length=256,
+        verbose_name=_("Nom de la participante"),
     )
 
     birth_date = models.DateField(
-        verbose_name=_("Date de naissance"), null=False, blank=False
+        null=False,
+        verbose_name=_("Date de naissance de la participante"),
     )
 
     email = models.EmailField(
-        verbose_name=_("Adresse email"),
-        unique=True,
+        null=False, verbose_name=_("Adresse email de la participante")
     )
 
     phone = models.CharField(
-        verbose_name=_("Numéro de téléphone"),
-        blank=True,
         max_length=16,
+        blank=True,
+        verbose_name=_("Numéro de téléphone de la participante"),
     )
 
-    address = models.JSONField(verbose_name=_("Adresse"), default=dict)
+    address = models.JSONField(
+        verbose_name=_("Adresse de la participante"), default=dict
+    )
 
-    nb_participations = models.IntegerField(
-        verbose_name=_("Nombre"),
+    first_name_resp = models.CharField(
+        max_length=256,
+        default="",
+        verbose_name=_("Prénom du responsable légal"),
+    )
+
+    last_name_resp = models.CharField(
+        max_length=256,
+        default="",
+        verbose_name=_("Nom du responsable légal"),
+    )
+
+    email_resp = models.EmailField(
+        default="", verbose_name=_("Adresse email du responable légal")
+    )
+
+    phone_resp = models.CharField(
+        max_length=16,
         blank=True,
-        null=True,
-        default=0,
+        verbose_name=_("Numéro de téléphone du responsable légal"),
+    )
+
+    address_resp = models.JSONField(
+        verbose_name=_("Adresse du responsable légal"), default=dict
     )
 
     school = models.JSONField(
-        verbose_name=_("Établissement scolaire"),
+        verbose_name=_("Etablissement scolaire de la participante"),
         default=dict,
         blank=True,
         null=True,
