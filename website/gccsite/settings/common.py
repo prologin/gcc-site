@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "events",
     "users",
     "pages",
+    "profiles",
     "partners",
     "applications",
 ]
