@@ -263,28 +263,6 @@ class EventApplicationForm(forms.Form):
             ),
         )
 
-    def clean_address(self) -> Optional[dict]:
-        if not self.is_valid():
-            return None
-        return {
-            "street": self.cleaned_data["street_applicant"],
-            "complement": self.cleaned_data["complement_applicant"],
-            "city": self.cleaned_data["city_applicant"],
-            "zip_code": self.cleaned_data["zip_code_applicant"],
-            "country": self.cleaned_data["country_applicant"],
-        }
-
-    def clean_address_resp(self) -> Optional[dict]:
-        if not self.is_valid():
-            return None
-        return {
-            "street": self.cleaned_data["street_applicant_resp"],
-            "complement": self.cleaned_data["complement_applicant_resp"],
-            "city": self.cleaned_data["city_applicant_resp"],
-            "zip_code": self.cleaned_data["zip_code_applicant_resp"],
-            "country": self.cleaned_data["country_applicant_resp"],
-        }
-
     def clean_school_info(self) -> Optional[dict]:
         if not self.is_valid():
             return None
