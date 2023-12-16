@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 
@@ -12,7 +13,7 @@ from profiles.models import Profile
 # Create your views here.
 
 
-class CreateProfileView(CreateView):
+class CreateProfileView(LoginRequiredMixin, CreateView):
     template_name = "profiles/create_profiles.html"
     form_class = ProfileCreationForm
     success_url = reverse_lazy("profiles:profile_list")  # TODO: Update this
@@ -33,7 +34,7 @@ class CreateProfileView(CreateView):
                 )
                 return HttpResponseRedirect(redirect_url)
             else:
-                user = User.objects.get(id=request.user.id)
+                user = get_user_model().objects.get(id=request.user.id)
 
                 address = form.clean_address()
 
@@ -41,7 +42,7 @@ class CreateProfileView(CreateView):
 
                 school = form.clean_school_info()
 
-                application = Application.objects.create(
+                profile = Profile.objects.create(
                     user=user,
                     first_name=form.cleaned_data["first_name"],
                     last_name=form.cleaned_data["last_name"],
