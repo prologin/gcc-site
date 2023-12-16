@@ -28,8 +28,7 @@ class ProfileAdmin(admin.ModelAdmin):
                     "last_name",
                     "email",
                     "phone",
-                    "dob",
-                    "form_answer",
+                    "birth_date",
                     "address",
                 )
             },

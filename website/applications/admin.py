@@ -29,6 +29,7 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
                 "fields": (
                     "status",
                     "nb_participations",
+                    "form_answer",
                     "notes",
                 ),
             },
