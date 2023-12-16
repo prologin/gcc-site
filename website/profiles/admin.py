@@ -20,6 +20,7 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
     fieldsets = (
+        (None, {"fields": ("user",)}),
         (
             "Informations participante",
             {
@@ -36,5 +37,9 @@ class ProfileAdmin(admin.ModelAdmin):
         (
             "Responsable légal",
             {"fields": ("email_resp", "phone_resp", "address_resp")},
+        ),
+        (
+            "Établissement scolaire",
+            {"fields": ("school",)},
         ),
     )

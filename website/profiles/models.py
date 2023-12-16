@@ -76,3 +76,6 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
+
+    def __str__(self) -> str:
+        return f"<Profile ({self.first_name} {self.last_name} - {self.user})>"
