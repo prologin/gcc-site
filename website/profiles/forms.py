@@ -43,7 +43,7 @@ class ProfileCreationForm(forms.ModelForm):
         max_length=255,
     )
 
-    dob = forms.DateField(
+    birth_date = forms.DateField(
         label="Date de naissance",
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
     )
@@ -261,9 +261,13 @@ class ProfileCreationForm(forms.ModelForm):
         fields = (
             "last_name",
             "first_name",
+            "email",
             "phone",
-            "dob",
-            "address",
+            "first_name_resp",
+            "last_name_resp",
+            "email_resp",
+            "phone",
+            "school",
         )
 
     def __init__(self, *args, **kwargs):
@@ -271,7 +275,7 @@ class ProfileCreationForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id = "profile_creation_form"
         self.helper.form_method = "post"
-        self.helper.form_action = reverse_lazy("profiles:profiles_create")
+        # self.helper.form_action = reverse_lazy("profiles:profiles_create")
 
         # Utility function to format a label tag ahead of input groups
         def labelize(s, required=False):
@@ -321,7 +325,7 @@ class ProfileCreationForm(forms.ModelForm):
                     Column(Field("first_name")),
                     Column(Field("last_name")),
                 ),
-                Field("dob"),
+                Field("birth_date"),
                 Field("email"),
                 Field("phone"),
                 *address_applicant,
