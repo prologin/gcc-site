@@ -3,20 +3,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Address(models.Model):
-    street = models.CharField(
-        max_length=64, verbose_name=_("Nom et numéro de voie")
-    )
-    complement = models.CharField(
-        max_length=64,
-        blank=True,
-        verbose_name=_("Complément d'adressse (si nécessaire)"),
-    )
-    city = models.CharField(max_length=64, verbose_name=_("Ville"))
-    zipcode = models.CharField(max_length=16, verbose_name=_("Code postal"))
-    country = models.CharField(max_length=32, verbose_name=_("Pays"))
-
-
 # Create your models here.
 class Profile(models.Model):
     user = models.ForeignKey(
@@ -55,12 +41,20 @@ class Profile(models.Model):
         verbose_name=_("Numéro de téléphone de la participante"),
     )
 
-    address = models.OneToOneField(
-        Address,
-        related_name="+",
-        on_delete=models.CASCADE,
-        verbose_name=_("Adresse de la participante"),
+    # Address applicant
+    street_app = models.CharField(
+        max_length=64, verbose_name=_("Nom et numéro de voie")
     )
+    complement_app = models.CharField(
+        max_length=64,
+        blank=True,
+        verbose_name=_("Complément d'adressse (si nécessaire)"),
+    )
+    city_app = models.CharField(max_length=64, verbose_name=_("Ville"))
+    zipcode_app = models.CharField(
+        max_length=16, verbose_name=_("Code postal")
+    )
+    country_app = models.CharField(max_length=32, verbose_name=_("Pays"))
 
     # Legal Guardian
 
@@ -84,12 +78,19 @@ class Profile(models.Model):
         verbose_name=_("Numéro de téléphone du responsable légal"),
     )
 
-    address_resp = models.OneToOneField(
-        Address,
-        related_name="+",
-        on_delete=models.CASCADE,
-        verbose_name=_("Adresse du responsable légal"),
+    street_resp = models.CharField(
+        max_length=64, verbose_name=_("Nom et numéro de voie")
     )
+    complement_resp = models.CharField(
+        max_length=64,
+        blank=True,
+        verbose_name=_("Complément d'adressse (si nécessaire)"),
+    )
+    city_resp = models.CharField(max_length=64, verbose_name=_("Ville"))
+    zipcode_resp = models.CharField(
+        max_length=16, verbose_name=_("Code postal")
+    )
+    country_resp = models.CharField(max_length=32, verbose_name=_("Pays"))
 
     # School
 
@@ -98,12 +99,19 @@ class Profile(models.Model):
         verbose_name=_("Etablissement scolaire de la participante"),
     )
 
-    school_address = models.OneToOneField(
-        Address,
-        related_name="+",
-        on_delete=models.CASCADE,
-        verbose_name=_("Adresse de l'établissement scolaire"),
+    street_school = models.CharField(
+        max_length=64, verbose_name=_("Nom et numéro de voie")
     )
+    complement_school = models.CharField(
+        max_length=64,
+        blank=True,
+        verbose_name=_("Complément d'adressse (si nécessaire)"),
+    )
+    city_school = models.CharField(max_length=64, verbose_name=_("Ville"))
+    zipcode_school = models.CharField(
+        max_length=16, verbose_name=_("Code postal")
+    )
+    country_school = models.CharField(max_length=32, verbose_name=_("Pays"))
 
     def __str__(self) -> str:
         return f"<Profile ({self.first_name} {self.last_name} - {self.user})>"

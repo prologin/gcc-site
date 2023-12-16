@@ -87,13 +87,13 @@ class ProfileCreationForm(forms.ModelForm):
 
     # Adresse de la participante
 
-    street_applicant = forms.CharField(
+    street_app = forms.CharField(
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie"}),
         max_length=250,
     )
 
-    complement_applicant = forms.CharField(
+    complement_app = forms.CharField(
         label="",
         widget=forms.TextInput(
             attrs={
@@ -105,14 +105,14 @@ class ProfileCreationForm(forms.ModelForm):
         required=False,
     )
 
-    city_applicant = forms.CharField(
+    city_app = forms.CharField(
         label="",
         max_length=50,
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_applicant = forms.CharField(
+    zipcode_app = forms.CharField(
         label="",
         max_length=16,
         required=True,
@@ -122,7 +122,7 @@ class ProfileCreationForm(forms.ModelForm):
             }
         ),
     )
-    country_applicant = forms.CharField(
+    country_app = forms.CharField(
         label="",
         max_length=30,
         initial="France",
@@ -162,13 +162,13 @@ class ProfileCreationForm(forms.ModelForm):
         ),
     )
 
-    street_applicant_resp = forms.CharField(
+    street_resp = forms.CharField(
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Nom et numéro de voie"}),
         max_length=250,
     )
 
-    complement_applicant_resp = forms.CharField(
+    complement_resp = forms.CharField(
         label="",
         widget=forms.TextInput(
             attrs={
@@ -180,14 +180,14 @@ class ProfileCreationForm(forms.ModelForm):
         required=False,
     )
 
-    city_applicant_resp = forms.CharField(
+    city_resp = forms.CharField(
         label="",
         max_length=50,
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_applicant_resp = forms.CharField(
+    zipcode_resp = forms.CharField(
         label="",
         max_length=16,
         required=True,
@@ -198,7 +198,7 @@ class ProfileCreationForm(forms.ModelForm):
         ),
     )
 
-    country_applicant_resp = forms.CharField(
+    country_resp = forms.CharField(
         label="",
         max_length=30,
         initial="France",
@@ -236,7 +236,7 @@ class ProfileCreationForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"placeholder": "Ville"}),
     )
 
-    zip_code_school = forms.CharField(
+    zipcode_school = forms.CharField(
         label="",
         max_length=16,
         required=True,
@@ -263,22 +263,34 @@ class ProfileCreationForm(forms.ModelForm):
             "email",
             "birth_date",
             "phone",
+            "street_app",
+            "complement_app",
+            "city_app",
+            "zipcode_app",
+            "country_app",
             # Legal Guardian
             "first_name_resp",
             "last_name_resp",
             "email_resp",
             "phone_resp",
+            "street_resp",
+            "complement_resp",
+            "city_resp",
+            "zipcode_resp",
+            "country_resp",
             # School
             "school_name",
+            "street_school",
+            "complement_school",
+            "city_school",
+            "zipcode_school",
+            "country_school",
         )
 
     def __init__(self, *args, user, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.instance.user = user
-        self.instance.address = models.Address()
-        self.instance.address_resp = models.Address()
-        self.instance.school_address = models.Address()
 
         self.helper = FormHelper()
         self.helper.form_id = "profile_creation_form"
@@ -296,22 +308,22 @@ class ProfileCreationForm(forms.ModelForm):
 
         address_applicant = (
             labelize("Adresse", True),
-            Field("street_applicant"),
-            Field("complement_applicant"),
-            Field("city_applicant"),
+            Field("street_app"),
+            Field("complement_app"),
+            Field("city_app"),
             Row(
-                Column(Field("zip_code_applicant")),
-                Column(Field("country_applicant")),
+                Column(Field("zipcode_app")),
+                Column(Field("country_app")),
             ),
         )
         address_applicant_resp = (
             labelize("Adresse", True),
-            Field("street_applicant_resp"),
-            Field("complement_applicant_resp"),
-            Field("city_applicant_resp"),
+            Field("street_resp"),
+            Field("complement_resp"),
+            Field("city_resp"),
             Row(
-                Column(Field("zip_code_applicant_resp")),
-                Column(Field("country_applicant_resp")),
+                Column(Field("zipcode_resp")),
+                Column(Field("country_resp")),
             ),
         )
         address_school = (
@@ -320,7 +332,7 @@ class ProfileCreationForm(forms.ModelForm):
             Field("complement_school"),
             Field("city_school"),
             Row(
-                Column(Field("zip_code_school")),
+                Column(Field("zipcode_school")),
                 Column(Field("country_school")),
             ),
         )
@@ -406,9 +418,3 @@ class ProfileCreationForm(forms.ModelForm):
                 css_class="tab",
             ),
         )
-
-    def save(self):
-        self.instance.address.save()
-        self.instance.address_resp.save()
-        self.instance.school_address.save()
-        return super().save(commit=True)

@@ -30,16 +30,39 @@ class ProfileAdmin(admin.ModelAdmin):
                     "email",
                     "phone",
                     "birth_date",
-                    "address",
+                    "street_app",
+                    "complement_app",
+                    "city_app",
+                    "zipcode_app",
+                    "country_app",
                 )
             },
         ),
         (
             "Responsable légal",
-            {"fields": ("email_resp", "phone_resp", "address_resp")},
+            {
+                "fields": (
+                    "email_resp",
+                    "phone_resp",
+                    "street_resp",
+                    "complement_resp",
+                    "city_resp",
+                    "zipcode_resp",
+                    "country_resp",
+                )
+            },
         ),
         (
             "Établissement scolaire",
-            {"fields": ("school",)},
+            {
+                "fields": (
+                    "school_name",
+                    "street_school",
+                    "complement_school",
+                    "city_school",
+                    "zipcode_school",
+                    "country_school",
+                )
+            },
         ),
     )
