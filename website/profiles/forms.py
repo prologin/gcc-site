@@ -368,4 +368,63 @@ class ProfileCreationForm(forms.ModelForm):
                 ),
                 css_class="tab",
             ),
+            Div(
+                HTML("<h2>Informations sur l'établissement scolaire</h2>"),
+                Field("name_school"),
+                *address_school,
+                Div(
+                    Row(
+                        Column(
+                            Button(
+                                name="back",
+                                value="Retour",
+                                css_class="my-4 btn btn-light btn-block",
+                            ),
+                        ),
+                        Column(
+                            Submit(
+                                name="submit-application",
+                                value="Créer mon profil",
+                                css_class="my-4 btn btn-primary btn-block",
+                            )
+                        ),
+                    ),
+                    css_class="mt-4 p-0",
+                ),
+                css_class="tab",
+            ),
         )
+
+    def clean_address(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "street": self.cleaned_data["street_applicant"],
+            "complement": self.cleaned_data["complement_applicant"],
+            "city": self.cleaned_data["city_applicant"],
+            "zip_code": self.cleaned_data["zip_code_applicant"],
+            "country": self.cleaned_data["country_applicant"],
+        }
+
+    def clean_address_resp(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "street": self.cleaned_data["street_applicant_resp"],
+            "complement": self.cleaned_data["complement_applicant_resp"],
+            "city": self.cleaned_data["city_applicant_resp"],
+            "zip_code": self.cleaned_data["zip_code_applicant_resp"],
+            "country": self.cleaned_data["country_applicant_resp"],
+        }
+
+    def clean_school_info(self) -> Optional[dict]:
+        if not self.is_valid():
+            return None
+        return {
+            "name": self.cleaned_data["name_school"],
+            "street": self.cleaned_data["street_school"],
+            "complement": self.cleaned_data["complement_school"],
+            "city": self.cleaned_data["city_school"],
+            "zip_code": self.cleaned_data["zip_code_school"],
+            "country": self.cleaned_data["country_school"],
+        }
