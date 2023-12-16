@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
 
 from profiles.forms import ProfileCreationForm
@@ -26,7 +26,6 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
         if "submit-application" in request.POST:
             form = ProfileCreationForm(request.POST)
 
-            print(form)
             if not form.is_valid():
                 messages.warning(
                     request,
@@ -72,4 +71,9 @@ class ProfileListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         profiles = super().get_queryset()
-        return profiles.filter(user=self.request.user)
+
+        return profiles
+
+
+class ProfileDetailView(DetailView):
+    template_name = ""
