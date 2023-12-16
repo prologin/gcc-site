@@ -36,7 +36,15 @@ class ProfileAdmin(admin.ModelAdmin):
         ),
         (
             "Responsable légal",
-            {"fields": ("email_resp", "phone_resp", "address_resp")},
+            {
+                "fields": (
+                    "first_name_resp",
+                    "last_name_resp",
+                    "email_resp",
+                    "phone_resp",
+                    "address_resp",
+                )
+            },
         ),
         (
             "Établissement scolaire",
