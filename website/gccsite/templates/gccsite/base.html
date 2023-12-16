@@ -39,6 +39,12 @@
 
                     {% include "gccsite/partial/header.html" %}
 
+                    {% for msg in messages %}
+                        <div class="mt-2 alert alert-{{ msg.level_tag }}" role="alert">
+                            {{ msg.message }}
+                        </div>
+                    {% endfor %}
+
                     {% block content %}
                     {% endblock content %}
 
