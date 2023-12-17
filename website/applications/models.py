@@ -76,8 +76,10 @@ class Application(models.Model):
 
     @staticmethod
     def _transition_perm_user_or_staff(instance, user):
-        return instance.user == user or user.has_perm(
-            "applications.manage_applications"
+        return (
+            instance.profile
+            and instance.profile.user == user
+            or user.has_perm("applications.manage_applications")
         )
 
     @staticmethod
