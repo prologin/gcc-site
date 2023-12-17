@@ -60,7 +60,7 @@ class DeleteProfileView(LoginRequiredMixin, DeleteView):
         return self.request.user
 
     def get_success_url(self):
-        messages.success(self.request, _("Le profile a été supprimé"))
+        messages.success(self.request, _("Le profil a été supprimé"))
         return reverse("profiles:profiles")
 
     def delete(self, request, *args, **kwargs):
