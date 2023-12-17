@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_fsm import FSMIntegerField, transition
 
+from profiles.models import Profile
+
 
 class ApplicationStatus(models.IntegerChoices):
     REJECTED = -3, _("Candidature rejetée")
@@ -38,77 +40,16 @@ class Application(models.Model):
         related_name="applications",
     )
 
-    user = models.ForeignKey(
-        to=get_user_model(),
-        verbose_name=_("Utilisateur"),
-        on_delete=models.CASCADE,
+    profile = models.ForeignKey(
+        to=Profile,
+        verbose_name=_("Profil"),
+        on_delete=models.SET_NULL,
         related_name="applications",
-    )
-
-    first_name = models.CharField(
-        max_length=256,
-        verbose_name=_("Prénom de la participante"),
-    )
-
-    last_name = models.CharField(
-        max_length=256,
-        verbose_name=_("Nom de la participante"),
-    )
-
-    birthdate = models.DateField(
-        verbose_name=_("Date de naissance de la participante"),
-    )
-
-    email = models.EmailField(
-        verbose_name=_("Adresse email de la participante")
-    )
-
-    phone = models.CharField(
-        max_length=16,
-        blank=True,
-        verbose_name=_("Numéro de téléphone de la participante"),
-    )
-
-    address = models.JSONField(
-        verbose_name=_("Adresse de la participante"), default=dict
-    )
-
-    first_name_resp = models.CharField(
-        max_length=256,
-        verbose_name=_("Prénom du responsable légal"),
-    )
-
-    last_name_resp = models.CharField(
-        max_length=256,
-        verbose_name=_("Nom du responsable légal"),
-    )
-
-    email_resp = models.EmailField(
-        verbose_name=_("Adresse email du responable légal")
-    )
-
-    phone_resp = models.CharField(
-        max_length=16,
-        blank=True,
-        verbose_name=_("Numéro de téléphone du responsable légal"),
-    )
-
-    address_resp = models.JSONField(
-        verbose_name=_("Adresse du responsable légal"), default=dict
-    )
-
-    school = models.JSONField(
-        verbose_name=_("Etablissement scolaire de la participante"),
-        default=dict,
+        null=True,
     )
 
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
-    )
-
-    nb_participations = models.CharField(
-        default="",
-        verbose_name=_("Nombre de participations de la participante"),
     )
 
     notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
@@ -128,7 +69,10 @@ class Application(models.Model):
     objects = ApplicationManager()
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}@{self.event}"
+        if self.profile:
+            return f"{self.profile}({self.profile.user_id})@{self.event}"
+        else:
+            return f"-@{self.event}"
 
     @staticmethod
     def _transition_perm_user_or_staff(instance, user):

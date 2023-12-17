@@ -7,25 +7,24 @@ from applications import models
 @admin.register(models.Application)
 class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     list_display = (
-        "user",
-        "first_name",
-        "last_name",
+        "profile",
         "status",
         "event",
     )
 
     raw_id_fields = (
-        "user",
+        "profile",
         "event",
     )
 
     search_fields = (
-        "first_name",
-        "last_name",
-        "user__username",
-        "user__first_name",
-        "user__last_name",
-        "user__email",
+        "profile__user__username",
+        "profile__user__first_name",
+        "profile__user__last_name",
+        "profile__user__email",
+        "profile__first_name",
+        "profile__last_name",
+        "profile__email",
     )
 
     list_filter = (
@@ -34,39 +33,27 @@ class ApplicationAdmin(FSMTransitionMixin, admin.ModelAdmin):
     )
 
     fieldsets = (
-        (None, {"fields": ("user", "event")}),
+        (None, {"fields": ("profile", "event")}),
         (
             "Informations participante",
-            {
-                "fields": (
-                    "first_name",
-                    "last_name",
-                    "email",
-                    "phone",
-                    "birthdate",
-                    "form_answer",
-                    "address",
-                )
-            },
-        ),
-        (
-            "Responsable légal",
-            {"fields": ("email_resp", "phone_resp", "address_resp")},
+            {"fields": ("form_answer",)},
         ),
         (
             "Sélection",
             {
                 "fields": (
                     "status",
-                    "nb_participations",
                     "notes",
+                    # TODO: Add a "nb_participation" property to the profile model
                 ),
             },
         ),
     )
 
+    ordering = ["-created_at"]
+
     fsm_field = ["status"]
-    readonly_fields = ["status"]
+    readonly_fields = ["status", "created_at"]
 
 
 @admin.register(models.ApplicationLabel)
