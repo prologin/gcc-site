@@ -11,8 +11,8 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-11 ">
                     <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
-                        <h1>Mon Profil:</h1>
-                        <h2>Information de la participante :</h2>
+                        <h1>Mon Profil</h1>
+                        <h2>Information de la participante</h2>
                         <div class="col-md m-2 ms-4 me-4">
                             {# Name #}
                             <div class="d-flex align-items-center">
@@ -51,17 +51,17 @@
                                     <i class="fas fa-location-dot"></i>
                                 </div>
                                 <div class="col">
-                                    {{ object.address.street }},
-                                    {{ object.address.complement }}
+                                    {{ object.street_app }},
+                                    {{ object.complement_app }}
                                     <br>
-                                    {{ object.address.zip_code }},
-                                    {{ object.address.city }}
+                                    {{ object.zipcode_app }},
+                                    {{ object.city_app }}
                                     <br>
-                                    {{ object.address.country }}
+                                    {{ object.country_app }}
                                 </div>
                             </div>
                         </div>
-                        <h2 class="mt-4">Information du responsable legal:</h2>
+                        <h2 class="mt-4">Information du responsable légal</h2>
                         <div class="col-md m-2 ms-4 me-4">
                             {# Name #}
                             <div class="d-flex align-items-center">
@@ -93,21 +93,21 @@
                                     <i class="fas fa-location-dot"></i>
                                 </div>
                                 <div class="col">
-                                    {{ object.address_resp.street }},
-                                    {{ object.address_resp.complement }}
+                                    {{ object.street_resp }},
+                                    {{ object.complement_resp }}
                                     <br>
-                                    {{ object.address_resp.zip_code }},
-                                    {{ object.address_resp.city }}
+                                    {{ object.zipcode_resp }},
+                                    {{ object.city_resp }}
                                     <br>
-                                    {{ object.address_resp.country }}
+                                    {{ object.country_resp }}
                                 </div>
                             </div>
                         </div>
-                        <h2 class="mt-4">Etablissement scolaire de la participante:</h2>
+                        <h2 class="mt-4">Établissement scolaire de la participante</h2>
                         <div class="col-md m-2 ms-4 me-4">
                             {# Name #}
                             <div class="d-flex align-items-center">
-                                <span class="fs-4 fw-bold pe-2">{{ object.school.name }}</span>
+                                <span class="fs-5 fw-bold pe-2">{{ object.school_name }}</span>
                             </div>
                         </div>
 
@@ -118,13 +118,13 @@
                                     <i class="fas fa-location-dot"></i>
                                 </div>
                                 <div class="col">
-                                    {{ object.school.street }},
-                                    {{ object.school.complement }}
+                                    {{ object.street_school }},
+                                    {{ object.complement_school }}
                                     <br>
-                                    {{ object.school.zip_code }},
-                                    {{ object.school.city }}
+                                    {{ object.zipcode_school }},
+                                    {{ object.city_school }}
                                     <br>
-                                    {{ object.school.country }}
+                                    {{ object.country_school }}
                                 </div>
                             </div>
                         </div>
