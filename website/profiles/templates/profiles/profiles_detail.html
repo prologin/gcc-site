@@ -7,128 +7,89 @@
 
 {% block content %}
     <div class="content-viewport bg-half-3">
-        <div class="container-fluid">
-            <div class="row justify-content-center mt-4">
-                <div class="col-11 ">
-                    <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
-                        <h1>Mon Profil</h1>
-                        <h2>Information de la participante</h2>
-                        <div class="col-md m-2 ms-4 me-4">
-                            {# Name #}
-                            <div class="d-flex align-items-center">
-                                <span class="fs-4 fw-bold pe-2">{{ object.first_name | title }} {{ object.last_name | title }}</span>
-                            </div>
-
-                            {# Email #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="far fa-regular fa-envelope"></i>
-                                </div>
-                                {{ object.email }}
-                            </div>
-
-                            {# Phone number #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="far fa-solid fa-phone"></i>
-                                </div>
-                                {{ object.phone }}
-                            </div>
-
-                            {# Birth date #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="fa-solid fa-cake-candles"></i>
-                                </div>
-                                {{ object.birth_date }}
-                            </div>
+        <div class="container bg-white rounded-3 mt-5 p-3">
+            <h1>Détail du profil</h1>
+            <div class="row justify-content-center">
+                <div class="col-md">
+                    <span class="fs-3 fw-bold">Candidate</span>
+                    <br />
+                    <span class="fs-5 fw-bold pe-2">{{ object.first_name | title }} {{ object.last_name | title }}</span>
+                    <div class="row">
+                        <div class="col-sm">
+                            <span><i class="far fa-regular fa-envelope"></i> {{ object.email }}</span>
+                            <br />
+                            <span><i class="far fa-solid fa-phone"></i> {{ object.phone }}</span>
+                            <br />
+                            <span><i class="far fa-solid fa-cake-candles"></i> {{ object.birth_date }}</span>
                         </div>
-
-                        <div class="col-md">
-                            {# Location #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="fas fa-location-dot"></i>
-                                </div>
-                                <div class="col">
-                                    {{ object.street_app }},
-                                    {{ object.complement_app }}
-                                    <br>
+                        <div class="col-sm d-flex align-items-center">
+                            <i class="fas fa-location-dot"></i>
+                            <div class="ps-2">
+                                <span>
+                                    {{ object.street_app }}
+                                    {% if object.complement_app %}, {{ object.complement_app }}{% endif %}
+                                    <br />
                                     {{ object.zipcode_app }},
                                     {{ object.city_app }}
-                                    <br>
+                                    <br />
                                     {{ object.country_app }}
-                                </div>
-                            </div>
-                        </div>
-                        <h2 class="mt-4">Information du responsable légal</h2>
-                        <div class="col-md m-2 ms-4 me-4">
-                            {# Name #}
-                            <div class="d-flex align-items-center">
-                                <span class="fs-4 fw-bold pe-2">{{ object.first_name_resp | title }} {{ object.last_name_resp | title }}</span>
-                            </div>
-
-                            {# Email #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="far fa-regular fa-envelope"></i>
-                                </div>
-                                {{ object.email_resp }}
-                            </div>
-
-                            {# Phone number #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="far fa-solid fa-phone"></i>
-                                </div>
-                                {{ object.phone_resp }}
-                            </div>
-
-                        </div>
-
-                        <div class="col-md">
-                            {# Location #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="fas fa-location-dot"></i>
-                                </div>
-                                <div class="col">
-                                    {{ object.street_resp }},
-                                    {{ object.complement_resp }}
-                                    <br>
-                                    {{ object.zipcode_resp }},
-                                    {{ object.city_resp }}
-                                    <br>
-                                    {{ object.country_resp }}
-                                </div>
-                            </div>
-                        </div>
-                        <h2 class="mt-4">Établissement scolaire de la participante</h2>
-                        <div class="col-md m-2 ms-4 me-4">
-                            {# Name #}
-                            <div class="d-flex align-items-center">
-                                <span class="fs-5 fw-bold pe-2">{{ object.school_name }}</span>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            {# Location #}
-                            <div class="row">
-                                <div class="col-auto">
-                                    <i class="fas fa-location-dot"></i>
-                                </div>
-                                <div class="col">
-                                    {{ object.street_school }},
-                                    {{ object.complement_school }}
-                                    <br>
-                                    {{ object.zipcode_school }},
-                                    {{ object.city_school }}
-                                    <br>
-                                    {{ object.country_school }}
-                                </div>
+                                </span>
                             </div>
                         </div>
                     </div>
+
+                </div>
+                <div class="col-md">
+                    <span class="fs-3 fw-bold">Responsable Légal</span>
+                    <br />
+                    <span class="fs-5 fw-bold pe-2">{{ object.first_name_resp | title }} {{ object.last_name_resp | title }}</span>
+                    <div class="row">
+                        <div class="col-sm">
+                            <span><i class="far fa-regular fa-envelope"></i> {{ object.email_resp }}</span>
+                            <br />
+                            <span><i class="far fa-solid fa-phone"></i> {{ object.phone_resp }}</span>
+                        </div>
+                        <div class="col-sm d-flex align-items-center">
+                            <i class="fas fa-location-dot"></i>
+                            <div class="ps-2">
+                                <span>
+                                    {{ object.street_resp }}
+                                    {% if object.complement_resp %}, {{ object.complement_resp }}{% endif %}
+                                    <br />
+                                    {{ object.zipcode_resp }},
+                                    {{ object.city_resp }}
+                                    <br />
+                                    {{ object.country_resp }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-md-4">
+                <div class="col-md">
+                    <span class="fs-3 fw-bold">Établissement Scolaire</span>
+                    <br />
+                    <span class="fs-5 fw-bold pe-2">{{ object.school_name | title }}</span>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-location-dot"></i>
+                        <div class="ps-2">
+                            <span>
+                                {{ object.street_school }}
+                                {% if object.complement_school %}, {{ object.complement_school }}{% endif %}
+                                <br />
+                                {{ object.zipcode_school }},
+                                {{ object.city_school }}
+                                <br />
+                                {{ object.country_school }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <span class="fs-3 fw-bold">Informations</span>
+                    <br />
+                    <span>Nombre de participations: {{ object.participation_count }}</span>
                 </div>
             </div>
         </div>

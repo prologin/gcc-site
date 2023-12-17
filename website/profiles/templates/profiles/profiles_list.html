@@ -11,7 +11,7 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-11 ">
                     <div class="d-flex flex-row justify-content-between align-items-center">
-                        <h1>Mes profils candidatures</h1>
+                        <h1>Mes profils candidate</h1>
                         <a href="{% url 'profiles:profiles_create' %}"
                            class="btn btn-primary"
                            role="button">Nouveau Profil</a>
@@ -21,7 +21,7 @@
                         <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
                             <div class="col-md m-2">
                                 <div class="d-flex align-items-center">
-                                    <span class="fs-4 pe-2">La participante</span>
+                                    <span class="fs-4 pe-2">Candidate</span>
                                 </div>
                                 {# Name #}
                                 <div class="d-flex align-items-center">
@@ -39,7 +39,7 @@
                             <div class="col-md">
                                 {# Location #}
                                 <div class="row">
-                                    <span class="fs-4 pe-1">Le responsable légal</span>
+                                    <span class="fs-4 pe-1">Responsable légal</span>
                                     {# Name #}
                                     <div class="d-flex align-items-center">
                                         <span class="fs-4 fw-bold pe-2">{{ entry.first_name_resp | title }} {{ entry.last_name_resp | title }}</span>
