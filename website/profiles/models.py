@@ -113,6 +113,11 @@ class Profile(models.Model):
     )
     country_school = models.CharField(max_length=32, verbose_name=_("Pays"))
 
+    @property
+    def participation_count(self):
+        # Use reverse accessor to applications
+        return self.applications.count
+
     def __str__(self) -> str:
         return f"<Profile ({self.first_name} {self.last_name} - {self.user})>"
 
