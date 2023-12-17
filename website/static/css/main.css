@@ -31,7 +31,7 @@ body {
   --bs-link-color: #00AED3;
   --bs-link-hover-color: #00AED3;
 
-  --gcc-navbar-height: 70px;
+  --gcc-navbar-height: 75px;
   --gcc-footer-height: 200px;
 }
 
@@ -67,33 +67,72 @@ a:hover {
  * */
 .main-body-style {
   /*
-   * The fixed navbar overlay other contents, unless you add padding
+   * The fixed navbar overlay other contents, unless you add margins
    * to the top of the <body>.
    */
-  padding-top: var(--gcc-navbar-height);
+  margin-top: var(--gcc-navbar-height);
 
   /*
    * Needed to fix the footer to the bottom of the screen or to the bottom of
    * the page if the page is longer than the screen.
    * */
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 100px);
+  /* min-height: calc(100vh - var(--gcc-footer-height)); */
+  min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
 }
 
-@media screen and (min-width: 401px) {
-    .gcc-view {
-        min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
-    }
+/* Space between header and footer */
+.content-viewport {
+    min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
+    background-attachment: fixed;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 /*
- * To use if you want to fix the footer to the bottom of the screen or the
- * page. The page content should be inside the content class and the footer
- * have to be outside of it.
- * */
-.content {
-  flex: 1;
+ *      BACKGROUNDS
+ */
+
+.bg-full-1 {
+    background-image: url("../img/background_full_1.svg");
+}
+
+.bg-half-1 {
+    background-image: url('../img/background_bottom_1.svg');
+}
+
+.bg-half-2 {
+    background-image: url('../img/background_bottom_2.svg');
+}
+
+.bg-half-3 {
+    background-color: var(--main-grey-background);
+    background-image: url("../img/background_bottom_3.svg");
+}
+
+.bg-top-1 {
+    background-color: var(--main-grey-background);
+    background-image: url("../img/background_top_1.svg");
+}
+
+.partners-background {
+  background-color: white;
+  padding: 15px;
+}
+
+.newsletter-background {
+    background-color: var(--main-grey-background);
+    background-image: url("../img/newsletter_bg.svg");
+}
+
+
+
+
+.content-background {
+  background-color: white;
+  border-radius: var(--global-border-radius);
+  border: 1px solid var(--light-text-color);
 }
 
 
@@ -130,28 +169,6 @@ h3, .subsubtitleSize {
 .gcc-blue {
   color: var(--gcc-blue-color);
 }
-
-.content-background {
-  background-color: white;
-  border-radius: var(--global-border-radius);
-  border: 1px solid var(--light-text-color);
-}
-
-.basic-background {
-  /* height: 100%; */
-  background-attachment: fixed;
-  background-color: white;
-  background-image: url('../img/basic_background.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
-
-.partners-background {
-  background-color: white;
-  padding: 15px;
-}
-
 
 /*
  * Main
@@ -234,18 +251,12 @@ h3, .subsubtitleSize {
   }
 }
 
-.newsletter-background {
-  background-color: var(--main-grey-background);
-  background-image: url("../img/newsletter_bg.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 /*
  *  Header
  */
 .navbar {
   background-color: white;
+  height: var(--gcc-navbar-height);
 }
 
 .navbar-brand {
@@ -270,14 +281,14 @@ button.dropdown-item {
 }
 
 /*
- * Event List
+ * Event List partial
  */
 
 .event-list-background {
   background-color: var(--main-grey-background);
   background-image: url("../img/event_list_bg.svg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: top 0 right 0;
 }
 
@@ -295,13 +306,6 @@ button.dropdown-item {
  * Newsletter
  */
 
-.background-style {
-  background-color: var(--main-grey-background);
-  background-image: url("../img/newsletter_bg.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .rounded-input-left {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
@@ -314,14 +318,6 @@ button.dropdown-item {
   border-bottom-right-radius: var(--global-border-radius) !important;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
-}
-
-/*
- * Event Card
- */
-.event-card {
-  background-color: #ffffff;
-  border-radius: 12px;
 }
 
 .btn-group-vertical > button {
@@ -362,16 +358,6 @@ button.dropdown-item {
   background-color: var(--gcc-blue-color);
 }
 
-/*
- * FAQ
- */
- .faq-background {
-  background-color: var(--main-grey-background);
-  background-image: url(../img/faq_bg.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom 0 right 0;
-}
 
 /*
  * AccordionCard
