@@ -82,23 +82,38 @@ a:hover {
 
 /* Space between header and footer */
 .content-viewport {
-  min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
+    min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
+    background-attachment: fixed;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
-.content-background {
-  background-color: white;
-  border-radius: var(--global-border-radius);
-  border: 1px solid var(--light-text-color);
+/*
+ *      BACKGROUNDS
+ */
+
+.bg-full-1 {
+    background-image: url("../img/background_full_1.svg");
 }
 
-.basic-background {
-  /* height: 100%; */
-  background-attachment: fixed;
-  background-color: white;
-  background-image: url('../img/basic_background.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+.bg-half-1 {
+    background-image: url('../img/background_bottom_1.svg');
+}
+
+.bg-half-2 {
+    background-image: url('../img/background_bottom_2.svg');
+}
+
+.bg-half-3 {
+    background-color: var(--main-grey-background);
+    background-image: url("../img/background_bottom_3.svg");
+}
+
+.bg-top-1 {
+    background-color: var(--main-grey-background);
+    background-image: url("../img/background_top_1.svg");
 }
 
 .partners-background {
@@ -107,10 +122,17 @@ a:hover {
 }
 
 .newsletter-background {
-  background-color: var(--main-grey-background);
-  background-image: url("../img/newsletter_bg.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-color: var(--main-grey-background);
+    background-image: url("../img/newsletter_bg.svg");
+}
+
+
+
+
+.content-background {
+  background-color: white;
+  border-radius: var(--global-border-radius);
+  border: 1px solid var(--light-text-color);
 }
 
 
@@ -259,14 +281,14 @@ button.dropdown-item {
 }
 
 /*
- * Event List
+ * Event List partial
  */
 
 .event-list-background {
   background-color: var(--main-grey-background);
   background-image: url("../img/event_list_bg.svg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: top 0 right 0;
 }
 
@@ -284,13 +306,6 @@ button.dropdown-item {
  * Newsletter
  */
 
-.background-style {
-  background-color: var(--main-grey-background);
-  background-image: url("../img/newsletter_bg.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .rounded-input-left {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
@@ -303,14 +318,6 @@ button.dropdown-item {
   border-bottom-right-radius: var(--global-border-radius) !important;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
-}
-
-/*
- * Event Card
- */
-.event-card {
-  background-color: #ffffff;
-  border-radius: 12px;
 }
 
 .btn-group-vertical > button {
@@ -351,16 +358,6 @@ button.dropdown-item {
   background-color: var(--gcc-blue-color);
 }
 
-/*
- * FAQ
- */
- .faq-background {
-  background-color: var(--main-grey-background);
-  background-image: url(../img/faq_bg.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom 0 right 0;
-}
 
 /*
  * AccordionCard
