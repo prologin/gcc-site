@@ -6,11 +6,13 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, TemplateView
+from django.views.generic.edit import FormMixin
 
 from applications.forms import EventApplicationForm
 from applications.models import Application, ApplicationStatus
 from events.models import Event
 from partners.models import Partner
+from profiles.models import Profile
 
 
 class HomePageView(ListView):
@@ -28,7 +30,8 @@ class HomePageView(ListView):
         ctx = super().get_context_data(*args, **kwargs)
 
         ctx["open_events"] = Event.objects.get_open_events(5)
-        ctx["form"] = EventApplicationForm
+        form = EventApplicationForm(profile_choices=[])
+        ctx["form"] = form
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
         ctx["partners_financement"] = Partner.objects.filter(
@@ -69,17 +72,33 @@ class ApplicationsReviewView(PermissionRequiredMixin, TemplateView):
         return ctx
 
 
-class EventListViewBase(ListView):
+class EventListViewBase(FormMixin, ListView):
     model = Event
     template_name = "events/event_list_page.html"
     # Show 5 elements per page
     paginate_by = 10
 
+    form_class = EventApplicationForm
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = EventApplicationForm
         context["passed"] = False
         return context
+
+    def get_form_kwargs(self):
+        """
+        Provide the rendered form with the profile choices of the current user
+        """
+        kw = super().get_form_kwargs()
+
+        if self.request.user.is_authenticated:
+            kw["profile_choices"] = Profile.get_choices_for_user(
+                self.request.user
+            )
+        else:
+            kw["profile_choices"] = [(None, "-")]
+
+        return kw
 
 
 class EventListView(EventListViewBase):

@@ -115,3 +115,18 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f"<Profile ({self.first_name} {self.last_name} - {self.user})>"
+
+    @staticmethod
+    def get_choices_for_user(user):
+        choices = [(None, "-")]
+        if not user:
+            return choices
+
+        choices.extend(
+            [
+                (p.id, f"{p.first_name} {p.last_name}")
+                for p in user.profiles.all()
+            ]
+        )
+
+        return choices

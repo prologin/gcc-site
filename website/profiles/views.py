@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView
 
@@ -43,8 +44,7 @@ class ProfileListView(LoginRequiredMixin, ListView):
     model = Profile
 
     def get_queryset(self):
-        profiles = super().get_queryset()
-
+        profiles = super().get_queryset().filter(user_id=self.request.user.id)
         return profiles
 
 
@@ -60,8 +60,8 @@ class DeleteProfileView(LoginRequiredMixin, DeleteView):
         return self.request.user
 
     def get_success_url(self):
-        message.success(self.request, _("Le profile a été supprimé"))
+        messages.success(self.request, _("Le profile a été supprimé"))
         return reverse("profiles:profiles")
 
     def delete(self, request, *args, **kwargs):
-        return super().delete(reqest, *args, **kwargs)
+        return super().delete(request, *args, **kwargs)
