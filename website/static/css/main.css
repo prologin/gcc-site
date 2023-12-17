@@ -31,7 +31,7 @@ body {
   --bs-link-color: #00AED3;
   --bs-link-hover-color: #00AED3;
 
-  --gcc-navbar-height: 70px;
+  --gcc-navbar-height: 75px;
   --gcc-footer-height: 200px;
 }
 
@@ -67,33 +67,50 @@ a:hover {
  * */
 .main-body-style {
   /*
-   * The fixed navbar overlay other contents, unless you add padding
+   * The fixed navbar overlay other contents, unless you add margins
    * to the top of the <body>.
    */
-  padding-top: var(--gcc-navbar-height);
+  margin-top: var(--gcc-navbar-height);
 
   /*
    * Needed to fix the footer to the bottom of the screen or to the bottom of
    * the page if the page is longer than the screen.
    * */
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 100px);
+  /* min-height: calc(100vh - var(--gcc-footer-height)); */
+  min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
 }
 
-@media screen and (min-width: 401px) {
-    .gcc-view {
-        min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
-    }
+/* Space between header and footer */
+.content-viewport {
+  min-height: calc(100vh - var(--gcc-footer-height) - var(--gcc-navbar-height));
 }
 
-/*
- * To use if you want to fix the footer to the bottom of the screen or the
- * page. The page content should be inside the content class and the footer
- * have to be outside of it.
- * */
-.content {
-  flex: 1;
+.content-background {
+  background-color: white;
+  border-radius: var(--global-border-radius);
+  border: 1px solid var(--light-text-color);
+}
+
+.basic-background {
+  /* height: 100%; */
+  background-attachment: fixed;
+  background-color: white;
+  background-image: url('../img/basic_background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.partners-background {
+  background-color: white;
+  padding: 15px;
+}
+
+.newsletter-background {
+  background-color: var(--main-grey-background);
+  background-image: url("../img/newsletter_bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -130,28 +147,6 @@ h3, .subsubtitleSize {
 .gcc-blue {
   color: var(--gcc-blue-color);
 }
-
-.content-background {
-  background-color: white;
-  border-radius: var(--global-border-radius);
-  border: 1px solid var(--light-text-color);
-}
-
-.basic-background {
-  /* height: 100%; */
-  background-attachment: fixed;
-  background-color: white;
-  background-image: url('../img/basic_background.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
-
-.partners-background {
-  background-color: white;
-  padding: 15px;
-}
-
 
 /*
  * Main
@@ -234,18 +229,12 @@ h3, .subsubtitleSize {
   }
 }
 
-.newsletter-background {
-  background-color: var(--main-grey-background);
-  background-image: url("../img/newsletter_bg.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 /*
  *  Header
  */
 .navbar {
   background-color: white;
+  height: var(--gcc-navbar-height);
 }
 
 .navbar-brand {
