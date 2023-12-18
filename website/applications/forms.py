@@ -106,6 +106,7 @@ class EventApplicationForm(forms.ModelForm):
             query_dict.update(
                 {
                     "form_answer": {
+                        "school_level": query_dict.get("school_level"),
                         "tshirt": query_dict.get("tshirt"),
                         "allergies": query_dict.get("allergies"),
                         "diet": query_dict.get("diet"),
