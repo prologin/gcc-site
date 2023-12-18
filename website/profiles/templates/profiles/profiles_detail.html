@@ -23,7 +23,7 @@
                        href="{% url 'profiles:profile_detail' object.id %}">
                         <button class="btn btn-primary btn-block">Voir ce profil</button>
                     </a>
-                    {% include "profiles/partial/delete_modal.html" with profile=entry button_class="btn-danger" %}
+                    {% include "profiles/partial/delete_modal.html" with profile=object button_class="btn-danger" %}
                 </div>
             </div>
             <div class="row justify-content-center p-2">

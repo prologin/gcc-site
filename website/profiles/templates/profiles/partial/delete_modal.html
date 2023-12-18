@@ -7,12 +7,12 @@
 <button type="button"
         class="btn {{ button_class }}"
         data-bs-toggle="modal"
-        data-bs-target="#cancelModal-{% if profile.id %} profile.id {% else %} object.id {% endif %}">
+        data-bs-target="#cancelModal-{{ profile.id }}">
     Supprimer ce profil
 </button>
 
 <div class="modal fade"
-     id="cancelModal-{% if profile.id %} profile.id {% else %} object.id {% endif %}"
+     id="cancelModal-{{ profile.id }}"
      tabindex="-1"
      aria-labelledby="cancelModalLabel"
      aria-hidden="true">
@@ -35,7 +35,7 @@
             </div>
             <div class="modal-footer">
                 <form method="post"
-                      action="{% if profile.id %} {% url 'profiles:profile_delete' profile.id %} {% else %} {% url 'profiles:profile_delete' object.id %}{% endif %}"
+                      action="{% url 'profiles:profile_delete' profile.id %}"
                       class="{{ form_class }}">
                     {% csrf_token %}
                     <input type="submit"

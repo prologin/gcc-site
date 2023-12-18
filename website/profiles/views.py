@@ -58,9 +58,7 @@ class DeleteProfileView(LoginRequiredMixin, View):
     http_method_names = ("post",)
 
     def post(self, request, *args, **kwargs):
-        redirect_url = request.META.get("HTTP_REFERER", None)
-        if not redirect_url:
-            redirect_url = reverse("profiles:profiles_list")
+        redirect_url = reverse("profiles:profiles_list")
 
         profile_id = self.kwargs.get("pk")
         profile = Profile.objects.get(id=profile_id)
