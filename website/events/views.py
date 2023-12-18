@@ -15,7 +15,7 @@ from partners.models import Partner
 from profiles.models import Profile
 
 
-class HomePageView(ListView):
+class HomePageView(FormMixin, ListView):
     model = Event
     template_name = "events/home.html"
     form_class = EventApplicationForm
@@ -31,7 +31,7 @@ class HomePageView(ListView):
 
         ctx["open_events"] = Event.objects.get_open_events(5)
         form = EventApplicationForm(profile_choices=[])
-        ctx["form"] = form
+        # ctx["form"] = form
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
         ctx["partners_financement"] = Partner.objects.filter(
