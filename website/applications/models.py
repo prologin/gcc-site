@@ -70,6 +70,96 @@ class Application(models.Model):
         auto_now_add=True,
     )
 
+    @property
+    def first_name(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.first_name
+
+    @property
+    def last_name(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.last_name
+
+    @property
+    def email(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.email
+
+    @property
+    def phone(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.phone
+
+    @property
+    def birth_date(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.birth_date
+
+    @property
+    def first_name_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.first_name_resp
+
+    @property
+    def last_name_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.last_name_resp
+
+    @property
+    def email_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.email_resp
+
+    @property
+    def phone_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.phone_resp
+
+    @property
+    def school_name(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.school_name
+
+    @property
+    def address(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        res = f"{self.profile.street_app}"
+        if self.profile.complement_app:
+            res += f"{self.profile.complement_app}"
+        res += f", {self.profile.zipcode_app} {self.profile.city_app}"
+        return res
+
+    @property
+    def address_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        res = f"{self.profile.street_resp}"
+        if self.profile.complement_resp:
+            res += f"{self.profile.complement_resp}"
+        res += f", {self.profile.zipcode_resp} {self.profile.city_resp}"
+        return res
+
+    @property
+    def address_school(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        res = f"{self.profile.street_school}"
+        if self.profile.complement_school:
+            res += f"{self.profile.complement_school}"
+        res += f", {self.profile.zipcode_school} {self.profile.city_school}"
+        return res
+
     objects = ApplicationManager()
 
     def __str__(self):
