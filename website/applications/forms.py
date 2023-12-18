@@ -46,11 +46,6 @@ TSHIRT = [
 PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
-def phoneNumberTest(phone):
-    if re.match(PHONE_REGEX, str(phone)):
-        raise ValidationError("Not a phone number")
-
-
 class EventApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
@@ -100,6 +95,9 @@ class EventApplicationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         if "profile_choices" in kwargs:
             self.base_fields["profile"].choices = kwargs.pop("profile_choices")
+            self.base_fields[
+                "profile"
+            ].label = "Selectioner mon profil participante"
 
         if len(args) > 0 and isinstance(args[0], QueryDict):
             # If POSTing, add a form_answer value to the input which is
