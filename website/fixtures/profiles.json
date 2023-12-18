@@ -3,7 +3,7 @@
         "model": "profiles.profile",
         "pk": 1,
         "fields": {
-            "user": 1,
+            "user": 9,
             "first_name": "Martha",
             "last_name": "Hudson",
             "birth_date": "2003-12-13",
@@ -35,7 +35,7 @@
         "model": "profiles.profile",
         "pk": 2,
         "fields": {
-            "user": 1,
+            "user": 9,
             "first_name": "Valentine",
             "last_name": "Seux",
             "birth_date": "1996-07-25",
@@ -67,7 +67,7 @@
         "model": "profiles.profile",
         "pk": 3,
         "fields": {
-            "user": 1,
+            "user": 9,
             "first_name": "Sardine",
             "last_name": "Ruisseau",
             "birth_date": "2010-05-13",
