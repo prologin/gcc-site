@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 from django.utils.translation import gettext_lazy as _
 
 
@@ -138,3 +140,14 @@ class Profile(models.Model):
         )
 
         return choices
+
+
+@receiver(pre_delete, sender=Profile)
+def _profile_delete(sender, instance, *args, **kwargs):
+    """
+    Signal hook when a Profile is deleted
+    """
+    for app in instance.applications.all():
+        app.profile = None
+        app.force_cancelled()
+        app.save()
