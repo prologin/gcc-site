@@ -32,6 +32,7 @@ class Application(models.Model):
                 "Can override the application status flow",
             ),
         ]
+        unique_together = ("event", "profile")
 
     event = models.ForeignKey(
         to="events.Event",

@@ -123,6 +123,9 @@ class Profile(models.Model):
 
     @staticmethod
     def get_choices_for_user(user):
+        """
+        Return a QuerySet of all the profiles attached to the given user
+        """
         choices = [(None, "-")]
         if not user:
             return choices
