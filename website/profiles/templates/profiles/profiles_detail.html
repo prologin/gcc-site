@@ -7,15 +7,26 @@
 
 {% block content %}
     <div class="content-viewport bg-half-3">
-        <div class="container my-2">
+        <div class="container my-2 p-2">
             <a href="{% url 'profiles:profiles_list' %}">
                 <i class="fa-solid fa-arrow-left"></i>
                 <span>Revenir aux profils</span>
             </a>
         </div>
-        <div class="container bg-white rounded-3 p-3">
-            <h1>Détail du profil</h1>
-            <div class="row justify-content-center">
+        <div class="container bg-white rounded-3 p-4">
+            <div class="row">
+                <div class="col">
+                    <h1>Détail du profil</h1>
+                </div>
+                <div class="col-md-3 row">
+                    <a class="mb-4 px-0"
+                       href="{% url 'profiles:profile_detail' object.id %}">
+                        <button class="btn btn-primary btn-block">Voir ce profil</button>
+                    </a>
+                    {% include "profiles/partial/delete_modal.html" with profile=entry button_class="btn-danger" %}
+                </div>
+            </div>
+            <div class="row justify-content-center p-2">
                 <div class="col-md">
                     <span class="fs-3 fw-bold">Candidate</span>
                     <br />
@@ -72,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mt-md-4">
+            <div class="row justify-content-center mt-md-4 p-2">
                 <div class="col-md">
                     <span class="fs-3 fw-bold">Établissement Scolaire</span>
                     <br />
