@@ -23,8 +23,8 @@ PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
 def phoneNumberTest(phone):
-    if re.match(PHONE_REGEX, str(phone)):
-        raise ValidationError("Not a phone number")
+    if not re.match(PHONE_REGEX, str(phone)):
+        raise ValidationError(_("numéro de téléphone invalide"))
 
 
 class ProfileCreationForm(forms.ModelForm):
@@ -46,7 +46,7 @@ class ProfileCreationForm(forms.ModelForm):
         widget=forms.widgets.DateInput(attrs={"type": "date"}),
     )
 
-    phone = forms.DecimalField(
+    phone = forms.CharField(
         label="Numéro de téléphone",
         validators=[phoneNumberTest],
         widget=forms.TextInput(
@@ -151,7 +151,7 @@ class ProfileCreationForm(forms.ModelForm):
         validators=[validate_email],
     )
 
-    phone_resp = forms.DecimalField(
+    phone_resp = forms.CharField(
         label="Numéro de téléphone",
         validators=[phoneNumberTest],
         widget=forms.TextInput(
