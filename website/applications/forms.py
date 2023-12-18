@@ -15,6 +15,7 @@ from crispy_forms.layout import (
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.http import QueryDict
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -50,8 +51,10 @@ def phoneNumberTest(phone):
         raise ValidationError("Not a phone number")
 
 
-class EventApplicationForm(forms.Form):
-    profile = forms.ChoiceField(label="Profil de la participante", choices=[])
+class EventApplicationForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ["event", "profile", "form_answer"]
 
     # Info supplémentaires sur la participante (en + du profil)
     school_level = forms.ChoiceField(
@@ -97,7 +100,29 @@ class EventApplicationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         if "profile_choices" in kwargs:
             self.base_fields["profile"].choices = kwargs.pop("profile_choices")
-        super().__init__(*args, **kwargs)
+
+        if len(args) > 0 and isinstance(args[0], QueryDict):
+            # If POSTing, add a form_answer value to the input which is
+            # aggregated from the other fields
+            query_dict = args[0].copy()  # Copy beacuse it is read only
+            query_dict.update(
+                {
+                    "form_answer": {
+                        "tshirt": query_dict.get("tshirt"),
+                        "allergies": query_dict.get("allergies"),
+                        "diet": query_dict.get("diet"),
+                        "learning": query_dict.get("learn"),
+                        "programing": query_dict.get("programing"),
+                        "studies": query_dict.get("studies"),
+                        "association": query_dict.get("association"),
+                    }
+                }
+            )
+            args = (query_dict,) + args[1:]
+            super().__init__(*args, **kwargs)
+        else:
+            super().__init__(*args, **kwargs)
+
         self.helper = FormHelper(self)
         self.helper.form_id = "application_form"
         self.helper.form_method = "post"
@@ -146,16 +171,3 @@ class EventApplicationForm(forms.Form):
                 css_class="tab",
             ),
         )
-
-    def clean_form_answers(self) -> Optional[dict]:
-        if not self.is_valid():
-            return None
-        return {
-            "tshirt": self.cleaned_data["tshirt"],
-            "allergies": self.cleaned_data["allergies"],
-            "diet": self.cleaned_data["diet"],
-            "learning": self.cleaned_data["learn"],
-            "programing": self.cleaned_data["programing"],
-            "studies": self.cleaned_data["studies"],
-            "association": self.cleaned_data["association"],
-        }

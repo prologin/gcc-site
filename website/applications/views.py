@@ -57,32 +57,19 @@ class ApplicationCreateView(LoginRequiredMixin, View):
         if not redirect_url:
             redirect_url = reverse("events:home")
 
-        if "submit-application" in request.POST:
-            form = EventApplicationForm(request.POST)
+        form = EventApplicationForm(request.POST)
 
-            if not form.is_valid():
-                messages.warning(
-                    request,
-                    str(form.errors),
-                )
-                return HttpResponseRedirect(redirect_url)
-            else:
-                event = Event.objects.get(id=request.POST["event-id"])
-                user = User.objects.get(id=request.user.id)
+        if not form.is_valid():
+            messages.warning(
+                request,
+                str(form.errors),
+            )
+            return HttpResponseRedirect(redirect_url)
+        else:
+            form.save()
+            messages.success(request, "Votre candidature a été enregistrée!")
 
-                form_answer = form.clean_form_answers()
-
-                application = Application.objects.create(
-                    profile_id=form.cleaned_data["profile"],
-                    event=event,
-                    form_answer=form_answer,
-                )
-
-                messages.success(
-                    request, "Votre candidature a été enregistrée!"
-                )
-
-                return HttpResponseRedirect(redirect_url)
+            return HttpResponseRedirect(redirect_url)
 
     def http_method_not_allowed(self, request, *args, **kwargs):
         raise Http404()
