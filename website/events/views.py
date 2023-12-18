@@ -42,6 +42,21 @@ class HomePageView(ListView):
         ctx["AppStatus"] = ApplicationStatus
         return ctx
 
+    def get_form_kwargs(self):
+        """
+        Provide the rendered form with the profile choices of the current user
+        """
+        kw = super().get_form_kwargs()
+
+        if self.request.user.is_authenticated:
+            kw["profile_choices"] = Profile.get_choices_for_user(
+                self.request.user
+            )
+        else:
+            kw["profile_choices"] = [(None, "-")]
+
+        return kw
+
 
 class ReviewIndexView(PermissionRequiredMixin, TemplateView):
     permission_required = "users.can_view_applications"
