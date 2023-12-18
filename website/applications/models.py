@@ -47,13 +47,16 @@ class Application(models.Model):
         on_delete=models.SET_NULL,
         related_name="applications",
         null=True,
+        blank=True,
     )
 
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
     )
 
-    notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
+    notes = models.TextField(
+        verbose_name=_("Notes sur la candidatures"), blank=True
+    )
 
     status = FSMIntegerField(
         default=ApplicationStatus.PENDING,
@@ -74,6 +77,14 @@ class Application(models.Model):
             return f"{self.profile}({self.profile.user_id})@{self.event}"
         else:
             return f"-@{self.event}"
+
+    def save(self, *args, **kwargs):
+        """
+        When saving the model, if profile is none, switch the status to CANCELLED
+        """
+        if not self.profile:
+            self.profile = None
+        super().save(*args, **kwargs)
 
     @staticmethod
     def _transition_perm_user_or_staff(instance, user):
