@@ -2,9 +2,10 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView
 
 from profiles.forms import ProfileCreationForm
@@ -53,15 +54,24 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = "profiles/profiles_detail.html"
 
 
-class DeleteProfileView(LoginRequiredMixin, DeleteView):
-    model = Profile
+class DeleteProfileView(LoginRequiredMixin, View):
+    http_method_names = ("post",)
 
-    def get_object(self, queryset=None):
-        return self.request.user
+    def post(self, request, *args, **kwargs):
+        redirect_url = request.META.get("HTTP_REFERER", None)
+        if not redirect_url:
+            redirect_url = reverse("profiles:profiles_list")
 
-    def get_success_url(self):
-        messages.success(self.request, _("Le profil a été supprimé"))
-        return reverse("profiles:profiles")
+        profile_id = self.kwargs.get("pk")
+        profile = Profile.objects.get(id=profile_id)
 
-    def delete(self, request, *args, **kwargs):
-        return super().delete(request, *args, **kwargs)
+        if not profile:
+            return HttpResponseBadRequest("Bad request")
+
+        profile.delete()
+
+        messages.success(request, "Le profil a été supprimé")
+        return HttpResponseRedirect(redirect_url)
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        return HttpResponseBadRequest("Invalid method")
