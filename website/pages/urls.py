@@ -28,4 +28,5 @@ urlpatterns = [
         name="privacy_newsletter",
     ),
     path("faq/", views.FAQView.as_view(), name="FAQ"),
+    path("help/", views.HelpView.as_view(), name="help"),
 ]

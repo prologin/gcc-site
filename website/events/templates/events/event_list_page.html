@@ -26,6 +26,10 @@
             </div>
 
             <div class="p-2 bg-white rounded-3">
+                <div class="alert alert-info ms-2 me-2">
+                    Un doute sur le processus d'inscription ? <a href={% url 'pages:help' %}>Clique-ici pour avoir de l'aide.</a>
+                </div>
+
                 {% for event in object_list %}
                     {% include "events/partial/event_card.html" with event=event finished=passed %}
                 {% endfor %}
@@ -71,7 +75,6 @@
     {% include "applications/partial/event_application_form_modal.html" with color=1 %}
     {% include "events/partial/event_schedule_modal.html" with event_format="week" %}
     {% include "events/partial/event_schedule_modal.html" with event_format="weekend" %}
-
 {% endblock content %}
 
 {% block scripts %}
