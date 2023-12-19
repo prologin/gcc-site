@@ -153,34 +153,34 @@ class ExportUsersCSVView(LoginRequiredMixin, View):
 
         writer.writerow([user.first_name, user.last_name, user.email])
 
-        writer.writerow([])
+        writer.writerow(["Profil"])
         writer.writerow(
             [
-                "Profil first name",
-                "Profil last name",
-                "Profil birth date",
-                "Profil email",
-                "Profil phone",
-                "Profil street_app",
-                "Profil complement_app",
-                "Profil city_app",
-                "Profil zipcode_app",
-                "Profil country_app",
-                "Profil first_name_resp",
-                "Profil last_name_resp",
-                "Profil email_resp",
-                "Profil phone_resp",
-                "Profil street_resp",
-                "Profil complement_resp",
-                "Profil city_resp",
-                "Profil zipcode_resp",
-                "Profil country_resp",
-                "Profil school_name",
-                "Profil street_school",
-                "Profil complement_school",
-                "Profil city_school",
-                "Profil zipcode_school",
-                "Profil country_school",
+                "first_name",
+                "last_name",
+                "birth_date",
+                "email",
+                "phone",
+                "street_app",
+                "complement_app",
+                "city_app",
+                "zipcode_app",
+                "country_app",
+                "first_name_resp",
+                "last_name_resp",
+                "email_resp",
+                "phone_resp",
+                "street_resp",
+                "complement_resp",
+                "city_resp",
+                "zipcode_resp",
+                "country_resp",
+                "school_name",
+                "street_school",
+                "complement_school",
+                "city_school",
+                "zipcode_school",
+                "country_school",
             ]
         )
 
@@ -216,12 +216,12 @@ class ExportUsersCSVView(LoginRequiredMixin, View):
                 ]
             )
 
-        writer.writerow([])
+        writer.writerow(["application"])
         writer.writerow(
             [
-                "Application profile",
-                "Application school",
-                "Application form answer",
+                "profile",
+                "school",
+                "form_answer",
                 "created at",
             ]
         )
