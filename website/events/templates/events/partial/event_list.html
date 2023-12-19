@@ -19,6 +19,9 @@
     {% else %}
         <div class="w-75 mx-auto">
             <p class="h2 pt-4 pb-2 text-center">Nos prochains stages</p>
+            <div class="alert alert-info">
+                Besoin aide pour vous inscrire ? <a href={% url 'pages:help' %}>Clique-ici pour avoir de l'aide.</a>
+            </div>
             {% for event in open_events %}
                 {% include "events/partial/event_card.html" with event=event finished=False class="my-4" %}
             {% endfor %}
