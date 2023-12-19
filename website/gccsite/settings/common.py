@@ -3,6 +3,7 @@ from pathlib import Path
 
 from gccsite import env
 
+from .auth import *
 from .debug import DEBUG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
