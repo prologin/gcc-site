@@ -1,0 +1,73 @@
+{% extends "gccsite/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block form %}
+    {% crispy form %}
+{% endblock form %}
+
+{% block content %}
+    <div class="content-viewport bg-half-1">
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-4">
+                <div class="col-11 ">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <h1>Mes profils candidate</h1>
+                        <a href="{% url 'profiles:profiles_create' %}"
+                           class="btn btn-primary"
+                           role="button">Nouveau Profil</a>
+                    </div>
+
+                    {% for entry in object_list %}
+                        <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
+                            <div class="col-md m-2">
+                                <div class="d-flex align-items-center">
+                                    <span class="fs-4 pe-2">Candidate</span>
+                                </div>
+                                {# Name #}
+                                <div class="d-flex align-items-center">
+                                    <span class="fs-4 fw-bold pe-2">{{ entry.first_name | title }} {{ entry.last_name | title }}</span>
+                                </div>
+
+                                {# Email #}
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="far fa-regular fa-envelope"></i>
+                                    </div>
+                                    {{ entry.email }}
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                {# Location #}
+                                <div class="row">
+                                    <span class="fs-4 pe-1">Responsable légal</span>
+                                    {# Name #}
+                                    <div class="d-flex align-items-center">
+                                        <span class="fs-4 fw-bold pe-2">{{ entry.first_name_resp | title }} {{ entry.last_name_resp | title }}</span>
+                                    </div>
+
+                                    {# Email #}
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <i class="far fa-regular fa-envelope"></i>
+                                        </div>
+                                        {{ entry.email_resp }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 row">
+                                <a class="mb-4 px-0" href="{% url 'profiles:profile_detail' entry.id %}">
+                                    <button class="btn btn-primary btn-block">Voir ce profil</button>
+                                </a>
+                                {% include "profiles/partial/delete_modal.html" with profile=entry button_class="btn-danger" %}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <h4>Tu n'as pas encore créé de profil de candidate !</h4>
+                        <br />
+                        <span>Clique sur "Nouveau Profil" pour en créer un, puis utilise-le pour t'inscrire à l'un de nos évènements !</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_fsm import FSMIntegerField, transition
 
+from profiles.models import Profile
+
 
 class ApplicationStatus(models.IntegerChoices):
     REJECTED = -3, _("Candidature rejetée")
@@ -30,6 +32,7 @@ class Application(models.Model):
                 "Can override the application status flow",
             ),
         ]
+        unique_together = ("event", "profile")
 
     event = models.ForeignKey(
         to="events.Event",
@@ -38,80 +41,22 @@ class Application(models.Model):
         related_name="applications",
     )
 
-    user = models.ForeignKey(
-        to=get_user_model(),
-        verbose_name=_("Utilisateur"),
-        on_delete=models.CASCADE,
+    profile = models.ForeignKey(
+        to=Profile,
+        verbose_name=_("Profil"),
+        on_delete=models.SET_NULL,
         related_name="applications",
-    )
-
-    first_name = models.CharField(
-        max_length=256,
-        verbose_name=_("Prénom de la participante"),
-    )
-
-    last_name = models.CharField(
-        max_length=256,
-        verbose_name=_("Nom de la participante"),
-    )
-
-    birthdate = models.DateField(
-        verbose_name=_("Date de naissance de la participante"),
-    )
-
-    email = models.EmailField(
-        verbose_name=_("Adresse email de la participante")
-    )
-
-    phone = models.CharField(
-        max_length=16,
+        null=True,
         blank=True,
-        verbose_name=_("Numéro de téléphone de la participante"),
-    )
-
-    address = models.JSONField(
-        verbose_name=_("Adresse de la participante"), default=dict
-    )
-
-    first_name_resp = models.CharField(
-        max_length=256,
-        verbose_name=_("Prénom du responsable légal"),
-    )
-
-    last_name_resp = models.CharField(
-        max_length=256,
-        verbose_name=_("Nom du responsable légal"),
-    )
-
-    email_resp = models.EmailField(
-        verbose_name=_("Adresse email du responable légal")
-    )
-
-    phone_resp = models.CharField(
-        max_length=16,
-        blank=True,
-        verbose_name=_("Numéro de téléphone du responsable légal"),
-    )
-
-    address_resp = models.JSONField(
-        verbose_name=_("Adresse du responsable légal"), default=dict
-    )
-
-    school = models.JSONField(
-        verbose_name=_("Etablissement scolaire de la participante"),
-        default=dict,
     )
 
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
     )
 
-    nb_participations = models.CharField(
-        default="",
-        verbose_name=_("Nombre de participations de la participante"),
+    notes = models.TextField(
+        verbose_name=_("Notes sur la candidatures"), blank=True
     )
-
-    notes = models.TextField(verbose_name=_("Notes sur la candidatures"))
 
     status = FSMIntegerField(
         default=ApplicationStatus.PENDING,
@@ -125,15 +70,118 @@ class Application(models.Model):
         auto_now_add=True,
     )
 
+    @property
+    def first_name(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.first_name
+
+    @property
+    def last_name(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.last_name
+
+    @property
+    def email(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.email
+
+    @property
+    def phone(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.phone
+
+    @property
+    def birth_date(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.birth_date
+
+    @property
+    def first_name_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.first_name_resp
+
+    @property
+    def last_name_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.last_name_resp
+
+    @property
+    def email_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.email_resp
+
+    @property
+    def phone_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.phone_resp
+
+    @property
+    def school_name(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        return self.profile.school_name
+
+    @property
+    def address(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        res = f"{self.profile.street_app}"
+        if self.profile.complement_app:
+            res += f"{self.profile.complement_app}"
+        res += f", {self.profile.zipcode_app} {self.profile.city_app}"
+        return res
+
+    @property
+    def address_resp(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        res = f"{self.profile.street_resp}"
+        if self.profile.complement_resp:
+            res += f"{self.profile.complement_resp}"
+        res += f", {self.profile.zipcode_resp} {self.profile.city_resp}"
+        return res
+
+    @property
+    def address_school(self):
+        if self.profile is None:
+            return "<deleted-profile>"
+        res = f"{self.profile.street_school}"
+        if self.profile.complement_school:
+            res += f"{self.profile.complement_school}"
+        res += f", {self.profile.zipcode_school} {self.profile.city_school}"
+        return res
+
     objects = ApplicationManager()
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}@{self.event}"
+        if self.profile:
+            return f"{self.profile}({self.profile.user_id})@{self.event}"
+        else:
+            return f"-@{self.event}"
+
+    def save(self, *args, **kwargs):
+        """
+        When saving the model, if profile is none, switch the status to CANCELLED
+        """
+        if not self.profile:
+            self.profile = None
+        super().save(*args, **kwargs)
 
     @staticmethod
     def _transition_perm_user_or_staff(instance, user):
-        return instance.user == user or user.has_perm(
-            "applications.manage_applications"
+        return (
+            instance.profile
+            and instance.profile.user == user
+            or user.has_perm("applications.manage_applications")
         )
 
     @staticmethod

@@ -1,0 +1,51 @@
+{% comment %}
+    Template parameters:
+    - profile: the profile object.
+    - button_class: class for the button style
+{% endcomment %}
+
+<button type="button"
+        class="btn {{ button_class }}"
+        data-bs-toggle="modal"
+        data-bs-target="#cancelModal-{{ profile.id }}">
+    Supprimer ce profil
+</button>
+
+<div class="modal fade"
+     id="cancelModal-{{ profile.id }}"
+     tabindex="-1"
+     aria-labelledby="cancelModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="fw-bold">Suppression de profil</span>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body col-md-auto mb-2">
+                Es-tu sûre de vouloir supprimer le profil candidate de
+                <strong>{{ profile.first_name }} {{ profile.last_name }}</strong> ?
+                <br />
+                <p class="fst-italic">
+                    Toutes les candidatures en cours déposées avec ce profil seront annulées d'office.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form method="post"
+                      action="{% url 'profiles:profile_delete' profile.id %}"
+                      class="{{ form_class }}">
+                    {% csrf_token %}
+                    <input type="submit"
+                           class="btn btn-danger {{ btn_class }}"
+                           value="Supprimer mon profil">
+                </form>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

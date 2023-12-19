@@ -6,23 +6,23 @@ app_name = "applications"
 
 urlpatterns = [
     path(
-        "applications",
+        "applications/",
         views.ApplicationsView.as_view(),
         name="my_applications",
     ),
     path(
-        "applications/new",
+        "applications/new/",
         views.ApplicationCreateView.as_view(),
         name="create_application",
     ),
     path(
-        "applications/notes",
+        "applications/notes/",
         views.ApplicationNotesUpdateView.as_view(),
         name="application_notes_update",
     ),
     # Application status update endpoint (POST)
     path(
-        "application/<int:appid>/status",
+        "application/<int:appid>/status/",
         views.ApplicationStatusUpdateView.as_view(),
         name="application_status_update",
     ),

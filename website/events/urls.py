@@ -8,17 +8,17 @@ urlpatterns = [
     path("", views.HomePageView.as_view(), name="home"),
     path("review/", views.ReviewIndexView.as_view(), name="review"),
     path(
-        "review/<int:year>/<int:event>",
+        "review/<int:year>/<int:event>/",
         views.ApplicationsReviewView.as_view(),
         name="application_review",
     ),
     path(
-        "events",
+        "events/",
         views.EventListView.as_view(),
         name="events",
     ),
     path(
-        "events/passed",
+        "events/passed/",
         views.PassedEventListView.as_view(),
         name="passed_events",
     ),

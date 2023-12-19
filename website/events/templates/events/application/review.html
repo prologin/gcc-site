@@ -24,8 +24,8 @@
                     {% for application in applications %}
                         <tr {% if 'users.can_view_applications_details' in perms %} data-bs-toggle="collapse" data-bs-target="#row-{{ forloop.counter }}" aria-expanded="false" aria-controls="row-{{ forloop.counter }}" {% endif %}>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ application.last_name }} {{ application.first_name }}</td>
-                            <td>{{ application.nb_participations }}</td>
+                            <td>{{ application.first_name }} {{ application.last_name }}</td>
+                            <td>{{ application.profile.participation_count }}</td>
                             <td>{{ application|status_label }}</td>
                         </tr>
                         {% if 'users.can_view_applications_details' in perms %}
@@ -39,18 +39,16 @@
                                                         <h2>Informations sur la participante:</h2>
                                                     </p>
                                                     <p>
-                                                        <i class="fa-solid fa-at"></i> {{ application.email_resp }}
+                                                        <i class="fa-solid fa-at"></i> {{ application.email }}
                                                     </p>
                                                     <p>
                                                         <i class="fa-solid fa-phone"></i> {{ application.phone }}
                                                     </p>
                                                     <p>
-                                                        <i class="fa-solid fa-house-user"></i> {{ application.address.zip_code }}
-                                                        {{ application.address.city }},
-                                                        {{ application.address.country }}
+                                                        <i class="fa-solid fa-house-user"></i> {{ application.address }}
                                                     </p>
                                                     <p>
-                                                        <i class="fa-solid fa-cake-candles"></i> {{ application.birthdate }}
+                                                        <i class="fa-solid fa-cake-candles"></i> {{ application.birth_date }}
                                                     </p>
                                                 {% endif %}
                                             </div>
@@ -68,12 +66,10 @@
                                                         <i class="fa-solid fa-at"></i> {{ application.email_resp }}
                                                     </p>
                                                     <p>
-                                                        <i class="fa-solid fa-phone"></i> {{ application.phone }}
+                                                        <i class="fa-solid fa-phone"></i> {{ application.phone_resp }}
                                                     </p>
                                                     <p>
-                                                        <i class="fa-solid fa-house-user"></i> {{ application.address_resp.zip_code }}
-                                                        {{ application.address_resp.city }},
-                                                        {{ application.address_resp.country }}
+                                                        <i class="fa-solid fa-house-user"></i> {{ application.address_resp }}
                                                     </p>
                                                 {% endif %}
                                             </div>
@@ -83,15 +79,14 @@
                                             <p>
                                                 <h2>
                                                     <i class="fa-solid fa-school"></i> Etablissement scolaire:
-                                                    {{ application.school.name }}
+                                                    {{ application.school_name }}
                                                 </h2>
                                             </p>
                                             <p>
-                                                <i class="fa-solid fa-location-dot"></i> {{ application.school.street }},
-                                                {{ application.school.zip_code }} {{ application.school.city }}
+                                                <i class="fa-solid fa-location-dot"></i> {{ application.address_school }}
                                             </p>
                                             <p>
-                                                <i class="fa-solid fa-user-graduate"></i> {{ application.school.school_level }}
+                                                <i class="fa-solid fa-user-graduate"></i> {{ application.form_answer.school_level }}
                                             </p>
                                         </div>
                                     </div>

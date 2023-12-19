@@ -1,0 +1,114 @@
+{% extends "gccsite/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block form %}
+    {% crispy form %}
+{% endblock form %}
+
+{% block content %}
+    <div class="content-viewport bg-half-3">
+        <div class="container my-2 p-2">
+            <a href="{% url 'profiles:profiles_list' %}">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Revenir aux profils</span>
+            </a>
+        </div>
+        <div class="container bg-white rounded-3 p-4">
+            <div class="row">
+                <div class="col align-middle">
+                    <h1>Détail du profil</h1>
+                </div>
+                <div class="col-md-3 row">
+                    {# TODO: edit profile #}
+                    <a class="mb-4 px-0" href="{% url 'events:events' %}">
+                        <button class="btn btn-primary btn-block">Participer à un stage</button>
+                    </a>
+                    {% include "profiles/partial/delete_modal.html" with profile=object button_class="btn-danger btn-block p-1" %}
+                </div>
+            </div>
+            <div class="row justify-content-center p-2">
+                <div class="col-xl mt-3">
+                    <span class="fs-3 fw-bold">Candidate</span>
+                    <br />
+                    <span class="fs-5 fw-bold pe-2">{{ object.first_name | title }} {{ object.last_name | title }}</span>
+                    <div class="row">
+                        <div class="col-sm">
+                            <span><i class="far fa-regular fa-envelope"></i> {{ object.email }}</span>
+                            <br />
+                            <span><i class="far fa-solid fa-phone"></i> {{ object.phone }}</span>
+                            <br />
+                            <span><i class="far fa-solid fa-cake-candles"></i> {{ object.birth_date }}</span>
+                        </div>
+                        <div class="col-sm d-flex align-items-center">
+                            <i class="fas fa-location-dot"></i>
+                            <div class="ps-2">
+                                <span>
+                                    {{ object.street_app }}
+                                    {% if object.complement_app %}, {{ object.complement_app }}{% endif %}
+                                    <br />
+                                    {{ object.zipcode_app }},
+                                    {{ object.city_app }}
+                                    <br />
+                                    {{ object.country_app }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xl mt-3">
+                    <span class="fs-3 fw-bold">Responsable Légal</span>
+                    <br />
+                    <span class="fs-5 fw-bold pe-2">{{ object.first_name_resp | title }} {{ object.last_name_resp | title }}</span>
+                    <div class="row">
+                        <div class="col-sm">
+                            <span><i class="far fa-regular fa-envelope"></i> {{ object.email_resp }}</span>
+                            <br />
+                            <span><i class="far fa-solid fa-phone"></i> {{ object.phone_resp }}</span>
+                        </div>
+                        <div class="col-sm d-flex align-items-center">
+                            <i class="fas fa-location-dot"></i>
+                            <div class="ps-2">
+                                <span>
+                                    {{ object.street_resp }}
+                                    {% if object.complement_resp %}, {{ object.complement_resp }}{% endif %}
+                                    <br />
+                                    {{ object.zipcode_resp }},
+                                    {{ object.city_resp }}
+                                    <br />
+                                    {{ object.country_resp }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center p-2">
+                <div class="col-xl mt-3">
+                    <span class="fs-3 fw-bold">Établissement Scolaire</span>
+                    <br />
+                    <span class="fs-5 fw-bold pe-2">{{ object.school_name | title }}</span>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-location-dot"></i>
+                        <div class="ps-2">
+                            <span>
+                                {{ object.street_school }}
+                                {% if object.complement_school %}, {{ object.complement_school }}{% endif %}
+                                <br />
+                                {{ object.zipcode_school }},
+                                {{ object.city_school }}
+                                <br />
+                                {{ object.country_school }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg mt-sm-3">
+                    <span class="fs-3 fw-bold">Informations</span>
+                    <br />
+                    <span>Nombre de participations: {{ object.participation_count }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

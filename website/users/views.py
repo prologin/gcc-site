@@ -38,6 +38,7 @@ from django.views.generic import CreateView, DeleteView, TemplateView
 from django.views.generic.edit import UpdateView
 
 from applications.models import Application
+from profiles.models import Profile
 
 from .forms import (
     AuthLoginForm,
@@ -145,24 +146,82 @@ class ExportUsersCSVView(LoginRequiredMixin, View):
         writer.writerow(["First Name", "Last Name", "Email"])
 
         user = User.objects.get(id=self.request.user.id)
-        applications = Application.objects.filter(user=user).order_by(
-            "-created_at"
-        )
+        profiles = Profile.objects.filter(user_id=self.request.user.id)
+        applications = Application.objects.filter(
+            profile__user_id=self.request.user.id
+        ).order_by("-created_at")
 
         writer.writerow([user.first_name, user.last_name, user.email])
 
-        writer.writerow([])
+        writer.writerow(["Profil"])
         writer.writerow(
             [
-                "Application first name",
-                "Application last name",
-                "Application event name",
-                "Application status",
-                "Application birthdate",
-                "Application phone",
-                "Application address",
-                "Application school",
-                "Application form answer",
+                "first_name",
+                "last_name",
+                "birth_date",
+                "email",
+                "phone",
+                "street_app",
+                "complement_app",
+                "city_app",
+                "zipcode_app",
+                "country_app",
+                "first_name_resp",
+                "last_name_resp",
+                "email_resp",
+                "phone_resp",
+                "street_resp",
+                "complement_resp",
+                "city_resp",
+                "zipcode_resp",
+                "country_resp",
+                "school_name",
+                "street_school",
+                "complement_school",
+                "city_school",
+                "zipcode_school",
+                "country_school",
+            ]
+        )
+
+        for profile in profiles:
+            # Add application data to the CSV row
+            writer.writerow(
+                [
+                    profile.first_name,
+                    profile.last_name,
+                    profile.birth_date,
+                    profile.email,
+                    profile.phone,
+                    profile.street_app,
+                    profile.complement_app,
+                    profile.city_app,
+                    profile.zipcode_app,
+                    profile.country_app,
+                    profile.first_name_resp,
+                    profile.last_name_resp,
+                    profile.email_resp,
+                    profile.phone_resp,
+                    profile.street_resp,
+                    profile.complement_resp,
+                    profile.city_resp,
+                    profile.zipcode_resp,
+                    profile.country_resp,
+                    profile.school_name,
+                    profile.street_school,
+                    profile.complement_school,
+                    profile.city_school,
+                    profile.zipcode_school,
+                    profile.country_school,
+                ]
+            )
+
+        writer.writerow(["application"])
+        writer.writerow(
+            [
+                "profile",
+                "school",
+                "form_answer",
                 "created at",
             ]
         )
@@ -171,14 +230,7 @@ class ExportUsersCSVView(LoginRequiredMixin, View):
             # Add application data to the CSV row
             writer.writerow(
                 [
-                    application.first_name,
-                    application.last_name,
-                    application.event,
-                    application.status,
-                    application.birthdate,
-                    application.phone,
-                    application.address,
-                    application.school,
+                    application.profile,
                     application.form_answer,
                     application.created_at,
                 ]

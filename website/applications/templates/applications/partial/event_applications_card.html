@@ -135,8 +135,12 @@
                              style="width: calc(100% - var(--bs-accordion-btn-icon-width))">
                             <div class="col-sm-6 my-sm-auto mb-3 text-center text-sm-start">
                                 <i class="fas fa-user me-2"></i>
-                                {{ application.first_name|title }}
-                                {{ application.last_name|title }}
+                                {% if application.profile is not None %}
+                                    {{ application.profile.first_name|title }}
+                                    {{ application.profile.last_name|title }}
+                                {% else %}
+                                    -Profil supprimé-
+                                {% endif %}
                             </div>
 
                             {# Status Chip #}
