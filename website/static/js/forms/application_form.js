@@ -47,7 +47,7 @@ function setupApplicationFormModal(modal_id) {
 
         // Add an onclick event to the button
         createProfileButton.onclick = function () {
-            window.open("profiles/create", "_blank");
+            window.open(window.location.origin + "/profiles/create/", "_blank");
         };
 
         // Append the button to the column div
