@@ -6,48 +6,40 @@
 
 {% block content %}
     <div class="content-viewport bg-full-1 p-4">
-        <div class="pt-4 m-4">
+        <div class="pt-4 m-4 content-background p-3 ps-4 pe-4">
             <h1>Comment s'inscrire à un stage Girls Can Code!</h1>
             Vous souhaitez vous inscrire ou inscrire votre fille à l’un de nos stages, cependant la procédure d’inscription ne vous semble pas claire ?
             Cette page est là pour vous guider.
 
-            <div class="row mt-4 align-items-center content-background p-3 ps-4 pe-4">
-                <div class="col">
-                    <h2>Se rendre sur le site et créer son compte</h2>
-                    Tout d’abord, veuillez vous rendre sur le site internet girlscancode.fr.
-                    <br>
-                    Une fois sur le site, vous devriez voir en haut à droite les bontons <strong>S'inscrire</strong> et <strong>Se connecter</strong>.
-                    <br>
-                    Vous pouvez ensuite créer votre compte.
-                </div>
-            </div>
+            <p class="row mt-4 align-items-center">
+                <h2>1. Se rendre sur le site et créer son compte</h2>
+                Tout d’abord, veuillez vous rendre sur le site internet girlscancode.fr.
+                <br>
+                Une fois sur le site, vous devriez voir en haut à droite les bontons <strong>S'inscrire</strong> et <strong>Se connecter</strong>.
+                <br>
+                Vous pouvez ensuite créer votre compte.
+            </p>
 
-            <div class="row mt-4 align-items-center content-background p-3 ps-4 pe-4">
-                <div class="col">
-                    <h2>Créer un profil candidate</h2>
-                    Une fois votre compte créé, vous pouvez cliquer sur votre nom en haut à gauche, puis sur <strong><i class="fas fa-address-card me-2"></i>Mes profils</strong>.
-                    <br>
-                    Ajoutez ensuite un profil en cliquant sur <strong>Nouveau Profil</strong>.
-                </div>
-            </div>
+            <p class="row mt-4 align-items-center">
+                <h2>2. Créer un profil candidate</h2>
+                Une fois votre compte créé, vous pouvez cliquer sur votre nom en haut à gauche, puis sur <strong><i class="fas fa-address-card me-2"></i>Mes profils</strong>.
+                <br>
+                Ajoutez ensuite un profil en cliquant sur <strong>Nouveau Profil</strong>.
+            </p>
 
-            <div class="row mt-4 align-items-center content-background p-3 ps-4 pe-4">
-                <div class="col">
-                    <h2>S'inscrire au stage</h2>
-                    Une fois votre profil créé, vous pouvez cliquer sur <strong>Nos événements</strong>.
-                    <br>
-                    Sélectionnez le profil que vous venez de créer et remplissez les questions.
-                </div>
-            </div>
+            <p class="row mt-4 align-items-center">
+                <h2>3. S'inscrire au stage</h2>
+                Une fois votre profil créé, vous pouvez cliquer sur <strong>Nos événements</strong>.
+                <br>
+                Sélectionnez le profil que vous venez de créer et remplissez les questions.
+            </p>
 
-            <div class="row mt-4 align-items-center content-background p-3 ps-4 pe-4">
-                <div class="col">
-                    <h2>Bravo !</h2>
-                    Félicitations, vous avez bien réussi l’inscription, nous espérons vous retrouver sur les stages à venir !
-                    <br>
-                    En cas de problème, n’hésitez pas à nous contacter par mail à l’adresse {{ CONTACT_EMAIL }} ou via téléphone au {{ CONTACT_PHONE }}.
-                </div>
-            </div>
+            <p class="row mt-4 align-items-center">
+                <h2>Bravo !</h2>
+                Félicitations, vous avez bien réussi l’inscription, nous espérons vous retrouver sur les stages à venir !
+                <br>
+                En cas de problème, n’hésitez pas à nous contacter par mail à l’adresse <strong>{{ CONTACT_EMAIL }}</strong> ou via téléphone au <strong>{{ CONTACT_PHONE }}</strong>.
+            </p>
         </div>
     </div>
 {% endblock content %}
