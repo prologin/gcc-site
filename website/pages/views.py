@@ -71,3 +71,10 @@ class FAQView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         return faq_entries_list()
+
+
+class HelpView(TemplateView):
+    template_name = "pages/help.html"
+
+    def get_context_data(self, *args, **kwargs):
+        return faq_entries_list()
