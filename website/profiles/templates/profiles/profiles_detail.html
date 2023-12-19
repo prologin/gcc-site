@@ -19,11 +19,11 @@
                     <h1>Détail du profil</h1>
                 </div>
                 <div class="col-md-3 row">
-                    <a class="mb-4 px-0"
-                       href="{% url 'profiles:profile_detail' object.id %}">
-                        <button class="btn btn-primary btn-block">Modifier ce profil</button>
+                    {# TODO: edit profile #}
+                    <a class="mb-4 px-0" href="{% url 'events:events' %}">
+                        <button class="btn btn-primary btn-block">Participer à un stage</button>
                     </a>
-                    {% include "profiles/partial/delete_modal.html" with profile=object button_class="btn-danger" %}
+                    {% include "profiles/partial/delete_modal.html" with profile=object button_class="btn-danger btn-block p-1" %}
                 </div>
             </div>
             <div class="row justify-content-center p-2">
