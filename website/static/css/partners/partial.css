@@ -10,4 +10,5 @@
 .carousel-inner .partner img {
     max-width: 40vh;
     height: auto;
+    max-height: 20vh;
 }
