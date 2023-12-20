@@ -46,9 +46,9 @@ def my_context_processor(req):
             "alt": "Page Facebook des stages Girls Can Code!",
         },
         {
-            "link": "https://twitter.com/prologin",
-            "logo": "fa-twitter",
-            "alt": "Page Twitter de l'association Prologin",
+            "link": "https://x.com/prologin",
+            "logo": "fa-x-twitter",
+            "alt": "Page X de l'association Prologin",
         },
     ]
 
