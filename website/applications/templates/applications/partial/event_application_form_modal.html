@@ -27,6 +27,11 @@
                     <div class="container-fluid">
                         <div class="row justify-content-center">
                             <div class="col-11">
+                                <div class="fst-italic fs-footnote mb-2">
+                                    Les champs avec un astérisque
+                                    <span class="asteriskField">*</span>
+                                    sont à remplir obligatoirement.
+                                </div>
                                 <form method="post" action="{% url 'applications:create_application' %}">
                                     {% comment %}
                                     The event id value attribute should be set
@@ -36,11 +41,6 @@
 
                                     {% crispy form %}
                                 </form>
-                                <div class="fst-italic fs-footnote">
-                                    Les champs avec un astérisque
-                                    <span class="asteriskField">*</span>
-                                    sont à remplir obligatoirement.
-                                </div>
                             </div>
                         </div>
                     </div>
