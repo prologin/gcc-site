@@ -39,28 +39,28 @@
             </div>
 
             {# All the navbar buttons #}
-            <ul class="offcanvas-body navbar-nav me-auto mb-2 mb-lg-0 p-1">
+            <ul class="offcanvas-body navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item d-flex flex-md-fill mx-1 my-1 my-md-0">
                     <a href="{% url 'events:events' %}"
-                       class="d-flex align-items-center btn btn-navbar py-1 px-3 ">
+                       class="d-flex align-items-center btn btn-navbar btn-lg">
                         Nos événements
                     </a>
                 </li>
                 <li class="nav-item d-flex flex-md-fill mx-1 my-1 my-md-0">
                     <a href="{% url 'partners:partners' %}"
-                       class="d-flex align-items-center btn btn-navbar py-1 px-3">
+                       class="d-flex align-items-center btn btn-navbar btn-lg">
                         Nos partenaires
                     </a>
                 </li>
                 <li class="nav-item d-flex flex-md-fill mx-1 my-1 my-md-0">
                     <a href="{% url 'pages:FAQ' %}"
-                       class="d-flex align-items-center btn btn-navbar py-1 px-3">
+                       class="d-flex align-items-center btn btn-navbar btn-lg">
                         <div>FAQ</div>
                     </a>
                 </li>
                 <li class="nav-item d-flex flex-md-fill mx-1 my-1 my-md-0">
                     <a href="{% url 'pages:about' %}"
-                       class="d-flex align-items-center btn btn-navbar py-1 px-3 ">
+                       class="d-flex align-items-center btn btn-navbar btn-lg">
                         À propos
                     </a>
                 </li>
@@ -69,7 +69,7 @@
                     {% if user.is_staff %}
                         <li class="nav-item d-flex flex-md-fill mx-1 my-1 my-md-0">
                             <div class="dropdown-center">
-                                <button class="d-flex align-items-center btn btn-light py-1 px-3"
+                                <button class="d-flex align-items-center btn btn-light btn-lg"
                                         data-bs-toggle="dropdown"
                                         data-bs-target="#dropdown-admin">
                                     <div class="row">
@@ -89,7 +89,7 @@
                     {% endif %}
                     <li class="nav-item d-flex flex-md-fill mx-1 my-1 my-md-0">
                         <div class="dropdown-center">
-                            <button class="d-flex align-items-center btn btn-light py-1 px-3"
+                            <button class="d-flex align-items-center btn btn-light btn-lg"
                                     data-bs-target="#dropdown-user"
                                     data-bs-toggle="dropdown">
                                 <div class="row">
