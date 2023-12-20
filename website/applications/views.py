@@ -10,9 +10,7 @@ from django.views.generic.edit import FormMixin, UpdateView
 
 from applications.forms import EventApplicationForm
 from applications.models import Application, ApplicationStatus
-from events.models import Event
 from profiles.models import Profile
-from users.models import User
 
 
 class ApplicationsView(LoginRequiredMixin, FormMixin, TemplateView):
@@ -40,11 +38,9 @@ class ApplicationsView(LoginRequiredMixin, FormMixin, TemplateView):
         kw = super().get_form_kwargs()
 
         if self.request.user.is_authenticated:
-            kw["profile_choices"] = Profile.get_choices_for_user(
-                self.request.user
-            )
+            kw["profile_qs"] = self.request.user.profiles.all()
         else:
-            kw["profile_choices"] = [(None, "-")]
+            kw["profile_qs"] = Profile.objects.none()
 
         return kw
 

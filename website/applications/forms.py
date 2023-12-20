@@ -13,13 +13,15 @@ from crispy_forms.layout import (
     Submit,
 )
 from django import forms
-from django.core.exceptions import ValidationError
+from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 from django.core.validators import validate_email
+from django.db import models
 from django.http import QueryDict
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from applications.models import Application
+from profiles.models import Profile
 
 SCHOOL_LEVEL = [
     (None, "-"),  # Start choice
@@ -50,6 +52,21 @@ class EventApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = ["event", "profile", "form_answer"]
+        error_messages = {
+            NON_FIELD_ERRORS: {
+                "unique_together": _(
+                    "Une candidature avec ce profil est déjà enregistrée pour ce stage"
+                ),
+            }
+        }
+
+    profile = forms.TypedChoiceField(
+        label="Sélectionner mon profil participante",
+        choices=[],
+        empty_value=None,
+        coerce=lambda id: Profile.objects.get(id=id),
+        required=True,
+    )
 
     # Info supplémentaires sur la participante (en + du profil)
     school_level = forms.ChoiceField(
@@ -93,11 +110,16 @@ class EventApplicationForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        if "profile_choices" in kwargs:
-            self.base_fields["profile"].choices = kwargs.pop("profile_choices")
-            self.base_fields[
-                "profile"
-            ].label = "Selectioner mon profil participante"
+        if "profile_qs" in kwargs:
+            choices = [(None, "-")]
+            qs = kwargs.pop("profile_qs")
+            choices.extend(
+                [
+                    (entry.id, f"{entry.first_name} {entry.last_name}")
+                    for entry in qs
+                ]
+            )
+            self.base_fields["profile"].choices = choices
 
         if len(args) > 0 and isinstance(args[0], QueryDict):
             # If POSTing, add a form_answer value to the input which is

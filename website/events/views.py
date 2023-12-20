@@ -30,7 +30,7 @@ class HomePageView(FormMixin, ListView):
         ctx = super().get_context_data(*args, **kwargs)
 
         ctx["open_events"] = Event.objects.get_open_events(5)
-        form = EventApplicationForm(profile_choices=[])
+        form = EventApplicationForm()
         # ctx["form"] = form
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
@@ -49,11 +49,9 @@ class HomePageView(FormMixin, ListView):
         kw = super().get_form_kwargs()
 
         if self.request.user.is_authenticated:
-            kw["profile_choices"] = Profile.get_choices_for_user(
-                self.request.user
-            )
+            kw["profile_qs"] = self.request.user.profiles.all()
         else:
-            kw["profile_choices"] = [(None, "-")]
+            kw["profile_qs"] = Profile.objects.none()
 
         return kw
 
@@ -107,11 +105,9 @@ class EventListViewBase(FormMixin, ListView):
         kw = super().get_form_kwargs()
 
         if self.request.user.is_authenticated:
-            kw["profile_choices"] = Profile.get_choices_for_user(
-                self.request.user
-            )
+            kw["profile_qs"] = self.request.user.profiles.all()
         else:
-            kw["profile_choices"] = [(None, "-")]
+            kw["profile_qs"] = Profile.objects.none()
 
         return kw
 
