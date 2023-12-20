@@ -28,33 +28,38 @@ function setupApplicationFormModal(modal_id) {
 
         // Get the existing elements
         let profil = document.querySelector("#div_id_profile");
-        let label = document.querySelector(".form-label");
-        let choice = document.querySelector("#id_profile");
+        let actual_button = profil.querySelector("#button_add_new_profile");
+        if (actual_button == null)
+        {
+            let label = document.querySelector(".form-label");
+            let choice = document.querySelector("#id_profile");
 
-        label.classList.add('col');
+            label.classList.add('col');
 
-        // Create a new div for the column
-        const columnDiv = document.createElement('div');
-        columnDiv.className = 'row';
+            // Create a new div for the column
+            const columnDiv = document.createElement('div');
+            columnDiv.className = 'row';
 
-        // Append the label to the column div
-        columnDiv.appendChild(label);
+            // Append the label to the column div
+            columnDiv.appendChild(label);
 
-        // Create the "Créer un nouveau profil" button
-        const createProfileButton = document.createElement('button');
-        createProfileButton.innerText = 'Créer un nouveau profil !';
-        createProfileButton.className = 'btn btn-block btn-light mb-2 col';
+            // Create the "Créer un nouveau profil" button
+            const createProfileButton = document.createElement('button');
+            createProfileButton.innerText = 'Créer un nouveau profil !';
+            createProfileButton.className = 'btn btn-block btn-light mb-2 col';
+            createProfileButton.setAttribute("id", "button_add_new_profile");
 
-        // Add an onclick event to the button
-        createProfileButton.onclick = function () {
-            window.open(window.location.origin + "/profiles/create/", "_blank");
-        };
+            // Add an onclick event to the button
+            createProfileButton.onclick = function () {
+                location.replace(window.location.origin + "/profiles/create/", "_blank");
+            };
 
-        // Append the button to the column div
-        columnDiv.appendChild(createProfileButton);
+            // Append the button to the column div
+            columnDiv.appendChild(createProfileButton);
 
-        // Replace the existing label with the new column div
-        profil.insertBefore(columnDiv, choice);
+            // Replace the existing label with the new column div
+            profil.insertBefore(columnDiv, choice);
+        }
 
         // Update the form's event id, and reset its content.
         // Check current form id. if new event ID, reset its content.
