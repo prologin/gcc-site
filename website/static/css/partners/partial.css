@@ -1,3 +1,7 @@
+.partner-logo {
+    max-height: 20vh;
+}
+
 .carousel-inner .partner {
     display: flex;
     justify-content: center;

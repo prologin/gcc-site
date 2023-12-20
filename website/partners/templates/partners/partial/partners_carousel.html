@@ -16,7 +16,7 @@
 
         {# If large screen #}
         <div class="container text-center d-none d-md-block">
-            <div class="row">
+            <div class="row justify-content-evenly">
                 {% if status == "avant" %}
                     {% for partner in partners_avant %}
                         <div class="col-md-6 col-lg-4 col-xl-2">
@@ -24,7 +24,7 @@
                                 <a href="{{ partner.website_url }}">
                                     <img src="{{ partner.logo.url }}"
                                          loading="lazy"
-                                         class="img-fluid d-block mx-auto" />
+                                         class="img-fluid d-block mx-auto partner-logo" />
                                 </a>
                             </div>
                         </div>
