@@ -189,7 +189,7 @@ else:
     EMAIL_PORT = env.get_string("DJANGO_SMTP_PORT", 25)
     EMAIL_HOST_USER = env.get_string("DJANGO_SMTP_USER", "")
     EMAIL_HOST_PASSWORD = env.get_secret("DJANGO_SMTP_PASSWORD", "")
-    EMAIL_USE_TLS = env.get_bool("DJANGO_SMTP_STARTTLS", False)
+    EMAIL_USE_TLS = env.get_bool("DJANGO_SMTP_USETLS", False)
 
 # Those are only used to send emails to admins and managers
 SERVER_EMAIL = env.get_string("DJANGO_SERVER_EMAIL", DEFAULT_FROM_EMAIL)

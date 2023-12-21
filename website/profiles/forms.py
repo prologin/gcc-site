@@ -55,6 +55,7 @@ class ProfileCreationForm(forms.ModelForm):
                 "type": "tel",
             }
         ),
+        required=False,
     )
 
     email = forms.EmailField(
