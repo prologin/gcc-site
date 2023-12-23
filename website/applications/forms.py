@@ -150,13 +150,44 @@ class EventApplicationForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Div(
+                Row(
+                    Column(
+                        Button(
+                            name="next",
+                            value="J'ai déjà un profil",
+                            css_class="my-4 btn btn-primary btn-block",
+                        ),
+                    ),
+                    Column(
+                        Button(
+                            name="next",
+                            value="Je crée un profil",
+                            css_class="my-4 btn btn-primary btn-block",
+                        ),
+                    ),
+                    css_class="mt-4 p-0",
+                ),
+                css_class="tab active",
+            ),
+            Div(
                 Field("profile"),
                 Field("school_level"),
                 Div(
-                    Button(
-                        name="next",
-                        value="Suivant",
-                        css_class="my-4 btn btn-primary btn-block",
+                    Row(
+                        Column(
+                            Button(
+                                name="back",
+                                value="Retour",
+                                css_class="my-4 btn btn-light btn-block",
+                            )
+                        ),
+                        Column(
+                            Submit(
+                                name="next",
+                                value="Suivant",
+                                css_class="my-4 btn btn-primary btn-block",
+                            )
+                        ),
                     ),
                     css_class="mt-4 p-0",
                 ),
