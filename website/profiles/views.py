@@ -33,7 +33,7 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
         else:
             messages.success(
                 request,
-                "Votre profil a été enregistré ! Enregistre toi à un stage sur cette page !",
+                "Votre profil a été enregistré ! Inscrit toi à un stage sur cette page !",
             )
             return self.form_valid(form)
 
