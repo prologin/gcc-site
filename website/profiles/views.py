@@ -17,7 +17,7 @@ from profiles.models import Profile
 class CreateProfileView(LoginRequiredMixin, CreateView):
     template_name = "profiles/create_profiles.html"
     form_class = ProfileCreationForm
-    success_url = reverse_lazy("profiles:profiles_list")  # TODO: Update this
+    success_url = reverse_lazy("events:events")  # TODO: Update this
 
     def post(self, request, *args, **kwargs):
         self.object = None
@@ -31,7 +31,10 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
             )
             return self.form_invalid(form)
         else:
-            messages.success(request, "Votre profil a été enregistré !")
+            messages.success(
+                request,
+                "Votre profil a été enregistré ! Utilisez-le pour vous inscrire à un stage sur cette page !",
+            )
             return self.form_valid(form)
 
     def get_form_kwargs(self):
