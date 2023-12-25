@@ -2,12 +2,15 @@ from pathlib import Path
 
 from django.conf import settings
 from django.core.files.storage import default_storage
-from django.core.validators import ValidationError
+from django.core.validators import FileExtensionValidator, ValidationError
 from django.db import models
 from django.utils import timezone
+from django.utils.module_loading import import_string
 from django.utils.translation import gettext_lazy as _
 
 from applications.models import ApplicationStatus
+from events.tasks import expense_report_generate_document
+from events.validators import validate_is_pdf
 
 
 class Address(models.Model):
@@ -113,11 +116,14 @@ class Event(models.Model):
     start_date = models.DateTimeField(verbose_name=_("Date de début"))
     end_date = models.DateTimeField(verbose_name=_("Date de fin"))
 
-    documents = models.ManyToManyField(
-        to="events.Document",
-        related_name="events",
+    documents = models.FileField(
+        upload_to="events_gcc/",
+        validators=(
+            FileExtensionValidator(allowed_extensions=("pdf",)),
+            validate_is_pdf,
+        ),
         verbose_name=_("Documents"),
-        through="events.EventDocument",
+        null=True,
         blank=True,
     )
 
@@ -187,70 +193,13 @@ class Event(models.Model):
                 ),
             )
 
+    def generate_document(self):
+        print("cc")
+        expense_report_generate_document.delay(self.pk)
+        self.save()
+
     def get_application_questions(self, mandatory_only=False):
         if mandatory_only:
             return self.form.questions.filter(mandatory=True)
         else:
             return self.form.questions.all()
-
-
-class DocumentType(models.IntegerChoices):
-    PUBLIC = 1, _("Public")
-    ACCEPTED_OR_CONFIRMED = 2, _("Accepté ou confirmé")
-    CONFIRMED = 3, _("Confirmé seulement")
-
-
-class EventDocument(models.Model):
-    document = models.ForeignKey(
-        to="events.Document",
-        verbose_name=_("Document"),
-        on_delete=models.CASCADE,
-    )
-
-    event = models.ForeignKey(
-        to="events.Event",
-        verbose_name=_("Évènement"),
-        on_delete=models.CASCADE,
-    )
-
-    display_name = models.CharField(
-        max_length=260,
-        verbose_name=_("Nom public du document"),
-        help_text=_(
-            "Le nom public du document qui sera affiché aux participants"
-        ),
-    )
-
-    visibility = models.IntegerField(
-        verbose_name=_("Visibilité"),
-        choices=DocumentType.choices,
-    )
-
-    class Meta:
-        verbose_name = _("document lié à l'évènement")
-        verbose_name_plural = _("documents liés à l'évènement")
-
-    def __str__(self):
-        return self.display_name
-
-
-class Document(models.Model):
-    admin_name = models.CharField(
-        max_length=260,
-        unique=True,
-        verbose_name=_("Nom du document"),
-        help_text=_("Ce nom est uniquement utilisé pour l'admin django"),
-    )
-
-    file = models.FileField(
-        verbose_name=_("Fichier"),
-        storage=getattr(settings, "GCCSITE_STORAGE_BACKEND", default_storage),
-        upload_to=Path("events") / "documents",
-    )
-
-    class Meta:
-        verbose_name = _("document")
-        verbose_name_plural = _("documents")
-
-    def __str__(self):
-        return self.admin_name
