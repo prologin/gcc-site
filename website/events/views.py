@@ -14,6 +14,8 @@ from events.models import Event
 from partners.models import Partner
 from profiles.models import Profile
 
+from .tasks import expense_report_generate_document
+
 
 class HomePageView(FormMixin, ListView):
     model = Event
@@ -24,6 +26,13 @@ class HomePageView(FormMixin, ListView):
         if "submit-newsletter" in request.POST:
             # TODO : DO SOMETHING HERE ?
 
+            return HttpResponseRedirect(reverse("events:home"))
+
+        elif "generate" in request.POST:
+            print(request.POST)
+            self.object = Event.objects.get(id=request.POST["event-id"])
+            expense_report_generate_document.delay(self.object.pk)
+            self.object.save()
             return HttpResponseRedirect(reverse("events:home"))
 
     def get_context_data(self, *args, **kwargs):
