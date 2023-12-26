@@ -194,7 +194,6 @@ class Event(models.Model):
             )
 
     def generate_document(self):
-        print("cc")
         expense_report_generate_document.delay(self.pk)
         self.save()
 
