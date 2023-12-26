@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 
 from applications.models import ApplicationStatus
 from events.tasks import expense_report_generate_document
-from events.validators import validate_is_pdf
+from events.validators import validate_file_max_size, validate_is_pdf
 
 
 class Address(models.Model):
@@ -121,6 +121,7 @@ class Event(models.Model):
         validators=(
             FileExtensionValidator(allowed_extensions=("pdf",)),
             validate_is_pdf,
+            validate_file_max_size(10),
         ),
         verbose_name=_("Documents"),
         null=True,
