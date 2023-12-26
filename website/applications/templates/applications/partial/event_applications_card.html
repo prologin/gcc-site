@@ -100,6 +100,12 @@
                             onclick="{{ event.document.url }}">
                         Télécharger les documents
                     </button>
+                {% else %}
+                    <p class="text-body-secondary fst-italic">
+                        Les documents ne sont pas disponibles sur le site.
+                        Ils vous seront envoyés par mail.
+                        Dans le cas contraire, merci de nous contacter.
+                    </p>
                 {% endif %}
 
             </div>
