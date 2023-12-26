@@ -41,7 +41,6 @@ def expense_report_generate_document(event_id):
     )
     response.raise_for_status()
 
-
     merger = PdfWriter()
     merger.append(BytesIO(response.content))
 
