@@ -112,6 +112,8 @@ services:
       OIDC_DOCUMENTS_GENERATOR_RP_CLIENT_ID_FILE: /run/secrets/documents-generator-client-id
       OIDC_DOCUMENTS_GENERATOR_M2M_USERNAME_FILE: /run/secrets/documents-generator-username
       OIDC_DOCUMENTS_GENERATOR_M2M_PASSWORD_FILE: /run/secrets/documents-generator-password
+      RECAPTCHA_PUBLIC_KEY_FILE: /run/secrets/recaptcha-public-key
+      RECAPTCHA_PRIVATE_KEY_FILE: /run/secrets/recaptcha-private-key
     depends_on:
       - db_dev
       - redis_dev
@@ -135,6 +137,8 @@ services:
       - documents-generator-password
       - s3-access
       - s3-secret
+      - recaptcha-public-key
+      - recaptcha-private-key
 
   celery_dev: &celery_dev
     <<: *backend_dev
@@ -192,3 +196,7 @@ secrets:
     file: ./secrets/documents-generator-username
   documents-generator-password:
     file: ./secrets/documents-generator-password
+  recaptcha-public-key:
+    file: ./secrets/recaptcha-public-key
+  recaptcha-private-key:
+    file: ./secrets/recaptcha-private-key

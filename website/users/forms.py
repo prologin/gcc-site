@@ -22,6 +22,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV3
 
 
 class PersonalInfoForm(forms.Form):
@@ -230,6 +232,8 @@ class AuthRegisterForm(BaseUserCreationForm):
         required=True,
     )
 
+    captcha = ReCaptchaField(widget=ReCaptchaV3)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -254,6 +258,7 @@ class AuthRegisterForm(BaseUserCreationForm):
                 Field("password1"),
                 Field("password2"),
                 Field("authorization"),
+                Field("captcha"),
                 Submit(
                     name="submit-registration",
                     value="Créer mon compte",
