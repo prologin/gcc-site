@@ -9,7 +9,6 @@ from django.utils.module_loading import import_string
 from django.utils.translation import gettext_lazy as _
 
 from applications.models import ApplicationStatus
-from events.tasks import expense_report_generate_document
 from events.validators import validate_file_max_size, validate_is_pdf
 
 
