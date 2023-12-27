@@ -1,3 +1,6 @@
+import datetime
+
+import pytz
 from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import (
@@ -19,9 +22,13 @@ from django.contrib.auth.forms import (
     SetPasswordForm,
 )
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+
+# New site deploy
+_FIRST_JANUARY_24 = datetime.datetime(2024, 1, 1, tzinfo=pytz.UTC)
 
 
 class PersonalInfoForm(forms.Form):
@@ -210,6 +217,21 @@ class AuthLoginForm(AuthenticationForm):
         self.helper.layout = Layout(
             Field("username"), Field("password"), submit
         )
+
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            if user.date_joined < _FIRST_JANUARY_24:
+                # Legacy user
+                raise ValidationError(
+                    "inactive legacy Account",
+                    code="inactive",
+                )
+            else:
+                # New user
+                raise ValidationError(
+                    "inactive new Account",
+                    code="inactive",
+                )
 
 
 class AuthRegisterForm(BaseUserCreationForm):

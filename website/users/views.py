@@ -371,7 +371,7 @@ class ActivateAccountView(View):
                 settings.LOGIN_REDIRECT_URL
             )  # Redirect to the login page or any other desired page
         else:
-            messages.error(request, _("Le lien d'activation a exipiré"))
+            messages.error(request, _("Le lien d'activation a expiré"))
             return redirect(
                 "activation_error"
             )  # Redirect to an error page if activation fails
