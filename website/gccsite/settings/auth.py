@@ -11,7 +11,7 @@ OIDC_DRF_AUTH_BACKEND = "gccsite.auth.backend.ProloginOIDCAB"
 
 AUTHENTICATION_BACKENDS = [
     OIDC_DRF_AUTH_BACKEND,
-    "django.contrib.auth.backends.ModelBackend",
+    "django.contrib.auth.backends.AllowAllUsersModelBackend",
 ]
 
 LOGIN_URL = "/login"
