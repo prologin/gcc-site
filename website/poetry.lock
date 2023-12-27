@@ -939,6 +939,20 @@ files = [
 prometheus-client = ">=0.7"
 
 [[package]]
+name = "django-recaptcha"
+version = "4.0.0"
+description = "Django recaptcha form field/widget app."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-recaptcha-4.0.0.tar.gz", hash = "sha256:5316438f97700c431d65351470d1255047e3f2cd9af0f2f13592b637dad9213e"},
+    {file = "django_recaptcha-4.0.0-py3-none-any.whl", hash = "sha256:0d912d5c7c009df4e47accd25029133d47a74342dbd2a8edc2877b6bffa971a3"},
+]
+
+[package.dependencies]
+django = "*"
+
+[[package]]
 name = "django-redis"
 version = "5.4.0"
 description = "Full featured redis cache backend for Django."
@@ -2889,4 +2903,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "c68b84e4ac4f9396dcf7b8e15f6aad84279e5bbd96108863efac5fcad492c5a4"
+content-hash = "2a3939cfac44586846641d85fec0390bb44586c0b2f0e30dc0e61009c9077fa9"

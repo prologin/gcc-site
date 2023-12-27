@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_fsm",
     "fsm_admin",
+    "django_recaptcha",
     "mozilla_django_oidc",
     "django_celery_beat",
     "post_office",
@@ -231,3 +232,8 @@ AWS_S3_URL_PROTOCOL = (
 )
 AWS_S3_CUSTOM_DOMAIN = env.get_string("DJANGO_S3_CUSTOM_DOMAIN", None)
 AWS_STATIC_LOCATION = "static"
+
+
+RECAPTCHA_PUBLIC_KEY = env.get_secret("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env.get_secret("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_REQUIRED_SCORE = 0.85
