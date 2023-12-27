@@ -363,15 +363,15 @@ class ActivateAccountView(View):
             user.save()
             messages.success(
                 request,
-                _("Your account has been activated. You can now log in."),
+                _(
+                    "Votre compte a été activé. Vous pouvez maintenant vous connecter."
+                ),
             )
             return redirect(
                 settings.LOGIN_REDIRECT_URL
             )  # Redirect to the login page or any other desired page
         else:
-            messages.error(
-                request, _("Activation link is invalid or has expired.")
-            )
+            messages.error(request, _("Le lien d'activation a exipiré"))
             return redirect(
                 "activation_error"
             )  # Redirect to an error page if activation fails
