@@ -29,7 +29,6 @@ class HomePageView(FormMixin, ListView):
             return HttpResponseRedirect(reverse("events:home"))
 
         elif "generate" in request.POST:
-            print(request.POST)
             self.object = Event.objects.get(id=request.POST["event-id"])
             expense_report_generate_document.delay(self.object.pk)
             self.object.save()
