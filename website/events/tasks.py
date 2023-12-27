@@ -31,7 +31,6 @@ def expense_report_generate_document(event_id):
         "event_end_time": "18:00",
     }
 
-
     response = requests.post(
         settings.DOCUMENTS_GENERATOR_DOCUMENTS_GCC_ENDPOINT,
         json=data,
