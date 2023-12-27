@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin,
 )
+from django.forms.utils import ErrorList
 from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView, View
@@ -56,10 +57,15 @@ class ApplicationCreateView(LoginRequiredMixin, View):
         form = EventApplicationForm(request.POST)
 
         if not form.is_valid():
-            messages.warning(
-                request,
-                str(form.errors),
+            # Shitty code to properly render the modal error message in the
+            # warning displayed on the full page
+            errors = ErrorList(
+                f"{k}: {v.as_text().replace('* ','')}"
+                if k != "__all__"
+                else v.as_text().replace("* ", "")
+                for k, v in form.errors.items()
             )
+            messages.warning(request, errors)
             return HttpResponseRedirect(redirect_url)
         else:
             form.save()
