@@ -15,6 +15,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (
     AuthenticationForm,
     BaseUserCreationForm,
+    PasswordChangeForm,
     PasswordResetForm,
     SetPasswordForm,
 )
@@ -99,28 +100,13 @@ class EmailForm(forms.Form):
         )
 
 
-class PasswordUpdateForm(forms.Form):
-    old_password = forms.CharField(
-        label="Mot de passe actuel", widget=forms.PasswordInput, required=True
-    )
-    new_password1 = forms.CharField(
-        label="Nouveau mot de passe",
-        widget=forms.PasswordInput,
-        required=True,
-        validators=[validate_password],
-    )
-    new_password2 = forms.CharField(
-        label="Confirmer le nouveau mot de passe",
-        widget=forms.PasswordInput,
-        required=True,
-    )
-
+class UserPasswordUpdateForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "password_update_form"
         self.helper.form_method = "post"
-        self.helper.form_action = reverse_lazy("users:update_user_password")
+        self.helper.form_action = reverse_lazy("users:update_password")
 
         submit = Div(
             Submit(

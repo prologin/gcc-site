@@ -48,8 +48,8 @@ from .forms import (
     GCCPasswordResetConfirmForm,
     GCCPasswordResetForm,
     NotificationsUpdateForm,
-    PasswordUpdateForm,
     PersonalInfoForm,
+    UserPasswordUpdateForm,
 )
 from .models import User
 
@@ -131,8 +131,14 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
 
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
-    def get_success_url(self):
-        return reverse_lazy("users:account_information") + "#password"
+    template_name = "users/password_reset/password_reset.html"
+    form_class = UserPasswordUpdateForm
+    success_url = reverse_lazy("users:account_information")
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["page_title"] = "Changement de mot de passe"
+        return ctx
 
 
 class ExportUsersCSVView(LoginRequiredMixin, View):
@@ -264,7 +270,6 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
     def post(self, request, *agrs, **kwargs):
         personal_info_form = PersonalInfoForm(request.POST)
         email_form = EmailForm(request.POST)
-        password_update_form = PasswordUpdateForm(request.POST)
         notifs_update_form = NotificationsUpdateForm(request.POST)
 
         if "submit-notifications" in request.POST:
@@ -283,7 +288,6 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
         return {
             "personal_info_form": PersonalInfoForm(user_data),
             "email_form": EmailForm(user_data),
-            "password_update_form": PasswordUpdateForm(),
             "notifs_update_form": NotificationsUpdateForm(),
             "delete_user_form": DeleteUserForm(),
         }
@@ -382,6 +386,11 @@ class GCCPasswordResetView(PasswordResetView):
     form_class = GCCPasswordResetForm
     email_template_name = "users/password_reset/password_reset_email.html"
     success_url = reverse_lazy("users:password_reset_done")
+
+    def get_context_data(self):
+        ctx = super().get_context_data()
+        ctx["page_title"] = "Réinitialiser son mot de passe"
+        return ctx
 
 
 class GCCPasswordResetDoneView(PasswordResetDoneView):

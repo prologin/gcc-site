@@ -22,11 +22,6 @@ urlpatterns = [
         name="update_user_email",
     ),
     path(
-        "update-user-password/",
-        views.UserPasswordChangeView.as_view(),
-        name="update_user_password",
-    ),
-    path(
         "delete-user/",
         views.UserDeleteView.as_view(),
         name="delete_user",
@@ -44,6 +39,11 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("register/", views.RegisterView.as_view(), name="register"),
+    path(
+        "update-password/",
+        views.UserPasswordChangeView.as_view(),
+        name="update_password",
+    ),
     path(
         "reset-password/",
         views.GCCPasswordResetView.as_view(),
