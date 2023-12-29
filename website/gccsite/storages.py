@@ -47,12 +47,12 @@ class GCCBaseStorage(S3Boto3Storage):
 
 class GCCMediaStorage(GCCBaseStorage):
     bucket_name = settings.DJANGO_S3_MEDIA_BUCKET
-    custom_domain = settings.AWS_S3_CUSTOM_DOMAIN
+    custom_domain = settings.AWS_S3_MEDIA_CUSTOM_DOMAIN
     default_acl = "private"
 
 
 class GCCStaticStorage(GCCBaseStorage):
     bucket_name = settings.DJANGO_S3_STATIC_BUCKET
-    custom_domain = settings.AWS_S3_CUSTOM_DOMAIN
+    custom_domain = settings.AWS_S3_STATIC_CUSTOM_DOMAIN
     default_acl = "public-read"
     querystring_auth = False
