@@ -342,7 +342,7 @@ class RegisterView(RedirectURLMixin, CreateView):
             current_site, uid, token
         )
 
-        email_from = settings.EMAIL_HOST_USER
+        email_from = settings.DEFAULT_FROM_EMAIL
         message = render_to_string(
             template_name="users/mails/account_activation_link.txt",
             context={
