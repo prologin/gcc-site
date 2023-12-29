@@ -19,8 +19,9 @@ class GCCBaseStorage(S3Boto3Storage):
             url_start = self.endpoint_url
             if self.custom_domain:
                 url_start = f"{self.url_protocol}//{self.custom_domain}"
-            url = "{}/{}{}".format(
+            url = "{}/{}/{}{}".format(
                 url_start,
+                self.bucket.name,
                 filepath_to_uri(name),
                 "?{}".format(urlencode(params)) if params else "",
             )
@@ -46,12 +47,12 @@ class GCCBaseStorage(S3Boto3Storage):
 
 class GCCMediaStorage(GCCBaseStorage):
     bucket_name = settings.DJANGO_S3_MEDIA_BUCKET
-    custom_domain = settings.AWS_S3_MEDIA_CUSTOM_DOMAIN
+    custom_domain = settings.AWS_S3_CUSTOM_DOMAIN
     default_acl = "private"
 
 
 class GCCStaticStorage(GCCBaseStorage):
     bucket_name = settings.DJANGO_S3_STATIC_BUCKET
-    custom_domain = settings.AWS_S3_STATIC_CUSTOM_DOMAIN
+    custom_domain = settings.AWS_S3_CUSTOM_DOMAIN
     default_acl = "public-read"
     querystring_auth = False
