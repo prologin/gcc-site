@@ -77,9 +77,26 @@
       "first_name": "bat",
       "last_name": "man",
       "is_staff": false,
-      "is_active": true,
+      "is_active": false,
       "date_joined": "2022-07-05T10:19:19.575Z",
       "email": "tintin@example.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$jyUtPMXHEr9tOedlGZnl51$5XR4G7456JNe3MSum7MO5kQPFykeyXhQRbhyKfwIpxM=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "bat",
+      "last_name": "man",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2024-07-05T10:19:19.575Z",
+      "email": "milou@example.com",
       "groups": [],
       "user_permissions": []
     }
