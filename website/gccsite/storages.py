@@ -19,9 +19,8 @@ class GCCBaseStorage(S3Boto3Storage):
             url_start = self.endpoint_url
             if self.custom_domain:
                 url_start = f"{self.url_protocol}//{self.custom_domain}"
-            url = "{}/{}/{}{}".format(
+            url = "{}/{}{}".format(
                 url_start,
-                self.bucket.name,
                 filepath_to_uri(name),
                 "?{}".format(urlencode(params)) if params else "",
             )
