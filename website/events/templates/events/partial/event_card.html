@@ -61,6 +61,19 @@
                     data-bs-target="#scheduleModal-{{ event|event_format }}">
                 Calendrier du stage
             </button>
+            {% comment %}
+            {% if user.is_staff %}
+                {% if not object.document %}
+
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="event-id" value="{{ event.id }}">
+                        <button class="btn mx-auto btn-primary btn-block" type="submit" name="generate">générer</button>
+                    </form>
+
+                {% endif %}
+            {% endif %}
+            {% endcomment %}
         </div>
     {% endif %}
 

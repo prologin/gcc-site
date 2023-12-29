@@ -28,18 +28,11 @@ class CenterAdmin(admin.ModelAdmin):
     inlines = (AddressAdmin,)
 
 
-class EventDocumentInlineAdmin(admin.TabularInline):
-    model = models.Event.documents.through
-    fields = ("document", "display_name", "visibility")
-    extra = 0
-
-
 @admin.register(models.Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ("name", "center", "year", "start_date", "end_date")
     list_filter = ("center", "year")
     ordering = ("-start_date",)
-    inlines = (EventDocumentInlineAdmin,)
 
     fieldsets = (
         (None, {"fields": ("name", "center", "year")}),
@@ -57,9 +50,5 @@ class EventAdmin(admin.ModelAdmin):
             "Informations aux participantes",
             {"fields": ("description", "notes")},
         ),
+        ("Documents du stage", {"fields": ("documents",)}),
     )
-
-
-@admin.register(models.Document)
-class DocumentAdmin(admin.ModelAdmin):
-    search_fields = ("display_name", "admin_name")

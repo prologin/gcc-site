@@ -95,6 +95,19 @@
                 </p>
                 {# TODO : DOCUMENT GENERATOR #}
                 {#<button class="btn btn-primary py-2 col-auto">Télécharger les documents</button>#}
+                {% if object.document %}
+                    <button class="btn mx-auto ml-lg-auto mr-lg-4 btn-primary btn-block"
+                            onclick="{{ event.document.url }}">
+                        Télécharger les documents
+                    </button>
+                {% else %}
+                    <p class="text-body-secondary fst-italic">
+                        Les documents ne sont pas disponibles sur le site.
+                        Ils vous seront envoyés par mail.
+                        Dans le cas contraire, merci de nous contacter.
+                    </p>
+                {% endif %}
+
             </div>
             <div class="m-2">
                 <i class="fa-sharp fa-solid fa-circle-info fa-lg"></i>
