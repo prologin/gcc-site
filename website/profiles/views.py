@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -56,6 +57,16 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = "profiles/profiles_detail.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        profile_id = self.kwargs.get("pk")
+        profile = Profile.objects.get(id=profile_id)
+
+        # Prevent user from accessing other users' profiles
+        if request.user != profile.user:
+            raise PermissionDenied()
+
+        super().dispatch(request, *args, **kwargs)
+
 
 class DeleteProfileView(LoginRequiredMixin, View):
     http_method_names = ("post",)
@@ -65,6 +76,10 @@ class DeleteProfileView(LoginRequiredMixin, View):
 
         profile_id = self.kwargs.get("pk")
         profile = Profile.objects.get(id=profile_id)
+
+        # Prevent user from accessing other users' profiles
+        if request.user != profile.user:
+            raise PermissionDenied()
 
         if not profile:
             return HttpResponseBadRequest("Bad request")
