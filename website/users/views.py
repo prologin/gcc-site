@@ -68,7 +68,7 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     )
 
     def get_object(self, *args, **kwargs):
-        return User.objects.get(id=self.request.user.id)
+        return self.request.user
 
     def get_success_url(self):
         return reverse_lazy("users:account_information") + "#personal-info"
@@ -245,7 +245,7 @@ class ExportUsersCSVView(LoginRequiredMixin, View):
         return response
 
     def get_object(self, *args, **kwargs):
-        return User.objects.get(id=self.request.user.id)
+        return self.request.user
 
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
@@ -277,7 +277,7 @@ class AccountInformationsView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs: Any):
         # Get the request user to prefill the forms
-        user = User.objects.get(id=self.request.user.id)
+        user = self.request.user
 
         user_data = {
             "first_name": user.first_name,
