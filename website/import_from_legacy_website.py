@@ -6,6 +6,7 @@ import json
 import sys
 from datetime import date, datetime
 
+from django.contrib.auth.hashers import make_password
 from django.db import transaction
 
 from applications.models import Application, ApplicationStatus
@@ -19,12 +20,15 @@ def get_users(users):
         user_model = User(
             id=user["id"],
             email=user["email"],
+            password=make_password(None),
             first_name=user["first_name"],
             last_name=user["last_name"],
             date_joined=datetime.fromisoformat(user["date_joined"]),
             last_login=datetime.fromisoformat(user["last_login"]),
-            is_active=False,
+            is_active=True,
         )
+        # By using make_password(None), we ensure the user as an unusable
+        # password (user.is_password_usable() -> False)
 
         yield (
             user_model,

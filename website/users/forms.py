@@ -14,7 +14,7 @@ from crispy_forms.layout import (
     Submit,
 )
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import (
     AuthenticationForm,
     BaseUserCreationForm,
@@ -22,6 +22,7 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
+from django.contrib.auth.hashers import is_password_usable
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -206,20 +207,35 @@ class AuthLoginForm(AuthenticationForm):
             Field("username"), Field("password"), submit
         )
 
-    def confirm_login_allowed(self, user):
-        if not user.is_active:
-            if user.date_joined < _FIRST_JANUARY_24:
-                # Legacy user
-                raise ValidationError(
-                    "inactive legacy Account",
-                    code="inactive",
-                )
+    def clean(self):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+
+        if username is not None and password:
+            self.user_cache = authenticate(
+                self.request, username=username, password=password
+            )
+            if self.user_cache is None:
+                # Handle the legacy account case
+                user = get_user_model().objects.filter(email=username).first()
+                if (
+                    user is not None
+                    and not is_password_usable(user.password)
+                    and user.date_joined < _FIRST_JANUARY_24
+                ):
+                    raise ValidationError(
+                        _(
+                            "Votre compte a été créé sur notre ancien site. Par mesure "
+                            "de sécurité, merci de réinitialiser votre mot de passe "
+                            "avant de vous connecter."
+                        ),
+                        code="inactive",
+                    )
+                raise self.get_invalid_login_error()
             else:
-                # New user
-                raise ValidationError(
-                    "inactive new Account",
-                    code="inactive",
-                )
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
 
 
 class AuthRegisterForm(BaseUserCreationForm):
