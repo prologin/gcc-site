@@ -21,8 +21,8 @@ from django.contrib.auth.forms import (
     PasswordChangeForm,
     PasswordResetForm,
     SetPasswordForm,
+    _unicode_ci_compare,
 )
-from django.contrib.auth.hashers import is_password_usable
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -33,6 +33,8 @@ from django_recaptcha.widgets import ReCaptchaV3
 
 # New site deploy
 _FIRST_JANUARY_24 = datetime.datetime(2024, 1, 1, tzinfo=pytz.UTC)
+
+UserModel = get_user_model()
 
 
 class PersonalInfoForm(forms.Form):
@@ -217,17 +219,18 @@ class AuthLoginForm(AuthenticationForm):
             )
             if self.user_cache is None:
                 # Handle the legacy account case
-                user = get_user_model().objects.filter(email=username).first()
+                user = UserModel.objects.filter(email=username).first()
                 if (
                     user is not None
-                    and not is_password_usable(user.password)
+                    and not user.has_usable_password()
                     and user.date_joined < _FIRST_JANUARY_24
                 ):
                     raise ValidationError(
                         _(
-                            "Votre compte a été créé sur notre ancien site. Par mesure "
-                            "de sécurité, merci de réinitialiser votre mot de passe "
-                            "avant de vous connecter."
+                            "Le compte lié à cet email a été créé sur notre "
+                            "ancien site. Par mesure de sécurité, merci de "
+                            "réinitialiser votre mot de passe avant de vous "
+                            "connecter."
                         ),
                         code="inactive",
                     )
@@ -240,7 +243,7 @@ class AuthLoginForm(AuthenticationForm):
 
 class AuthRegisterForm(BaseUserCreationForm):
     class Meta:
-        model = get_user_model()
+        model = UserModel
         fields = ("email", "first_name", "last_name")
         field_classes = {"email": forms.EmailField}
 
@@ -304,6 +307,21 @@ class GCCPasswordResetForm(PasswordResetForm):
         self.helper = FormHelper()
         self.helper.add_input(
             Submit("submit", "Réinitialiser mon mot de passe")
+        )
+
+    def get_users(self, email):
+        email_field_name = UserModel.get_email_field_name()
+        active_users = UserModel._default_manager.filter(
+            **{
+                "%s__iexact" % email_field_name: email,
+                "is_active": True,
+            }
+        )
+        # Do not filter out users with unusable passwords
+        return (
+            u
+            for u in active_users
+            if _unicode_ci_compare(email, getattr(u, email_field_name))
         )
 
 

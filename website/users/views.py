@@ -3,9 +3,7 @@ from typing import Any
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import (
     default_token_generator as account_activation_token,
