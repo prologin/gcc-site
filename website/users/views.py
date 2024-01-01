@@ -8,6 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import (
     default_token_generator as account_activation_token,
 )
+from django.forms.models import BaseModelForm
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.views import (
     PasswordChangeView,
     PasswordResetCompleteView,
@@ -77,52 +79,16 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ("email",)
 
-    def post(self, request, *agrs, **kwargs):
-        # Check if the email is valid using the EmailValidator
-        email = request.POST["email"]
-        email_validator = EmailValidator()
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(User, pk=self.request.user.id)
 
-        try:
-            email_validator(email)
-        except ValidationError:
-            messages.warning(
-                self.request,
-                "L'email est invalide !",
-                extra_tags=TAG_EMAIL,
-            )
-            return HttpResponseRedirect(
-                reverse("users:account_information") + "#personal-info"
-            )
-
-        # Check if another user already uses the same email address
-        try:
-            _ = User.objects.get(email=email)
-            messages.warning(
-                self.request,
-                "Un utilisateur avec cet email existe déjà !",
-                extra_tags=TAG_EMAIL,
-            )
-            return HttpResponseRedirect(
-                reverse("users:account_information") + "#personal-info"
-            )
-        except User.DoesNotExist:
-            # Unable to find a user, this is fine
-            request.user.email = email
-            # Update user in the database.
-            request.user.save()
-
-            # Send a message to display
-            messages.success(
-                request,
-                "Informations personnelles mises à jour",
-                extra_tags=TAG_EMAIL,
-            )
-
-        # Save the updated email for the user
-        return super().form_valid(self.get_form())
-
-    def get_object(self, queryset=None):
-        return self.request.user
+    def form_invalid(self, form):
+        messages.warning(
+            self.request,
+            _("L'email est invalide"),
+            extra_tags=TAG_EMAIL
+        )
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse_lazy("users:account_information") + "#personal-info"
@@ -318,18 +284,18 @@ class RegisterView(RedirectURLMixin, CreateView):
 
         messages.info(
             self.request,
-            "Activez votre compte en cliquant sur le lien envoyé à votre adresse mail",
+            _("Activez votre compte en cliquant sur le lien envoyé à votre adresse mail"),
         )
         return HttpResponseRedirect(self.get_success_url())
 
     def send_activation_email(self, user, email):
-        current_site = get_current_site(self.request)
-        subject = _("Activate your account on Girls Can Code!")
+        subject = _("Activez votre compte Girls Can Code!")
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = account_activation_token.make_token(user)
 
-        activation_link = "{0}/activate/{1}/{2}".format(
-            current_site, uid, token
+        activation_link = "{}{}".format(
+            get_current_site(self.request),
+            reverse('users:activate', args = [ uid, token ])
         )
 
         email_from = settings.DEFAULT_FROM_EMAIL
@@ -345,30 +311,38 @@ class RegisterView(RedirectURLMixin, CreateView):
 
 
 class ActivateAccountView(View):
+
+    def invalid_link(self):
+        messages.error(
+            request, _("Le lien d'activation est invalide ou a expiré.")
+        )
+        return redirect(
+            "activation_error"
+        )  # Redirect to an error page if activation fails
+    
+    def activate_account(self):
+        self.user.is_active = True
+        self.user.save()
+    
+    def get_success_url(self):
+        messages.success(
+            self.request,
+            _("Votre compte a été activé ! Vous pouvez vous connecter."),
+        )
+        return settings.LOGIN_REDIRECT_URL
+
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
+            self.user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
+            return self.invalid_link()
 
-        if user and account_activation_token.check_token(user, token):
-            user.is_active = True
-            user.save()
-            messages.success(
-                request,
-                _("Your account has been activated. You can now log in."),
-            )
-            return redirect(
-                settings.LOGIN_REDIRECT_URL
-            )  # Redirect to the login page or any other desired page
+        if self.user and account_activation_token.check_token(self.user, token):
+            self.activate_account()
+            return redirect(self.get_success_url())
         else:
-            messages.error(
-                request, _("Activation link is invalid or has expired.")
-            )
-            return redirect(
-                "activation_error"
-            )  # Redirect to an error page if activation fails
+            return self.invalid_link()
 
 
 class GCCPasswordResetView(PasswordResetView):
