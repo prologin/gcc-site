@@ -41,6 +41,10 @@
                         {% block title %}
                         {% endblock title %}
                     </h2>
+                    {% for msg in messages %}
+                        <div class="mt-2 alert {% if msg.level_tag == 'error' %}alert-danger{% else %}alert-{{ msg.level_tag }}{% endif %}"
+                             role="alert">{{ msg.message }}</div>
+                    {% endfor %}
                 </div>
                 <div class="content-background px-3">
                     <div class="px-md-5 py-3">
