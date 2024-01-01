@@ -284,18 +284,18 @@ class RegisterView(RedirectURLMixin, CreateView):
 
         messages.info(
             self.request,
-            "Activez votre compte en cliquant sur le lien envoyé à votre adresse mail",
+            _("Activez votre compte en cliquant sur le lien envoyé à votre adresse mail"),
         )
         return HttpResponseRedirect(self.get_success_url())
 
     def send_activation_email(self, user, email):
-        current_site = get_current_site(self.request)
-        subject = _("Activate your account on Girls Can Code!")
+        subject = _("Activez votre compte Girls Can Code!")
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = account_activation_token.make_token(user)
 
-        activation_link = "{0}/activate/{1}/{2}".format(
-            current_site, uid, token
+        activation_link = "{}{}".format(
+            get_current_site(self.request),
+            reverse('users:activate', args = [ uid, token ])
         )
 
         email_from = settings.DEFAULT_FROM_EMAIL
@@ -311,30 +311,38 @@ class RegisterView(RedirectURLMixin, CreateView):
 
 
 class ActivateAccountView(View):
+
+    def invalid_link(self):
+        messages.error(
+            request, _("Le lien d'activation est invalide ou a expiré.")
+        )
+        return redirect(
+            "activation_error"
+        )  # Redirect to an error page if activation fails
+    
+    def activate_account(self):
+        self.user.is_active = True
+        self.user.save()
+    
+    def get_success_url(self):
+        messages.success(
+            self.request,
+            _("Votre compte a été activé ! Vous pouvez vous connecter."),
+        )
+        return settings.LOGIN_REDIRECT_URL
+
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
+            self.user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
+            return self.invalid_link()
 
-        if user and account_activation_token.check_token(user, token):
-            user.is_active = True
-            user.save()
-            messages.success(
-                request,
-                _("Your account has been activated. You can now log in."),
-            )
-            return redirect(
-                settings.LOGIN_REDIRECT_URL
-            )  # Redirect to the login page or any other desired page
+        if self.user and account_activation_token.check_token(self.user, token):
+            self.activate_account()
+            return redirect(self.get_success_url())
         else:
-            messages.error(
-                request, _("Activation link is invalid or has expired.")
-            )
-            return redirect(
-                "activation_error"
-            )  # Redirect to an error page if activation fails
+            return self.invalid_link()
 
 
 class GCCPasswordResetView(PasswordResetView):
