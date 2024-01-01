@@ -212,7 +212,14 @@ class AuthRegisterForm(BaseUserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.add_input(Submit(None, value=_("Créer mon compte"), css_class="btn btn-primary btn-block"))
+        self.helper.add_input(
+            Submit(
+                None,
+                value=_("Créer mon compte"),
+                css_class="btn btn-primary btn-block",
+            )
+        )
+
 
 class GCCPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):

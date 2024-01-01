@@ -8,8 +8,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import (
     default_token_generator as account_activation_token,
 )
-from django.forms.models import BaseModelForm
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.views import (
     PasswordChangeView,
     PasswordResetCompleteView,
@@ -22,8 +20,9 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import EmailValidator
+from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect, resolve_url
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
@@ -84,9 +83,7 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
 
     def form_invalid(self, form):
         messages.warning(
-            self.request,
-            _("L'email est invalide"),
-            extra_tags=TAG_EMAIL
+            self.request, _("L'email est invalide"), extra_tags=TAG_EMAIL
         )
         return HttpResponseRedirect(self.get_success_url())
 
@@ -283,7 +280,9 @@ class RegisterView(RedirectURLMixin, CreateView):
 
         messages.info(
             self.request,
-            _("Activez votre compte en cliquant sur le lien envoyé à votre adresse mail"),
+            _(
+                "Activez votre compte en cliquant sur le lien envoyé à votre adresse mail"
+            ),
         )
         return HttpResponseRedirect(self.get_success_url())
 
@@ -294,7 +293,7 @@ class RegisterView(RedirectURLMixin, CreateView):
 
         activation_link = "{}{}".format(
             get_current_site(self.request),
-            reverse('users:activate', args = [ uid, token ])
+            reverse("users:activate", args=[uid, token]),
         )
 
         email_from = settings.DEFAULT_FROM_EMAIL
@@ -310,7 +309,6 @@ class RegisterView(RedirectURLMixin, CreateView):
 
 
 class ActivateAccountView(View):
-
     def invalid_link(self):
         messages.error(
             self.request, _("Le lien d'activation est invalide ou a expiré.")
@@ -335,7 +333,9 @@ class ActivateAccountView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return self.invalid_link()
 
-        if self.user and account_activation_token.check_token(self.user, token):
+        if self.user and account_activation_token.check_token(
+            self.user, token
+        ):
             self.activate_account()
             return redirect(self.get_success_url())
         else:
