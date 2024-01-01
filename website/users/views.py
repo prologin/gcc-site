@@ -8,6 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import (
     default_token_generator as account_activation_token,
 )
+from django.forms.models import BaseModelForm
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.views import (
     PasswordChangeView,
     PasswordResetCompleteView,
@@ -77,52 +79,16 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ("email",)
 
-    def post(self, request, *agrs, **kwargs):
-        # Check if the email is valid using the EmailValidator
-        email = request.POST["email"]
-        email_validator = EmailValidator()
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(User, pk=self.request.user.id)
 
-        try:
-            email_validator(email)
-        except ValidationError:
-            messages.warning(
-                self.request,
-                "L'email est invalide !",
-                extra_tags=TAG_EMAIL,
-            )
-            return HttpResponseRedirect(
-                reverse("users:account_information") + "#personal-info"
-            )
-
-        # Check if another user already uses the same email address
-        try:
-            _ = User.objects.get(email=email)
-            messages.warning(
-                self.request,
-                "Un utilisateur avec cet email existe déjà !",
-                extra_tags=TAG_EMAIL,
-            )
-            return HttpResponseRedirect(
-                reverse("users:account_information") + "#personal-info"
-            )
-        except User.DoesNotExist:
-            # Unable to find a user, this is fine
-            request.user.email = email
-            # Update user in the database.
-            request.user.save()
-
-            # Send a message to display
-            messages.success(
-                request,
-                "Informations personnelles mises à jour",
-                extra_tags=TAG_EMAIL,
-            )
-
-        # Save the updated email for the user
-        return super().form_valid(self.get_form())
-
-    def get_object(self, queryset=None):
-        return self.request.user
+    def form_invalid(self, form):
+        messages.warning(
+            self.request,
+            _("L'email est invalide"),
+            extra_tags=TAG_EMAIL
+        )
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse_lazy("users:account_information") + "#personal-info"
