@@ -194,7 +194,6 @@ class AuthRegisterForm(BaseUserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ("email", "first_name", "last_name")
-        field_classes = {"email": forms.EmailField}
 
     authorization = forms.BooleanField(
         label=_(
@@ -213,42 +212,7 @@ class AuthRegisterForm(BaseUserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_id = "register_form"
-        self.helper.form_method = "post"
-
-        self.helper.layout = Layout(
-            # First tab
-            Div(
-                Field("first_name"),
-                Field("last_name"),
-                Button(
-                    name="next",
-                    value="Suivant",
-                    css_class="btn btn-primary btn-block",
-                ),
-                css_class="tab",
-            ),
-            # Second tab
-            Div(
-                Field("email"),
-                Field("password1"),
-                Field("password2"),
-                Field("authorization"),
-                Field("captcha"),
-                Submit(
-                    name="submit-registration",
-                    value="Créer mon compte",
-                    css_class="btn btn-primary btn-block",
-                ),
-                Button(
-                    name="back",
-                    value="Précédent",
-                    css_class="mt-2 btn btn-block btn-light",
-                ),
-                css_class="tab",
-            ),
-        )
-
+        self.helper.add_input(Submit(None, value=_("Créer mon compte"), css_class="btn btn-primary btn-block"))
 
 class GCCPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):

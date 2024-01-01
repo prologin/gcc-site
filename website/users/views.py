@@ -261,7 +261,6 @@ class RegisterView(RedirectURLMixin, CreateView):
     next_page = settings.LOGIN_REDIRECT_URL
 
     @method_decorator(sensitive_post_parameters())
-    @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(
         self, request: HttpRequest, *args: Any, **kwargs: Any
@@ -314,22 +313,20 @@ class ActivateAccountView(View):
 
     def invalid_link(self):
         messages.error(
-            request, _("Le lien d'activation est invalide ou a expiré.")
+            self.request, _("Le lien d'activation est invalide ou a expiré.")
         )
-        return redirect(
-            "activation_error"
-        )  # Redirect to an error page if activation fails
-    
+        return redirect(settings.LOGIN_URL)
+
     def activate_account(self):
         self.user.is_active = True
         self.user.save()
-    
+
     def get_success_url(self):
         messages.success(
             self.request,
             _("Votre compte a été activé ! Vous pouvez vous connecter."),
         )
-        return settings.LOGIN_REDIRECT_URL
+        return settings.LOGIN_URL
 
     def get(self, request, uidb64, token):
         try:
