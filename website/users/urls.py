@@ -32,6 +32,11 @@ urlpatterns = [
         name="activate",
     ),
     path(
+        "verify_email/<uidb64>/<token>/",
+        views.ActivateEmailView.as_view(),
+        name="verify_email",
+    ),
+    path(
         "export-users/",
         views.ExportUsersCSVView.as_view(),
         name="export_users_csv",
