@@ -142,9 +142,9 @@ class ActivateEmailView(View):
     def get_success_url(self):
         messages.success(
             self.request,
-            _("Votre mail a été modifié ! Vous pouvez vous connecter."),
+            _("Votre mail a été modifié !"),
         )
-        return settings.LOGIN_URL
+        return reverse("events:home")
 
     def get(self, request, uidb64, token):
         try:
