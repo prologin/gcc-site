@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView
 
@@ -13,27 +14,18 @@ from profiles.models import Profile
 
 
 class CreateProfileView(LoginRequiredMixin, CreateView):
-    template_name = "profiles/create_profiles.html"
+    template_name = "profiles/create_profile.html"
     form_class = ProfileCreationForm
     success_url = reverse_lazy("events:events")  # TODO: Update this
 
-    def post(self, request, *args, **kwargs):
-        self.object = None
-
-        form = self.get_form()
-
-        if not form.is_valid():
-            messages.warning(
-                request,
-                str(form.errors),
-            )
-            return self.form_invalid(form)
-        else:
-            messages.success(
-                request,
-                "Votre profil a été enregistré ! Utilisez-le pour vous inscrire à un stage sur cette page !",
-            )
-            return self.form_valid(form)
+    def form_valid(self, *args, **kwargs):
+        messages.success(
+            self.request,
+            _(
+                "Votre profil a été enregistré ! Utilisez-le pour vous inscrire à un stage sur cette page !"
+            ),
+        )
+        return super().form_valid(*args, **kwargs)
 
     def get_form_kwargs(self):
         kw = super().get_form_kwargs()

@@ -1,24 +1,22 @@
 {% extends "gccsite/base.html" %}
-{% load static %}
+{% load static i18n %}
 {% load crispy_forms_tags %}
 {% block form %}
     {% crispy form %}
 {% endblock form %}
 
-{% block head %}
-    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
-{% endblock head %}
-
 {% block content %}
     <div class="content-viewport auth-background">
         <div class="container-fluid">
-            <div class="row justify-content-center mt-4">
-                <div class="col-11 ">
-                    <h1>Création d'un profil candidatures</h1>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-md-8">
+                    <h1>{% trans "Création d'un profil" %}</h1>
                     <div class="fst-italic fs-footnote">
+                        {% blocktrans %}
                         Les champs avec un astérisque
                         <span class="asteriskField">*</span>
                         sont à remplir obligatoirement.
+                        {% endblocktrans %}
                     </div>
                     {% crispy form %}
                 </div>
@@ -26,7 +24,3 @@
         </div>
     </div>
 {% endblock content %}
-
-{% block scripts %}
-    <script type="module" src="{% static 'js/forms/profile_create_form.js'%}"></script>
-{% endblock scripts %}

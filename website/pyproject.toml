@@ -36,6 +36,8 @@ djangorestframework = "^3.14.0"
 django-constance = "^3.1.0"
 social-auth-app-django = "^5.4.0"
 social-auth-core = "^4.5.3"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "^7.3.0"}
+django-countries = {extras = ["pyuca"], version = "^7.5.1"}
 
 [tool.poetry.dev-dependencies]
 black = "*"

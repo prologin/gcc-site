@@ -27,9 +27,11 @@
             pre-commit
             python311Packages.cfgv
             python311Packages.identify
+            python311Packages.django-phonenumber-field
             shellcheck
             virtualenv
             yarn
+            sbclPackages.spellcheck
           ];
         };
       }
