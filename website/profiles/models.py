@@ -3,7 +3,8 @@ from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import gettext_lazy as _
-
+from phonenumber_field.modelfields import PhoneNumberField
+from django_countries.fields import CountryField
 
 # Create your models here.
 class Profile(models.Model):
@@ -37,10 +38,10 @@ class Profile(models.Model):
         null=False, verbose_name=_("Adresse email de la participante")
     )
 
-    phone = models.CharField(
-        max_length=16,
-        blank=True,
+    phone = PhoneNumberField(
         verbose_name=_("Numéro de téléphone de la participante"),
+        region='FR',
+        blank=True
     )
 
     # Address applicant
@@ -50,13 +51,15 @@ class Profile(models.Model):
     complement_app = models.CharField(
         max_length=64,
         blank=True,
-        verbose_name=_("Complément d'adressse (si nécessaire)"),
+        verbose_name=_("Complément d'adressse (facultatif)"),
     )
     city_app = models.CharField(max_length=64, verbose_name=_("Ville"))
     zipcode_app = models.CharField(
         max_length=16, verbose_name=_("Code postal")
     )
-    country_app = models.CharField(max_length=32, verbose_name=_("Pays"))
+    country_app = CountryField(
+        verbose_name=_("Pays"),
+    )
 
     # Legal Guardian
 
@@ -74,10 +77,10 @@ class Profile(models.Model):
         default="", verbose_name=_("Adresse email du responable légal")
     )
 
-    phone_resp = models.CharField(
-        max_length=16,
-        blank=True,
+    phone_resp = PhoneNumberField(
         verbose_name=_("Numéro de téléphone du responsable légal"),
+        region = 'FR',
+        blank = True
     )
 
     street_resp = models.CharField(
@@ -86,13 +89,13 @@ class Profile(models.Model):
     complement_resp = models.CharField(
         max_length=64,
         blank=True,
-        verbose_name=_("Complément d'adressse (si nécessaire)"),
+        verbose_name=_("Complément d'adressse (facultatif)"),
     )
     city_resp = models.CharField(max_length=64, verbose_name=_("Ville"))
     zipcode_resp = models.CharField(
         max_length=16, verbose_name=_("Code postal")
     )
-    country_resp = models.CharField(max_length=32, verbose_name=_("Pays"))
+    country_resp = CountryField(verbose_name=_("Pays"))
 
     # School
 
@@ -107,13 +110,13 @@ class Profile(models.Model):
     complement_school = models.CharField(
         max_length=64,
         blank=True,
-        verbose_name=_("Complément d'adressse (si nécessaire)"),
+        verbose_name=_("Complément d'adressse (facultatif)"),
     )
     city_school = models.CharField(max_length=64, verbose_name=_("Ville"))
     zipcode_school = models.CharField(
         max_length=16, verbose_name=_("Code postal")
     )
-    country_school = models.CharField(max_length=32, verbose_name=_("Pays"))
+    country_school = CountryField(verbose_name=_("Pays"))
 
     def __str__(self) -> str:
         return f"<Profile ({self.first_name} {self.last_name} - {self.user})>"

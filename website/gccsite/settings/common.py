@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_fsm",
     "fsm_admin",
+    "phonenumber_field",
     "django_recaptcha",
     "mozilla_django_oidc",
     "django_celery_beat",
