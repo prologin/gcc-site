@@ -17,6 +17,7 @@ from django.contrib.auth.views import (
     RedirectURLMixin,
 )
 from django.contrib.sites.shortcuts import get_current_site
+from django.core import signing
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import EmailValidator
@@ -81,6 +82,23 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
     def get_object(self, *args, **kwargs):
         return get_object_or_404(User, pk=self.request.user.id)
 
+    def form_valid(self, form):
+        user_data = {
+            "pk": self.request.user.pk,
+            "email": form.cleaned_data["email"],
+        }
+        token = signing.dumps(user_data)
+        self.send_activation_email(
+            self.request.user, form.cleaned_data["email"], token
+        )
+        messages.info(
+            self.request,
+            _(
+                "Un mail de vérification a été envoyé à l'adresse renseignée. Merci de cliquer sur le lien donné dans le mail pour compléter la mise à jour de votre adresse email."
+            ),
+        )
+        return super().form_valid(form)
+
     def form_invalid(self, form):
         messages.warning(
             self.request, _("L'email est invalide"), extra_tags=TAG_EMAIL
@@ -89,6 +107,58 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("users:account_information") + "#personal-info"
+
+    def send_activation_email(self, user, email, token):
+        subject = _("Activez votre nouvelle adresse email!")
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+        activation_link = "{}{}".format(
+            get_current_site(self.request),
+            reverse("users:verify_email", args=[uid, token]),
+        )
+
+        message = render_to_string(
+            template_name="users/mails/email_activation_link.txt",
+            context={
+                "firstname": user.first_name,
+                "lastname": user.last_name,
+                "link": activation_link,
+            },
+        )
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+
+
+class ActivateEmailView(View):
+    def invalid_link(self):
+        messages.error(
+            self.request, _("Le lien d'activation est invalide ou a expiré.")
+        )
+        return redirect(settings.LOGIN_URL)
+
+    def activate_email(self):
+        self.user.email = self.user_data.get("email")
+        self.user.save()
+
+    def get_success_url(self):
+        messages.success(
+            self.request,
+            _("Votre mail a été modifié !"),
+        )
+        return reverse("events:home")
+
+    def get(self, request, uidb64, token):
+        try:
+            self.user_data = signing.loads(token)
+            uid = self.user_data.get("pk")
+            self.user = User.objects.get(pk=uid)
+        except (signing.BadSignature, User.DoesNotExist):
+            return self.invalid_link()
+
+        if self.user and "email" in self.user_data:
+            self.activate_email()
+            return redirect(self.get_success_url())
+        else:
+            return self.invalid_link()
 
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
