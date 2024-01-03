@@ -3,8 +3,9 @@ from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -40,8 +41,8 @@ class Profile(models.Model):
 
     phone = PhoneNumberField(
         verbose_name=_("Numéro de téléphone de la participante"),
-        region='FR',
-        blank=True
+        region="FR",
+        blank=True,
     )
 
     # Address applicant
@@ -79,8 +80,8 @@ class Profile(models.Model):
 
     phone_resp = PhoneNumberField(
         verbose_name=_("Numéro de téléphone du responsable légal"),
-        region = 'FR',
-        blank = True
+        region="FR",
+        blank=True,
     )
 
     street_resp = models.CharField(

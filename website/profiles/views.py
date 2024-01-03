@@ -20,7 +20,9 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
     def form_valid(self, *args, **kwargs):
         messages.success(
             self.request,
-            _("Votre profil a été enregistré ! Utilisez-le pour vous inscrire à un stage sur cette page !"),
+            _(
+                "Votre profil a été enregistré ! Utilisez-le pour vous inscrire à un stage sur cette page !"
+            ),
         )
         return super().form_valid(*args, **kwargs)
 
