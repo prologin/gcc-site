@@ -94,7 +94,7 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
         messages.info(
             self.request,
             _(
-                "Veuillez vérifier l'email en cliquant sur le lien que l'ont vous a envoyé."
+                "Un mail de vérification a été envoyé à l'adresse renseignée. Merci de cliquer sur le lien donné dans le mail pour compléter la mise à jour de votre adresse email."
             ),
         )
         return super().form_valid(form)
