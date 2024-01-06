@@ -83,7 +83,7 @@ def faq_entries_list():
                 "partagent leur vécu dans le monde du travail.</p>",
             },
             {
-                "question": "Qui peux s'inscrire aux stages ?",
+                "question": "Qui peut s'inscrire aux stages ?",
                 "answer": "Toute personne s'identifiant comme une femme et "
                 "étant actuellement ou à la rentrée prochaine dans "
                 "l'enseignement secondaire (collège et lycée) ou équivalent.",
@@ -131,7 +131,7 @@ def faq_entries_list():
             {
                 "question": "Je ne suis pas éligible aux stages GCC!, que me suggérez-vous ?",
                 "answer": "<h3>Si tu as déjà codé</h3><p>Nous te proposons de "
-                'participer au concours <a href="https://prologin.org">Prologin</a>.'
+                'participer au <a href="https://prologin.org">concours Prologin</a>.'
                 "<h3>Si tu souhaites débuter</h3> Tu peux te laisser guider par "
                 'les exercices de <a href="http://www.france-ioi.org/">France-IOI</a> '
                 "et si tu te débrouilles en anglais, il y a "

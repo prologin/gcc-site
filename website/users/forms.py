@@ -202,7 +202,7 @@ class AuthRegisterForm(BaseUserCreationForm):
         ),
         error_messages={
             "required": _(
-                "Tu ne peux pas t'inscrire sur ce site sans l'autorisation de ton responsable légal si tu as 15 ans ou moins"
+                "Les personnes de moins de 15 ans ne sont pas autorisées à s'inscrire sans l'accord de leur responsable légal"
             ),
         },
         required=True,

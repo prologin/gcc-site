@@ -109,38 +109,39 @@
                                         <div class="col-md-6">
                                             <h2>Questionnaire</h2>
                                             <dl class="py-2">
-                                                <h3 class="questions">• Quelle est ta taille de t-shirt ?</h3>
+                                                <h3 class="questions">• Taille de t-shirt de la participante</h3>
                                                 <p class="answer">{{ application.tshirt }}</p>
 
                                                 <h3 class="questions">
-                                                    • Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage
-                                                    ?
+                                                    • La participante a-t-elle des attentes particulières pour le stage ?
                                                 </h3>
                                                 <p class="answer">{{ application.form_answer.learning }}</p>
 
                                                 <h3 class="questions">
-                                                    • As-tu déjà programmé, si oui, quand as-tu codé pour la première fois et quels
-                                                    outils ou langages de programmation as-tu essayés ?
+                                                    • La participante a-t-elle déjà programmé, si oui, quand a-t-elle codé pour la première fois et quels
+                                                    outils ou langages de programmation a-t-elle essayés ?
                                                 </h3>
                                                 <p class="answer">{{ application.form_answer.programing }}</p>
 
                                                 <h3 class="questions">
-                                                    • Y a-t-il des études en informatique qui t'intéresseraient ? Si oui, pourrais-tu
+                                                    • La participante envisage-t-elle des études en informatique ? Si oui, pourrais-tu
                                                     préciser lesquelles ?
                                                 </h3>
                                                 <p class="answer">{{ application.form_answer.studies }}</p>
 
                                                 <h3 class="questions">
-                                                    • Comment as-tu connu l'association et les stages ? Essaye d'être précise, cela
-                                                    nous aide beaucoup !
+                                                    • Comment avez-vous entendu parler des stages Girls Can Code ?
+                                                    Les réponses précises nous aident beaucoup !
                                                 </h3>
                                                 <p class="answer">{{ application.form_answer.association }}</p>
 
                                                 {% if "users.can_view_applications_private_details" in perms %}
-                                                    <h3 class="questions">• As-tu des allergies ?</h3>
+                                                    <h3 class="questions">• La participante a-t-elle des allergies ?</h3>
                                                     <p class="answer">{{ application.form_answer.allergies }}</p>
 
-                                                    <h3 class="questions">• As-tu un régime alimentaire particulier ?</h3>
+                                                    <h3 class="questions">
+                                                        • La participante a-t-elle un régime alimentaire particulier ?
+                                                    </h3>
                                                     <p class="answer">{{ application.form_answer.diet }}</p>
                                                 {% endif %}
 

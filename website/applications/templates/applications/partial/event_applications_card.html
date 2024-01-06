@@ -18,7 +18,7 @@
                 </div>
             </div>
             <p>
-                Tu as soumis {{ event_applications|length }}
+                Vous avez soumis {{ event_applications|length }}
                 candidature{{ event_applications|length|pluralize:"s" }} pour ce stage.
             </p>
         </div>
@@ -47,7 +47,9 @@
     {% if event_applications|any_confirmed %}
         <div class="p-2 m-2 rounded rounded-2 bg-dark bg-opacity-10">
             <h2 class="m-2">Félicitations ! 🎉</h2>
-            <p class="m-2">Au moins une de tes candidatures a été confirmée !</p>
+            <p class="m-2">
+                Au moins une de vos candidatures pour ce stage a été confirmée !
+            </p>
 
             {# Display a Google map embed if the query is given #}
             {% with application.event.center.address.gg_maps_query as query %}
@@ -176,12 +178,12 @@
                             <p class="h6">
                                 Le stage est terminé, bravo à toi pour ta participation !
                                 <br>
-                                Tu peux retrouver les photos du stags sur notre <a href="https://www.flickr.com/photos/prologin/">flickr</a>
+                                Vous pouvez retrouver les photos du stage sur notre <a href="https://www.flickr.com/photos/prologin/">flickr</a>
                             </p>
                         {% elif application.status == AppStatus.CONFIRMED %}
                             {# CONFIRMED Application #}
                             <div>
-                                <h6>Félicitations ! Ta candidature a été confirmée !</h6>
+                                <h6>Félicitations ! Cette candidature a été confirmée !</h6>
 
                                 <div class="row justify-content-center text-center mt-4" role="group">
                                     {# Cancel bouton #}
@@ -192,8 +194,8 @@
                             {# ACCEPTED Application #}
                             <div>
                                 <h6>
-                                    Félicitations, ta candidature a été retenue !
-                                    Il faut maintenant que tu confirmes ta venue.
+                                    Félicitations, cette candidature a été retenue !
+                                    Il faut maintenant que vous confirmiez la venue de la participante.
                                 </h6>
 
                                 <div type="button"
@@ -211,7 +213,7 @@
                             {# PENDING Application #}
                             <div>
                                 <h6>
-                                    Nous avons bien reçu ta candidature. Reviens plus tard pour voir si tu es sélectionnée !
+                                    Nous avons bien reçu la candidature. Revenez plus tard pour voir si celle-ci est retenue !
                                 </h6>
 
                                 <div class="row justify-content-center text-center mt-4" role="group">
@@ -223,7 +225,7 @@
                             {# CANCELLED Application #}
                             <div>
                                 <h6>
-                                    Ta candidature a été annulée par les organisateurs. Pour toute question ou réclamation, tu peux envoyer un mail à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
+                                    Cette candidature a été annulée par les organisateurs. Pour toute question ou réclamation, tu peux envoyer un mail à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
                                     <a href="{% url 'events:home' %}">Tu peux t'inscrire à d'autres stages ici.</a>
                                 </h6>
                             </div>
@@ -231,7 +233,7 @@
                             {# WITHDRAWN Application #}
                             <div>
                                 <h6>
-                                    Tu as annulé ta candidature. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
+                                    Candidature annulée. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
                                 </h6>
                             </div>
                         {% elif application.status == AppStatus.REJECTED %}
