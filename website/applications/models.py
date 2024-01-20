@@ -15,6 +15,16 @@ class ApplicationStatus(models.IntegerChoices):
     ENDED = 3, _("Stage terminé")
 
 
+class TshirtSize(models.TextChoices):
+    __empty__ = "-"
+    XS = ("XS", "XS")
+    S = ("S", "S")
+    M = ("M", "M")
+    L = ("L", "L")
+    XL = ("XL", "XL")
+    XXL = ("XXL", "XXL")
+
+
 class ApplicationManager(models.Manager):
     def get_applicants(self, event):
         return self.filter(event=event)
@@ -35,6 +45,12 @@ class Application(models.Model):
         related_name="applications",
         null=True,
         blank=True,
+    )
+
+    tshirt = models.CharField(
+        verbose_name=_("Taille de tshirt"),
+        max_length=3,
+        choices=TshirtSize.choices,
     )
 
     form_answer = models.JSONField(
