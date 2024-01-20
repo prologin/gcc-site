@@ -1,12 +1,18 @@
 #!/bin/sh
 
 RAND_SECRET_NAMES="django-secret-key postgres-passwd"
-USER_SECRET_NAMES="documents-generator-username documents-generator-password"
+USER_SECRET_NAMES="\
+    documents-generator-username \
+    documents-generator-password \
+    recaptcha-public-key \
+    recaptcha-private-key"
 
 
 
 for name in $RAND_SECRET_NAMES; do
     DEST=./secrets/"$name"
+    echo "Generating secret for ${name}"
+
     if [ ! -e "$DEST" ]; then
         tr -d -c "a-zA-Z0-9" < /dev/urandom | fold -w32 | head -n 1 > "$DEST"
     fi
@@ -14,9 +20,11 @@ done
 
 for name in ${USER_SECRET_NAMES}; do
     DEST=./secrets/$name
+
     envname=$(echo "$name" | sed 's/-/_/g')
     envvalue="$(eval echo "\${$envname}")"
     if [ -n "$envvalue" ]; then
+        echo "Writing secret for ${name} from env..."
         echo "$envvalue" > "${DEST}"
         continue
     fi
