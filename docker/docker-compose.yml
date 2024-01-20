@@ -28,7 +28,7 @@ services:
       - s3_dev:s3-dev
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc config host add dev http://s3-dev:9000 $(cat /run/secrets/s3-access) $(cat /run/secrets/s3-secret);
+      /usr/bin/mc config host add dev http://s3-dev:9000 `cat /run/secrets/s3-access` `cat /run/secrets/s3-secret`;
       [ -f /buckets/created ] && exit 0;
       touch /buckets/created;
       /usr/bin/mc mb dev/gcc-static;
