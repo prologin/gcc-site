@@ -26,7 +26,9 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ application.first_name }} {{ application.last_name }}</td>
                             <td>{{ application.profile.participation_count }}</td>
-                            <td>{{ application|status_label }}</td>
+                            <td>
+                                {% include "applications/partial/application_status_badge.html" with application=application %}
+                            </td>
                         </tr>
                         {% if 'users.can_view_applications_details' in perms %}
                             <tr class="collapse" id="row-{{ forloop.counter }}">
