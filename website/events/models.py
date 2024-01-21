@@ -103,6 +103,8 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
 
+    type_chelou = models.TextField(verbose_name="Type chelou")
+
     year = models.PositiveIntegerField(verbose_name=_("Année de l'événement"))
 
     signup_start_date = models.DateTimeField(
