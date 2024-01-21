@@ -215,6 +215,7 @@ test: &docker_setup
 
 django:check_migrations:
   <<: *docker_setup
+  artifacts: # No artifacts created here
   script:
     - cd docker/
     - ./gen_secrets.sh
