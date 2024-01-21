@@ -166,7 +166,7 @@ format:djlint:
     - poetry run djlint --check .
   allow_failure: false
 
-test:
+test: &docker_setup
   stage: qa
   interruptible: true
   needs:
@@ -195,9 +195,9 @@ test:
   script:
     - cd docker/
     - ./gen_secrets.sh
-    - docker pull $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    - docker pull -q $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
     - docker tag $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA backend_dev
-    - docker-compose pull --ignore-pull-failures
+    - docker-compose pull -q --ignore-pull-failures
     - export COMPOSE_PARALLEL_LIMIT=1000
     - docker network prune --force
     - docker-compose -p "$CI_CONCURRENT_ID" up -d s3_dev db_dev redis_dev
@@ -214,27 +214,13 @@ test:
   allow_failure: true
 
 django:check_migrations:
-  stage: qa
-  interruptible: true
-  needs:
-    - website
-  image:
-    name: docker/compose:1.29.2
-    entrypoint: [""]
-  services:
-    - docker:24.0.7-dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-  before_script:
-    - apk update && apk add openssl
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  <<: *docker_setup
   script:
     - cd docker/
     - ./gen_secrets.sh
-    - docker pull $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    - docker pull -q $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
     - docker tag $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA backend_dev
-    - docker-compose pull --ignore-pull-failures
+    - docker-compose pull -q --ignore-pull-failures
     - export COMPOSE_PARALLEL_LIMIT=1000
     - docker network prune --force
     - docker-compose -p "$CI_CONCURRENT_ID" up -d s3_dev db_dev redis_dev
@@ -244,6 +230,4 @@ django:check_migrations:
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev ./manage.py makemigrations --dry-run
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev ./manage.py makemigrations --dry-run --check
     - cd ..
-  after_script:
-    - cd docker/
-    - docker-compose -p "$CI_CONCURRENT_ID" down -v
+  allow_failure: false
