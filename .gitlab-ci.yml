@@ -166,8 +166,8 @@ format:djlint:
     - poetry run djlint --check .
   allow_failure: false
 
-test: &docker_setup
-  stage: qa
+
+.docker_compose_env: &docker_setup
   interruptible: true
   needs:
     - website
@@ -179,21 +179,11 @@ test: &docker_setup
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
-  artifacts:
-    reports:
-      junit: website/test-reports/*.xml
-    paths:
-      - artifacts/
-      - website/artifacts
-    when: always
-  coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%)$/'
-  before_script:
+
+.docker_compose_env_script:
+  script:
     - apk update && apk add openssl
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - mkdir artifacts website/artifacts
-    - chmod a+rwx artifacts website/artifacts
-  script:
-    - cd docker/
     - ./gen_secrets.sh
     - docker pull -q $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
     - docker tag $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA backend_dev
@@ -203,6 +193,23 @@ test: &docker_setup
     - docker-compose -p "$CI_CONCURRENT_ID" up -d s3_dev db_dev redis_dev
     - sleep 30
     - docker-compose -p "$CI_CONCURRENT_ID" up -d
+
+test:
+  stage: qa
+  artifacts:
+    reports:
+      junit: website/test-reports/*.xml
+    paths:
+      - artifacts/
+      - website/artifacts
+    when: always
+  coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%)$/'
+  before_script:
+    - mkdir artifacts website/artifacts
+    - chmod a+rwx artifacts website/artifacts
+  script:
+    - cd docker/
+    - !reference [.docker_compose_env_script, script]
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev coverage run --source='.' ./manage.py test
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev coverage report
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev coverage html -d /app/gccsite/artifacts/coverage/
@@ -214,19 +221,11 @@ test: &docker_setup
   allow_failure: true
 
 django:check_migrations:
+  stage: qa
   <<: *docker_setup
-  artifacts: # No artifacts created here
   script:
     - cd docker/
-    - ./gen_secrets.sh
-    - docker pull -q $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
-    - docker tag $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA backend_dev
-    - docker-compose pull -q --ignore-pull-failures
-    - export COMPOSE_PARALLEL_LIMIT=1000
-    - docker network prune --force
-    - docker-compose -p "$CI_CONCURRENT_ID" up -d s3_dev db_dev redis_dev
-    - sleep 30
-    - docker-compose -p "$CI_CONCURRENT_ID" up -d
+    - !reference [.docker_compose_env_script, script]
       # Run once without --check to print on the output (it won't with --check)
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev ./manage.py makemigrations --dry-run
     - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev ./manage.py makemigrations --dry-run --check
