@@ -5,7 +5,7 @@ from django.core.exceptions import NON_FIELD_ERRORS
 from django.http import QueryDict
 from django.utils.translation import gettext_lazy as _
 
-from applications.models import Application, TshirtSize
+from applications.models import Application
 from profiles.models import Profile
 
 SCHOOL_LEVEL = [

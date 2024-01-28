@@ -39,7 +39,7 @@
                             </td>
                             <td>{{ event.center }}</td>
                             <td>
-                                <a href="{% url 'events:application_review' year=event.year event=event.id %}">Review</a>
+                                <a href="{% url 'events:application_review' event=event.id %}">Review</a>
                             </td>
                         </tr>
                     {% endfor %}

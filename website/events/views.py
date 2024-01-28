@@ -3,7 +3,7 @@ import datetime
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormMixin
 
 from applications.forms import EventApplicationForm
@@ -68,14 +68,15 @@ class ReviewIndexView(PermissionRequiredMixin, TemplateView):
         return ctx
 
 
-class ApplicationsReviewView(PermissionRequiredMixin, TemplateView):
+class ApplicationsReviewView(PermissionRequiredMixin, DetailView):
     permission_required = "users.can_view_applications"
     template_name = "events/application/review.html"
+    model = Event
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
         ctx["applications"] = Application.objects.get_applicants(
-            kwargs["event"]
+            self.get_object().id
         )
         ctx["AppStatus"] = ApplicationStatus
         return ctx
