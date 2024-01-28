@@ -1,14 +1,8 @@
-from pathlib import Path
-
-from django.conf import settings
-from django.core.files.storage import default_storage
 from django.core.validators import FileExtensionValidator, ValidationError
 from django.db import models
 from django.utils import timezone
-from django.utils.module_loading import import_string
 from django.utils.translation import gettext_lazy as _
 
-from applications.models import ApplicationStatus
 from events.validators import FileSizeValidator, validate_is_pdf
 
 
@@ -42,12 +36,12 @@ class Address(models.Model):
         blank=True,
     )
 
-    def __str__(self):
-        return f"{self.city}, {self.street}"
-
     class Meta:
         verbose_name = _("Adresse")
         verbose_name_plural = _("Adresses")
+
+    def __str__(self):
+        return f"{self.city}, {self.street}"
 
 
 class Center(models.Model):
@@ -143,13 +137,6 @@ class Event(models.Model):
 
     objects = EventManager()
 
-    @property
-    def is_open(self):
-        return (
-            self.signup_start_date <= timezone.now()
-            and self.signup_end_date > timezone.now()
-        )
-
     class Meta:
         ordering = ("year",)
         verbose_name = _("évènement")
@@ -157,6 +144,13 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_open(self):
+        return (
+            self.signup_start_date <= timezone.now()
+            and self.signup_end_date > timezone.now()
+        )
 
     def clean(self):
         errors = {}
@@ -182,20 +176,20 @@ class Event(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def get_application_documents(self, application):
-        if application.status == ApplicationStatus.CONFIRMED.value:
-            return self.documents.all()
-        if application.status == ApplicationStatus.ACCEPTED.value:
-            return self.documents.filter(
-                eventdocument__visibility__in=(
-                    DocumentType.ACCEPTED_OR_CONFIRMED.value,
-                    DocumentType.PUBLIC,
-                ),
-            )
+    # def get_application_documents(self, application):
+    #     if application.status == ApplicationStatus.CONFIRMED.value:
+    #         return self.documents.all()
+    #     if application.status == ApplicationStatus.ACCEPTED.value:
+    #         return self.documents.filter(
+    #             eventdocument__visibility__in=(
+    #                 DocumentType.ACCEPTED_OR_CONFIRMED.value,
+    #                 DocumentType.PUBLIC,
+    #             ),
+    #         )
 
-    def generate_document(self):
-        expense_report_generate_document.delay(self.pk)
-        self.save()
+    # def generate_document(self):
+    #     expense_report_generate_document.delay(self.pk)
+    #     self.save()
 
     def get_application_questions(self, mandatory_only=False):
         if mandatory_only:

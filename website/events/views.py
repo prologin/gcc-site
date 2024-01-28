@@ -1,8 +1,6 @@
 import datetime
 
-from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, TemplateView
@@ -30,8 +28,6 @@ class HomePageView(FormMixin, ListView):
         ctx = super().get_context_data(*args, **kwargs)
 
         ctx["open_events"] = Event.objects.get_open_events(5)
-        form = EventApplicationForm()
-        # ctx["form"] = form
 
         ctx["partners_avant"] = Partner.objects.filter(status="Promoted")
         ctx["partners_financement"] = Partner.objects.filter(

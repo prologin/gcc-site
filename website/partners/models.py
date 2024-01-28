@@ -4,8 +4,7 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from gccsite.settings.common import AWS_S3_ENDPOINT_URL
-from gccsite.storages import GCCMediaStorage, GCCStaticStorage
+from gccsite.storages import GCCMediaStorage
 
 
 class PartnerStatus(models.TextChoices):
@@ -14,6 +13,7 @@ class PartnerStatus(models.TextChoices):
     WELCOMING = "Welcoming", _("Partenaires qui nous accueillent")
 
 
+# ruff: noqa: DJ012
 class Partner(models.Model):
     name = models.CharField(
         verbose_name="Nom",
@@ -53,9 +53,9 @@ class Partner(models.Model):
         default="Promoted",
     )
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = _("Partenaire")
         verbose_name_plural = _("Partenaires")
+
+    def __str__(self):
+        return self.name

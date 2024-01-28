@@ -1,13 +1,10 @@
-from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView, View
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView
 
 from profiles.forms import ProfileCreationForm
 from profiles.models import Profile

@@ -2,7 +2,6 @@
 # Copyright (c) 2022 Association Prologin <association@prologin.org>
 # Copyright (c) 2022 Marc 'risson' Schmitt <marc.schmitt@prologin.org>
 
-from django.urls import reverse_lazy
 
 from gccsite import env
 from gccsite.tools import get_oidc_config

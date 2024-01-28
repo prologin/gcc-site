@@ -1,15 +1,6 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (
-    HTML,
-    Button,
-    Column,
-    Div,
-    Field,
-    Layout,
-    Row,
-    Submit,
-)
+from crispy_forms.layout import Button, Column, Div, Field, Layout, Row, Submit
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (
@@ -19,7 +10,6 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
-from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _

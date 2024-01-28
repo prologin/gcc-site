@@ -1,9 +1,8 @@
-from datetime import datetime, timedelta
-from urllib.parse import urlencode, urlparse, urlsplit
+from urllib.parse import urlencode, urlsplit
 
 from django.conf import settings
 from django.utils.encoding import filepath_to_uri
-from storages.backends.s3boto3 import S3Boto3Storage, S3ManifestStaticStorage
+from storages.backends.s3boto3 import S3Boto3Storage
 from storages.utils import clean_name
 
 

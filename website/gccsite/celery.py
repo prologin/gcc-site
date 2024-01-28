@@ -35,7 +35,11 @@ app.conf.beat_schedule = {
 
 @signals.setup_logging.connect
 def receiver_setup_logging(
-    loglevel, logfile, format, colorize, **kwargs  # noqa
+    loglevel,
+    logfile,
+    format,
+    colorize,
+    **kwargs,  # ruff: noqa
 ):
     logging.config.dictConfig(settings.LOGGING)
 

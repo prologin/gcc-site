@@ -2,7 +2,6 @@ from django import template
 from django.db.models import QuerySet
 from django.utils import timezone
 from django.utils.formats import date_format
-from django.utils.translation import gettext_lazy as _
 
 from applications.models import ApplicationManager, ApplicationStatus
 

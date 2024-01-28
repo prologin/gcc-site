@@ -9,7 +9,7 @@ license = "AGPL-3.0"
 python = "^3.10"
 boto3 = "^1.24"
 celery = { version = "^5.2" }
-coverage = { version = "*", extras = [ "toml" ] }
+coverage = { version = "*", extras = ["toml"] }
 django = "^4.2"
 gunicorn = "^21.0.0"
 ipython = "^8.12.0"
@@ -17,16 +17,16 @@ psycopg2-binary = "^2.9.6"
 django-crispy-forms = "^2.0"
 crispy-bootstrap5 = "^2023.10"
 django-bootstrap-icons = "^0.8.3"
-django-structlog = { version = "^6.0", extras = [ "celery" ] }
+django-structlog = { version = "^6.0", extras = ["celery"] }
 django-storages = "^1.12"
 django-redis = { version = "^5" }
 django-rest-knox = { version = "^4.2" }
-django-celery-beat = { version = "^2.4"}
+django-celery-beat = { version = "^2.4" }
 django-mail-panel = "^4.0"
 django-post-office = "^3.6"
 django-fsm = "^2.8.1"
 django-fsm-admin = { git = "https://github.com/gadventures/django-fsm-admin", rev = "fe59a4b" }
-prospector = {extras = ["with_everything"], version = "*"}
+prospector = { extras = ["with_everything"], version = "*" }
 mozilla-django-oidc = "^3.0.0"
 django-prometheus = "^2.3.1"
 django-debug-toolbar = "^4.2.0"
@@ -39,6 +39,7 @@ black = "*"
 isort = "*"
 djlint = "^1.34"
 pre-commit = "*"
+ruff = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -46,9 +47,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
 branch = true
-omit = [
-    "../*migrations*",
-]
+omit = ["../*migrations*"]
 
 [tool.coverage.report]
 show_missing = true
@@ -80,7 +79,7 @@ force_exclude = '''
 [tool.isort]
 profile = "black"
 line_length = 79
-skip_glob = [ "*migrations*" ]
+skip_glob = ["*migrations*"]
 
 [tool.djlint]
 ignore = "H006,H013,H021"
@@ -88,3 +87,26 @@ indent = 4
 max_blank_lines = 3
 max_line_length = 80
 preserve_blank_lines = true
+
+[tool.ruff]
+target-version = "py310"
+exclude = [
+    ".venv",
+    "migrations",
+    ".ipython_config.py",
+    "import_from_legacy_website.py",
+]
+line-length = 79
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B", "I", "DJ"]
+ignore = ["DJ001"]                               # Ignore the "dont use null on TextFields
+
+[tool.ruff.lint.per-file-ignores]
+"gccsite/settings/*" = ["F403", "F405"] # Remove expected "import *" errors
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

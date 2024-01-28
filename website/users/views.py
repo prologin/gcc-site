@@ -3,9 +3,7 @@ from typing import Any
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import (
     default_token_generator as account_activation_token,
@@ -23,7 +21,7 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import EmailValidator
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, resolve_url
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
@@ -98,7 +96,7 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
 
         # Check if another user already uses the same email address
         try:
-            match = User.objects.get(email=email)
+            _ = User.objects.get(email=email)
             messages.warning(
                 self.request,
                 "Un utilisateur avec cet email existe déjà !",
@@ -109,9 +107,9 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
             )
         except User.DoesNotExist:
             # Unable to find a user, this is fine
-            user.email = email
+            request.user.email = email
             # Update user in the database.
-            user.save()
+            request.user.save()
 
             # Send a message to display
             messages.success(
@@ -121,7 +119,7 @@ class UserEmailEditView(LoginRequiredMixin, UpdateView):
             )
 
         # Save the updated email for the user
-        return super().form_valid(form)
+        return super().form_valid(self.get_form())
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -266,14 +264,6 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 class AccountInformationsView(LoginRequiredMixin, TemplateView):
     template_name = "users/AccountInformationsView.html"
-
-    def post(self, request, *agrs, **kwargs):
-        personal_info_form = PersonalInfoForm(request.POST)
-        email_form = EmailForm(request.POST)
-        notifs_update_form = NotificationsUpdateForm(request.POST)
-
-        if "submit-notifications" in request.POST:
-            return HttpResponse("Notifs update form valid")
 
     def get_context_data(self, **kwargs: Any):
         # Get the request user to prefill the forms

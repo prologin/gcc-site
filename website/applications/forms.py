@@ -1,23 +1,8 @@
-import re
-from typing import Optional
-
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (
-    HTML,
-    Button,
-    Column,
-    Div,
-    Field,
-    Layout,
-    Row,
-    Submit,
-)
+from crispy_forms.layout import Button, Column, Div, Field, Layout, Row, Submit
 from django import forms
-from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
-from django.core.validators import validate_email
-from django.db import models
+from django.core.exceptions import NON_FIELD_ERRORS
 from django.http import QueryDict
-from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from applications.models import Application

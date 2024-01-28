@@ -4,7 +4,7 @@ django.setup()
 
 import json
 import sys
-from datetime import date, datetime
+from datetime import datetime
 
 from django.db import transaction
 

@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_fsm import FSMIntegerField, transition
@@ -22,18 +21,6 @@ class ApplicationManager(models.Manager):
 
 
 class Application(models.Model):
-    class Meta:
-        verbose_name = _("candidatures")
-        verbose_name_plural = _("candidatures")
-        permissions = [
-            ("manage_applications", "Can manage the status of applications"),
-            (
-                "override_applications",
-                "Can override the application status flow",
-            ),
-        ]
-        unique_together = ("event", "profile")
-
     event = models.ForeignKey(
         to="events.Event",
         verbose_name=_("Évènement"),
@@ -69,6 +56,34 @@ class Application(models.Model):
         verbose_name=_("Date d'inscription"),
         auto_now_add=True,
     )
+
+    objects = ApplicationManager()
+
+    class Meta:
+        verbose_name = _("candidatures")
+        verbose_name_plural = _("candidatures")
+        permissions = [
+            ("manage_applications", "Can manage the status of applications"),
+            (
+                "override_applications",
+                "Can override the application status flow",
+            ),
+        ]
+        unique_together = ("event", "profile")
+
+    def __str__(self):
+        if self.profile:
+            return f"{self.profile}({self.profile.user_id})@{self.event}"
+        else:
+            return f"-@{self.event}"
+
+    def save(self, *args, **kwargs):
+        """
+        When saving the model, if profile is none, switch the status to CANCELLED
+        """
+        if not self.profile:
+            self.profile = None
+        super().save(*args, **kwargs)
 
     @property
     def first_name(self):
@@ -160,22 +175,6 @@ class Application(models.Model):
         res += f", {self.profile.zipcode_school} {self.profile.city_school}"
         return res
 
-    objects = ApplicationManager()
-
-    def __str__(self):
-        if self.profile:
-            return f"{self.profile}({self.profile.user_id})@{self.event}"
-        else:
-            return f"-@{self.event}"
-
-    def save(self, *args, **kwargs):
-        """
-        When saving the model, if profile is none, switch the status to CANCELLED
-        """
-        if not self.profile:
-            self.profile = None
-        super().save(*args, **kwargs)
-
     @staticmethod
     def _transition_perm_user_or_staff(instance, user):
         return (
@@ -191,6 +190,10 @@ class Application(models.Model):
     @staticmethod
     def _transition_perm_override(_, user):
         return user.has_perm("applications.override_applications")
+
+    # -----------
+    # TRANSITIONS
+    # -----------
 
     @transition(
         field=status,

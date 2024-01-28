@@ -135,21 +135,25 @@ lint:djlint:
     - poetry run djlint --lint --profile=django .
   allow_failure: false
 
-format:black:
+format:ruff:
   stage: qa
   interruptible: true
-  needs: []
+  needs : []
   image:
-    name: python:3.12-slim
-    entrypoint: [""]
+     name: python:3.10-slim
+     entrypoint: [""]
   before_script:
     - cd website
     - pip3 install poetry
-    - poetry install || true
+    - poetry install --only=dev || true
   script:
-    - poetry run black --check .
-    - poetry run isort --check-only .
-  allow_failure: false
+    - poetry run ruff check --select I --diff . # Sort imports
+    - poetry run ruff format --check --diff . > ruff.diff
+  artifacts:
+    when: on_failure
+    expose_as: "ruff diff"
+    paths:
+      - website/ruff.diff
 
 format:djlint:
   stage: qa

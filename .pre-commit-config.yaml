@@ -1,3 +1,4 @@
+---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
@@ -6,23 +7,6 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
         args: ["--fix=lf"]
-
-  - repo: https://github.com/python/black
-    rev: 23.12.1
-    hooks:
-      - id: black
-        language_version: python3.11
-        args: ["--config=./website/pyproject.toml"]
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        name: isort
-        args: ["--settings-path=./website/pyproject.toml"]
-        # Exclude migration files at pre-commit step
-        # because isort exclude is broken
-        exclude: ^.*/migrations/.*\.py$
 
   - repo: https://github.com/gruntwork-io/pre-commit
     rev: v0.1.23
@@ -36,3 +20,14 @@ repos:
         args: ["--configuration=./website/pyproject.toml"]
       - id: djlint-django
         args: ["--configuration=./website/pyproject.toml"]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.1.14
+    hooks:
+      # Run the linter (sorts imports).
+      - id: ruff
+        args: [ --fix, website/ ]
+      # Run the formatter.
+      - id: ruff-format
+        args: [ website/ ]
