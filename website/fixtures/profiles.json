@@ -94,5 +94,37 @@
             "zipcode_school": "94270",
             "country_school": "France"
         }
+    },
+    {
+        "model": "profiles.profile",
+        "pk": 3,
+        "fields": {
+            "user": 9,
+            "first_name": "Emma",
+            "last_name": "Moute",
+            "birth_date": "2006-08-14",
+            "phone": "05 36 15 36 15",
+            "email": "Many@iceage.fr",
+            "street_app": "15 rue des peupliers",
+            "complement_app": "",
+            "city_app": "Meauges",
+            "zipcode_app": "67230",
+            "country_app": "France",
+            "first_name_resp": "Stéphane",
+            "last_name_resp": "Roger",
+            "phone_resp": "02 03 04 05 02",
+            "email_resp": "stephane.roger@free.fr",
+            "street_resp": "15 rue des peupliers",
+            "complement_resp": "",
+            "city_resp": "Meauges",
+            "zipcode_resp": "67230",
+            "country_resp": "France",
+            "school_name": "École Jules Ferry",
+            "street_school": "rue des mésanges",
+            "complement_school": "",
+            "city_school": "La fontenière",
+            "zipcode_school": "67410",
+            "country_school": "France"
+        }
     }
 ]
