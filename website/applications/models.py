@@ -1,18 +1,18 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_fsm import FSMIntegerField, transition
+from django_fsm import FSMField, transition
 
 from profiles.models import Profile
 
 
-class ApplicationStatus(models.IntegerChoices):
-    REJECTED = -3, _("Candidature rejetée")
-    WITHDRAWN = -2, _("Candidature annulée par la candidate")
-    CANCELLED = -1, _("Candidature annulée par les organisateurs")
-    PENDING = 0, _("Candidature en cours de traitement")
-    ACCEPTED = 1, _("Candidature acceptée")
-    CONFIRMED = 2, _("Candidature confirmée")
-    ENDED = 3, _("Stage terminé")
+class ApplicationStatus(models.TextChoices):
+    REJECTED = "rejected", _("Candidature rejetée")
+    WITHDRAWN = "withdrawn", _("Candidature annulée par la candidate")
+    CANCELLED = "cancelled", _("Candidature annulée par les organisateurs")
+    PENDING = "pending", _("Candidature en cours de traitement")
+    ACCEPTED = "accepted", _("Candidature acceptée")
+    CONFIRMED = "confirmed", _("Candidature confirmée")
+    ENDED = "ended", _("Stage terminé")
 
 
 class TshirtSize(models.TextChoices):
@@ -61,7 +61,7 @@ class Application(models.Model):
         verbose_name=_("Notes sur la candidatures"), blank=True
     )
 
-    status = FSMIntegerField(
+    status = FSMField(
         default=ApplicationStatus.PENDING,
         choices=ApplicationStatus.choices,
         verbose_name=_("Statut de la candidature"),

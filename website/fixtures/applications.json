@@ -5,7 +5,7 @@
         "fields": {
             "profile": 1,
             "event": 2,
-            "status": 1,
+            "status": "pending",
             "tshirt": "XXL",
             "created_at": "2022-08-29T20:57:16.943Z",
             "form_answer": {
@@ -26,7 +26,7 @@
         "fields": {
             "profile": 2,
             "event": 3,
-            "status": 0,
+            "status": "pending",
             "tshirt": "M",
             "created_at": "2022-09-03T10:39:01.411Z",
             "form_answer": {
@@ -47,7 +47,7 @@
         "fields": {
             "profile": 3,
             "event": 2,
-            "status": 1,
+            "status": "pending",
             "tshirt": "S",
             "created_at": "2022-08-29T20:57:16.943Z",
             "form_answer": {
