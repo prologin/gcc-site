@@ -16,11 +16,6 @@ urlpatterns = [
         views.ApplicationCreateView.as_view(),
         name="create_application",
     ),
-    path(
-        "applications/notes/",
-        views.ApplicationNotesUpdateView.as_view(),
-        name="application_notes_update",
-    ),
     # Application status update endpoint (POST)
     path(
         "application/<int:appid>/status/",
