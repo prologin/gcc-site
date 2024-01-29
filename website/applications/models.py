@@ -192,7 +192,11 @@ class Application(models.Model):
         return res
 
     @staticmethod
-    def _transition_perm_user_or_staff(instance, user):
+    def _transition_perm_owner(instance, user):
+        return instance.profile and instance.profile.user == user
+
+    @staticmethod
+    def _transition_perm_owner_or_staff(instance, user):
         return (
             instance.profile
             and instance.profile.user == user
@@ -241,7 +245,7 @@ class Application(models.Model):
         field=status,
         source=ApplicationStatus.ACCEPTED,
         target=ApplicationStatus.CONFIRMED,
-        permission=_transition_perm_user_or_staff,
+        permission=_transition_perm_owner_or_staff,
     )
     def confirm(self):
         """
@@ -258,7 +262,7 @@ class Application(models.Model):
             ApplicationStatus.CONFIRMED,
         ],
         target=ApplicationStatus.WITHDRAWN,
-        permission=_transition_perm_user_or_staff,
+        permission=_transition_perm_owner,
     )
     def withdraw(self):
         """

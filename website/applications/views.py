@@ -115,7 +115,7 @@ class ApplicationStatusUpdateView(LoginRequiredMixin, View):
 
 
 class ApplicationNotesUpdateView(PermissionRequiredMixin, UpdateView):
-    permission = "user.can_view_application"
+    permission_required = "user.can_view_application"
     http_method_names = ("post",)
     model = Application
 

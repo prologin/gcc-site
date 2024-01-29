@@ -159,20 +159,15 @@
                                             </div>
 
                                             <div class="card my-2">
-                                                <div class="card-body">
+                                                <div class="card-body gcc-notes-card" data-gcc-id="{{ application.id }}">
                                                     <h5 class="card-title">Notes sur la candidature:</h5>
-                                                    <form method="post"
-                                                          action="{% url 'applications:application_notes_update' %}">
+                                                    <div class="card-text">
                                                         {% csrf_token %}
-                                                        <input type="hidden" name="application-id" value="{{ application.pk }}">
-                                                        <input type="hidden" name="event-year" value="{{ application.event.year }}">
-                                                        <input type="hidden" name="event-id" value="{{ application.event.pk }}">
-                                                        <textarea name="notes" class="textarea form-control">{{application.notes}}</textarea>
+                                                        <textarea name="notes" class="textarea form-control gcc-note-textarea">{{application.notes}}</textarea>
                                                         <input type="submit"
-                                                               name="submit-application-notes"
                                                                value="Modifier les notes"
-                                                               class="btn btn-primary mt-2" />
-                                                    </form>
+                                                               class="btn btn-primary mt-2 gcc-note-submit" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

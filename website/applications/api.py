@@ -75,3 +75,53 @@ def apply_transition(request, id, transition):
     getattr(application, transition)()
     application.save()
     return Response()
+
+
+@api_view(["GET", "POST"])
+def application_notes(request, id):
+    """
+    Endpoint to get/set the notes associated to an application.
+
+    GET/POST response body:
+    {
+        "notes": str
+    }
+
+    POST request body:
+    {
+        "notes": str
+    }
+    """
+    if request.method == "GET":
+        # TODO: Use proper permission
+        if not request.user.is_staff:
+            return Response(
+                {"error": "Insufficient permissions"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        try:
+            application = Application.objects.get(id=id)
+        except Application.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return Response({"notes": application.notes})
+
+    elif request.method == "POST":
+        # TODO: Use proper permission
+        if not request.user.is_staff:
+            return Response(
+                {"error": "Insufficient permissions"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        try:
+            application = Application.objects.get(id=id)
+        except Application.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        new_notes = request.data["notes"]
+        application.notes = new_notes
+        application.save()
+
+        return Response({"notes": application.notes})

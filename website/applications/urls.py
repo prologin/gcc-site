@@ -33,4 +33,8 @@ urlpatterns = [
         "rest/applications/<int:id>/transition/<str:transition>",
         api.apply_transition,
     ),
+    path(
+        "rest/applications/<int:id>/notes",
+        api.application_notes,
+    ),
 ]

@@ -77,7 +77,7 @@ class ApplicationsReviewView(PermissionRequiredMixin, DetailView):
         ctx = super().get_context_data(*args, **kwargs)
         ctx["applications"] = Application.objects.get_applicants(
             self.get_object().id
-        )
+        ).order_by("profile__first_name")
         ctx["AppStatus"] = ApplicationStatus
         return ctx
 

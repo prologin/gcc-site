@@ -117,6 +117,29 @@ function main() {
         }
     );
 
+    document.querySelectorAll(".gcc-notes-card").forEach(
+        function (element) {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const id = element.getAttribute("data-gcc-id");
+            var textarea = element.querySelector(".gcc-note-textarea");
+            var submit_btn = element.querySelector(".gcc-note-submit");
+
+            submit_btn.addEventListener("click", function (_) {
+                // Send API request to update the notes
+                const url = `/rest/applications/${id}/notes`;
+                const body = {
+                    "notes": textarea.value
+                };
+
+                fetch(url, {
+                    method: "POST",
+                    headers: { "X-CSRFToken": csrftoken, "Content-Type": "application/json" },
+                    body: JSON.stringify(body)
+                })
+            })
+        }
+    )
+
 }
 
 // If we're already past the "DOM is ready" point, execute immediately:
