@@ -28,7 +28,7 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ application.first_name }} {{ application.last_name }}</td>
                             <td>{{ application.profile.participation_count }}</td>
-                            <td>
+                            <td data-gcc-id="{{ application.id }}">
                                 {% include "applications/partial/application_status_badge.html" with application=application %}
                             </td>
                         </tr>

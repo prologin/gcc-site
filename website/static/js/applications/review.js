@@ -59,12 +59,14 @@ function requestTransition(id, transition) {
     fetch(url, {
         method: "POST",
         headers: { "X-CSRFToken": csrftoken },
-        success: function(data) {
+    }).then(
+        function (data) {
             // Update was successful, update page
-            var element = document.querySelector(`.gcc-status-card [data-gcc-id=${id}]`);
+            const query = `.gcc-status-card[data-gcc-id="${id}"]`;
+            var element = document.querySelector(query);
             updateGCCStatus(element);
         }
-    });
+    );
 }
 
 function createTransitionButton(application_id, transition) {
@@ -79,6 +81,7 @@ function createTransitionButton(application_id, transition) {
 }
 
 function updateGCCStatus(gcc_status_element) {
+    console.log(gcc_status_element);
     const id = gcc_status_element.getAttribute("data-gcc-id");
     const url = `/rest/applications/${id}/status`;
 
@@ -89,6 +92,10 @@ function updateGCCStatus(gcc_status_element) {
 
             gcc_status_element
                 .querySelector(".card-title > .gcc-status-badge")
+                .replaceWith(statusBadge(status));
+            // Replace row badge
+            document
+                .querySelector(`td[data-gcc-id="${id}"] .gcc-status-badge`)
                 .replaceWith(statusBadge(status));
 
             let card_body = gcc_status_element.querySelector(".card-text");

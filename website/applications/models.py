@@ -277,7 +277,7 @@ class Application(models.Model):
         target=ApplicationStatus.CANCELLED,
         permission=_transition_perm_staff,
     )
-    def cancel(self, reason):
+    def cancel(self, reason=None):
         """
         An application is cancelled, mostly because the event is cancelled
         """
