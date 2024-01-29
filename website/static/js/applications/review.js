@@ -81,7 +81,6 @@ function createTransitionButton(application_id, transition) {
 }
 
 function updateGCCStatus(gcc_status_element) {
-    console.log(gcc_status_element);
     const id = gcc_status_element.getAttribute("data-gcc-id");
     const url = `/rest/applications/${id}/status`;
 
@@ -99,8 +98,9 @@ function updateGCCStatus(gcc_status_element) {
                 .replaceWith(statusBadge(status));
 
             let card_body = gcc_status_element.querySelector(".card-text");
-            card_body.innerHTML = ''; // Clear inside
+            card_body.innerHTML = ''; // Clear current buttons inside
 
+            // Add a button for all new transitions
             const transitions = json["available_transitions"];
             transitions.forEach(tr => {
                 const button = createTransitionButton(id, tr)

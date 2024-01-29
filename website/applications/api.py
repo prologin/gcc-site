@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -24,10 +25,7 @@ def application_status(request, id):
             status=status.HTTP_403_FORBIDDEN,
         )
 
-    try:
-        application = Application.objects.get(id=id)
-    except Application.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    application = get_object_or_404(Application, id=id)
 
     if (
         not request.user.has_perm("applications.manage_applications")
@@ -57,10 +55,7 @@ def apply_transition(request, id, transition):
     if not request.user.is_authenticated:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
-    try:
-        application = Application.objects.get(id=id)
-    except Application.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    application = get_object_or_404(Application, id=id)
 
     # User permission checking is performed in the function
     if transition not in application.get_available_transitions_names(
@@ -115,13 +110,15 @@ def application_notes(request, id):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        try:
-            application = Application.objects.get(id=id)
-        except Application.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        application = get_object_or_404(Application, id=id)
 
         new_notes = request.data["notes"]
         application.notes = new_notes
         application.save()
 
         return Response({"notes": application.notes})
+
+
+@api_view(["GET"])
+def export_applications(request, event_id):
+    pass
