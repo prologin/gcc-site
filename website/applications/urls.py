@@ -1,8 +1,9 @@
 from django.urls import path
 
-from applications import views
+from applications import api, views
 
 app_name = "applications"
+
 
 urlpatterns = [
     path(
@@ -25,5 +26,11 @@ urlpatterns = [
         "application/<int:appid>/status/",
         views.ApplicationStatusUpdateView.as_view(),
         name="application_status_update",
+    ),
+    # API routes
+    path("rest/applications/<int:id>/status", api.application_status),
+    path(
+        "rest/applications/<int:id>/transition/<str:transition>",
+        api.apply_transition,
     ),
 ]

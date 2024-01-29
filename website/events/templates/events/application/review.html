@@ -5,6 +5,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+    <script src="{% static 'js/applications/review.js' %}"></script>
 {% endblock head %}
 
 {% block content %}
@@ -141,8 +142,10 @@
 
                                         <div class="col-md-6">
                                             <div class="card my-2">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Statut de la candidature:</h5>
+                                                <div class="card-body gcc-status-card" data-gcc-id="{{ application.id }}">
+                                                    <h5 class="card-title">
+                                                        Statut de la candidature: <span class="gcc-status-badge"></span>
+                                                    </h5>
 
                                                     <div class="card-text">
                                                         <div class="col">{{ application|status_label }}</div>
