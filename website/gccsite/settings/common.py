@@ -68,6 +68,8 @@ INSTALLED_APPS = [
     "post_office",
     "crispy_forms",
     "crispy_bootstrap5",
+    "rest_framework",
+    # Apps
     "events",
     "users",
     "pages",
@@ -161,6 +163,10 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # django-fsm-admin setting
 FSM_ADMIN_FORCE_PERMIT = True
+
+# REST settings
+
+REST_FRAMEWORK = {}
 
 # Email settings
 

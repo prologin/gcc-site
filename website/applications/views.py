@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
-    PermissionRequiredMixin,
 )
 from django.forms.utils import ErrorList
 from django.http import Http404, HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView, View
-from django.views.generic.edit import FormMixin, UpdateView
+from django.views.generic.edit import FormMixin
 
 from applications.forms import EventApplicationForm
 from applications.models import Application, ApplicationStatus
@@ -112,17 +111,3 @@ class ApplicationStatusUpdateView(LoginRequiredMixin, View):
 
     def http_method_not_allowed(self, request, *args, **kwargs):
         return HttpResponseBadRequest("Invalid method")
-
-
-class ApplicationNotesUpdateView(PermissionRequiredMixin, UpdateView):
-    permission = "user.can_view_application"
-    http_method_names = ("post",)
-    model = Application
-
-    fields = ("notes",)
-
-    def get_success_url(self):
-        return self.request.META.get("HTTP_REFERER", None)
-
-    def get_object(self, *args, **kwargs):
-        return Application.objects.get(id=self.request.POST["application-id"])

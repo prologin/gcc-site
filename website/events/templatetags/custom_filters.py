@@ -63,7 +63,8 @@ def any_confirmed(applications):
     """
     Given a list of applications, return True if any of them is Confirmed
     """
-    for app in applications:
-        if app.status == ApplicationStatus.CONFIRMED:
-            return True
-    return False
+    return any(
+        map(
+            lambda app: app.status == ApplicationStatus.CONFIRMED, applications
+        )
+    )

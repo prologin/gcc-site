@@ -19,16 +19,6 @@ SCHOOL_LEVEL = [
     ("Terminale", "Terminale"),
 ]
 
-TSHIRT = [
-    (None, "-"),
-    ("XS", "XS"),
-    ("S", "S"),
-    ("M", "M"),
-    ("L", "L"),
-    ("XL", "XL"),
-    ("XXL", "XXL"),
-]
-
 # Must be the same as static/js/forms/form.js:PHONE_REGEX
 PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
@@ -36,7 +26,7 @@ PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 class EventApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
-        fields = ["event", "profile", "form_answer"]
+        fields = ["event", "profile", "form_answer", "tshirt"]
         error_messages = {
             NON_FIELD_ERRORS: {
                 "unique_together": _(
@@ -66,12 +56,6 @@ class EventApplicationForm(forms.ModelForm):
     diet = forms.CharField(
         label="La participante a-t-elle un régime alimentaire particulier ?",
         widget=forms.Textarea(attrs={"rows": 3, "cols": 20}),
-    )
-
-    tshirt = forms.ChoiceField(
-        label="Quelle est la taille de t-shirt de la participante ?",
-        choices=TSHIRT,
-        help_text="Un t-shirt sera donné aux participantes pendant le stage",
     )
 
     learn = forms.CharField(

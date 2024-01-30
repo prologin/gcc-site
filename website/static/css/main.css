@@ -359,18 +359,3 @@ button.dropdown-item {
 .gcc-3-back {
   background-color: var(--gcc-blue-color);
 }
-
-
-/*
- * AccordionCard
- */
-.card,
-.card-header {
-  background-color: white !important;
-  border-radius: var(--global-border-radius) !important;
-  border: none;
-}
-.collapsed > .when-open,
-.not-collapsed > .when-closed {
-  display: none;
-}

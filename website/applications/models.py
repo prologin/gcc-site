@@ -1,18 +1,28 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_fsm import FSMIntegerField, transition
+from django_fsm import FSMField, transition
 
 from profiles.models import Profile
 
 
-class ApplicationStatus(models.IntegerChoices):
-    REJECTED = -3, _("Candidature rejetée")
-    WITHDRAWN = -2, _("Candidature annulée par la candidate")
-    CANCELLED = -1, _("Candidature annulée par les organisateurs")
-    PENDING = 0, _("Candidature en cours de traitement")
-    ACCEPTED = 1, _("Candidature acceptée")
-    CONFIRMED = 2, _("Candidature confirmée")
-    ENDED = 3, _("Stage terminé")
+class ApplicationStatus(models.TextChoices):
+    REJECTED = "rejected", _("Candidature rejetée")
+    WITHDRAWN = "withdrawn", _("Candidature annulée par la candidate")
+    CANCELLED = "cancelled", _("Candidature annulée par les organisateurs")
+    PENDING = "pending", _("Candidature en cours de traitement")
+    ACCEPTED = "accepted", _("Candidature acceptée")
+    CONFIRMED = "confirmed", _("Candidature confirmée")
+    ENDED = "ended", _("Stage terminé")
+
+
+class TshirtSize(models.TextChoices):
+    __empty__ = "-"
+    XS = ("XS", "XS")
+    S = ("S", "S")
+    M = ("M", "M")
+    L = ("L", "L")
+    XL = ("XL", "XL")
+    XXL = ("XXL", "XXL")
 
 
 class ApplicationManager(models.Manager):
@@ -37,6 +47,12 @@ class Application(models.Model):
         blank=True,
     )
 
+    tshirt = models.CharField(
+        verbose_name=_("Taille de tshirt"),
+        max_length=3,
+        choices=TshirtSize.choices,
+    )
+
     form_answer = models.JSONField(
         verbose_name=_("Réponse de formulaire"), default=dict
     )
@@ -45,7 +61,7 @@ class Application(models.Model):
         verbose_name=_("Notes sur la candidatures"), blank=True
     )
 
-    status = FSMIntegerField(
+    status = FSMField(
         default=ApplicationStatus.PENDING,
         choices=ApplicationStatus.choices,
         verbose_name=_("Statut de la candidature"),
@@ -176,7 +192,11 @@ class Application(models.Model):
         return res
 
     @staticmethod
-    def _transition_perm_user_or_staff(instance, user):
+    def _transition_perm_owner(instance, user):
+        return instance.profile and instance.profile.user == user
+
+    @staticmethod
+    def _transition_perm_owner_or_staff(instance, user):
         return (
             instance.profile
             and instance.profile.user == user
@@ -225,7 +245,7 @@ class Application(models.Model):
         field=status,
         source=ApplicationStatus.ACCEPTED,
         target=ApplicationStatus.CONFIRMED,
-        permission=_transition_perm_user_or_staff,
+        permission=_transition_perm_owner_or_staff,
     )
     def confirm(self):
         """
@@ -242,7 +262,7 @@ class Application(models.Model):
             ApplicationStatus.CONFIRMED,
         ],
         target=ApplicationStatus.WITHDRAWN,
-        permission=_transition_perm_user_or_staff,
+        permission=_transition_perm_owner,
     )
     def withdraw(self):
         """
@@ -261,7 +281,7 @@ class Application(models.Model):
         target=ApplicationStatus.CANCELLED,
         permission=_transition_perm_staff,
     )
-    def cancel(self, reason):
+    def cancel(self, reason=None):
         """
         An application is cancelled, mostly because the event is cancelled
         """

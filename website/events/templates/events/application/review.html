@@ -5,11 +5,13 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/events/events.css' %}">
+    <script src="{% static 'js/applications/review.js' %}"></script>
 {% endblock head %}
 
 {% block content %}
 
     <div class="container-fluid mt-2">
+        <h2 class="text-center m-2">{{ object.name }}</h2>
         <div class="custom-table">
             <table class="table">
                 <thead>
@@ -26,77 +28,82 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ application.first_name }} {{ application.last_name }}</td>
                             <td>{{ application.profile.participation_count }}</td>
-                            <td>{{ application|status_label }}</td>
+                            <td data-gcc-id="{{ application.id }}">
+                                {% include "applications/partial/application_status_badge.html" with application=application %}
+                            </td>
                         </tr>
                         {% if 'users.can_view_applications_details' in perms %}
                             <tr class="collapse" id="row-{{ forloop.counter }}">
                                 <td colspan="5">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="p-2">
-                                                {% if "users.can_view_applications_private_details" in perms %}
-                                                    <p>
-                                                        <h2>Informations sur la participante:</h2>
-                                                    </p>
-                                                    <p>
-                                                        <i class="fa-solid fa-at"></i> {{ application.email }}
-                                                    </p>
-                                                    <p>
-                                                        <i class="fa-solid fa-phone"></i> {{ application.phone }}
-                                                    </p>
-                                                    <p>
-                                                        <i class="fa-solid fa-house-user"></i> {{ application.address }}
-                                                    </p>
-                                                    <p>
-                                                        <i class="fa-solid fa-cake-candles"></i> {{ application.birth_date }}
-                                                    </p>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="p-2">
-                                                <p>
-                                                    <h2>Informations sur le responsable légal:</h2>
-                                                </p>
-                                                <p>
-                                                    <i class="fa-solid fa-user"></i> {{ application.first_name_resp }}
-                                                    {{ application.last_name_resp }}
-                                                </p>
-                                                {% if "users.can_view_applications_private_details" in perms %}
-                                                    <p>
-                                                        <i class="fa-solid fa-at"></i> {{ application.email_resp }}
-                                                    </p>
-                                                    <p>
-                                                        <i class="fa-solid fa-phone"></i> {{ application.phone_resp }}
-                                                    </p>
-                                                    <p>
-                                                        <i class="fa-solid fa-house-user"></i> {{ application.address_resp }}
-                                                    </p>
-                                                {% endif %}
+                                    <div class="row row-cols-1 row-cols-xl-3">
+                                        <div class="col">
+                                            <div class="card my-2">
+                                                <h5 class="card-header">Participante</h5>
+                                                <div class="card-body">
+                                                    {% if "users.can_view_applications_private_details" in perms %}
+                                                        <div class="card-text">
+                                                            <i class="fa-solid fa-user"></i> {{ application.first_name }}
+                                                            {{ application.last_name }}
+                                                            <br />
+                                                            <i class="fa-solid fa-at"></i> {{ application.email }}
+                                                            <br />
+                                                            <i class="fa-solid fa-phone"></i> {{ application.phone }}
+                                                            <br />
+                                                            <i class="fa-solid fa-house-user"></i> {{ application.address }}
+                                                            <br />
+                                                            <i class="fa-solid fa-cake-candles"></i> {{ application.birth_date }}
+                                                        </div>
+                                                    {% else %}
+                                                        <p class="text-muted">Permissions insuffisantes</p>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <p>
-                                                <h2>
-                                                    <i class="fa-solid fa-school"></i> Etablissement scolaire:
-                                                    {{ application.school_name }}
-                                                </h2>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-location-dot"></i> {{ application.address_school }}
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-user-graduate"></i> {{ application.form_answer.school_level }}
-                                            </p>
+                                        <div class="col">
+                                            <div class="card my-2">
+                                                <h5 class="card-header">Responsable légal</h5>
+                                                <div class="card-body">
+                                                    {% if "users.can_view_applications_private_details" in perms %}
+                                                        <div class="card-text">
+                                                            <i class="fa-solid fa-user"></i> {{ application.first_name_resp }}
+                                                            {{ application.last_name_resp }}
+                                                            <br />
+                                                            <i class="fa-solid fa-at"></i> {{ application.email_resp }}
+                                                            <br />
+                                                            <i class="fa-solid fa-phone"></i> {{ application.phone_resp }}
+                                                            <br />
+                                                            <i class="fa-solid fa-house-user"></i> {{ application.address_resp }}
+                                                        </div>
+                                                    {% else %}
+                                                        <p class="text-muted">Permissions insuffisantes</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card my-2">
+                                                <h5 class="card-header">Établissement scolaire</h5>
+                                                <div class="card-body">
+                                                    <div class="card-text">
+                                                        <i class="fa-solid fa-school"></i> {{ application.school_name }}
+                                                        <br />
+                                                        <i class="fa-solid fa-user-graduate"></i> {{ application.form_answer.school_level }}
+                                                        <br />
+                                                        <i class="fa-solid fa-location-dot"></i> {{ application.address_school }}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="row p-2">
-                                        <div class="col-md">
-                                            <h2>Réponse au questionnaires</h2>
+                                        <div class="col-md-6">
+                                            <h2>Questionnaire</h2>
                                             <dl class="py-2">
                                                 <h3 class="questions">• Quelle est ta taille de t-shirt ?</h3>
-                                                <p class="answer">{{ application.form_answer.tshirt }}</p>
+                                                <p class="answer">{{ application.tshirt }}</p>
 
                                                 <h3 class="questions">
                                                     • Y a-t-il quelque chose en particulier que tu espères apprendre pendant le stage
@@ -132,37 +139,38 @@
 
                                             </dl>
                                         </div>
-                                    </div>
 
-                                    <div class="row py-3 px-2">
-                                        <div class="col-12">
-                                            <h2>Notes sur la candidature:</h2>
-                                            <form method="post"
-                                                  action="{% url 'applications:application_notes_update' %}">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="application-id" value="{{ application.pk }}">
-                                                <input type="hidden" name="event-year" value="{{ application.event.year }}">
-                                                <input type="hidden" name="event-id" value="{{ application.event.pk }}">
-                                                <textarea name="notes" class="textarea form-control">{{application.notes}}</textarea>
-                                                <input type="submit"
-                                                       name="submit-application-notes"
-                                                       value="Modifier les notes"
-                                                       class="my-4 btn btn-primary" />
-                                            </form>
+                                        <div class="col-md-6">
+                                            <div class="card my-2">
+                                                <div class="card-body gcc-status-card" data-gcc-id="{{ application.id }}">
+                                                    <h5 class="card-title">
+                                                        Statut de la candidature: <span class="gcc-status-badge"></span>
+                                                    </h5>
+
+                                                    <div class="card-text">
+                                                        <div class="col">{{ application|status_label }}</div>
+                                                        <div class="row">
+                                                            {% for transition in application|get_available_transitions:request.user %}
+                                                                {% include "applications/partial/application_transition_button.html" with application=application transition=transition text=transition|title form_class="col-auto" %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card my-2">
+                                                <div class="card-body gcc-notes-card" data-gcc-id="{{ application.id }}">
+                                                    <h5 class="card-title">Notes sur la candidature:</h5>
+                                                    <div class="card-text">
+                                                        {% csrf_token %}
+                                                        <textarea name="notes" class="textarea form-control gcc-note-textarea">{{application.notes}}</textarea>
+                                                        <input type="submit"
+                                                               value="Modifier les notes"
+                                                               class="btn btn-primary mt-2 gcc-note-submit" />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row pt-3 px-2">
-                                        <h2 class="col-auto">Statut de la candidature:</h2>
-                                    </div>
-                                    <div class="row pb-2 px-2">
-                                        <span class="col">{{ application|status_label }}</span>
-                                    </div>
-                                    <div class="row pb-3 px-2">
-
-                                        {% for transition in application|get_available_transitions:request.user %}
-                                            {% include "applications/partial/application_transition_button.html" with application=application transition=transition text=transition|title form_class="col-auto" %}
-                                        {% endfor %}
                                     </div>
 
                                 </td>

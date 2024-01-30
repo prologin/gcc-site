@@ -5,11 +5,11 @@
         "fields": {
             "profile": 1,
             "event": 2,
-            "status": 1,
+            "status": "pending",
+            "tshirt": "XXL",
             "created_at": "2022-08-29T20:57:16.943Z",
             "form_answer": {
                 "school_level": "3ème",
-                "tshirt": 1,
                 "allergies": "aucune",
                 "diet": "aucun regime particulier",
                 "learning": "decouvrir",
@@ -26,11 +26,11 @@
         "fields": {
             "profile": 2,
             "event": 3,
-            "status": 0,
+            "status": "pending",
+            "tshirt": "M",
             "created_at": "2022-09-03T10:39:01.411Z",
             "form_answer": {
                 "school_level": "3ème",
-                "tshirt": 1,
                 "allergies": "aucune",
                 "diet": "aucun regime particulier",
                 "learning": "decouvrir",
@@ -39,6 +39,27 @@
                 "about": "ma prof!"
             },
             "notes": ""
+        }
+    },
+    {
+        "model": "applications.application",
+        "pk": 3,
+        "fields": {
+            "profile": 3,
+            "event": 2,
+            "status": "pending",
+            "tshirt": "S",
+            "created_at": "2022-08-29T20:57:16.943Z",
+            "form_answer": {
+                "school_level": "3ème",
+                "allergies": "aucune",
+                "diet": "aucun regime particulier",
+                "learning": "decouvrir",
+                "programming": "rien du tout",
+                "studies": "je sais pas encore",
+                "about": "ma prof!"
+            },
+            "notes": " "
         }
     }
 ]
