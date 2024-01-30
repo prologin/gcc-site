@@ -1,0 +1,41 @@
+{% comment %}
+    Template parameters:
+    - event: the event object.
+{% endcomment %}
+<div class="btn-group">
+    <button id="gcc-application-export-btn" class="btn btn-primary" type="button">
+        Exporter des candidatures
+    </button>
+    <button type="button"
+            class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul id="gcc-application-export-choices" class="dropdown-menu">
+        <li>
+            <span class="dropdown-item-text">Statut</span>
+        </li>
+        {% for status in AppStatus %}
+            <li class="dropdown-item">
+
+                {# Select the "confirmed" status by default #}
+                {% if status.value == "confirmed" %}
+                    <input class="form-check-input"
+                           type="checkbox"
+                           value="{{ status.value }}"
+                           checked
+                           id="flexCheckDefault">
+                {% else %}
+                    <input class="form-check-input"
+                           type="checkbox"
+                           value="{{ status.value }}"
+                           id="flexCheckDefault">
+                {% endif %}
+                <label class="form-check-label" for="flexCheckDefault">
+                    {% include "applications/partial/application_status_badge.html" with status=status %}
+                </label>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
