@@ -72,7 +72,7 @@ function requestTransition(id, transition) {
 function createTransitionButton(application_id, transition) {
     var button = document.createElement("button");
     button.textContent = transition;
-    button.classList.add("btn", "btn-primary");
+    button.classList.add("btn", "btn-primary", "mx-2");
     button.setAttribute("data-gcc-transition", transition);
     button.addEventListener("click", function (_) {
         requestTransition(application_id, transition);

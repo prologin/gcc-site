@@ -13,8 +13,12 @@
     <div id="gcc-event-id" class="d-none" data-gcc-event-id={{ event.id }}>
     </div>
     <div class="container-fluid mt-2">
-        {% include "events/application/export_csv_button.html" with event=object %}
         <h2 class="text-center m-2">{{ object.name }}</h2>
+        <div class="row m-2">
+            <div class="col-auto ms-auto">
+                {% include "events/application/export_csv_button.html" with event=object %}
+            </div>
+        </div>
         <div class="custom-table">
             <table class="table">
                 <thead>
