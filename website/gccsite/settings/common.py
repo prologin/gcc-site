@@ -166,7 +166,11 @@ FSM_ADMIN_FORCE_PERMIT = True
 
 # REST settings
 
-REST_FRAMEWORK = {}
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ]
+}
 
 # Email settings
 

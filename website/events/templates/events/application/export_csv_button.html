@@ -1,6 +1,6 @@
 {% comment %}
     Template parameters:
-    - event: the event object.
+    - AppStatus: The ApplicationStatus class
 {% endcomment %}
 <div class="btn-group">
     <button id="gcc-application-export-btn" class="btn btn-primary" type="button">
@@ -17,17 +17,17 @@
             <span class="dropdown-item-text">Statut</span>
         </li>
         {% for status in AppStatus %}
-            <li class="dropdown-item">
+            <li class="dropdown-item-text">
 
                 {# Select the "confirmed" status by default #}
                 {% if status.value == "confirmed" %}
-                    <input class="form-check-input"
+                    <input class="form-check-input gcc-application-export-choice"
                            type="checkbox"
                            value="{{ status.value }}"
                            checked
                            id="flexCheckDefault">
                 {% else %}
-                    <input class="form-check-input"
+                    <input class="form-check-input gcc-application-export-choice"
                            type="checkbox"
                            value="{{ status.value }}"
                            id="flexCheckDefault">
