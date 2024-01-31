@@ -1,6 +1,6 @@
 from django.urls import path
 
-from events import views
+from events import api, views
 
 app_name = "events"
 
@@ -21,5 +21,11 @@ urlpatterns = [
         "events/passed/",
         views.PassedEventListView.as_view(),
         name="passed_events",
+    ),
+    # API
+    path(
+        "rest/events/export/<int:id>",
+        api.ExportSelectedApplications.as_view(),
+        name="event-application-export",
     ),
 ]

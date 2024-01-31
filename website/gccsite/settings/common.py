@@ -166,7 +166,17 @@ FSM_ADMIN_FORCE_PERMIT = True
 
 # REST settings
 
-REST_FRAMEWORK = {}
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    # rate limiting: https://www.django-rest-framework.org/api-guide/throttling/
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"anon": "0/minute", "user": "20/minute"},
+}
 
 # Email settings
 

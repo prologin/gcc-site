@@ -9,9 +9,16 @@
 {% endblock head %}
 
 {% block content %}
-
+    {# For JS purposes #}
+    <div id="gcc-event-id" class="d-none" data-gcc-event-id={{ event.id }}>
+    </div>
     <div class="container-fluid mt-2">
         <h2 class="text-center m-2">{{ object.name }}</h2>
+        <div class="row m-2">
+            <div class="col-auto ms-auto">
+                {% include "events/application/export_csv_button.html" with event=object %}
+            </div>
+        </div>
         <div class="custom-table">
             <table class="table">
                 <thead>
@@ -29,7 +36,7 @@
                             <td>{{ application.first_name }} {{ application.last_name }}</td>
                             <td>{{ application.profile.participation_count }}</td>
                             <td data-gcc-id="{{ application.id }}">
-                                {% include "applications/partial/application_status_badge.html" with application=application %}
+                                {% include "applications/partial/application_status_badge.html" with status=application.status %}
                             </td>
                         </tr>
                         {% if 'users.can_view_applications_details' in perms %}

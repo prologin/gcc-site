@@ -72,7 +72,7 @@ function requestTransition(id, transition) {
 function createTransitionButton(application_id, transition) {
     var button = document.createElement("button");
     button.textContent = transition;
-    button.classList.add("btn", "btn-primary");
+    button.classList.add("btn", "btn-primary", "mx-2");
     button.setAttribute("data-gcc-transition", transition);
     button.addEventListener("click", function (_) {
         requestTransition(application_id, transition);
@@ -111,6 +111,8 @@ function updateGCCStatus(gcc_status_element) {
 
 function main() {
 
+    const EVENT_ID = document.querySelector("#gcc-event-id").getAttribute("data-gcc-event-id");
+
     document.querySelectorAll(".gcc-status-card").forEach(
         function (element) {
             updateGCCStatus(element);
@@ -120,13 +122,12 @@ function main() {
     document.querySelectorAll(".gcc-notes-card").forEach(
         function (element) {
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            const id = element.getAttribute("data-gcc-id");
             var textarea = element.querySelector(".gcc-note-textarea");
             var submit_btn = element.querySelector(".gcc-note-submit");
 
             submit_btn.addEventListener("click", function (_) {
                 // Send API request to update the notes
-                const url = `/rest/applications/${id}/notes`;
+                const url = `/rest/applications/${EVENT_ID}/notes`;
                 const body = {
                     "notes": textarea.value
                 };
@@ -139,6 +140,25 @@ function main() {
             })
         }
     )
+
+
+    document.querySelector("#gcc-application-export-btn").addEventListener("click", function (btn) {
+        const export_status_choices =
+            Array.from(
+                document
+                    .querySelectorAll("#gcc-application-export-choices .gcc-application-export-choice"))
+                .filter((input) => input.checked)
+                .map((input) => input.getAttribute("value"))
+                .join(' ');
+
+        const url = encodeURI(`/rest/events/export/${EVENT_ID}?status=${export_status_choices}`);
+        console.log(url);
+
+        const aElement = document.createElement('a');
+        aElement.href = url;
+        aElement.click();
+
+    });
 
 }
 
