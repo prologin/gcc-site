@@ -176,7 +176,7 @@
                             {# ENDED Application #}
                             {# TODO: Add field in back to have the good link of flickr #}
                             <p class="h6">
-                                Le stage est terminé, bravo à toi pour ta participation !
+                                Le stage est terminé, félicitations pour y avoir participé !
                                 <br>
                                 Vous pouvez retrouver les photos du stage sur notre <a href="https://www.flickr.com/photos/prologin/">flickr</a>
                             </p>
@@ -226,21 +226,21 @@
                             <div>
                                 <h6>
                                     Cette candidature a été annulée par les organisateurs. Pour toute question ou réclamation, tu peux envoyer un mail à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
-                                    <a href="{% url 'events:home' %}">Tu peux t'inscrire à d'autres stages ici.</a>
+                                    <a href="{% url 'events:home' %}">Vous pouvez faire une autre inscription à un stage ici.</a>
                                 </h6>
                             </div>
                         {% elif application.status == AppStatus.WITHDRAWN %}
                             {# WITHDRAWN Application #}
                             <div>
                                 <h6>
-                                    Candidature annulée. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
+                                    Candidature annulée. <a href="{% url 'events:home' %}">D'autres stages sont disponibles ici.</a>
                                 </h6>
                             </div>
                         {% elif application.status == AppStatus.REJECTED %}
                             {# REJECTED Application #}
                             <div>
                                 <h6>
-                                    Le stage est déjà complet. <a href="{% url 'events:home' %}">Inscris-toi à d'autres stages ici.</a>
+                                    Le stage est déjà complet. <a href="{% url 'events:home' %}">D'autres stages sont disponibles ici.</a>
                                 </h6>
                             </div>
                         {% endif %}
