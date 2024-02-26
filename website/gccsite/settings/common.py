@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "rest_framework",
+    "constance",
     # Apps
     "events",
     "users",
@@ -249,7 +250,25 @@ AWS_S3_URL_PROTOCOL = (
 AWS_S3_CUSTOM_DOMAIN = env.get_string("DJANGO_S3_CUSTOM_DOMAIN", None)
 AWS_STATIC_LOCATION = "static"
 
-
 RECAPTCHA_PUBLIC_KEY = env.get_secret("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = env.get_secret("RECAPTCHA_PRIVATE_KEY")
 RECAPTCHA_REQUIRED_SCORE = 0.85
+
+# Live config
+CONSTANCE_CONFIG = {
+    "DISCORD_INVITE_ENABLE": (
+        False,
+        "Should the Discord invite link be shown to the user ?",
+    ),
+    "DISCORD_INVITE_LINK": (
+        "https://girlscancode.fr",
+        "Discord invitation link",
+    ),
+}
+CONSTANCE_CONFIG_FIELDSETS = {
+    "Discord Invite": ("DISCORD_INVITE_ENABLE", "DISCORD_INVITE_LINK"),
+}
+
+CONSTANCE_REDIS_CONNECTION = env.get_string("DJANGO_LIVE_CONFIG_URL")
+CONSTANCE_BACKEND = "constance.backends.redisd.CachingRedisBackend"
+CONSTANCE_REDIS_CACHE_TIMEOUT = 60

@@ -96,6 +96,7 @@ services:
       DB_HOST: db_dev
       DB_PASSWORD_FILE: /run/secrets/postgres-passwd
       DJANGO_CACHE_URL: redis://redis_dev:6379/0
+      DJANGO_LIVE_CONFIG_URL: redis://redis_dev:6379/2
       CELERY_BROKER_URL: redis://redis_dev:6379/1
       CELERY_RESULT_EXPIRES: 60
       OIDC_OP_CONFIG_URL: https://auth.prologin.org/application/o/prologin-public-test-client
