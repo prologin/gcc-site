@@ -70,17 +70,20 @@ def faq_entries_list():
         "FAQ_ENTRIES": [
             {
                 "question": "Qu'est-ce qu'un stage GCC! ?",
-                "answer": "<p>C'est un stage où vous apprenez et pratiquez la "
-                "programmation, accompagnées par des étudiants et étudiantes "
-                "en informatique.</br>Nous proposons deux type de stages :<ul>"
-                "<li> les stages longs qui durent du lundi matin au samedi midi</li>"
-                "<li>les stages courts qui durent le temps d'un week-end</li>"
-                "</ul>Le tout dans une atmosphère détendue, nous ne forçons personne, "
-                "ce stage est là pour vous faire découvrir un domaine afin de vous "
-                "aider dans votre orientation. Nous ne vous en voudrons pas si vous "
-                "n'aimez pas la programmation.<br><br>Nous organisons aussi des "
-                "conférences animées par des femmes du numérique pour qu'elles "
-                "partagent leur vécu dans le monde du travail.</p>",
+                "answer": "<p>Les stages Girls Can Code! sont des opportunités "
+                "gratuites d'initiation à la programmation, exclusivement réservées "
+                "aux filles. Accompagnées par des étudiants en informatique, les "
+                "participantes explorent diverses thématiques pour concevoir des "
+                "programmes créatifs.<br><br>"
+                "Ces stages ont généralement lieu sur deux jours pendant les "
+                "week-ends, mais peuvent également être proposés sous forme de "
+                "sessions plus longues d'une semaine, souvent pendant les "
+                "vacances scolaires.<br><br>"
+                "Pendant ces stages, les filles explorent une variété de sujets "
+                "passionnants liés à la programmation. De plus, des intervenantes "
+                "professionnelles partagent leur parcours et leur expérience avec "
+                "les participantes, offrant ainsi une perspective enrichissante "
+                "sur les carrières dans le domaine de la technologie.</p>",
             },
             {
                 "question": "Qui peut s'inscrire aux stages ?",
