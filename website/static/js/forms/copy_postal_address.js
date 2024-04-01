@@ -5,7 +5,7 @@ function copyPostalAddress(btn_id) {
 
     const application_form_modal = document.getElementById(form_modal)
     const form = application_form_modal.querySelector("form");
-    if (form == null) {
+    if (form === null) {
         return;
     }
 
