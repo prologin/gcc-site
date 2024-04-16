@@ -7,34 +7,42 @@ license = "AGPL-3.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-boto3 = "^1.24"
 celery = { version = "^5.2" }
-coverage = { version = "*", extras = ["toml"] }
 django = "^4.2"
 gunicorn = "^21.0.0"
-ipython = "^8.12.0"
-psycopg2-binary = "^2.9.6"
-django-crispy-forms = "^2.0"
-crispy-bootstrap5 = "^2023.10"
-django-bootstrap-icons = "^0.8.3"
 django-structlog = { version = "^6.0", extras = ["celery"] }
 django-storages = "^1.12"
-django-redis = { version = "^5" }
 django-rest-knox = { version = "^4.2" }
 django-celery-beat = { version = "^2.4" }
-django-mail-panel = "^4.0"
-django-post-office = "^3.6"
 django-fsm = "^2.8.1"
 django-fsm-admin = { git = "https://github.com/gadventures/django-fsm-admin", rev = "fe59a4b" }
-prospector = { extras = ["with_everything"], version = "*" }
 mozilla-django-oidc = "^3.0.0"
 django-prometheus = "^2.3.1"
-django-debug-toolbar = "^4.2.0"
 django-recaptcha = "^4.0.0"
 pypdf = "^3.17.4"
 python-magic = "^0.4.27"
 djangorestframework = "^3.14.0"
 django-constance = "^3.1.0"
+
+# Database
+boto3 = "^1.24"
+psycopg2-binary = "^2.9.6"
+django-redis = "^5"
+
+# Frontend
+django-crispy-forms = "^2.0"
+crispy-bootstrap5 = "^2023.10"
+django-bootstrap-icons = "^0.8.3"
+
+# Dev/Debug stuff
+ipython = "^8.12.0"
+django-debug-toolbar = "^4.2.0"
+django-mail-panel = "^4.0"
+prospector = { extras = ["with_everything"], version = "*" }
+coverage = { version = "*", extras = ["toml"] }
+
+# Mail management
+django-post-office = "^3.6"
 
 [tool.poetry.dev-dependencies]
 black = "*"
