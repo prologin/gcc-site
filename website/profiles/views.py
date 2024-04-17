@@ -1,21 +1,33 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import send_mail
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.http import (
+    HttpResponseBadRequest,
+    HttpResponseRedirect,
+)
+from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView
 
 from profiles.forms import ProfileCreationForm
 from profiles.models import Profile
-
-# Create your views here.
+from profiles.utils import (
+    check_profile_email_token,
+    generate_profile_email_token,
+)
 
 
 class CreateProfileView(LoginRequiredMixin, CreateView):
     template_name = "profiles/create_profiles.html"
     form_class = ProfileCreationForm
-    success_url = reverse_lazy("events:events")  # TODO: Update this
+    success_url = reverse_lazy("profiles:profiles_list")  # TODO: Update this
 
     def post(self, request, *args, **kwargs):
         self.object = None
@@ -31,14 +43,49 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
         else:
             messages.success(
                 request,
-                "Votre profil a été enregistré ! Utilisez-le pour vous inscrire à un stage sur cette page !",
+                "Votre profil a été enregistré ! Confirmez les adresses email renseignées en cliquant sur le lien envoyé dans le mail envoyé à chacunes des adresses",
             )
+
             return self.form_valid(form)
+
+    def form_valid(self, form):
+        profile = form.save()
+
+        self.send_profile_email_confirmation(profile, "email")
+        if profile.email != profile.email_resp:
+            # Do not send 2 emails to the same address
+            self.send_profile_email_confirmation(profile, "email_resp")
+
+        return HttpResponseRedirect(self.success_url)
 
     def get_form_kwargs(self):
         kw = super().get_form_kwargs()
         kw.update({"user": self.request.user})
         return kw
+
+    def send_profile_email_confirmation(self, profile: Profile, field: str):
+        current_site = get_current_site(self.request)
+        subject = "Confirmez votre email de profil sur GirlsCanCode!"
+        email = getattr(profile, field)
+        request_id = urlsafe_base64_encode(
+            force_bytes(f"{profile.id}|{email}")
+        )
+        token = generate_profile_email_token(profile, field)
+
+        activation_link = "{0}/profiles/email-confirm/{1}/{2}".format(
+            current_site, request_id, token
+        )
+
+        email_from = settings.DEFAULT_FROM_EMAIL
+        message = render_to_string(
+            template_name="profiles/mails/profile_email_activation_link.txt",
+            context={
+                "firstname": profile.first_name,
+                "lastname": profile.last_name,
+                "link": activation_link,
+            },
+        )
+        send_mail(subject, message, email_from, [email])
 
 
 class ProfileListView(LoginRequiredMixin, ListView):
@@ -88,3 +135,37 @@ class DeleteProfileView(LoginRequiredMixin, View):
 
     def http_method_not_allowed(self, request, *args, **kwargs):
         return HttpResponseBadRequest("Invalid method")
+
+
+class ProfileConfirmEmailView(View):
+    def get(self, request, requestidb64, token):
+        (profile_id, email) = (
+            urlsafe_base64_decode(requestidb64).decode().split("|")
+        )
+
+        profile = get_object_or_404(Profile, id=profile_id)
+
+        # Check token:
+        (valid, email_field) = check_profile_email_token(profile, token)
+        if not valid:
+            messages.error(request, "La confirmation a échoué")
+            return HttpResponseRedirect(reverse_lazy("profiles:profiles_list"))
+
+        # There us a mismatch between profile and email
+        if getattr(profile, email_field) != email:
+            messages.error(request, "La confirmation a échoué")
+            return HttpResponseRedirect(reverse_lazy("profiles:profiles_list"))
+
+        # The email was already validated
+        confirmed_field = f"{email_field}_confirmed"
+        if getattr(profile, confirmed_field):
+            messages.error(request, "Cette adresse email a déjà été confirmée")
+            return HttpResponseRedirect(reverse_lazy("profiles:profiles_list"))
+
+        setattr(profile, confirmed_field, True)
+        if profile.email == profile.email_resp:
+            profile.email_resp_confirmed = True
+        profile.save()
+
+        messages.success(request, "Votre adresse email a été activée")
+        return HttpResponseRedirect(reverse_lazy("profiles:profiles_list"))

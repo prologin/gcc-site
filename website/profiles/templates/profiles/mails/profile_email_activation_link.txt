@@ -1,0 +1,10 @@
+Bonjour {{ firstname }} {{ lastname }},
+
+Confirmez l'adresse email de votre profil sur Girls Can Code! en cliquant sur le lien ci-dessous :
+
+{{ link }}
+
+À bientôt !
+
+--
+L'équipe Girls Can Code!

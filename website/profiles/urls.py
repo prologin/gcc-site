@@ -25,4 +25,9 @@ urlpatterns = [
         views.DeleteProfileView.as_view(),
         name="profile_delete",
     ),
+    path(
+        "profiles/email-confirm/<requestidb64>/<token>/",
+        views.ProfileConfirmEmailView.as_view(),
+        name="activate",
+    ),
 ]
