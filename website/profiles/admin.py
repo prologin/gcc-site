@@ -28,6 +28,7 @@ class ProfileAdmin(admin.ModelAdmin):
                     "first_name",
                     "last_name",
                     "email",
+                    "email_confirmed",
                     "phone",
                     "birth_date",
                     "street_app",
@@ -43,6 +44,7 @@ class ProfileAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "email_resp",
+                    "email_resp_confirmed",
                     "phone_resp",
                     "street_resp",
                     "complement_resp",

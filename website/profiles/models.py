@@ -36,6 +36,9 @@ class Profile(models.Model):
     email = models.EmailField(
         null=False, verbose_name=_("Adresse email de la participante")
     )
+    email_confirmed = models.BooleanField(
+        default=False, verbose_name=_("Statut validation email")
+    )
 
     phone = models.CharField(
         max_length=16,
@@ -71,7 +74,11 @@ class Profile(models.Model):
     )
 
     email_resp = models.EmailField(
-        default="", verbose_name=_("Adresse email du responable légal")
+        default="", verbose_name=_("Adresse email du responsable légal")
+    )
+    email_resp_confirmed = models.BooleanField(
+        default=False,
+        verbose_name=_("Statut validation email responsable legal"),
     )
 
     phone_resp = models.CharField(
@@ -122,6 +129,13 @@ class Profile(models.Model):
     def participation_count(self):
         # Use reverse accessor to applications
         return self.applications.count
+
+    @property
+    def profile_confirmed(self):
+        """
+        The profile is confirmed if both emails are confirmed.
+        """
+        return self.email_confirmed and self.email_resp_confirmed
 
     @staticmethod
     def get_choices_for_user(user):
