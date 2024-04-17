@@ -51,8 +51,15 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         profile = form.save()
 
-        self.send_profile_email_confirmation(profile, "email")
-        if profile.email != profile.email_resp:
+        # Do not send confirmation email if it is the same as the user account email
+        if profile.email == self.request.user.email:
+            profile.email_confirmed = True
+        else:
+            self.send_profile_email_confirmation(profile, "email")
+
+        if profile.email_resp == self.request.user.email:
+            profile.email_resp_confirmed = True
+        elif profile.email != profile.email_resp:
             # Do not send 2 emails to the same address
             self.send_profile_email_confirmation(profile, "email_resp")
 
@@ -65,7 +72,7 @@ class CreateProfileView(LoginRequiredMixin, CreateView):
 
     def send_profile_email_confirmation(self, profile: Profile, field: str):
         current_site = get_current_site(self.request)
-        subject = "Confirmez votre email de profil sur GirlsCanCode!"
+        subject = "Confirmez votre email de profil sur Girls Can Code!"
         email = getattr(profile, field)
         request_id = urlsafe_base64_encode(
             force_bytes(f"{profile.id}|{email}")
