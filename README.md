@@ -24,6 +24,7 @@ $ docker compose -p gccsite up --build # You can use the flag -d if you to detac
 You can then go to http://localhost:8000/.
 
 #### Inserting fixtures
+
 For the development environment to reproduce normal state, the folder
 `website/fixtures/` contains several files that are used to insert test data
 in the database. There are users, event centers, events, applications, etc...
@@ -36,7 +37,7 @@ $ ./manage.sh loaddata fixtures/users.json fixtures/centers.json fixtures/events
 ```
 
 > /!\ The order is important, as some fixtures references other model fixtures
-(we need to load users before profiles because profiles references users).
+> (we need to load users before profiles because profiles references users).
 
 For the `users` fixture, user passwords are the same as their usernames.
 
@@ -45,6 +46,7 @@ E.g : `root@example.com` -> root
 `root@example.com` is a superuser
 
 ##### Super User creation
+
 To create a super User :
 
 ```sh
@@ -59,12 +61,13 @@ You can then go to http://localhost:8000/admin and login.
 
 ```sh
 $ cd docker/
-$ docker compose -p gccsite up --build
+$ docker compose up --build
 ```
 
 #### Formatting
 
 We use the following tools to format code:
+
 - `ruff` for python files
 - `djlint` for Django HTML template files format (and linting)
 - `eslint` for JS files (this is not the case anymore, apparently)
@@ -83,5 +86,5 @@ can use the following commands to check your code:
 
 ```sh
 $ cd docker/
-$ docker-compose -p gccsite exec backend_dev prospector --profile base
+$ docker-compose exec backend_dev-1 prospector --profile base
 ```

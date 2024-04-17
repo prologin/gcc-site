@@ -25,7 +25,10 @@
             nodejs
             poetry
             pre-commit
+            python311Packages.cfgv
+            python311Packages.identify
             shellcheck
+            virtualenv
             yarn
           ];
         };

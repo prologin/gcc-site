@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec docker-compose -p gccsite exec backend_dev ./manage.py "$@"
+exec docker exec docker-backend_dev-1 ./manage.py "$@"
