@@ -3,7 +3,7 @@
 # Copyright (c) 2022 Marc 'risson' Schmitt <marc.schmitt@prologin.org>
 
 import requests
-from mozilla_django_oidc.utils import import_from_settings
+from django.conf import settings
 
 from gccsite import env
 
@@ -28,11 +28,11 @@ def get_auth_headers_for_app(app_name: str):
     if OIDC_OP_CONFIG_URL is not None:
         OIDC_OP_CONFIG_URL += "/.well-known/openid-configuration"
     else:
-        OIDC_OP_CONFIG_URL = import_from_settings("OIDC_OP_CONFIG_URL")
+        OIDC_OP_CONFIG_URL = settings.OIDC_OP_CONFIG_URL
 
     OIDC_TIMEOUT = env.get_int(
         f"OIDC_{app_name_normalized}_TIMEOUT",
-        import_from_settings("OIDC_TIMEOUT", 15),
+        15,
     )
 
     OIDC_OP_CONFIG = get_oidc_config(OIDC_OP_CONFIG_URL, timeout=OIDC_TIMEOUT)

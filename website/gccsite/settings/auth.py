@@ -4,38 +4,42 @@
 
 
 from gccsite import env
-from gccsite.tools import get_oidc_config
-
-OIDC_DRF_AUTH_BACKEND = "gccsite.auth.backend.ProloginOIDCAB"
 
 AUTHENTICATION_BACKENDS = [
-    OIDC_DRF_AUTH_BACKEND,
     "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.open_id_connect.OpenIdConnectAuth",
 ]
 
 LOGIN_URL = "/login"
 
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/logout/"
 LOGIN_ERROR_URL = "/"
-
 
 # OIDC
 
-OIDC_OP_CONFIG_URL = (
-    env.get_string("OIDC_OP_CONFIG_URL") + "/.well-known/openid-configuration"
-)
-OIDC_TIMEOUT = env.get_int("OIDC_TIMEOUT", 15)
-
+SOCIAL_AUTH_OIDC_OIDC_ENDPOINT = env.get_string("OIDC_OP_CONFIG_URL")
 OIDC_RP_SCOPES = " ".join(["openid", "email", "profile", "roles"])
-OIDC_OP_CONFIG = get_oidc_config(OIDC_OP_CONFIG_URL, timeout=OIDC_TIMEOUT)
-OIDC_OP_AUTHORIZATION_ENDPOINT = OIDC_OP_CONFIG["authorization_endpoint"]
-OIDC_OP_TOKEN_ENDPOINT = OIDC_OP_CONFIG["token_endpoint"]
-OIDC_OP_USER_ENDPOINT = OIDC_OP_CONFIG["userinfo_endpoint"]
-OIDC_OP_LOGOUT_URL_METHOD = OIDC_OP_CONFIG["end_session_endpoint"]
-OIDC_RP_CLIENT_ID = env.get_secret("OIDC_RP_CLIENT_ID")
-OIDC_RP_CLIENT_SECRET = env.get_secret("OIDC_RP_CLIENT_SECRET")
-OIDC_RP_SIGN_ALGO = env.get_string("OIDC_RP_SIGN_ALGO", "RS256")
 
-if OIDC_RP_SIGN_ALGO == "RS256":
-    OIDC_OP_JWKS_ENDPOINT = OIDC_OP_CONFIG["jwks_uri"]
+
+SOCIAL_AUTH_OIDC_KEY = env.get_secret("OIDC_RP_CLIENT_ID")
+SOCIAL_AUTH_OIDC_SECRET = env.get_secret("OIDC_RP_CLIENT_SECRET")
+
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "gccsite.auth.backend.map_groups",
+    "social_core.pipeline.user.user_details",
+)
+
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ["first_name", "email"]
+
+ALLOWED_GROUPS = ["staff"]
+STAFF_GROUPS = ["roots"]
+SUPERUSER_GROUPS = ["bureau", "roots"]
