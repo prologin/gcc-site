@@ -10,7 +10,7 @@ urlpatterns = [
     path("", include("partners.urls")),
     path("", include("applications.urls")),
     path("", include("profiles.urls")),
-    path("rest/auth/oidc/", include("mozilla_django_oidc.urls")),
+    path("", include("social_django.urls", namespace="social")),
 ]
 
 if settings.DEBUG:

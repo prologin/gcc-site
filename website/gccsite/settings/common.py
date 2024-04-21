@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     "django_fsm",
     "fsm_admin",
     "django_recaptcha",
-    "mozilla_django_oidc",
+    "social_django",
     "django_celery_beat",
     "post_office",
     "crispy_forms",
@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "social_django.middleware.SocialAuthExceptionMiddleware",
 ]
 
 ROOT_URLCONF = "gccsite.urls"
@@ -103,6 +104,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "gccsite.context_processors.my_context_processor",
+                # "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
