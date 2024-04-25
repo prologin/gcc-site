@@ -2,10 +2,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Button, Column, Div, Field, Layout, Row, Submit
 from django import forms
 from django.core.exceptions import NON_FIELD_ERRORS
+from django.forms import widgets
 from django.http import QueryDict
 from django.utils.translation import gettext_lazy as _
 
 from applications.models import Application
+from applications.validators import ProfileConfirmedValidator
 from profiles.models import Profile
 
 SCHOOL_LEVEL = [
@@ -23,6 +25,36 @@ SCHOOL_LEVEL = [
 PHONE_REGEX = r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
 
 
+class DisabledChoiceWidget(widgets.Select):
+    def __init__(self, disabled_choices=(), *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.disabled_choices = disabled_choices
+
+    def is_choice_disabled(self, choice_value):
+        return choice_value in self.disabled_choices
+
+    def create_option(
+        self, name, value, label, selected, index, subindex=None, attrs=None
+    ):
+        option = super().create_option(
+            name, value, label, selected, index, subindex, attrs
+        )
+
+        if self.is_choice_disabled(value):
+            option["label"] += " (non confirmé)"
+            option["attrs"]["disabled"] = True
+
+        return option
+
+    @property
+    def disabled_choices(self):
+        return self._disabled_choices
+
+    @disabled_choices.setter
+    def disabled_choices(self, disabled_choices: list):
+        self._disabled_choices = disabled_choices
+
+
 class EventApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
@@ -37,10 +69,12 @@ class EventApplicationForm(forms.ModelForm):
 
     profile = forms.TypedChoiceField(
         label="Sélectionner mon profil participante",
-        choices=[],
+        choices=[],  # Defined dynamically
         empty_value=None,
         coerce=lambda id: Profile.objects.get(id=id),
         required=True,
+        widget=DisabledChoiceWidget,
+        validators=[ProfileConfirmedValidator],
     )
 
     # Info supplémentaires sur la participante (en + du profil)
@@ -88,7 +122,13 @@ class EventApplicationForm(forms.ModelForm):
                     for entry in qs
                 ]
             )
+            disabled_choices = [
+                entry.id for entry in qs if not entry.profile_confirmed
+            ]
             self.base_fields["profile"].choices = choices
+            self.base_fields[
+                "profile"
+            ].widget.disabled_choices = disabled_choices
 
         if len(args) > 0 and isinstance(args[0], QueryDict):
             # If POSTing, add a form_answer value to the input which is
