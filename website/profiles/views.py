@@ -116,7 +116,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         if request.user != profile.user:
             raise PermissionDenied()
 
-        super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class DeleteProfileView(LoginRequiredMixin, View):

@@ -4,7 +4,6 @@
 {% block form %}
     {% crispy form %}
 {% endblock form %}
-
 {% block content %}
     <div class="content-viewport bg-half-1">
         <div class="container-fluid">
@@ -16,7 +15,6 @@
                            class="btn btn-primary"
                            role="button">Nouveau Profil</a>
                     </div>
-
                     {% for entry in object_list %}
                         <div class="row m-2 p-2 border rounded-3 align-items-center justify-content-between bg-white {{ class }}">
                             <div class="col-md m-2">
@@ -27,16 +25,18 @@
                                 <div class="d-flex align-items-center">
                                     <span class="fs-4 fw-bold pe-2">{{ entry.first_name | title }} {{ entry.last_name | title }}</span>
                                 </div>
-
                                 {# Email #}
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <i class="far fa-regular fa-envelope"></i>
-                                    </div>
+                                <span>
+                                    <i class="far fa-regular fa-envelope"></i>
                                     {{ entry.email }}
-                                </div>
+                                    {% if entry.email_confirmed %}
+                                        <span class="badge rounded-pill gcc-status-badge text-bg-success fs-footnote">confirmé</span>
+                                    {% else %}
+                                        <span class="badge rounded-pill gcc-status-badge text-bg-danger fs-footnote">non confirmé</span>
+                                    {% endif %}
+                                </span>
                             </div>
-                            <div class="col-md">
+                            <div class="col-md m-2">
                                 {# Location #}
                                 <div class="row">
                                     <span class="fs-4 pe-1">Responsable légal</span>
@@ -44,21 +44,25 @@
                                     <div class="d-flex align-items-center">
                                         <span class="fs-4 fw-bold pe-2">{{ entry.first_name_resp | title }} {{ entry.last_name_resp | title }}</span>
                                     </div>
-
                                     {# Email #}
-                                    <div class="row">
-                                        <div class="col-auto">
-                                            <i class="far fa-regular fa-envelope"></i>
-                                        </div>
+                                    <span>
+                                        <i class="far fa-regular fa-envelope"></i>
                                         {{ entry.email_resp }}
-                                    </div>
+                                        {% if entry.email_resp_confirmed %}
+                                            <span class="badge rounded-pill gcc-status-badge text-bg-success fs-footnote">confirmé</span>
+                                        {% else %}
+                                            <span class="badge rounded-pill gcc-status-badge text-bg-danger fs-footnote">non confirmé</span>
+                                        {% endif %}
+                                    </span>
                                 </div>
                             </div>
-                            <div class="col-md-3 row">
-                                <a class="mb-4 px-0" href="{% url 'profiles:profile_detail' entry.id %}">
-                                    <button class="btn btn-primary btn-block">Voir ce profil</button>
-                                </a>
-                                {% include "profiles/partial/delete_modal.html" with profile=entry button_class="btn-danger" %}
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <a class="mb-4 px-0" href="{% url 'profiles:profile_detail' entry.id %}">
+                                        <button class="btn btn-primary btn-block">Voir ce profil</button>
+                                    </a>
+                                    {% include "profiles/partial/delete_modal.html" with profile=entry button_class="btn-danger" %}
+                                </div>
                             </div>
                         </div>
                     {% empty %}

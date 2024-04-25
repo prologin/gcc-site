@@ -4,7 +4,6 @@
 {% block form %}
     {% crispy form %}
 {% endblock form %}
-
 {% block content %}
     <div class="content-viewport bg-half-3">
         <div class="container my-2 p-2">
@@ -30,11 +29,20 @@
                 <div class="col-xl mt-3">
                     <span class="fs-3 fw-bold">Candidate</span>
                     <br />
-                    <span class="fs-5 fw-bold pe-2">{{ object.first_name | title }} {{ object.last_name | title }}</span>
+                    <div class="row">
+                        <span class="fs-5 fw-bold pe-2 col-md-auto">{{ object.first_name | title }} {{ object.last_name | title }}</span>
+                        <span class="col">
+                            <i class="far fa-regular fa-envelope"></i>
+                            {{ object.email }}
+                            {% if object.email_confirmed %}
+                                <span class="badge rounded-pill gcc-status-badge text-bg-success fs-footnote">confirmé</span>
+                            {% else %}
+                                <span class="badge rounded-pill gcc-status-badge text-bg-danger fs-footnote">non confirmé</span>
+                            {% endif %}
+                        </span>
+                    </div>
                     <div class="row">
                         <div class="col-sm">
-                            <span><i class="far fa-regular fa-envelope"></i> {{ object.email }}</span>
-                            <br />
                             <span><i class="far fa-solid fa-phone"></i> {{ object.phone }}</span>
                             <br />
                             <span><i class="far fa-solid fa-cake-candles"></i> {{ object.birth_date }}</span>
@@ -54,12 +62,22 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-xl mt-3">
                     <span class="fs-3 fw-bold">Responsable Légal</span>
                     <br />
-                    <span class="fs-5 fw-bold pe-2">{{ object.first_name_resp | title }} {{ object.last_name_resp | title }}</span>
+                    <div class="row">
+                        <span class="fs-5 fw-bold pe-2 col-md-auto">{{ object.first_name_resp | title }} {{ object.last_name_resp | title }}</span>
+                        <span class="col">
+                            <i class="far fa-regular fa-envelope"></i>
+                            {{ object.email_resp }}
+                            {% if object.email_resp_confirmed %}
+                                <span class="badge rounded-pill gcc-status-badge text-bg-success fs-footnote">confirmé</span>
+                            {% else %}
+                                <span class="badge rounded-pill gcc-status-badge text-bg-danger fs-footnote">non confirmé</span>
+                            {% endif %}
+                        </span>
+                    </div>
                     <div class="row">
                         <div class="col-sm">
                             <span><i class="far fa-regular fa-envelope"></i> {{ object.email_resp }}</span>
