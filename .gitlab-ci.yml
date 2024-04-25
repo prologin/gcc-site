@@ -2,7 +2,7 @@
 
 default:
   before_script:
-  image: docker:24.0.7
+  image: docker:24.0.9
 
 include:
   - template: SAST.gitlab-ci.yml
@@ -156,7 +156,7 @@ format:djlint:
     name: docker/compose:1.29.2
     entrypoint: [""]
   services:
-    - docker:24.0.7-dind
+    - docker:24.0.9-dind
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
