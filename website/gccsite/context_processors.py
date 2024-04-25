@@ -87,38 +87,53 @@ def faq_entries_list():
             },
             {
                 "question": "Qui peut s'inscrire aux stages ?",
-                "answer": "Toute personne s'identifiant comme une femme et "
-                "étant actuellement ou à la rentrée prochaine dans "
-                "l'enseignement secondaire (collège et lycée) ou équivalent.",
+                "answer": "Toutes les filles, de la 6ème à la terminale, "
+                "sont les bienvenues pour s'inscrire à nos stages. Notre "
+                "initiative vise à encourager et à soutenir les jeunes "
+                "filles intéressées par la programmation, peu importe leur "
+                "niveau d'expérience. Que vous soyez débutante ou plus "
+                "avancée dans vos connaissances en informatique, nos stages "
+                "sont conçus pour vous aider à explorer et à développer vos "
+                "compétences dans un environnement inclusif et bienveillant.",
             },
             {
                 "question": "Combien coûte un stage ?",
-                "answer": f"""Nous prenons en charge l'ensemble des repas ainsi que tous les frais relatifs aux activités pendant le stage. Si vous avez besoin d'une aide financière pour le logement et/ou le transport vous pouvez faire une demande de bourse à <a href="mailto:f{_BASE_CTX['SCHOLARSHIP_EMAIL']}">{_BASE_CTX['SCHOLARSHIP_EMAIL']}</a>. Nous pouvons aussi vous mettre en relation avec les autres familles volontaires pour l'hébergement ou pour du covoiturage, pour cela envoyez un mail à <a href="mailto:{_BASE_CTX['CONTACT_EMAIL']}">{_BASE_CTX['CONTACT_EMAIL']}</a>.""",
+                "answer": f"""Nos stages sont entièrement gratuits. Nous prenons en charge tous les repas ainsi que tous les frais liés aux activités pendant le stage. De plus, si vous avez besoin d'une aide financière pour le logement et/ou le transport, nous vous encourageons à faire une demande de bourse en envoyant un e-mail à <a href="mailto:f{_BASE_CTX['SCHOLARSHIP_EMAIL']}">{_BASE_CTX['SCHOLARSHIP_EMAIL']}</a>. Nous sommes également en mesure de vous mettre en relation avec d'autres familles volontaires pour l'hébergement ou pour organiser du covoiturage. Pour cela, veuillez nous contacter à l'adresse e-mail <a href="mailto:{_BASE_CTX['CONTACT_EMAIL']}">{_BASE_CTX['CONTACT_EMAIL']}</a>.""",
             },
             {
                 "question": "Quels sont les critères de sélection ?",
-                "answer": "Nous nous basons principalement sur la motivation et "
-                "réponses lors de la candidature. Le niveau n'est absolument "
-                "pas un critère car nous adaptons les exercices en fonction de "
-                "celui-ci. Les filles n'ayant jamais participé à nos stages "
-                "sont prioritaires par rapport à celles qui en ont déjà fait.",
+                "answer": "Nos critères de sélection se basent principalement sur "
+                "la motivation des candidates et leurs réponses lors de la "
+                "candidature. Le niveau de compétence en informatique n'est "
+                "absolument pas un critère, car nous adaptons les exercices "
+                "en fonction du niveau de chaque participante. De plus, les "
+                "filles n'ayant jamais participé à nos stages sont prioritaires "
+                "par rapport à celles qui en ont déjà fait. Notre objectif est "
+                "d'offrir une opportunité équitable à toutes les jeunes filles "
+                "intéressées par la programmation, quelle que soit leur expérience "
+                "préalable.",
             },
             {
-                "question": "Quel est le niveau requis pour participer ?",
-                "answer": "Il n'y a pas de niveau minimal. Nous nous adaptons "
-                "à tous les niveaux, il ne faut pas hésiter à nous informer "
-                "d'éventuels sujets spécifiques que vous souhaitez découvrir "
-                "ou approfondir. Nous nous adaptons à tous les profils.",
+                "question": "Aucun niveau de compétence préalable n'est "
+                "requis pour participer à nos stages. Nous nous adaptons "
+                "à tous les niveaux et nous encourageons vivement les "
+                "participantes à nous informer de tout sujet spécifique "
+                "qu'elles souhaitent découvrir ou approfondir. Notre "
+                "programme est conçu pour accueillir toutes les jeunes "
+                "filles, quel que soit leur profil ou leur expérience en "
+                "informatique. N'hésitez pas à nous rejoindre et à explorer "
+                "le monde passionnant de la programmation avec nous !",
             },
             {
                 "question": "Qui organise le stage ?",
-                "answer": "Nous sommes l'association Prologin et en plus des "
-                'stages "Girls Can Code!", nous organisons le concours '
-                '<a href="https://prologin.org">Prologin</a>. Notre but est '
-                "de promouvoir l'informatique auprès des jeunes. Les encadrants "
-                "sont principalement des étudiants et étudiantes en informatique. "
-                "Ils sont là pour vous aider dans les exercices et répondre à "
-                "toutes vos questions que ce soit d'informatique ou d'orientation.",
+                "answer": "Les stages Girls Can Code! sont organisés par "
+                "l'association Prologin, qui organise également le concours éponyme "
+                '<a href="https://prologin.org">Prologin</a>. Notre objectif est de '
+                "promouvoir l'informatique auprès des jeunes. Les encadrants sont "
+                "principalement des étudiants et des étudiantes en informatique, "
+                "dévoués à vous accompagner dans les exercices et à répondre à "
+                "toutes vos questions, que ce soit sur des sujets informatiques "
+                "ou sur l'orientation professionnelle.",
             },
             {
                 "question": "Comment bénéficier de la bourse ?",
@@ -127,9 +142,7 @@ def faq_entries_list():
             {
                 "question": "Peut-on faire le stage plusieurs fois ?",
                 "answer": "Oui, c'est possible. Cependant, gardez à l'esprit "
-                "que vous ne serez pas prioritaire lors de la sélection. De "
-                "plus, il est possible que vous ayez déjà exploré toutes les "
-                "notions que nous proposons.",
+                "que vous ne serez pas prioritaire lors de la sélection.",
             },
             {
                 "question": "Je ne suis pas éligible aux stages GCC!, que me suggérez-vous ?",
