@@ -1,9 +1,10 @@
 import datetime
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 
 from applications.forms import EventApplicationForm
@@ -52,18 +53,30 @@ class HomePageView(FormMixin, ListView):
         return kw
 
 
-class ReviewIndexView(PermissionRequiredMixin, TemplateView):
-    permission_required = "users.can_view_applications"
+class ReviewIndexView(PermissionRequiredMixin, ListView):
+    permission_required = "events.can_be_event_staff"
     raise_exception = True
     template_name = "events/application/index.html"
+    model = Event
+    context_object_name = "events"
 
-    def get_context_data(self, *args, **kwargs):
-        ctx = super().get_context_data(*args, **kwargs)
+    def get_queryset(self):
+        queryset = Event.objects.get_visible_events()
+        year = self.request.GET.get("year")
+
+        if year:
+            queryset = queryset.filter(year=year)
+
+        if not self.request.user.has_perm("events.can_manage_event"):
+            queryset = queryset.filter(
+                Q(staff=self.request.user) | Q(managers=self.request.user)
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
         ctx["years"] = Event.objects.years()
-        if self.request.GET:
-            ctx["events"] = Event.objects.filter(year=self.request.GET["year"])
-        else:
-            ctx["events"] = Event.objects.get_visible_events()
         ctx["AppStatus"] = ApplicationStatus
         return ctx
 

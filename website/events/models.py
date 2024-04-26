@@ -1,9 +1,30 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator, ValidationError
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from events.validators import FileSizeValidator, validate_is_pdf
+
+"""
+class Region(models.Model):
+    name = models.CharField(
+        verbose_name=_("Nom de la région"),
+        max_length=100,
+    )
+    managers = models.ManyToManyField(to=get_user_model(), blank=True)
+
+    class Meta:
+        verbose_name = _("Region")
+        verbose_name_plural = _("Region")
+        permissions = [
+            ("can_manage_region", "Can manage all region"),
+            ("can_be_region_manager", "Can become region manager"),
+        ]
+
+    def __str__(self):
+        return f"{self.name}"
+"""
 
 
 class Address(models.Model):
@@ -97,6 +118,7 @@ class Event(models.Model):
         on_delete=models.CASCADE,
     )
 
+    # region = Region()
     year = models.PositiveIntegerField(verbose_name=_("Année de l'événement"))
 
     signup_start_date = models.DateTimeField(
@@ -135,12 +157,31 @@ class Event(models.Model):
         verbose_name=_("Description de l'évènement"),
     )
 
+    managers = models.ManyToManyField(
+        to=get_user_model(),
+        verbose_name=_("Managers"),
+        blank=True,
+        null=True,
+    )
+    staff = models.ManyToManyField(
+        to=get_user_model(),
+        verbose_name=_("Staffs"),
+        related_name="staffed_events",
+        blank=True,
+        null=True,
+    )
+
     objects = EventManager()
 
     class Meta:
         ordering = ("year",)
         verbose_name = _("évènement")
         verbose_name_plural = _("évènements")
+        permissions = [
+            ("can_manage_event", "Can manage all events"),
+            ("can_be_event_manager", "Can become event manager"),
+            ("can_be_event_staff", "Can become event staff"),
+        ]
 
     def __str__(self):
         return self.name

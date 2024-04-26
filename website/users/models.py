@@ -109,6 +109,7 @@ class User(AbstractUser):
 
     class Meta:
         permissions = [
+            # TODO: remove this
             ("can_view_applications", "Can view event applications"),
             (
                 "can_view_applications_details",
@@ -123,4 +124,5 @@ class User(AbstractUser):
                 "can_download_informations",
                 "Can download applications informations",
             ),
+            ("respo-idf", "Responsable of IDF region"),
         ]
