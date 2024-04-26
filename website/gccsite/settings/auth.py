@@ -34,7 +34,7 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.user.create_user",
     "social_core.pipeline.social_auth.associate_user",
     "social_core.pipeline.social_auth.load_extra_data",
-    "gccsite.auth.backend.map_groups",
+    "gccsite.auth.auth_pipeline.map_groups",
     "social_core.pipeline.user.user_details",
 )
 
