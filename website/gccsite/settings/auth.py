@@ -41,5 +41,5 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ["first_name", "email"]
 
 ALLOWED_GROUPS = ["staff"]
-STAFF_GROUPS = ["respos-reginaux"]
+STAFF_GROUPS = ["respos-reginaux", "bureau", "roots"]
 SUPERUSER_GROUPS = ["bureau", "roots"]

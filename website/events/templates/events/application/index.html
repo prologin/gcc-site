@@ -7,16 +7,16 @@
 {% endblock head %}
 
 {% block content %}
-    {% regroup events by year as grouped_events %}
-    <h1>Review des candidatures</h1>
-    <ul class="review-edition-years">
-        {% for year in years %}
-            <li>
-                <a href="?year={{ year }}">{{ year }}</a>
-            </li>
-        {% endfor %}
-    </ul>
     <div class="container-fluid mb-4">
+        {% regroup events by year as grouped_events %}
+        <h1>Review des candidatures</h1>
+        <ul class="review-edition-years">
+            {% for year in years %}
+                <li>
+                    <a href="?year={{ year }}">{{ year }}</a>
+                </li>
+            {% endfor %}
+        </ul>
         <div class="table-responsive custom-table">
             <table class="table">
                 <thead>

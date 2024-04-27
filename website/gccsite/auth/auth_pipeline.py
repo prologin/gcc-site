@@ -3,6 +3,7 @@ from django.contrib.auth.models import Group
 
 
 def map_groups(response, user, *_args, **_kwargs):
+    print(response)
     groups = response.get("groups")
     if not groups:
         return
@@ -28,9 +29,12 @@ def map_groups(response, user, *_args, **_kwargs):
     for group in {g for g in user.groups.all()} - django_groups:
         user.groups.remove(group)
 
-    user.is_staff = bool(slugs.intersection(set(settings.STAFF_GROUPS)))
     user.is_superuser = bool(
         slugs.intersection(set(settings.SUPERUSER_GROUPS))
     )
+    if user.is_superuser:
+        user.is_staff = True
+    else:
+        user.is_staff = bool(slugs.intersection(set(settings.STAFF_GROUPS)))
 
     user.save()
