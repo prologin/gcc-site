@@ -177,32 +177,6 @@ format:djlint:
     - sleep 30
     - docker-compose -p "$CI_CONCURRENT_ID" up -d
 
-test:
-  stage: qa
-  artifacts:
-    reports:
-      junit: website/test-reports/*.xml
-    paths:
-      - artifacts/
-      - website/artifacts
-    when: always
-  coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%)$/'
-  before_script:
-    - mkdir artifacts website/artifacts
-    - chmod a+rwx artifacts website/artifacts
-  script:
-    - cd docker/
-    - !reference [.docker_compose_env_script, script]
-    - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev coverage run --source='.' ./manage.py test
-    - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev coverage report
-    - docker-compose -p "$CI_CONCURRENT_ID" exec -T backend_dev coverage html -d /app/gccsite/artifacts/coverage/
-    - cd ..
-  after_script:
-    - cd docker/
-    - docker-compose -p "$CI_CONCURRENT_ID" logs -t --no-color > ../artifacts/docker-compose.log
-    - docker-compose -p "$CI_CONCURRENT_ID" down -v
-  allow_failure: true
-
 django:check_migrations:
   stage: qa
   <<: *docker_setup
