@@ -75,12 +75,14 @@ lint:website:
   needs:
     - website
   image:
-    name: $CI_REGISTRY_IMAGE/website/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    name: python:3.12-slim
     entrypoint: [""]
   before_script:
     - cd website
+    - pip3 install poetry
+    - poetry install --with=dev || true
   script:
-    - prospector --profile ci > prospector-output.xml
+    - poetry run prospector --profile ci > prospector-output.xml
   artifacts:
     reports:
       junit: website/prospector-output.xml
