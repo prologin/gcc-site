@@ -12,9 +12,10 @@ stricteness: veryhigh
 uses:
   - django
 
+ignore-patterns:
+  - .*/migrations/\d{4}_.*\.py # Do not care about migration files being too long
+
 pep8:
   full: true
   options:
     max-line-length: 88
-  uses:
-    - django
