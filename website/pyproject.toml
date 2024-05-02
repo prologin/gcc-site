@@ -52,7 +52,6 @@ django-bootstrap-icons = "^0.8.3"
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^4.2.0"
 
-coverage = { version = "*", extras = ["toml"] }
 djlint = "^1.34"
 prospector = { extras = ["with_everything"], version = "*" }
 ruff = "0.4.2"
@@ -60,27 +59,6 @@ ruff = "0.4.2"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.coverage.run]
-branch = true
-omit = ["../*migrations*"]
-
-[tool.coverage.report]
-show_missing = true
-exclude_lines = [
-    # Re-enable the standard pragma
-    "pragma: nocover",
-
-    # Don't complain if tests don't hit defensive assertion code:
-    "raise NotImplementedError",
-
-    # Don't complain about missing debug-only code:
-    "def __repr__",
-
-    # Don't complain if non-runnable code isn't run:
-    "if 0:",
-    "if __name__ == .__main__.:",
-]
 
 
 [tool.djlint]
