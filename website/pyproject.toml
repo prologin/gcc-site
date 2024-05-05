@@ -41,7 +41,7 @@ social-auth-core = "^4.5.3"
 black = "*"
 isort = "*"
 djlint = "^1.34"
-ruff = "0.4.2"
+ruff = "0.4.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
