@@ -175,6 +175,14 @@ class AuthLoginForm(AuthenticationForm):
         self.helper = FormHelper()
         self.helper.form_id = "notifs_update_form"
         self.helper.form_method = "post"
+        self.error_messages = {
+            "invalid_login": _(
+                "Saisissez un Adresse email et un mot de passe valides. Remarquez que chacun de ces champs est sensible à la casse (différenciation des majuscules/minuscules)."
+            ),
+            "inactive": _(
+                "Votre compte n'est pas encore activé. Veuillez vérifier vos e-mails pour trouver le lien d'activation."
+            ),
+        }
 
         submit = Div(
             Submit(

@@ -6,7 +6,7 @@
 from gccsite import env
 
 AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
+    "django.contrib.auth.backends.AllowAllUsersModelBackend",
     "social_core.backends.open_id_connect.OpenIdConnectAuth",
 ]
 
