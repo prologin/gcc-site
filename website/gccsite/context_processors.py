@@ -108,6 +108,12 @@ def faq_entries_list():
                 "ou approfondir. Nous nous adaptons à tous les profils.",
             },
             {
+                "question": "Peut-on venir seulement sur une certaine partie du stage ?",
+                "answer": "Vous pouvez venir un seul jour sur les deux si vous le souhaitez !<br>"
+                "Cependant, merci de nous prévenir dans votre candidature, afin que nous puissions "
+                "nous organiser au mieux.",
+            },
+            {
                 "question": "Qui organise le stage ?",
                 "answer": "Nous sommes l'association Prologin et en plus des "
                 'stages "Girls Can Code!", nous organisons le concours '
